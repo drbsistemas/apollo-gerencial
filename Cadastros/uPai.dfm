@@ -1,0 +1,59 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'FPai'
+  ClientHeight = 403
+  ClientWidth = 680
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnCad: TPanel
+    Left = 0
+    Top = 0
+    Width = 680
+    Height = 403
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 256
+    ExplicitTop = 200
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object pnBotao: TPanel
+      Left = 1
+      Top = 361
+      Width = 678
+      Height = 41
+      Align = alBottom
+      TabOrder = 0
+      ExplicitLeft = 248
+      ExplicitTop = 184
+      ExplicitWidth = 185
+    end
+  end
+  object pnCon: TPanel
+    Left = 0
+    Top = 0
+    Width = 680
+    Height = 403
+    Align = alClient
+    TabOrder = 1
+    ExplicitLeft = 1
+    object pnMenu: TPanel
+      Left = 1
+      Top = 1
+      Width = 678
+      Height = 41
+      Align = alTop
+      TabOrder = 0
+      ExplicitLeft = 248
+      ExplicitTop = 184
+      ExplicitWidth = 185
+    end
+  end
+end
