@@ -16,11 +16,19 @@ uses
   dxSkinPumpkin, dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus,
   dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
   dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010,
-  dxSkinWhiteprint, dxSkinXmas2008Blue, cxTextEdit;
+  dxSkinWhiteprint, dxSkinXmas2008Blue, cxTextEdit, Vcl.StdCtrls, Vcl.ExtCtrls,
+  cxLabel;
 
 type
   TFCad_Ini = class(TForm)
+    pnMain: TPanel;
     cxEmpresa: TcxTextEdit;
+    cxLabel1: TcxLabel;
+    cxLabel2: TcxLabel;
+    cxTextEdit1: TcxTextEdit;
+    cxLabel3: TcxLabel;
+    FileOpenDialog1: TFileOpenDialog;
+    ButtonedEdit1: TButtonedEdit;
   private
     { Private declarations }
   public
