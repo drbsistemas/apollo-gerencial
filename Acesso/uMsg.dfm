@@ -32,8 +32,6 @@ object Fmsg: TFmsg
     Style.BorderStyle = ebsFlat
     Style.Color = 33023
     TabOrder = 0
-    ExplicitLeft = 32
-    ExplicitTop = 9
     Height = 273
     Width = 585
     object cxLabel1: TcxLabel

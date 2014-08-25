@@ -1,9 +1,8 @@
-object FCad_Ini: TFCad_Ini
+object FPrinc: TFPrinc
   Left = 0
   Top = 0
-  BorderStyle = bsNone
-  ClientHeight = 400
-  ClientWidth = 600
+  ClientHeight = 600
+  ClientWidth = 800
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,13 +10,9 @@ object FCad_Ini: TFCad_Ini
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poMainFormCenter
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object cxEmpresa: TcxTextEdit
-    Left = 144
-    Top = 56
-    TabOrder = 0
-    Width = 300
-  end
 end

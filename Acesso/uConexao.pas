@@ -18,7 +18,8 @@ uses uRotinas, uCad_Ini;
 procedure AbreConexao;
 begin
    CaminhoExe := ExtractFilePath(Application.ExeName);
-   if (not FileExists(CaminhoExe+'DRBSIS.INFO')) then
+   CaminhoIni := CaminhoExe + 'DRBSIS.INFO';
+   if (not FileExists(CaminhoIni)) then
       CriaIni() else
       AbreIni();
 
