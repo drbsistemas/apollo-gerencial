@@ -17,7 +17,7 @@ uses
   dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
   dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010,
   dxSkinWhiteprint, dxSkinXmas2008Blue, cxTextEdit, Vcl.StdCtrls, Vcl.ExtCtrls,
-  cxLabel;
+  cxLabel, Vcl.Mask, RxToolEdit;
 
 type
   TFCad_Ini = class(TForm)
@@ -27,8 +27,9 @@ type
     cxLabel2: TcxLabel;
     cxTextEdit1: TcxTextEdit;
     cxLabel3: TcxLabel;
-    FileOpenDialog1: TFileOpenDialog;
-    ButtonedEdit1: TButtonedEdit;
+    FilenameEdit1: TFilenameEdit;
+    cxLabel4: TcxLabel;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,5 +42,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFCad_Ini.FormShow(Sender: TObject);
+begin
+   pnMain.Left := (self.Width - pnmain.Width) div 2;
+   pnmain.Top  := (self.Height - pnmain.Height) div 2;
+end;
 
 end.

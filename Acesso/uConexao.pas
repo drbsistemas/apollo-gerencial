@@ -60,6 +60,7 @@ var
    NomeArq : String;
 
 begin
+   Msg('de abrir o software não encontrou o arquivo de dados, confirme para nós!','I');
    Fcad_Ini := TFCad_ini.Create(Fcad_Ini);
    Fcad_Ini.ShowModal;
    AssignFile(Arq, CaminhoIni);

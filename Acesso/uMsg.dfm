@@ -5,8 +5,8 @@ object Fmsg: TFmsg
   AlphaBlendValue = 200
   BorderIcons = []
   BorderStyle = bsNone
-  ClientHeight = 337
-  ClientWidth = 651
+  ClientHeight = 600
+  ClientWidth = 700
   Color = 5987163
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -18,22 +18,27 @@ object Fmsg: TFmsg
   WindowState = wsMaximized
   OnShow = FormShow
   DesignSize = (
-    651
-    337)
+    700
+    600)
   PixelsPerInch = 96
   TextHeight = 13
   object cxPanel: TcxGroupBox
-    Left = 35
-    Top = 22
+    Left = 50
+    Top = 145
     Anchors = []
+    BiDiMode = bdLeftToRight
+    Ctl3D = False
     ParentBackground = False
+    ParentBiDiMode = False
     ParentColor = False
+    ParentCtl3D = False
     Style.BorderColor = clWhite
     Style.BorderStyle = ebsFlat
     Style.Color = 33023
+    Style.Shadow = False
     TabOrder = 0
-    Height = 273
-    Width = 585
+    Height = 270
+    Width = 600
     object cxLabel1: TcxLabel
       Left = 5
       Top = 9
@@ -81,7 +86,7 @@ object Fmsg: TFmsg
       Width = 573
     end
     object cxSim: TcxButton
-      Left = 140
+      Left = 147
       Top = 217
       Width = 150
       Height = 40
@@ -97,7 +102,7 @@ object Fmsg: TFmsg
       OnClick = cxSimClick
     end
     object cxNao: TcxButton
-      Left = 295
+      Left = 302
       Top = 217
       Width = 150
       Height = 40
@@ -113,7 +118,7 @@ object Fmsg: TFmsg
       OnClick = cxNaoClick
     end
     object cxOk: TcxButton
-      Left = 217
+      Left = 224
       Top = 217
       Width = 150
       Height = 40
@@ -126,6 +131,7 @@ object Fmsg: TFmsg
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
+      OnClick = cxOkClick
     end
   end
 end

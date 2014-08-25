@@ -31,6 +31,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure cxNaoClick(Sender: TObject);
     procedure cxSimClick(Sender: TObject);
+    procedure cxOkClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,6 +46,12 @@ implementation
 {$R *.dfm}
 
 procedure TFmsg.cxNaoClick(Sender: TObject);
+begin
+   cxSim.Tag := 0;
+   Close;
+end;
+
+procedure TFmsg.cxOkClick(Sender: TObject);
 begin
    cxSim.Tag := 0;
    Close;
