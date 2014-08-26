@@ -17,18 +17,20 @@ uses
   dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
   dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010,
   dxSkinWhiteprint, dxSkinXmas2008Blue, cxTextEdit, Vcl.StdCtrls, Vcl.ExtCtrls,
-  cxLabel, Vcl.Mask, RxToolEdit;
+  cxLabel, Vcl.Mask, RxToolEdit, Vcl.ComCtrls, Winapi.ShlObj, cxShellCommon,
+  Vcl.Menus, cxButtons, cxMaskEdit, cxDropDownEdit, cxShellComboBox,
+  dxGDIPlusClasses, cxImage;
 
 type
   TFCad_Ini = class(TForm)
     pnMain: TPanel;
-    cxEmpresa: TcxTextEdit;
     cxLabel1: TcxLabel;
-    cxLabel2: TcxLabel;
-    cxTextEdit1: TcxTextEdit;
     cxLabel3: TcxLabel;
-    FilenameEdit1: TFilenameEdit;
-    cxLabel4: TcxLabel;
+    cxTextEdit1: TcxTextEdit;
+    cxBanco: TcxShellComboBox;
+    cxCancela: TcxButton;
+    cxOk: TcxButton;
+    cxRosto: TcxLabel;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -45,6 +47,7 @@ implementation
 
 procedure TFCad_Ini.FormShow(Sender: TObject);
 begin
+   cxOk.SetFocus;
    pnMain.Left := (self.Width - pnmain.Width) div 2;
    pnmain.Top  := (self.Height - pnmain.Height) div 2;
 end;

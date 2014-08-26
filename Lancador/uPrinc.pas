@@ -37,7 +37,7 @@ end;
 
 procedure TFPrinc.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-   if Msg('de fechar o sistema pode ser concluído?','P') then
+   if Msg('de fechar o sistema pode ser concluído?','P',':(') then
       Application.Terminate else
       Abort;
 end;

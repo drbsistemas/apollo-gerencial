@@ -22,7 +22,7 @@ uses
 type
   TFmsg = class(TForm)
     cxPanel: TcxGroupBox;
-    cxLabel1: TcxLabel;
+    cxRosto: TcxLabel;
     cxLabel2: TcxLabel;
     cxMSg: TcxMemo;
     cxSim: TcxButton;

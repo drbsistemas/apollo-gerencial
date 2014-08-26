@@ -5,7 +5,7 @@ interface
 uses
   MMSystem, Graphics, System.SysUtils, Forms;
 
-  Function Msg(Mensagem, TipoMsg: String): Boolean;
+  Function Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
 
 var
    FCorSelec, FCorLista : TColor;
@@ -16,11 +16,12 @@ implementation
 uses uMsg;
 
 
-Function Msg(Mensagem, TipoMsg: String): Boolean;
+Function Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
 begin
    // TipoMSg = 'I'nfo / 'P'ergunta
    FMsg             := TFMsg.Create(FMSg);
    FMsg.cxMsg.TExt  := Mensagem;
+   FMsg.cxRosto.Caption := Rosto;
    FMsg.cxSim.Visible    := false;
    FMsg.cxNao.Visible    := false;
    FMsg.cxOk.Visible     := false;

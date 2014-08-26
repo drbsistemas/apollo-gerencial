@@ -2,9 +2,9 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2014/08/23 01:18:05.000.927,=C:\Users\DRB\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2014/08/23 01:19:54.000.129,C:\Users\DRB\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\Gerencial\Lancador\uPrinc.pas</Transaction>
-    <Transaction>2014/08/23 01:19:54.000.129,C:\Users\DRB\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\Gerencial\Lancador\uPrinc.dfm</Transaction>
-    <Transaction>2014/08/23 01:20:00.000.898,C:\Users\DRB\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\Gerencial\Lancador\Gerencial.dproj</Transaction>
+    <Transaction>2014/08/23 01:19:54.000.129,D:\Gerencial\Lancador\uPrinc.pas=C:\Users\DRB\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/08/23 01:19:54.000.129,D:\Gerencial\Lancador\uPrinc.dfm=C:\Users\DRB\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2014/08/23 01:20:00.000.898,D:\Gerencial\Lancador\Gerencial.dproj=C:\Users\DRB\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2014/08/23 16:04:52.000.559,=D:\Gerencial\Rotinas\uRotinas.pas</Transaction>
     <Transaction>2014/08/23 16:05:05.000.897,=D:\Gerencial\Acesso\uMsg.pas</Transaction>
     <Transaction>2014/08/24 15:29:45.000.618,=D:\Gerencial\Acesso\uDM.pas</Transaction>
