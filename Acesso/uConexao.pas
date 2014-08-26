@@ -8,6 +8,7 @@ Uses
    //Conexão
    Procedure AbreConexao;
    // Arquivo INI
+   FUNCTION DadosdoIni(ARQUIVO:STRING; SESSAO:STRING; PARAMETRO:STRING) :STRING;
    Procedure CriaIni();
    Procedure AbreIni();
 
@@ -19,9 +20,9 @@ procedure AbreConexao;
 begin
    CaminhoExe := ExtractFilePath(Application.ExeName);
    CaminhoIni := CaminhoExe + 'DRBSIS.INFO';
-   if (not FileExists(CaminhoIni)) then
-      CriaIni() else
-      AbreIni();
+   if (FileExists(CaminhoIni)) then
+      AbreIni() else
+      CriaIni();
 
 {   FdCon.Close;
    if not FileExists((ExtractFilePath(Application.ExeName) + 'wINfo.DRB')) then
@@ -46,30 +47,39 @@ begin
 end;
 
 procedure AbreINI();
+
 begin
    try
-      //
+      NomeEmpresa := '';
+
    except
       Application.terminate;
    end;
 end;
 
 procedure CriaIni();
-var
-   Arq: TextFile;
-   NomeArq : String;
-
 begin
    Msg('de abrir o software não encontrou o arquivo de dados, confirme para nós!','I',':|');
    Fcad_Ini := TFCad_ini.Create(Fcad_Ini);
    Fcad_Ini.ShowModal;
-   AssignFile(Arq, CaminhoIni);
-   Rewrite(Arq);
-   WriteLn(Arq,'');
-   CloseFile(Arq);
    FCad_Ini.Free;
    AbreIni;
 
 end;
+
+FUNCTION DadosdoIni(ARQUIVO:STRING; SESSAO:STRING; PARAMETRO:STRING) :STRING;
+var
+  ArqIni : tIniFile;
+begin
+  Result := '';
+  SESSAO    := UpperCase(SESSAO) ;
+  PARAMETRO := UpperCase(PARAMETRO) ;
+  ArqIni := tIniFile.Create(ARQUIVO);
+  Try
+    Result := ArqIni.ReadString(SESSAO, PARAMETRO, Result)
+  Finally
+    ArqIni.Free;
+  end;
+END;
 
 end.

@@ -19,19 +19,23 @@ uses
   dxSkinWhiteprint, dxSkinXmas2008Blue, cxTextEdit, Vcl.StdCtrls, Vcl.ExtCtrls,
   cxLabel, Vcl.Mask, RxToolEdit, Vcl.ComCtrls, Winapi.ShlObj, cxShellCommon,
   Vcl.Menus, cxButtons, cxMaskEdit, cxDropDownEdit, cxShellComboBox,
-  dxGDIPlusClasses, cxImage;
+  dxGDIPlusClasses, cxImage, Data.DB, RxMemDS;
 
 type
   TFCad_Ini = class(TForm)
     pnMain: TPanel;
     cxLabel1: TcxLabel;
     cxLabel3: TcxLabel;
-    cxTextEdit1: TcxTextEdit;
-    cxBanco: TcxShellComboBox;
+    eEmpresa: TcxTextEdit;
     cxCancela: TcxButton;
     cxOk: TcxButton;
     cxRosto: TcxLabel;
+    cxBanco: TcxShellComboBox;
+    RxMemoryDataEx1: TRxMemoryDataEx;
     procedure FormShow(Sender: TObject);
+    procedure cxBancoExit(Sender: TObject);
+    procedure cxCancelaClick(Sender: TObject);
+    procedure cxOkClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,8 +49,37 @@ implementation
 
 {$R *.dfm}
 
+uses uRotinas;
+
+procedure TFCad_Ini.cxBancoExit(Sender: TObject);
+begin
+   if not FileExists(cxBAnco.Text) then
+      Msg('de direcionar o banco não retornou um arquivo válido, verifique!','I',':(');
+end;
+
+procedure TFCad_Ini.cxCancelaClick(Sender: TObject);
+begin
+   if msg('deverá fechar o sistema por falta de dados, deseja sair?','P',':(') then
+   Application.Terminate;
+end;
+
+procedure TFCad_Ini.cxOkClick(Sender: TObject);
+var
+   Arq: TextFile;
+   NomeArq : String;
+begin
+   AssignFile(Arq, CaminhoIni);
+   Rewrite(Arq);
+   WriteLn(Arq,'[LOJA]');
+   WriteLn(Arq,'');
+   WriteLn(Arq,'[LOJA]');
+   CloseFile(Arq);
+   Close;
+end;
+
 procedure TFCad_Ini.FormShow(Sender: TObject);
 begin
+   cxbanco.Properties.Root.CustomPath := CaminhoExe;
    cxOk.SetFocus;
    pnMain.Left := (self.Width - pnmain.Width) div 2;
    pnmain.Top  := (self.Height - pnmain.Height) div 2;

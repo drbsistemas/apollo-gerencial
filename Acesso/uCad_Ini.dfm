@@ -22,17 +22,17 @@ object FCad_Ini: TFCad_Ini
   PixelsPerInch = 96
   TextHeight = 13
   object pnMain: TPanel
-    Left = 50
-    Top = 165
+    Left = 58
+    Top = 157
     Width = 600
-    Height = 270
+    Height = 316
     Anchors = []
     Color = 33023
     ParentBackground = False
     TabOrder = 0
     object cxLabel1: TcxLabel
       Left = 74
-      Top = 88
+      Top = 70
       Caption = 'Nome Empresa:'
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
@@ -48,7 +48,7 @@ object FCad_Ini: TFCad_Ini
     end
     object cxLabel3: TcxLabel
       Left = 70
-      Top = 121
+      Top = 97
       Caption = 'Banco de Dados:'
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
@@ -60,23 +60,15 @@ object FCad_Ini: TFCad_Ini
       Style.IsFontAssigned = True
       Transparent = True
     end
-    object cxTextEdit1: TcxTextEdit
+    object eEmpresa: TcxTextEdit
       Left = 194
-      Top = 90
-      TabOrder = 2
-      Text = 'cxTextEdit1'
-      Width = 300
-    end
-    object cxBanco: TcxShellComboBox
-      Left = 194
-      Top = 123
-      StyleHot.BorderColor = 14675967
-      TabOrder = 3
+      Top = 75
+      TabOrder = 0
       Width = 300
     end
     object cxCancela: TcxButton
       Left = 306
-      Top = 217
+      Top = 265
       Width = 100
       Height = 40
       Hint = 'Cancelar!'
@@ -226,17 +218,18 @@ object FCad_Ini: TFCad_Ini
       ShowHint = True
       SpeedButtonOptions.Flat = True
       SpeedButtonOptions.Transparent = True
-      TabOrder = 4
+      TabOrder = 2
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
+      OnClick = cxCancelaClick
     end
     object cxOk: TcxButton
       Left = 194
-      Top = 217
+      Top = 265
       Width = 100
       Height = 40
       Hint = 'Cancelar!'
@@ -358,17 +351,18 @@ object FCad_Ini: TFCad_Ini
       ShowHint = True
       SpeedButtonOptions.Flat = True
       SpeedButtonOptions.Transparent = True
-      TabOrder = 5
+      TabOrder = 1
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
+      OnClick = cxOkClick
     end
     object cxRosto: TcxLabel
       Left = 70
-      Top = 17
+      Top = 2
       Caption = ';)'
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
@@ -378,5 +372,35 @@ object FCad_Ini: TFCad_Ini
       Style.Font.Style = []
       Style.IsFontAssigned = True
     end
+    object cxBanco: TcxShellComboBox
+      Left = 194
+      Top = 102
+      Hint = 'Pesquisa banco de dados.'
+      ParentShowHint = False
+      Properties.FastSearch = True
+      Properties.FileMask = '*.FDB'
+      Properties.HideSelection = False
+      Properties.IncrementalSearch = True
+      Properties.ShowFullPath = sfpAlways
+      Properties.StoreRelativePath = False
+      Properties.TreeViewOptions = [tvoShowButtons, tvoShowInfoTips, tvoShowLines]
+      Properties.UseLeftAlignmentOnEditing = False
+      Properties.ValidateOnEnter = False
+      Properties.ViewOptions = [scvoShowFiles]
+      ShowHint = True
+      TabOrder = 6
+      OnExit = cxBancoExit
+      Width = 300
+    end
+  end
+  object RxMemoryDataEx1: TRxMemoryDataEx
+    FieldDefs = <>
+    SortOrder = soAsc
+    SortCaseSens = scYes
+    SortFields = ''
+    AutoSortOnOpen = True
+    AutoRefreshOnFilterChanged = True
+    Left = 394
+    Top = 189
   end
 end
