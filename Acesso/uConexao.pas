@@ -9,8 +9,8 @@ Uses
    Procedure AbreConexao;
    // Arquivo INI
    FUNCTION DadosdoIni(ARQUIVO:STRING; SESSAO:STRING; PARAMETRO:STRING) :STRING;
-   Procedure CriaIni();
    Procedure AbreIni();
+   Procedure CriaIni();
 
 implementation
 
@@ -50,7 +50,8 @@ procedure AbreINI();
 
 begin
    try
-      NomeEmpresa := '';
+      NomeEmpresa    := DadosdoIni(CaminhoIni, 'LOJA', 'NOME');
+      EnderecoBanco  := DadosdoIni(CaminhoIni, 'LOJA', 'BANCO');
 
    except
       Application.terminate;
@@ -58,12 +59,13 @@ begin
 end;
 
 procedure CriaIni();
+var
+   Arq: TextFile;
+   Nome: String;
 begin
-   Msg('de abrir o software não encontrou o arquivo de dados, confirme para nós!','I',':|');
-   Fcad_Ini := TFCad_ini.Create(Fcad_Ini);
-   Fcad_Ini.ShowModal;
-   FCad_Ini.Free;
-   AbreIni;
+//   Arq := CaminhoIni;
+//   Rewrite();
+//
 
 end;
 
@@ -80,6 +82,6 @@ begin
   Finally
     ArqIni.Free;
   end;
-END;
+end;
 
 end.

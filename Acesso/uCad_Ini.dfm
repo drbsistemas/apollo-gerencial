@@ -7,10 +7,10 @@ object FCad_Ini: TFCad_Ini
   ClientHeight = 600
   ClientWidth = 700
   Color = 4868682
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
   Position = poDefault
@@ -45,26 +45,6 @@ object FCad_Ini: TFCad_Ini
       StyleFocused.Color = clNone
       StyleFocused.TextColor = clNone
       Transparent = True
-    end
-    object cxLabel3: TcxLabel
-      Left = 70
-      Top = 97
-      Caption = 'Banco de Dados:'
-      ParentFont = False
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clBlack
-      Style.Font.Height = -16
-      Style.Font.Name = 'Segoe UI'
-      Style.Font.Style = []
-      Style.TextColor = clWhite
-      Style.IsFontAssigned = True
-      Transparent = True
-    end
-    object eEmpresa: TcxTextEdit
-      Left = 194
-      Top = 75
-      TabOrder = 0
-      Width = 300
     end
     object cxCancela: TcxButton
       Left = 306
@@ -218,7 +198,7 @@ object FCad_Ini: TFCad_Ini
       ShowHint = True
       SpeedButtonOptions.Flat = True
       SpeedButtonOptions.Transparent = True
-      TabOrder = 2
+      TabOrder = 1
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
@@ -351,7 +331,7 @@ object FCad_Ini: TFCad_Ini
       ShowHint = True
       SpeedButtonOptions.Flat = True
       SpeedButtonOptions.Transparent = True
-      TabOrder = 1
+      TabOrder = 0
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
@@ -372,35 +352,21 @@ object FCad_Ini: TFCad_Ini
       Style.Font.Style = []
       Style.IsFontAssigned = True
     end
-    object cxBanco: TcxShellComboBox
-      Left = 194
-      Top = 102
-      Hint = 'Pesquisa banco de dados.'
-      ParentShowHint = False
-      Properties.FastSearch = True
-      Properties.FileMask = '*.FDB'
-      Properties.HideSelection = False
-      Properties.IncrementalSearch = True
-      Properties.ShowFullPath = sfpAlways
-      Properties.StoreRelativePath = False
-      Properties.TreeViewOptions = [tvoShowButtons, tvoShowInfoTips, tvoShowLines]
-      Properties.UseLeftAlignmentOnEditing = False
-      Properties.ValidateOnEnter = False
-      Properties.ViewOptions = [scvoShowFiles]
-      ShowHint = True
-      TabOrder = 6
-      OnExit = cxBancoExit
-      Width = 300
+    object cxMemo1: TcxMemo
+      Left = 74
+      Top = 96
+      Lines.Strings = (
+        'cxMemo1')
+      ParentFont = False
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -19
+      Style.Font.Name = 'Segoe UI'
+      Style.Font.Style = []
+      Style.IsFontAssigned = True
+      TabOrder = 4
+      Height = 153
+      Width = 463
     end
-  end
-  object RxMemoryDataEx1: TRxMemoryDataEx
-    FieldDefs = <>
-    SortOrder = soAsc
-    SortCaseSens = scYes
-    SortFields = ''
-    AutoSortOnOpen = True
-    AutoRefreshOnFilterChanged = True
-    Left = 394
-    Top = 189
   end
 end

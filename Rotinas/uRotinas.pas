@@ -9,7 +9,10 @@ uses
 
 var
    FCorSelec, FCorLista : TColor;
-   CaminhoExe, CaminhoIni, NomeEmpresa  : String;
+   CaminhoExe,
+   CaminhoIni,
+   NomeEmpresa,
+   EnderecoBanco  : String;
 
 implementation
 
