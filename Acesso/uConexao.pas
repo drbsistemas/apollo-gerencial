@@ -10,11 +10,10 @@ Uses
    // Arquivo INI
    FUNCTION DadosdoIni(ARQUIVO:STRING; SESSAO:STRING; PARAMETRO:STRING) :STRING;
    Procedure AbreIni();
-   Procedure CriaIni();
 
 implementation
 
-uses uRotinas, uCad_Ini;
+uses uRotinas, uDmCon, uPrinc;
 
 procedure AbreConexao;
 begin
@@ -22,51 +21,39 @@ begin
    CaminhoIni := CaminhoExe + 'DRBSIS.INFO';
    if (FileExists(CaminhoIni)) then
       AbreIni() else
-      CriaIni();
-
-{   FdCon.Close;
-   if not FileExists((ExtractFilePath(Application.ExeName) + 'wINfo.DRB')) then
-   begin
-      MessageDlg('Arquivo de Informações não foi encontrado!'+#13+'Contate o Suporte.',mtError,[mbok],0);
-
-   end;
-   try
-       StrCaminho := CAMINHODOSERVIDOR(ExtractFilePath(Application.ExeName) + 'wINFo.DRB', 'LOJA 1', 'BANCO');
-      if SQLCon.Connected then
-         SQLCon.Connected := False;
-      SQLCon.Params.Values['database'] := StrCaminho;
-      SQLCon.Params.Values['sqldialect'] := '3';
-      SQLCon.Connected := True;
-   except
-      on EDatabaseError do
       begin
-         MessageDlg('Erro ao conectar o Banco de dados', mtError, [mbOK], 0);
-         Application.terminate;
+         Msg('de abrir o software não encontrou o arquivo de configuração, verifique por favor! - Cód: 00001','I',':(');
+         Application.Terminate;
       end;
-   end; }
+
+   try
+      if dmCon = nil then
+         Application.CreateForm(TdmCon, dmCon);
+
+      dmCon.FdCon.Params.Clear;
+      dmCon.FdCon.Close;
+      dmCon.FdCon.Params.Add('Database='+EnderecoBanco);
+      dmCon.FdCon.Params.Add('User_Name=SYSDBA');
+      dmCon.FdCon.Params.Add('Password=masterkey');
+      dmCon.FdCon.Params.Add('DriverID=FB');
+      dmCon.FDPhysFBDriverLink1.VendorLib := 'gds32.dll'; // Pasta do Aplicativo EXE
+      dmcon.FdCon.Open();
+//      dmCon.FdCon.Connected := True;
+   except
+      Msg('não encontrou o banco de dados, contate suporte! - Cód: 00002','I',':(');
+      Application.terminate;
+   end;
 end;
 
 procedure AbreINI();
 
 begin
    try
-      NomeEmpresa    := DadosdoIni(CaminhoIni, 'LOJA', 'NOME');
-      EnderecoBanco  := DadosdoIni(CaminhoIni, 'LOJA', 'BANCO');
-
+      NomeEmpresa    := DadosdoIni(CaminhoIni, 'LOJA 1', 'NOME');
+      EnderecoBanco  := DadosdoIni(CaminhoIni, 'LOJA 1', 'BANCO');
    except
       Application.terminate;
    end;
-end;
-
-procedure CriaIni();
-var
-   Arq: TextFile;
-   Nome: String;
-begin
-//   Arq := CaminhoIni;
-//   Rewrite();
-//
-
 end;
 
 FUNCTION DadosdoIni(ARQUIVO:STRING; SESSAO:STRING; PARAMETRO:STRING) :STRING;
