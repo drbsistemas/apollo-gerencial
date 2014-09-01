@@ -1,0 +1,2 @@
+00001 - de abrir o software não encontrou o arquivo de configuração, verifique por favor!
+00002 - não encontrou o banco de dados, contate suporte!
