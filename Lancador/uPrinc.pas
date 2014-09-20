@@ -6,13 +6,13 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, TypInfo, cxGraphics, cxControls,
   cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, cxGroupBox,
-  cxLabel, UCBase, UCDataConnector, UCFireDACConn, Vcl.Menus, RxMenus,
+  cxLabel, UCBase, UCDataConnector, UCFireDACConn, Vcl.Menus,
   System.Actions, Vcl.ActnList;
 
 type
 
    TFPrinc = class(TForm)
-    cxPanel: TcxGroupBox;
+    cxHint: TcxGroupBox;
     UserControl1: TUserControl;
     UCFireDACConn1: TUCFireDACConn;
     UCControls1: TUCControls;
@@ -45,27 +45,36 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas, uConexao, uMsg, uDmCon;
+uses uRotinas, uConexao, uMsg, uDmCon, uDmCad;
 
 procedure TFPrinc.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-   if Msg('de fechar o sistema pode ser concluído?','P',':(') then
+   if Msg('Que pena, deseja mesmo fechar o software?','P',':(') then
       Application.Terminate else
       Abort;
 end;
 
 procedure TFPrinc.FormCreate(Sender: TObject);
 begin
+   if dmCad = nil then
+      Application.CreateForm(TdmCad, dmCad);
+
    Application.OnMessage := PegaNomeForm;
+   Application.OnHint := ShowHint;
+   AbreIni;
+   AbreAcesso;
+   UserControl1.StartLogin;
+
+   if not dmcad.CdsConf.Active = true then
+      dmCad.CdsConf.Open;
+
+   ValidaLicenca;
 end;
 
 procedure TFPrinc.FormShow(Sender: TObject);
 begin
    FCorSelec := $0097E6FD;
    FCorLista := clBtnFace;//$0000002D; //$00F1EDE9;
-   Application.OnHint := ShowHint;
-   AbreConexao;
-   UserControl1.StartLogin;
 end;
 
 procedure TFPrinc.PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
@@ -94,9 +103,9 @@ end;
 procedure TFprinc.ShowHint(Sender: TObject);
 begin
    if Length(Application.Hint) > 0 then
-      FPrinc.cxPanel.caption := Application.Hint
+      FPrinc.cxHint.caption := Application.Hint
    else
-      FPrinc.cxPanel.caption := '';
+      FPrinc.cxHint.caption := '';
 end;
 
 end.

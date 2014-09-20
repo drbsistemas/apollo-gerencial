@@ -1,10 +1,41 @@
 object dmCon: TdmCon
   OldCreateOrder = False
-  Height = 193
-  Width = 244
+  Height = 197
+  Width = 265
+  object FdConAcesso: TFDConnection
+    Params.Strings = (
+      'Database=D:\Gerencial\Dados\Acesso.FDB'
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'PageSize=16384'
+      'CharacterSet=WIN1252'
+      'DriverID=FB')
+    Transaction = FdSalvaAcesso
+    Left = 27
+    Top = 11
+  end
+  object FdSalvaAcesso: TFDTransaction
+    Connection = FdConAcesso
+    Left = 101
+    Top = 11
+  end
+  object FDPhysFBDriverLink1: TFDPhysFBDriverLink
+    VendorLib = 'D:\Gerencial\Lancador\Win32\Debug\gds32.dll'
+    Left = 192
+    Top = 112
+  end
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 193
+    Top = 12
+  end
+  object FDTableAdapter1: TFDTableAdapter
+    Left = 192
+    Top = 64
+  end
   object FdCon: TFDConnection
     Params.Strings = (
-      'Database=D:\Gerencial\Dados\DOG.FDB'
+      'Database=D:\Gerencial\Dados\BANCO.FDB'
       'User_Name=SYSDBA'
       'Password=masterkey'
       'PageSize=16384'
@@ -12,25 +43,11 @@ object dmCon: TdmCon
       'DriverID=FB')
     Transaction = FdSalva
     Left = 27
-    Top = 27
+    Top = 59
   end
   object FdSalva: TFDTransaction
     Connection = FdCon
-    Left = 77
-    Top = 27
-  end
-  object FDPhysFBDriverLink1: TFDPhysFBDriverLink
-    VendorLib = 'D:\Gerencial\Lancador\Win32\Debug\gds32.dll'
-    Left = 80
-    Top = 80
-  end
-  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
-    Provider = 'Forms'
-    Left = 128
-    Top = 24
-  end
-  object FDTableAdapter1: TFDTableAdapter
-    Left = 160
-    Top = 80
+    Left = 101
+    Top = 59
   end
 end

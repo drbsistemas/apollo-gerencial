@@ -12,11 +12,13 @@ uses
 
 type
   TdmCon = class(TDataModule)
-    FdCon: TFDConnection;
-    FdSalva: TFDTransaction;
+    FdConAcesso: TFDConnection;
+    FdSalvaAcesso: TFDTransaction;
     FDPhysFBDriverLink1: TFDPhysFBDriverLink;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     FDTableAdapter1: TFDTableAdapter;
+    FdCon: TFDConnection;
+    FdSalva: TFDTransaction;
   private
     { Private declarations }
   public

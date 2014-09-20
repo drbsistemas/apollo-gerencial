@@ -23,7 +23,6 @@ type
   TFmsg = class(TForm)
     cxPanel: TcxGroupBox;
     cxRosto: TcxLabel;
-    cxLabel2: TcxLabel;
     cxMSg: TcxMemo;
     cxSim: TcxButton;
     cxNao: TcxButton;
@@ -32,6 +31,7 @@ type
     procedure cxNaoClick(Sender: TObject);
     procedure cxSimClick(Sender: TObject);
     procedure cxOkClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -61,6 +61,16 @@ procedure TFmsg.cxSimClick(Sender: TObject);
 begin
    cxSim.tag := 1;
    Close;
+end;
+
+procedure TFmsg.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   if (key = Vk_F4) and (cxSim.Visible = true) then
+      cxSimClick(self) else
+   if (key = Vk_F4) and (cxOk.Visible = true) then
+      cxOkClick(self) else
+   if (key = Vk_F7) and (cxNao.Visible = true) then
+      cxNaoClick(self);
 end;
 
 procedure TFmsg.FormShow(Sender: TObject);

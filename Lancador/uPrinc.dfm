@@ -20,7 +20,7 @@ object FPrinc: TFPrinc
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object cxPanel: TcxGroupBox
+  object cxHint: TcxGroupBox
     Left = 0
     Top = 0
     Hint = 'Informa'#231#245'es dos componentes do sistema.'
@@ -42,7 +42,6 @@ object FPrinc: TFPrinc
     Width = 778
   end
   object UserControl1: TUserControl
-    AutoStart = True
     ApplicationID = 'Controle de Usu'#225'rios'
     ControlRight.ActionList = ActionList1
     User.Action = actUsuarios
@@ -90,7 +89,7 @@ object FPrinc: TFPrinc
     Top = 96
   end
   object UCFireDACConn1: TUCFireDACConn
-    Connection = dmCon.FdCon
+    Connection = dmCon.FdConAcesso
     Left = 40
     Top = 48
   end
