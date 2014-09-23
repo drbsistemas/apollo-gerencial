@@ -18,6 +18,7 @@ type
     Image1: TImage;
     procedure FormShow(Sender: TObject);
     procedure cxSimClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     function GeraImagem(Img: TImage): string;
     { Private declarations }
@@ -44,6 +45,15 @@ begin
      Msg('Opa! Parece que código da imagem não confere, tente novamente!', 'I', '=(');
   end;
   close;
+end;
+
+procedure TFcon_Captcha.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+    Begin
+      Key := #0;
+      Perform(WM_NEXTDLGCTL,0,0);
+    End;
 end;
 
 procedure TFcon_Captcha.FormShow(Sender: TObject);

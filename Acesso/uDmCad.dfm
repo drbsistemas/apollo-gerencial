@@ -2,16 +2,29 @@ object dmCad: TdmCad
   OldCreateOrder = False
   Height = 186
   Width = 341
-  object cdsConf: TFDQuery
+  object qryConf: TFDQuery
+    CachedUpdates = True
     Connection = dmCon.FdCon
     Transaction = dmCon.FdSalva
-    UpdateObject = updateConf
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtConf
     SQL.Strings = (
-      'Select * from CONF')
+      'select * from CONF')
     Left = 24
     Top = 16
   end
-  object updateConf: TFDUpdateSQL
+  object qryAux: TFDQuery
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    Left = 24
+    Top = 80
+  end
+  object dsAux: TDataSource
+    DataSet = qryAux
+    Left = 64
+    Top = 80
+  end
+  object UpdtConf: TFDUpdateSQL
     Connection = dmCon.FdCon
     InsertSQL.Strings = (
       'INSERT INTO CONF'
@@ -21,7 +34,8 @@ object dmCad: TdmCad
       '  CEPEMP, CONTATOEMP, FONEEMP, EMAILEMP, '
       '  SITEEMP, DATABACKUP, VALIDADELIC, QTDELIC, '
       '  PROGRAMABACKUP, LOGOEMP, PASTASERVIDOR, HOSTEMAIL, '
-      '  USUARIOEMAIL, SENHAEMAIL, PORTAEMAIL, SSLEMAIL)'
+      '  USUARIOEMAIL, SENHAEMAIL, PORTAEMAIL, SSLEMAIL, '
+      '  DATAULTIMOACESSO)'
       
         'VALUES (:NEW_KEYGEN, :NEW_RAZAOEMP, :NEW_FANTASIAEMP, :NEW_CNPJE' +
         'MP, '
@@ -38,7 +52,15 @@ object dmCad: TdmCad
         'STEMAIL, '
       
         '  :NEW_USUARIOEMAIL, :NEW_SENHAEMAIL, :NEW_PORTAEMAIL, :NEW_SSLE' +
-        'MAIL)')
+        'MAIL, '
+      '  :NEW_DATAULTIMOACESSO)'
+      
+        'RETURNING IDCONF, KEYGEN, RAZAOEMP, FANTASIAEMP, CNPJEMP, IEEMP,' +
+        ' ENDERECOEMP, NUMEROEMP, COMPLEMENTOEMP, BAIRROEMP, IIEMUNEMP, C' +
+        'IDADEEMP, UFEMP, CEPEMP, CONTATOEMP, FONEEMP, EMAILEMP, SITEEMP,' +
+        ' DATABACKUP, VALIDADELIC, QTDELIC, PROGRAMABACKUP, LOGOEMP, PAST' +
+        'ASERVIDOR, HOSTEMAIL, USUARIOEMAIL, SENHAEMAIL, PORTAEMAIL, SSLE' +
+        'MAIL, DATAULTIMOACESSO')
     ModifySQL.Strings = (
       'UPDATE CONF'
       
@@ -64,8 +86,17 @@ object dmCad: TdmCad
       '  LOGOEMP = :NEW_LOGOEMP, PASTASERVIDOR = :NEW_PASTASERVIDOR, '
       '  HOSTEMAIL = :NEW_HOSTEMAIL, USUARIOEMAIL = :NEW_USUARIOEMAIL, '
       '  SENHAEMAIL = :NEW_SENHAEMAIL, PORTAEMAIL = :NEW_PORTAEMAIL, '
-      '  SSLEMAIL = :NEW_SSLEMAIL'
-      'WHERE IDCONF = :OLD_IDCONF')
+      
+        '  SSLEMAIL = :NEW_SSLEMAIL, DATAULTIMOACESSO = :NEW_DATAULTIMOAC' +
+        'ESSO'
+      'WHERE IDCONF = :OLD_IDCONF'
+      
+        'RETURNING IDCONF, KEYGEN, RAZAOEMP, FANTASIAEMP, CNPJEMP, IEEMP,' +
+        ' ENDERECOEMP, NUMEROEMP, COMPLEMENTOEMP, BAIRROEMP, IIEMUNEMP, C' +
+        'IDADEEMP, UFEMP, CEPEMP, CONTATOEMP, FONEEMP, EMAILEMP, SITEEMP,' +
+        ' DATABACKUP, VALIDADELIC, QTDELIC, PROGRAMABACKUP, LOGOEMP, PAST' +
+        'ASERVIDOR, HOSTEMAIL, USUARIOEMAIL, SENHAEMAIL, PORTAEMAIL, SSLE' +
+        'MAIL, DATAULTIMOACESSO')
     DeleteSQL.Strings = (
       'DELETE FROM CONF'
       'WHERE IDCONF = :OLD_IDCONF')
@@ -78,15 +109,16 @@ object dmCad: TdmCad
         '  UFEMP, CEPEMP, CONTATOEMP, FONEEMP, EMAILEMP, SITEEMP, DATABAC' +
         'KUP, '
       '  VALIDADELIC, QTDELIC, PROGRAMABACKUP, LOGOEMP, PASTASERVIDOR, '
-      '  HOSTEMAIL, USUARIOEMAIL, SENHAEMAIL, PORTAEMAIL, SSLEMAIL'
+      '  HOSTEMAIL, USUARIOEMAIL, SENHAEMAIL, PORTAEMAIL, SSLEMAIL, '
+      '  DATAULTIMOACESSO'
       'FROM CONF'
       'WHERE IDCONF = :IDCONF')
-    Left = 80
+    Left = 104
     Top = 16
   end
   object dsConf: TDataSource
-    DataSet = cdsConf
-    Left = 136
+    DataSet = qryAux
+    Left = 64
     Top = 16
   end
 end

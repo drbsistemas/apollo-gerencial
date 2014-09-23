@@ -3,22 +3,49 @@ unit uRotinas;
 interface
 
 uses
-  MMSystem, Graphics, System.SysUtils, Forms, System.Classes;
+  MMSystem, Graphics, System.SysUtils, Forms, System.Classes, TypInfo,
+  FireDAC.Comp.Client, Windows;
 
-  Function Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
+   Function Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
    Function Crypt(Action, Src: String): String;
+   Function ConsultaQuery(StrCOnsulta: string; intQuery: Integer): Integer;
 
+   procedure ExecutaForm(FormClass: TFormClass; var Reference);
 var
    FCorSelec, FCorLista               : TColor;
    Lista                              : TStringList;
    CaminhoExe,
    CaminhoIni,
+   StrSql,
+   StrRazao,
+   PalavraSecreta,
+   Terminais,
+   DataExpira,
+   Cnpj,
+   Usuario,
    NomeEmpresa                        : String;
+   Diasfim                            : Real;
    Liberacao                          : Boolean;
 
 implementation
 
-uses uMsg;
+uses uMsg, uDmCad;
+
+procedure ExecutaForm(FormClass: TFormClass; var Reference);
+begin
+   try
+      if TForm(Reference) = nil then
+         Application.CreateForm(FormClass, TForm(Reference))
+      else
+      begin
+         if TForm(Reference).WindowState = wsMinimized then
+            TForm(Reference).WindowState := wsNormal;
+         TForm(Reference).BringToFront;
+      end;
+   finally
+//      PFundo(0);
+   end;
+end;
 
 
 Function Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
@@ -109,6 +136,72 @@ begin
    end;
    Result          := Dest;
    Fim:
+end;
+
+procedure GravaSql(StrTexto: String; NomeComponente: TComponentName);
+var
+   Arq                     : TextFile;
+   nomeArq, Linha, Caminho : String;
+   ch                      : Char;
+   Rect                    : TRect;
+   TD                      : PTypeData;
+begin
+   Caminho := CaminhoIni+ 'qry.sql';
+   TD := GetTypeData(Screen.ActiveForm.ClassInfo);
+   AssignFile(Arq, Caminho);
+
+   if not FileExists(CAMINHO) then
+      Rewrite(arq) else
+         Append(arq);
+
+   Writeln(arq, '');
+   Writeln(arq, '/*----------------------------------------------------------------------------------------------------*/');
+   Writeln(arq, '');
+   Writeln(arq, StrTexto);
+   Writeln(arq, '');
+   Writeln(arq, uppercase('/* Data Hora: '+FormatDateTime('dd/mm/yyy hh:mm:ss', Now)+' - Componente: '+NomeComponente+ ' - Form: '+uppercase(Screen.ActiveForm.Name)+' - Unit: '+uppercase(TD^.UnitName)+' */'));
+   CloseFile(Arq);
+end;
+
+Function ConsultaQuery(StrCOnsulta: string; intQuery: Integer): Integer;
+begin
+   with dmCAd do
+   begin
+      try
+         Result:= -1;
+         case intQuery of
+            1: begin
+               qryAux.Close;
+               qryAux.sql.clear;
+               qryAux.sql.add(StrConsulta);
+               qryAux.open;
+               qryAux.FetchAll;
+               qryAux.First;
+               Result := qryAux.REcordCount;
+            end;
+            2: begin
+               qryAux.close;
+               qryAux.sql.clear;
+               qryAux.sql.add(StrConsulta);
+               qryAux.open;
+               qryAux.FetchAll;
+               qryAux.First;
+               Result := qryAux.REcordCount;
+            end;
+            3: begin
+               qryAux.close;
+               qryAux.sql.clear;
+               qryAux.sql.add(StrConsulta);
+               qryAux.open;
+               qryAux.FetchAll;
+               qryAux.First;
+               Result := qryAux.REcordCount;
+            end;
+         end;
+      Finally
+         GravaSql(StrConsulta, 'qrAux'+IntToStr(intQuery));
+      end;
+   end;
 end;
 
 end.

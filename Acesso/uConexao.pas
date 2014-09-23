@@ -9,7 +9,11 @@ Uses
    Procedure AbreAcesso;
    Procedure AbreBanco(EnderecoBanco:String);
    // Licença
-   Function ValidaLicenca(): Boolean;
+   Function VerificaLicenca(): Boolean;
+   Function ValidaLicenca(StrSerial: String): Boolean;
+   Function LeLicenca(StrSerial: String): Boolean;
+   Procedure AtualizaLicenca(StrValidade, StrTerminais, StrKeygen: String);
+   Function ContaUsuariosLogados():integer;
    // Arquivo INI
    Procedure CarregaEmpresa(StrEmpresa: String);
    Function DadosdoIni(ARQUIVO:STRING; SESSAO:STRING; PARAMETRO:STRING) :STRING;
@@ -25,14 +29,18 @@ begin
       if dmCon = nil then
          Application.CreateForm(TdmCon, dmCon);
 
-      dmCon.FdConAcesso.Params.Clear;
-      dmCon.FdConAcesso.Close;
-      dmCon.FdConAcesso.Params.Add('Database='+DadosdoIni(CaminhoIni, 'ACESSO', 'BANCO'));
-      dmCon.FdConAcesso.Params.Add('User_Name=SYSDBA');
-      dmCon.FdConAcesso.Params.Add('Password=masterkey');
-      dmCon.FdConAcesso.Params.Add('DriverID=FB');
-      dmCon.FDPhysFBDriverLink1.VendorLib := 'gds32.dll'; // Pasta do Aplicativo EXE
-      dmcon.FdConAcesso.Open();
+      with dmCon.FdConAcesso do
+      begin
+         Params.Clear;
+         Close;
+         Params.Add('Database='+DadosdoIni(CaminhoIni, 'ACESSO', 'BANCO'));
+         Params.Add('User_Name=SYSDBA');
+         Params.Add('Password=masterkey');
+         Params.Add('DriverID=FB');
+         dmCon.FDPhysFBDriverLink1.VendorLib := 'gds32.dll'; // Pasta do Aplicativo EXE
+         Open();
+      end;
+
    except
       Msg('Ei, não encontramos o banco de dados do acesso, entre em contato com nosso suporte!','I',':(');
       Application.terminate;
@@ -45,14 +53,17 @@ begin
       if dmCon = nil then
          Application.CreateForm(TdmCon, dmCon);
 
-      dmCon.FdCon.Params.Clear;
-      dmCon.FdCon.Close;
-      dmCon.FdCon.Params.Add('Database='+EnderecoBanco);
-      dmCon.FdCon.Params.Add('User_Name=SYSDBA');
-      dmCon.FdCon.Params.Add('Password=masterkey');
-      dmCon.FdCon.Params.Add('DriverID=FB');
-      dmCon.FDPhysFBDriverLink1.VendorLib := 'gds32.dll'; // Pasta do Aplicativo EXE
-      dmcon.FdCon.Open();
+      with dmCon.FdCon do
+      begin
+         Params.Clear;
+         Close;
+         Params.Add('Database='+EnderecoBanco);
+         Params.Add('User_Name=SYSDBA');
+         Params.Add('Password=masterkey');
+         Params.Add('DriverID=FB');
+         dmCon.FDPhysFBDriverLink1.VendorLib := 'gds32.dll'; // Pasta do Aplicativo EXE
+         Open();
+      end;
 
    except
       Msg('Encontramos um problema, banco de dados não esta no lugar correto, contate nosso suporte!','I',':(');
@@ -110,91 +121,116 @@ begin
    end;
 end;
 
-Function ValidaLicenca(): Boolean;
+Function VerificaLicenca(): Boolean;
 var
+   LicencaValida: Boolean;
+begin
+   if (dmCad.qryConf.FieldbyName('KEYGEN').AsString='') or (not ValidaLicenca(dmCad.qryConf.FieldbyName('KEYGEN').AsString)) then
+   begin
+      Msg('Acabamos de identificar sua licença está inválida, precisamos atualizar, clique em ok para continuarmos!', 'I',':S');
+      Fcad_Serial := TFcad_Serial.Create(Fcad_Serial);
+      Fcad_Serial.ShowModal;
+      Fcad_Serial.Free;
+   end;
+
+   if ContaUsuariosLogados > StrToInt(Terminais) then
+   begin
+      Msg('Verificamos e você já esta usando o máximo de usuários liberados, o sistema será fechado, porém para contratar mais usuários, contate nosso setor comercial!', 'I',':S');
+      Application.terminate;
+   end;
+
+   Diasfim:=(StrToDate(Dataexpira)-date);
+   if Date>StrToDate(dataexpira) then
+   begin
+      if Msg('Seu serial de uso do nosso software esta expirada desde: '+dataexpira+', quer atualizar o serial agora ?!', 'P',';)') then
+      begin
+         Liberacao := false; // trava liberacao do sistema
+         Fcad_Serial := TFcad_Serial.Create(Fcad_Serial);
+         Fcad_Serial.ShowModal;
+         Fcad_Serial.Free;
+         Msg('Precisamos reiniciar a aplicação para validar, acesse novamente o nosso software!', 'I',':S');
+         Application.terminate;
+      end
+      else
+      begin
+         Msg('Seu sistema está com o serial expirado, mas você ainda pode usar para consulta dos dados!', 'I',':S');
+//         FPrinc.StatusBar1.Panels[4].Text := 'Licença Expirada, Verifique!';
+         Liberacao:=False;
+      end;
+   end else
+   if (StrToDate(dataexpira)-date <= 5) then
+   begin
+      if Msg('Verificamos que faltam '+FormatFloat('#0',diasfim)+' para expirar o serial do seu software, o que acha de atualizar agora ?', 'P',':S') then
+      begin
+         FCad_serial := TFCad_serial.Create(FCad_serial);
+         FCad_serial.ShowModal;
+      end;
+//      FPrinc.StatusBar1.Panels[0].Text := 'Usuário: '+usuario;
+      Fprinc.UserControl1.Log('Aviso! Licença com data expirando em: '+FormatFloat('#0',diasfim)+' dias.', 3);
+//      FPrinc.StatusBar1.Panels[3].Text := 'Aviso! Licença de Uso Expira em: '+FormatFloat('#0',diasfim)+' dias.';
+   end;
+   FPrinc.UserControl1.Log('Login.:'+ FPrinc.UserControl1.CurrentUser.UserName, 0);
+end;
+
+Function ValidaLicenca(StrSerial: String): Boolean;
+begin
+   LeLicenca(StrSerial);
+   if (dmcad.qryConf.Fieldbyname('RAZAOEMP').asString          <> StrRazao) or
+      (dmcad.qryConf.Fieldbyname('CNPJEMP').asString           <> cnpj) or
+      (dmcad.qryConf.Fieldbyname('VALIDADELIC').AsString       <> dataexpira) or
+      (strtoInt(dmcad.qryConf.Fieldbyname('QTDELIC').asString) <> StrToInt(terminais)) or
+      ('RBDANILOSISTEMAS'                                      <> palavraSecreta) then
+   begin
+      AtualizaLicenca('','','');
+      Result := False;
+   end else
+   begin
+      AtualizaLicenca(dataexpira, terminais, StrSerial);
+      Result := True;
+   end;
+end;
+
+Function LeLicenca(StrSerial: String):Boolean;
+Var
    Tamanho        : Integer;
-   PalavraSecreta,
-   Terminais,
-   DataExpira,
-   Cnpj,
-   Empresa,
    Cript,
    Descript       : String;
 begin
-   try
-      Liberacao      := True;    // Abre a liberação para iniciar a verificação
-      cript          := trim(dmCad.cdsConf.FieldbyName('KEYGEN').AsString);
-      descript       :=crypt('D',cript);
-      Tamanho        := StrToInt(Copy(descript,17,3));
+   cript          := trim(StrSerial);
+   descript       :=crypt('D',cript);
+   Tamanho        := StrToInt(Copy(descript,17,3));
 
-   if (dmcad.cdsConf.Fieldbyname('RAZAOEMP').asString          <> Copy(descript,20,tamanho)) or
-      (dmcad.cdsCOnf.Fieldbyname('CNPJEMP').asString           <> Copy(descript,(20+tamanho),14)) or
-      (dmcad.cdsCOnf.Fieldbyname('VALIDADELIC').AsString       <> dateToStr(StrToDate(copy(descript,(44+tamanho),10)))) or
-      (strtoInt(dmcad.cdsConf.Fieldbyname('QTDELIC').asString) <> StrToint(Copy(descript,(54+tamanho),3))) or
-      ('RBDANILOSISTEMAS'                                      <> Copy(descript,1,16)) then
-      begin
-         Msg('Aiai sua licença expirou, precisamos atualizar, contate nosso suporte!', 'I',':S');
+   StrRazao       := Copy(descript,20,tamanho);
+   cnpj           := Copy(descript,(20+tamanho),14);
+   DataExpira     := copy(descript,(44+tamanho),10);
+   terminais      := Copy(descript,(54+tamanho),3);
+   palavrasecreta := Copy(descript,1,16);
+end;
 
-         dmcad.cdsConf.Edit;
-         dmcad.cdsConf.Fieldbyname('VALIDADELIC').AsString := '';
-         dmcad.cdsConf.Fieldbyname('QTDELIC').AsString     := '';
-         dmcad.cdsConf.Post;
-         dmcad.cdsConf.ApplyUpdates(0);
-
-         Fcad_Serial := TFcad_Serial.Create(Fcad_Serial);
-         Fcad_Serial.ShowModal;
-      end;
-
-   except
-      Msg('Que estranho sua licenca está inválida, vamos corrigir isso dê um OK!', 'I',':S');
-      Fcad_Serial := TFcad_Serial.Create(Fcad_Serial);
-      Fcad_Serial.ShowModal;
-      Abort;
+procedure AtualizaLicenca(StrValidade, StrTerminais, StrKeygen: String);
+begin
+   with dmCAd.qryConf do
+   begin
+      Edit;
+      FieldByName('DATAULTIMOACESSO').AsString := DateToStr(Date);
+      FieldbyName('RAZAOEMP').AsString         := StrRazao;
+      FIeldbyname('CNPJEMP').AsString          := CNPJ;
+      Fieldbyname('VALIDADELIC').AsString      := StrValidade;
+      Fieldbyname('QTDELIC').AsString          := StrTerminais;
+      Fieldbyname('KEYGEN').AsString           := StrKeygen;
+      Post;
+      ApplyUpdates(0);
    end;
+end;
 
-//   if CONTAUSUARIOLOGADO > StrToInt(terminais) then
-//   begin
-//      Msg('0211 - Número máximo de licenças '+terminais+' atingido, verifique usuários logados','I');
-//      Application.terminate;
-//   end;
-//
-//   diasfim:=(dataexpira-date);
-//   if date>dataexpira then
-//   begin
-//      if Msg('0212 - Atenção! Cópia expirada em '+DateToStr(dataexpira)+', deseja atualizar a licença agora?', 'P') then
-//      begin
-//         Liberacao := false; // trava liberacao do sistema
-//         ExecutaForm(TFormLibera, FormLibera);
-//      end
-//      else
-//      begin
-//         Msg('0213 - Atenção! Sistema liberado apenas para consultas, atualize a sua licença!','I');
-//         FPrinc.StatusBar1.Panels[4].Text := 'Licença Expirada, Verifique!';
-//         Liberacao:=False;
-//      end;
-//   end
-//   else
-//   if (dataexpira-date <= 5) then
-//   begin
-//      if Msg('0214 - Faltam '+FormatFloat('#0',diasfim)+' para expirar o programa! Deseja Atualizar a licença agora?','P') then
-//      begin
-//         FormLibera := TFormLibera.Create(self);
-//         FormLibera.ShowModal;
-//      end;
-//      FPrinc.StatusBar1.Panels[0].Text := 'Usuário: '+usuario;
-//      Fprinc.UserControl1.Log('Aviso! Licença com data expirando em: '+FormatFloat('#0',diasfim)+' dias.', 3);
-//      FPrinc.StatusBar1.Panels[3].Text := 'Aviso! Licença de Uso Expira em: '+FormatFloat('#0',diasfim)+' dias.';
-//   end;
-//
-/////// Fim de verificar a licença de usuario.
-//   if LoginUsuario<>'CANCELAR' then
-//      Usuario := EditUsuario.Text;
-//   if Usuario<>'' then
-//      FPrinc.StatusBar1.Panels[1].Text := 'Usuário: '+usuario;
-/////// Faz login no componente UserControl ( Informação + Usuario, Nivel );
-//      FPrinc.UserControl1.Log('Login.:'+ FPrinc.UserControl1.CurrentUser.UserName, 0);
-//  Action := caFree;
+Function ContaUsuariosLogados():integer;
+begin
+   StrSQl := 'select count(mon$user) from Mon$attachments';
+   dmCad.qryAux.close;
+   dmcad.qryAux.sql.Add(StrSql);
+   dmcad.qryAux.Open;
 
+   Result := dmcad.qryAux.FieldbyName('COUNT').asInteger;
 end;
 
 end.

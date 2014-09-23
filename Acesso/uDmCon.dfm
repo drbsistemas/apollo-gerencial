@@ -10,6 +10,7 @@ object dmCon: TdmCon
       'PageSize=16384'
       'CharacterSet=WIN1252'
       'DriverID=FB')
+    LoginPrompt = False
     Transaction = FdSalvaAcesso
     Left = 27
     Top = 11
@@ -20,7 +21,7 @@ object dmCon: TdmCon
     Top = 11
   end
   object FDPhysFBDriverLink1: TFDPhysFBDriverLink
-    VendorLib = 'D:\Gerencial\Lancador\Win32\Debug\gds32.dll'
+    VendorLib = 'D:\Gerencial\Lancador\gds32.dll'
     Left = 192
     Top = 112
   end
@@ -41,6 +42,7 @@ object dmCon: TdmCon
       'PageSize=16384'
       'CharacterSet=WIN1252'
       'DriverID=FB')
+    LoginPrompt = False
     Transaction = FdSalva
     Left = 27
     Top = 59

@@ -17,6 +17,7 @@ object FCad_Serial: TFCad_Serial
   Position = poDefault
   WindowState = wsMaximized
   OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
   OnShow = FormShow
   DesignSize = (
     708
@@ -38,8 +39,6 @@ object FCad_Serial: TFCad_Serial
     Style.Color = 33023
     Style.Shadow = False
     TabOrder = 0
-    ExplicitLeft = 50
-    ExplicitTop = 165
     Height = 270
     Width = 600
     object cxRosto: TcxLabel

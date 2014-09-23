@@ -65,10 +65,10 @@ begin
    AbreAcesso;
    UserControl1.StartLogin;
 
-   if not dmcad.CdsConf.Active = true then
-      dmCad.CdsConf.Open;
+   if not dmcad.qryConf.Active = true then
+      dmCad.qryConf.Open;
 
-   ValidaLicenca;
+   VerificaLicenca();
 end;
 
 procedure TFPrinc.FormShow(Sender: TObject);

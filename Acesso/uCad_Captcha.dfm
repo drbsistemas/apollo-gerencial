@@ -16,6 +16,7 @@ object Fcon_Captcha: TFcon_Captcha
   OldCreateOrder = False
   Position = poDefault
   WindowState = wsMaximized
+  OnKeyPress = FormKeyPress
   OnShow = FormShow
   DesignSize = (
     708
@@ -37,8 +38,6 @@ object Fcon_Captcha: TFcon_Captcha
     Style.Color = 33023
     Style.Shadow = False
     TabOrder = 0
-    ExplicitLeft = 50
-    ExplicitTop = 165
     Height = 270
     Width = 600
     object Image1: TImage
