@@ -43,7 +43,7 @@ object Fmsg: TFmsg
     Width = 600
     object cxRosto: TcxLabel
       Left = 24
-      Top = 9
+      Top = 2
       Caption = ';)'
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
@@ -55,12 +55,13 @@ object Fmsg: TFmsg
     end
     object cxMSg: TcxMemo
       Left = 24
-      Top = 81
+      Top = 66
       TabStop = False
       Lines.Strings = (
         'cxMSg')
       ParentFont = False
       Properties.ReadOnly = True
+      Properties.ScrollBars = ssVertical
       Style.Color = 33023
       Style.Edges = []
       Style.Font.Charset = ANSI_CHARSET
@@ -72,8 +73,8 @@ object Fmsg: TFmsg
       Style.TransparentBorder = True
       Style.IsFontAssigned = True
       TabOrder = 1
-      Height = 104
-      Width = 552
+      Height = 148
+      Width = 576
     end
     object cxSim: TcxButton
       Left = 147
@@ -82,6 +83,7 @@ object Fmsg: TFmsg
       Height = 40
       Caption = '(F4)'
       Colors.Default = 4892159
+      LookAndFeel.SkinName = ''
       OptionsImage.Glyph.Data = {
         36100000424D3610000000000000360000002800000020000000200000000100
         2000000000000010000000000000000000000000000000000000000000000000
@@ -228,9 +230,14 @@ object Fmsg: TFmsg
       Top = 217
       Width = 150
       Height = 40
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
       Cancel = True
       Caption = '(F7)'
       Colors.Default = 4892159
+      LookAndFeel.SkinName = ''
       OptionsImage.Glyph.Data = {
         36100000424D3610000000000000360000002800000020000000200000000100
         2000000000000010000000000000000000000000000000000000000000000000
@@ -379,6 +386,7 @@ object Fmsg: TFmsg
       Height = 40
       Caption = '(F4)'
       Colors.Default = 4892159
+      LookAndFeel.SkinName = ''
       OptionsImage.Glyph.Data = {
         36100000424D3610000000000000360000002800000020000000200000000100
         2000000000000010000000000000000000000000000000000000000000000000

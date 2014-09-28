@@ -1,0 +1,9 @@
+[ACESSO]
+BANCO=D:\Gerencial\Dados\Nfse\Acesso_NFse.FDB
+
+[LOJAS]
+TOTAL=1
+
+[LOJA 1]
+NOME=PETSHOP
+BANCO=D:\Gerencial\Dados\Nfse\BANCO_Nfse.FDB

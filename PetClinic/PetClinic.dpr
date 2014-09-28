@@ -9,9 +9,10 @@ uses
   uMsg in '..\Acesso\uMsg.pas' {Fmsg},
   LoginWindow_U in 'C:\Program Files (x86)\Embarcadero\Studio\14.0\LibAdicional\UserControlXE6\Source\LoginWindow_U.pas' {frmLoginWindow},
   uDmCad in '..\Acesso\uDmCad.pas' {dmCad: TDataModule},
-  uPai in '..\Cadastros\uPai.pas' {Form2},
+  uPai in '..\Cadastros\uPai.pas' {Fcad_Pai},
   uSerial in '..\Acesso\uSerial.pas' {FCad_Serial},
-  uCad_Captcha in '..\Acesso\uCad_Captcha.pas' {Fcon_Captcha};
+  uCad_Captcha in '..\Acesso\uCad_Captcha.pas' {Fcon_Captcha},
+  uCad_Clientes in '..\Cadastros\uCad_Clientes.pas' {Fcad_Clientes};
 
 {$R *.res}
 

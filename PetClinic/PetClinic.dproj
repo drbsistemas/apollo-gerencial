@@ -107,7 +107,7 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\Cadastros\uPai.pas">
-            <Form>Form2</Form>
+            <Form>Fcad_Pai</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Acesso\uSerial.pas">
@@ -116,6 +116,10 @@
         </DCCReference>
         <DCCReference Include="..\Acesso\uCad_Captcha.pas">
             <Form>Fcon_Captcha</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Cadastros\uCad_Clientes.pas">
+            <Form>Fcad_Clientes</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

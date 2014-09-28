@@ -17,9 +17,9 @@ uses
   dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
   dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010,
   dxSkinWhiteprint, dxSkinXmas2008Blue, cxTextEdit, Vcl.StdCtrls, Vcl.ExtCtrls,
-  cxLabel, Vcl.Mask, RxToolEdit, Vcl.ComCtrls, Winapi.ShlObj, cxShellCommon,
+  cxLabel, Vcl.Mask, Vcl.ComCtrls, Winapi.ShlObj, cxShellCommon,
   Vcl.Menus, cxButtons, cxMaskEdit, cxDropDownEdit, cxShellComboBox,
-  dxGDIPlusClasses, cxImage, Data.DB, RxMemDS, cxMemo;
+  dxGDIPlusClasses, cxImage, Data.DB, cxMemo;
 
 type
   TFCad_Ini = class(TForm)

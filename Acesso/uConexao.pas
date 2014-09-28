@@ -15,7 +15,7 @@ Uses
    Procedure AtualizaLicenca(StrValidade, StrTerminais, StrKeygen: String);
    Function ContaUsuariosLogados():integer;
    // Arquivo INI
-   Procedure CarregaEmpresa(StrEmpresa: String);
+   Procedure CarregaEmpresa(StrEmpresa, StrUsuario: String);
    Function DadosdoIni(ARQUIVO:STRING; SESSAO:STRING; PARAMETRO:STRING) :STRING;
    Function AbreINI(): TStringList;
 
@@ -96,10 +96,15 @@ begin
    end;
 end;
 
-Procedure CarregaEmpresa(StrEmpresa: String);
+Procedure CarregaEmpresa(StrEmpresa, StrUsuario: String);
 begin
    try
       NomeEmpresa    := DadosdoIni(CaminhoIni, StrEmpresa, 'NOME');
+      Usuario        := StrUsuario;
+
+      FPrinc.StBar.Panels[0].Text := 'Empresa: '+ NomeEmpresa;
+      Fprinc.StBar.Panels[1].Text := 'Usuário: '+ Usuario;
+//      FPrinc.StatusBar1.Panels[3].Text := 'Aviso! Licença de Uso Expira em: '+FormatFloat('#0',diasfim)+' dias.';
       AbreBanco(DadosdoIni(CaminhoIni, StrEmpresa, 'BANCO'));
    except
       Application.terminate;
@@ -154,7 +159,6 @@ begin
       else
       begin
          Msg('Seu sistema está com o serial expirado, mas você ainda pode usar para consulta dos dados!', 'I',':S');
-//         FPrinc.StatusBar1.Panels[4].Text := 'Licença Expirada, Verifique!';
          Liberacao:=False;
       end;
    end else
@@ -165,9 +169,7 @@ begin
          FCad_serial := TFCad_serial.Create(FCad_serial);
          FCad_serial.ShowModal;
       end;
-//      FPrinc.StatusBar1.Panels[0].Text := 'Usuário: '+usuario;
       Fprinc.UserControl1.Log('Aviso! Licença com data expirando em: '+FormatFloat('#0',diasfim)+' dias.', 3);
-//      FPrinc.StatusBar1.Panels[3].Text := 'Aviso! Licença de Uso Expira em: '+FormatFloat('#0',diasfim)+' dias.';
    end;
    FPrinc.UserControl1.Log('Login.:'+ FPrinc.UserControl1.CurrentUser.UserName, 0);
 end;

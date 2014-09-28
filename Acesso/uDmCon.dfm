@@ -21,7 +21,7 @@ object dmCon: TdmCon
     Top = 11
   end
   object FDPhysFBDriverLink1: TFDPhysFBDriverLink
-    VendorLib = 'D:\Gerencial\Lancador\gds32.dll'
+    VendorLib = 'D:\Gerencial\gds32.dll'
     Left = 192
     Top = 112
   end

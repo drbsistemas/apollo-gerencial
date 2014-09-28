@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014/09/25 15:15:53.000.526,=C:\Users\Danilo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/09/25 15:18:19.000.449,C:\Users\Danilo\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\Gerencial\Nfse\UPrinc.pas</Transaction>
+    <Transaction>2014/09/25 15:18:19.000.449,C:\Users\Danilo\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\Gerencial\Nfse\UPrinc.dfm</Transaction>
+    <Transaction>2014/09/25 15:18:29.000.238,C:\Users\Danilo\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\Gerencial\Nfse\Nfse.dproj</Transaction>
+    <Transaction>2014/09/25 15:18:44.000.226,=D:\Gerencial\Acesso\uSerial.pas</Transaction>
+    <Transaction>2014/09/25 15:18:44.000.102,=D:\Gerencial\Acesso\uDmCad.pas</Transaction>
+    <Transaction>2014/09/25 15:18:44.000.051,=D:\Gerencial\Acesso\uCad_Ini.pas</Transaction>
+    <Transaction>2014/09/25 15:18:44.000.142,=D:\Gerencial\Acesso\uDmCon.pas</Transaction>
+    <Transaction>2014/09/25 15:18:44.000.011,=D:\Gerencial\Acesso\uCad_Captcha.pas</Transaction>
+    <Transaction>2014/09/25 15:18:44.000.184,=D:\Gerencial\Acesso\uMsg.pas</Transaction>
+    <Transaction>2014/09/25 15:18:44.000.061,=D:\Gerencial\Acesso\uConexao.pas</Transaction>
+    <Transaction>2014/09/25 15:18:57.000.906,=D:\Gerencial\Rotinas\uRotinas.pas</Transaction>
+    <Transaction>2014/09/25 15:19:04.000.552,=D:\Gerencial\Cadastros\uPai.pas</Transaction>
+    <Transaction>2014/09/25 15:19:04.000.510,=D:\Gerencial\Cadastros\uCad_Clientes.pas</Transaction>
+  </Transactions>
+</BorlandProject>

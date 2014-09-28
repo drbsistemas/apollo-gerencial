@@ -1,22 +1,25 @@
 object FPrinc: TFPrinc
   Left = 0
   Top = 0
-  Caption = 'PetClinic'
-  ClientHeight = 469
-  ClientWidth = 778
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'NFs-e'
+  ClientHeight = 602
+  ClientWidth = 802
   Color = clBtnFace
-  Font.Charset = ANSI_CHARSET
+  Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'Segoe UI'
+  Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsMDIForm
   KeyPreview = True
   OldCreateOrder = False
-  Position = poDesktopCenter
   WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnKeyPress = FormKeyPress
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -38,19 +41,20 @@ object FPrinc: TFPrinc
     Style.Font.Name = 'Segoe UI'
     Style.Font.Style = [fsBold]
     Style.LookAndFeel.SkinName = ''
-    Style.TextColor = clMaroon
+    Style.TextColor = clBlack
     Style.IsFontAssigned = True
     StyleDisabled.LookAndFeel.SkinName = ''
     StyleFocused.LookAndFeel.SkinName = ''
     StyleHot.LookAndFeel.SkinName = ''
     TabOrder = 0
+    ExplicitWidth = 800
     Height = 20
-    Width = 778
+    Width = 802
   end
   object StBar: TdxStatusBar
     Left = 0
-    Top = 449
-    Width = 778
+    Top = 582
+    Width = 802
     Height = 20
     Panels = <
       item
@@ -100,15 +104,21 @@ object FPrinc: TFPrinc
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
+    ExplicitTop = 580
+    ExplicitWidth = 800
   end
   object Button1: TButton
-    Left = 352
-    Top = 200
+    Left = 368
+    Top = 304
     Width = 75
     Height = 25
     Caption = 'Button1'
-    TabOrder = 2
+    TabOrder = 1
     OnClick = Button1Click
+  end
+  object UCFireDACConn1: TUCFireDACConn
+    Left = 40
+    Top = 48
   end
   object UserControl1: TUserControl
     ApplicationID = 'Controle de Usu'#225'rios'
@@ -156,11 +166,6 @@ object FPrinc: TFPrinc
     DataConnector = UCFireDACConn1
     Left = 40
     Top = 96
-  end
-  object UCFireDACConn1: TUCFireDACConn
-    Connection = dmCon.FdConAcesso
-    Left = 40
-    Top = 48
   end
   object UCControls1: TUCControls
     GroupName = 'Tela Principal'

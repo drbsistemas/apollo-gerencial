@@ -3,15 +3,29 @@ unit uRotinas;
 interface
 
 uses
-  MMSystem, Graphics, System.SysUtils, Forms, System.Classes, TypInfo,
-  FireDAC.Comp.Client, Windows;
-
+   MMSystem, Graphics, System.SysUtils, Forms, System.Classes, TypInfo,
+   cxButtons, CxGroupBox, cxLabel, cxCheckBox, cxTextEdit, cxMaskEdit,
+   FireDAC.Comp.Client, Windows, StdCtrls;
+   // Mensagens
    Function Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
+   // Licenca
    Function Crypt(Action, Src: String): String;
+
+   // Validaçoes
+   FUNCTION    VALIDAUF(Dado : string) : boolean;
+   FUNCTION    VALIDACNPJ(Dado : string) : boolean;
+   FUNCTION    VALIDACPF(Dado : string) : boolean;
+   Procedure ValidaCampoTag(Form: TForm);
+
+   Function ExecutaGen(StrTabela : String) : Integer;
+   Function Consulta(StrConsulta: String; qrDados: TFDQuery): Boolean;
+   Function ifs(Expressao: Boolean; CasoVerdadeiro, CasoFalso: Variant): Variant;
    Function ConsultaQuery(StrCOnsulta: string; intQuery: Integer): Integer;
 
    procedure ExecutaForm(FormClass: TFormClass; var Reference);
+   procedure PFundo(mostra: integer);
 var
+   FormAtivo                          : TForm;
    FCorSelec, FCorLista               : TColor;
    Lista                              : TStringList;
    CaminhoExe,
@@ -29,7 +43,145 @@ var
 
 implementation
 
-uses uMsg, uDmCad;
+uses uMsg, uDmCad, uDmCon;
+
+function VALIDACNPJ(Dado : string) : boolean;
+var  D1            : array[1..12] of byte;
+     I,
+     DF1,
+     DF2,
+     DF3,
+     DF4,
+     DF5,
+     DF6,
+     Resto1,
+     Resto2,
+     PrimeiroDigito,
+     SegundoDigito : integer;
+begin
+     Result := true;
+     if Length(Dado) = 14 then
+     begin
+          for I := 1 to 12 do
+               if Dado[I] in ['0'..'9'] then
+                    D1[I] := StrToInt(Dado[I])
+               else
+                    Result := false;
+          if Result then
+          begin
+               DF1 := 5*D1[1] + 4*D1[2] + 3*D1[3] + 2*D1[4] + 9*D1[5] + 8*D1[6] +
+                      7*D1[7] + 6*D1[8] + 5*D1[9] + 4*D1[10] + 3*D1[11] + 2*D1[12];
+               DF2 := DF1 div 11;
+               DF3 := DF2 * 11;
+               Resto1 := DF1 - DF3;
+               if (Resto1 = 0) or (Resto1 = 1) then
+                    PrimeiroDigito := 0
+               else
+                    PrimeiroDigito := 11 - Resto1;
+               DF4 := 6*D1[1] + 5*D1[2] + 4*D1[3] + 3*D1[4] + 2*D1[5] + 9*D1[6] +
+                      8*D1[7] + 7*D1[8] + 6*D1[9] + 5*D1[10] + 4*D1[11] + 3*D1[12] +
+                      2*PrimeiroDigito;
+               DF5 := DF4 div 11;
+               DF6 := DF5 * 11;
+               Resto2 := DF4 - DF6;
+               if (Resto2 = 0) or (Resto2 = 1) then
+                    SegundoDigito := 0
+               else
+                    SegundoDigito := 11 - Resto2;
+               if (PrimeiroDigito <> StrToInt(Dado[13])) or
+                  (SegundoDigito <> StrToInt(Dado[14])) then
+                    Result := false;
+          end;
+     end
+     else
+          if Length(Dado) <> 0 then
+               Result := false;
+end; {TESTA_CNPJ}
+
+
+{Valida dígito verificador de CPF}
+function VALIDACPF(Dado : string) : boolean;
+var  D1            : array[1..9] of byte;
+     I,
+     DF1,
+     DF2,
+     DF3,
+     DF4,
+     DF5,
+     DF6,
+     Resto1,
+     Resto2,
+     PrimeiroDigito,
+     SegundoDigito : integer;
+begin
+     Result := true;
+     if Length(Dado) = 11 then
+     begin
+          for I := 1 to 9 do
+               if Dado[I] in ['0'..'9'] then
+                    D1[I] := StrToInt(Dado[I])
+               else
+                    Result := false;
+          if Result then
+          begin
+               DF1 := 10*D1[1] + 9*D1[2] + 8*D1[3] + 7*D1[4] + 6*D1[5] + 5*D1[6] +
+                      4*D1[7] + 3*D1[8] + 2*D1[9];
+               DF2 := DF1 div 11;
+               DF3 := DF2 * 11;
+               Resto1 := DF1 - DF3;
+               if (Resto1 = 0) or (Resto1 = 1) then
+                    PrimeiroDigito := 0
+               else
+                    PrimeiroDigito := 11 - Resto1;
+               DF4 := 11*D1[1] + 10*D1[2] + 9*D1[3] + 8*D1[4] + 7*D1[5] + 6*D1[6] +
+                      5*D1[7] + 4*D1[8] + 3*D1[9] + 2*PrimeiroDigito;
+               DF5 := DF4 div 11;
+               DF6 := DF5 * 11;
+               Resto2 := DF4 - DF6;
+               if (Resto2 = 0) or (Resto2 = 1) then
+                    SegundoDigito := 0
+               else
+                    SegundoDigito := 11 - Resto2;
+               if (PrimeiroDigito <> StrToInt(Dado[10])) or
+                  (SegundoDigito <> StrToInt(Dado[11])) then
+                    Result := false;
+          end;
+     end
+     else
+          if Length(Dado) <> 0 then
+               Result := false;
+
+end;
+
+function VALIDAUF(Dado : string) : boolean;
+var i:integer;
+const Estados = 'SPMGRJRSSCPRESDFMTMSGOTOBASEALPBPEMARNCEPIPAAMAPFNACRRROEX';
+begin
+     i:=1;
+     While ((Estados[i]+Estados[i+1])<>Dado) and (i<>59) do
+      i:=i+2;
+
+     If i<59
+      then Result:=True
+      else Result:=False;
+end; {TESTA_UF}
+
+procedure PFundo(mostra: integer);
+begin
+//      if Mostra=1 then
+//      begin
+//         Fprinc.cxFundo.Visible := true;
+//         FPrinc.pnfundo.Visible := true;
+//         FPrinc.pnTop.Visible   := true;
+//      end else
+//      if Mostra=0 then
+//      begin
+//         FPrinc.pnfundo.Visible := false;
+//         Fprinc.cxFundo.Visible := false;
+//         if Fcad_Mesa = NIL then
+//            FPrinc.pnTop.Visible   := false;
+//      end;
+end;
 
 procedure ExecutaForm(FormClass: TFormClass; var Reference);
 begin
@@ -43,6 +195,7 @@ begin
          TForm(Reference).BringToFront;
       end;
    finally
+      FormAtivo := TForm(Reference);
 //      PFundo(0);
    end;
 end;
@@ -51,12 +204,12 @@ end;
 Function Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
 begin
    // TipoMSg = 'I'nfo / 'P'ergunta
-   FMsg             := TFMsg.Create(FMSg);
-   FMsg.cxMsg.TExt  := Mensagem;
+   FMsg                 := TFMsg.Create(FMSg);
+   FMsg.cxMsg.TExt      := Mensagem;
    FMsg.cxRosto.Caption := Rosto;
-   FMsg.cxSim.Visible    := false;
-   FMsg.cxNao.Visible    := false;
-   FMsg.cxOk.Visible     := false;
+   FMsg.cxSim.Visible   := false;
+   FMsg.cxNao.Visible   := false;
+   FMsg.cxOk.Visible    := false;
    ///// Lista de Sons no final da pagina.
    if TipoMsg = 'I' then
    begin
@@ -146,7 +299,7 @@ var
    Rect                    : TRect;
    TD                      : PTypeData;
 begin
-   Caminho := CaminhoIni+ 'qry.sql';
+   Caminho := CaminhoExe+ 'qry.sql';
    TD := GetTypeData(Screen.ActiveForm.ClassInfo);
    AssignFile(Arq, Caminho);
 
@@ -199,8 +352,107 @@ begin
             end;
          end;
       Finally
-         GravaSql(StrConsulta, 'qrAux'+IntToStr(intQuery));
+         GravaSql(StrConsulta, 'qryAux'+IntToStr(intQuery));
       end;
+   end;
+end;
+
+Function ExecutaGen(StrTabela : String) : Integer;
+begin
+   with dmCad do
+   begin
+      ConsultaQuery('select GEN_ID(GEN_'+StrTabela+'_ID,1) codigo from dual',1);
+      Result := dmCad.qryAux.Fieldbyname('CODIGO').asInteger;
+   end;
+end;
+
+Function Consulta(StrConsulta: String; qrDados: TFDQuery): Boolean;
+begin
+   try
+      qrDados.Close;
+      qrDados.Sql.Clear;
+      qrDados.SQL.Text := StrConsulta;
+      qrDados.Open;
+   Finally
+      GravaSql(StrConsulta, qrDados.Name);
+      Result := True;
+   end;
+
+end;
+
+function ifs(Expressao: Boolean; CasoVerdadeiro, CasoFalso: Variant): Variant;
+begin
+ if Expressao
+  then Result:=CasoVerdadeiro
+  else Result:=CasoFalso;
+end;
+
+Procedure ValidaCampoTag(Form: TForm);
+var
+   i, intPassou: integer;
+   StrMsg, StrCorrige, StrPreenche : String;
+begin
+   with Form do
+   begin
+      for i := 0 to ComponentCount-1 do
+      begin
+         if ((Components[i] is TcxTextEdit)) then
+         begin
+            if ((Components[i] as TcxTextEdit).Tag > 0) then
+               (Components[i] as TcxTextEdit).Style.Color := clWhite;
+
+            if ((Components[i] as TcxTextEdit).Tag = 1) and ((Components[i] as TcxTextEdit).Text = '') then
+            begin
+               (Components[i] as TcxTextEdit).Style.Color := FCorSelec;
+               StrPreenche := StrPreenche + '-> '+(Components[i] as TcxTextEdit).Hint+#13;
+               intPassou := intPassou + 1;
+            end;
+
+            if ((Components[i] as TcxTextEdit).Tag = 2) and (Pos('@', (Components[i] as TcxTextEdit).Text) = 0) then
+            begin
+               (Components[i] as TcxTextEdit).Style.Color := FCorSelec;
+               StrCorrige := StrCorrige + '-> '+(Components[i] as TcxTextEdit).Hint+#13;
+               intPassou := intPassou + 1;
+            end;
+
+            if intPassou = 1 then
+            begin
+               (Components[i] as TcxTextEdit).SetFocus;
+               intPassou := 2;
+            end;
+         end;
+
+         if ((Components[i] is TcxMaskEdit)) then
+         begin
+            if ((Components[i] as TcxMaskEdit).Tag = 1) then
+               (Components[i] as TcxMaskEdit).Style.Color := clWhite;
+
+            if ((Components[i] as TcxMaskEdit).Tag = 1) and ((Components[i] as TcxMaskEdit).Text = '') then
+            begin
+               (Components[i] as TcxMaskEdit).Style.Color := FCorSelec;
+               StrPreenche := StrPreenche + '-> '+(Components[i] as TcxMaskEdit).Hint+#13;
+               intPassou := intPassou + 1;
+            end;
+
+            if intPassou = 1 then
+            begin
+               (Components[i] as TcxMaskEdit).SetFocus;
+               intPassou := 2;
+            end;
+         end;
+
+      end;
+   end; // with
+
+   if StrPreenche <> '' then
+      StrMsg := 'Opa! Verificamos que os campos abaixo precisam ser preenchidos.'+#13+StrPreenche+#13;
+   if StrCorrige  <> '' then
+      StrMsg := StrMsg + 'Corrija os Campos abaixo. '+#13+StrCorrige;
+
+   if intPassou > 0 then
+   begin
+      Msg(StrMsg,'I',':P');
+      abort;
    end;
 end;
 
