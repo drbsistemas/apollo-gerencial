@@ -22,7 +22,7 @@ uses
   cxDropDownEdit, cxLabel, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, Vcl.ExtCtrls,
   Vcl.ComCtrls, dxCore, cxDateUtils, cxGroupBox, cxCheckBox, cxCalendar,
-  cxButtonEdit, cxImage;
+  cxButtonEdit, cxImage, dxGDIPlusClasses;
 
 type
   TFcad_Clientes = class(TFcad_Pai)
@@ -63,16 +63,25 @@ type
     cbPessoa: TcxComboBox;
     eDtCad: TcxDateEdit;
     eFantasia: TcxTextEdit;
-    cxJuridica: TcxGroupBox;
-    eCnpj: TcxMaskEdit;
-    eIe: TcxMaskEdit;
-    cxLabel6: TcxLabel;
-    cxLabel12: TcxLabel;
     cxLabel4: TcxLabel;
     eNum: TcxMaskEdit;
     eIbge: TcxMaskEdit;
     eComplemento: TcxTextEdit;
     cxLabel22: TcxLabel;
+    grConsultaDBTableView1Column1: TcxGridDBColumn;
+    grConsultaDBTableView1Column2: TcxGridDBColumn;
+    grConsultaDBTableView1Column3: TcxGridDBColumn;
+    grConsultaDBTableView1Column4: TcxGridDBColumn;
+    grConsultaDBTableView1Column5: TcxGridDBColumn;
+    grConsultaDBTableView1Column6: TcxGridDBColumn;
+    grConsultaDBTableView1Column7: TcxGridDBColumn;
+    grConsultaDBTableView1Column8: TcxGridDBColumn;
+    grConsultaDBTableView1Column9: TcxGridDBColumn;
+    cxJuridica: TPanel;
+    cxLabel6: TcxLabel;
+    eCnpj: TcxMaskEdit;
+    cxLabel12: TcxLabel;
+    eIe: TcxMaskEdit;
     procedure cxVoltarClick(Sender: TObject);
     procedure cxCancelaClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -89,6 +98,8 @@ type
     procedure cxVerClick(Sender: TObject);
     procedure cxApagarClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure eCidadePropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
   private
     { Private declarations }
     indice : String;
@@ -105,7 +116,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDmCad, uRotinas;
+uses uDmCad, uRotinas, uCad_Cidade;
 
 procedure TFcad_Clientes.cbPessoaPropertiesChange(Sender: TObject);
 begin
@@ -203,6 +214,28 @@ begin
       Close;
 end;
 
+procedure TFcad_Clientes.eCidadePropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+   inherited;
+   Fcad_Cidade             := TFcad_Cidade.Create(Self);
+   Fcad_Cidade.FormStyle   := fsNormal;
+   Fcad_Cidade.WindowState := wsNormal;
+   Fcad_Cidade.Visible     := False;
+   Fcad_Cidade.Position    := poMainFormCenter;
+   Fcad_Cidade.ShowModal;
+
+   FCad_Clientes.WindowState := wsNormal;
+   FCad_Clientes.WindowState := wsMaximized;
+
+   if ID > 0 then
+   begin
+      eCidade.Text := DESCRICAO;
+      eIBGE.Text   := intToStr(ID);
+      eUF.Text     := OBS;
+   end;
+end;
+
 procedure TFcad_Clientes.eCnpjExit(Sender: TObject);
 begin
   inherited;
@@ -235,6 +268,7 @@ begin
       FormAtivo     := Nil;
       Fcad_Clientes := Nil;
    end;
+   pFundo(1);
    Action           := CaFree;
 end;
 
@@ -242,7 +276,7 @@ procedure TFcad_Clientes.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   inherited;
-   if (Key = VK_F3) and (pnCon.Visible = true) then
+   if (Key = VK_F3) and (pnBUsca.Visible = true) then
       cxConsultaPropertiesChange(self);
    if (key = Vk_F2) then
    begin

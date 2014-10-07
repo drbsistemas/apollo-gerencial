@@ -18,11 +18,11 @@ uses
   dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010,
   dxSkinWhiteprint, dxSkinXmas2008Blue, dxSkinsdxStatusBarPainter, dxStatusBar,
   System.Actions, Vcl.ActnList, UCBase, UCDataConnector, UCFireDACConn,
-  cxGroupBox, Vcl.StdCtrls;
+  cxGroupBox, Vcl.StdCtrls, Vcl.Menus, cxButtons, Vcl.ExtCtrls,
+  dxGDIPlusClasses, cxImage;
 
 type
   TFPrinc = class(TForm)
-    cxHint: TcxGroupBox;
     UCFireDACConn1: TUCFireDACConn;
     UserControl1: TUserControl;
     UCControls1: TUCControls;
@@ -35,17 +35,33 @@ type
     actlongoff: TAction;
     Action1: TAction;
     StBar: TdxStatusBar;
-    Button1: TButton;
+    pnTop: TcxGroupBox;
+    cxHint: TPanel;
+    pnimg: TcxImage;
+    pnImg2: TcxImage;
+    pnFundo: TPanel;
+    cxImage1: TcxImage;
+    cxImage2: TcxImage;
+    cxImage3: TcxImage;
+    cxFundo: TPanel;
+    cxSalvar: TcxButton;
+    cxButton1: TcxButton;
+    cxButton2: TcxButton;
+    cxButton3: TcxButton;
+    cxButton4: TcxButton;
+    cxButton5: TcxButton;
 
     procedure PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
     procedure MostraNomeForm(Str: String);
     procedure ShowHint(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure cxSalvaClick(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure cxButton5Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -79,9 +95,14 @@ begin
       end;
 end;
 
-procedure TFPrinc.Button1Click(Sender: TObject);
+procedure TFPrinc.cxButton5Click(Sender: TObject);
 begin
-   ExecutaFOrm(TFcad_Clientes, Fcad_Clientes);
+   Close;
+end;
+
+procedure TFPrinc.cxSalvaClick(Sender: TObject);
+begin
+   ExecutaForm(TFcad_Clientes, TObject(Fcad_Clientes));
 end;
 
 procedure TFPrinc.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -124,8 +145,6 @@ end;
 
 procedure TFPrinc.FormKeyPress(Sender: TObject; var Key: Char);
 begin
-   if Key = #27 then
-      Close;
    if Key = #13 then
    begin
      Key := #0;
@@ -133,13 +152,21 @@ begin
    end;
 end;
 
+procedure TFPrinc.FormResize(Sender: TObject);
+begin
+///// Redimensiona os botoões para ficar no meio do form
+      pnfundo.Width := (FPrinc.ClientWidth div 2)-200;
+end;
+
 procedure TFPrinc.FormShow(Sender: TObject);
 begin
    FCorSelec := $0097E6FD;
    FCorLista := clBtnFace;//$0000002D; //$00F1EDE9;
+   FPrinc.OnResize(self);
 
    if Liberacao = false then
       StBar.Panels[2].Text := 'Licença Expirada!';
+
 end;
 
 procedure TFprinc.MostraNomeForm(Str: String);

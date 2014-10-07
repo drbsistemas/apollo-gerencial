@@ -21,7 +21,7 @@ uses
   dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinsDefaultPainters,
   dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue,
   dxSkinscxPCPainter, cxContainer, cxTextEdit, cxMaskEdit, cxDropDownEdit,
-  cxLabel, cxImage;
+  cxLabel, cxImage, dxGDIPlusClasses;
 
 Type
    TAbrePainel = (Cad, Con);
@@ -33,20 +33,6 @@ type
     pnMenu: TPanel;
     cxSalvar: TcxButton;
     cxCancela: TcxButton;
-    grConsulta: TcxGrid;
-    grConsultaDBTableView1: TcxGridDBTableView;
-    grConsultaDBTableView1IDCLIE: TcxGridDBColumn;
-    grConsultaDBTableView1RAZAO: TcxGridDBColumn;
-    grConsultaDBTableView1FONE: TcxGridDBColumn;
-    grConsultaDBTableView1CELULAR: TcxGridDBColumn;
-    grConsultaDBTableView1Column1: TcxGridDBColumn;
-    grConsultaDBTableView1ENDERECO: TcxGridDBColumn;
-    grConsultaDBTableView1NUM: TcxGridDBColumn;
-    grConsultaDBTableView1CIDADE: TcxGridDBColumn;
-    grConsultaDBTableView1UF: TcxGridDBColumn;
-    grConsultaDBTableView1BAIRRO: TcxGridDBColumn;
-    grConsultaDBTableView1OBS: TcxGridDBColumn;
-    grConsultaLevel1: TcxGridLevel;
     pnBusca: TPanel;
     pnBotaoCad: TPanel;
     cxNovo: TcxButton;
@@ -66,6 +52,12 @@ type
     cxFechar: TcxButton;
     cxQtdeReg: TcxLabel;
     pnImg: TcxImage;
+    grConsulta: TcxGrid;
+    grConsultaDBTableView1: TcxGridDBTableView;
+    grConsultaDBTableView1Campo1: TcxGridDBColumn;
+    grConsultaDBTableView1Campo2: TcxGridDBColumn;
+    grConsultaLevel1: TcxGridLevel;
+    procedure MOstraPainelCadastro(AbrePainel: TAbrePainel);
     procedure MostraPainelBusca(AbrePainel: TAbrePainel);
     procedure grConsultaDBTableView1CustomDrawCell(
       Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
@@ -80,12 +72,11 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
     procedure cxVoltarClick(Sender: TObject);
+    procedure cxConsultaPropertiesChange(Sender: TObject);
   private
-    procedure MOstraPainelCadastro(AbrePainel: TAbrePainel);
+
     { Private declarations }
   public
-     ID: Integer;
-     DESCRICAO: String;
     { Public declarations }
   end;
 
@@ -104,10 +95,12 @@ begin
       Cad: Begin
               pnBotaoCad.Visible := True;
               pnBotaoCon.Visible := False;
+              pnImg.Visible      := false;
            End;
       Con: Begin
               pnBotaoCad.Visible := False;
-              pnBotaoCad.Visible := True;
+              pnBotaoCon.Visible := True;
+              pnImg.Visible      := True;
            End;
    end;
 end;
@@ -139,6 +132,11 @@ begin
    MostraPainelCadastro(Con);
 end;
 
+procedure TFcad_Pai.cxConsultaPropertiesChange(Sender: TObject);
+begin
+   //
+end;
+
 procedure TFcad_Pai.cxEditaClick(Sender: TObject);
 begin
    MostraPainelCadastro(Cad);
@@ -168,13 +166,15 @@ end;
 
 procedure TFcad_Pai.FormCreate(Sender: TObject);
 begin
+   grConsulta.Tag := 0;
+   ID             := 0;
+   DESCRICAO      := EmptyStr;
+   OBS            := EmptyStr;
    MostraPainelBusca(Cad);
 end;
 
 procedure TFcad_Pai.FormKeyPress(Sender: TObject; var Key: Char);
 begin
-   if Key = #27 then
-      Close;
    if Key = #13 then
    begin
      Key := #0;

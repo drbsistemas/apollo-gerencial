@@ -178,15 +178,18 @@ object dmCad: TdmCad
     object qryClieCEP: TStringField
       FieldName = 'CEP'
       Origin = 'CEP'
+      EditMask = '99.999-999;0;_'
       Size = 15
     end
     object qryClieCNPJ: TStringField
       FieldName = 'CNPJ'
       Origin = 'CNPJ'
+      EditMask = '99.999.999/9999-99;0;_'
     end
     object qryClieRG: TStringField
       FieldName = 'RG'
       Origin = 'RG'
+      EditMask = '999.999.999.999;0;_'
     end
     object qryClieIE: TStringField
       FieldName = 'IE'
@@ -195,14 +198,17 @@ object dmCad: TdmCad
     object qryClieCPF: TStringField
       FieldName = 'CPF'
       Origin = 'CPF'
+      EditMask = '999.999.999-99;0;_'
     end
     object qryClieFONE: TStringField
       FieldName = 'FONE'
       Origin = 'FONE'
+      EditMask = '(99) 9999-9999;0;_'
     end
     object qryClieCELULAR: TStringField
       FieldName = 'CELULAR'
       Origin = 'CELULAR'
+      EditMask = '(99) 9999-9999;0;_'
     end
     object qryClieEMAIL: TStringField
       FieldName = 'EMAIL'
@@ -232,6 +238,7 @@ object dmCad: TdmCad
     object qryClieDATANASCE: TSQLTimeStampField
       FieldName = 'DATANASCE'
       Origin = 'DATANASCE'
+      EditMask = '99/99/9999;1;_'
     end
     object qryClieTIPOPESSOA: TStringField
       FieldName = 'TIPOPESSOA'
@@ -303,6 +310,78 @@ object dmCad: TdmCad
   object dsClie: TDataSource
     DataSet = qryClie
     Left = 112
+    Top = 104
+  end
+  object qryCidade: TFDQuery
+    AfterInsert = qryCidadeAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtCidade
+    SQL.Strings = (
+      'select * from CODIBGE')
+    Left = 160
+    Top = 8
+  end
+  object UpdtCidade: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO CLIENTE'
+      '(IDCLIE, RAZAO, FANTASIA, ENDERECO, NUMERO, '
+      '  CIDADE, UF, BAIRRO, CEP, CNPJ, '
+      '  RG, IE, CPF, FONE, CELULAR, EMAIL, '
+      '  OBS, COMPLEMENTO, DATACAD, ATIVO, DATANASCE, '
+      '  TIPOPESSOA, TIPOCLIE)'
+      
+        'VALUES (:NEW_IDCLIE, :NEW_RAZAO, :NEW_FANTASIA, :NEW_ENDERECO, :' +
+        'NEW_NUMERO, '
+      '  :NEW_CIDADE, :NEW_UF, :NEW_BAIRRO, :NEW_CEP, :NEW_CNPJ, '
+      
+        '  :NEW_RG, :NEW_IE, :NEW_CPF, :NEW_FONE, :NEW_CELULAR, :NEW_EMAI' +
+        'L, '
+      
+        '  :NEW_OBS, :NEW_COMPLEMENTO, :NEW_DATACAD, :NEW_ATIVO, :NEW_DAT' +
+        'ANASCE, '
+      '  :NEW_TIPOPESSOA, :NEW_TIPOCLIE)')
+    ModifySQL.Strings = (
+      'UPDATE CLIENTE'
+      
+        'SET IDCLIE = :NEW_IDCLIE, RAZAO = :NEW_RAZAO, FANTASIA = :NEW_FA' +
+        'NTASIA, '
+      
+        '  ENDERECO = :NEW_ENDERECO, NUMERO = :NEW_NUMERO, CIDADE = :NEW_' +
+        'CIDADE, '
+      
+        '  UF = :NEW_UF, BAIRRO = :NEW_BAIRRO, CEP = :NEW_CEP, CNPJ = :NE' +
+        'W_CNPJ, '
+      '  RG = :NEW_RG, IE = :NEW_IE, CPF = :NEW_CPF, FONE = :NEW_FONE, '
+      '  CELULAR = :NEW_CELULAR, EMAIL = :NEW_EMAIL, OBS = :NEW_OBS, '
+      '  COMPLEMENTO = :NEW_COMPLEMENTO, DATACAD = :NEW_DATACAD, '
+      
+        '  ATIVO = :NEW_ATIVO, DATANASCE = :NEW_DATANASCE, TIPOPESSOA = :' +
+        'NEW_TIPOPESSOA, '
+      '  TIPOCLIE = :NEW_TIPOCLIE'
+      'WHERE IDCLIE = :OLD_IDCLIE')
+    DeleteSQL.Strings = (
+      'DELETE FROM CLIENTE'
+      'WHERE IDCLIE = :OLD_IDCLIE')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDCLIE, RAZAO, FANTASIA, ENDERECO, NUMERO, CIDADE, UF, BA' +
+        'IRRO, '
+      
+        '  CEP, CNPJ, RG, IE, CPF, FONE, CELULAR, EMAIL, OBS, COMPLEMENTO' +
+        ', '
+      '  DATACAD, ATIVO, DATANASCE, TIPOPESSOA, TIPOCLIE'
+      'FROM CLIENTE'
+      'WHERE IDCLIE = :IDCLIE')
+    Left = 160
+    Top = 56
+  end
+  object dsCidade: TDataSource
+    DataSet = qryCidade
+    Left = 160
     Top = 104
   end
 end

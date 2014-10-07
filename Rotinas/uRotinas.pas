@@ -22,7 +22,7 @@ uses
    Function ifs(Expressao: Boolean; CasoVerdadeiro, CasoFalso: Variant): Variant;
    Function ConsultaQuery(StrCOnsulta: string; intQuery: Integer): Integer;
 
-   procedure ExecutaForm(FormClass: TFormClass; var Reference);
+   procedure ExecutaForm(FormClasse: TFormClass; var NewForm: TObject);
    procedure PFundo(mostra: integer);
 var
    FormAtivo                          : TForm;
@@ -37,13 +37,15 @@ var
    DataExpira,
    Cnpj,
    Usuario,
+   DESCRICAO, OBS,
    NomeEmpresa                        : String;
    Diasfim                            : Real;
    Liberacao                          : Boolean;
+   ID: Integer;
 
 implementation
 
-uses uMsg, uDmCad, uDmCon;
+uses uMsg, uDmCad, uDmCon, UPrinc;
 
 function VALIDACNPJ(Dado : string) : boolean;
 var  D1            : array[1..12] of byte;
@@ -168,38 +170,39 @@ end; {TESTA_UF}
 
 procedure PFundo(mostra: integer);
 begin
-//      if Mostra=1 then
-//      begin
-//         Fprinc.cxFundo.Visible := true;
-//         FPrinc.pnfundo.Visible := true;
-//         FPrinc.pnTop.Visible   := true;
-//      end else
-//      if Mostra=0 then
-//      begin
-//         FPrinc.pnfundo.Visible := false;
-//         Fprinc.cxFundo.Visible := false;
-//         if Fcad_Mesa = NIL then
-//            FPrinc.pnTop.Visible   := false;
-//      end;
-end;
-
-procedure ExecutaForm(FormClass: TFormClass; var Reference);
-begin
-   try
-      if TForm(Reference) = nil then
-         Application.CreateForm(FormClass, TForm(Reference))
-      else
-      begin
-         if TForm(Reference).WindowState = wsMinimized then
-            TForm(Reference).WindowState := wsNormal;
-         TForm(Reference).BringToFront;
-      end;
-   finally
-      FormAtivo := TForm(Reference);
-//      PFundo(0);
+   if Mostra=1 then
+   begin
+      Fprinc.cxFundo.Visible := true;
+      FPrinc.pnfundo.Visible := true;
+      FPrinc.pnTop.Visible   := true;
+   end else
+   if Mostra=0 then
+   begin
+      FPrinc.pnfundo.Visible := false;
+      Fprinc.cxFundo.Visible := false;
+//      if Fcad_Mesa = NIL then
+//         FPrinc.pnTop.Visible   := false;
    end;
 end;
 
+
+procedure ExecutaForm(FormClasse: TFormClass; var NewForm: TObject);
+begin
+     Try
+//       WaitMouse; // Veja outra dica para funções de ponteiro do mouse.
+       if (TForm(NewForm) = Nil) Or (not TForm(NewForm).HandleAllocated) Then
+          NewForm := FormClasse.Create(TForm(NewForm))
+       else
+          begin
+           if (TForm(NewForm).WindowState = WsMinimized) Then
+              TForm(NewForm).WindowState := wsNormal;
+           end;
+       TForm(NewForm).Show;
+     Finally
+//       ResetMouse;
+       end;
+   PFundo(0);
+end;
 
 Function Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
 begin

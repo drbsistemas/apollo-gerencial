@@ -1,39 +1,23 @@
 inherited Fcad_Clientes: TFcad_Clientes
+  BorderIcons = [biSystemMenu, biMinimize, biMaximize]
   Caption = 'Tela de Pessoas'
-  ClientHeight = 600
-  ClientWidth = 741
+  ClientHeight = 541
+  ClientWidth = 704
   OnClose = FormClose
   OnKeyDown = FormKeyDown
-  ExplicitWidth = 749
-  ExplicitHeight = 631
+  ExplicitWidth = 712
+  ExplicitHeight = 572
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCon: TPanel [0]
-    Width = 683
-    Height = 600
-    TabOrder = 1
-    ExplicitWidth = 652
-    inherited grConsulta: TcxGrid
-      Width = 681
-      Height = 481
-      ExplicitWidth = 650
-      inherited grConsultaDBTableView1: TcxGridDBTableView
-        OnDblClick = grConsultaDBTableView1DblClick
-        DataController.DataSource = dmCad.dsClie
-        inherited grConsultaDBTableView1RAZAO: TcxGridDBColumn
-          Caption = 'Raz'#227'o'
-        end
-        inherited grConsultaDBTableView1NUM: TcxGridDBColumn
-          DataBinding.FieldName = 'NUMERO'
-        end
-      end
-    end
+  inherited pnCon: TPanel
+    Width = 646
+    Height = 541
+    ExplicitWidth = 646
+    ExplicitHeight = 541
     inherited pnBusca: TPanel
-      Width = 681
-      ExplicitWidth = 130
+      Width = 644
+      ExplicitWidth = 644
       inherited cxConsulta: TcxComboBox
-        Properties.CharCase = ecUpperCase
-        Properties.DropDownListStyle = lsFixedList
         Properties.Items.Strings = (
           'C'#243'digo'
           'Raz'#227'o'
@@ -42,67 +26,151 @@ inherited Fcad_Clientes: TFcad_Clientes
           'Celular'
           'CNPJ'
           'CPF')
-        Properties.OnChange = cxConsultaPropertiesChange
         Text = 'C'#211'DIGO'
       end
       inherited eConsulta: TcxTextEdit
-        Properties.CharCase = ecUpperCase
-        Properties.OnChange = cxConsultaPropertiesChange
+        Properties.OnChange = nil
       end
       inherited cbAtivo: TcxComboBox
-        Left = 509
-        ParentFont = True
-        Properties.CharCase = ecUpperCase
+        Left = 476
         Properties.DropDownListStyle = lsFixedList
         Properties.OnChange = cxConsultaPropertiesChange
-        ExplicitLeft = 509
-      end
-      inherited cxCon: TcxButton
-        OnClick = cxConsultaPropertiesChange
+        Style.IsFontAssigned = True
+        ExplicitLeft = 476
       end
       inherited cxQtdeReg: TcxLabel
-        Left = 590
-        ExplicitLeft = 590
+        Left = 557
+        ExplicitLeft = 557
       end
     end
     inherited pnBotaoCad: TPanel
-      Width = 681
-      ExplicitWidth = 130
+      Width = 644
+      ExplicitWidth = 644
+      inherited cxNovo: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxEdita: TcxButton
+        LookAndFeel.SkinName = ''
+      end
       inherited cxVer: TcxButton
+        LookAndFeel.SkinName = ''
         OnClick = cxVerClick
       end
       inherited cxApagar: TcxButton
+        LookAndFeel.SkinName = ''
         OnClick = cxApagarClick
+      end
+      inherited cxVoltar: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxPrint: TcxButton
+        LookAndFeel.SkinName = ''
       end
     end
     inherited pnBotaoCon: TPanel
-      Top = 552
-      Width = 681
-      ExplicitTop = -40
-      ExplicitWidth = 130
+      Top = 490
+      Width = 644
+      ExplicitTop = 490
+      ExplicitWidth = 644
+      inherited cxCadastro: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxFechar: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+    end
+    inherited grConsulta: TcxGrid
+      Width = 644
+      Height = 416
+      ExplicitWidth = 644
+      ExplicitHeight = 416
+      inherited grConsultaDBTableView1: TcxGridDBTableView
+        OnDblClick = grConsultaDBTableView1DblClick
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
+          Caption = 'Fantasia'
+          DataBinding.FieldName = 'FANTASIA'
+        end
+        object grConsultaDBTableView1Column1: TcxGridDBColumn
+          Caption = 'Fone'
+          DataBinding.FieldName = 'FONE'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column2: TcxGridDBColumn
+          Caption = 'Celular'
+          DataBinding.FieldName = 'CELULAR'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn
+          Caption = 'Cnpj'
+          DataBinding.FieldName = 'CNPJ'
+          Width = 130
+        end
+        object grConsultaDBTableView1Column4: TcxGridDBColumn
+          Caption = 'Endere'#231'o'
+          DataBinding.FieldName = 'ENDERECO'
+          Width = 200
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn
+          Caption = 'N'#186
+          DataBinding.FieldName = 'NUMERO'
+          Width = 40
+        end
+        object grConsultaDBTableView1Column6: TcxGridDBColumn
+          Caption = 'Cidade'
+          DataBinding.FieldName = 'CIDADE'
+          Width = 150
+        end
+        object grConsultaDBTableView1Column7: TcxGridDBColumn
+          Caption = 'Uf'
+          DataBinding.FieldName = 'UF'
+        end
+        object grConsultaDBTableView1Column8: TcxGridDBColumn
+          Caption = 'Bairro'
+          DataBinding.FieldName = 'BAIRRO'
+          Width = 150
+        end
+        object grConsultaDBTableView1Column9: TcxGridDBColumn
+          Caption = 'Obs'
+          DataBinding.FieldName = 'OBS'
+          Width = 1000
+        end
+      end
     end
   end
-  inherited pnImg: TcxImage [1]
-    Left = 683
-    Height = 600
+  inherited pnImg: TcxImage
+    Left = 646
+    Properties.GraphicClassName = 'TdxPNGImage'
+    Style.BorderStyle = ebsFlat
+    ExplicitLeft = 646
+    ExplicitHeight = 541
+    Height = 541
   end
-  inherited pnCad: TPanel [2]
-    Width = 683
-    Height = 600
-    TabOrder = 0
-    ExplicitWidth = 652
-    ExplicitHeight = 8
+  inherited pnCad: TPanel
+    Width = 646
+    Height = 541
+    BevelOuter = bvNone
+    ExplicitWidth = 646
+    ExplicitHeight = 541
     inherited pnMenu: TPanel
-      Width = 681
+      Left = 0
+      Top = 0
+      Width = 646
+      Height = 51
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 646
+      ExplicitHeight = 51
       inherited cxSalvar: TcxButton
         Left = 132
         Top = 1
+        LookAndFeel.SkinName = ''
         ExplicitLeft = 132
         ExplicitTop = 1
       end
       inherited cxCancela: TcxButton
         Left = 191
         Top = 1
+        LookAndFeel.SkinName = ''
         ExplicitLeft = 191
         ExplicitTop = 1
       end
@@ -224,6 +292,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Properties.CharCase = ecUpperCase
       Properties.ClickKey = 114
       Properties.MaxLength = 150
+      Properties.ReadOnly = True
+      Properties.OnButtonClick = eCidadePropertiesButtonClick
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clWindowText
       Style.Font.Height = -11
@@ -914,99 +984,6 @@ inherited Fcad_Clientes: TFcad_Clientes
       TabOrder = 14
       Width = 481
     end
-    object cxJuridica: TcxGroupBox
-      Left = 61
-      Top = 189
-      PanelStyle.Active = True
-      Style.BorderStyle = ebsNone
-      TabOrder = 16
-      Height = 23
-      Width = 564
-      object eCnpj: TcxMaskEdit
-        Tag = 2
-        Left = 71
-        Top = 1
-        Hint = 'Cnpj'
-        ParentFont = False
-        Properties.EditMask = '99.999.999/9999-99;0;_'
-        Properties.MaxLength = 0
-        Style.Font.Charset = ANSI_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = []
-        Style.IsFontAssigned = True
-        StyleFocused.Color = 13366014
-        TabOrder = 0
-        Text = '              '
-        OnExit = eCnpjExit
-        Width = 120
-      end
-      object eIe: TcxMaskEdit
-        Left = 347
-        Top = 1
-        Hint = 'Inscri'#231#227'o Estadual'
-        ParentFont = False
-        Properties.CharCase = ecUpperCase
-        Properties.MaxLength = 20
-        Style.Font.Charset = ANSI_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = []
-        Style.IsFontAssigned = True
-        StyleFocused.Color = 13366014
-        TabOrder = 1
-        Text = '              '
-        Width = 120
-      end
-      object cxLabel6: TcxLabel
-        Left = 11
-        Top = 3
-        AutoSize = False
-        Caption = 'Cnpj:'
-        ParentFont = False
-        Style.Font.Charset = ANSI_CHARSET
-        Style.Font.Color = clBlack
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = []
-        Style.LookAndFeel.NativeStyle = True
-        Style.IsFontAssigned = True
-        StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
-        Properties.Alignment.Horz = taRightJustify
-        Properties.LabelEffect = cxleCool
-        Transparent = True
-        Height = 17
-        Width = 60
-        AnchorX = 71
-      end
-      object cxLabel12: TcxLabel
-        Left = 286
-        Top = 3
-        AutoSize = False
-        Caption = 'Ie:'
-        ParentFont = False
-        Style.Font.Charset = ANSI_CHARSET
-        Style.Font.Color = clBlack
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = []
-        Style.LookAndFeel.NativeStyle = True
-        Style.IsFontAssigned = True
-        StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
-        Properties.Alignment.Horz = taRightJustify
-        Properties.LabelEffect = cxleCool
-        Transparent = True
-        Height = 17
-        Width = 60
-        AnchorX = 346
-      end
-    end
     object cxLabel4: TcxLabel
       Left = 384
       Top = 234
@@ -1108,6 +1085,98 @@ inherited Fcad_Clientes: TFcad_Clientes
       Height = 17
       Width = 38
       AnchorX = 409
+    end
+    object cxJuridica: TPanel
+      Left = 61
+      Top = 189
+      Width = 552
+      Height = 22
+      BevelOuter = bvNone
+      TabOrder = 16
+      object cxLabel6: TcxLabel
+        Left = 11
+        Top = 3
+        AutoSize = False
+        Caption = 'Cnpj:'
+        ParentFont = False
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.LookAndFeel.NativeStyle = True
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        Properties.Alignment.Horz = taRightJustify
+        Properties.LabelEffect = cxleCool
+        Transparent = True
+        Height = 17
+        Width = 60
+        AnchorX = 71
+      end
+      object eCnpj: TcxMaskEdit
+        Tag = 2
+        Left = 71
+        Top = 1
+        Hint = 'Cnpj'
+        ParentFont = False
+        Properties.EditMask = '99.999.999/9999-99;0;_'
+        Properties.MaxLength = 0
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 13366014
+        TabOrder = 0
+        Text = '              '
+        OnExit = eCnpjExit
+        Width = 120
+      end
+      object cxLabel12: TcxLabel
+        Left = 286
+        Top = 3
+        AutoSize = False
+        Caption = 'Ie:'
+        ParentFont = False
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.LookAndFeel.NativeStyle = True
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        Properties.Alignment.Horz = taRightJustify
+        Properties.LabelEffect = cxleCool
+        Transparent = True
+        Height = 17
+        Width = 60
+        AnchorX = 346
+      end
+      object eIe: TcxMaskEdit
+        Left = 347
+        Top = 1
+        Hint = 'Inscri'#231#227'o Estadual'
+        ParentFont = False
+        Properties.CharCase = ecUpperCase
+        Properties.MaxLength = 20
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 13366014
+        TabOrder = 1
+        Text = '              '
+        Width = 120
+      end
     end
   end
 end

@@ -41,7 +41,11 @@ type
     qryClieDATANASCE: TSQLTimeStampField;
     qryClieTIPOPESSOA: TStringField;
     qryClieTIPOCLIE: TStringField;
+    qryCidade: TFDQuery;
+    UpdtCidade: TFDUpdateSQL;
+    dsCidade: TDataSource;
     procedure qryClieAfterInsert(DataSet: TDataSet);
+    procedure qryCidadeAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -58,6 +62,11 @@ implementation
 uses uDmCon, uRotinas;
 
 {$R *.dfm}
+
+procedure TdmCad.qryCidadeAfterInsert(DataSet: TDataSet);
+begin
+   dmCad.qryClie.FieldByName('CODMUN').AsInteger := ExecutaGen('CODIBGE');
+end;
 
 procedure TdmCad.qryClieAfterInsert(DataSet: TDataSet);
 begin

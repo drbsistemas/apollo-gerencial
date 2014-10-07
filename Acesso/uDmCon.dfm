@@ -36,7 +36,7 @@ object dmCon: TdmCon
   end
   object FdCon: TFDConnection
     Params.Strings = (
-      'Database=D:\Gerencial\Dados\BANCO.FDB'
+      'Database=D:\Gerencial\Dados\NFSE\BANCO_NFSE.FDB'
       'User_Name=SYSDBA'
       'Password=masterkey'
       'PageSize=16384'
