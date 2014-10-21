@@ -360,6 +360,8 @@ object Fcad_Pai: TFcad_Pai
         Left = 57
         Top = 1
         Properties.CharCase = ecUpperCase
+        Properties.Items.Strings = (
+          '')
         Properties.OnChange = cxConsultaPropertiesChange
         StyleFocused.Color = 13366014
         TabOrder = 1
@@ -372,17 +374,17 @@ object Fcad_Pai: TFcad_Pai
         Properties.OnChange = cxConsultaPropertiesChange
         StyleFocused.Color = 13366014
         TabOrder = 2
-        Width = 270
+        Width = 235
       end
       object cxLabel2: TcxLabel
-        Left = 478
+        Left = 443
         Top = 3
         Caption = 'Ativo:'
         Style.TextColor = clBlack
         Transparent = True
       end
       object cbAtivo: TcxComboBox
-        Left = 510
+        Left = 475
         Top = 1
         ParentFont = False
         Properties.CharCase = ecUpperCase
@@ -403,7 +405,7 @@ object Fcad_Pai: TFcad_Pai
         Width = 80
       end
       object cxCon: TcxButton
-        Left = 447
+        Left = 412
         Top = 0
         Width = 30
         Height = 22
@@ -448,7 +450,7 @@ object Fcad_Pai: TFcad_Pai
         OnClick = cxConsultaPropertiesChange
       end
       object cxQtdeReg: TcxLabel
-        Left = 593
+        Left = 558
         Top = 3
         AutoSize = False
         Caption = 'Qtde Registros'

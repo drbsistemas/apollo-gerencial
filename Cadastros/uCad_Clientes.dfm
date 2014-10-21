@@ -9,7 +9,7 @@ inherited Fcad_Clientes: TFcad_Clientes
   ExplicitHeight = 572
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCon: TPanel
+  inherited pnCon: TPanel [0]
     Width = 646
     Height = 541
     ExplicitWidth = 646
@@ -137,7 +137,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       end
     end
   end
-  inherited pnImg: TcxImage
+  inherited pnImg: TcxImage [1]
     Left = 646
     Properties.GraphicClassName = 'TdxPNGImage'
     Style.BorderStyle = ebsFlat
@@ -145,7 +145,7 @@ inherited Fcad_Clientes: TFcad_Clientes
     ExplicitHeight = 541
     Height = 541
   end
-  inherited pnCad: TPanel
+  inherited pnCad: TPanel [2]
     Width = 646
     Height = 541
     BevelOuter = bvNone
@@ -161,23 +161,19 @@ inherited Fcad_Clientes: TFcad_Clientes
       ExplicitWidth = 646
       ExplicitHeight = 51
       inherited cxSalvar: TcxButton
-        Left = 132
         Top = 1
         LookAndFeel.SkinName = ''
-        ExplicitLeft = 132
         ExplicitTop = 1
       end
       inherited cxCancela: TcxButton
-        Left = 191
         Top = 1
         LookAndFeel.SkinName = ''
-        ExplicitLeft = 191
         ExplicitTop = 1
       end
     end
     object eRazao: TcxTextEdit
       Tag = 1
-      Left = 132
+      Left = 122
       Top = 148
       Hint = 'Raz'#227'o/Nome do Cliente.'
       ParentFont = False
@@ -197,7 +193,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 481
     end
     object eCodigo: TcxTextEdit
-      Left = 132
+      Left = 122
       Top = 106
       Hint = 'C'#243'digo Interno do Sistema'
       TabStop = False
@@ -216,7 +212,7 @@ inherited Fcad_Clientes: TFcad_Clientes
     end
     object eEndereco: TcxTextEdit
       Tag = 1
-      Left = 132
+      Left = 122
       Top = 232
       Hint = 'Endere'#231'o/Logradouro'
       ParentFont = False
@@ -234,7 +230,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 233
     end
     object eBairro: TcxTextEdit
-      Left = 132
+      Left = 122
       Top = 253
       Hint = 'Bairro ou Zona'
       ParentFont = False
@@ -253,7 +249,7 @@ inherited Fcad_Clientes: TFcad_Clientes
     end
     object eCidade: TcxButtonEdit
       Tag = 1
-      Left = 132
+      Left = 122
       Top = 275
       Hint = 'Cidade'
       ParentFont = False
@@ -305,7 +301,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 233
     end
     object cxLabel3: TcxLabel
-      Left = 58
+      Left = 48
       Top = 108
       AutoSize = False
       Caption = 'C'#243'digo:'
@@ -325,11 +321,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 133
+      AnchorX = 123
     end
     object cxNome: TcxLabel
-      Left = 58
-      Top = 150
+      Left = 42
+      Top = 152
       AutoSize = False
       Caption = 'Raz'#227'o:'
       ParentFont = False
@@ -348,10 +344,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 133
+      AnchorX = 117
     end
     object cxApelido: TcxLabel
-      Left = 58
+      Left = 48
       Top = 171
       AutoSize = False
       Caption = 'Fantasia:'
@@ -371,10 +367,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 133
+      AnchorX = 123
     end
     object cxLabel5: TcxLabel
-      Left = 58
+      Left = 48
       Top = 234
       AutoSize = False
       Caption = 'Endere'#231'o:'
@@ -394,10 +390,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 133
+      AnchorX = 123
     end
     object cxLabel7: TcxLabel
-      Left = 58
+      Left = 48
       Top = 255
       AutoSize = False
       Caption = 'Bairro:'
@@ -417,10 +413,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 133
+      AnchorX = 123
     end
     object cxLabel8: TcxLabel
-      Left = 87
+      Left = 77
       Top = 276
       AutoSize = False
       Caption = 'Cidade:'
@@ -440,10 +436,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 44
-      AnchorX = 131
+      AnchorX = 121
     end
     object cxLabel9: TcxLabel
-      Left = 385
+      Left = 375
       Top = 278
       AutoSize = False
       Caption = 'Uf:'
@@ -463,11 +459,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 24
-      AnchorX = 409
+      AnchorX = 399
     end
     object eUf: TcxTextEdit
       Tag = 1
-      Left = 408
+      Left = 398
       Top = 276
       Hint = 'Uf (Estado)'
       ParentFont = False
@@ -486,7 +482,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 31
     end
     object cxLabel10: TcxLabel
-      Left = 446
+      Left = 436
       Top = 234
       AutoSize = False
       Caption = 'Cep:'
@@ -506,10 +502,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 38
-      AnchorX = 484
+      AnchorX = 474
     end
     object eCep: TcxMaskEdit
-      Left = 486
+      Left = 476
       Top = 232
       Hint = 'Cep dos correios'
       ParentFont = False
@@ -527,7 +523,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 127
     end
     object cxLabel11: TcxLabel
-      Left = 58
+      Left = 48
       Top = 213
       AutoSize = False
       Caption = 'Fone:'
@@ -547,11 +543,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 133
+      AnchorX = 123
     end
     object eFone: TcxMaskEdit
       Tag = 1
-      Left = 132
+      Left = 122
       Top = 211
       Hint = 'Telefone de contato'
       ParentFont = False
@@ -571,7 +567,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 120
     end
     object cxLabel13: TcxLabel
-      Left = 89
+      Left = 79
       Top = 300
       AutoSize = False
       Caption = 'Email:'
@@ -591,10 +587,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 42
-      AnchorX = 131
+      AnchorX = 121
     end
     object eMail: TcxTextEdit
-      Left = 132
+      Left = 122
       Top = 298
       Hint = 'Email de contato'
       ParentFont = False
@@ -612,7 +608,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 482
     end
     object cxLabel14: TcxLabel
-      Left = 402
+      Left = 392
       Top = 108
       AutoSize = False
       Caption = 'Dt. Cadastro:'
@@ -632,10 +628,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 82
-      AnchorX = 484
+      AnchorX = 474
     end
     object cxLabel15: TcxLabel
-      Left = 58
+      Left = 48
       Top = 129
       AutoSize = False
       Caption = 'Tipo:'
@@ -655,10 +651,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 133
+      AnchorX = 123
     end
     object cbtpclie: TcxComboBox
-      Left = 133
+      Left = 123
       Top = 127
       Hint = 'Tipo de Cadastro'
       ParentFont = False
@@ -679,7 +675,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 150
     end
     object cxLabel16: TcxLabel
-      Left = 384
+      Left = 374
       Top = 129
       AutoSize = False
       Caption = 'Dt. Nasc:'
@@ -699,10 +695,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 100
-      AnchorX = 484
+      AnchorX = 474
     end
     object cbDtNascimento: TcxDateEdit
-      Left = 483
+      Left = 473
       Top = 127
       Hint = 'Data de Nascimento/Cria'#231#227'o se empresa'
       ParentFont = False
@@ -717,7 +713,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 130
     end
     object cxLabel17: TcxLabel
-      Left = 58
+      Left = 48
       Top = 192
       AutoSize = False
       Caption = 'Cpf:'
@@ -737,11 +733,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 133
+      AnchorX = 123
     end
     object eCpf: TcxMaskEdit
       Tag = 2
-      Left = 133
+      Left = 123
       Top = 190
       Hint = 'Cpf (Cadastro de pessoa f'#237'sica)'
       ParentFont = False
@@ -760,7 +756,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 120
     end
     object eRg: TcxMaskEdit
-      Left = 408
+      Left = 398
       Top = 190
       Hint = 'Rg (identidade)'
       ParentFont = False
@@ -777,7 +773,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 120
     end
     object cxLabel18: TcxLabel
-      Left = 347
+      Left = 337
       Top = 192
       AutoSize = False
       Caption = 'Rg:'
@@ -797,10 +793,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 60
-      AnchorX = 407
+      AnchorX = 397
     end
     object cxLabel19: TcxLabel
-      Left = 351
+      Left = 341
       Top = 213
       AutoSize = False
       Caption = 'Celular:'
@@ -820,10 +816,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 56
-      AnchorX = 407
+      AnchorX = 397
     end
     object eCelular: TcxMaskEdit
-      Left = 408
+      Left = 398
       Top = 211
       Hint = 'Celular de contato'
       ParentFont = False
@@ -841,7 +837,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 120
     end
     object eObs: TcxTextEdit
-      Left = 132
+      Left = 122
       Top = 319
       Hint = 'Observa'#231#227'o'
       ParentFont = False
@@ -859,7 +855,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 482
     end
     object cxLabel20: TcxLabel
-      Left = 58
+      Left = 48
       Top = 320
       AutoSize = False
       Caption = 'Observa'#231#227'o:'
@@ -879,10 +875,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 133
+      AnchorX = 123
     end
     object eAtivo: TcxCheckBox
-      Left = 235
+      Left = 225
       Top = 106
       Hint = 'Cadastro Ativo'
       Caption = 'Ativo'
@@ -902,7 +898,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 54
     end
     object cxLabel21: TcxLabel
-      Left = 285
+      Left = 275
       Top = 129
       AutoSize = False
       Caption = 'Pessoa:'
@@ -922,10 +918,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 47
-      AnchorX = 332
+      AnchorX = 322
     end
     object cbPessoa: TcxComboBox
-      Left = 332
+      Left = 322
       Top = 127
       Hint = 'Tipo de Pessoa'
       ParentFont = False
@@ -947,7 +943,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 98
     end
     object eDtCad: TcxDateEdit
-      Left = 483
+      Left = 473
       Top = 106
       Hint = 'Data do Cadastro no Sistema'
       Enabled = False
@@ -967,7 +963,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 130
     end
     object eFantasia: TcxTextEdit
-      Left = 132
+      Left = 122
       Top = 169
       Hint = 'Fantasia/Apelido'
       ParentFont = False
@@ -985,7 +981,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 481
     end
     object cxLabel4: TcxLabel
-      Left = 384
+      Left = 374
       Top = 234
       AutoSize = False
       Caption = 'N'#186':'
@@ -1005,11 +1001,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 23
-      AnchorX = 407
+      AnchorX = 397
     end
     object eNum: TcxMaskEdit
       Tag = 1
-      Left = 408
+      Left = 398
       Top = 232
       Hint = 'N'#250'mero'
       ParentFont = False
@@ -1027,7 +1023,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 40
     end
     object eIbge: TcxMaskEdit
-      Left = 444
+      Left = 434
       Top = 277
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -1046,7 +1042,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 40
     end
     object eComplemento: TcxTextEdit
-      Left = 408
+      Left = 398
       Top = 253
       Hint = 'Complemento'
       ParentFont = False
@@ -1064,7 +1060,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 205
     end
     object cxLabel22: TcxLabel
-      Left = 371
+      Left = 361
       Top = 255
       AutoSize = False
       Caption = 'Compl:'
@@ -1084,10 +1080,10 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 38
-      AnchorX = 409
+      AnchorX = 399
     end
     object cxJuridica: TPanel
-      Left = 61
+      Left = 51
       Top = 189
       Width = 552
       Height = 22

@@ -20,7 +20,9 @@ uses
   uPai in '..\Cadastros\uPai.pas' {Fcad_Pai},
   Vcl.Themes,
   Vcl.Styles,
-  uCad_Cidade in '..\Cadastros\uCad_Cidade.pas' {Fcad_Cidade};
+  uCad_Cidade in '..\Cadastros\uCad_Cidade.pas' {Fcad_Cidade},
+  uCad_Servico in '..\Cadastros\uCad_Servico.pas' {FCad_Servicos},
+  uCad_Empresa in '..\Cadastros\uCad_Empresa.pas' {FCad_Empresa};
 
 {$R *.res}
 

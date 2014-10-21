@@ -110,14 +110,15 @@ begin
    case AbrePainel of
       Cad:
          begin
-            pnCad.Visible := True;
-            pnCon.Visible := False;
+            pnCad.Visible    := True;
+            pnCon.Visible    := False;
          end;
       Con:
          begin
-            pnCad.Visible := False;
-            pnCon.Visible := True;
+            pnCad.Visible    := False;
+            pnCon.Visible    := True;
             cxSalvar.Enabled := True;
+            cxSalvar.Tag     := 0;
          end;
    end;
 end;
@@ -140,6 +141,7 @@ end;
 procedure TFcad_Pai.cxEditaClick(Sender: TObject);
 begin
    MostraPainelCadastro(Cad);
+   cxSalvar.Tag := 0;
 end;
 
 procedure TFcad_Pai.cxFecharClick(Sender: TObject);
@@ -150,6 +152,7 @@ end;
 procedure TFcad_Pai.cxNovoClick(Sender: TObject);
 begin
    MostraPainelCadastro(Cad);
+   cxSalvar.Tag := 1;
 end;
 
 procedure TFcad_Pai.cxSalvarClick(Sender: TObject);

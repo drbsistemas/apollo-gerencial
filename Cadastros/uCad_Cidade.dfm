@@ -1,30 +1,31 @@
 inherited Fcad_Cidade: TFcad_Cidade
-  Caption = 'Cidade'
+  BorderStyle = bsSingle
+  Caption = 'Tela de Cidades'
+  ClientHeight = 572
+  ClientWidth = 712
   Visible = False
   WindowState = wsNormal
   OnClose = FormClose
   OnKeyDown = FormKeyDown
+  ExplicitWidth = 718
+  ExplicitHeight = 601
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel
-    inherited pnMenu: TPanel
-      inherited cxSalvar: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxCancela: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-    end
-  end
-  inherited pnCon: TPanel
+  inherited pnCon: TPanel [0]
+    Width = 654
+    Height = 572
+    ExplicitWidth = 654
+    ExplicitHeight = 572
     inherited pnBusca: TPanel
+      Width = 652
+      ExplicitWidth = 652
       inherited cxConsulta: TcxComboBox
         Properties.Items.Strings = (
           'C'#243'd. IBGE'
           'Cidade'
           'Uf')
         TabOrder = 3
-        Text = 'C'#211'D. IBGE'
+        Text = 'CIDADE'
       end
       inherited eConsulta: TcxTextEdit
         TabOrder = 4
@@ -54,6 +55,8 @@ inherited Fcad_Cidade: TFcad_Cidade
       end
     end
     inherited pnBotaoCad: TPanel
+      Width = 652
+      ExplicitWidth = 652
       inherited cxNovo: TcxButton
         LookAndFeel.SkinName = ''
       end
@@ -74,6 +77,10 @@ inherited Fcad_Cidade: TFcad_Cidade
       end
     end
     inherited pnBotaoCon: TPanel
+      Top = 521
+      Width = 652
+      ExplicitTop = 521
+      ExplicitWidth = 652
       inherited cxCadastro: TcxButton
         LookAndFeel.SkinName = ''
         Visible = False
@@ -83,6 +90,10 @@ inherited Fcad_Cidade: TFcad_Cidade
       end
     end
     inherited grConsulta: TcxGrid
+      Width = 652
+      Height = 447
+      ExplicitWidth = 652
+      ExplicitHeight = 447
       inherited grConsultaDBTableView1: TcxGridDBTableView
         OnDblClick = grConsultaDBTableView1DblClick
         DataController.DataSource = dmCad.dsCidade
@@ -98,6 +109,28 @@ inherited Fcad_Cidade: TFcad_Cidade
           Caption = 'Uf'
           DataBinding.FieldName = 'UF'
         end
+      end
+    end
+  end
+  inherited pnImg: TcxImage [1]
+    Left = 654
+    ExplicitLeft = 654
+    ExplicitHeight = 572
+    Height = 572
+  end
+  inherited pnCad: TPanel [2]
+    Width = 654
+    Height = 572
+    ExplicitWidth = 654
+    ExplicitHeight = 572
+    inherited pnMenu: TPanel
+      Width = 652
+      ExplicitWidth = 652
+      inherited cxSalvar: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxCancela: TcxButton
+        LookAndFeel.SkinName = ''
       end
     end
   end

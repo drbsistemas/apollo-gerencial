@@ -87,7 +87,7 @@ end;
 procedure TFcad_Cidade.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  inherited;
+   inherited;
    if (Key = VK_F3) and (pnBUsca.Visible = true) then
       cxConsultaPropertiesChange(self);
    if (key = Vk_F2) then

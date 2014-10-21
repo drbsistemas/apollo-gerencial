@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>Nfse.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -78,11 +78,11 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Build>48</VerInfo_Build>
+        <VerInfo_Build>56</VerInfo_Build>
         <DCC_DcuOutput>.\</DCC_DcuOutput>
         <DCC_ExeOutput>.\</DCC_ExeOutput>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=DRB Sistemas Comerciais;FileDescription=Sistema de Envio de Nfs-e;FileVersion=1.0.0.48;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=;LastCompiledTime=06/10/2014 19:50:31</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=DRB Sistemas Comerciais;FileDescription=Sistema de Envio de Nfs-e;FileVersion=1.0.0.56;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=;LastCompiledTime=14/10/2014 17:03:49</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
     </PropertyGroup>
@@ -93,12 +93,12 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <VerInfo_Build>3</VerInfo_Build>
+        <VerInfo_Build>72</VerInfo_Build>
         <VerInfo_Locale>1046</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <DCC_DcuOutput>.\</DCC_DcuOutput>
         <DCC_ExeOutput>.\</DCC_ExeOutput>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.3;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=;LastCompiledTime=06/10/2014 20:02:59</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.72;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=;LastCompiledTime=11/10/2014 08:08:11</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -146,6 +146,14 @@
         </DCCReference>
         <DCCReference Include="..\Cadastros\uCad_Cidade.pas">
             <Form>Fcad_Cidade</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Cadastros\uCad_Servico.pas">
+            <Form>FCad_Servicos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Cadastros\uCad_Empresa.pas">
+            <Form>FCad_Empresa</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

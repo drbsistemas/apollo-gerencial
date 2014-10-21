@@ -119,7 +119,7 @@ object dmCad: TdmCad
     Top = 56
   end
   object dsConf: TDataSource
-    DataSet = qryAux
+    DataSet = qryConf
     Left = 63
     Top = 104
   end

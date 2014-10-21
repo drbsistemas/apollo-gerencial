@@ -62,6 +62,7 @@ type
     procedure cxSalvaClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure cxButton5Click(Sender: TObject);
+    procedure cxButton2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -75,7 +76,7 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas, uDmCad, uConexao, uCad_Clientes;
+uses uRotinas, uDmCad, uConexao, uCad_Clientes, uCad_Empresa;
 
 procedure TFPrinc.PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
 var
@@ -93,6 +94,11 @@ begin
 
          MostraNomeForm(StrMsg);
       end;
+end;
+
+procedure TFPrinc.cxButton2Click(Sender: TObject);
+begin
+   ExecutaForm(TFcad_Empresa, TObject(Fcad_Empresa));
 end;
 
 procedure TFPrinc.cxButton5Click(Sender: TObject);

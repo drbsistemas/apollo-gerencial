@@ -2,7 +2,7 @@ object Fmsg: TFmsg
   Left = 0
   Top = 0
   AlphaBlend = True
-  AlphaBlendValue = 230
+  AlphaBlendValue = 210
   BorderIcons = []
   BorderStyle = bsNone
   ClientHeight = 600
@@ -370,7 +370,7 @@ object Fmsg: TFmsg
         00DA000000C10000009800000049000000070000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
       SpeedButtonOptions.Transparent = True
-      TabOrder = 3
+      TabOrder = 4
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
@@ -519,7 +519,7 @@ object Fmsg: TFmsg
         01DA020001C10100019801000049000000070000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
       SpeedButtonOptions.Transparent = True
-      TabOrder = 4
+      TabOrder = 3
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19

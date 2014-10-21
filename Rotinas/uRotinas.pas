@@ -5,7 +5,7 @@ interface
 uses
    MMSystem, Graphics, System.SysUtils, Forms, System.Classes, TypInfo,
    cxButtons, CxGroupBox, cxLabel, cxCheckBox, cxTextEdit, cxMaskEdit,
-   FireDAC.Comp.Client, Windows, StdCtrls;
+   FireDAC.Comp.Client, Windows, StdCtrls, Vcl.DIalogs;
    // Mensagens
    Function Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
    // Licenca

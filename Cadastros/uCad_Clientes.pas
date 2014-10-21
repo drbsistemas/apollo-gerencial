@@ -95,11 +95,11 @@ type
     procedure eCnpjExit(Sender: TObject);
     procedure eUfExit(Sender: TObject);
     procedure grConsultaDBTableView1DblClick(Sender: TObject);
-    procedure cxVerClick(Sender: TObject);
     procedure cxApagarClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure eCidadePropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
+    procedure cxVerClick(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -186,7 +186,6 @@ end;
 procedure TFcad_Clientes.cxEditaClick(Sender: TObject);
 begin
    inherited;
-   cxSalvar.Tag := 0;
    Limpa;
    Edita;
 end;
@@ -194,7 +193,6 @@ end;
 procedure TFcad_Clientes.cxNovoClick(Sender: TObject);
 begin
   inherited;
-   cxSalvar.Tag := 1;
    Limpa;
    cbPessoa.SetFocus;
 end;
