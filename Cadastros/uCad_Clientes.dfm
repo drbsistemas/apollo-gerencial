@@ -9,143 +9,7 @@ inherited Fcad_Clientes: TFcad_Clientes
   ExplicitHeight = 572
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCon: TPanel [0]
-    Width = 646
-    Height = 541
-    ExplicitWidth = 646
-    ExplicitHeight = 541
-    inherited pnBusca: TPanel
-      Width = 644
-      ExplicitWidth = 644
-      inherited cxConsulta: TcxComboBox
-        Properties.Items.Strings = (
-          'C'#243'digo'
-          'Raz'#227'o'
-          'Fantasia'
-          'Fone'
-          'Celular'
-          'CNPJ'
-          'CPF')
-        Text = 'C'#211'DIGO'
-      end
-      inherited eConsulta: TcxTextEdit
-        Properties.OnChange = nil
-      end
-      inherited cbAtivo: TcxComboBox
-        Left = 476
-        Properties.DropDownListStyle = lsFixedList
-        Properties.OnChange = cxConsultaPropertiesChange
-        Style.IsFontAssigned = True
-        ExplicitLeft = 476
-      end
-      inherited cxQtdeReg: TcxLabel
-        Left = 557
-        ExplicitLeft = 557
-      end
-    end
-    inherited pnBotaoCad: TPanel
-      Width = 644
-      ExplicitWidth = 644
-      inherited cxNovo: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxEdita: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxVer: TcxButton
-        LookAndFeel.SkinName = ''
-        OnClick = cxVerClick
-      end
-      inherited cxApagar: TcxButton
-        LookAndFeel.SkinName = ''
-        OnClick = cxApagarClick
-      end
-      inherited cxVoltar: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxPrint: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-    end
-    inherited pnBotaoCon: TPanel
-      Top = 490
-      Width = 644
-      ExplicitTop = 490
-      ExplicitWidth = 644
-      inherited cxCadastro: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxFechar: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-    end
-    inherited grConsulta: TcxGrid
-      Width = 644
-      Height = 416
-      ExplicitWidth = 644
-      ExplicitHeight = 416
-      inherited grConsultaDBTableView1: TcxGridDBTableView
-        OnDblClick = grConsultaDBTableView1DblClick
-        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
-          Caption = 'Fantasia'
-          DataBinding.FieldName = 'FANTASIA'
-        end
-        object grConsultaDBTableView1Column1: TcxGridDBColumn
-          Caption = 'Fone'
-          DataBinding.FieldName = 'FONE'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column2: TcxGridDBColumn
-          Caption = 'Celular'
-          DataBinding.FieldName = 'CELULAR'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column3: TcxGridDBColumn
-          Caption = 'Cnpj'
-          DataBinding.FieldName = 'CNPJ'
-          Width = 130
-        end
-        object grConsultaDBTableView1Column4: TcxGridDBColumn
-          Caption = 'Endere'#231'o'
-          DataBinding.FieldName = 'ENDERECO'
-          Width = 200
-        end
-        object grConsultaDBTableView1Column5: TcxGridDBColumn
-          Caption = 'N'#186
-          DataBinding.FieldName = 'NUMERO'
-          Width = 40
-        end
-        object grConsultaDBTableView1Column6: TcxGridDBColumn
-          Caption = 'Cidade'
-          DataBinding.FieldName = 'CIDADE'
-          Width = 150
-        end
-        object grConsultaDBTableView1Column7: TcxGridDBColumn
-          Caption = 'Uf'
-          DataBinding.FieldName = 'UF'
-        end
-        object grConsultaDBTableView1Column8: TcxGridDBColumn
-          Caption = 'Bairro'
-          DataBinding.FieldName = 'BAIRRO'
-          Width = 150
-        end
-        object grConsultaDBTableView1Column9: TcxGridDBColumn
-          Caption = 'Obs'
-          DataBinding.FieldName = 'OBS'
-          Width = 1000
-        end
-      end
-    end
-  end
-  inherited pnImg: TcxImage [1]
-    Left = 646
-    Properties.GraphicClassName = 'TdxPNGImage'
-    Style.BorderStyle = ebsFlat
-    ExplicitLeft = 646
-    ExplicitHeight = 541
-    Height = 541
-  end
-  inherited pnCad: TPanel [2]
+  inherited pnCad: TPanel
     Width = 646
     Height = 541
     BevelOuter = bvNone
@@ -1174,5 +1038,141 @@ inherited Fcad_Clientes: TFcad_Clientes
         Width = 120
       end
     end
+  end
+  inherited pnCon: TPanel
+    Width = 646
+    Height = 541
+    ExplicitWidth = 646
+    ExplicitHeight = 541
+    inherited pnBusca: TPanel
+      Width = 644
+      ExplicitWidth = 644
+      inherited cxConsulta: TcxComboBox
+        Properties.Items.Strings = (
+          'C'#243'digo'
+          'Raz'#227'o'
+          'Fantasia'
+          'Fone'
+          'Celular'
+          'CNPJ'
+          'CPF')
+        Text = 'C'#211'DIGO'
+      end
+      inherited eConsulta: TcxTextEdit
+        Properties.OnChange = nil
+      end
+      inherited cbAtivo: TcxComboBox
+        Left = 476
+        Properties.DropDownListStyle = lsFixedList
+        Properties.OnChange = cxConsultaPropertiesChange
+        Style.IsFontAssigned = True
+        ExplicitLeft = 476
+      end
+      inherited cxQtdeReg: TcxLabel
+        Left = 557
+        ExplicitLeft = 557
+      end
+    end
+    inherited pnBotaoCad: TPanel
+      Width = 644
+      ExplicitWidth = 644
+      inherited cxNovo: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxEdita: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxVer: TcxButton
+        LookAndFeel.SkinName = ''
+        OnClick = cxVerClick
+      end
+      inherited cxApagar: TcxButton
+        LookAndFeel.SkinName = ''
+        OnClick = cxApagarClick
+      end
+      inherited cxVoltar: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxPrint: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+    end
+    inherited pnBotaoCon: TPanel
+      Top = 490
+      Width = 644
+      ExplicitTop = 490
+      ExplicitWidth = 644
+      inherited cxCadastro: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxFechar: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+    end
+    inherited grConsulta: TcxGrid
+      Width = 644
+      Height = 416
+      ExplicitWidth = 644
+      ExplicitHeight = 416
+      inherited grConsultaDBTableView1: TcxGridDBTableView
+        OnDblClick = grConsultaDBTableView1DblClick
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
+          Caption = 'Fantasia'
+          DataBinding.FieldName = 'FANTASIA'
+        end
+        object grConsultaDBTableView1Column1: TcxGridDBColumn
+          Caption = 'Fone'
+          DataBinding.FieldName = 'FONE'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column2: TcxGridDBColumn
+          Caption = 'Celular'
+          DataBinding.FieldName = 'CELULAR'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn
+          Caption = 'Cnpj'
+          DataBinding.FieldName = 'CNPJ'
+          Width = 130
+        end
+        object grConsultaDBTableView1Column4: TcxGridDBColumn
+          Caption = 'Endere'#231'o'
+          DataBinding.FieldName = 'ENDERECO'
+          Width = 200
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn
+          Caption = 'N'#186
+          DataBinding.FieldName = 'NUMERO'
+          Width = 40
+        end
+        object grConsultaDBTableView1Column6: TcxGridDBColumn
+          Caption = 'Cidade'
+          DataBinding.FieldName = 'CIDADE'
+          Width = 150
+        end
+        object grConsultaDBTableView1Column7: TcxGridDBColumn
+          Caption = 'Uf'
+          DataBinding.FieldName = 'UF'
+        end
+        object grConsultaDBTableView1Column8: TcxGridDBColumn
+          Caption = 'Bairro'
+          DataBinding.FieldName = 'BAIRRO'
+          Width = 150
+        end
+        object grConsultaDBTableView1Column9: TcxGridDBColumn
+          Caption = 'Obs'
+          DataBinding.FieldName = 'OBS'
+          Width = 1000
+        end
+      end
+    end
+  end
+  inherited pnImg: TcxImage
+    Left = 646
+    Properties.GraphicClassName = 'TdxPNGImage'
+    Style.BorderStyle = ebsFlat
+    ExplicitLeft = 646
+    ExplicitHeight = 541
+    Height = 541
   end
 end

@@ -6,17 +6,7 @@ inherited FCad_Servicos: TFCad_Servicos
   ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel
-    Width = 644
-    Height = 539
-    ExplicitWidth = 644
-    ExplicitHeight = 539
-    inherited pnMenu: TPanel
-      Width = 642
-      ExplicitWidth = 642
-    end
-  end
-  inherited pnCon: TPanel
+  inherited pnCon: TPanel [0]
     Width = 644
     Height = 539
     ExplicitWidth = 644
@@ -38,6 +28,9 @@ inherited FCad_Servicos: TFCad_Servicos
     inherited pnBotaoCad: TPanel
       Width = 642
       ExplicitWidth = 642
+      inherited cxApagar: TcxButton
+        OnClick = cxApagarClick
+      end
     end
     inherited pnBotaoCon: TPanel
       Top = 488
@@ -52,10 +45,20 @@ inherited FCad_Servicos: TFCad_Servicos
       ExplicitHeight = 414
     end
   end
-  inherited pnImg: TcxImage
+  inherited pnImg: TcxImage [1]
     Left = 644
     ExplicitLeft = 644
     ExplicitHeight = 539
     Height = 539
+  end
+  inherited pnCad: TPanel [2]
+    Width = 644
+    Height = 539
+    ExplicitWidth = 644
+    ExplicitHeight = 539
+    inherited pnMenu: TPanel
+      Width = 642
+      ExplicitWidth = 642
+    end
   end
 end

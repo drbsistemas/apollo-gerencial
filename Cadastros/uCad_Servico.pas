@@ -25,6 +25,8 @@ uses
 
 type
   TFCad_Servicos = class(TFcad_Pai)
+    procedure cxVoltarClick(Sender: TObject);
+    procedure cxApagarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,5 +39,29 @@ var
 implementation
 
 {$R *.dfm}
+
+uses uRotinas;
+
+procedure TFCad_Servicos.cxApagarClick(Sender: TObject);
+begin
+  inherited;
+   if Msg('Entendemos sua vontade, mas deseja realmente apagar o registro?','P', ':X') then
+   begin
+//      try
+//         dmcad.qryClie.Delete;
+//         dmcad.qryClie.ApplyUpdates(0);
+//      Except
+//         dmcad.qryClie.CancelUpdates;
+//      end;
+   end;
+end;
+
+procedure TFCad_Servicos.cxVoltarClick(Sender: TObject);
+begin
+   inherited;
+   if pnBotaoCon.Tag = 1 then
+      MostraPainelBusca(Con) else
+      Close;
+end;
 
 end.
