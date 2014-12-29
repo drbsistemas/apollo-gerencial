@@ -10,7 +10,7 @@ object dmCad: TdmCad
     UpdateObject = UpdtConf
     SQL.Strings = (
       'select * from CONF')
-    Left = 64
+    Left = 232
     Top = 8
   end
   object qryAux: TFDQuery
@@ -18,12 +18,12 @@ object dmCad: TdmCad
     Connection = dmCon.FdCon
     Transaction = dmCon.FdSalva
     UpdateTransaction = dmCon.FdSalva
-    Left = 16
+    Left = 304
     Top = 9
   end
   object dsAux: TDataSource
     DataSet = qryAux
-    Left = 16
+    Left = 304
     Top = 56
   end
   object UpdtConf: TFDUpdateSQL
@@ -115,12 +115,12 @@ object dmCad: TdmCad
       '  DATAULTIMOACESSO'
       'FROM CONF'
       'WHERE IDCONF = :IDCONF')
-    Left = 64
+    Left = 232
     Top = 56
   end
   object dsConf: TDataSource
     DataSet = qryConf
-    Left = 63
+    Left = 231
     Top = 104
   end
   object qryClie: TFDQuery
@@ -132,8 +132,8 @@ object dmCad: TdmCad
     UpdateObject = UpdtClie
     SQL.Strings = (
       'select * from CLIENTE')
-    Left = 112
-    Top = 8
+    Left = 12
+    Top = 6
     object qryClieIDCLIE: TIntegerField
       FieldName = 'IDCLIE'
       Origin = 'IDCLIE'
@@ -304,13 +304,13 @@ object dmCad: TdmCad
       '  DATACAD, ATIVO, DATANASCE, TIPOPESSOA, TIPOCLIE'
       'FROM CLIENTE'
       'WHERE IDCLIE = :IDCLIE')
-    Left = 112
-    Top = 56
+    Left = 12
+    Top = 54
   end
   object dsClie: TDataSource
     DataSet = qryClie
-    Left = 112
-    Top = 104
+    Left = 12
+    Top = 102
   end
   object qryCidade: TFDQuery
     AfterInsert = qryCidadeAfterInsert
@@ -321,8 +321,8 @@ object dmCad: TdmCad
     UpdateObject = UpdtCidade
     SQL.Strings = (
       'select * from CODIBGE')
-    Left = 160
-    Top = 8
+    Left = 60
+    Top = 6
   end
   object UpdtCidade: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -376,12 +376,55 @@ object dmCad: TdmCad
       '  DATACAD, ATIVO, DATANASCE, TIPOPESSOA, TIPOCLIE'
       'FROM CLIENTE'
       'WHERE IDCLIE = :IDCLIE')
-    Left = 160
-    Top = 56
+    Left = 60
+    Top = 54
   end
   object dsCidade: TDataSource
     DataSet = qryCidade
-    Left = 160
-    Top = 104
+    Left = 60
+    Top = 102
+  end
+  object qryGenerico: TFDQuery
+    Active = True
+    AfterInsert = qryGenericoAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtGenerico
+    SQL.Strings = (
+      'select * from GENERICA')
+    Left = 104
+    Top = 6
+  end
+  object UpdtGenerico: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO GENERICA'
+      '(IDGENERICA, TABELA, DESCRICAO, VALOR, OBS)'
+      
+        'VALUES (:NEW_IDGENERICA, :NEW_TABELA, :NEW_DESCRICAO, :NEW_VALOR' +
+        ', :NEW_OBS)')
+    ModifySQL.Strings = (
+      'UPDATE GENERICA'
+      
+        'SET IDGENERICA = :NEW_IDGENERICA, TABELA = :NEW_TABELA, DESCRICA' +
+        'O = :NEW_DESCRICAO, '
+      '  VALOR = :NEW_VALOR, OBS = :NEW_OBS'
+      'WHERE IDGENERICA = :OLD_IDGENERICA')
+    DeleteSQL.Strings = (
+      'DELETE FROM GENERICA'
+      'WHERE IDGENERICA = :OLD_IDGENERICA')
+    FetchRowSQL.Strings = (
+      'SELECT IDGENERICA, TABELA, DESCRICAO, VALOR, OBS'
+      'FROM GENERICA'
+      'WHERE IDGENERICA = :IDGENERICA')
+    Left = 104
+    Top = 54
+  end
+  object dsGenerico: TDataSource
+    DataSet = qryGenerico
+    Left = 106
+    Top = 102
   end
 end

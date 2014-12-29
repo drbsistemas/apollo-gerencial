@@ -452,7 +452,7 @@ begin
    if StrCorrige  <> '' then
       StrMsg := StrMsg + 'Corrija os Campos abaixo. '+#13+StrCorrige;
 
-   if intPassou > 0 then
+   if intPassou >= 1 then
    begin
       Msg(StrMsg,'I',':P');
       abort;

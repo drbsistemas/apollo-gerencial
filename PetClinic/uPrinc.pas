@@ -19,12 +19,11 @@ uses
   dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
   dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVS2010,
   dxSkinWhiteprint, dxSkinXmas2008Blue, dxSkinsdxStatusBarPainter, dxStatusBar,
-  Vcl.StdCtrls;
+  Vcl.StdCtrls, dxGDIPlusClasses, cxImage, cxButtons, Vcl.ExtCtrls;
 
 type
 
    TFPrinc = class(TForm)
-    cxHint: TcxGroupBox;
     UserControl1: TUserControl;
     UCFireDACConn1: TUCFireDACConn;
     UCControls1: TUCControls;
@@ -37,7 +36,24 @@ type
     actlongoff: TAction;
     Action1: TAction;
     StBar: TdxStatusBar;
-    Button1: TButton;
+    cxFundo: TPanel;
+    cxClientes: TcxButton;
+    cxAnimais: TcxButton;
+    cxButton2: TcxButton;
+    cxButton3: TcxButton;
+    cxButton4: TcxButton;
+    cxButton5: TcxButton;
+    cxHint: TPanel;
+    pnFundo: TPanel;
+    pnTop: TcxGroupBox;
+    cxImage1: TcxImage;
+    pnimg: TcxImage;
+    pnImg2: TcxImage;
+    cxImage2: TcxImage;
+    cxImage3: TcxImage;
+    cxProduto: TcxButton;
+    cxOutros: TcxButton;
+    cxButton1: TcxButton;
    //
    procedure PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
    procedure MostraNomeForm(Str: String);
@@ -46,7 +62,11 @@ type
    procedure FormShow(Sender: TObject);
    procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure Button1Click(Sender: TObject);
+    procedure cxClientesClick(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure cxButton5Click(Sender: TObject);
+    procedure cxAnimaisClick(Sender: TObject);
+    procedure cxOutrosClick(Sender: TObject);
    private
       { Private declarations }
    public
@@ -60,11 +80,27 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, Unit1;
+uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, Unit1, uCad_Clientes,
+  uCad_Animais, uCon_Generica;
 
-procedure TFPrinc.Button1Click(Sender: TObject);
+procedure TFPrinc.cxAnimaisClick(Sender: TObject);
 begin
-   ExecutaForm(TFcad_Clientes, Fcad_Clientes);
+   ExecutaForm(TFcad_Animais, TObject(Fcad_Animais));
+end;
+
+procedure TFPrinc.cxButton5Click(Sender: TObject);
+begin
+   Close;
+end;
+
+procedure TFPrinc.cxClientesClick(Sender: TObject);
+begin
+   ExecutaForm(TFcad_Clientes, TObject(Fcad_Clientes));
+end;
+
+procedure TFPrinc.cxOutrosClick(Sender: TObject);
+begin
+   ExecutaForm(TFcad_Generica, TObject(Fcad_Generica));
 end;
 
 procedure TFPrinc.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -96,6 +132,12 @@ begin
       dmCad.qryConf.Open;
 
    VerificaLicenca();
+end;
+
+procedure TFPrinc.FormResize(Sender: TObject);
+begin
+///// Redimensiona os botões para ficar no meio do form
+      pnfundo.Width := (FPrinc.ClientWidth div 2)-200;
 end;
 
 procedure TFPrinc.FormShow(Sender: TObject);

@@ -21,10 +21,18 @@ uses
   cxNavigator, Data.DB, cxDBData, dxGDIPlusClasses, cxImage, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
   cxGridCustomView, cxGrid, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLabel,
-  Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls;
+  Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, Vcl.ComCtrls, dxCore, cxDateUtils,
+  cxCalendar, cxCheckBox;
 
 type
   TFCad_Servicos = class(TFcad_Pai)
+    cxLabel3: TcxLabel;
+    eCodigo: TcxTextEdit;
+    eAtivo: TcxCheckBox;
+    cxLabel14: TcxLabel;
+    eDtCad: TcxDateEdit;
+    cxNome: TcxLabel;
+    eRazao: TcxTextEdit;
     procedure cxVoltarClick(Sender: TObject);
     procedure cxApagarClick(Sender: TObject);
   private

@@ -44,8 +44,12 @@ type
     qryCidade: TFDQuery;
     UpdtCidade: TFDUpdateSQL;
     dsCidade: TDataSource;
+    qryGenerico: TFDQuery;
+    UpdtGenerico: TFDUpdateSQL;
+    dsGenerico: TDataSource;
     procedure qryClieAfterInsert(DataSet: TDataSet);
     procedure qryCidadeAfterInsert(DataSet: TDataSet);
+    procedure qryGenericoAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -71,6 +75,11 @@ end;
 procedure TdmCad.qryClieAfterInsert(DataSet: TDataSet);
 begin
    dmCad.qryClie.FieldByName('IDCLIE').AsInteger := ExecutaGen('CLIENTE');
+end;
+
+procedure TdmCad.qryGenericoAfterInsert(DataSet: TDataSet);
+begin
+   dmCad.qryGenerico.FieldByName('IDGENERICA').AsInteger := ExecutaGen('GENERICA');
 end;
 
 end.

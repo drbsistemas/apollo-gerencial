@@ -21,7 +21,7 @@ uses
   dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinsDefaultPainters,
   dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue,
   dxSkinscxPCPainter, cxContainer, cxTextEdit, cxMaskEdit, cxDropDownEdit,
-  cxLabel, cxImage, dxGDIPlusClasses;
+  cxLabel, cxImage, dxGDIPlusClasses, RxMenus;
 
 Type
    TAbrePainel = (Cad, Con);
@@ -57,6 +57,8 @@ type
     grConsultaDBTableView1Campo1: TcxGridDBColumn;
     grConsultaDBTableView1Campo2: TcxGridDBColumn;
     grConsultaLevel1: TcxGridLevel;
+    cxOpcoes: TcxButton;
+    cxPopMenu: TRxPopupMenu;
     procedure MOstraPainelCadastro(AbrePainel: TAbrePainel);
     procedure MostraPainelBusca(AbrePainel: TAbrePainel);
     procedure grConsultaDBTableView1CustomDrawCell(

@@ -39,17 +39,25 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <SanitizedProjectName>PetClinic</SanitizedProjectName>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
-        <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
-        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_DcuOutput>.\</DCC_DcuOutput>
+        <DCC_ExeOutput>.\</DCC_ExeOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <Icon_MainIcon>PetClinic_Icon.ico</Icon_MainIcon>
+        <VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
+        <VerInfo_Keys>CompanyName=DRB Sistemas Comerciais;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=2011;LegalTrademarks=;OriginalFilename=;ProductName=Sistema PetClinic;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Locale>1046</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <DCC_UsePackage>dxSkinOffice2007SilverRS20;cxGridRS20;dxPSdxLCLnkRS20;dxPScxExtCommonRS20;cxPageControlRS20;RtmRxCtl200;FireDACPgDriver;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;dxSkinsdxBarPainterRS20;dxSkinSharpRS20;DbxCommonDriver;dxLayoutControlRS20;vclimg;dxSkinSilverRS20;dxSkinsdxNavBarPainterRS20;dbxcds;DatasnapConnectorsFreePascal;dxPSCoreRS20;vcldb;dxPSTeeChartRS20;dxSkinOffice2013WhiteRS20;dxSkinMcSkinRS20;CustomIPTransport;dsnap;IndyIPServer;dxSkinCoffeeRS20;dxSkinGlassOceansRS20;IndyCore;dxSkinOffice2010SilverRS20;RLibWinDXE6;dxComnRS20;CloudService;dxFlowChartRS20;FmxTeeUI;FireDACIBDriver;dxDBXServerModeRS20;cxTreeListdxBarPopupMenuRS20;dxSkinOffice2007PinkRS20;dxSkinSpringTimeRS20;dxPsPrVwAdvRS20;dxPScxGridLnkRS20;dxSkiniMaginaryRS20;dxSkinDevExpressDarkStyleRS20;cxSchedulerGridRS20;dxtrmdRS20;dsnapxml;FireDACDb2Driver;dxSkinMoneyTwinsRS20;dxSkinOffice2007GreenRS20;dxPScxTLLnkRS20;cxPivotGridOLAPRS20;dxPSdxFCLnkRS20;bindcompfmx;cxPageControldxBarPopupMenuRS20;vcldbx;FireDACODBCDriver;RESTBackendComponents;dbrtl;FireDACCommon;bindcomp;inetdb;DBXOdbcDriver;vclFireDAC;cxSpreadSheetRS20;xmlrtl;ibxpress;dxPScxSSLnkRS20;dxSkinOffice2007BlackRS20;FireDACCommonDriver;bindengine;vclactnband;soaprtl;FMXTee;ACBrComum;dxGDIPlusRS20;bindcompvcl;synapse;vclie;cxVerticalGridRS20;cxSchedulerRS20;dxSkinBlackRS20;FireDACMSSQLDriver;DBXInformixDriver;dxSkinSummer2008RS20;Intraweb;cxBarEditItemRS20;DataSnapServerMidas;dsnapcon;DBXFirebirdDriver;inet;dxBarRS20;cxDataRS20;dxSkinDarkSideRS20;FireDACMySQLDriver;soapmidas;vclx;dxPScxVGridLnkRS20;dxSkinLondonLiquidSkyRS20;dxCoreRS20;DBXSybaseASADriver;RESTComponents;dxPSPrVwRibbonRS20;dbexpress;dxPSLnksRS20;IndyIPClient;dxSpellCheckerRS20;dxBarExtItemsRS20;RtmRxDB200;ACBr_BoletoFC_Fortes;dxdbtrRS20;FireDACSqliteDriver;FireDACDSDriver;DBXSqliteDriver;ACBrDiversos;fmx;dxSkinVS2010RS20;IndySystem;dxSkinXmas2008BlueRS20;TeeDB;tethering;inetdbbde;vclib;DataSnapClient;dxTabbedMDIRS20;dxmdsRS20;DataSnapProviderClient;DBXSybaseASEDriver;dxdborRS20;dxPSdxDBTVLnkRS20;MetropolisUILiveTile;dxPScxSchedulerLnkRS20;dxSkinCaramelRS20;dxSkinLiquidSkyRS20;vcldsnap;dxSkinDevExpressStyleRS20;fmxFireDAC;cxPivotGridChartRS20;DBXDb2Driver;DBXOracleDriver;dxSkinOffice2010BlueRS20;dcldxSkinsCoreRS20;vclribbon;cxExportRS20;dxServerModeRS20;dxSkinscxSchedulerPainterRS20;fmxase;vcl;DBXMSSQLDriver;IndyIPCommon;CodeSiteExpressPkg;RtmRxBde200;dxSkinBlueRS20;ACBr_Boleto;dxSkinOffice2010BlackRS20;DataSnapFireDAC;FireDACDBXDriver;dxBarExtDBItemsRS20;dxSkinsdxDLPainterRS20;soapserver;dxPSDBTeeChartRS20;inetdbxpress;dxADOServerModeRS20;dxSkinBlueprintRS20;dxSkinFoggyRS20;dxSkinSharpPlusRS20;FireDACInfxDriver;cxPivotGridRS20;adortl;dxRibbonRS20;FireDACASADriver;dxSkinHighContrastRS20;dxSkinTheAsphaltWorldRS20;dxBarDBNavRS20;dxSkinscxPCPainterRS20;rtl;DbxClientDriver;dxNavBarRS20;dxDockingRS20;Tee;dxSkinOffice2007BlueRS20;dxSkinsdxRibbonPainterRS20;dxSkinValentineRS20;DataSnapNativeClient;svnui;IndyProtocols;DBXMySQLDriver;dxPScxCommonRS20;dxSkinSevenClassicRS20;dxSkinPumpkinRS20;bindcompdbx;TeeUI;dxSkinDarkRoomRS20;FireDACADSDriver;vcltouch;dxSkinStardustRS20;cxEditorsRS20;dxorgcRS20;dxPSdxDBOCLnkRS20;VclSmp;FireDAC;VCLRESTComponents;dxSkinsCoreRS20;DataSnapConnectors;dxSkinSevenRS20;cxLibraryRS20;fmxobj;dxSkinLilianRS20;svn;dxWizardControlRS20;FireDACOracleDriver;fmxdae;dxPScxPivotGridLnkRS20;dxSkinWhiteprintRS20;bdertl;dxThemeRS20;dxPSdxOCLnkRS20;cxTreeListRS20;dxTileControlRS20;FireDACMSAccDriver;DataSnapIndy10ServerTransport;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
@@ -66,6 +74,8 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
+        <Icon_MainIcon>PetClinic_Icon.ico</Icon_MainIcon>
         <DCC_ExeOutput>.\</DCC_ExeOutput>
         <DCC_DcuOutput>.\</DCC_DcuOutput>
         <VerInfo_Locale>1033</VerInfo_Locale>
@@ -77,6 +87,14 @@
         <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
         <DCC_DebugInformation>0</DCC_DebugInformation>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_AutoGenVersion>true</VerInfo_AutoGenVersion>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Icon_MainIcon>PetClinic_Icon.ico</Icon_MainIcon>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_DcuOutput>.\</DCC_DcuOutput>
+        <DCC_ExeOutput>.\</DCC_ExeOutput>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -120,6 +138,18 @@
         </DCCReference>
         <DCCReference Include="..\Cadastros\uCad_Clientes.pas">
             <Form>Fcad_Clientes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Cadastros\uCad_Cidade.pas">
+            <Form>Fcad_Cidade</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Cadastros\uCad_Animais.pas">
+            <Form>Fcad_Animais</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Cadastros\uCon_Generica.pas">
+            <Form>Fcad_Generica</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

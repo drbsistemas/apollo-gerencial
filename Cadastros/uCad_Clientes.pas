@@ -22,7 +22,7 @@ uses
   cxDropDownEdit, cxLabel, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, Vcl.ExtCtrls,
   Vcl.ComCtrls, dxCore, cxDateUtils, cxGroupBox, cxCheckBox, cxCalendar,
-  cxButtonEdit, cxImage, dxGDIPlusClasses;
+  cxButtonEdit, cxImage, dxGDIPlusClasses, RxMenus;
 
 type
   TFcad_Clientes = class(TFcad_Pai)
