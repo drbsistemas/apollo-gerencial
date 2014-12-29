@@ -213,6 +213,9 @@ begin
             dmCad.qryConf.FieldByName('PASTASERVIDOR').ASString + '\Relatorios\Impressos\ppFichaCliente.rtm',
             'SIM',dmcad.qryClieEMAIL.ASString,
             1);
+   Application.ProcessMessages;
+   grCOnsulta.Visible := false;
+   grCOnsulta.Visible := true;
    cxConsultaPropertiesChange(self);
 end;
 

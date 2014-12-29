@@ -20,6 +20,7 @@ var
    FileName: String;
 begin
    CriaDmRel;
+
    dmRel.dbPipeAux.DataSource                  := dmCad.dsClie;
    dmRel.dbPipeAux.Active;
    if dsNome2 <> nIl then
@@ -38,10 +39,10 @@ begin
       dmRel.ppReport.DeviceType                := 'Screen' else
       dmRel.ppReport.DeviceType                := 'Printer';
 
-   dmRel.ppReport.Print;
+   dmRel.ppReport.PrintReport;
 
    /////
-   if Length(EnviaEmail) > 0 then
+{   if Length(EnviaEmail) > 0 then
    begin
       FileName := dmCad.qryConf.FieldByName('PASTASERVIDOR').ASString + '\Relatorios\Temp\'+Caption+'.PDF';
       dmRel.ppReport.AllowPrintToFile := True;
@@ -50,7 +51,7 @@ begin
       dmRel.ppReport.ShowPrintDialog :=False;
       dmRel.ppReport.PrintReport;
       //EnviaEmailDll(Caption, EnviaEmail, dmRel.ppReport.TextFileName);
-   end;
+   end; }
    /////
 end;
 
