@@ -4,108 +4,11 @@ inherited FCad_Empresa: TFCad_Empresa
   ClientWidth = 702
   OnClose = FormClose
   OnKeyDown = FormKeyDown
-  ExplicitWidth = 710
-  ExplicitHeight = 570
+  ExplicitWidth = 718
+  ExplicitHeight = 578
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCon: TPanel [0]
-    Width = 644
-    Height = 539
-    TabOrder = 1
-    ExplicitWidth = 644
-    ExplicitHeight = 539
-    inherited pnBusca: TPanel
-      Width = 642
-      ExplicitWidth = 642
-      inherited cxConsulta: TcxComboBox
-        Properties.Items.Strings = (
-          'C'#243'digo'
-          'Raz'#227'o')
-        Text = 'C'#211'DIGO'
-      end
-      inherited cbAtivo: TcxComboBox
-        Style.IsFontAssigned = True
-      end
-    end
-    inherited pnBotaoCad: TPanel
-      Width = 642
-      ExplicitWidth = 642
-      inherited cxNovo: TcxButton
-        Enabled = False
-      end
-      inherited cxVer: TcxButton
-        OnClick = cxVerClick
-      end
-      inherited cxApagar: TcxButton
-        Enabled = False
-        OnClick = cxApagarClick
-      end
-    end
-    inherited pnBotaoCon: TPanel
-      Top = 488
-      Width = 642
-      ExplicitTop = 488
-      ExplicitWidth = 642
-    end
-    inherited grConsulta: TcxGrid
-      Width = 642
-      Height = 414
-      ExplicitWidth = 642
-      ExplicitHeight = 414
-      inherited grConsultaDBTableView1: TcxGridDBTableView
-        OnDblClick = grConsultaDBTableView1DblClick
-        DataController.DataSource = dmCad.dsConf
-        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
-          DataBinding.FieldName = 'IDCONF'
-        end
-        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
-          DataBinding.FieldName = 'RAZAOEMP'
-          Width = 250
-        end
-        object grConsultaDBTableView1Column6: TcxGridDBColumn
-          Caption = 'Fone'
-          DataBinding.FieldName = 'FONEEMP'
-          PropertiesClassName = 'TcxMaskEditProperties'
-          Properties.EditMask = '(99)9999-9999;0;_'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column1: TcxGridDBColumn
-          Caption = 'Cnpj'
-          DataBinding.FieldName = 'CNPJEMP'
-          PropertiesClassName = 'TcxMaskEditProperties'
-          Properties.EditMask = '99.999.999/9999-99;0;_'
-          Width = 120
-        end
-        object grConsultaDBTableView1Column2: TcxGridDBColumn
-          Caption = 'E-mail'
-          DataBinding.FieldName = 'EMAILEMP'
-          Width = 250
-        end
-        object grConsultaDBTableView1Column3: TcxGridDBColumn
-          Caption = 'Dt. Backup'
-          DataBinding.FieldName = 'DATABACKUP'
-          Width = 70
-        end
-        object grConsultaDBTableView1Column4: TcxGridDBColumn
-          Caption = 'Qtde. Lic'
-          DataBinding.FieldName = 'QTDELIC'
-          Width = 65
-        end
-        object grConsultaDBTableView1Column5: TcxGridDBColumn
-          Caption = 'Validade Lic.'
-          DataBinding.FieldName = 'VALIDADELIC'
-          Width = 80
-        end
-      end
-    end
-  end
-  inherited pnImg: TcxImage [1]
-    Left = 644
-    ExplicitLeft = 644
-    ExplicitHeight = 539
-    Height = 539
-  end
-  inherited pnCad: TPanel [2]
+  inherited pnCad: TPanel [0]
     Width = 644
     Height = 539
     TabOrder = 0
@@ -1168,29 +1071,6 @@ inherited FCad_Empresa: TFCad_Empresa
       object cxEmail: TcxTabSheet
         Caption = 'Conf. de E-mail'
         ImageIndex = 0
-        object cxLabel17: TcxLabel
-          Left = 50
-          Top = 10
-          AutoSize = False
-          Caption = 'Host:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = [fsBold]
-          Style.LookAndFeel.NativeStyle = True
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 79
-          AnchorX = 129
-        end
         object eHost: TcxTextEdit
           Left = 130
           Top = 8
@@ -1215,54 +1095,8 @@ inherited FCad_Empresa: TFCad_Empresa
           Properties.CharCase = ecLowerCase
           Style.Color = clWhite
           StyleFocused.Color = 15921919
-          TabOrder = 2
+          TabOrder = 1
           Width = 400
-        end
-        object cxLabel24: TcxLabel
-          Left = 50
-          Top = 32
-          AutoSize = False
-          Caption = 'Usu'#225'rio:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = [fsBold]
-          Style.LookAndFeel.NativeStyle = True
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 79
-          AnchorX = 129
-        end
-        object cxLabel25: TcxLabel
-          Left = 50
-          Top = 54
-          AutoSize = False
-          Caption = 'Senha:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = [fsBold]
-          Style.LookAndFeel.NativeStyle = True
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 79
-          AnchorX = 129
         end
         object eSenha: TcxTextEdit
           Left = 130
@@ -1279,7 +1113,7 @@ inherited FCad_Empresa: TFCad_Empresa
           Style.Font.Style = [fsBold]
           Style.IsFontAssigned = True
           StyleFocused.Color = 15921919
-          TabOrder = 4
+          TabOrder = 2
           Width = 130
         end
         object cbSSL: TcxComboBox
@@ -1297,55 +1131,9 @@ inherited FCad_Empresa: TFCad_Empresa
           Style.Font.Name = 'Tahoma'
           Style.Font.Style = []
           Style.IsFontAssigned = True
-          TabOrder = 5
+          TabOrder = 3
           Text = 'SIM'
           Width = 65
-        end
-        object cxLabel26: TcxLabel
-          Left = 258
-          Top = 54
-          AutoSize = False
-          Caption = 'SSL Ativo:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = [fsBold]
-          Style.LookAndFeel.NativeStyle = True
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 66
-          AnchorX = 324
-        end
-        object cxLabel27: TcxLabel
-          Left = 390
-          Top = 54
-          AutoSize = False
-          Caption = 'Porta Sa'#237'da:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = [fsBold]
-          Style.LookAndFeel.NativeStyle = True
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 79
-          AnchorX = 469
         end
         object ePorta: TcxTextEdit
           Left = 470
@@ -1354,8 +1142,235 @@ inherited FCad_Empresa: TFCad_Empresa
           Properties.CharCase = ecLowerCase
           Style.Color = clWhite
           StyleFocused.Color = 15921919
-          TabOrder = 6
+          TabOrder = 4
           Width = 60
+        end
+        object cxLabel17: TcxLabel
+          Left = 27
+          Top = 8
+          AutoSize = False
+          Caption = 'Host:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clBlack
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 21
+          Width = 100
+          AnchorX = 127
+        end
+        object cxLabel24: TcxLabel
+          Left = 24
+          Top = 30
+          AutoSize = False
+          Caption = 'Usu'#225'rio:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clBlack
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 21
+          Width = 100
+          AnchorX = 124
+        end
+        object cxLabel25: TcxLabel
+          Left = 31
+          Top = 52
+          AutoSize = False
+          Caption = 'Senha:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clBlack
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 21
+          Width = 100
+          AnchorX = 131
+        end
+        object cxLabel26: TcxLabel
+          Left = 222
+          Top = 54
+          AutoSize = False
+          Caption = 'SSL Ativo:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clBlack
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 21
+          Width = 100
+          AnchorX = 322
+        end
+        object cxLabel27: TcxLabel
+          Left = 368
+          Top = 54
+          AutoSize = False
+          Caption = 'Porta Sa'#237'da:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clBlack
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 21
+          Width = 100
+          AnchorX = 468
+        end
+        object cxButton1: TcxButton
+          Left = 536
+          Top = 46
+          Width = 75
+          Height = 25
+          Caption = 'cxButton1'
+          TabOrder = 10
+          OnClick = cxButton1Click
+        end
+      end
+    end
+  end
+  inherited pnImg: TcxImage
+    Left = 644
+    ExplicitLeft = 644
+    ExplicitHeight = 539
+    Height = 539
+  end
+  inherited pnCon: TPanel [2]
+    Width = 644
+    Height = 539
+    TabOrder = 1
+    ExplicitWidth = 644
+    ExplicitHeight = 539
+    inherited pnBusca: TPanel
+      Width = 642
+      ExplicitWidth = 642
+      inherited cxConsulta: TcxComboBox
+        Properties.Items.Strings = (
+          'C'#243'digo'
+          'Raz'#227'o')
+        Text = 'C'#211'DIGO'
+      end
+      inherited cbAtivo: TcxComboBox
+        Style.IsFontAssigned = True
+      end
+    end
+    inherited pnBotaoCad: TPanel
+      Width = 642
+      ExplicitWidth = 642
+      inherited cxNovo: TcxButton
+        Enabled = False
+      end
+      inherited cxVer: TcxButton
+        OnClick = cxVerClick
+      end
+      inherited cxApagar: TcxButton
+        Enabled = False
+        OnClick = cxApagarClick
+      end
+      inherited cxPrint: TcxButton
+        Enabled = False
+      end
+      inherited cxOpcoes: TcxButton
+        Enabled = False
+      end
+    end
+    inherited pnBotaoCon: TPanel
+      Top = 488
+      Width = 642
+      ExplicitTop = 488
+      ExplicitWidth = 642
+    end
+    inherited grConsulta: TcxGrid
+      Width = 642
+      Height = 413
+      ExplicitWidth = 642
+      ExplicitHeight = 413
+      inherited grConsultaDBTableView1: TcxGridDBTableView
+        OnDblClick = grConsultaDBTableView1DblClick
+        DataController.DataSource = dmCad.dsConf
+        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
+          DataBinding.FieldName = 'IDCONF'
+        end
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
+          DataBinding.FieldName = 'RAZAOEMP'
+          Width = 250
+        end
+        object grConsultaDBTableView1Column6: TcxGridDBColumn
+          Caption = 'Fone'
+          DataBinding.FieldName = 'FONEEMP'
+          PropertiesClassName = 'TcxMaskEditProperties'
+          Properties.EditMask = '(99)9999-9999;0;_'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column1: TcxGridDBColumn
+          Caption = 'Cnpj'
+          DataBinding.FieldName = 'CNPJEMP'
+          PropertiesClassName = 'TcxMaskEditProperties'
+          Properties.EditMask = '99.999.999/9999-99;0;_'
+          Width = 120
+        end
+        object grConsultaDBTableView1Column2: TcxGridDBColumn
+          Caption = 'E-mail'
+          DataBinding.FieldName = 'EMAILEMP'
+          Width = 250
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn
+          Caption = 'Dt. Backup'
+          DataBinding.FieldName = 'DATABACKUP'
+          Width = 70
+        end
+        object grConsultaDBTableView1Column4: TcxGridDBColumn
+          Caption = 'Qtde. Lic'
+          DataBinding.FieldName = 'QTDELIC'
+          Width = 65
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn
+          Caption = 'Validade Lic.'
+          DataBinding.FieldName = 'VALIDADELIC'
+          Width = 80
         end
       end
     end

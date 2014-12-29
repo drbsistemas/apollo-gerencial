@@ -2135,6 +2135,7 @@ object FPrinc: TFPrinc
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
+      OnClick = cxButton2Click
     end
     object cxButton3: TcxButton
       Left = 401

@@ -5,5 +5,9 @@
     <Transaction>2014/12/29 16:34:18.597,=D:\Gerencial\Acesso\uDmRel.pas</Transaction>
     <Transaction>2014/12/29 16:34:33.514,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
     <Transaction>2014/12/29 16:34:50.639,D:\Gerencial\Rotinas\uRelatorios.pas=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2014/12/29 18:15:49.920,=D:\Gerencial\Cadastros\uCad_Empresa.pas</Transaction>
+    <Transaction>2014/12/29 18:37:44.877,=D:\Gerencial\Rotinas\NFe_Util_2G_TLB.pas</Transaction>
+    <Transaction>2014/12/29 18:38:13.870,D:\Gerencial\Rotinas\NFe_Util_2G_TLB.pas=</Transaction>
+    <Transaction>2014/12/29 18:48:30.245,=C:\Users\DANILO\Documents\Embarcadero\Studio\14.0\Imports\NFe_Util_2G_TLB.pas</Transaction>
   </Transactions>
 </BorlandProject>

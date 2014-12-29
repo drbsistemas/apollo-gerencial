@@ -5,8 +5,9 @@ interface
 uses
    MMSystem, Graphics, System.SysUtils, Forms, System.Classes, TypInfo,
    cxButtons, CxGroupBox, cxLabel, cxCheckBox, cxTextEdit, cxMaskEdit,
-   FireDAC.Comp.Client, Windows, StdCtrls, Vcl.DIalogs,
+   FireDAC.Comp.Client, Windows, StdCtrls, Vcl.DIalogs, ComObj, ComCtrls,
    NFe_Util_2G_TLB ; // acrescentar essa linha no use da unit para NF-E DLL;
+
    // Mensagens
    Function Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
    // Licenca
@@ -465,12 +466,12 @@ end;
 
 procedure EnviaEmailDLL(Assunto, Destino, Anexo: String);
 var
-   Util: NFe_Util_2G_Interface;
+   Util:NFe_Util_2G_Interface;
    mensagem,
    msgResultado: WideString;
    cStat: integer;
 begin
-{   Util := NFe_Util_2G_TLB.CoUtil.Create; // instancia DLL
+   Util := NFe_Util_2G_TLB.CoUtil.Create;
 ///// Anexos
       //ANexoPdf := dmNfe.cdsParNfePASTAPDF.AsString + '\' + FormatDateTIme('YYYYMM', now) + '\' + dmNfe.cdsNFEID.AsString + '.pdf';
       //AnexoXml := dmNfe.cdsParNfeXMLCANCELADO.AsString + '\' + FormatDateTIme('YYYYMM', now) + '\' + dmNfe.cdsNFEID.AsString + '-Nfe.xml';
@@ -478,35 +479,35 @@ begin
 ///// Gera Mensagem
    Mensagem := 'Envio de E-mail por: '+Assunto+ #13 + #10 +
       '______________________________________________________________________________________' + #13 + #10 +
-      'Emitente.......: ' + dmcad.cdsCOnfRAZAOEMP.AsString + #13 + #10 +
+      'Emitente.......: ' + dmcad.qryConf.Fieldbyname('RAZAOEMP').AsString + #13 + #10 +
       'Data Emissão...: ' + FormatDateTime('DD/MM/YYYY hh:mm', Now) + #13 + #10 +
       '______________________________________________________________________________________' + #13 + #10 +
       'Atenção! As informações contidas neste e-mail é de responsabilidade do emitente.' + #13 + #10 +
       '______________________________________________________________________________________' + #13 + #10 +
-      'E-mail automático enviado do Sistema  - Apollo Bar - (http://www.drbsistemas.com.br)' + #13 + #10 + '';
+      'E-mail automático enviado do Sistema  - Sistema PetClinic - (http://www.drbsistemas.com.br)' + #13 + #10 + '';
    // Configura Corpo do E-mail;
 
 
 /////
-   cStat := Util.EnvEmail(dmcad.cdsCOnfUSUARIOEMAIL.ASString,
-      dmcad.cdsCOnfFANTASIAEMP.AsString,
+   cStat := Util.EnvEmail(dmcad.qryConf.Fieldbyname('USUARIOEMAIL').ASString,
+      dmcad.qryConf.Fieldbyname('FANTASIAEMP').AsString,
       Destino,
       '',
       Assunto,
       Mensagem,
       Anexo,
-      dmcad.cdsCOnfHOSTEMAIL.ASString,
-      dmcad.cdsCOnfPORTAEMAIL.AsString,
-      dmcad.cdsCOnfSSLEMAIL.AsString,
-      dmcad.cdsCOnfUSUARIOEMAIL.AsString,
-      dmcad.cdsCOnfSENHAEMAIL.AsString,
+      dmcad.qryConf.Fieldbyname('HOSTEMAIL').ASString,
+      dmcad.qryConf.Fieldbyname('PORTAEMAIL').AsString,
+      dmcad.qryConf.Fieldbyname('SSLEMAIL').AsString,
+      dmcad.qryConf.Fieldbyname('USUARIOEMAIL').AsString,
+      dmcad.qryConf.Fieldbyname('SENHAEMAIL').AsString,
       '0',
       '1',
       msgResultado);
    if cStat = 7100 then
       MessageDlg('E-mail enviado com sucesso!', mtInformation, [mbOK], 0) else
       MessageDlg('E-mail não enviado Falha: '+inttoStr(cStat)+'!', mtInformation, [mbOK], 0);
-   Util := nil;   }
+   Util := nil;
 end;
 
 end.

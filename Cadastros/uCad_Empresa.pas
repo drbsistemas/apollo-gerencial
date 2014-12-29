@@ -23,7 +23,7 @@ uses
   cxGridCustomView, cxGrid, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLabel,
   Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, cxButtonEdit, cxCheckBox,
   cxPCdxBarPopupMenu, Vcl.ComCtrls, Winapi.ShlObj, cxShellCommon,
-  cxShellComboBox, cxPC;
+  cxShellComboBox, cxPC, RxMenus;
 
 type
   TFCad_Empresa = class(TFcad_Pai)
@@ -82,16 +82,17 @@ type
     cxLabel23: TcxLabel;
     ePastaServidor: TcxShellComboBox;
     cxEmail: TcxTabSheet;
-    cxLabel17: TcxLabel;
     eHost: TcxTextEdit;
     eUsuario: TcxTextEdit;
-    cxLabel24: TcxLabel;
-    cxLabel25: TcxLabel;
     eSenha: TcxTextEdit;
     cbSSL: TcxComboBox;
+    ePorta: TcxTextEdit;
+    cxLabel17: TcxLabel;
+    cxLabel24: TcxLabel;
+    cxLabel25: TcxLabel;
     cxLabel26: TcxLabel;
     cxLabel27: TcxLabel;
-    ePorta: TcxTextEdit;
+    cxButton1: TcxButton;
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure grConsultaDBTableView1DblClick(Sender: TObject);
@@ -106,6 +107,7 @@ type
     procedure cxCancelaClick(Sender: TObject);
     procedure cxApagarClick(Sender: TObject);
     procedure cxVerClick(Sender: TObject);
+    procedure cxButton1Click(Sender: TObject);
   private
      indice : String;
     procedure Limpa;
@@ -136,6 +138,12 @@ begin
          dmcad.qryConf.CancelUpdates;
       end;
    end;
+end;
+
+procedure TFCad_Empresa.cxButton1Click(Sender: TObject);
+begin
+  inherited;
+   EnviaEmailDLL('','comercial@drbsistemas.com.br','');
 end;
 
 procedure TFCad_Empresa.cxCancelaClick(Sender: TObject);
@@ -205,9 +213,19 @@ begin
          Fieldbyname('DATABACKUP').AsString     := eDataBkp.Text;
          Fieldbyname('VALIDADELIC').AsString    := eDataLic.Text;
          Fieldbyname('QTDELIC').AsString        := eQtdeLic.Text;
-         ///// LENTO
+         ///// COMPONENTE É LENTO
          Fieldbyname('PROGRAMABACKUP').AsString := eBackup.Text;
          Fieldbyname('PASTASERVIDOR').AsString  := ePastaServidor.Text;
+
+       ///// Email
+         Fieldbyname('HOSTEMAIL').AsString      := eHost.Text;
+         Fieldbyname('SENHAEMAIL').AsString     := eSenha.Text;
+         Fieldbyname('USUARIOEMAIL').ASString   := eUsuario.Text;
+         Fieldbyname('PORTAEMAIL').AsInteger    := StrToInt(ePorta.Text);
+         Fieldbyname('SSLEMAIL').ASInteger      := cbSSL.ItemIndex;
+      /////
+
+
          Post;
          ApplyUpdates(0);
          inherited;
@@ -305,7 +323,7 @@ end;
 
 Procedure TFcad_Empresa.Limpa;
 begin
-//
+   cxPage.ActivePage := cxEspecificos;
 end;
 
 Procedure TFcad_Empresa.Edita;
@@ -339,12 +357,12 @@ begin
       ePastaServidor.Text := Fieldbyname('PASTASERVIDOR').AsString;
 
 
-   ///// Email
-//   eHost.Text           := dmcad.cdsCOnfHOSTEMAIL.AsString;
-//   eSenha.Text          := dmcad.cdsCOnfSENHAEMAIL.AsString;
-//   eUsuario.Text        := dmcad.cdsCOnfUSUARIOEMAIL.ASString;
-//   ePorta.Text          := IntTOStr(dmcad.cdsCOnfPORTAEMAIL.AsInteger);
-//   cbSSL.ItemIndex      := (dmcad.cdsCOnfSSLEMAIL.ASInteger);
+    ///// Email
+      eHost.Text           := Fieldbyname('HOSTEMAIL').AsString;
+      eSenha.Text          := Fieldbyname('SENHAEMAIL').AsString;
+      eUsuario.Text        := Fieldbyname('USUARIOEMAIL').ASString;
+      ePorta.Text          := IntTOStr(Fieldbyname('PORTAEMAIL').AsInteger);
+      cbSSL.ItemIndex      := Fieldbyname('SSLEMAIL').ASInteger;
    /////
 
 

@@ -18,7 +18,9 @@ uses
   uCad_Animais in '..\Cadastros\uCad_Animais.pas' {Fcad_Animais},
   uCon_Generica in '..\Cadastros\uCon_Generica.pas' {Fcad_Generica},
   uDmRel in '..\Acesso\uDmRel.pas' {dmRel: TDataModule},
-  uRelatorios in '..\Rotinas\uRelatorios.pas';
+  uRelatorios in '..\Rotinas\uRelatorios.pas',
+  uCad_Empresa in '..\Cadastros\uCad_Empresa.pas' {FCad_Empresa},
+  NFe_Util_2G_TLB in 'C:\Users\DANILO\Documents\Embarcadero\Studio\14.0\Imports\NFe_Util_2G_TLB.pas';
 
 {$R *.res}
 

@@ -67,6 +67,7 @@ type
     procedure cxButton5Click(Sender: TObject);
     procedure cxAnimaisClick(Sender: TObject);
     procedure cxOutrosClick(Sender: TObject);
+    procedure cxButton2Click(Sender: TObject);
    private
       { Private declarations }
    public
@@ -81,11 +82,16 @@ implementation
 {$R *.dfm}
 
 uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, Unit1, uCad_Clientes,
-  uCad_Animais, uCon_Generica, uDmRel;
+  uCad_Animais, uCon_Generica, uDmRel, uCad_Empresa;
 
 procedure TFPrinc.cxAnimaisClick(Sender: TObject);
 begin
    ExecutaForm(TFcad_Animais, TObject(Fcad_Animais));
+end;
+
+procedure TFPrinc.cxButton2Click(Sender: TObject);
+begin
+   ExecutaForm(TFCad_Empresa, TObject(Fcad_Empresa));
 end;
 
 procedure TFPrinc.cxButton5Click(Sender: TObject);
