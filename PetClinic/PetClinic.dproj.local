@@ -1,31 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-	<Transactions>
-    <Transaction>2014/09/06 16:56:03.000.608,=D:\Gerencial\Lancador\Unit1.pas</Transaction>
-    <Transaction>2014/09/06 16:56:31.000.105,D:\Gerencial\Acesso\uDmCad.pas=D:\Gerencial\Lancador\Unit1.pas</Transaction>
-    <Transaction>2014/09/06 16:56:31.000.105,D:\Gerencial\Acesso\uDmCad.dfm=D:\Gerencial\Lancador\Unit1.dfm</Transaction>
-    <Transaction>2014/09/18 14:49:37.000.219,=D:\Gerencial\Cadastros\uPai.pas</Transaction>
-    <Transaction>2014/09/19 22:23:04.000.224,=D:\Gerencial\Lancador\Unit1.pas</Transaction>
-    <Transaction>2014/09/19 22:40:37.000.153,D:\Gerencial\Acesso\uSerial.dfm=D:\Gerencial\Lancador\Unit1.dfm</Transaction>
-    <Transaction>2014/09/19 22:40:37.000.153,D:\Gerencial\Acesso\uSerial.pas=D:\Gerencial\Lancador\Unit1.pas</Transaction>
-    <Transaction>2014/09/19 22:41:41.000.627,=D:\Gerencial\Lancador\Unit3.pas</Transaction>
-    <Transaction>2014/09/19 22:45:36.000.362,D:\Gerencial\Acesso\uCad_Captcha.dfm=D:\Gerencial\Lancador\Unit3.dfm</Transaction>
-    <Transaction>2014/09/19 22:45:36.000.362,D:\Gerencial\Acesso\uCad_Captcha.pas=D:\Gerencial\Lancador\Unit3.pas</Transaction>
-    <Transaction>2014/09/25 11:28:11.000.876,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/09/25 11:30:07.000.243,D:\Gerencial\Cadastros\uCad_Clientes.pas=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/09/25 11:30:07.000.243,D:\Gerencial\Cadastros\uCad_Clientes.dfm=D:\Gerencial\PetClinic\Unit1.dfm</Transaction>
-    <Transaction>2014/09/25 11:39:36.000.067,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/09/25 11:42:06.000.191,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/09/25 11:44:31.000.583,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/09/25 14:52:32.000.642,D:\Gerencial\Cadastros\uCad_Clientes.pas=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/09/25 14:52:32.000.642,D:\Gerencial\Cadastros\uCad_Clientes.dfm=D:\Gerencial\PetClinic\Unit1.dfm</Transaction>
-    <Transaction>2014/12/22 19:29:21.000.102,=D:\Gerencial\Cadastros\uCad_Cidade.pas</Transaction>
-    <Transaction>2014/12/24 18:34:19.000.340,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/12/24 18:35:13.000.033,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/12/24 18:39:00.000.083,D:\Gerencial\PetClinic\Unit1.dfm=D:\Gerencial\Cadastros\uCad_Animais.dfm</Transaction>
-    <Transaction>2014/12/24 18:39:00.000.083,D:\Gerencial\PetClinic\Unit1.pas=D:\Gerencial\Cadastros\uCad_Animais.pas</Transaction>
-    <Transaction>2014/12/29 13:50:03.736,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/12/29 13:55:30.090,D:\Gerencial\Cadastros\uCon_Generica.pas=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/12/29 13:55:30.091,D:\Gerencial\Cadastros\uCon_Generica.dfm=D:\Gerencial\PetClinic\Unit1.dfm</Transaction>
+  <Transactions>
+    <Transaction>2014/12/29 16:32:13.979,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2014/12/29 16:34:18.597,=D:\Gerencial\Acesso\uDmRel.pas</Transaction>
+    <Transaction>2014/12/29 16:34:33.514,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2014/12/29 16:34:50.639,D:\Gerencial\Rotinas\uRelatorios.pas=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

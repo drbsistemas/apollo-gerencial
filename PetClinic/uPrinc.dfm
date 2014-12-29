@@ -531,7 +531,6 @@ object FPrinc: TFPrinc
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    ExplicitTop = 449
   end
   object cxFundo: TPanel
     Left = 100
@@ -542,7 +541,6 @@ object FPrinc: TFPrinc
     BevelOuter = bvNone
     Color = 15855081
     TabOrder = 1
-    ExplicitHeight = 366
     object cxClientes: TcxButton
       Left = 0
       Top = 0
@@ -4889,7 +4887,6 @@ object FPrinc: TFPrinc
     BevelOuter = bvNone
     Color = 15855081
     TabOrder = 3
-    ExplicitHeight = 366
   end
   object pnTop: TcxGroupBox
     Left = 0

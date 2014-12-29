@@ -81,7 +81,7 @@ implementation
 {$R *.dfm}
 
 uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, Unit1, uCad_Clientes,
-  uCad_Animais, uCon_Generica;
+  uCad_Animais, uCon_Generica, uDmRel;
 
 procedure TFPrinc.cxAnimaisClick(Sender: TObject);
 begin

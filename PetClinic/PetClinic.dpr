@@ -16,7 +16,9 @@ uses
   uCad_Clientes in '..\Cadastros\uCad_Clientes.pas' {Fcad_Clientes},
   uCad_Cidade in '..\Cadastros\uCad_Cidade.pas' {Fcad_Cidade},
   uCad_Animais in '..\Cadastros\uCad_Animais.pas' {Fcad_Animais},
-  uCon_Generica in '..\Cadastros\uCon_Generica.pas' {Fcad_Generica};
+  uCon_Generica in '..\Cadastros\uCon_Generica.pas' {Fcad_Generica},
+  uDmRel in '..\Acesso\uDmRel.pas' {dmRel: TDataModule},
+  uRelatorios in '..\Rotinas\uRelatorios.pas';
 
 {$R *.res}
 

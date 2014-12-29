@@ -100,6 +100,7 @@ type
     procedure eCidadePropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure cxVerClick(Sender: TObject);
+    procedure cxPrintClick(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -116,7 +117,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDmCad, uRotinas, uCad_Cidade;
+uses uDmCad, uRotinas, uCad_Cidade, uRelatorios;
 
 procedure TFcad_Clientes.cbPessoaPropertiesChange(Sender: TObject);
 begin
@@ -195,6 +196,24 @@ begin
   inherited;
    Limpa;
    cbPessoa.SetFocus;
+end;
+
+procedure TFcad_Clientes.cxPrintClick(Sender: TObject);
+var
+   IDCLIE : Integer;
+begin
+/////
+   IDCLIE := dmcad.qryClieIDCLIE.Asinteger;
+    StrSql := 'select * from CLIENTE where IDCLIE='+IntTOStr(IDCLIE);
+   Consulta(StrSql, dmcad.qryClie);
+///// Impresso
+   Imprime(dmCad.dsClie, NIL,
+            'SIM',
+            'Ficha de Cliente',
+            dmCad.qryConf.FieldByName('PASTASERVIDOR').ASString + '\Relatorios\Impressos\ppFichaCliente.rtm',
+            'SIM',dmcad.qryClieEMAIL.ASString,
+            1);
+   cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Clientes.cxVerClick(Sender: TObject);
@@ -334,6 +353,8 @@ begin
          FieldByName('DATANASCE').AsDateTime   := cbDtNascimento.Date;
          FieldByName('TIPOPESSOA').AsString    := Copy(cbPessoa.Text,1,1);
          FieldByName('TIPOCLIE').AsString      := Copy(cbtpclie.Text,1,3);
+         Fieldbyname('EMAIL').AsString         := eMail.Text;
+         Fieldbyname('OBS').AsString           := eObs.Text;
 
          Post;
          ApplyUpdates(0);
@@ -369,6 +390,8 @@ begin
       cbPessoa.Itemindex := ifs(FieldByName('TIPOPESSOA').AsString = 'F',0,1);
       cbtpclie.ItemIndex := ifs(FieldByName('TIPOCLIE').AsString='CLI', 0,1);
       cbDtNascimento.Date:= FieldByName('DATANASCE').AsDateTime;
+      eMail.Text         := Fieldbyname('EMAIL').AsString;
+      eObs.Text          := Fieldbyname('OBS').AsString;
    end;
 end;
 

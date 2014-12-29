@@ -1,0 +1,663 @@
+FlexDocs Documentos Eletrônicos
+
+DLL de utilidades da NF-e - NFe_Util_2G_v1.4 -  (C) 2008-2013 - Todos os direitos reservados
+
+Vide guia on-line, disponível em www.flexdocs.com.br/guiaNFe
+
+*** IMPORTANTE ****
+
+As assinaturas das funcionalidades foram alteradas com acréscimo de novos parâmetros e relocação de outros.
+Para facilitar os teste a DLL foi alterada para poder conviver com a versão 1.x.
+A estrutura das pastas foi alterada, vide a seguir.
+
+
+Versão preliminar da DLL compatível com o Manaul de Integração do Contribuinte - versão 4.01 - NT 2009/006.
+===========================================================================================================
+
+
+2010/02/02 - v 0.0 - versão preliminar
+
+-----------------------------------------------------------------------------------------------------------
+2010/03/10 - v 0.1 - alterações
+
+       . correção do retorno da funcionalidade assinatura digital - alterado para 5300;
+       . modificação da estrutura de pastas, criado uma pasta NFe_Util para abrigar as pastas da DLL;
+
+       <pasta aplicação>
+            |
+            +-NFe_Util_v2G.dll
+            |
+            +----<NFe_Util>
+                      |
+                      +---------<URL>
+                      |
+                      +---------<DPEC>
+                      |
+                      +---------<Schemas>
+                      |
+                      +---------<log>
+
+       . correção para criação da pasta log se inexistente;
+       . atualização do arquivo ws2.xml com a url de GO, MG, MS, MT e SP;
+       . disponbilização da funcionalidade EnviaNFe2G;
+       . disponbilização da funcionalidade BuscaNFe2G;
+       
+-----------------------------------------------------------------------------------------------------------
+2010/03/20 - v 0.2 - alterações/correções:
+
+	. correção da montagem do grupo ide para que o cNF fique com 8 dígitos (funcionalidade: identificador2G);
+	. correção do nome da tag CSON para CSOSN no grupo de ICMS (funcionalidade: icms2G);
+	. correção para retornar o procInut, nProtocoloInut e dhProtocoloInut da inutilização;
+	. substituição do comando date pelo pause nas bat de registro e desregistro da DLL;
+	. alteração na forma de recuperar a data de início de validade e de expiração do certificado digital na funcionalidade PegaDadosCertificado (sem qualquer repercussão para o usuário);
+	. alteração dos códigos de retorno do EnviaDPEC e ConsultaDPEC;
+	. acréscimo de nova funcionalidade para retornar a versão da chave da licença de uso;
+	
+	  string versaoLicenca(string CNPJ, string licenca), retorna "versão 1.x", "versão 2.x" ou "versão desconhecida"
+
+-----------------------------------------------------------------------------------------------------------
+2010/04/30 - v 0.3 - alterações/correções:
+
+        . alteração para devolução da data e hora de autorização de uso no formato do projeto da NF-e yyyy-MM-ddThh:mm:ss
+        . devolução do número do protocolo e data de autorização parâmetro nroRecibo: formato: nnnnnnnnnnnnnnn dd/mm/aaaa hh:mm:SS
+          >> Número do protocolo da autorizção de uso : posições de 1-15;
+          >> data da autorização de uso.: posições de 17-26;
+          >> hora da autorização de uso.: posições de 28-35.
+        . correção na montagem das mensagens de erro para evitar o erro: Índice (baseado em zero) deve ser maior ou igual a zero e menor que o tamanho da lista de argumentos...
+	. implementação do CriaProcNFe2G que pode ser utilizado para montar o procNFe da versão 1.10 ou 2.00, quando não houver retorno no envio de lote ou NF-e;
+	. implementação da ConsultaCAD2G;
+        . implementação da CriaProcCancNFe2G que pode ser utilizado para montar o procCancNFe da versão 1.10 ou 2.00, quando não houver retorno do chamada do cancelamento de NF-e;	
+
+-----------------------------------------------------------------------------------------------------------
+2010/05/28 - v 0.4 - alterações/correções:
+
+        . alteração da chamada do BuscaNFe2G/BuscaLote2G para informar a siglaWS para contornar o problema da SEFAZ/BA que está devolvendo o número do recibo fora de padrão do projeto indicando o número do autorizador diferente de 0/1, se a siglaWS não for informada a DLL pega a siglaWS com base na informação do número do recibo.
+        . correção do ws2.xml com a reinclusão das URL do RS, RO e correção da url do WS de recepção do SCAN-Homologação;
+        . correção na formatação do telefone do emitente/destinatário para não ficar com zeros à esquerda;
+
+-----------------------------------------------------------------------------------------------------------
+
+2010/06/16 - v 0.4a - alterações/correções:
+
+        . atualização dos schemas XML para a PL_006f (NT 2010/004);
+        . correção para criar a tag do email do destinatário;
+        . alteração para aceitar vazio no CNPJ do local de retirada e no local de entrega;
+        . correção para gerar as tagas xPed e nItemPed do grupo prod
+
+-----------------------------------------------------------------------------------------------------------
+2010/07/02 - v 0.5 - alterações/correções:
+
+        . correção da geração do grupo NFrefP para gerar a tag IE;
+        . correção da montagem do grupo comb2G para gerar a tag UFCons e exclusão da tag orfã <ICMSCons>;
+        . alteração na ordem dos parâmetros XML e resultado na funcionalidade Txt2XML;
+        . alteração para gerar as tags qBCProd e vAliqProd para PIS/COFINS se valores forem igual a 0 e CST=99, conforme orientação de preenchimento para emissor optante do Simples Nacional - NT 2009/004
+        . acréscimo das url de homologação do CE no arquivo ws2.xml;
+        . acréscimo das url de produção de GO no arquivo ws2.xml;
+        . acréscimo das url de produção de MG no arquivo ws2.xml;
+        . correção da geração do grupo de imposto quando existir ISSQN para que seja mutuamente exclusivo com ICMS, IPI e II;
+        . atualização dos schemas XML com o PL_006g e PL_005f (NT 2010/005).
+
+-----------------------------------------------------------------------------------------------------------
+2010/07/10 - v 0.5a - alterações:
+
+       . alteração das funcionalidades PIS, COFINS e TXT2XML para permitir a informação dos novos CST de PIS/COFINS da IN RFB 109/2010
+
+-----------------------------------------------------------------------------------------------------------
+2010/07/13 - v 0.5b - alterações:
+
+       . alteração da ordem de criação do grupo DI no item do produto.
+       . correção do tamanho do campo cSelo do grupo IPI que estava sendo truncado indevidamente em 1 dígito
+       
+-----------------------------------------------------------------------------------------------------------
+2010/08/03 - v 0.5c - alterações:
+
+       . alteração a validação da hSaiEnt
+       . alteração para consumir os WS do 2G do MT em Windows Vista/7
+       . correção na mensagem de erro de número da NF-e inválida no criaChaveNFe
+       . correção no preenchimento do CNPJ quando CNPJ e CPF forem vazios no Local de Entrega/Local de Retirada.
+
+-----------------------------------------------------------------------------------------------------------
+2010/10/12 - v 0.6 - alterações:
+
+       . implementação da funcionalidade TXT2XML2G;
+       . correção da forma criação do grupo de imposto;
+       . correção para o CST de PIS/COFINS não ficar com 99 quando informa com os novos CST da IN 109/2010;
+       . correção para montar o vIRRF no tributo retido;
+       . alteração para aceitar a tag InfAdicProd diretamente na montagem do det.
+
+
+-----------------------------------------------------------------------------------------------------------
+2010/10/15 - v 0.6a - alterações:
+
+       . correção para trocar o [,] por [.] no vUnCom, vUnTrib, qTrib e qCom;
+       . correção no tratamento do CST 40,41 e 50 na funcionalidade TXT2XML2G;
+       . correção no tratamento do infAdProd quando não informado;
+       . correção no tratamento de item de produto que tem ISSQN.
+
+
+-----------------------------------------------------------------------------------------------------------
+2010/10/19 - v 0.6b - alterações:
+
+       . correção para atualizar o cNF e o cDV nos casos em que a DLL cálcula o cNF;
+       . correção no criaProcCancNFe2G para aceitar protocolo de cancelamento na versão 1.07.
+
+-----------------------------------------------------------------------------------------------------------
+2010/12/05 - v 0.6c - alterações:
+ 
+       . correção no tratamento da geração da tag dSaiEnt que estava exigindo a informação do hSaiEnt indevidamente.
+       . correção no tratamento do erro 6403 no buscaNFe2G - tipoAmbiente informado divergente do tpAmb da nota fiscal informada;
+       . correção da geração grupo ide para gerar a tag dSainEnt que estava exigindo idevidamente a informação da tag hSaiEnt;
+       . correção da validação da faixa do nECF do grupo ECF referenciado para aceitar 1-999999;
+       . correção da validação para aceitar nDI com conteúdo caractere;
+       . atualização do arquivo de url da versão 2.00 (ws2.xml), com as seguintes alterações:
+          . 09/11/2010 - acrescimo da URL do CE - ambiente de producao;
+          . 09/11/2010 - acrescimo da URL de PE - ambiente de homologacao;
+          . 19/11/2010 - acrescimo da URL do SVAN para PE - ambiente de producao;
+          . 22/11/2010 - acrescimo da URL do PR - ambiente de homologacao;
+          . 01/12/2010 - acrescimo das URL do MS - ambientes de homologação e produção;
+          . 05/12/2010 - acrescimo das URL do AM - ambientes de homologação e produção.
+
+
+2010/12/28 - v 0.6d - alterações:
+ 
+       . correção da montagem do item que tem somente ISSQN;
+       . correção na validação do nDI e a identificação dos campos nas mensagens de erros do grupo DI e adi;
+
+2011/04/08 - v 0.6e - alterações:
+
+       . tratamento do bug txt/plain da SEF/MG
+       . gravação da NF-e no log do erro do EnviaNFe2G
+       . correção da validação registro L1 do txt2XML2G - UFCons
+       . correção da criação da tag qTemp quando o valor for = 0
+
+2011/05/15 - v 0.6f - alterações:
+
+       . alteração da forma de consumir o Web Services da versão 2G;
+
+
+2011/05/31 - v 0.7 - alterações:
+
+       . funcionalidade XML2Txt - conversão de XML da NF-e para TXT;
+       . funcionalidade enviaEmail - envia e-mail;
+       . funcionalidade enviaCCe - Carta de Correção;
+       . possibilidade de utilizar o certificado digital diretamento do arquivo pfx;
+       . aperfeiçoamento da validação do XML para mostrar o conteúdo da tag com problema de preenchimento;
+       . funcionalidade para leitura de arquivo UTF8/ANSI em codificação ANSI;
+       . controle de versão do arquivo ws2.xml;
+       . melhoria da funcionalidade da versão para retornar a versão do arquivos ws2.xml.
+
+2011/06/26 - v0.7a - alterações:
+
+       . correção do conversão em TXT do grupo ICMSSN202 - conversão do XML em TXT
+       . correção do x25a vazio - conversão do XML em TXT
+       . correção da montagem do W17 - ISSQNtot - conversão do XML em TXT
+       . correção do montagem do Z10 - procRef - conversão do XML em TXT
+       . correção da geração da hora em UTC - EnviaCCe
+       . correção para não gerar o nItemPed com valor = 0 - geração do XML da NF-e.
+       . acréscimo do parâmetro SMTPSLL para indicar a necessidade conexão SSL EnviaEmail
+       . alteração para aceitar a versão 2.01 na consulta status do protocolo da NF-e
+
+2011/07/05 - v0.7b - alterações:
+
+       . alteração para permitir a não informação do usuário e senha no proxy;
+       . correção para não buscar o certificado digital no CSP do Windows na funcionalidade EnviaNFe2G quando for utilizado o arquivo pfx;
+       . correção da funcionalidade de validação da versão - verLic;
+       . correção da verficação do BOM no ValidaXML quando o tamanho do XML for menor que 5 caracteres;
+       . acréscimo das URL da CC-e da BA, GO, MG e SVAN.
+
+2011/09/05 - v0.8 - alterações:
+
+       . acréscimo da geração do DANFE
+       . acréscimo da envio da capa de lote
+       . acréscimo da funcionalidade para montar lote de NF-e
+       . acréscimo da funcionalidade recuperar protNFe da resposta da SEFAZ
+       . acréscimo da funcionalidade de montagem do procNFe
+       . acréscimo da funcionalidade UPLoad - walmart
+       . alteração da mensagem de erro 5203 para informar o WS para qual inexiste url
+       . acréscimo de novos parâmetros na funcionalidade EnviaEmail:
+          .. HTML = "0" ou "1" (não/sim)
+          .. confirmacao = "0" ou "1" (não/sim)
+       . alteração da funcionalidade PegaDadosCertificado para aceitar arquivo pfx e pfx em base64
+       . correção da montagem de infCpl no TXT2XML2G para aceitar texto > 256 caracteres
+       . correção do tratamento quando o nomeCertificado informado for inválido na CC-e
+       . correção para retornar 5901 quando o DPEC for montado corretamente
+
+2011/09/19 - v0.8a - alterações:
+
+       . correção para informar CSOSN do 101 no XML2TXT
+       . correção para gerar a linha X05|CPF| quando o transportador for pessoa física no XML2TXT
+       . correção para forçar a impressão do quadro fatura e/ou ISSQN se houver informação, mesmo que o emissor tenha indicado para não imprimir
+       . aperfeiçoamento para permitir a omissão da impressão dos dados do emitente
+	   . funcionalidade de geração do XML
+          .. alteração do tamanho máximo do campo placa para 7 caracteres
+          .. alteração do tamanho máximo do campo nEmp para 22 caracteres
+          .. alteração do tamanho máximo do campo nDI para 12 digitos
+          .. alteração para tornar o CEP do emitente como informação obrigatório
+          .. acréscimo do valor 8 no rol de valores válidos para o campo motDesICMS
+
+2011/10/15 - v0.8b - alterações:
+
+       . correção para impressão do local de retirada/local de entrega no quadro de informações complementares;
+       . alteração para fazer a chamadas do WS via proxy do windows;
+       . alteração para imprimir o PDF na impressora [IMPRIMIR=n], onde n é o número de vias;
+       . alteração para imprimir o CSOSN no lugar do CST no cabeçalho do item do produto;
+       . alteração para imprimir somente a literal "FATURA" nos dados da fatura;
+       . correção da formatação da IE da BA na impressão DANFE;
+       . correção do processo de validação da assinatura digital;
+
+2011/10/26 - v0.8c - alterações:
+
+      geraDANFE - Novos parâmetros:
+
+      . Parâmetro origemDadosEmissor, valores válidos:
+
+        . sem conteúdo - se o parâmetro for informado com vazio, os dados de identificação do emissor serão obtidos do XML da NF-e;
+        . nome de arquivo - se informado com um nome de arquivo, a imagem do arquivo informado irá ocupar o quadro de identificação do emitente. A imagem deve ser um arquivo jpg de 339 x 114 pixels que deverá ter os dados cadastrais do emitente da NF-e, pois a imagem irá ocupar todo o quadro do emissor.
+        . impresso personalizado - informe [SEM DADOS EMITENTE] para omitir os dados do emitente ou informe [SEM QUADRO EMITENTE] para omitir o quadro (moldura e dados do emitente);
+
+      . Parâmetro gravaPDF, valores válidos:
+
+        . nomeArquivo -> grava PDF com nomeArquivo se existir apenas o nomeArquivo no parâmetro;
+        . [NFeId.PDF] -> grava arquivo com nome = chave de acesso da NF-e;
+        . [SEM COLUNA DESCONTO] -> não gera a coluna de desconto;
+        . [RODAPE=texto do rodape] -> imprime o "texto do rodape" informado no RODAPE;
+        . [PASTA=] -> indica a pasta de gravação do PDF;
+        . [VISUALIZAR] -> indica visualização da PDF;
+        . [ARQUIVO=nomeArquivo] -> grava o PDF com o nome indicado;
+        . [COM FATURA] -> indica que os dados da fatura devem ser impressos em informações adicionais;
+        . [MENSAGEM=texto da mensagem] -> imprime o "texto da mensagem" informado no corpo do DANFE;
+        
+       . correção da formatação da IE da MT na impressão DANFE;
+       . impressão dos dados da data e hora da contingência e justificativa no quadro de informações complementares;
+       . tratamento de bug de quebra de linha que ocorre quando o caractere de fim linha é traço (-);
+      
+      alteração no retorno da funcionalidade montaProcNFe:
+      . ordem dos parâmetros de retorno;
+      . acréscimo do e-mail do destinatário;
+      . os parâmetros são de tamanho fixo (posicionais) com exceção do XML do procNFe que continua variável
+      . parâmetro de retorno e tamanho do campo:
+        . chave da NF-e  -  44;
+        . cStat          -   3;
+        . xMotivo        - 255;
+        . tpAmb          -   1;
+        . verAplic       -  20;
+        . dhRecbto       -  19;
+        . nProt          -  15;
+        . digVal         -  28;
+        . email          -  60;
+        . XML            -  (tamanho variável, se a nota for rejeitada volta <NFe>NF-e rejeitada</NFe>)
+
+
+2011/10/27 - v0.8d
+
+      . coreeção da XML2TXT, para gerar o registro S09 ao invés do S10 quando o CST=99 para COFINS;
+      . correção da inconformidade da funcionalidade de inutilização de numeração que estava enviando o pedido de inutilização em duplicidade, resultando sempre em rejeição com cStat 563 - Rejeicao: Ja existe pedido de Inutilizacao com a mesma faixa de inutilizacao.
+      . versões afetadas pela inconformidade: v0.8b e v0.8c;
+      . consequência da inconformidade: a inutulização será homologada pela SEFAZ, mas como ocorreu o envio em duplicidade do pedido de inutilização, o resultado da chamada da inutilização será sempre 563 -  - Rejeicao: Ja existe pedido de Inutilizacao com a mesma faixa de inutilizacao é não será possível de obter o protocolo de homolgação da inutilização.
+      
+       Como corrigir o problema: substituição da DLL com problema ou atualização por uma versão 2G0.8d.
+       
+       
+2012-01-03 - v0.8e
+
+      . correção na montagem do grupo PISOutr e COFINSOutr que estavam ficando vPIS e vCOFINS =0;
+      . correção da buscaDadosCertificado quando for o nomeCertificado for informado com arquivo no enviaNFe2G;
+      . alteração para não validar o certificado digital do WS
+      . alteração na forma de obter o path de execução da DLL;
+      . correção no tratamento de erro na chamada do WS de consulta situação da NF-e e no envio da CC-e;
+      . alterações / correções no geraPDF:
+            . tratamento de impressão de caracteres especiais na descrição do produto;
+            . tratamento das notas fiscais referenciadas (cupom fiscal, NF-e, CT-e, NF, NF produtor);
+            . parâmetro gravaPDF, valores válidos:
+                 . [OBSCONTRIBUINTE] - imprime observações do contribuinte;
+   	 . [OBSFISCO] - imprime observação do fisco;
+                 . [QUADROPRODUTO] - imprime o quadro de produto por inteiro, mesmo que não existam itens suficientes;
+                 . b, l, t e z para forçar o uso do separador mesmo que o item de produto não ocupe duas linhas;
+            . alteração da literal de compras públicas;
+            . o caracterere ; nas infCpl é substituído por quebra de linha;
+            . alteração da forma de imprimir / mostrar o PDF;
+
+2012-05-16 - v0.9
+
+    . correção do decodeBase64;
+    . correção na recuperação nLacre na montagem do registro X33 na funcionalidade XML2Txt;
+
+    . parametrização das seguintes funcionalidades:
+      - gravação do log de erro -> tag [gravaLog] do ws2.xml;
+      - validação do Certificado Digital do WS -> tag [validaCertificadoWS] do ws2.xml;
+
+    . correções/aperfeiçoamento no geraPDF:
+
+       - correção da montagem do código de barras adicional para NF-e de exportação;
+    
+       - aperfeiçoamento para permitir a quebra de linha nas informações adicionais do produto e possibilidade de informar o string utilizado para indicar a quebra de linha
+
+         [SALTALINHA=;] -> indica ";"  como identificador de quebra de linha
+         [SALTALINHA=*/*] -> indica "*/*"  como identificador de quebra de linha 
+                 
+         O caractere ";" é o caractere padrão para identificador de quebra de linha e tem efeito mesmo que o [SALTALINHA=;] seja omitido.
+
+      
+       - aperfeiçoamento do tamanho da entrelinha na texto do recibo do DANFE e eliminação do negrito;
+       - possibilidade da DLL gerar a informação "BC ICMS-ST: 999,99 / ICMS-ST: 99,99" no detalhe do produto quando existir vBCICMSST / vICMSST no item e existir [MOSTRARICMSST] no parâmetro gravaPDF;
+       - possibilidade de personalizar a cor do zebrado informando a [CORSOMBREADO=#808080] no parâmetro gravaPDF, exemplo de cores ( HTML color - http://www.w3schools.com/html/html_colors.asp  ) :
+       
+          gray       = #808080 - cor default utilizada pela DLL
+          darkgray   = #A9A9A9
+          silver     = #C0C0C0
+          lightgray  = #D3D3D3
+          gainsboro  = #DCDCDC
+          whitesmoke = #F5F5F5;
+          
+       - impressão da expressão "DANFE em Contingência - impresso em decorrência de problemas técnicos" no corpo do DANFE quando o tpEmis= 2 ou 5;
+       - quem desejar ter uma melhor resolução do logo, pode informar um logo com mais detalhes aumentando o tamanho do arquivo, o aumento deve ser proporcional na altura e largura, ex.: dobrar a quantidade de pontos 339 x 114 -> 678 x 228
+       - tratamento para a placa do veículo e o município do transportador não exceder o respectivo quadro;
+       - tratamento para colocar a tarja de NF-e denegada;
+       - tratamento da quebra de linha das informações adicionais do produto;
+       - tratamento da impressão da duplicatas quando a quantidade for maior que 12 duplicatas;
+       - tratamento da quebra de página na montagem das infAdProd;
+       - acréscimo da forma de pagamento "PAGAMENTO À VISTA" e "OUTROS" no quadro Fatura/Duplicatas;
+       - tratamento para informar "1-Destinatário" para operação de saída ou "1-Remetente" na operação de entrada no quadro modalidade do frete.
+       - tratamento para impressão de uTrib, qTrib e vUnTrib quando uTrib diferente de uCom;
+       - repetição do texto informado em [RODAPE=] em todas as páginas.
+       - repetição do texto informado em [MENSAGEM=] em todas as páginas
+       - tratamento para expressão "SEM VALOR FISCAL" ficar contida no quadro Dados Adicionais
+       - possibilidade de informar a quantidade de casas decimais do vUnTrib - [vUnTribDEC=4] (0-10 decimais)
+       - possibilidade de informar a quantidade de casas decimais do qCom    - [qComDEC=4]    (0-4 decimais)
+       - possibilidade de informar a quantidade de casas decimais do qTrib   - [qTribDEC=4]   (0-4 decimais)
+       - correção para mostrar o CEP do emissor;
+       - possibilidade de utilizar o SumatraPDF para impressão do DANFE - [SumatraPDF], necessário ter o SumatraPDF na pasta da aplicação - http://blog.kowalczyk.info/software/sumatrapdf/free-pdf-reader-pt.html
+       - correção no tratamento da geração do DANFE, quando selecionado a opção de visualizar e gravar o DANFE;
+       - tratamento para mostrar as espécies, marca e numeração dos volumes em informações complementares, quando existir mais de uma espécie de volume;
+       - possibilidade de customizar a impressão dos dados do emissor quando informar o arquivo de logo, exemplo de parâmetro:
+          [DadosEmissor=<DadosEmissor><Item><cxMM>39</cxMM><cyMM>7</cyMM><fonteMM>2,7</fonteMM><texto>MRM KATO ASAKURA EPP</texto></Item><Item><cxMM>10</cxMM><cyMM>16</cyMM><fonteMM>2,5</fonteMM><texto>Av. Altino Arantes 131, 14º andar - sala 145</texto></Item><Item><cxMM>15</cxMM><cyMM>20</cyMM><fonteMM>2,2</fonteMM><texto>CEP: 19.900-030 - Centro - Ourinhos/SP</texto></Item><Item><cxMM>14</cxMM><cyMM>24</cyMM><fonteMM>2,2</fonteMM><texto>Tel: (14)-3302-1000 - fax: (14)-3302-2000</texto></Item><Item><cxMM>22</cxMM><cyMM>28</cyMM><fonteMM>2,2</fonteMM><texto>suporte@www.flexdocs.com.br</texto></Item></DadosEmissor>]
+          
+         <DadosEmissor>
+              <Item>
+                 <cxMM>39</cxMM>                          <==== posição x em MM 
+                 <cyMM>7</cyMM>                           <==== posição y em MM
+                 <fonteMM>2,7</fonteMM>                   <==== tamanho do fonte em MM
+                  <texto>MRM KATO ASAKURA EPP</texto>     <==== texto a ser impresso
+                 </Item>
+           </DadosEmissor>
+
+            O texto "MRM KATO ASAKURA EPP" será gerado com fonte 2,7 mm na coordenada 39mm , 7 mm do quadro dos dados do emitente.
+
+      . alteração para aceitar a literal ISENTO na inscrição do produtor rural da nota fiscal referenciada do produtor rural no leiaute do TXT;
+      . alteração na forma de obter o path de execução da DLL, correção para tratar erro quando não for possível recuperar o path na nova forma.
+      . possibilidade de informar a quantidade de casas decimais do vUnCom - [vUnComDEC=4] no gravaPDF
+      . correção da montagem da tag vServ do Retenção do ICMS do transportador para ficar com 2 decimais;
+      . alteração para aceitar uma lista de e-mail na BCC no envEmail;
+      . correção da URL do WS de Capa de Lote;
+      . alteração da forma da chamada do WS de Evento do GO para não utilizar a classe proxy do c#
+      . acréscimo das seguintes funcionalidades:
+
+        int ftpUpload(string servidorFTP, string nomeArquivoRemoto, string nomeArquivoLocal, string usuario, string senha, out string msgResultado);
+        int ftpDownload(string servidorFTP, string nomeArquivoRemoto, string nomeArquivoLocal, string usuario, string senha, out string msgResultado);
+
+
+2012-06-24 - v0.9a
+
+ . alteração para utilizar a versão 2.01 da consulta status da NF-e para montagem do criaProcNFe2G e criaCancNge2G
+ . alteração para não validar o certificado digital do servidor de e-mail no caso de envio seguro (SSL)
+ . alteração para não gerar as tags vBCSTRet e vICMSRet
+ . correções/aperfeiçoamento no geraPDF:
+
+    - aperfeiçoamento no posicionamento das informações das duplicatas para comportar valores até R$ 99.999.999,99
+    - acréscimo de aspas no path do arquivo para chamada do SumatraPDF
+    - correção para só acrescentar o vUnTrib, qUnTrib e uTrib se a diferença entre o vUnTrib e vUnCom > 0.05
+    - [AltQuadroRECIBO=n] , onde n >= 18 e <= 40 - para permitir a personalização da altura do quadro do Recibo
+    - [MarcaDagua=xml], permite acrescentar imagens no DANFE, informar um XML com pelo menos um item:
+
+       <MarcaDagua>
+           <Item>
+                 <cxMM>100</cxMM>       // coordenada x (centro da imagem)
+                 <cyMM>150</cyMM>       // coordenada y (superior)
+                 <imagem>c:\alemao.jpg</imagem>
+                 <largMM>100</largMM>
+                 <altMM>100</altMM>
+            </Item>
+        </MarcaDagua>
+ 
+           7915 - Erro: Falha no processo de tratamento do MarcaDagua =[{0}], examine a mensagem de erro do Windows: [{1}]
+           7916 - Erro: Arquivo de imagem:[{0}] não localizado
+           7917 - Erro: Falha na leitura do arquivo de imagem:[{0}], examine a mensagem de erro do Windows: [{1}]
+ 
+2012-06-28 - v0.9b
+
+. alteração para utilizar a versão 2.01 da ConsultaNF2G quando a versao informada pelo usuário fo 2.00
+
+2012-07-27 - v0.9c
+
+. correções/aperfeiçoamento no geraPDF:
+  . aperfeiçoamento para converter o XML com representação UTF-8 em ANSI para evitar a apresentação de incorreta de caracteres especiais;
+  . correção para mostrar os dados de da unidade e valor tributável quando o valor tributável for diferente do valor de comercialização;
+  . aperfeiçoamento para criar o quadro de continuação das informações complementares no corpo do DANFE e eliminiação do --->continua... e --->continuação;
+  . alteração da forma de quebrar o texto das informações complementares para evitar o uso da funcionalidade do Reports.dll que elimina os caracteres de underline (_) do texto;
+  . aperfeiçoamento para uso de fonte de tamanho variável para a quantidade de volumes.
+  . aperfeiçoamento para formatar telefone celular de 11 dígitos.
+
+. tratamento para pegar propriedade de certificado digital que não tenha CNPJ/CPF
+. tratamento para não informar o usuário para envio de e-mail quando o parâmetro usuário for informado com "NIHIL"
+. alteração do time-out do EnvEmail para 180000ms
+. tratamento para não abrir a caixa de diálogo quando a DLL for utilizada como serviço.
+
+2012-07-31 - v1.0 - ATUALIZAÇÃO DE VERSÃO, NECESSÁRIO ATUALIZAÇÃO ONEROSA PARA TROCA DE NOVA LICENÇA DE USO
+
+. Novas funcionalidades da Manifestação do Destinatário
+  . EnviaManDest - envio do evento de Manifestação do Destinatário
+  . ConsultaNFDest - consulta das NF-e emitidas para um destinatário
+  . DownloadNFWS - download de NF com ciência da operação ou confirmação de recebimento via WS
+  
+. Funcionalidade para agilizar o download da NF-e no Portal Nacional.
+
+2012-08-08 - v1.0 - ajuste para aceitar ambiente de produção nas novas funcionalidades.
+2012-08-09 - v1.0 - ajuste para aceitar procNFe sem compactação do download do WS do AN
+2012-08-10 - v1.0 - correção para mostrar a cor do veículo no DANFE
+2012-08-11 - v1.0 - correção das URL do ambiente de produção da manifestação do destinatário do AN com acréscimo de www na URL
+
+2012-08-17 - v1.0a - tratamento do cStat= 150-uso autorizado fora de prazo e do cStat=151-cancelamento fora do prazo na BuscaNFe2G e CriaProcNFe2G e CriaProcCancNFe2G
+2012-08-20 - v1.0a - correção da validação da licença no EnvioNFe2G
+2012-08-20 - v1.0a - possibilidade de realizar o cancelamento como Evento, informando "1.00" no parâmetro versao.
+
+2012-08-29 - v1.0b - aperfeiçoamento da validação da chave da NF-e e inexistência da NF-e no download Web
+
+			8011 - Cancelado pelo Usuário
+			8012 - Nenhum documento foi localizado para a chave de acesso.
+			8013 - O Código UF informado na chave de acesso é inválido.
+			8014 - A Data de Emissão informada na chave de acesso é inválida.
+			8015 - O CNPJ informado na chave de acesso é inválido.
+			8016 - O Modelo informado na chave de acesso é inválido (diferente de 55).
+			8017 - Chave de acesso inválida: [{0}]. A chave de acesso deve ter 44 dígitos.
+			8018 - Dígito verificador da Chave de Acesso inválido. Verificar o número da chave de acesso e digitá-lo novamente.
+			8019 - Erro desconhecido na requisição de download da NFe, resposta do Portal: [{0}]
+
+2012-08-30 - v1.1 - acréscimo da funcionalidade InutilizaNroNF2G_xBase com 20 parâmetros para contornar limitação da quantidade de parâmetros do xBase++
+2012-08-31 - v1.1 - correção na montagem do procNFe no DownloadNFWS
+2012-09-02 - v1.1 - correção no tratamento das mensagens de rejeição do download do Ambiente Nacional
+                    alteração para tentar corrigir o erro: the server committed a protocol violation. section=responsestatusline
+2012-09-10 - v1.1 - correção do TXT do retorno da CC-e na consultaNFDest
+2012-09-12 - v1.1 - alteração para uso da versão 1.0 no http do downloadNFWeb
+2012-09-13 - v1.1 - correção do tratamento das informações complementares quando não existir informação
+2012-09-19 - v1.1 - correção no tratamento dos valores totais do ISSQN no geraPDF
+2012-09-26 - v1.1d - correção da URL do WS de recepção de evento do AN de produção que estava com "ww" ao invés de "www" causando erro em alguns ambientes
+2012-10-03 - v1.1e - aperfeiçoamento para não gerar os grupos dup e vol quando não existir tag filho, exemplo: <dup></dup> e <vol></vol> não serão mais geradas.
+                   - atualização dos schemas XML PL_006n - NT 2012/003 - http://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=kE5icVGPKoo=
+                   
+2012-10-26 - v1.1f - atualização do schema XML da ConsultaSitNFe_v2.01.xsd para permitir a validação de resposta que tenham eventos/necessário para montagem do procNFe de NF-e que tenham eventos vinculados
+                   - alteração para não gerar a tag CODIF quando o conteúdo for = 0.
+                   - alteração para consumir o WS de Consulta Cadastro DF da versão 2.00 que é um hibrído da versão anterior e SOAP Action proprietário.
+                   - correção na forma de pegar o nome do titular do certificado digital.
+                   - correção para gerar o procEvento em caso de cancelamento fora do prazo (cStat=155)                   
+                   
+                   
+2012-11-28 - 1.2 - disponibilização de chamadas para consumo do WS da GNRE Online
+
+        int EnviaGNRE(int tipoAmbiente, string nomeCertificado, string versao, ref string msgDados, out string msgRetWS, out string msgResultado, out string nroRecibo, out string dhRecibo, out string tEstProc, string proxy, string usuario, string senha);
+
+			ambiente 1 ou 2, a DLL está consumindo o ambiente de produção em ambos os casos;
+			nomeCertificado
+			msgDados -> XML com o lote de até 50 guias (GNRE)
+
+			retorno da chamada =  código de retorno do WS
+			descricao = descrição do retorno do WS
+			nroRecibo = número do recibo de entrega do lote
+			dhRecibo = data e hora da entrega do lote
+			tEstProc = tempo estimado para processamento do lote em ms
+
+        string BuscaGNRE(int tipoAmbiente, string nomeCertificado, string versao, out string msgDados, out string msgRetWS, string nroRecibo, out int cStat, out string msgResultado, string proxy, string usuario, string senha)
+
+			parâmetros da chamada:
+			ambiente 1 ou 2, a DLL está consumindo o ambiente de produção em ambos os casos;
+			nomeCertificado
+			nroRecibo do lote a ser consultado
+
+			retorno da chamada = resposta do WS de acordo com o Layout_GNRE_Lote_Retornov8.pdf
+			cStat = código de retorno do WS
+			descricao = descrição do retorno do WS
+     
+        string ConsultaConfigGNRE(int tipoAmbiente, string nomeCertificado, string versao, out string msgDados, string UF, string receita, out int cStat, out string msgResultado, string proxy, string usuario, string senha)
+
+			parâmetros da chamada:
+			ambiente 1 ou 2, a DLL está consumindo o ambiente de produção em ambos os casos;
+			nomeCertificado
+			UF -> sigla da UF consultada
+			receita -> código da receita que se deseja consultar, inforamr 100056C caso deseje as configurações específicas de Courier para a receita 100056
+			cStat = código de retorno do WS
+			descricao = descrição do retorno do WS
+
+			retorno estrutura XML contendo as configurações da UF informada
+
+      . atualização do pacote de schemas XML para PL_006p ->
+      . acréscimo da URL do WebService de recepção de evento de cancelamento para o SCAN; 
+      . acréscimo da funcionalidade CancelaNFEvento que permite informar a data e hora do Evento;
+
+      . string CancelaNFEvento(string siglaWS, int tipoAmbiente, string nomeCertificado, string versao, out string msgDados, out string msgRetWS, out int cStat, out string msgResultado, string chaveNFe, string nProtocolo, string justificativa, string dhEvento, out string nProtocoloCanc, out string dProtocoloCanc, string proxy, string usuario, string senha, string licenca);
+
+      . aperfeiçocamento para aceitar a omissão da data e hora do evento no enviaCCe, envManDest e CancelaNFEvento. Em caso de omissão da data hora do evento, será utilizado a hora do equipamento. 
+      . alteração para permitir a chamada da DLL por aplicações Partially Trusted -> [assembly: System.Security.AllowPartiallyTrustedCallers]
+      . atualização para aceitar os novos valores do orig do CST - NT2012/005;
+      . atualização do schema XML para PL_006q (26-11-2012) para aceitar os novos valores do orig do CST - NT2012/005;
+      . correção na forma de recuperar o nome do titular e do emissor do certificado digital;
+ 			
+
+2012-12-28 - 1.2a - alteração das URL do WS de download de NF-e do Ambiente Nacional
+                  - alteração da ordem de geração das informações complementares do DANFE para que o infAdFisco apareça antes de infCpl
+
+2013-01-02 - 1.2c - versionamento da DLL para corrigir a versão de identificação da DLL para 1.2c (1.2.3.0), pois a versão de identificação ficou incorreta nas versões anteriores 1.2a (1.2.1.0) e 1.2 (1.2.2.0);
+
+2013-04-17 - 1.2d - possibilidade de informar [SEMDADOSVEICULOSNOVOS] no parâmetro gravaPDF para omitir os dados do grupo de veículos novos
+                    possibilidade de informar [FSSEMESTAMPAFISCAL] no parâmetro gravaPDF para não omitir o quadro de RESERVADO AO FISCO
+                    alteração para omitir a literal Nota de Empenho/ Contrato/ Pedido do quadro de informações adcionais do DANFE quando os campos não forem informados no grupo de compras
+                    acréscimo das URL do ambiente de homologação da GNRE
+                    acréscimo da chamda produto2GItem que aceita string no parâmetro nItemPed
+                    alteração para aceitar o '' do Delphi no parâmetro receita da chamada: ConsultaConfigGNRE
+                    correção para tratar o proxy nas funcionalidades ConsultaNFDest, DownloadNFWS e EnviaManDest                  
+                    tratamento para permitir a omissão das informações do grupo compras
+		    aperfeiçoamento para aumentar a margem direito nos valores de duplicata menor que 1 milhão
+
+2013-05-03 - 1.3
+
+  . novas funcionalidades para permitir a geração da tag vTotTrib:
+
+        string imposto2GNovo(double _vTotTrib, string _icms, string _ipi, string _ii, string _pis, string _pisst, string _cofins, string _cofinsst, string _issqn);
+
+        string totalICMSNovo(double vBC, double vICMS, double vBCST, double vST, double vProd, double vFrete, double vSeg, double vDesc, double vII, double vIPI, double vPIS, double vCOFINS, double vOutro, double vNF, double vTotTrib);
+
+  . alteração no leiaute TXT para permitir a geração da tag vTotTrib:
+
+        M|vTotTrib|
+
+        W02|vBC|vICMS|vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib|
+
+  . alteração no geraPDF para acrescentar a coluna Valor Aproximado de Tributos e campo no Grupo Total do ICMS quando houver valor.
+
+        - acréscimo do parâmetro "[COLUNAVALORTRIBUTO]" - mostrar a coluna Valor Aproximado de Tributos e campo no Grupo Total do ICMS, mesmo quando não houver informação.
+
+  . atualização do schema XML para PL_006r
+ 
+  . correção do valor da nDI que estava sendo carregado com dDesemb no XML2Txt
+
+
+2013-07-02 - 1.3a
+  
+ . acréscimo do parâmetro [QUEBRADADOSVEICULOSNOVOS] para possibilitar a inserção de linha nas informações de Veiculos Novos (grupo veicProd)
+ . eliminação do download da NF-e via portal da SEFAZ/SP - todos os download serão tentados no portal nacional
+ . alteração para não gravar o log quando cStat=137 no ConsultaNFDest
+ . novos parâmetros do geraPdfDANFE
+
+   [NAOGERARZEROSICMS] - possibilitar a não impressão de 0,00 e 0 do BC ICMS, VALOR ICMS e Aliq ICMS quando os valores forem zero
+   [NAOGERARZEROSIPI] - possibilitar a não impressão de 0,00 e 0 do VALOR IPI e Aliq IPI quando os valores forem zero 
+   [NAOGERARENDERECOENTREGA] - possibilidade de não gerar os dados do local de entrega
+   [NAOGERARENDERECORETIRADA] - possibilidade de não gerar os dados do local de retirada
+
+2013-08-06 - 1.4
+
+ . atualização do schema XML para PL_006s (nFCI e orig=8);
+ . alteração para aceitar o orig = 8 na funcionalidade geração do XML a partir do TXT;
+ . alteração para aceitar o nFCI no Txt2XML2G
+     I|CProd|CEAN|XProd|NCM|EXTIPI|CFOP|UCom|QCom|VUnCom|VProd|CEANTrib|UTrib|QTrib|VUnTrib|VFrete|VSeg|VDesc|vOutro|indTot|xPed|nItemPed|nFCI|
+ . acréscimo da nova funcionalidade para permitir a geração do nFCI
+ 
+   string produto2GFCI(string cProd, string cEAN, string xProd, string NCM, string EXTIPI, int CFOP, string uCom, double qCom, double vUnCom, double vProd, string cEANTrib, string uTrib, double qTrib, double vUnTrib, double vFrete, double vSeg,double vDesc, double vOutro, int indTot, string DI, string DetEspecifico, string xPed, int nItemPed, string nFCI_Opc);
+  
+  . alteração na geração do DANFE para mostrar o nFCI na descrição do produto quando for informado [MOSTRARFCI]
+  . alteração da TXT2XML para tratar o vTotTrib
+  . acréscimo do envEmail2, que possibilita informar o tempo de Timeout, o valor deve ser informado em ms, onde 1000ms corresponde a 1s, valor padrão anterior 180000ms (3 minutos)
+  
+    int EnvEmail2(string eMailRemetente, string nomeRemetente, string eMailDestinatario, string eMailBcc, string assunto, string mensagem, string arquivos, string smtpCliente, string smtpPorta, string smtpSSL, string smtpUsuario, string smtpSenha, string HTML, string confirmacao, out string msgResultado, string timeout)
+ 
+===============================================================================================================
+2INFORMAÇÕES GERAIS
+===============================================================================================================
+
+1. Alteração dos WS;
+--------------------
+
+Foram disponbilizadas as novas chamadas multi-versão (1.01, 1.07, 1.10 e 2.00) para os seguintes WS:
+
+a) enviaLote (1.10/2.00);
+b) buscaLote (1.10/2.00);
+c) consulta status da NF-e (1.07/2.00);
+d) consulta status do serviço (1.07/2.00);
+e) cancela NF-e (1.07/2.00);
+f) inutiliza Numeração de NF-e (1.07/2.00);
+g) envioNFe (1.10/2.00);
+h) buscaNFe (1.10/2.00);
+i) consultaCad (1.01/2.00); 
+
+
+Vale observar que nem todas as UF oferecem os WS em ambiente de homologação e os serviços ainda estão instáveis.
+
+
+2. Alteração do leiaute XML da NF-e;
+------------------------------------
+
+Todas a funcionalidades que criam os fragmentos dos XML foram atualizados para a versão 2.0 do leiaute da NF-e;
+Estas funcionalidaes tem o 2G no final para diferenciar, ex.:
+
+string localRetirada(string _CNPJ, string _xLgr, string _nro, string _xCpl, string _xBairro, string _cMun, string _xMun, string _UF);
+
+string localRetirada2G(string _CNPJ, string _CPF, string _xLgr, string _nro, string _xCpl, string _xBairro, string _cMun, string _xMun, string _UF);
+
+
+3. Alteração do leiaute do txt da NF-e;
+--------------------------------------
+
+A funcionalidade de conversão do TXT2XML adota o mesmo padrão do emissor gratuito da SEFAZ/SP.
+
+TXT2XML:
+
+Versão 1.10 do leiaute da NF-e: http://www.emissornfe.fazenda.sp.gov.br/docs/[Emissor_NF-e]_Manual_de_layout_TXT-NF-e_v1.1.1.pdf
+
+TXT2XML2G:
+
+Versão 2.00 do leiaute da NF-e: http://www.emissornfe.fazenda.sp.gov.br/v2/docs/[Emissor_NF-e]_Manual_de_layout_TXT-NF-e_v2.0.0.pdf 
+
+
+4. ATUALIZAÇÃO DE VERSÃO:
+-------------------------
+
+A atualização para a versão 2G é gratuita para todos os usuários que adquiriram ou ativaram a versão 1x após 30/09/2009, os demais usuários devem adquirir a atualização da DLL por R$ 30,00 por CNPJ licenciado. Caso não tenha recebido um e-mail com a relação das chaves da versão 2G para as licenças adquiridas após 30/09/2009 queira entrar em conato pelo fale conosco: wwww.flexdocs.com.br/suporte.
+
+A chave da licença de uso desta versão é distinta da versão anterior e será disponibilizada oportunamente, caso necessite utilizar a versão 2G em produção, queira solicitar a chave da licença, mas ressaltamos que a DLL ainda não foi suficentemente testada e nem existe garantia que os Web Services da SEFAZ estão estáveis também.
