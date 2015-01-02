@@ -19,7 +19,9 @@ object Fcad_Pai: TFcad_Pai
   Position = poMainFormCenter
   Visible = True
   WindowState = wsMaximized
+  OnClose = FormClose
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   PixelsPerInch = 96
@@ -79,6 +81,7 @@ object Fcad_Pai: TFcad_Pai
         Top = 1
         ParentFont = False
         Properties.CharCase = ecUpperCase
+        Properties.DropDownListStyle = lsFixedList
         Properties.Items.Strings = (
           'TODOS'
           'SIM'
@@ -773,7 +776,6 @@ object Fcad_Pai: TFcad_Pai
         Width = 60
         Height = 51
         Hint = 'Retorna para tela anterior.'
-        Cancel = True
         Caption = '&Fechar'
         LookAndFeel.Kind = lfOffice11
         OptionsImage.Glyph.Data = {
@@ -1378,7 +1380,7 @@ object Fcad_Pai: TFcad_Pai
         OptionsImage.Spacing = 0
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 0
+        TabOrder = 1
         Font.Charset = ANSI_CHARSET
         Font.Color = clMaroon
         Font.Height = -11
@@ -1393,7 +1395,6 @@ object Fcad_Pai: TFcad_Pai
         Width = 60
         Height = 50
         Hint = 'Edita os dados do registro em sele'#231#227'o.'
-        Cancel = True
         Caption = '&Fechar'
         LookAndFeel.Kind = lfOffice11
         OptionsImage.Glyph.Data = {
@@ -1530,7 +1531,7 @@ object Fcad_Pai: TFcad_Pai
         OptionsImage.Layout = blGlyphTop
         OptionsImage.Margin = 0
         OptionsImage.Spacing = 0
-        TabOrder = 1
+        TabOrder = 0
         Font.Charset = ANSI_CHARSET
         Font.Color = clMaroon
         Font.Height = -11
@@ -1562,6 +1563,7 @@ object Fcad_Pai: TFcad_Pai
       LookAndFeel.SkinName = 'Office2010Black'
       RootLevelOptions.TabsForEmptyDetails = False
       object grConsultaDBTableView1: TcxGridDBTableView
+        OnDblClick = grConsultaDBTableView1DblClick
         Navigator.Buttons.CustomButtons = <>
         OnCustomDrawCell = grConsultaDBTableView1CustomDrawCell
         DataController.DataSource = dmCad.dsClie

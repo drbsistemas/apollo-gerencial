@@ -3,13 +3,144 @@ inherited Fcad_Clientes: TFcad_Clientes
   Caption = 'Cadastro de Pessoas'
   ClientHeight = 541
   ClientWidth = 704
-  OnClose = FormClose
-  OnKeyDown = FormKeyDown
   ExplicitWidth = 720
   ExplicitHeight = 580
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel [0]
+  inherited pnCon: TPanel [0]
+    Width = 646
+    Height = 541
+    ExplicitWidth = 646
+    ExplicitHeight = 541
+    inherited pnBusca: TPanel
+      Width = 644
+      ExplicitWidth = 644
+      inherited cxConsulta: TcxComboBox
+        Properties.Items.Strings = (
+          'C'#243'digo'
+          'Raz'#227'o'
+          'Fantasia'
+          'Fone'
+          'Celular'
+          'CNPJ'
+          'CPF')
+        Text = 'C'#211'DIGO'
+      end
+      inherited cbAtivo: TcxComboBox
+        Left = 476
+        Properties.DropDownListStyle = lsFixedList
+        Properties.OnChange = cxConsultaPropertiesChange
+        Style.IsFontAssigned = True
+        ExplicitLeft = 476
+      end
+      inherited cxQtdeReg: TcxLabel
+        Left = 557
+        ExplicitLeft = 557
+      end
+    end
+    inherited pnBotaoCad: TPanel
+      Width = 644
+      ExplicitWidth = 644
+      inherited cxNovo: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxEdita: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxVer: TcxButton
+        LookAndFeel.SkinName = ''
+        OnClick = cxVerClick
+      end
+      inherited cxApagar: TcxButton
+        LookAndFeel.SkinName = ''
+        OnClick = cxApagarClick
+      end
+      inherited cxVoltar: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxPrint: TcxButton
+        LookAndFeel.SkinName = ''
+        OnClick = cxPrintClick
+      end
+    end
+    inherited pnBotaoCon: TPanel
+      Top = 490
+      Width = 644
+      ExplicitTop = 490
+      ExplicitWidth = 644
+      inherited cxCadastro: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxFechar: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+    end
+    inherited grConsulta: TcxGrid
+      Width = 644
+      Height = 415
+      ExplicitWidth = 644
+      ExplicitHeight = 415
+      inherited grConsultaDBTableView1: TcxGridDBTableView
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
+          Caption = 'Fantasia'
+          DataBinding.FieldName = 'FANTASIA'
+        end
+        object grConsultaDBTableView1Column1: TcxGridDBColumn
+          Caption = 'Fone'
+          DataBinding.FieldName = 'FONE'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column2: TcxGridDBColumn
+          Caption = 'Celular'
+          DataBinding.FieldName = 'CELULAR'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn
+          Caption = 'Cnpj'
+          DataBinding.FieldName = 'CNPJ'
+          Width = 130
+        end
+        object grConsultaDBTableView1Column4: TcxGridDBColumn
+          Caption = 'Endere'#231'o'
+          DataBinding.FieldName = 'ENDERECO'
+          Width = 200
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn
+          Caption = 'N'#186
+          DataBinding.FieldName = 'NUMERO'
+          Width = 40
+        end
+        object grConsultaDBTableView1Column6: TcxGridDBColumn
+          Caption = 'Cidade'
+          DataBinding.FieldName = 'CIDADE'
+          Width = 150
+        end
+        object grConsultaDBTableView1Column7: TcxGridDBColumn
+          Caption = 'Uf'
+          DataBinding.FieldName = 'UF'
+        end
+        object grConsultaDBTableView1Column8: TcxGridDBColumn
+          Caption = 'Bairro'
+          DataBinding.FieldName = 'BAIRRO'
+          Width = 150
+        end
+        object grConsultaDBTableView1Column9: TcxGridDBColumn
+          Caption = 'Obs'
+          DataBinding.FieldName = 'OBS'
+          Width = 1000
+        end
+      end
+    end
+  end
+  inherited pnImg: TcxImage [1]
+    Left = 646
+    Properties.GraphicClassName = 'TdxPNGImage'
+    Style.BorderStyle = ebsFlat
+    ExplicitLeft = 646
+    ExplicitHeight = 541
+    Height = 541
+  end
+  inherited pnCad: TPanel [2]
     Width = 646
     Height = 541
     BevelOuter = bvNone
@@ -39,8 +170,8 @@ inherited Fcad_Clientes: TFcad_Clientes
     end
     object eRazao: TcxTextEdit
       Tag = 1
-      Left = 122
-      Top = 148
+      Left = 97
+      Top = 133
       Hint = 'Raz'#227'o/Nome do Cliente.'
       ParentFont = False
       ParentShowHint = False
@@ -59,8 +190,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 481
     end
     object eCodigo: TcxTextEdit
-      Left = 122
-      Top = 106
+      Left = 97
+      Top = 91
       Hint = 'C'#243'digo Interno do Sistema'
       TabStop = False
       ParentFont = False
@@ -78,8 +209,8 @@ inherited Fcad_Clientes: TFcad_Clientes
     end
     object eEndereco: TcxTextEdit
       Tag = 1
-      Left = 122
-      Top = 232
+      Left = 97
+      Top = 217
       Hint = 'Endere'#231'o/Logradouro'
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -96,8 +227,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 233
     end
     object eBairro: TcxTextEdit
-      Left = 122
-      Top = 253
+      Left = 97
+      Top = 238
       Hint = 'Bairro ou Zona'
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -110,13 +241,13 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 22
+      TabOrder = 20
       Width = 233
     end
     object eCidade: TcxButtonEdit
       Tag = 1
-      Left = 122
-      Top = 275
+      Left = 97
+      Top = 260
       Hint = 'Cidade'
       ParentFont = False
       Properties.Buttons = <
@@ -163,12 +294,12 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 27
+      TabOrder = 26
       Width = 233
     end
     object cxLabel3: TcxLabel
-      Left = 48
-      Top = 108
+      Left = 23
+      Top = 93
       AutoSize = False
       Caption = 'C'#243'digo:'
       ParentFont = False
@@ -187,11 +318,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 123
+      AnchorX = 98
     end
     object cxNome: TcxLabel
-      Left = 42
-      Top = 152
+      Left = 17
+      Top = 137
       AutoSize = False
       Caption = 'Raz'#227'o:'
       ParentFont = False
@@ -210,11 +341,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 117
+      AnchorX = 92
     end
     object cxApelido: TcxLabel
-      Left = 48
-      Top = 171
+      Left = 23
+      Top = 156
       AutoSize = False
       Caption = 'Fantasia:'
       ParentFont = False
@@ -233,11 +364,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 123
+      AnchorX = 98
     end
     object cxLabel5: TcxLabel
-      Left = 48
-      Top = 234
+      Left = 23
+      Top = 219
       AutoSize = False
       Caption = 'Endere'#231'o:'
       ParentFont = False
@@ -256,11 +387,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 123
+      AnchorX = 98
     end
     object cxLabel7: TcxLabel
-      Left = 48
-      Top = 255
+      Left = 23
+      Top = 240
       AutoSize = False
       Caption = 'Bairro:'
       ParentFont = False
@@ -279,11 +410,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 123
+      AnchorX = 98
     end
     object cxLabel8: TcxLabel
-      Left = 77
-      Top = 276
+      Left = 52
+      Top = 261
       AutoSize = False
       Caption = 'Cidade:'
       ParentFont = False
@@ -302,11 +433,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 44
-      AnchorX = 121
+      AnchorX = 96
     end
     object cxLabel9: TcxLabel
-      Left = 375
-      Top = 278
+      Left = 350
+      Top = 263
       AutoSize = False
       Caption = 'Uf:'
       ParentFont = False
@@ -325,12 +456,12 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 24
-      AnchorX = 399
+      AnchorX = 374
     end
     object eUf: TcxTextEdit
       Tag = 1
-      Left = 398
-      Top = 276
+      Left = 373
+      Top = 261
       Hint = 'Uf (Estado)'
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -343,13 +474,13 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 32
+      TabOrder = 30
       OnExit = eUfExit
       Width = 31
     end
     object cxLabel10: TcxLabel
-      Left = 436
-      Top = 234
+      Left = 411
+      Top = 219
       AutoSize = False
       Caption = 'Cep:'
       ParentFont = False
@@ -368,11 +499,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 38
-      AnchorX = 474
+      AnchorX = 449
     end
     object eCep: TcxMaskEdit
-      Left = 476
-      Top = 232
+      Left = 451
+      Top = 217
       Hint = 'Cep dos correios'
       ParentFont = False
       Properties.EditMask = '99.999-999;0;_'
@@ -389,8 +520,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 127
     end
     object cxLabel11: TcxLabel
-      Left = 48
-      Top = 213
+      Left = 23
+      Top = 198
       AutoSize = False
       Caption = 'Fone:'
       ParentFont = False
@@ -409,12 +540,12 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 123
+      AnchorX = 98
     end
     object eFone: TcxMaskEdit
       Tag = 1
-      Left = 122
-      Top = 211
+      Left = 97
+      Top = 196
       Hint = 'Telefone de contato'
       ParentFont = False
       ParentShowHint = False
@@ -433,8 +564,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 120
     end
     object cxLabel13: TcxLabel
-      Left = 79
-      Top = 300
+      Left = 54
+      Top = 285
       AutoSize = False
       Caption = 'Email:'
       ParentFont = False
@@ -453,11 +584,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 42
-      AnchorX = 121
+      AnchorX = 96
     end
     object eMail: TcxTextEdit
-      Left = 122
-      Top = 298
+      Left = 97
+      Top = 283
       Hint = 'Email de contato'
       ParentFont = False
       Properties.CharCase = ecLowerCase
@@ -474,8 +605,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 482
     end
     object cxLabel14: TcxLabel
-      Left = 392
-      Top = 108
+      Left = 367
+      Top = 93
       AutoSize = False
       Caption = 'Dt. Cadastro:'
       ParentFont = False
@@ -494,11 +625,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 82
-      AnchorX = 474
+      AnchorX = 449
     end
     object cxLabel15: TcxLabel
-      Left = 48
-      Top = 129
+      Left = 23
+      Top = 114
       AutoSize = False
       Caption = 'Tipo:'
       ParentFont = False
@@ -517,18 +648,19 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 123
+      AnchorX = 98
     end
     object cbtpclie: TcxComboBox
-      Left = 123
-      Top = 127
+      Left = 98
+      Top = 112
       Hint = 'Tipo de Cadastro'
       ParentFont = False
       Properties.CharCase = ecUpperCase
       Properties.DropDownListStyle = lsFixedList
       Properties.Items.Strings = (
         'CLIENTE'
-        'FORNECEDOR')
+        'FORNECEDOR'
+        'VENDEDOR')
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clWindowText
       Style.Font.Height = -11
@@ -541,8 +673,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 150
     end
     object cxLabel16: TcxLabel
-      Left = 374
-      Top = 129
+      Left = 349
+      Top = 114
       AutoSize = False
       Caption = 'Dt. Nasc:'
       ParentFont = False
@@ -561,11 +693,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 100
-      AnchorX = 474
+      AnchorX = 449
     end
     object cbDtNascimento: TcxDateEdit
-      Left = 473
-      Top = 127
+      Left = 448
+      Top = 112
       Hint = 'Data de Nascimento/Cria'#231#227'o se empresa'
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
@@ -576,11 +708,12 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
       TabOrder = 6
+      OnExit = cbDtNascimentoExit
       Width = 130
     end
     object cxLabel17: TcxLabel
-      Left = 48
-      Top = 192
+      Left = 23
+      Top = 177
       AutoSize = False
       Caption = 'Cpf:'
       ParentFont = False
@@ -599,12 +732,12 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 123
+      AnchorX = 98
     end
     object eCpf: TcxMaskEdit
       Tag = 2
-      Left = 123
-      Top = 190
+      Left = 98
+      Top = 175
       Hint = 'Cpf (Cadastro de pessoa f'#237'sica)'
       ParentFont = False
       Properties.EditMask = '999.999.999-99;0;_'
@@ -622,8 +755,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 120
     end
     object eRg: TcxMaskEdit
-      Left = 398
-      Top = 190
+      Left = 373
+      Top = 175
       Hint = 'Rg (identidade)'
       ParentFont = False
       Properties.MaxLength = 20
@@ -639,8 +772,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 120
     end
     object cxLabel18: TcxLabel
-      Left = 337
-      Top = 192
+      Left = 312
+      Top = 177
       AutoSize = False
       Caption = 'Rg:'
       ParentFont = False
@@ -659,11 +792,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 60
-      AnchorX = 397
+      AnchorX = 372
     end
     object cxLabel19: TcxLabel
-      Left = 341
-      Top = 213
+      Left = 316
+      Top = 198
       AutoSize = False
       Caption = 'Celular:'
       ParentFont = False
@@ -682,11 +815,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 56
-      AnchorX = 397
+      AnchorX = 372
     end
     object eCelular: TcxMaskEdit
-      Left = 398
-      Top = 211
+      Left = 373
+      Top = 196
       Hint = 'Celular de contato'
       ParentFont = False
       Properties.EditMask = '!\(99\)0000-0000;0;_'
@@ -703,8 +836,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 120
     end
     object eObs: TcxTextEdit
-      Left = 122
-      Top = 319
+      Left = 97
+      Top = 304
       Hint = 'Observa'#231#227'o'
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -721,8 +854,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 482
     end
     object cxLabel20: TcxLabel
-      Left = 48
-      Top = 320
+      Left = 23
+      Top = 305
       AutoSize = False
       Caption = 'Observa'#231#227'o:'
       ParentFont = False
@@ -741,11 +874,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 123
+      AnchorX = 98
     end
     object eAtivo: TcxCheckBox
-      Left = 225
-      Top = 106
+      Left = 200
+      Top = 91
       Hint = 'Cadastro Ativo'
       Caption = 'Ativo'
       ParentFont = False
@@ -764,8 +897,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 54
     end
     object cxLabel21: TcxLabel
-      Left = 275
-      Top = 129
+      Left = 250
+      Top = 114
       AutoSize = False
       Caption = 'Pessoa:'
       ParentFont = False
@@ -784,11 +917,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 47
-      AnchorX = 322
+      AnchorX = 297
     end
     object cbPessoa: TcxComboBox
-      Left = 322
-      Top = 127
+      Left = 297
+      Top = 112
       Hint = 'Tipo de Pessoa'
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -809,8 +942,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 98
     end
     object eDtCad: TcxDateEdit
-      Left = 473
-      Top = 106
+      Left = 448
+      Top = 91
       Hint = 'Data do Cadastro no Sistema'
       Enabled = False
       ParentFont = False
@@ -829,8 +962,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 130
     end
     object eFantasia: TcxTextEdit
-      Left = 122
-      Top = 169
+      Left = 97
+      Top = 154
       Hint = 'Fantasia/Apelido'
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -847,8 +980,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 481
     end
     object cxLabel4: TcxLabel
-      Left = 374
-      Top = 234
+      Left = 349
+      Top = 219
       AutoSize = False
       Caption = 'N'#186':'
       ParentFont = False
@@ -867,12 +1000,12 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 23
-      AnchorX = 397
+      AnchorX = 372
     end
     object eNum: TcxMaskEdit
       Tag = 1
-      Left = 398
-      Top = 232
+      Left = 373
+      Top = 217
       Hint = 'N'#250'mero'
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -889,8 +1022,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 40
     end
     object eIbge: TcxMaskEdit
-      Left = 434
-      Top = 277
+      Left = 409
+      Top = 262
       ParentFont = False
       Properties.CharCase = ecUpperCase
       Properties.MaxLength = 0
@@ -902,14 +1035,14 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 15921919
-      TabOrder = 33
+      TabOrder = 31
       Text = '        '
       Visible = False
       Width = 40
     end
     object eComplemento: TcxTextEdit
-      Left = 398
-      Top = 253
+      Left = 373
+      Top = 238
       Hint = 'Complemento'
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -922,12 +1055,12 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 23
+      TabOrder = 21
       Width = 205
     end
     object cxLabel22: TcxLabel
-      Left = 361
-      Top = 255
+      Left = 336
+      Top = 240
       AutoSize = False
       Caption = 'Compl:'
       ParentFont = False
@@ -946,11 +1079,11 @@ inherited Fcad_Clientes: TFcad_Clientes
       Transparent = True
       Height = 17
       Width = 38
-      AnchorX = 399
+      AnchorX = 374
     end
     object cxJuridica: TPanel
-      Left = 51
-      Top = 189
+      Left = 26
+      Top = 174
       Width = 552
       Height = 22
       BevelOuter = bvNone
@@ -1040,139 +1173,5 @@ inherited Fcad_Clientes: TFcad_Clientes
         Width = 120
       end
     end
-  end
-  inherited pnCon: TPanel [1]
-    Width = 646
-    Height = 541
-    ExplicitWidth = 646
-    ExplicitHeight = 541
-    inherited pnBusca: TPanel
-      Width = 644
-      ExplicitWidth = 644
-      inherited cxConsulta: TcxComboBox
-        Properties.Items.Strings = (
-          'C'#243'digo'
-          'Raz'#227'o'
-          'Fantasia'
-          'Fone'
-          'Celular'
-          'CNPJ'
-          'CPF')
-        Text = 'C'#211'DIGO'
-      end
-      inherited cbAtivo: TcxComboBox
-        Left = 476
-        Properties.DropDownListStyle = lsFixedList
-        Properties.OnChange = cxConsultaPropertiesChange
-        Style.IsFontAssigned = True
-        ExplicitLeft = 476
-      end
-      inherited cxQtdeReg: TcxLabel
-        Left = 557
-        ExplicitLeft = 557
-      end
-    end
-    inherited pnBotaoCad: TPanel
-      Width = 644
-      ExplicitWidth = 644
-      inherited cxNovo: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxEdita: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxVer: TcxButton
-        LookAndFeel.SkinName = ''
-        OnClick = cxVerClick
-      end
-      inherited cxApagar: TcxButton
-        LookAndFeel.SkinName = ''
-        OnClick = cxApagarClick
-      end
-      inherited cxVoltar: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxPrint: TcxButton
-        LookAndFeel.SkinName = ''
-        OnClick = cxPrintClick
-      end
-    end
-    inherited pnBotaoCon: TPanel
-      Top = 490
-      Width = 644
-      ExplicitTop = 490
-      ExplicitWidth = 644
-      inherited cxCadastro: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxFechar: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-    end
-    inherited grConsulta: TcxGrid
-      Width = 644
-      Height = 415
-      ExplicitWidth = 644
-      ExplicitHeight = 415
-      inherited grConsultaDBTableView1: TcxGridDBTableView
-        OnDblClick = grConsultaDBTableView1DblClick
-        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
-          Caption = 'Fantasia'
-          DataBinding.FieldName = 'FANTASIA'
-        end
-        object grConsultaDBTableView1Column1: TcxGridDBColumn
-          Caption = 'Fone'
-          DataBinding.FieldName = 'FONE'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column2: TcxGridDBColumn
-          Caption = 'Celular'
-          DataBinding.FieldName = 'CELULAR'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column3: TcxGridDBColumn
-          Caption = 'Cnpj'
-          DataBinding.FieldName = 'CNPJ'
-          Width = 130
-        end
-        object grConsultaDBTableView1Column4: TcxGridDBColumn
-          Caption = 'Endere'#231'o'
-          DataBinding.FieldName = 'ENDERECO'
-          Width = 200
-        end
-        object grConsultaDBTableView1Column5: TcxGridDBColumn
-          Caption = 'N'#186
-          DataBinding.FieldName = 'NUMERO'
-          Width = 40
-        end
-        object grConsultaDBTableView1Column6: TcxGridDBColumn
-          Caption = 'Cidade'
-          DataBinding.FieldName = 'CIDADE'
-          Width = 150
-        end
-        object grConsultaDBTableView1Column7: TcxGridDBColumn
-          Caption = 'Uf'
-          DataBinding.FieldName = 'UF'
-        end
-        object grConsultaDBTableView1Column8: TcxGridDBColumn
-          Caption = 'Bairro'
-          DataBinding.FieldName = 'BAIRRO'
-          Width = 150
-        end
-        object grConsultaDBTableView1Column9: TcxGridDBColumn
-          Caption = 'Obs'
-          DataBinding.FieldName = 'OBS'
-          Width = 1000
-        end
-      end
-    end
-  end
-  inherited pnImg: TcxImage [2]
-    Left = 646
-    Properties.GraphicClassName = 'TdxPNGImage'
-    Style.BorderStyle = ebsFlat
-    ExplicitLeft = 646
-    ExplicitHeight = 541
-    Height = 541
   end
 end

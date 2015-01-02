@@ -47,9 +47,13 @@ type
     qryGenerico: TFDQuery;
     UpdtGenerico: TFDUpdateSQL;
     dsGenerico: TDataSource;
+    qryProd: TFDQuery;
+    UpdtProd: TFDUpdateSQL;
+    dsProd: TDataSource;
     procedure qryClieAfterInsert(DataSet: TDataSet);
     procedure qryCidadeAfterInsert(DataSet: TDataSet);
     procedure qryGenericoAfterInsert(DataSet: TDataSet);
+    procedure qryProdAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -80,6 +84,11 @@ end;
 procedure TdmCad.qryGenericoAfterInsert(DataSet: TDataSet);
 begin
    dmCad.qryGenerico.FieldByName('IDGENERICA').AsInteger := ExecutaGen('GENERICA');
+end;
+
+procedure TdmCad.qryProdAfterInsert(DataSet: TDataSet);
+begin
+   dmCad.qryProd.FieldByName('IDPROD').AsInteger := ExecutaGen('PRODUTO');
 end;
 
 end.

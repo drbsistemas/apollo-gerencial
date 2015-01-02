@@ -1,13 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2014/12/29 16:32:13.979,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/12/29 16:34:18.597,=D:\Gerencial\Acesso\uDmRel.pas</Transaction>
-    <Transaction>2014/12/29 16:34:33.514,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/12/29 16:34:50.639,D:\Gerencial\Rotinas\uRelatorios.pas=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2014/12/29 18:15:49.920,=D:\Gerencial\Cadastros\uCad_Empresa.pas</Transaction>
-    <Transaction>2014/12/29 18:37:44.877,=D:\Gerencial\Rotinas\NFe_Util_2G_TLB.pas</Transaction>
-    <Transaction>2014/12/29 18:38:13.870,D:\Gerencial\Rotinas\NFe_Util_2G_TLB.pas=</Transaction>
-    <Transaction>2014/12/29 18:48:30.245,=C:\Users\DANILO\Documents\Embarcadero\Studio\14.0\Imports\NFe_Util_2G_TLB.pas</Transaction>
+	<Transactions>
+    <Transaction>2014/12/29 16:32:13.000.979,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2014/12/29 16:34:18.000.597,=D:\Gerencial\Acesso\uDmRel.pas</Transaction>
+    <Transaction>2014/12/29 16:34:33.000.514,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2014/12/29 16:34:50.000.639,D:\Gerencial\PetClinic\Unit1.pas=D:\Gerencial\Rotinas\uRelatorios.pas</Transaction>
+    <Transaction>2014/12/29 18:15:49.000.920,=D:\Gerencial\Cadastros\uCad_Empresa.pas</Transaction>
+    <Transaction>2014/12/29 18:37:44.000.877,=D:\Gerencial\Rotinas\NFe_Util_2G_TLB.pas</Transaction>
+    <Transaction>2014/12/29 18:38:13.000.870,D:\Gerencial\Rotinas\NFe_Util_2G_TLB.pas=</Transaction>
+    <Transaction>2014/12/29 18:48:30.000.245,=C:\Users\DANILO\Documents\Embarcadero\Studio\14.0\Imports\NFe_Util_2G_TLB.pas</Transaction>
+    <Transaction>2014/12/30 12:52:10.000.884,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2014/12/30 13:09:29.000.087,D:\Gerencial\PetClinic\Unit1.dfm=D:\Gerencial\Cadastros\uCad_Produto.dfm</Transaction>
+    <Transaction>2014/12/30 13:09:29.000.087,D:\Gerencial\PetClinic\Unit1.pas=D:\Gerencial\Cadastros\uCad_Produto.pas</Transaction>
   </Transactions>
 </BorlandProject>

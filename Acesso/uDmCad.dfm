@@ -10,7 +10,7 @@ object dmCad: TdmCad
     UpdateObject = UpdtConf
     SQL.Strings = (
       'select * from CONF')
-    Left = 232
+    Left = 258
     Top = 8
   end
   object qryAux: TFDQuery
@@ -115,12 +115,12 @@ object dmCad: TdmCad
       '  DATAULTIMOACESSO'
       'FROM CONF'
       'WHERE IDCONF = :IDCONF')
-    Left = 232
+    Left = 258
     Top = 56
   end
   object dsConf: TDataSource
     DataSet = qryConf
-    Left = 231
+    Left = 257
     Top = 104
   end
   object qryClie: TFDQuery
@@ -321,7 +321,7 @@ object dmCad: TdmCad
     UpdateObject = UpdtCidade
     SQL.Strings = (
       'select * from CODIBGE')
-    Left = 60
+    Left = 58
     Top = 6
   end
   object UpdtCidade: TFDUpdateSQL
@@ -376,16 +376,15 @@ object dmCad: TdmCad
       '  DATACAD, ATIVO, DATANASCE, TIPOPESSOA, TIPOCLIE'
       'FROM CLIENTE'
       'WHERE IDCLIE = :IDCLIE')
-    Left = 60
+    Left = 58
     Top = 54
   end
   object dsCidade: TDataSource
     DataSet = qryCidade
-    Left = 60
+    Left = 58
     Top = 102
   end
   object qryGenerico: TFDQuery
-    Active = True
     AfterInsert = qryGenericoAfterInsert
     CachedUpdates = True
     Connection = dmCon.FdCon
@@ -394,7 +393,7 @@ object dmCad: TdmCad
     UpdateObject = UpdtGenerico
     SQL.Strings = (
       'select * from GENERICA')
-    Left = 104
+    Left = 102
     Top = 6
   end
   object UpdtGenerico: TFDUpdateSQL
@@ -419,12 +418,141 @@ object dmCad: TdmCad
       'SELECT IDGENERICA, TABELA, DESCRICAO, VALOR, OBS'
       'FROM GENERICA'
       'WHERE IDGENERICA = :IDGENERICA')
-    Left = 104
+    Left = 102
     Top = 54
   end
   object dsGenerico: TDataSource
     DataSet = qryGenerico
-    Left = 106
+    Left = 102
+    Top = 102
+  end
+  object qryProd: TFDQuery
+    AfterInsert = qryProdAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtProd
+    SQL.Strings = (
+      'SELECT A.*, '
+      'B.DESCRICAO GRUPO, '
+      'C.DESCRICAO SUBGRUPO, '
+      'D.RAZAO,'
+      'E.DESCRICAO NOMELOCAL'
+      'FROM PRODUTO A'
+      
+        'LEFT JOIN GENERICA B ON A.idgrupo=B.IDGENERICA AND  b.TABELA='#39'GR' +
+        'UPOS'#39
+      
+        'LEFT JOIN GENERICA C ON A.idSUBgrupo=B.IDGENERICA AND C.TABELA='#39 +
+        'SUBGRUPO'#39
+      
+        'LEFT JOIN GENERICA E ON A.idLocal=E.IDGENERICA AND C.TABELA='#39'LOC' +
+        'ALIZACAO'#39
+      'LEFT JOIN CLIENTE D ON A.IDFORNEC=D.IDCLIE')
+    Left = 142
+    Top = 6
+  end
+  object UpdtProd: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO PRODUTO'
+      '(IDPROD, NOMEPROD, REFPROD, MARCAPROD, IDGRUPO, '
+      '  IDFORNEC, IDSUBGRUPO, ESTOQUEPEDIDO, ESTOQUEORCAMENTO, '
+      '  ESTOQUEDISP, ESTOQUETOTAL, ESTOQUEMIN, ESTOQUEMAX, '
+      '  DTCADASTRO, DTVALIDADE, PESOBRUTO, PESOLIQ, '
+      '  ATIVOPROD, UNPROD, FOTOPROD, NCMPROD, '
+      '  PRECOCOMRPA, CUSTOCOMPRA, CUSTOTOTAL, MARGEMLUCRO, '
+      '  PRECOVENDA, PERCCOMISSAO, DTATUALIZADO, CODBAR, '
+      '  OBS, IDLOCAL)'
+      
+        'VALUES (:NEW_IDPROD, :NEW_NOMEPROD, :NEW_REFPROD, :NEW_MARCAPROD' +
+        ', :NEW_IDGRUPO, '
+      
+        '  :NEW_IDFORNEC, :NEW_IDSUBGRUPO, :NEW_ESTOQUEPEDIDO, :NEW_ESTOQ' +
+        'UEORCAMENTO, '
+      
+        '  :NEW_ESTOQUEDISP, :NEW_ESTOQUETOTAL, :NEW_ESTOQUEMIN, :NEW_EST' +
+        'OQUEMAX, '
+      
+        '  :NEW_DTCADASTRO, :NEW_DTVALIDADE, :NEW_PESOBRUTO, :NEW_PESOLIQ' +
+        ', '
+      '  :NEW_ATIVOPROD, :NEW_UNPROD, :NEW_FOTOPROD, :NEW_NCMPROD, '
+      
+        '  :NEW_PRECOCOMRPA, :NEW_CUSTOCOMPRA, :NEW_CUSTOTOTAL, :NEW_MARG' +
+        'EMLUCRO, '
+      
+        '  :NEW_PRECOVENDA, :NEW_PERCCOMISSAO, :NEW_DTATUALIZADO, :NEW_CO' +
+        'DBAR, '
+      '  :NEW_OBS, :NEW_IDLOCAL)'
+      
+        'RETURNING IDPROD, NOMEPROD, REFPROD, MARCAPROD, IDGRUPO, IDFORNE' +
+        'C, IDSUBGRUPO, ESTOQUEPEDIDO, ESTOQUEORCAMENTO, ESTOQUEDISP, EST' +
+        'OQUETOTAL, ESTOQUEMIN, ESTOQUEMAX, DTCADASTRO, DTVALIDADE, PESOB' +
+        'RUTO, PESOLIQ, ATIVOPROD, UNPROD, FOTOPROD, NCMPROD, PRECOCOMRPA' +
+        ', CUSTOCOMPRA, CUSTOTOTAL, MARGEMLUCRO, PRECOVENDA, PERCCOMISSAO' +
+        ', DTATUALIZADO, CODBAR, OBS, IDLOCAL')
+    ModifySQL.Strings = (
+      'UPDATE PRODUTO'
+      
+        'SET IDPROD = :NEW_IDPROD, NOMEPROD = :NEW_NOMEPROD, REFPROD = :N' +
+        'EW_REFPROD, '
+      
+        '  MARCAPROD = :NEW_MARCAPROD, IDGRUPO = :NEW_IDGRUPO, IDFORNEC =' +
+        ' :NEW_IDFORNEC, '
+      
+        '  IDSUBGRUPO = :NEW_IDSUBGRUPO, ESTOQUEPEDIDO = :NEW_ESTOQUEPEDI' +
+        'DO, '
+      
+        '  ESTOQUEORCAMENTO = :NEW_ESTOQUEORCAMENTO, ESTOQUEDISP = :NEW_E' +
+        'STOQUEDISP, '
+      
+        '  ESTOQUETOTAL = :NEW_ESTOQUETOTAL, ESTOQUEMIN = :NEW_ESTOQUEMIN' +
+        ', '
+      '  ESTOQUEMAX = :NEW_ESTOQUEMAX, DTCADASTRO = :NEW_DTCADASTRO, '
+      '  DTVALIDADE = :NEW_DTVALIDADE, PESOBRUTO = :NEW_PESOBRUTO, '
+      
+        '  PESOLIQ = :NEW_PESOLIQ, ATIVOPROD = :NEW_ATIVOPROD, UNPROD = :' +
+        'NEW_UNPROD, '
+      
+        '  FOTOPROD = :NEW_FOTOPROD, NCMPROD = :NEW_NCMPROD, PRECOCOMRPA ' +
+        '= :NEW_PRECOCOMRPA, '
+      '  CUSTOCOMPRA = :NEW_CUSTOCOMPRA, CUSTOTOTAL = :NEW_CUSTOTOTAL, '
+      '  MARGEMLUCRO = :NEW_MARGEMLUCRO, PRECOVENDA = :NEW_PRECOVENDA, '
+      
+        '  PERCCOMISSAO = :NEW_PERCCOMISSAO, DTATUALIZADO = :NEW_DTATUALI' +
+        'ZADO, '
+      '  CODBAR = :NEW_CODBAR, OBS = :NEW_OBS, IDLOCAL = :NEW_IDLOCAL'
+      'WHERE IDPROD = :OLD_IDPROD'
+      
+        'RETURNING IDPROD, NOMEPROD, REFPROD, MARCAPROD, IDGRUPO, IDFORNE' +
+        'C, IDSUBGRUPO, ESTOQUEPEDIDO, ESTOQUEORCAMENTO, ESTOQUEDISP, EST' +
+        'OQUETOTAL, ESTOQUEMIN, ESTOQUEMAX, DTCADASTRO, DTVALIDADE, PESOB' +
+        'RUTO, PESOLIQ, ATIVOPROD, UNPROD, FOTOPROD, NCMPROD, PRECOCOMRPA' +
+        ', CUSTOCOMPRA, CUSTOTOTAL, MARGEMLUCRO, PRECOVENDA, PERCCOMISSAO' +
+        ', DTATUALIZADO, CODBAR, OBS, IDLOCAL')
+    DeleteSQL.Strings = (
+      'DELETE FROM PRODUTO'
+      'WHERE IDPROD = :OLD_IDPROD')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDPROD, NOMEPROD, REFPROD, MARCAPROD, IDGRUPO, IDFORNEC, ' +
+        'IDSUBGRUPO, '
+      '  ESTOQUEPEDIDO, ESTOQUEORCAMENTO, ESTOQUEDISP, ESTOQUETOTAL, '
+      '  ESTOQUEMIN, ESTOQUEMAX, DTCADASTRO, DTVALIDADE, PESOBRUTO, '
+      '  PESOLIQ, ATIVOPROD, UNPROD, FOTOPROD, NCMPROD, PRECOCOMRPA, '
+      
+        '  CUSTOCOMPRA, CUSTOTOTAL, MARGEMLUCRO, PRECOVENDA, PERCCOMISSAO' +
+        ', '
+      '  DTATUALIZADO, CODBAR, OBS, IDLOCAL'
+      'FROM PRODUTO'
+      'WHERE IDPROD = :IDPROD')
+    Left = 142
+    Top = 54
+  end
+  object dsProd: TDataSource
+    DataSet = qryProd
+    Left = 142
     Top = 102
   end
 end

@@ -20,7 +20,8 @@ uses
   uDmRel in '..\Acesso\uDmRel.pas' {dmRel: TDataModule},
   uRelatorios in '..\Rotinas\uRelatorios.pas',
   uCad_Empresa in '..\Cadastros\uCad_Empresa.pas' {FCad_Empresa},
-  NFe_Util_2G_TLB in 'C:\Users\DANILO\Documents\Embarcadero\Studio\14.0\Imports\NFe_Util_2G_TLB.pas';
+  NFe_Util_2G_TLB in 'C:\Users\DANILO\Documents\Embarcadero\Studio\14.0\Imports\NFe_Util_2G_TLB.pas',
+  uCad_Produto in '..\Cadastros\uCad_Produto.pas' {Fcad_Produto};
 
 {$R *.res}
 

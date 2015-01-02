@@ -3797,7 +3797,7 @@ object FPrinc: TFPrinc
       ParentShowHint = False
       ShowHint = True
       TabOrder = 6
-      OnClick = cxClientesClick
+      OnClick = cxProdutoClick
     end
     object cxOutros: TcxButton
       Left = 0
@@ -24006,6 +24006,11 @@ object FPrinc: TFPrinc
     end
     object Action1: TAction
       Caption = 'Action1'
+    end
+    object Action2: TAction
+      Caption = 'Action2'
+      ShortCut = 117
+      OnExecute = Action2Execute
     end
   end
 end

@@ -210,7 +210,7 @@ inherited FCad_Empresa: TFCad_Empresa
       Width = 120
     end
     object cxLabel4: TcxLabel
-      Left = 335
+      Left = 334
       Top = 171
       AutoSize = False
       Caption = 'Ie:'
@@ -230,7 +230,7 @@ inherited FCad_Empresa: TFCad_Empresa
       Transparent = True
       Height = 17
       Width = 65
-      AnchorX = 400
+      AnchorX = 399
     end
     object eIe: TcxMaskEdit
       Left = 398
@@ -293,7 +293,7 @@ inherited FCad_Empresa: TFCad_Empresa
       Width = 233
     end
     object cxLabel6: TcxLabel
-      Left = 372
+      Left = 371
       Top = 192
       AutoSize = False
       Caption = 'N'#186':'
@@ -313,7 +313,7 @@ inherited FCad_Empresa: TFCad_Empresa
       Transparent = True
       Height = 17
       Width = 28
-      AnchorX = 400
+      AnchorX = 399
     end
     object eNum: TcxMaskEdit
       Tag = 1
@@ -493,7 +493,7 @@ inherited FCad_Empresa: TFCad_Empresa
       AnchorX = 123
     end
     object cxLabel8: TcxLabel
-      Left = 371
+      Left = 370
       Top = 235
       AutoSize = False
       Caption = 'Uf:'
@@ -513,7 +513,7 @@ inherited FCad_Empresa: TFCad_Empresa
       Transparent = True
       Height = 17
       Width = 29
-      AnchorX = 400
+      AnchorX = 399
     end
     object eUf: TcxTextEdit
       Tag = 1
@@ -572,7 +572,7 @@ inherited FCad_Empresa: TFCad_Empresa
       Width = 205
     end
     object cxLabel11: TcxLabel
-      Left = 357
+      Left = 356
       Top = 213
       AutoSize = False
       Caption = 'Compl:'
@@ -592,7 +592,7 @@ inherited FCad_Empresa: TFCad_Empresa
       Transparent = True
       Height = 17
       Width = 43
-      AnchorX = 400
+      AnchorX = 399
     end
     object cxLabel12: TcxLabel
       Left = 23
@@ -767,7 +767,7 @@ inherited FCad_Empresa: TFCad_Empresa
       Width = 654
       Height = 135
       TabOrder = 35
-      Properties.ActivePage = cxEmail
+      Properties.ActivePage = cxEspecificos
       Properties.CustomButtons.Buttons = <>
       Properties.Style = 11
       Properties.TabWidth = 100

@@ -22,7 +22,7 @@ uses
   cxDropDownEdit, cxLabel, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, Vcl.ExtCtrls,
   Vcl.ComCtrls, dxCore, cxDateUtils, cxGroupBox, cxCheckBox, cxCalendar,
-  cxButtonEdit, cxImage, dxGDIPlusClasses, RxMenus;
+  cxButtonEdit, cxImage, dxGDIPlusClasses, RxMenus, StrUtils;
 
 type
   TFcad_Clientes = class(TFcad_Pai)
@@ -101,6 +101,7 @@ type
       AButtonIndex: Integer);
     procedure cxVerClick(Sender: TObject);
     procedure cxPrintClick(Sender: TObject);
+    procedure cbDtNascimentoExit(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -118,6 +119,17 @@ implementation
 {$R *.dfm}
 
 uses uDmCad, uRotinas, uCad_Cidade, uRelatorios;
+
+procedure TFcad_Clientes.cbDtNascimentoExit(Sender: TObject);
+begin
+  inherited;
+   if cbDtNascimento.Text <>'' then
+      if (not ValidaData(cbDtNascimento.Text)) or (cbDtNascimento.Date >= Date) then
+      begin
+         Msg('A data digitada não é válida!','I',':(');
+         cbDtNascimento.Clear;
+      end;
+end;
 
 procedure TFcad_Clientes.cbPessoaPropertiesChange(Sender: TObject);
 begin
@@ -186,7 +198,14 @@ end;
 
 procedure TFcad_Clientes.cxEditaClick(Sender: TObject);
 begin
+   if dmCad.qryClie.RecordCount <= 0 then
+   begin
+      Msg('Olá, Verificamos que não há nenhum registro para editar, verifique a consulta dos dados','I',':)');
+      Abort;
+   end;
+
    inherited;
+
    Limpa;
    Edita;
 end;
@@ -280,15 +299,17 @@ end;
 
 procedure TFcad_Clientes.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-   inherited;
    ID               := dmCad.qryClie.Fieldbyname('IDCLIE').AsInteger;
    DESCRICAO        := dmCad.qryClie.FieldByName('RAZAO').AsString;
+
+   inherited;
+
    if pnBotaoCon.Visible = False then
    begin
       FormAtivo     := Nil;
-      Fcad_Clientes := Nil;
+      pFundo(1);
    end;
-   pFundo(1);
+   Fcad_Clientes    := Nil;
    Action           := CaFree;
 end;
 
@@ -296,20 +317,11 @@ procedure TFcad_Clientes.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   inherited;
-   if (Key = VK_F3) and (pnBUsca.Visible = true) then
-      cxConsultaPropertiesChange(self);
-   if (key = Vk_F2) then
-   begin
-      if cxConsulta.Itemindex=  4 then
-         cxConsulta.Itemindex:= 0 else
-         cxConsulta.Itemindex:= cxConsulta.ItemIndex +1;
-      cxConsultaPropertiesChange(self);
-   end;
-
    if (key = VK_DOWN) and (not grConsulta.Focused = true) then
       dmCad.qryClie.Next;
    if (key = VK_UP) and (not grConsulta.Focused = true) then
       dmcad.qryClie.Prior;
+
    cxQtdeREg.Caption := 'Registros: '+ intToStr(dmCad.qryClie.RecordCount);
 end;
 
@@ -391,7 +403,11 @@ begin
       eDtCad.Date        := FieldByName('DATACAD').AsDateTime;
       eAtivo.Checked     := ifs(FieldByName('ATIVO').AsString = 'S', True, False);
       cbPessoa.Itemindex := ifs(FieldByName('TIPOPESSOA').AsString = 'F',0,1);
-      cbtpclie.ItemIndex := ifs(FieldByName('TIPOCLIE').AsString='CLI', 0,1);
+      case AnsiIndexStr(UpperCase(FieldByName('TIPOCLIE').AsString), ['CLI', 'FOR','VEN']) of
+         0: cbtpclie.ItemIndex := 0;
+         1: cbtpclie.ItemIndex := 1;
+         2: cbtpclie.ItemIndex := 2;
+      end;
       cbDtNascimento.Date:= FieldByName('DATANASCE').AsDateTime;
       eMail.Text         := Fieldbyname('EMAIL').AsString;
       eObs.Text          := Fieldbyname('OBS').AsString;

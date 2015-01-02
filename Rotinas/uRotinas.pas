@@ -9,26 +9,35 @@ uses
    NFe_Util_2G_TLB ; // acrescentar essa linha no use da unit para NF-E DLL;
 
    // Mensagens
-   Function Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
+   FUNCTION Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
    // Licenca
-   Function Crypt(Action, Src: String): String;
+   FUNCTION Crypt(Action, Src: String): String;
 
    // Validaçoes
    FUNCTION    VALIDAUF(Dado : string) : boolean;
    FUNCTION    VALIDACNPJ(Dado : string) : boolean;
    FUNCTION    VALIDACPF(Dado : string) : boolean;
-   Procedure ValidaCampoTag(Form: TForm);
+   PROCEDURE ValidaCampoTag(Form: TForm);
+   FUNCTION ValidaData(const S: string): boolean;
 
    // Envio de E-mails
-   procedure EnviaEmailDLL(Assunto, Destino, Anexo: String);
+   PROCEDURE EnviaEmailDLL(Assunto, Destino, Anexo: String);
 
-   Function ExecutaGen(StrTabela : String) : Integer;
-   Function Consulta(StrConsulta: String; qrDados: TFDQuery): Boolean;
-   Function ifs(Expressao: Boolean; CasoVerdadeiro, CasoFalso: Variant): Variant;
-   Function ConsultaQuery(StrCOnsulta: string; intQuery: Integer): Integer;
+   // Executa Processos
+   FUNCTION ExecutaGen(StrTabela : String) : Integer;
+   FUNCTION Consulta(StrConsulta: String; qrDados: TFDQuery): Boolean;
+   FUNCTION ifs(Expressao: Boolean; CasoVerdadeiro, CasoFalso: Variant): Variant;
+   FUNCTION ConsultaQuery(StrCOnsulta: string; intQuery: Integer): Integer;
+   FUNCTION BuscaNomeAtivo(TABELA:String;CODIGO:Integer):String;
+Function ConsultaCampoNomeAtivo(StrCodigo, StrTabela: String):String;
 
-   procedure ExecutaForm(FormClasse: TFormClass; var NewForm: TObject);
-   procedure PFundo(mostra: integer);
+
+   // Chama/Configura Forms
+   PROCEDURE ExecutaForm(FormClasse: TFormClass; var NewForm: TObject);
+   PROCEDURE AbreTelaComShowModal(FormClasse: TFormClass; var NewForm: TObject; FNomeFormRetorno: TForm; StrTabela: String);
+
+   PROCEDURE PFundo(mostra: integer);
+
 var
    FormAtivo                          : TForm;
    FCorSelec, FCorLista               : TColor;
@@ -50,7 +59,8 @@ var
 
 implementation
 
-uses uMsg, uDmCad, uDmCon, UPrinc;
+uses uMsg, uDmCad, uDmCon, UPrinc, uCon_Generica, uCad_Produto, uPai,
+  uCad_Clientes;
 
 function VALIDACNPJ(Dado : string) : boolean;
 var  D1            : array[1..12] of byte;
@@ -307,21 +317,24 @@ var
    Rect                    : TRect;
    TD                      : PTypeData;
 begin
-   Caminho := CaminhoExe+ 'qry.sql';
-   TD := GetTypeData(Screen.ActiveForm.ClassInfo);
-   AssignFile(Arq, Caminho);
+   if Screen.ActiveForm <> nil then
+   begin
+      Caminho := CaminhoExe+ 'qry.sql';
+      TD := GetTypeData(Screen.ActiveForm.ClassInfo);
+      AssignFile(Arq, Caminho);
 
-   if not FileExists(CAMINHO) then
-      Rewrite(arq) else
-         Append(arq);
+      if not FileExists(CAMINHO) then
+         Rewrite(arq) else
+            Append(arq);
 
-   Writeln(arq, '');
-   Writeln(arq, '/*----------------------------------------------------------------------------------------------------*/');
-   Writeln(arq, '');
-   Writeln(arq, StrTexto);
-   Writeln(arq, '');
-   Writeln(arq, uppercase('/* Data Hora: '+FormatDateTime('dd/mm/yyy hh:mm:ss', Now)+' - Componente: '+NomeComponente+ ' - Form: '+uppercase(Screen.ActiveForm.Name)+' - Unit: '+uppercase(TD^.UnitName)+' */'));
-   CloseFile(Arq);
+      Writeln(arq, '');
+      Writeln(arq, '/*----------------------------------------------------------------------------------------------------*/');
+      Writeln(arq, '');
+      Writeln(arq, StrTexto);
+      Writeln(arq, '');
+      Writeln(arq, uppercase('/* Data Hora: '+FormatDateTime('dd/mm/yyy hh:mm:ss', Now)+' - Componente: '+NomeComponente+ ' - Form: '+uppercase(Screen.ActiveForm.Name)+' - Unit: '+uppercase(TD^.UnitName)+' */'));
+      CloseFile(Arq);
+   end;
 end;
 
 Function ConsultaQuery(StrCOnsulta: string; intQuery: Integer): Integer;
@@ -393,6 +406,16 @@ begin
  if Expressao
   then Result:=CasoVerdadeiro
   else Result:=CasoFalso;
+end;
+
+function ValidaData(const S: string): boolean;
+begin
+   try
+      StrToDate(S);
+      Result := true;
+   except
+      Result := false;
+   end;
 end;
 
 Procedure ValidaCampoTag(Form: TForm);
@@ -508,6 +531,72 @@ begin
       MessageDlg('E-mail enviado com sucesso!', mtInformation, [mbOK], 0) else
       MessageDlg('E-mail não enviado Falha: '+inttoStr(cStat)+'!', mtInformation, [mbOK], 0);
    Util := nil;
+end;
+
+
+Procedure AbreTelaComShowModal(FormClasse: TFormClass; var NewForm: TObject; FNomeFormRetorno: TForm; StrTabela: String);
+begin
+   FreeAndNil(TForm(NewForm));
+
+   if (TForm(NewForm) = Nil) Or (not TForm(NewForm).HandleAllocated) Then
+//      NewForm := FormClasse.Create(TForm(Application));
+      Application.CreateForm(FormClasse, NewForm);
+
+   TForm(NewForm).FormStyle   := fsNormal;
+   TForm(NewForm).WindowState := wsNormal;
+   TForm(NewForm).Visible     := False;
+   TForm(NewForm).Position    := poMainFormCenter;
+
+   if TForm(NewForm) = Fcad_Generica then
+   begin
+      Fcad_GEnerica.AbreCom('CON');
+      Fcad_GEnerica.TABELA      := StrTabela;
+   end;
+//   FAbreForm.MostraPainelBusca(Con);
+   TForm(NewForm).ShowModal;
+
+   TForm(NewForm) := NIl;
+   TForm(NewForm).Free;
+   if FNomeFormRetorno <> NIL then
+   begin
+      TForm(FNomeFormRetorno).WindowState := wsNormal;
+      TForm(FNomeFormRetorno).WindowState := wsMaximized;
+   end;
+end;
+
+function BuscaNomeAtivo(TABELA:String;CODIGO:Integer):String;
+var oNome:String;
+begin
+   dmCad.qryAux.Close;
+
+   If TABELA = 'CLIENTE'         then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('CLI'); // Cliente
+   If TABELA = 'FORNECEDOR'      then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('FOR'); // Cliente
+   If TABELA = 'VENDEDOR'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('VEN'); // Cliente
+   if TABELA = 'GRUPOS'          then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
+   if TABELA = 'SUBGRUPO'       then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
+   if TABELA = 'FPAGTO'          then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
+   if TABELA = 'LOCALIZACAO'     then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
+
+
+   dmCad.qryAux.ParamByName('CODIGO').AsInteger  :=  CODIGO;
+   dmCad.qryAux.Active   := true;
+
+   If not dmCad.qryAux.IsEmpty then
+      oNome := dmCad.qryAux.FieldbyName('NOME').AsString
+   else
+   begin
+     oNome := 'NENHUM';
+     Msg('Este código não pertence ao cadastro de '+TABELA+' ou este registro não está com cadastro ativo!', 'I',':Z');
+   end;
+   dmCad.qryAux.Close;
+   Result := oNome;
+end;
+
+Function ConsultaCampoNomeAtivo(StrCodigo, StrTabela: String):String;
+begin
+   if (StrCodigo = '') or (StrCodigo='0') then
+      Result := 'NENHUM' else
+      Result := BuscaNomeAtivo(StrTabela, StrToInt(StrCodigo));
 end;
 
 end.

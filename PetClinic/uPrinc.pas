@@ -22,7 +22,6 @@ uses
   Vcl.StdCtrls, dxGDIPlusClasses, cxImage, cxButtons, Vcl.ExtCtrls;
 
 type
-
    TFPrinc = class(TForm)
     UserControl1: TUserControl;
     UCFireDACConn1: TUCFireDACConn;
@@ -54,6 +53,7 @@ type
     cxProduto: TcxButton;
     cxOutros: TcxButton;
     cxButton1: TcxButton;
+    Action2: TAction;
    //
    procedure PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
    procedure MostraNomeForm(Str: String);
@@ -68,6 +68,8 @@ type
     procedure cxAnimaisClick(Sender: TObject);
     procedure cxOutrosClick(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
+    procedure cxProdutoClick(Sender: TObject);
+    procedure Action2Execute(Sender: TObject);
    private
       { Private declarations }
    public
@@ -82,7 +84,13 @@ implementation
 {$R *.dfm}
 
 uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, Unit1, uCad_Clientes,
-  uCad_Animais, uCon_Generica, uDmRel, uCad_Empresa;
+  uCad_Animais, uCon_Generica, uDmRel, uCad_Empresa, uCad_Produto;
+
+procedure TFPrinc.Action2Execute(Sender: TObject);
+begin
+   if Fcad_Produto = nil then
+      AbreTelaComShowModal(TFcad_Produto, TObject(Fcad_Produto), NIL, '');
+end;
 
 procedure TFPrinc.cxAnimaisClick(Sender: TObject);
 begin
@@ -107,6 +115,11 @@ end;
 procedure TFPrinc.cxOutrosClick(Sender: TObject);
 begin
    ExecutaForm(TFcad_Generica, TObject(Fcad_Generica));
+end;
+
+procedure TFPrinc.cxProdutoClick(Sender: TObject);
+begin
+   ExecutaForm(TFcad_Produto, TObject(Fcad_Produto));
 end;
 
 procedure TFPrinc.FormClose(Sender: TObject; var Action: TCloseAction);

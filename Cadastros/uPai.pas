@@ -75,6 +75,9 @@ type
     procedure FormShow(Sender: TObject);
     procedure cxVoltarClick(Sender: TObject);
     procedure cxConsultaPropertiesChange(Sender: TObject);
+    procedure grConsultaDBTableView1DblClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
 
     { Private declarations }
@@ -101,6 +104,7 @@ begin
            End;
       Con: Begin
               pnBotaoCad.Visible := False;
+              pnBotaoCon.Tag     := 0;
               pnBotaoCon.Visible := True;
               pnImg.Visible      := True;
            End;
@@ -127,6 +131,7 @@ end;
 
 procedure TFcad_Pai.cxCadastroClick(Sender: TObject);
 begin
+   pnBotaoCon.Tag :=1;
    MostraPainelBusca(Cad);
 end;
 
@@ -169,6 +174,16 @@ begin
       Close;
 end;
 
+procedure TFcad_Pai.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   if grConsulta.Tag = 1 then
+   begin
+      ID             := 0;
+      DESCRICAO      := EmptyStr;
+      OBS            := EmptyStr;
+   end;
+end;
+
 procedure TFcad_Pai.FormCreate(Sender: TObject);
 begin
    grConsulta.Tag := 0;
@@ -178,8 +193,32 @@ begin
    MostraPainelBusca(Cad);
 end;
 
+procedure TFcad_Pai.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if (Key = VK_F3) and (pnBUsca.Visible = true) then
+      cxConsultaPropertiesChange(self);
+
+   if (key = Vk_F2) then
+   begin
+      if cxConsulta.Itemindex=  cxCOnsulta.Properties.Items.Count then
+         cxConsulta.Itemindex:= 0 else
+         cxConsulta.Itemindex:= cxConsulta.ItemIndex +1;
+      cxConsultaPropertiesChange(self);
+   end;
+end;
+
 procedure TFcad_Pai.FormKeyPress(Sender: TObject; var Key: Char);
 begin
+   if (key = #27) and (pnBotaoCon.Visible = true) then
+   begin
+      grCOnsulta.TAg := 1;
+      Close;
+   end else
+   if (key = #27) and (pnBotaoCon.Visible = false) then
+      cxVoltarClick(Self);
+
+
    if Key = #13 then
    begin
      Key := #0;
@@ -189,6 +228,9 @@ end;
 
 procedure TFcad_Pai.FormShow(Sender: TObject);
 begin
+   if FormStyle = fsNormal then
+      MostraPainelBusca(Con);
+
    MOstraPainelCadastro(Con);
 end;
 
@@ -209,6 +251,13 @@ begin
       else
          ACanvas.Brush.Color := FCorLista;
    end;
+end;
+
+procedure TFcad_Pai.grConsultaDBTableView1DblClick(Sender: TObject);
+begin
+   if pnBotaoCon.Visible = false then
+      cxEditaClick(Self) else
+      Close;
 end;
 
 end.

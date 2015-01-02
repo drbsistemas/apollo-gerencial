@@ -34,6 +34,10 @@ type
     eDescricao: TcxTextEdit;
     cxApelido: TcxLabel;
     eObs: TcxTextEdit;
+    procedure AbreCom(StrAbre: String);
+    procedure CaptionForm(StrNome: String);
+    procedure CarregaTabelas();
+
     procedure FormShow(Sender: TObject);
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure cxTabelaClick(Sender: TObject);
@@ -45,6 +49,7 @@ type
     procedure cxVoltarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -89,7 +94,14 @@ end;
 
 procedure TFcad_Generica.cxEditaClick(Sender: TObject);
 begin
-  inherited;
+  if dmCad.qryGenerico.RecordCount <= 0 then
+   begin
+      Msg('Olá, Verificamos que não há nenhum registro para editar, verifique a consulta dos dados','I',':)');
+      Abort;
+   end;
+
+   inherited;
+
    Limpa;
    Edita;
 end;
@@ -126,13 +138,10 @@ end;
 
 procedure TFcad_Generica.cxTabelaClick(Sender: TObject);
 begin
-  inherited;
-   case cxTabela.Itemindex of
-      0: TABELA := 'GRUPOS';
-      1: TABELA := 'SUBGRUPO';
-      2: TABELA := 'CCUSTO';
-      3: TABELA := 'FPAGTO';
-   end;
+   inherited;
+   Consulta('select TABELA from generica where NOMETABELA='+QuotedStr(cxTAbela.Text), dmcad.qryAux);
+   TABELA := dmCad.qryAux.FieldByName('TABELA').AsString;
+
    cxConsultaPropertiesChange(self);
 end;
 
@@ -160,45 +169,46 @@ end;
 
 procedure TFcad_Generica.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  inherited;
    ID               := dmCad.qryGenerico.Fieldbyname('IDGENERICA').AsInteger;
    DESCRICAO        := dmCad.qryGenerico.FieldByName('DESCRICAO').AsString;
+
+   inherited;
+
    if pnBotaoCon.Visible = False then
    begin
       FormAtivo     := Nil;
-      Fcad_Generica := Nil;
+      pFundo(1);
    end;
-   pFundo(1);
+   Fcad_Generica    := Nil;
    Action           := CaFree;
+end;
+
+procedure TFcad_Generica.FormCreate(Sender: TObject);
+begin
+  inherited;
+   TABELA := EmptyStr;
 end;
 
 procedure TFcad_Generica.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   inherited;
-   if (Key = VK_F3) and (pnBUsca.Visible = true) then
-      cxConsultaPropertiesChange(self);
-   if (key = Vk_F2) then
-   begin
-      if cxConsulta.Itemindex=  4 then
-         cxConsulta.Itemindex:= 0 else
-         cxConsulta.Itemindex:= cxConsulta.ItemIndex +1;
-      cxConsultaPropertiesChange(self);
-   end;
-
    if (key = VK_DOWN) and (not grConsulta.Focused = true) then
       dmCad.qryGenerico.Next;
+
    if (key = VK_UP) and (not grConsulta.Focused = true) then
       dmcad.qryGenerico.Prior;
+
    cxQtdeREg.Caption := 'Registros: '+ intToStr(dmCad.qryGenerico.RecordCount);
 end;
 
 procedure TFcad_Generica.FormShow(Sender: TObject);
 begin
    inherited;
-   pnTabela.Visible := true;
-   cxTabelaClick(self);
-//   cxConsultaPropertiesChange(self);
+   if TABELA = '' then
+      CarregaTabelas;
+   CaptionForm(TABELA);
+   cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Generica.Limpa;
@@ -208,5 +218,43 @@ begin
    eObs.Clear;
 end;
 
+procedure TFcad_Generica.AbreCom(StrAbre: String);
+begin
+   if StrAbre = 'CON' then
+      pnTabela.Visible        := false;
+   if (StrAbre = 'CAD') then
+      pnTabela.Visible        := True;
+end;
+
+procedure TFcad_Generica.CaptionForm(StrNome: String);
+begin
+   if TABELA = 'CCUSTO' then
+      Fcad_Generica.Caption := 'Cadastro de CENTRO DE CUSTO' else
+   if TABELA = 'FPAGTO' then
+      Fcad_Generica.Caption := 'Cadastro de FORMAS DE PAGAMENTO' else
+   if TABELA = 'GRUPOS' then
+      Fcad_Generica.Caption := 'Cadastro de GRUPOS' else
+   if TABELA = 'SUBGRUPO' then
+      Fcad_Generica.Caption := 'Cadastro de SUBGRUPOS' else
+   if TABELA = 'FPAGTO' then
+      Fcad_Generica.Caption := 'Cadastro de FORMAS DE PAGAMENTO';
+end;
+
+procedure TFcad_Generica.CarregaTabelas();
+begin
+   Consulta('select NOMETABELA from generica group by TABELA, NOMETABELA order by TABELA', dmcad.qryAux);
+   dmcad.qryAux.First;
+
+   cxTabela.Properties.Items.Clear;
+   while not dmcad.qryAux.Eof do
+   begin
+      cxTabela.Properties.Items.Add(dmcad.qryAux.FieldByName('NOMETABELA').AsString);
+      dmCad.qryAux.Next;
+   end;
+   cxTabela.ItemIndex := 0;
+   cxTabelaClick(self);
+end;
+
 end.
+
 
