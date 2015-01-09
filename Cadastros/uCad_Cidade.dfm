@@ -5,13 +5,27 @@ inherited Fcad_Cidade: TFcad_Cidade
   ClientWidth = 712
   Visible = False
   WindowState = wsNormal
-  OnClose = FormClose
-  OnKeyDown = FormKeyDown
   ExplicitWidth = 718
   ExplicitHeight = 601
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCon: TPanel [0]
+  inherited pnCad: TPanel
+    Width = 654
+    Height = 572
+    ExplicitWidth = 654
+    ExplicitHeight = 572
+    inherited pnMenu: TPanel
+      Width = 652
+      ExplicitWidth = 652
+      inherited cxSalvar: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxCancela: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+    end
+  end
+  inherited pnCon: TPanel
     Width = 654
     Height = 572
     ExplicitWidth = 654
@@ -24,7 +38,7 @@ inherited Fcad_Cidade: TFcad_Cidade
           'C'#243'd. IBGE'
           'Cidade'
           'Uf')
-        TabOrder = 3
+        TabOrder = 2
         Text = 'CIDADE'
       end
       inherited eConsulta: TcxTextEdit
@@ -47,7 +61,7 @@ inherited Fcad_Cidade: TFcad_Cidade
         ExplicitTop = -15
       end
       inherited cxCon: TcxButton
-        TabOrder = 2
+        TabOrder = 1
       end
       inherited cxQtdeReg: TcxLabel
         Left = 481
@@ -91,11 +105,10 @@ inherited Fcad_Cidade: TFcad_Cidade
     end
     inherited grConsulta: TcxGrid
       Width = 652
-      Height = 447
+      Height = 445
       ExplicitWidth = 652
-      ExplicitHeight = 447
+      ExplicitHeight = 445
       inherited grConsultaDBTableView1: TcxGridDBTableView
-        OnDblClick = grConsultaDBTableView1DblClick
         DataController.DataSource = dmCad.dsCidade
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
           Caption = 'C'#243'd Ibge'
@@ -112,26 +125,10 @@ inherited Fcad_Cidade: TFcad_Cidade
       end
     end
   end
-  inherited pnImg: TcxImage [1]
+  inherited pnImg: TcxImage
     Left = 654
     ExplicitLeft = 654
     ExplicitHeight = 572
     Height = 572
-  end
-  inherited pnCad: TPanel [2]
-    Width = 654
-    Height = 572
-    ExplicitWidth = 654
-    ExplicitHeight = 572
-    inherited pnMenu: TPanel
-      Width = 652
-      ExplicitWidth = 652
-      inherited cxSalvar: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxCancela: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-    end
   end
 end

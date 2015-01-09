@@ -1,19 +1,19 @@
 inherited Fcad_Generica: TFcad_Generica
   Caption = 'Outros Cadastros'
-  ClientHeight = 531
-  ClientWidth = 694
+  ClientHeight = 541
+  ClientWidth = 704
   ExplicitWidth = 710
   ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnCad: TPanel
-    Width = 636
-    Height = 531
-    ExplicitWidth = 636
-    ExplicitHeight = 531
+    Width = 646
+    Height = 541
+    ExplicitWidth = 644
+    ExplicitHeight = 539
     inherited pnMenu: TPanel
-      Width = 634
-      ExplicitWidth = 634
+      Width = 644
+      ExplicitWidth = 642
     end
     object cxLabel4: TcxLabel
       Left = 43
@@ -142,16 +142,16 @@ inherited Fcad_Generica: TFcad_Generica
     end
   end
   inherited pnCon: TPanel
-    Width = 636
-    Height = 531
-    ExplicitWidth = 636
-    ExplicitHeight = 531
+    Width = 646
+    Height = 541
+    ExplicitWidth = 644
+    ExplicitHeight = 539
     inherited pnBusca: TPanel
-      Top = 79
-      Width = 634
+      Top = 80
+      Width = 644
       TabOrder = 0
-      ExplicitTop = 79
-      ExplicitWidth = 634
+      ExplicitTop = 80
+      ExplicitWidth = 642
       inherited cxConsulta: TcxComboBox
         Properties.Items.Strings = (
           'C'#243'digo'
@@ -176,20 +176,20 @@ inherited Fcad_Generica: TFcad_Generica
       end
     end
     inherited pnBotaoCon: TPanel [1]
-      Top = 480
-      Width = 634
+      Top = 490
+      Width = 644
       TabOrder = 2
-      ExplicitTop = 480
-      ExplicitWidth = 634
+      ExplicitTop = 488
+      ExplicitWidth = 642
     end
     inherited grConsulta: TcxGrid [2]
-      Top = 102
-      Width = 634
-      Height = 378
+      Top = 103
+      Width = 644
+      Height = 387
       TabOrder = 1
-      ExplicitTop = 102
-      ExplicitWidth = 634
-      ExplicitHeight = 378
+      ExplicitTop = 103
+      ExplicitWidth = 642
+      ExplicitHeight = 385
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmCad.dsGenerico
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
@@ -203,10 +203,11 @@ inherited Fcad_Generica: TFcad_Generica
     object pnTabela: TPanel [3]
       Left = 1
       Top = 1
-      Width = 634
+      Width = 644
       Height = 27
       Align = alTop
       TabOrder = 3
+      ExplicitWidth = 642
       object cxLabel3: TcxLabel
         Left = 2
         Top = 5
@@ -234,10 +235,10 @@ inherited Fcad_Generica: TFcad_Generica
     end
     inherited pnBotaoCad: TPanel [4]
       Top = 28
-      Width = 634
+      Width = 644
       TabOrder = 4
       ExplicitTop = 28
-      ExplicitWidth = 634
+      ExplicitWidth = 642
       inherited cxVer: TcxButton
         OnClick = cxVerClick
       end
@@ -253,9 +254,9 @@ inherited Fcad_Generica: TFcad_Generica
     end
   end
   inherited pnImg: TcxImage
-    Left = 636
-    ExplicitLeft = 636
-    ExplicitHeight = 531
-    Height = 531
+    Left = 646
+    ExplicitLeft = 644
+    ExplicitHeight = 539
+    Height = 541
   end
 end

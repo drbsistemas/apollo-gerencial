@@ -84,7 +84,6 @@ type
     eIe: TcxMaskEdit;
     procedure cxVoltarClick(Sender: TObject);
     procedure cxCancelaClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure cxSalvarClick(Sender: TObject);
@@ -102,6 +101,7 @@ type
     procedure cxVerClick(Sender: TObject);
     procedure cxPrintClick(Sender: TObject);
     procedure cbDtNascimentoExit(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     indice : String;
@@ -192,7 +192,7 @@ begin
    if cbAtivo.ItemIndex > 0 then
       StrSql := StrSql + ' and ATIVO='+QuotedStr(ifs(cbAtivo.ItemIndex=1, 'S','N'));
 
-   Consulta(StrSql, dmcad.qryClie);
+   ConsultaSql(StrSql, dmcad.qryClie);
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryClie.RecordCount);
 end;
 
@@ -224,7 +224,7 @@ begin
 /////
    IDCLIE := dmcad.qryClieIDCLIE.Asinteger;
     StrSql := 'select * from CLIENTE where IDCLIE='+IntTOStr(IDCLIE);
-   Consulta(StrSql, dmcad.qryClie);
+   ConsultaSql(StrSql, dmcad.qryClie);
 ///// Impresso
    Imprime(dmCad.dsClie, NIL,
             'SIM',
@@ -248,9 +248,8 @@ end;
 procedure TFcad_Clientes.cxVoltarClick(Sender: TObject);
 begin
    inherited;
-   if pnBotaoCon.Tag = 1 then
-      MostraPainelBusca(Con) else
-      Close;
+   ID               := dmCad.qryClie.Fieldbyname('IDCLIE').AsInteger;
+   DESCRICAO        := dmCad.qryClie.FieldByName('RAZAO').AsString;
 end;
 
 procedure TFcad_Clientes.eCidadePropertiesButtonClick(Sender: TObject;
@@ -299,11 +298,7 @@ end;
 
 procedure TFcad_Clientes.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-   ID               := dmCad.qryClie.Fieldbyname('IDCLIE').AsInteger;
-   DESCRICAO        := dmCad.qryClie.FieldByName('RAZAO').AsString;
-
-   inherited;
-
+  inherited;
    if pnBotaoCon.Visible = False then
    begin
       FormAtivo     := Nil;

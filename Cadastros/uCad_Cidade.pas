@@ -21,7 +21,7 @@ uses
   cxNavigator, Data.DB, cxDBData, cxContainer, cxImage, cxTextEdit, cxMaskEdit,
   cxDropDownEdit, cxLabel, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, Vcl.StdCtrls,
-  cxButtons, Vcl.ExtCtrls, dxGDIPlusClasses;
+  cxButtons, Vcl.ExtCtrls, dxGDIPlusClasses, RxMenus;
 
 type
   TFcad_Cidade = class(TFcad_Pai)
@@ -58,7 +58,7 @@ begin
    end;
    StrSql := 'select * from CODIBGE where '+indice+' like '+QuotedStr('%'+eConsulta.Text+'%');
 
-   Consulta(StrSql, dmcad.qryCidade);
+   ConsultaSql(StrSql, dmcad.qryCidade);
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryCidade.RecordCount);
    eConsulta.setFOcus;
 end;

@@ -4,8 +4,8 @@ interface
 
 uses
    MMSystem, Graphics, System.SysUtils, Forms, System.Classes, TypInfo,
-   cxButtons, CxGroupBox, cxLabel, cxCheckBox, cxTextEdit, cxMaskEdit,
-   FireDAC.Comp.Client, Windows, StdCtrls, Vcl.DIalogs, ComObj, ComCtrls,
+   cxButtons, CxGroupBox, cxLabel, cxCheckBox, cxTextEdit, cxMaskEdit, Controls,
+   FireDAC.Comp.Client, Windows, StdCtrls, Vcl.DIalogs, ComObj, ComCtrls, cxImage,
    NFe_Util_2G_TLB ; // acrescentar essa linha no use da unit para NF-E DLL;
 
    // Mensagens
@@ -17,28 +17,36 @@ uses
    FUNCTION    VALIDAUF(Dado : string) : boolean;
    FUNCTION    VALIDACNPJ(Dado : string) : boolean;
    FUNCTION    VALIDACPF(Dado : string) : boolean;
-   PROCEDURE ValidaCampoTag(Form: TForm);
-   FUNCTION ValidaData(const S: string): boolean;
+   PROCEDURE   ValidaCampoTag(Form: TForm);
+   FUNCTION    ValidaData(const S: string): boolean;
+   FUNCTION    Temletra(texto:string) : boolean;
+   FUNCTION    DigitoCodigodeBar(EREFERENCIA:string):integer;
 
    // Envio de E-mails
    PROCEDURE EnviaEmailDLL(Assunto, Destino, Anexo: String);
 
    // Executa Processos
-   FUNCTION ExecutaGen(StrTabela : String) : Integer;
-   FUNCTION Consulta(StrConsulta: String; qrDados: TFDQuery): Boolean;
-   FUNCTION ifs(Expressao: Boolean; CasoVerdadeiro, CasoFalso: Variant): Variant;
-   FUNCTION ConsultaQuery(StrCOnsulta: string; intQuery: Integer): Integer;
-   FUNCTION BuscaNomeAtivo(TABELA:String;CODIGO:Integer):String;
-Function ConsultaCampoNomeAtivo(StrCodigo, StrTabela: String):String;
+   FUNCTION    ExecutaGen(StrTabela : String) : Integer;
+   FUNCTION    ExecutaSql(StrConsulta: String; qrDados: TFDQuery): Boolean;
+   FUNCTION    ConsultaSql(StrConsulta: String; qrDados: TFDQuery): Boolean;
+   FUNCTION    ifs(Expressao: Boolean; CasoVerdadeiro, CasoFalso: Variant): Variant;
+   FUNCTION    BuscaNomeAtivo(TABELA:String;CODIGO:Integer):String;
+   FUNCTION    BUSCACONF(CAMPO:String):String;
+   FUNCTION    ConsultaCampoNomeAtivo(StrCodigo, StrTabela: String):String;
+   FUNCTION    ConsultaProduto(StrProd: String): String;
 
 
    // Chama/Configura Forms
-   PROCEDURE ExecutaForm(FormClasse: TFormClass; var NewForm: TObject);
-   PROCEDURE AbreTelaComShowModal(FormClasse: TFormClass; var NewForm: TObject; FNomeFormRetorno: TForm; StrTabela: String);
+   PROCEDURE   ExecutaForm(FormClasse: TFormClass; var NewForm: TObject);
+   PROCEDURE   AbreTelaComShowModal(FormClasse: TFormClass; var NewForm: TObject; FNomeFormRetorno: TForm; StrTabela: String);
 
-   PROCEDURE PFundo(mostra: integer);
+   PROCEDURE   PFundo(mostra: integer);
+
+const
+   SqlBuscaProduto = 'SELECT IDPROD, NOMEPROD, UNPROD, ESTOQUETOTAL, REFPROD, CODBAR FROM PRODUTO';
 
 var
+   FVisualizaImagem,
    FormAtivo                          : TForm;
    FCorSelec, FCorLista               : TColor;
    Lista                              : TStringList;
@@ -187,16 +195,12 @@ procedure PFundo(mostra: integer);
 begin
    if Mostra=1 then
    begin
-      Fprinc.cxFundo.Visible := true;
-      FPrinc.pnfundo.Visible := true;
-      FPrinc.pnTop.Visible   := true;
+      FPrinc.dxMenu.Visible := True;
+      FPrinc.pnTop.Visible  := true;
    end else
    if Mostra=0 then
    begin
-      FPrinc.pnfundo.Visible := false;
-      Fprinc.cxFundo.Visible := false;
-//      if Fcad_Mesa = NIL then
-//         FPrinc.pnTop.Visible   := false;
+      FPrinc.dxMenu.Visible := False;
    end;
 end;
 
@@ -215,6 +219,7 @@ begin
        TForm(NewForm).Show;
      Finally
 //       ResetMouse;
+         FormAtivo := TForm(NewForm);
        end;
    PFundo(0);
 end;
@@ -337,63 +342,23 @@ begin
    end;
 end;
 
-Function ConsultaQuery(StrCOnsulta: string; intQuery: Integer): Integer;
-begin
-   with dmCAd do
-   begin
-      try
-         Result:= -1;
-         case intQuery of
-            1: begin
-               qryAux.Close;
-               qryAux.sql.clear;
-               qryAux.sql.add(StrConsulta);
-               qryAux.open;
-               qryAux.FetchAll;
-               qryAux.First;
-               Result := qryAux.REcordCount;
-            end;
-            2: begin
-               qryAux.close;
-               qryAux.sql.clear;
-               qryAux.sql.add(StrConsulta);
-               qryAux.open;
-               qryAux.FetchAll;
-               qryAux.First;
-               Result := qryAux.REcordCount;
-            end;
-            3: begin
-               qryAux.close;
-               qryAux.sql.clear;
-               qryAux.sql.add(StrConsulta);
-               qryAux.open;
-               qryAux.FetchAll;
-               qryAux.First;
-               Result := qryAux.REcordCount;
-            end;
-         end;
-      Finally
-         GravaSql(StrConsulta, 'qryAux'+IntToStr(intQuery));
-      end;
-   end;
-end;
-
 Function ExecutaGen(StrTabela : String) : Integer;
 begin
    with dmCad do
    begin
-      ConsultaQuery('select GEN_ID(GEN_'+StrTabela+'_ID,1) codigo from dual',1);
+      ConsultaSql('select GEN_ID(GEN_'+StrTabela+'_ID,1) codigo from dual',dmCad.qryAux);
       Result := dmCad.qryAux.Fieldbyname('CODIGO').asInteger;
    end;
 end;
 
-Function Consulta(StrConsulta: String; qrDados: TFDQuery): Boolean;
+Function ConsultaSql(StrConsulta: String; qrDados: TFDQuery): Boolean;
 begin
    try
       qrDados.Close;
       qrDados.Sql.Clear;
       qrDados.SQL.Text := StrConsulta;
       qrDados.Open;
+      qrDados.First;
    Finally
       GravaSql(StrConsulta, qrDados.Name);
       Result := True;
@@ -569,13 +534,10 @@ var oNome:String;
 begin
    dmCad.qryAux.Close;
 
-   If TABELA = 'CLIENTE'         then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('CLI'); // Cliente
-   If TABELA = 'FORNECEDOR'      then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('FOR'); // Cliente
-   If TABELA = 'VENDEDOR'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('VEN'); // Cliente
-   if TABELA = 'GRUPOS'          then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
-   if TABELA = 'SUBGRUPO'       then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
-   if TABELA = 'FPAGTO'          then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
-   if TABELA = 'LOCALIZACAO'     then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
+   If TABELA = 'CLIENTE'         then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('CLI') else
+   If TABELA = 'FORNECEDOR'      then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('FOR') else
+   If TABELA = 'VENDEDOR'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('VEN') else
+   if TABELA <> ''               then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
 
 
    dmCad.qryAux.ParamByName('CODIGO').AsInteger  :=  CODIGO;
@@ -597,6 +559,133 @@ begin
    if (StrCodigo = '') or (StrCodigo='0') then
       Result := 'NENHUM' else
       Result := BuscaNomeAtivo(StrTabela, StrToInt(StrCodigo));
+end;
+
+function BUSCACONF(CAMPO:String):String;
+var oNome:String;
+begin
+   ConsultaSql('select VALORCONF from ITEMCONF where CAMPO='+QuotedStr(CAMPO), dmCad.qryAux);
+
+   if not dmcad.qryAux.IsEmpty then
+      oNome:= dmCad.qryAux.FieldByname('VALORCONF').asString else
+   begin
+      oNome:='ERRO';
+      ShowMessage('Atenção! Configuração não encontrada, contate suporte!');
+      Msg('Não encontramos uma configuração correta, contate suporte!', 'I',':(');
+   end;
+   ReSult := oNome;
+end;
+
+Function ExecutaSql(StrConsulta: String; qrDados: TFDQuery): Boolean;
+begin
+   try
+      qrDados.Close;
+      qrDados.Sql.Clear;
+      qrDados.SQL.Text := StrConsulta;
+      qrDados.ExecSQL;
+      qrDados.Close;
+   Finally
+      GravaSql(StrConsulta, qrDados.Name);
+      Result := True;
+   end;
+end;
+
+function Temletra(texto:string) : boolean;
+var i : integer;
+    oresultado : boolean;
+begin
+    oresultado                                         := false;
+    i                                                  :=1;
+    while (i <= length(texto)) and (oresultado = false) do
+    begin
+       if not (texto[i] in ['0'..'9']) then oresultado := true;
+       inc(i);
+    end;
+
+    result                                             := oresultado;
+end;
+
+function DigitoCodigodeBar(EREFERENCIA:string):integer;
+var
+   ean13:string;
+   i,total,num,mult,digito:integer;
+begin
+    total     :=0;
+    ean13     :='131313131313';
+    for i     :=1 to length(ereferencia) do
+    begin
+      num     :=strtoint(eReferencia[i]);
+      mult    :=strtoint(ean13[i]);
+      total   :=total+(num*mult);
+    end;
+
+    if total mod 10 = 0 then
+    begin
+       digito :=0;
+    end
+    else
+    begin
+       digito :=10-(total mod 10);
+    end;
+    result    :=digito;
+end;
+
+Function ConsultaProduto(StrProd: String): String;
+begin
+   dmcad.qryAux.Close;
+
+///// Verifica se pode ser EAN
+   if (Length(StrProd) = 13) and (not Temletra(StrProd)) then
+   begin
+///// Verifica se é EAN
+      if  DIGITOCODIGODEBAR(copy(StrProd,1,12)) = StrToInt(StrProd[13]) then
+      begin
+         ///// Busca por REFERENCIA
+         ConsultaSql(SqlBuscaProduto+' WHERE REFPROD='+QuotedStr(StrProd)+' AND ATIVOPROD <> '+QuotedStr('N'), dmCad.qryAux);
+
+         ///// Se não achou Busca por COD PRODUTO
+         if dmcad.qryAux.IsEmpty then
+            ConsultaSql(SqlBuscaProduto+' WHERE IDPROD='+QuotedStr(copy(StrProd,6,7))+' AND ATIVOPROD <> '+QuotedStr('N'), dmCad.qryAux);
+
+///// Se não achou Busca por CODIGO DE BARRAS
+         if dmcad.qryAux.IsEmpty then
+            ConsultaSql(SqlBuscaProduto+' WHERE CODBAR='+QuotedStr(StrProd)+' AND ATIVOPROD <> '+QuotedStr('N'), dmCad.qryAux);
+      end
+      else
+      begin
+///// Se não achou Busca por CODIGO PRODUTO
+         ConsultaSql(SqlBuscaProduto+' WHERE IDPROD='+QuotedStr(StrProd)+' AND ATIVOPROD <> '+QuotedStr('N'), dmCad.qryAux);
+
+///// Se não achou Busca por REFERENCIA
+         if dmcad.qryAux.IsEmpty then
+            ConsultaSql(SqlBuscaProduto+' WHERE REFPROD='+QuotedStr(StrProd)+' AND ATIVOPROD <> '+QuotedStr('N'), dmCad.qryAux);
+
+///// Se não achou Busca por CODIGO BARRAS
+         if dmcad.qryAux.IsEmpty then
+         begin
+            ConsultaSql(SqlBuscaProduto+' WHERE CODBAR='+QuotedStr(StrProd)+' AND ATIVOPROD <> '+QuotedStr('N'), dmCad.qryAux);
+
+         end;
+      end;
+   end else
+///// Se o tamnho é diferente ou menor que 13
+   begin
+      ///// Se não achou Busca por REFERENCIA
+      ConsultaSql(SqlBuscaProduto+' WHERE REFPROD='+QuotedStr(StrProd)+' AND ATIVOPROD <> '+QuotedStr('N'), dmCad.qryAux);
+      ///// Se não achou Busca por CODIGO PRODUTO
+      if dmcad.qryAux.IsEmpty then
+         ConsultaSql(SqlBuscaProduto+' WHERE IDPROD='+QuotedStr(StrProd)+' AND ATIVOPROD <> '+QuotedStr('N'), dmCad.qryAux);
+
+///// Se não achou Busca por CODIGO BARRAS
+      if dmcad.qryAux.IsEmpty then
+         ConsultaSql(SqlBuscaProduto+' WHERE CODBAR='+QuotedStr(StrProd)+' AND ATIVOPROD <> '+QuotedStr('N'), dmCad.qryAux);
+   end;
+///// Se não achou DEVOLVE 0
+   If ((dmcad.qryAux.IsEmpty) or (dmcad.qryAux.RecordCount > 1)) then
+      Result := '0'
+   else
+///// Se achou devolve o codigo
+      Result := IntToStr(dmCad.qryAux.Fieldbyname('IDPROD').AsInteger);
 end;
 
 end.

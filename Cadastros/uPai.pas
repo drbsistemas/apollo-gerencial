@@ -92,7 +92,7 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas;
+uses uRotinas, uPrinc;
 
 procedure TFcad_Pai.MostraPainelBusca(AbrePainel: TAbrePainel);
 begin

@@ -27,15 +27,6 @@ uses
 
 type
   TFcad_Produto = class(TFcad_Pai)
-    eCodigo: TcxTextEdit;
-    cxLabel3: TcxLabel;
-    eAtivo: TcxCheckBox;
-    cxLabel14: TcxLabel;
-    eDtCad: TcxDateEdit;
-    cxNome: TcxLabel;
-    eNomeProd: TcxTextEdit;
-    cxLabel5: TcxLabel;
-    eMarca: TcxTextEdit;
     cxPage: TcxPageControl;
     cxVenda: TcxTabSheet;
     ePrecoCpr: TcxCurrencyEdit;
@@ -67,6 +58,37 @@ type
     cxLabel28: TcxLabel;
     eObs: TcxMemo;
     cxLabel29: TcxLabel;
+    eFile2: TOpenPictureDialog;
+    grConsultaDBTableView1Column1: TcxGridDBColumn;
+    grConsultaDBTableView1Column2: TcxGridDBColumn;
+    grConsultaDBTableView1Column3: TcxGridDBColumn;
+    grConsultaDBTableView1Column4: TcxGridDBColumn;
+    cxBtnEstoque: TcxButton;
+    cxImage1: TcxImage;
+    cxLabel13: TcxLabel;
+    cxLabel30: TcxLabel;
+    cxLabel31: TcxLabel;
+    cxLabel32: TcxLabel;
+    cxLabel33: TcxLabel;
+    cxDBTextEdit5: TcxDBTextEdit;
+    cxLabel34: TcxLabel;
+    cxDBTextEdit6: TcxDBTextEdit;
+    cxDBTextEdit7: TcxDBTextEdit;
+    cxLabel35: TcxLabel;
+    cxDBCurrencyEdit2: TcxDBCurrencyEdit;
+    cxDBCurrencyEdit3: TcxDBCurrencyEdit;
+    cxDBCurrencyEdit4: TcxDBCurrencyEdit;
+    cxDBCurrencyEdit1: TcxDBCurrencyEdit;
+    Panel1: TPanel;
+    eCodigo: TcxTextEdit;
+    cxLabel3: TcxLabel;
+    eAtivo: TcxCheckBox;
+    cxLabel14: TcxLabel;
+    eDtCad: TcxDateEdit;
+    cxNome: TcxLabel;
+    eNomeProd: TcxTextEdit;
+    cxLabel5: TcxLabel;
+    eMarca: TcxTextEdit;
     eRefProd: TcxTextEdit;
     cxLabel6: TcxLabel;
     cxLabel10: TcxLabel;
@@ -86,38 +108,16 @@ type
     cxLabelNcm: TcxLabel;
     cxImage: TcxImage;
     eFoto: TcxTextEdit;
-    eFile2: TOpenPictureDialog;
     cxApagaFoto: TcxButton;
     cxSalvaFoto: TcxButton;
     eDtAtualizado: TcxDateEdit;
     cxLabel12: TcxLabel;
-    grConsultaDBTableView1Column1: TcxGridDBColumn;
-    grConsultaDBTableView1Column2: TcxGridDBColumn;
-    grConsultaDBTableView1Column3: TcxGridDBColumn;
-    grConsultaDBTableView1Column4: TcxGridDBColumn;
-    pnInfoProd: TPanel;
-    cxImage1: TcxImage;
-    cxDBTextEdit1: TcxDBTextEdit;
-    cxLabel13: TcxLabel;
-    cxLabel30: TcxLabel;
-    cxDBTextEdit2: TcxDBTextEdit;
-    cxDBTextEdit3: TcxDBTextEdit;
-    cxLabel31: TcxLabel;
-    cxLabel32: TcxLabel;
-    cxDBTextEdit4: TcxDBTextEdit;
-    cxLabel33: TcxLabel;
-    cxDBTextEdit5: TcxDBTextEdit;
-    cxLabel34: TcxLabel;
-    cxDBTextEdit6: TcxDBTextEdit;
-    cxDBTextEdit7: TcxDBTextEdit;
-    cxLabel35: TcxLabel;
     eLocal: TcxTextEdit;
     eCodLocal: TcxButtonEdit;
     cxLabel19: TcxLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
-    procedure cxVoltarClick(Sender: TObject);
     procedure grConsultaDBTableView1DblClick(Sender: TObject);
     procedure cxApagarClick(Sender: TObject);
     procedure cxVerClick(Sender: TObject);
@@ -140,11 +140,23 @@ type
     procedure eCodLocalPropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure eCodLocalExit(Sender: TObject);
+    procedure cxBtnEstoqueClick(Sender: TObject);
+    procedure grConsultaDBTableView1CellClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure cxImage1Click(Sender: TObject);
+    procedure cxImageClick(Sender: TObject);
+    procedure eCustoProdExit(Sender: TObject);
+    procedure eMlExit(Sender: TObject);
+    procedure ePrecoVendaExit(Sender: TObject);
   private
     { Private declarations }
     indice : String;
     procedure Edita;
     procedure Limpa;
+    procedure VerFoto;
+    procedure FechaVisualizacaoImagem(sender: TObject);
+    procedure VisualizaImagem;
   public
     { Public declarations }
   end;
@@ -156,7 +168,7 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas, uDmCad, uCon_Generica, uCad_Clientes;
+uses uRotinas, uDmCad, uCon_Generica, uCad_Clientes, uCad_Estoque, uCalculos;
 
 procedure TFcad_Produto.cxApagaFotoClick(Sender: TObject);
 begin
@@ -181,6 +193,12 @@ begin
    end;
 end;
 
+procedure TFcad_Produto.cxBtnEstoqueClick(Sender: TObject);
+begin
+  inherited;
+  AbreTelaComShowModal(TFcad_Estoque, TObject(FCad_Estoque), NIL, '');
+end;
+
 procedure TFcad_Produto.cxConsultaPropertiesChange(Sender: TObject);
 begin
   inherited;
@@ -200,7 +218,8 @@ begin
    if cbAtivo.ItemIndex > 0 then
       StrSql := StrSql + ' and ATIVO='+QuotedStr(ifs(cbAtivo.ItemIndex=1, 'S','N'));
 
-   Consulta(StrSql, dmcad.qryProd);
+   ConsultaSql(StrSql, dmcad.qryProd);
+   dmcad.qryProd.First;
 
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryProd.RecordCount);
 end;
@@ -220,6 +239,18 @@ begin
    eRefProd.SetFocus;
 end;
 
+procedure TFcad_Produto.cxImage1Click(Sender: TObject);
+begin
+  inherited;
+   VisualizaImagem;
+end;
+
+procedure TFcad_Produto.cxImageClick(Sender: TObject);
+begin
+  inherited;
+   VisualizaImagem;
+end;
+
 procedure TFcad_Produto.cxNovoClick(Sender: TObject);
 begin
    inherited;
@@ -234,14 +265,6 @@ begin
    cxSalvar.Enabled := false;
 end;
 
-procedure TFcad_Produto.cxVoltarClick(Sender: TObject);
-begin
-   inherited;
-   if pnBotaoCon.Tag = 1 then
-      MostraPainelBusca(Con) else
-      Close;
-end;
-
 procedure TFcad_Produto.eCodFornecExit(Sender: TObject);
 begin
    inherited;
@@ -252,7 +275,7 @@ end;
 
 procedure TFcad_Produto.eCodFornecKeyPress(Sender: TObject; var Key: Char);
 begin
-  If not (key in ['0'..'9',#8]) then key := #0;
+   If not (key in ['0'..'9',#8]) then key := #0;
 end;
 
 procedure TFcad_Produto.eCodFornecPropertiesButtonClick(Sender: TObject;
@@ -331,6 +354,15 @@ begin
    end;
 end;
 
+procedure TFcad_Produto.eCustoProdExit(Sender: TObject);
+begin
+  inherited;
+   eCustoProd.Value := (ePrecoCpr.Value + eCustoCpr.Value);
+   if eMl.Value > 0 then
+      eMLExit(self);
+
+end;
+
 procedure TFcad_Produto.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    ID               := dmCad.qryProd.Fieldbyname('IDPROD').AsInteger;
@@ -358,12 +390,21 @@ begin
       dmcad.qryProd.Prior;
 
    cxQtdeREg.Caption := 'Registros: '+ intToStr(dmCad.qryProd.RecordCount);
+   VerFoto;
 end;
 
 procedure TFcad_Produto.FormShow(Sender: TObject);
 begin
    inherited;
    cxConsultaPropertiesChange(self);
+   VerFoto;
+end;
+
+procedure TFcad_Produto.grConsultaDBTableView1CellClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+begin
+   VerFoto;
 end;
 
 procedure TFcad_Produto.grConsultaDBTableView1DblClick(Sender: TObject);
@@ -540,4 +581,65 @@ begin
    end;
 end;
 
+procedure TFcad_Produto.eMlExit(Sender: TObject);
+begin
+   ePrecoVenda.Value := CalculaMargemLucro(eMl.Value, eCustoProd.Value);
+end;
+
+procedure TFcad_Produto.ePrecoVendaExit(Sender: TObject);
+begin
+   eMl.Value := ReCalculaMargemLucro(ePrecoVenda.Value, eCustoProd.Value);
+end;
+
+Procedure TFcad_Produto.VerFoto;
+begin
+   if (dmcad.QryProd.Fieldbyname('FOTOPROD').AsString <> '') and (FileExists(dmcad.QryProd.Fieldbyname('FOTOPROD').AsString)) then
+   begin
+      try
+         cxImage1.Picture.LoadFromFile(dmcad.QryProd.Fieldbyname('FOTOPROD').AsString);
+      except
+         cxImage1.Picture := nil;
+      end;
+   end
+   else
+      cxImage1.Picture := nil;
+end;
+
+Procedure TFCad_Produto.VisualizaImagem;
+var
+   fImagemZoom: TcxImage;
+begin
+   if dmcad.qryProd.FieldByName('FOTOPROD').AsString <> '' then
+   begin
+      fVisualizaImagem          := TForm.Create(fVisualizaImagem);
+      with fVisualizaImagem do begin
+         Position               := poScreenCenter;
+         BorderStyle            := bsSizeToolWin;
+         BorderIcons            := [biSystemMenu];
+         Color                  := clWhite;
+         Width                  := 800;
+         Height                 := 800;
+         Caption                := 'Visualizador de Imagem';
+         fImagemZoom            := TcxImage.Create(fVisualizaImagem);
+         with fImagemZoom do begin
+            Parent              := fVisualizaImagem;
+            Align               := alClient;
+            AutoSize            := False;
+            Properties.Center   := True;
+            Picture.LoadFromFile(dmcad.qryProd.FieldByName('FOTOPROD').AsString);
+            Properties.Stretch  := False;
+            fImagemZoom.OnClick := FechaVisualizacaoImagem;
+         end;
+         ShowModal;
+      end;
+   end;
+end;
+
+Procedure TFcad_PRoduto.FechaVisualizacaoImagem(sender: TObject);
+begin
+   fVisualizaImagem.Close;
+end;
+
+
 end.
+

@@ -50,10 +50,24 @@ type
     qryProd: TFDQuery;
     UpdtProd: TFDUpdateSQL;
     dsProd: TDataSource;
+    qryEstoque: TFDQuery;
+    UpdtEstoque: TFDUpdateSQL;
+    dsEstoque: TDataSource;
+    qryAnimais: TFDQuery;
+    UpdtAnimais: TFDUpdateSQL;
+    dsAnimais: TDataSource;
+    qryAux2: TFDQuery;
+    dsAux2: TDataSource;
+    qryBalanco: TFDQuery;
+    UpdtBalanco: TFDUpdateSQL;
+    dsBalanco: TDataSource;
     procedure qryClieAfterInsert(DataSet: TDataSet);
     procedure qryCidadeAfterInsert(DataSet: TDataSet);
     procedure qryGenericoAfterInsert(DataSet: TDataSet);
     procedure qryProdAfterInsert(DataSet: TDataSet);
+    procedure qryEstoqueAfterInsert(DataSet: TDataSet);
+    procedure qryAnimaisAfterInsert(DataSet: TDataSet);
+    procedure qryBalancoAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -71,14 +85,29 @@ uses uDmCon, uRotinas;
 
 {$R *.dfm}
 
+procedure TdmCad.qryAnimaisAfterInsert(DataSet: TDataSet);
+begin
+   dmCad.qryAnimais.FieldByName('IDANIMAL').AsInteger       := ExecutaGen('ANIMAIS');
+end;
+
+procedure TdmCad.qryBalancoAfterInsert(DataSet: TDataSet);
+begin
+   dmCad.qryAnimais.FieldByName('IDBALANCO').AsInteger       := ExecutaGen('BALANCO');
+end;
+
 procedure TdmCad.qryCidadeAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryClie.FieldByName('CODMUN').AsInteger := ExecutaGen('CODIBGE');
+   dmCad.qryClie.FieldByName('CODMUN').AsInteger         := ExecutaGen('CODIBGE');
 end;
 
 procedure TdmCad.qryClieAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryClie.FieldByName('IDCLIE').AsInteger := ExecutaGen('CLIENTE');
+   dmCad.qryClie.FieldByName('IDCLIE').AsInteger         := ExecutaGen('CLIENTE');
+end;
+
+procedure TdmCad.qryEstoqueAfterInsert(DataSet: TDataSet);
+begin
+   dmCad.qryProd.FieldByName('IDESTOQUE').AsInteger      := ExecutaGen('ESTOQUE');
 end;
 
 procedure TdmCad.qryGenericoAfterInsert(DataSet: TDataSet);
@@ -88,7 +117,7 @@ end;
 
 procedure TdmCad.qryProdAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryProd.FieldByName('IDPROD').AsInteger := ExecutaGen('PRODUTO');
+   dmCad.qryProd.FieldByName('IDPROD').AsInteger         := ExecutaGen('PRODUTO');
 end;
 
 end.

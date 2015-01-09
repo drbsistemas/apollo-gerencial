@@ -1,7 +1,7 @@
 object dmCad: TdmCad
   OldCreateOrder = False
-  Height = 186
-  Width = 341
+  Height = 355
+  Width = 395
   object qryConf: TFDQuery
     CachedUpdates = True
     Connection = dmCon.FdCon
@@ -11,7 +11,7 @@ object dmCad: TdmCad
     SQL.Strings = (
       'select * from CONF')
     Left = 258
-    Top = 8
+    Top = 5
   end
   object qryAux: TFDQuery
     CachedUpdates = True
@@ -19,12 +19,12 @@ object dmCad: TdmCad
     Transaction = dmCon.FdSalva
     UpdateTransaction = dmCon.FdSalva
     Left = 304
-    Top = 9
+    Top = 5
   end
   object dsAux: TDataSource
     DataSet = qryAux
     Left = 304
-    Top = 56
+    Top = 49
   end
   object UpdtConf: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -116,12 +116,12 @@ object dmCad: TdmCad
       'FROM CONF'
       'WHERE IDCONF = :IDCONF')
     Left = 258
-    Top = 56
+    Top = 49
   end
   object dsConf: TDataSource
     DataSet = qryConf
     Left = 257
-    Top = 104
+    Top = 94
   end
   object qryClie: TFDQuery
     AfterInsert = qryClieAfterInsert
@@ -133,7 +133,7 @@ object dmCad: TdmCad
     SQL.Strings = (
       'select * from CLIENTE')
     Left = 12
-    Top = 6
+    Top = 5
     object qryClieIDCLIE: TIntegerField
       FieldName = 'IDCLIE'
       Origin = 'IDCLIE'
@@ -305,12 +305,12 @@ object dmCad: TdmCad
       'FROM CLIENTE'
       'WHERE IDCLIE = :IDCLIE')
     Left = 12
-    Top = 54
+    Top = 49
   end
   object dsClie: TDataSource
     DataSet = qryClie
     Left = 12
-    Top = 102
+    Top = 94
   end
   object qryCidade: TFDQuery
     AfterInsert = qryCidadeAfterInsert
@@ -322,7 +322,7 @@ object dmCad: TdmCad
     SQL.Strings = (
       'select * from CODIBGE')
     Left = 58
-    Top = 6
+    Top = 5
   end
   object UpdtCidade: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -377,12 +377,12 @@ object dmCad: TdmCad
       'FROM CLIENTE'
       'WHERE IDCLIE = :IDCLIE')
     Left = 58
-    Top = 54
+    Top = 49
   end
   object dsCidade: TDataSource
     DataSet = qryCidade
     Left = 58
-    Top = 102
+    Top = 94
   end
   object qryGenerico: TFDQuery
     AfterInsert = qryGenericoAfterInsert
@@ -394,7 +394,7 @@ object dmCad: TdmCad
     SQL.Strings = (
       'select * from GENERICA')
     Left = 102
-    Top = 6
+    Top = 5
   end
   object UpdtGenerico: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -419,12 +419,12 @@ object dmCad: TdmCad
       'FROM GENERICA'
       'WHERE IDGENERICA = :IDGENERICA')
     Left = 102
-    Top = 54
+    Top = 49
   end
   object dsGenerico: TDataSource
     DataSet = qryGenerico
     Left = 102
-    Top = 102
+    Top = 94
   end
   object qryProd: TFDQuery
     AfterInsert = qryProdAfterInsert
@@ -451,7 +451,7 @@ object dmCad: TdmCad
         'ALIZACAO'#39
       'LEFT JOIN CLIENTE D ON A.IDFORNEC=D.IDCLIE')
     Left = 142
-    Top = 6
+    Top = 5
   end
   object UpdtProd: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -548,11 +548,280 @@ object dmCad: TdmCad
       'FROM PRODUTO'
       'WHERE IDPROD = :IDPROD')
     Left = 142
-    Top = 54
+    Top = 49
   end
   object dsProd: TDataSource
     DataSet = qryProd
     Left = 142
-    Top = 102
+    Top = 94
+  end
+  object qryEstoque: TFDQuery
+    AfterInsert = qryEstoqueAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtEstoque
+    SQL.Strings = (
+      
+        'select A.* , B.NOMEPROD, B.MARCAPROD, B.ESTOQUEDISP, B.ESTOQUETO' +
+        'TAL, B.UNPROD'
+      'from Estoque A'
+      'left join Produto B on A.IDPROD = B.IDPROD')
+    Left = 182
+    Top = 5
+  end
+  object UpdtEstoque: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO ESTOQUE'
+      '(IDESTOQUE, IDPROD, ESTOQUEANTES, ENTRADA, '
+      '  SAIDA, SALDO, CUSTO, ORIGEM, DOCUMENTO, '
+      '  "DATA", DESCRICAO, USUARIO, IDCLIE)'
+      
+        'VALUES (:NEW_IDESTOQUE, :NEW_IDPROD, :NEW_ESTOQUEANTES, :NEW_ENT' +
+        'RADA, '
+      
+        '  :NEW_SAIDA, :NEW_SALDO, :NEW_CUSTO, :NEW_ORIGEM, :NEW_DOCUMENT' +
+        'O, '
+      '  :NEW_DATA, :NEW_DESCRICAO, :NEW_USUARIO, :NEW_IDCLIE)'
+      
+        'RETURNING IDESTOQUE, IDPROD, ESTOQUEANTES, ENTRADA, SAIDA, SALDO' +
+        ', CUSTO, ORIGEM, DOCUMENTO, "DATA", DESCRICAO, USUARIO, IDCLIE')
+    ModifySQL.Strings = (
+      'UPDATE ESTOQUE'
+      
+        'SET IDESTOQUE = :NEW_IDESTOQUE, IDPROD = :NEW_IDPROD, ESTOQUEANT' +
+        'ES = :NEW_ESTOQUEANTES, '
+      
+        '  ENTRADA = :NEW_ENTRADA, SAIDA = :NEW_SAIDA, SALDO = :NEW_SALDO' +
+        ', '
+      
+        '  CUSTO = :NEW_CUSTO, ORIGEM = :NEW_ORIGEM, DOCUMENTO = :NEW_DOC' +
+        'UMENTO, '
+      
+        '  "DATA" = :NEW_DATA, DESCRICAO = :NEW_DESCRICAO, USUARIO = :NEW' +
+        '_USUARIO, '
+      '  IDCLIE = :NEW_IDCLIE'
+      'WHERE IDESTOQUE = :OLD_IDESTOQUE'
+      
+        'RETURNING IDESTOQUE, IDPROD, ESTOQUEANTES, ENTRADA, SAIDA, SALDO' +
+        ', CUSTO, ORIGEM, DOCUMENTO, "DATA", DESCRICAO, USUARIO, IDCLIE')
+    DeleteSQL.Strings = (
+      'DELETE FROM ESTOQUE'
+      'WHERE IDESTOQUE = :OLD_IDESTOQUE')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDESTOQUE, IDPROD, ESTOQUEANTES, ENTRADA, SAIDA, SALDO, C' +
+        'USTO, '
+      '  ORIGEM, DOCUMENTO, "DATA" AS "DATA", DESCRICAO, USUARIO, '
+      '  IDCLIE'
+      'FROM ESTOQUE'
+      'WHERE IDESTOQUE = :IDESTOQUE')
+    Left = 182
+    Top = 49
+  end
+  object dsEstoque: TDataSource
+    DataSet = qryEstoque
+    Left = 182
+    Top = 94
+  end
+  object qryAnimais: TFDQuery
+    AfterInsert = qryAnimaisAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtAnimais
+    SQL.Strings = (
+      'SELECT A.*, '
+      'B.DESCRICAO RACA,'
+      'C.DESCRICAO ESPECIE,'
+      'D.RAZAO'
+      'FROM ANIMAIS A'
+      
+        'LEFT JOIN GENERICA B ON A.IDRACA=B.IDGENERICA AND  b.TABELA='#39'RAC' +
+        'A'#39
+      
+        'LEFT JOIN GENERICA C ON A.IDESPECIE=B.IDGENERICA AND C.TABELA='#39'E' +
+        'SPECIE'#39
+      'LEFT JOIN CLIENTE D ON A.IDCLIE=D.IDCLIE')
+    Left = 11
+    Top = 152
+  end
+  object UpdtAnimais: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO ANIMAIS'
+      '(IDANIMAL, IDCLIE, DATACAD, DATAATUALIZACAO, '
+      '  NOME, COR, SEXO, DATANASCE, RGA, '
+      '  NPEDIGREE, IDESPECIE, IDRACA, ATIVO, '
+      '  USUARIO, HISTORICO, FOTO, PESOATUAL)'
+      
+        'VALUES (:NEW_IDANIMAL, :NEW_IDCLIE, :NEW_DATACAD, :NEW_DATAATUAL' +
+        'IZACAO, '
+      '  :NEW_NOME, :NEW_COR, :NEW_SEXO, :NEW_DATANASCE, :NEW_RGA, '
+      '  :NEW_NPEDIGREE, :NEW_IDESPECIE, :NEW_IDRACA, :NEW_ATIVO, '
+      '  :NEW_USUARIO, :NEW_HISTORICO, :NEW_FOTO, :NEW_PESOATUAL)'
+      
+        'RETURNING IDANIMAL, IDCLIE, DATACAD, DATAATUALIZACAO, NOME, COR,' +
+        ' SEXO, DATANASCE, RGA, NPEDIGREE, IDESPECIE, IDRACA, ATIVO, USUA' +
+        'RIO, HISTORICO, FOTO, PESOATUAL')
+    ModifySQL.Strings = (
+      'UPDATE ANIMAIS'
+      
+        'SET IDANIMAL = :NEW_IDANIMAL, IDCLIE = :NEW_IDCLIE, DATACAD = :N' +
+        'EW_DATACAD, '
+      '  DATAATUALIZACAO = :NEW_DATAATUALIZACAO, NOME = :NEW_NOME, '
+      '  COR = :NEW_COR, SEXO = :NEW_SEXO, DATANASCE = :NEW_DATANASCE, '
+      
+        '  RGA = :NEW_RGA, NPEDIGREE = :NEW_NPEDIGREE, IDESPECIE = :NEW_I' +
+        'DESPECIE, '
+      
+        '  IDRACA = :NEW_IDRACA, ATIVO = :NEW_ATIVO, USUARIO = :NEW_USUAR' +
+        'IO, '
+      
+        '  HISTORICO = :NEW_HISTORICO, FOTO = :NEW_FOTO, PESOATUAL = :NEW' +
+        '_PESOATUAL'
+      
+        'WHERE IDANIMAL = :OLD_IDANIMAL AND IDCLIE = :OLD_IDCLIE AND DATA' +
+        'CAD = :OLD_DATACAD AND '
+      
+        '  DATAATUALIZACAO = :OLD_DATAATUALIZACAO AND NOME = :OLD_NOME AN' +
+        'D '
+      
+        '  COR = :OLD_COR AND SEXO = :OLD_SEXO AND DATANASCE = :OLD_DATAN' +
+        'ASCE AND '
+      
+        '  RGA = :OLD_RGA AND NPEDIGREE = :OLD_NPEDIGREE AND IDESPECIE = ' +
+        ':OLD_IDESPECIE AND '
+      
+        '  IDRACA = :OLD_IDRACA AND ATIVO = :OLD_ATIVO AND USUARIO = :OLD' +
+        '_USUARIO AND '
+      
+        '  HISTORICO = :OLD_HISTORICO AND FOTO = :OLD_FOTO AND PESOATUAL ' +
+        '= :OLD_PESOATUAL'
+      
+        'RETURNING IDANIMAL, IDCLIE, DATACAD, DATAATUALIZACAO, NOME, COR,' +
+        ' SEXO, DATANASCE, RGA, NPEDIGREE, IDESPECIE, IDRACA, ATIVO, USUA' +
+        'RIO, HISTORICO, FOTO, PESOATUAL')
+    DeleteSQL.Strings = (
+      'DELETE FROM ANIMAIS'
+      
+        'WHERE IDANIMAL = :OLD_IDANIMAL AND IDCLIE = :OLD_IDCLIE AND DATA' +
+        'CAD = :OLD_DATACAD AND '
+      
+        '  DATAATUALIZACAO = :OLD_DATAATUALIZACAO AND NOME = :OLD_NOME AN' +
+        'D '
+      
+        '  COR = :OLD_COR AND SEXO = :OLD_SEXO AND DATANASCE = :OLD_DATAN' +
+        'ASCE AND '
+      
+        '  RGA = :OLD_RGA AND NPEDIGREE = :OLD_NPEDIGREE AND IDESPECIE = ' +
+        ':OLD_IDESPECIE AND '
+      
+        '  IDRACA = :OLD_IDRACA AND ATIVO = :OLD_ATIVO AND USUARIO = :OLD' +
+        '_USUARIO AND '
+      
+        '  HISTORICO = :OLD_HISTORICO AND FOTO = :OLD_FOTO AND PESOATUAL ' +
+        '= :OLD_PESOATUAL')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDANIMAL, IDCLIE, DATACAD, DATAATUALIZACAO, NOME, COR, SE' +
+        'XO, '
+      '  DATANASCE, RGA, NPEDIGREE, IDESPECIE, IDRACA, ATIVO, USUARIO, '
+      '  HISTORICO, FOTO, PESOATUAL'
+      'FROM ANIMAIS'
+      
+        'WHERE IDANIMAL = :IDANIMAL AND IDCLIE = :IDCLIE AND DATACAD = :D' +
+        'ATACAD AND '
+      '  DATAATUALIZACAO = :DATAATUALIZACAO AND NOME = :NOME AND '
+      '  COR = :COR AND SEXO = :SEXO AND DATANASCE = :DATANASCE AND '
+      
+        '  RGA = :RGA AND NPEDIGREE = :NPEDIGREE AND IDESPECIE = :IDESPEC' +
+        'IE AND '
+      
+        '  IDRACA = :IDRACA AND ATIVO = :ATIVO AND USUARIO = :USUARIO AND' +
+        ' '
+      
+        '  HISTORICO = :HISTORICO AND FOTO = :FOTO AND PESOATUAL = :PESOA' +
+        'TUAL')
+    Left = 11
+    Top = 196
+  end
+  object dsAnimais: TDataSource
+    DataSet = qryAnimais
+    Left = 11
+    Top = 240
+  end
+  object qryAux2: TFDQuery
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    Left = 344
+    Top = 5
+  end
+  object dsAux2: TDataSource
+    DataSet = qryAux2
+    Left = 344
+    Top = 49
+  end
+  object qryBalanco: TFDQuery
+    AfterInsert = qryBalancoAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtBalanco
+    SQL.Strings = (
+      'select A.*, B.REFPROD, B.NOMEPROD from BALANCO A '
+      'LEFT JOIN PRODUTO B on A.IDPROD=B.IDPROD')
+    Left = 53
+    Top = 152
+  end
+  object UpdtBalanco: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO BALANCO'
+      '(IDBALANCO, IDPROD, IDSEQ, "DATA", STATUS, '
+      '  ESTOQUETOTAL, ESTOQUECONT, ESTOQUEDIF)'
+      
+        'VALUES (:NEW_IDBALANCO, :NEW_IDPROD, :NEW_IDSEQ, :NEW_DATA, :NEW' +
+        '_STATUS, '
+      '  :NEW_ESTOQUETOTAL, :NEW_ESTOQUECONT, :NEW_ESTOQUEDIF)'
+      
+        'RETURNING IDBALANCO, IDPROD, IDSEQ, "DATA", STATUS, ESTOQUETOTAL' +
+        ', ESTOQUECONT, ESTOQUEDIF')
+    ModifySQL.Strings = (
+      'UPDATE BALANCO'
+      
+        'SET IDBALANCO = :NEW_IDBALANCO, IDPROD = :NEW_IDPROD, IDSEQ = :N' +
+        'EW_IDSEQ, '
+      
+        '  "DATA" = :NEW_DATA, STATUS = :NEW_STATUS, ESTOQUETOTAL = :NEW_' +
+        'ESTOQUETOTAL, '
+      '  ESTOQUECONT = :NEW_ESTOQUECONT, ESTOQUEDIF = :NEW_ESTOQUEDIF'
+      'WHERE IDBALANCO = :OLD_IDBALANCO'
+      
+        'RETURNING IDBALANCO, IDPROD, IDSEQ, "DATA", STATUS, ESTOQUETOTAL' +
+        ', ESTOQUECONT, ESTOQUEDIF')
+    DeleteSQL.Strings = (
+      'DELETE FROM BALANCO'
+      'WHERE IDBALANCO = :OLD_IDBALANCO')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDBALANCO, IDPROD, IDSEQ, "DATA" AS "DATA", STATUS, ESTOQ' +
+        'UETOTAL, '
+      '  ESTOQUECONT, ESTOQUEDIF'
+      'FROM BALANCO'
+      'WHERE IDBALANCO = :IDBALANCO')
+    Left = 53
+    Top = 196
+  end
+  object dsBalanco: TDataSource
+    DataSet = qryBalanco
+    Left = 53
+    Top = 240
   end
 end

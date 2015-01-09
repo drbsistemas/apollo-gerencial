@@ -21,7 +21,13 @@ uses
   uRelatorios in '..\Rotinas\uRelatorios.pas',
   uCad_Empresa in '..\Cadastros\uCad_Empresa.pas' {FCad_Empresa},
   NFe_Util_2G_TLB in 'C:\Users\DANILO\Documents\Embarcadero\Studio\14.0\Imports\NFe_Util_2G_TLB.pas',
-  uCad_Produto in '..\Cadastros\uCad_Produto.pas' {Fcad_Produto};
+  uCad_Produto in '..\Cadastros\uCad_Produto.pas' {Fcad_Produto},
+  uEstoque in '..\Rotinas\uEstoque.pas',
+  uCad_Estoque in '..\Cadastros\uCad_Estoque.pas' {FCad_Estoque},
+  Vcl.Themes,
+  Vcl.Styles,
+  uCalculos in '..\Rotinas\uCalculos.pas',
+  uCad_Balanco in '..\Cadastros\uCad_Balanco.pas' {Fcad_Balanco};
 
 {$R *.res}
 

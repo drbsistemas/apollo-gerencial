@@ -35,7 +35,7 @@ type
     cxApelido: TcxLabel;
     eObs: TcxTextEdit;
     procedure AbreCom(StrAbre: String);
-    procedure CaptionForm(StrNome: String);
+    procedure CaptionForm;
     procedure CarregaTabelas();
 
     procedure FormShow(Sender: TObject);
@@ -88,7 +88,8 @@ begin
    if cbAtivo.ItemIndex > 0 then
       StrSql := StrSql + ' and ATIVO='+QuotedStr(ifs(cbAtivo.ItemIndex=1, 'S','N'));
 
-   Consulta(StrSql, dmcad.qryGenerico);
+   ConsultaSql(StrSql, dmcad.qryGenerico);
+   CaptionForm;
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryGenerico.RecordCount);
 end;
 
@@ -139,7 +140,7 @@ end;
 procedure TFcad_Generica.cxTabelaClick(Sender: TObject);
 begin
    inherited;
-   Consulta('select TABELA from generica where NOMETABELA='+QuotedStr(cxTAbela.Text), dmcad.qryAux);
+   ConsultaSql('select TABELA from generica where NOMETABELA='+QuotedStr(cxTAbela.Text), dmcad.qryAux);
    TABELA := dmCad.qryAux.FieldByName('TABELA').AsString;
 
    cxConsultaPropertiesChange(self);
@@ -207,7 +208,6 @@ begin
    inherited;
    if TABELA = '' then
       CarregaTabelas;
-   CaptionForm(TABELA);
    cxConsultaPropertiesChange(self);
 end;
 
@@ -220,29 +220,20 @@ end;
 
 procedure TFcad_Generica.AbreCom(StrAbre: String);
 begin
-   if StrAbre = 'CON' then
+   if (StrAbre = 'CON') then
       pnTabela.Visible        := false;
    if (StrAbre = 'CAD') then
       pnTabela.Visible        := True;
 end;
 
-procedure TFcad_Generica.CaptionForm(StrNome: String);
+procedure TFcad_Generica.CaptionForm;
 begin
-   if TABELA = 'CCUSTO' then
-      Fcad_Generica.Caption := 'Cadastro de CENTRO DE CUSTO' else
-   if TABELA = 'FPAGTO' then
-      Fcad_Generica.Caption := 'Cadastro de FORMAS DE PAGAMENTO' else
-   if TABELA = 'GRUPOS' then
-      Fcad_Generica.Caption := 'Cadastro de GRUPOS' else
-   if TABELA = 'SUBGRUPO' then
-      Fcad_Generica.Caption := 'Cadastro de SUBGRUPOS' else
-   if TABELA = 'FPAGTO' then
-      Fcad_Generica.Caption := 'Cadastro de FORMAS DE PAGAMENTO';
+   Fcad_Generica.Caption := 'Cadastro de '+dmcad.qryGenerico.FieldByName('NOMETABELA').AsString;
 end;
 
 procedure TFcad_Generica.CarregaTabelas();
 begin
-   Consulta('select NOMETABELA from generica group by TABELA, NOMETABELA order by TABELA', dmcad.qryAux);
+   ConsultaSql('select NOMETABELA from generica group by TABELA, NOMETABELA order by TABELA', dmcad.qryAux);
    dmcad.qryAux.First;
 
    cxTabela.Properties.Items.Clear;
@@ -251,6 +242,7 @@ begin
       cxTabela.Properties.Items.Add(dmcad.qryAux.FieldByName('NOMETABELA').AsString);
       dmCad.qryAux.Next;
    end;
+   pnTabela.Visible := true;
    cxTabela.ItemIndex := 0;
    cxTabelaClick(self);
 end;

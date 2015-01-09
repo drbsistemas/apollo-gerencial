@@ -3,7 +3,7 @@ unit uDmRel;
 interface
 
 uses
-  System.SysUtils, System.Classes, Data.DB, RxMemDS, ppEndUsr, ppDB, ppComm,
+  System.SysUtils, System.Classes, Data.DB, ppEndUsr, ppDB, ppComm,
   ppRelatv, ppDBPipe, ppProd, ppClass, ppReport, ppDesignLayer, ppParameter,
   ppBands, ppMemo, ppStrtch, ppCtrls, ppVar, ppPrnabl, ppCache;
 
@@ -13,19 +13,6 @@ type
     dbPipeAux: TppDBPipeline;
     dbPipeAux2: TppDBPipeline;
     ppDesigner: TppDesigner;
-    rxCabec: TRxMemoryData;
-    rxCabecFILTRO: TStringField;
-    rxCabecFILTRO1: TStringField;
-    rxCabecFILTRO2: TStringField;
-    rxCabecFILTRO3: TStringField;
-    rxCabecFILTRO4: TStringField;
-    rxCabecLABEL: TStringField;
-    rxCabecLABEL1: TStringField;
-    rxCabecLABEL2: TStringField;
-    rxCabecLABEL3: TStringField;
-    rxCabecLABEL4: TStringField;
-    rxCabecUSACOR: TStringField;
-    rxCabecAGRUPA: TStringField;
     dsCabec: TDataSource;
     ppCabec: TppDBPipeline;
     ppReport: TppReport;
