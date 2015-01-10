@@ -66,6 +66,8 @@ type
     RxBalESTOQUETOTAL: TFloatField;
     RxBalESTOQUECONT: TFloatField;
     RxBalESTOQUEDIF: TFloatField;
+    Contagem1: TMenuItem;
+    Diferen1: TMenuItem;
     procedure eContagemExit(Sender: TObject);
     procedure eCodProdPropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
@@ -79,7 +81,16 @@ type
     procedure cxOpcoesClick(Sender: TObject);
     procedure cxNovoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure cxConsultaPropertiesChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure cxApagarClick(Sender: TObject);
+    procedure Contagem1Click(Sender: TObject);
+    procedure grConsultaDBTableView1CustomDrawCell(
+      Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+      AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+    procedure Diferen1Click(Sender: TObject);
   private
+    indice : String;
     procedure Limpa;
     { Private declarations }
   public
@@ -93,7 +104,75 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas, uDmCad, uPrinc, uCad_Produto;
+uses uRotinas, uDmCad, uPrinc, uCad_Produto, uEstoque;
+
+procedure TFcad_Balanco.Contagem1Click(Sender: TObject);
+begin
+   inherited;
+   if (dmcad.qryBalanco.Active = false) or (dmcad.qryBalanco.RecordCount<=0) then
+   begin
+      Msg('Não há registros para sincronizar, verifique!!','I',':T');
+      Abort;
+   end;
+   if dmcad.qryBalancoSTATUS.AsString = 'F' then
+   begin
+      Msg('Apenas sequenciais em aberto podem ser sincronizados!','I',':T');
+      abort;
+   end;
+
+
+   if Msg('Olá! Informamos que para sincronizar o estoque por contagem é necessário zerar o estoque antes! Se o estoque ja foi zerado, deseja continuar?','P',':P') = false then
+      Abort;
+
+   ConsultaSql('SELECT * FROM BALANCO WHERE IDSEQ='+dmCad.qryBalanco.FieldByName('IDSEQ').AsString, dmCad.qryAux2);
+   with dmcad.qryAux2 do
+   begin
+      while not dmcad.qryAux2.Eof do
+      begin
+         if Fieldbyname('ESTOQUECONT').AsFloat > 0 then
+            Estoque(Fieldbyname('IDPROD').AsInteger,0, BALANCO, ENTRADA, Fieldbyname('IDSEQ').AsString, 'AJUSTE DE BALANÇO PELA CONTAGEM', 0, Fieldbyname('ESTOQUECONT').AsFloat) else
+            Estoque(Fieldbyname('IDPROD').AsInteger,0, BALANCO, SAIDA  , Fieldbyname('IDSEQ').AsString, 'AJUSTE DE BALANÇO PELA CONTAGEM', 0, Fieldbyname('ESTOQUECONT').AsFloat);
+         ///// Atualiza Balanço
+         ExecutaSql('update balanco set STATUS='+QuotedStr('F')+' where IDBALANCO='+IntToStr(Fieldbyname('IDBALANCO').AsInteger),dmCad.qryAux);
+         Next;
+      end;
+      try
+         cxConsultaPropertiesChange(self);
+         Msg('Estoque ajustado com sucesso, de acordo com a contagem!','I',':)');
+      except
+      end;
+   end;
+end;
+
+procedure TFcad_Balanco.cxApagarClick(Sender: TObject);
+begin
+  inherited;
+///// validação
+   if (dmcad.qryBalanco.Active = false) or (dmcad.qryBalanco.RecordCount<=0) then
+   begin
+      Msg('Não há registros para apagar, verifique!','I',';)');
+      Abort;
+   end;
+   if dmcad.qryBalanco.FieldByName('STATUS').AsString = 'F' then
+   begin
+      Msg('Este registro esta com status sincroniado, não podendo ser apagado!','I',';)');
+      Abort;
+   end;
+   if  Msg('Você quer mesmo apagar este sequencial de contagem? É um processo irreversivel!','P',';)') = false then
+      Abort;
+/////
+   dmcad.qryAux.Close;
+   dmcad.qryAux.Sql.TExt := 'delete from BALANCO where IDSEQ='+QuotedStr(dmcad.qryBalanco.FieldByName('IDSEQ').AsString);
+   try
+      dmcad.qryAux.ExecSQL;
+
+      FPrinc.UserControl1.Log('Apagado Sequencial de balanço Nº: '+dmcad.qryBalanco.FieldByName('IDSEQ').AsString,2);
+      Msg('O Sequencial foi apagado com sucesso!','I',';)');
+      dmcad.qryBalanco.Refresh;
+   except
+      dmcad.qryAux.Cancel;
+   end;
+end;
 
 procedure TFcad_Balanco.cxCancelaClick(Sender: TObject);
 begin
@@ -101,11 +180,28 @@ begin
    rxBal.Close;
 end;
 
+procedure TFcad_Balanco.cxConsultaPropertiesChange(Sender: TObject);
+begin
+  inherited;
+   case cxConsulta.ItemIndex of
+      0: indice := 'IDSEQ';
+      1: indice := 'A.IDPROD';
+      2: indice := 'REFPROD';
+      3: indice := 'NOMEPROD';
+   end;
+   StrSql := ' select A.*, B.REFPROD, B.NOMEPROD from BALANCO A '+#13+
+         ' LEFT JOIN PRODUTO B on A.IDPROD=B.IDPROD '+#13+
+   ' where '+indice+' like '+QuotedStr('%'+eConsulta.Text+'%')+' order by '+indice;
+
+   ConsultaSql(StrSql, dmcad.qryBalanco);
+
+   cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryProd.RecordCount);
+end;
+
 procedure TFcad_Balanco.cxGridDBTableView1CustomDrawCell(
   Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
   AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
 begin
-   inherited;
 ////// Lista GRID
    if AViewInfo.GridRecord.Selected then
    begin
@@ -136,7 +232,9 @@ begin
   inherited;
    Limpa;
 ///// Padroniza
-   rxBal.Close;
+   RxBal.Open;
+   RxBal.EmptyDataSet;
+   RxBal.Close;
    RxBal.Open;
 
    eCodPRod.SetFocus;
@@ -155,47 +253,43 @@ begin
          ConsultaSql('SELECT * FROM PRODUTO WHERE IDPROD<>0', dmCad.qryAux);
 
          ///// usa cdsEstoque
-         if not dmcad.qryEstoque.Active = false then
+         if dmcad.qryEstoque.Active = false then
             dmcad.qryEstoque.Open;
 
          ///// Começa a zerar o estoque dentro do While
          while not dmcad.qryAux.Eof do
          begin
-            if dmcad.qryAux.Fieldbyname('ESTOQUETOTAL').AsFloat <> 0 then // Se ja for zero pula
+            if (dmcad.qryAux.Fieldbyname('ESTOQUETOTAL').AsFloat <> 0) or (dmcad.qryAux.Fieldbyname('ESTOQUETOTAL').IsNUll) then // Se ja for zero pula
             begin
                ///// Pega o Saldo Anterior
                StrSql := 'select SALDO from ESTOQUE where IDPROD=' + quotedstr(dmcad.qryAux.Fieldbyname('IDPROD').asString) +
                          ' AND IDESTOQUE =(select max(idestoque) from estoque where idprod=' + quotedstr(dmcad.qryAux.Fieldbyname('idprod').asString) + ')';
-               ExecutaSql(StrSql, dmCAd.qryAux2);
+               ConsultaSql(StrSql, dmCAd.qryAux2);
 
-               ///// Insere o registro de movimentação de estoque
-               dmcad.qryEstoque.Insert;
-               dmcad.qryEstoque.FieldByName('IDPROD').AsString     := dmcad.qryAux.Fieldbyname('IDPROD').asString;
-               dmcad.qryEstoque.FieldByName('ORIGEM').AsString     := 'BALANÇO';
-               dmcad.qryEstoque.FieldByName('DOCUMENTO').AsString  := '';
-               dmcad.qryEstoque.FieldByName('USUARIO').AsString    := FPrinc. UserControl1.CurrentUser.UserName;
-               dmcad.qryEstoque.FieldByName('DESCRICAO').AsString  := 'ESTOQUE ZERADO POR BALANÇO';
-               dmcad.qryEstoque.FieldByName('DATA').AsDateTime     := Date + Time;
-               ///// Verifica o tipo de estoque encontrato
-               if dmcad.qryAux.Fieldbyname('ESTOQUETOTAL').AsFloat < 0 then // Se maior que zero
-               begin
-                  dmcad.qryEstoque.FieldByName('ENTRADA').AsFloat := dmcad.qryAux.FieldbyName('ESTOQUETOTAL').asFloat * -1;
-                  dmcad.qryEstoque.FieldByName('SAIDA').AsFloat := 0;
-               end;
-               if dmcad.qryAux.Fieldbyname('ESTOQUETOTAL').AsFloat > 0 then // Se menor
-               begin
-                  dmcad.qryEstoque.FieldByName('ENTRADA').AsFloat := 0;
-                  dmcad.qryEstoque.FieldByName('SAIDA').AsFloat := dmcad.qryAux.FieldbyName('ESTOQUETOTAL').asFloat;
-               end;
-               dmcad.qryEstoque.FieldByName('SALDO').aSFloat       := dmcad.qryAux2.Fieldbyname('SALDO').asFloat + (dmcad.qryEstoque.FieldByName('ENTRADA').AsFloat - dmcad.qryEstoque.FieldByName('SAIDA').AsFloat);
-               dmCad.qryEstoque.Post;
-               ///// Após ter ajustado muda o registro
+               if dmcad.qryAux.Fieldbyname('ESTOQUETOTAL').AsFloat < 0 then
+                  Estoque(dmcad.qryAux.Fieldbyname('IDPROD').AsInteger,
+                           0,
+                           BALANCO,
+                           ENTRADA,
+                           '',
+                           'ESTOQUE ZERADO POR BALANÇO',
+                           dmCad.qryAux.FieldByName('CUSTOTOTAL').AsFloat,
+                           dmcad.qryAux.FieldbyName('ESTOQUETOTAL').asFloat);
+               if dmcad.qryAux.Fieldbyname('ESTOQUETOTAL').AsFloat > 0 then
+                  Estoque(dmcad.qryAux.Fieldbyname('IDPROD').AsInteger,
+                           0,
+                           BALANCO,
+                           SAIDA,
+                           '',
+                           'ESTOQUE ZERADO POR BALANÇO',
+                           dmCad.qryAux.FieldByName('CUSTOTOTAL').AsFloat,
+                           dmcad.qryAux.FieldbyName('ESTOQUETOTAL').asFloat);
+
                dmcad.qryAux.NExt;
             end else // Se não tem estoque pula para outro
                dmcad.qryAUx.NExt;
          end;
          try // Tenta salvar os dados
-            dmcad.qryEstoque.ApplyUpdates(0);
             Msg('Estoque zerado com sucesso!', 'I',':)');
          except
             Msg('Não foi possível zerar o estoque, saia do sistema e tente novamente!', 'I',':(');
@@ -213,7 +307,6 @@ var
 begin
    if rxBal.RecordCount<=0 then
    begin
-      MessageDlg('Não foram inseridos dados, verifique!', mtWarning, [mbOK], 0);
       Msg('Não encontramos registros para salvar, verifique!','I',':P');
       abort;
    end;
@@ -238,10 +331,45 @@ begin
       try
          dmcad.qryBalanco.ApplyUpdates(0);
          FPrinc.UserControl1.Log('Balanço Concluído no Sequencial Nº:' + IntTOStr(intSeq), 2);
+         rxBal.Close;
          inherited;
          eCOnsulta.SetFocus;
       except
          dmcad.qryBalanco.CancelUpdates;
+      end;
+   end;
+end;
+
+procedure TFcad_Balanco.Diferen1Click(Sender: TObject);
+begin
+   inherited;
+   if (dmcad.qryBalanco.Active = false) or (dmcad.qryBalanco.RecordCount<=0) then
+   begin
+      Msg('Não há registros para sincronizar, verifique!!','I',':T');
+      Abort;
+   end;
+   if dmcad.qryBalancoSTATUS.AsString = 'F' then
+   begin
+      Msg('Apenas sequenciais em aberto podem ser sincronizados!','I',':T');
+      abort;
+   end;
+
+   ConsultaSql('SELECT * FROM BALANCO WHERE IDSEQ='+dmCad.qryBalancoIDSEQ.AsString,dmCad.qryAux2);
+   with dmCad.qryAux2 do
+   begin
+      while not dmcad.qryAux2.Eof do
+      begin
+         if Fieldbyname('ESTOQUEDIF').AsFloat > 0 then
+            Estoque(Fieldbyname('IDPROD').AsInteger,0, BALANCO, ENTRADA, Fieldbyname('IDSEQ').AsString, 'AJUSTE DE BALANÇO PELA DIFERENÇA', 0, Fieldbyname('ESTOQUEDIF').AsFloat) else
+            Estoque(Fieldbyname('IDPROD').AsInteger,0, BALANCO, SAIDA  , Fieldbyname('IDSEQ').AsString, 'AJUSTE DE BALANÇO PELA DIFERENÇA', 0, Fieldbyname('ESTOQUEDIF').AsFloat*-1);
+
+         ExecutaSql('update balanco set STATUS='+QuotedStr('F')+' where IDBALANCO='+IntToStr(Fieldbyname('IDBALANCO').AsInteger),dmCad.qryAux);
+         Next;
+      end;
+      try
+         cxConsultaPropertiesChange(self);
+         Msg('Estoque ajustado com sucesso, de acordo com a diferença!','I',':)');
+      except
       end;
    end;
 end;
@@ -323,8 +451,33 @@ begin
       FormAtivo     := Nil;
       pFundo(1);
    end;
-   Fcad_Produto     := Nil;
+   Fcad_Balanco     := Nil;
    Action           := CaFree;
+end;
+
+procedure TFcad_Balanco.FormShow(Sender: TObject);
+begin
+  inherited;
+   cxConsultaPropertiesChange(self);
+end;
+
+procedure TFcad_Balanco.grConsultaDBTableView1CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+   inherited;
+   if (AViewInfo.Item.Index = grConsultaDBTableView1Campo1.Index) then
+   begin
+      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'F') then
+      begin
+         ACanvas.Canvas.Brush.Color := clBlue;
+         ACanvas.Canvas.Font.Color  := clBlue;
+      end else
+      begin
+         ACanvas.Canvas.Brush.Color := clGreen;
+         ACanvas.Canvas.Font.Color  := clGreen;
+      end;
+   end;
 end;
 
 Procedure TFcad_Balanco.Limpa;
@@ -336,6 +489,7 @@ Begin
    eRef.Clear;
    eEstoque.Value    := 0;
    eContagem.VaLue   := 1;
+
 End;
 
 end.

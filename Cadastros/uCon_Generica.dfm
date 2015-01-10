@@ -2,18 +2,18 @@ inherited Fcad_Generica: TFcad_Generica
   Caption = 'Outros Cadastros'
   ClientHeight = 541
   ClientWidth = 704
-  ExplicitWidth = 710
-  ExplicitHeight = 570
+  ExplicitWidth = 712
+  ExplicitHeight = 572
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnCad: TPanel
     Width = 646
     Height = 541
-    ExplicitWidth = 644
-    ExplicitHeight = 539
+    ExplicitWidth = 646
+    ExplicitHeight = 541
     inherited pnMenu: TPanel
       Width = 644
-      ExplicitWidth = 642
+      ExplicitWidth = 644
     end
     object cxLabel4: TcxLabel
       Left = 43
@@ -144,14 +144,14 @@ inherited Fcad_Generica: TFcad_Generica
   inherited pnCon: TPanel
     Width = 646
     Height = 541
-    ExplicitWidth = 644
-    ExplicitHeight = 539
+    ExplicitWidth = 646
+    ExplicitHeight = 541
     inherited pnBusca: TPanel
       Top = 80
       Width = 644
       TabOrder = 0
       ExplicitTop = 80
-      ExplicitWidth = 642
+      ExplicitWidth = 644
       inherited cxConsulta: TcxComboBox
         Properties.Items.Strings = (
           'C'#243'digo'
@@ -179,8 +179,8 @@ inherited Fcad_Generica: TFcad_Generica
       Top = 490
       Width = 644
       TabOrder = 2
-      ExplicitTop = 488
-      ExplicitWidth = 642
+      ExplicitTop = 490
+      ExplicitWidth = 644
     end
     inherited grConsulta: TcxGrid [2]
       Top = 103
@@ -188,8 +188,8 @@ inherited Fcad_Generica: TFcad_Generica
       Height = 387
       TabOrder = 1
       ExplicitTop = 103
-      ExplicitWidth = 642
-      ExplicitHeight = 385
+      ExplicitWidth = 644
+      ExplicitHeight = 387
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmCad.dsGenerico
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
@@ -207,7 +207,6 @@ inherited Fcad_Generica: TFcad_Generica
       Height = 27
       Align = alTop
       TabOrder = 3
-      ExplicitWidth = 642
       object cxLabel3: TcxLabel
         Left = 2
         Top = 5
@@ -238,7 +237,7 @@ inherited Fcad_Generica: TFcad_Generica
       Width = 644
       TabOrder = 4
       ExplicitTop = 28
-      ExplicitWidth = 642
+      ExplicitWidth = 644
       inherited cxVer: TcxButton
         OnClick = cxVerClick
       end
@@ -255,8 +254,8 @@ inherited Fcad_Generica: TFcad_Generica
   end
   inherited pnImg: TcxImage
     Left = 646
-    ExplicitLeft = 644
-    ExplicitHeight = 539
+    ExplicitLeft = 646
+    ExplicitHeight = 541
     Height = 541
   end
 end

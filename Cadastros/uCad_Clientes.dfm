@@ -1,18 +1,18 @@
 inherited Fcad_Clientes: TFcad_Clientes
   BorderIcons = [biSystemMenu, biMinimize, biMaximize]
   Caption = 'Cadastro de Pessoas'
-  ClientHeight = 539
+  ClientHeight = 541
   ClientWidth = 907
   ExplicitWidth = 915
-  ExplicitHeight = 570
+  ExplicitHeight = 572
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnCad: TPanel
     Width = 849
-    Height = 539
+    Height = 541
     BevelOuter = bvNone
     ExplicitWidth = 849
-    ExplicitHeight = 539
+    ExplicitHeight = 541
     inherited pnMenu: TPanel
       Left = 0
       Top = 0
@@ -1043,9 +1043,9 @@ inherited Fcad_Clientes: TFcad_Clientes
   end
   inherited pnCon: TPanel
     Width = 849
-    Height = 539
+    Height = 541
     ExplicitWidth = 849
-    ExplicitHeight = 539
+    ExplicitHeight = 541
     inherited pnBotaoCad: TPanel [0]
       Width = 847
       ExplicitWidth = 847
@@ -1097,9 +1097,9 @@ inherited Fcad_Clientes: TFcad_Clientes
       end
     end
     inherited pnBotaoCon: TPanel
-      Top = 488
+      Top = 490
       Width = 847
-      ExplicitTop = 488
+      ExplicitTop = 490
       ExplicitWidth = 847
       inherited cxCadastro: TcxButton
         Left = 364
@@ -1114,9 +1114,9 @@ inherited Fcad_Clientes: TFcad_Clientes
     end
     inherited grConsulta: TcxGrid
       Width = 847
-      Height = 412
+      Height = 414
       ExplicitWidth = 847
-      ExplicitHeight = 412
+      ExplicitHeight = 414
       inherited grConsultaDBTableView1: TcxGridDBTableView
         inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
           Caption = 'Fantasia'
@@ -1174,7 +1174,7 @@ inherited Fcad_Clientes: TFcad_Clientes
     Properties.GraphicClassName = 'TdxPNGImage'
     Style.BorderStyle = ebsFlat
     ExplicitLeft = 849
-    ExplicitHeight = 539
-    Height = 539
+    ExplicitHeight = 541
+    Height = 541
   end
 end

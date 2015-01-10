@@ -358,7 +358,7 @@ object FCad_Estoque: TFCad_Estoque
       object grConsultaDBTableView1Campo1: TcxGridDBColumn
         Caption = 'C'#243'digo'
         DataBinding.FieldName = 'IDESTOQUE'
-        Width = 62
+        Width = 53
       end
       object grConsultaDBTableView1Campo2: TcxGridDBColumn
         Caption = 'Data'
@@ -368,38 +368,42 @@ object FCad_Estoque: TFCad_Estoque
       object grConsultaDBTableView1Column1: TcxGridDBColumn
         Caption = 'Documento'
         DataBinding.FieldName = 'DOCUMENTO'
-        Width = 375
+        Width = 83
       end
       object grConsultaDBTableView1Column2: TcxGridDBColumn
         Caption = 'Est. Anterior'
         DataBinding.FieldName = 'ESTOQUEANTES'
-        Width = 38
+        Width = 90
       end
       object grConsultaDBTableView1Column3: TcxGridDBColumn
         Caption = 'Entrada'
         DataBinding.FieldName = 'ENTRADA'
-        Width = 137
+        Width = 90
       end
       object grConsultaDBTableView1Column4: TcxGridDBColumn
         Caption = 'Sa'#237'da'
         DataBinding.FieldName = 'SAIDA'
-        Width = 130
+        Width = 90
       end
       object grConsultaDBTableView1Column5: TcxGridDBColumn
         Caption = 'Saldo'
         DataBinding.FieldName = 'SALDO'
+        Width = 90
       end
       object grConsultaDBTableView1Column6: TcxGridDBColumn
         Caption = 'Origem'
         DataBinding.FieldName = 'ORIGEM'
+        Width = 90
       end
       object grConsultaDBTableView1Column7: TcxGridDBColumn
         Caption = 'Descri'#231#227'o'
         DataBinding.FieldName = 'DESCRICAO'
+        Width = 300
       end
       object grConsultaDBTableView1Column8: TcxGridDBColumn
         Caption = 'Usu'#225'rio'
         DataBinding.FieldName = 'USUARIO'
+        Width = 90
       end
     end
     object grConsultaLevel1: TcxGridLevel

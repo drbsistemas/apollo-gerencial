@@ -1,7 +1,7 @@
 object dmCad: TdmCad
   OldCreateOrder = False
   Height = 355
-  Width = 395
+  Width = 453
   object qryConf: TFDQuery
     CachedUpdates = True
     Connection = dmCon.FdCon
@@ -570,6 +570,107 @@ object dmCad: TdmCad
       'left join Produto B on A.IDPROD = B.IDPROD')
     Left = 182
     Top = 5
+    object qryEstoqueIDESTOQUE: TIntegerField
+      FieldName = 'IDESTOQUE'
+      Origin = 'IDESTOQUE'
+      Required = True
+    end
+    object qryEstoqueIDPROD: TIntegerField
+      FieldName = 'IDPROD'
+      Origin = 'IDPROD'
+    end
+    object qryEstoqueESTOQUEANTES: TFloatField
+      FieldName = 'ESTOQUEANTES'
+      Origin = 'ESTOQUEANTES'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryEstoqueENTRADA: TFloatField
+      FieldName = 'ENTRADA'
+      Origin = 'ENTRADA'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryEstoqueSAIDA: TFloatField
+      FieldName = 'SAIDA'
+      Origin = 'SAIDA'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryEstoqueSALDO: TFloatField
+      FieldName = 'SALDO'
+      Origin = 'SALDO'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryEstoqueCUSTO: TFloatField
+      FieldName = 'CUSTO'
+      Origin = 'CUSTO'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryEstoqueORIGEM: TStringField
+      FieldName = 'ORIGEM'
+      Origin = 'ORIGEM'
+      Size = 30
+    end
+    object qryEstoqueDOCUMENTO: TIntegerField
+      FieldName = 'DOCUMENTO'
+      Origin = 'DOCUMENTO'
+    end
+    object qryEstoqueDATA: TSQLTimeStampField
+      FieldName = 'DATA'
+      Origin = '"DATA"'
+    end
+    object qryEstoqueDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      Size = 300
+    end
+    object qryEstoqueUSUARIO: TStringField
+      FieldName = 'USUARIO'
+      Origin = 'USUARIO'
+      Size = 30
+    end
+    object qryEstoqueIDCLIE: TIntegerField
+      FieldName = 'IDCLIE'
+      Origin = 'IDCLIE'
+    end
+    object qryEstoqueNOMEPROD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOMEPROD'
+      Origin = 'NOMEPROD'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 300
+    end
+    object qryEstoqueMARCAPROD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MARCAPROD'
+      Origin = 'MARCAPROD'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object qryEstoqueESTOQUEDISP: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ESTOQUEDISP'
+      Origin = 'ESTOQUEDISP'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryEstoqueESTOQUETOTAL: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ESTOQUETOTAL'
+      Origin = 'ESTOQUETOTAL'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryEstoqueUNPROD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'UNPROD'
+      Origin = 'UNPROD'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 5
+    end
   end
   object UpdtEstoque: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -779,6 +880,56 @@ object dmCad: TdmCad
       'LEFT JOIN PRODUTO B on A.IDPROD=B.IDPROD')
     Left = 53
     Top = 152
+    object qryBalancoIDBALANCO: TIntegerField
+      FieldName = 'IDBALANCO'
+      Origin = 'IDBALANCO'
+      Required = True
+    end
+    object qryBalancoIDPROD: TIntegerField
+      FieldName = 'IDPROD'
+      Origin = 'IDPROD'
+    end
+    object qryBalancoIDSEQ: TIntegerField
+      FieldName = 'IDSEQ'
+      Origin = 'IDSEQ'
+    end
+    object qryBalancoDATA: TSQLTimeStampField
+      FieldName = 'DATA'
+      Origin = '"DATA"'
+    end
+    object qryBalancoSTATUS: TStringField
+      FieldName = 'STATUS'
+      Origin = 'STATUS'
+      Size = 1
+    end
+    object qryBalancoESTOQUETOTAL: TFloatField
+      FieldName = 'ESTOQUETOTAL'
+      Origin = 'ESTOQUETOTAL'
+    end
+    object qryBalancoESTOQUECONT: TFloatField
+      FieldName = 'ESTOQUECONT'
+      Origin = 'ESTOQUECONT'
+    end
+    object qryBalancoESTOQUEDIF: TFloatField
+      FieldName = 'ESTOQUEDIF'
+      Origin = 'ESTOQUEDIF'
+    end
+    object qryBalancoREFPROD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'REFPROD'
+      Origin = 'REFPROD'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object qryBalancoNOMEPROD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOMEPROD'
+      Origin = 'NOMEPROD'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 300
+    end
   end
   object UpdtBalanco: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -823,5 +974,18 @@ object dmCad: TdmCad
     DataSet = qryBalanco
     Left = 53
     Top = 240
+  end
+  object qryGen: TFDQuery
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    Left = 384
+    Top = 6
+  end
+  object dsGen: TDataSource
+    DataSet = qryGen
+    Left = 384
+    Top = 50
   end
 end

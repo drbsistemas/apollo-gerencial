@@ -533,12 +533,10 @@ object FPrinc: TFPrinc
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    ExplicitTop = 514
-    ExplicitWidth = 778
   end
   object cxHint: TPanel
     Left = 0
-    Top = 65
+    Top = 191
     Width = 1024
     Height = 18
     Align = alTop
@@ -551,7 +549,8 @@ object FPrinc: TFPrinc
     ParentBackground = False
     ParentFont = False
     TabOrder = 2
-    ExplicitWidth = 778
+    ExplicitLeft = -8
+    ExplicitTop = 209
   end
   object pnTop: TcxGroupBox
     Left = 0
@@ -577,7 +576,6 @@ object FPrinc: TFPrinc
     StyleFocused.LookAndFeel.SkinName = ''
     StyleHot.LookAndFeel.SkinName = ''
     TabOrder = 3
-    ExplicitWidth = 778
     Height = 65
     Width = 1024
     object cxImage1: TcxImage
@@ -19612,42 +19610,70 @@ object FPrinc: TFPrinc
   end
   object dxMenu: TdxRibbon
     Left = 0
-    Top = 83
+    Top = 65
     Width = 1024
-    Height = 101
+    Height = 126
     BarManager = dxBarManager
     Style = rs2013
     ColorSchemeName = 'Office2010Silver'
     MinimizeOnTabDblClick = False
-    ShowTabHeaders = False
     Contexts = <>
     TabOrder = 0
-    ExplicitWidth = 778
-    object dxMenuPrinc: TdxRibbonTab
+    TabStop = False
+    ExplicitTop = 83
+    object dxModuloPrinc: TdxRibbonTab
       Active = True
-      Caption = 'Menu do Sistema'
+      Caption = 'M'#243'dulo Principal'
       Groups = <
         item
-          ToolbarName = 'dxCad'
+          ToolbarName = 'tbCadastros'
         end
         item
-          ToolbarName = 'dxFin'
-        end
-        item
-          ToolbarName = 'dxCompras'
+          ToolbarName = 'tbCompras'
         end
         item
           Caption = 'Vendas'
-          ToolbarName = 'dxVendas'
+          ToolbarName = 'tbVendas'
         end
         item
-          ToolbarName = 'dxRel'
+          ToolbarName = 'tbFinanceiro'
         end
         item
-          ToolbarName = 'dxConf'
+          ToolbarName = 'tbRelatorios'
+        end
+        item
+          ToolbarName = 'tbConfiguracoes'
         end>
       MergeKind = rmkNone
       Index = 0
+    end
+    object dxModuloPet: TdxRibbonTab
+      Caption = 'M'#243'dulo PetClinic'
+      Groups = <
+        item
+          Caption = 'Cadastro'
+          ToolbarName = 'tbPetCadastro'
+        end
+        item
+          Caption = 'Agendamento'
+          ToolbarName = 'tbPetAtendimento'
+        end
+        item
+          ToolbarName = 'tbConfiguracoes'
+        end>
+      Index = 1
+    end
+    object dxModuloBar: TdxRibbonTab
+      Caption = 'Bar/Lounge'
+      Groups = <
+        item
+          Caption = 'Vendas'
+          ToolbarName = 'tbBarVendas'
+        end
+        item
+          ToolbarName = 'tbConfiguracoes'
+        end>
+      Index = 2
     end
   end
   object UserControl1: TUserControl
@@ -19774,10 +19800,10 @@ object FPrinc: TFPrinc
       0
       0
       0)
-    object dxFin: TdxBar
+    object tbFinanceiro: TdxBar
       Caption = 'Financeiro'
       CaptionButtons = <>
-      DockedLeft = 306
+      DockedLeft = 532
       DockedTop = 0
       FloatLeft = 804
       FloatTop = 8
@@ -19796,16 +19822,16 @@ object FPrinc: TFPrinc
           Visible = True
           ItemName = 'cxCaixa'
         end>
-      OneOnRow = True
-      Row = 5
+      OneOnRow = False
+      Row = 1
       UseOwnFont = False
       Visible = True
       WholeRow = False
     end
-    object dxCompras: TdxBar
+    object tbCompras: TdxBar
       Caption = 'Compras'
       CaptionButtons = <>
-      DockedLeft = 469
+      DockedLeft = 247
       DockedTop = 0
       FloatLeft = 804
       FloatTop = 8
@@ -19820,16 +19846,16 @@ object FPrinc: TFPrinc
           Visible = True
           ItemName = 'dxBarLargeButton1'
         end>
-      OneOnRow = True
-      Row = 4
+      OneOnRow = False
+      Row = 1
       UseOwnFont = False
       Visible = True
       WholeRow = False
     end
-    object dxConf: TdxBar
+    object tbConfiguracoes: TdxBar
       Caption = 'Configura'#231#245'es'
       CaptionButtons = <>
-      DockedLeft = 837
+      DockedLeft = 165
       DockedTop = 0
       FloatLeft = 804
       FloatTop = 8
@@ -19849,15 +19875,15 @@ object FPrinc: TFPrinc
           ItemName = 'cxSair'
         end>
       OneOnRow = True
-      Row = 3
+      Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
     end
-    object dxRel: TdxBar
+    object tbRelatorios: TdxBar
       Caption = 'Relat'#243'rios'
       CaptionButtons = <>
-      DockedLeft = 754
+      DockedLeft = 695
       DockedTop = 0
       FloatLeft = 804
       FloatTop = 8
@@ -19868,13 +19894,13 @@ object FPrinc: TFPrinc
           Visible = True
           ItemName = 'dxBarLargeButton9'
         end>
-      OneOnRow = True
-      Row = 2
+      OneOnRow = False
+      Row = 1
       UseOwnFont = False
       Visible = True
       WholeRow = False
     end
-    object dxCad: TdxBar
+    object tbCadastros: TdxBar
       Caption = 'Cadastros'
       CaptionButtons = <>
       DockedLeft = 0
@@ -19894,26 +19920,22 @@ object FPrinc: TFPrinc
         end
         item
           Visible = True
-          ItemName = 'cxAnimais'
-        end
-        item
-          Visible = True
           ItemName = 'cxOutros'
         end
         item
           Visible = True
           ItemName = 'cxBalanco'
         end>
-      OneOnRow = True
+      OneOnRow = False
       Row = 1
       UseOwnFont = False
       Visible = True
       WholeRow = False
     end
-    object dxVendas: TdxBar
+    object tbVendas: TdxBar
       Caption = 'Vendas'
       CaptionButtons = <>
-      DockedLeft = 603
+      DockedLeft = 381
       DockedTop = 0
       FloatLeft = 1050
       FloatTop = 8
@@ -19928,6 +19950,58 @@ object FPrinc: TFPrinc
           Visible = True
           ItemName = 'dxBarLargeButton2'
         end>
+      OneOnRow = False
+      Row = 1
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object tbPetCadastro: TdxBar
+      Caption = 'Pet - Cadastro'
+      CaptionButtons = <>
+      DockedLeft = 0
+      DockedTop = 0
+      FloatLeft = 1050
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'cxAnimais'
+        end>
+      OneOnRow = True
+      Row = 1
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object tbPetAtendimento: TdxBar
+      Caption = 'Pet - Atendimento'
+      CaptionButtons = <>
+      DockedLeft = 74
+      DockedTop = 0
+      FloatLeft = 1050
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <>
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object tbBarVendas: TdxBar
+      Caption = 'Bar - Vendas'
+      CaptionButtons = <>
+      DockedLeft = 0
+      DockedTop = 0
+      FloatLeft = 1050
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <>
       OneOnRow = True
       Row = 0
       UseOwnFont = False
@@ -22603,9 +22677,9 @@ object FPrinc: TFPrinc
         0000000000000000000000000000000000000000000000000000}
     end
     object dxBarButton1: TdxBarButton
-      Caption = 'Configura'#231#245'es'
+      Caption = 'Configura'#231#245'es     '
       Category = 0
-      Hint = 'Configura'#231#245'es'
+      Hint = 'Configura'#231#245'es     '
       Visible = ivAlways
       Glyph.Data = {
         36090000424D3609000000000000360000002800000018000000180000000100
@@ -22684,7 +22758,7 @@ object FPrinc: TFPrinc
         0000000000000000000000000000000000000000000000000000}
     end
     object cxEmpresa: TdxBarButton
-      Caption = '&Dados. Empresa'
+      Caption = '&Dados  Empresa   '
       Category = 0
       Hint = 'Configura'#231#227'o dos dados da Empresa'
       Visible = ivAlways
@@ -22766,9 +22840,9 @@ object FPrinc: TFPrinc
       OnClick = cxEmpresaClick
     end
     object cxSair: TdxBarButton
-      Caption = '&Fechar o Sistema'
+      Caption = '&Fechar o Sistema '
       Category = 0
-      Hint = 'Fechar o Sistema'
+      Hint = 'Fechar o Sistema '
       Visible = ivAlways
       Glyph.Data = {
         36090000424D3609000000000000360000002800000018000000180000000100

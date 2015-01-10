@@ -43,14 +43,14 @@ type
     cxImage2: TcxImage;
     cxImage3: TcxImage;
     dxBarManager: TdxBarManager;
-    dxMenuPrinc: TdxRibbonTab;
+    dxModuloPrinc: TdxRibbonTab;
     dxMenu: TdxRibbon;
     dxRadialMenu: TdxRibbonRadialMenu;
-    dxFin: TdxBar;
-    dxCompras: TdxBar;
-    dxConf: TdxBar;
-    dxRel: TdxBar;
-    dxCad: TdxBar;
+    tbFinanceiro: TdxBar;
+    tbCompras: TdxBar;
+    tbConfiguracoes: TdxBar;
+    tbRelatorios: TdxBar;
+    tbCadastros: TdxBar;
     cxCliente: TdxBarLargeButton;
     cxProduto: TdxBarLargeButton;
     cxAnimais: TdxBarLargeButton;
@@ -76,10 +76,15 @@ type
     cxCaixa: TdxBarLargeButton;
     dxBarLargeButton1: TdxBarLargeButton;
     cxPedido: TdxBarLargeButton;
-    dxVendas: TdxBar;
+    tbVendas: TdxBar;
     dxBarLargeButton2: TdxBarLargeButton;
     dxBarLargeButton3: TdxBarLargeButton;
     ActFechar: TAction;
+    dxModuloPet: TdxRibbonTab;
+    tbPetCadastro: TdxBar;
+    tbPetAtendimento: TdxBar;
+    dxModuloBar: TdxRibbonTab;
+    tbBarVendas: TdxBar;
    //
    procedure PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
    procedure MostraNomeForm(Str: String);
@@ -196,7 +201,7 @@ begin
    Application.OnHint := ShowHint;
    AbreIni;
 
-//   AbreAcesso;
+   AbreAcesso;
 //   UserControl1.StartLogin;
    CarregaEmpresa('LOJA '+FormatFloat('###0',1), 'Padrão');
 

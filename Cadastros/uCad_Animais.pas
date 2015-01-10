@@ -174,6 +174,7 @@ begin
    if cbAtivo.ItemIndex > 0 then
       StrSql := StrSql + ' and ATIVO='+QuotedStr(ifs(cbAtivo.ItemIndex=1, 'S','N'));
 
+   StrSql := StrSql +' order by '+indice;
    ConsultaSql(StrSql, dmcad.qryAnimais);
 
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryAnimais.RecordCount);

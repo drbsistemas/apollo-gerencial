@@ -61,6 +61,36 @@ type
     qryBalanco: TFDQuery;
     UpdtBalanco: TFDUpdateSQL;
     dsBalanco: TDataSource;
+    qryGen: TFDQuery;
+    dsGen: TDataSource;
+    qryBalancoIDBALANCO: TIntegerField;
+    qryBalancoIDPROD: TIntegerField;
+    qryBalancoIDSEQ: TIntegerField;
+    qryBalancoDATA: TSQLTimeStampField;
+    qryBalancoSTATUS: TStringField;
+    qryBalancoESTOQUETOTAL: TFloatField;
+    qryBalancoESTOQUECONT: TFloatField;
+    qryBalancoESTOQUEDIF: TFloatField;
+    qryBalancoREFPROD: TStringField;
+    qryBalancoNOMEPROD: TStringField;
+    qryEstoqueIDESTOQUE: TIntegerField;
+    qryEstoqueIDPROD: TIntegerField;
+    qryEstoqueESTOQUEANTES: TFloatField;
+    qryEstoqueENTRADA: TFloatField;
+    qryEstoqueSAIDA: TFloatField;
+    qryEstoqueSALDO: TFloatField;
+    qryEstoqueCUSTO: TFloatField;
+    qryEstoqueORIGEM: TStringField;
+    qryEstoqueDOCUMENTO: TIntegerField;
+    qryEstoqueDATA: TSQLTimeStampField;
+    qryEstoqueDESCRICAO: TStringField;
+    qryEstoqueUSUARIO: TStringField;
+    qryEstoqueIDCLIE: TIntegerField;
+    qryEstoqueNOMEPROD: TStringField;
+    qryEstoqueMARCAPROD: TStringField;
+    qryEstoqueESTOQUEDISP: TFloatField;
+    qryEstoqueESTOQUETOTAL: TFloatField;
+    qryEstoqueUNPROD: TStringField;
     procedure qryClieAfterInsert(DataSet: TDataSet);
     procedure qryCidadeAfterInsert(DataSet: TDataSet);
     procedure qryGenericoAfterInsert(DataSet: TDataSet);
@@ -92,7 +122,7 @@ end;
 
 procedure TdmCad.qryBalancoAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryAnimais.FieldByName('IDBALANCO').AsInteger       := ExecutaGen('BALANCO');
+   dmCad.qryBalanco.FieldByName('IDBALANCO').AsInteger       := ExecutaGen('BALANCO');
 end;
 
 procedure TdmCad.qryCidadeAfterInsert(DataSet: TDataSet);
@@ -107,7 +137,7 @@ end;
 
 procedure TdmCad.qryEstoqueAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryProd.FieldByName('IDESTOQUE').AsInteger      := ExecutaGen('ESTOQUE');
+   dmCad.qryEstoque.FieldByName('IDESTOQUE').AsInteger      := ExecutaGen('ESTOQUE');
 end;
 
 procedure TdmCad.qryGenericoAfterInsert(DataSet: TDataSet);

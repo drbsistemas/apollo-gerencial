@@ -1,24 +1,31 @@
 inherited Fcad_Balanco: TFcad_Balanco
   Caption = 'Balan'#231'o de Produtos (Contagem)'
-  ClientHeight = 539
-  ClientWidth = 911
-  ExplicitWidth = 919
-  ExplicitHeight = 570
+  ClientHeight = 537
+  ClientWidth = 909
+  Constraints.MinHeight = 568
+  ExplicitWidth = 917
+  ExplicitHeight = 568
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel
-    Width = 853
-    Height = 539
-    ExplicitWidth = 853
-    ExplicitHeight = 539
+  inherited pnImg: TcxImage [0]
+    Left = 851
+    ExplicitLeft = 851
+    ExplicitHeight = 537
+    Height = 537
+  end
+  inherited pnCad: TPanel [1]
+    Width = 851
+    Height = 537
+    ExplicitWidth = 851
+    ExplicitHeight = 537
     inherited pnMenu: TPanel
-      Width = 851
-      ExplicitWidth = 851
+      Width = 849
+      ExplicitWidth = 849
     end
     object Panel1: TPanel
       Left = 1
       Top = 51
-      Width = 851
+      Width = 849
       Height = 118
       Align = alTop
       TabOrder = 1
@@ -352,8 +359,8 @@ inherited Fcad_Balanco: TFcad_Balanco
     object grDadosBalanco: TcxGrid
       Left = 1
       Top = 169
-      Width = 851
-      Height = 369
+      Width = 849
+      Height = 367
       Hint = 'Grid de Dados'
       Align = alClient
       BorderStyle = cxcbsNone
@@ -432,27 +439,33 @@ inherited Fcad_Balanco: TFcad_Balanco
       end
     end
   end
-  inherited pnImg: TcxImage [1]
-    Left = 853
-    ExplicitLeft = 853
-    ExplicitHeight = 539
-    Height = 539
-  end
   inherited pnCon: TPanel [2]
-    Width = 853
-    Height = 539
-    ExplicitWidth = 853
-    ExplicitHeight = 539
+    Width = 851
+    Height = 537
+    ExplicitWidth = 851
+    ExplicitHeight = 537
     inherited pnBusca: TPanel
-      Width = 851
-      ExplicitWidth = 851
+      Width = 849
+      ExplicitWidth = 849
+      inherited cxConsulta: TcxComboBox
+        Properties.Items.Strings = (
+          'C'#243'd. Seq'
+          'C'#243'd. Produto'
+          'Refer'#234'ncia'
+          'Produto')
+        Text = 'C'#211'D. SEQ'
+      end
+      inherited cxLabel2: TcxLabel
+        Visible = False
+      end
       inherited cbAtivo: TcxComboBox
         Style.IsFontAssigned = True
+        Visible = False
       end
     end
     inherited pnBotaoCad: TPanel
-      Width = 851
-      ExplicitWidth = 851
+      Width = 849
+      ExplicitWidth = 849
       inherited cxEdita: TcxButton
         Left = 704
         Enabled = False
@@ -467,6 +480,7 @@ inherited Fcad_Balanco: TFcad_Balanco
       end
       inherited cxApagar: TcxButton
         Left = 116
+        OnClick = cxApagarClick
         ExplicitLeft = 116
       end
       inherited cxVoltar: TcxButton
@@ -479,6 +493,8 @@ inherited Fcad_Balanco: TFcad_Balanco
         Left = 274
         Width = 100
         Caption = '&Sincronizar'
+        DropDownMenu = cxPopMenu
+        Kind = cxbkOfficeDropDown
         OptionsImage.Glyph.Data = {
           36100000424D3610000000000000360000002800000020000000200000000100
           2000000000000010000000000000000000000000000000000000A2A2A2CEC5C4
@@ -754,18 +770,19 @@ inherited Fcad_Balanco: TFcad_Balanco
       end
     end
     inherited pnBotaoCon: TPanel
-      Top = 488
-      Width = 851
-      ExplicitTop = 488
-      ExplicitWidth = 851
+      Top = 486
+      Width = 849
+      ExplicitTop = 486
+      ExplicitWidth = 849
     end
     inherited grConsulta: TcxGrid
-      Width = 851
-      Height = 412
-      ExplicitWidth = 851
-      ExplicitHeight = 412
+      Width = 849
+      Height = 410
+      ExplicitWidth = 849
+      ExplicitHeight = 410
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmCad.dsBalanco
+        OptionsSelection.CellSelect = False
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
           Caption = 'ST'
           DataBinding.FieldName = 'STATUS'
@@ -803,16 +820,29 @@ inherited Fcad_Balanco: TFcad_Balanco
         object grConsultaDBTableView1Column6: TcxGridDBColumn
           Caption = 'Est. Produto'
           DataBinding.FieldName = 'ESTOQUETOTAL'
+          Width = 95
         end
         object grConsultaDBTableView1Column7: TcxGridDBColumn
           Caption = 'Est. Contado'
           DataBinding.FieldName = 'ESTOQUECONT'
+          Width = 95
         end
         object grConsultaDBTableView1Column8: TcxGridDBColumn
           Caption = 'Est. Diferen'#231'a'
           DataBinding.FieldName = 'ESTOQUEDIF'
+          Width = 95
         end
       end
+    end
+  end
+  inherited cxPopMenu: TRxPopupMenu
+    object Contagem1: TMenuItem
+      Caption = 'Por Contagem'
+      OnClick = Contagem1Click
+    end
+    object Diferen1: TMenuItem
+      Caption = 'Por Diferen'#231'a'
+      OnClick = Diferen1Click
     end
   end
   object dsBal: TDataSource

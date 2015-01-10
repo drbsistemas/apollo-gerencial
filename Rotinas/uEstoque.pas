@@ -27,7 +27,6 @@ begin
    ConsultaSql('select ESTOQUETOTAL, ESTOQUEDISP from PRODUTO where IDPROD='+IntToStr(IDPROD),dmcad.qryAux);
    FESTOQUETOTAL:= dmcad.qryAux.FIeldbyname('ESTOQUETOTAL').asFloat;
    FESTOQUEDISP := dmcad.qryAux.FIeldbyname('ESTOQUEDISP').asFloat;
-   FSALDO       := dmcad.qryAux.FIeldbyname('SALDO').asFloat;
    dmcad.qryAux.Close;
 
 ///// VERIFICA ESTOQUE NEGATIVO EM ORÇAMENTO
@@ -68,7 +67,7 @@ begin
    if (ORIGEM=VENDA) or (ORIGEM=COMPRA) or (ORIGEM=BALANCO) then
    begin
    ///// PEGA O SALDO ATUAL DO PRODUTO PARA MOVIMENTAR
-      ConsultaSql('select SALDO from ESTOQUE where IDPROD='+IntToStr(IDPROD)+' and IDESTOQUE = (select max(idestoque) from estoque where IDPROD='+IntToStr(IDPROD),dmCad.qryAux);
+      ConsultaSql('select SALDO from ESTOQUE where IDPROD='+IntToStr(IDPROD)+' and IDESTOQUE = (select max(idestoque) from estoque where IDPROD='+IntToStr(IDPROD)+')',dmCad.qryAux);
       try
          FSALDO := dmCad.qryAux.Fieldbyname('SALDO').asFloat;
       except
@@ -81,7 +80,7 @@ begin
    ///// Inicia Inserção
       dmcad.qryEstoque.Insert;
       dmcad.qryEstoque.Fieldbyname('IDPROD').AsINteger      := IDPROD;
-      dmcad.qryEstoque.Fieldbyname('ESTOQUETOTAL').asFloat  := FESTOQUETOTAL;
+      dmcad.qryEstoque.Fieldbyname('ESTOQUEANTES').asFloat  := FESTOQUETOTAL;
       dmcad.qryEstoque.Fieldbyname('DOCUMENTO').AsString    := DOCUMENTO;
       dmcad.qryEstoque.Fieldbyname('CUSTO').asFLoat         := CUSTO;
       dmcad.qryEstoque.Fieldbyname('IDCLIE').asInteger      := IDCLIE;

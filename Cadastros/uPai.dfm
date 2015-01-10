@@ -2,10 +2,9 @@ object Fcad_Pai: TFcad_Pai
   Left = 0
   Top = 0
   BorderIcons = []
-  BorderStyle = bsSingle
   Caption = 'FPai'
-  ClientHeight = 572
-  ClientWidth = 712
+  ClientHeight = 570
+  ClientWidth = 710
   Color = clBtnFace
   Constraints.MinHeight = 570
   Constraints.MinWidth = 710
@@ -30,21 +29,18 @@ object Fcad_Pai: TFcad_Pai
   object pnCad: TPanel
     Left = 0
     Top = 0
-    Width = 654
-    Height = 572
+    Width = 652
+    Height = 570
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 652
-    ExplicitHeight = 570
     object pnMenu: TPanel
       Left = 1
       Top = 1
-      Width = 652
+      Width = 650
       Height = 50
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 650
       object cxSalvar: TcxButton
         Left = 57
         Top = 0
@@ -343,21 +339,18 @@ object Fcad_Pai: TFcad_Pai
   object pnCon: TPanel
     Left = 0
     Top = 0
-    Width = 654
-    Height = 572
+    Width = 652
+    Height = 570
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 652
-    ExplicitHeight = 570
     object pnBusca: TPanel
       Left = 1
       Top = 53
-      Width = 652
+      Width = 650
       Height = 23
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 650
       object cxLabel1: TcxLabel
         Left = 3
         Top = 3
@@ -466,12 +459,11 @@ object Fcad_Pai: TFcad_Pai
     object pnBotaoCad: TPanel
       Left = 1
       Top = 1
-      Width = 652
+      Width = 650
       Height = 52
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 650
       object cxNovo: TcxButton
         Left = 57
         Top = 0
@@ -1540,14 +1532,12 @@ object Fcad_Pai: TFcad_Pai
     end
     object pnBotaoCon: TPanel
       Left = 1
-      Top = 521
-      Width = 652
+      Top = 519
+      Width = 650
       Height = 50
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitTop = 519
-      ExplicitWidth = 650
       object cxCadastro: TcxButton
         Left = 265
         Top = 0
@@ -1856,8 +1846,8 @@ object Fcad_Pai: TFcad_Pai
     object grConsulta: TcxGrid
       Left = 1
       Top = 76
-      Width = 652
-      Height = 445
+      Width = 650
+      Height = 443
       Hint = 'Grid de Dados'
       Align = alClient
       BevelInner = bvNone
@@ -1874,8 +1864,6 @@ object Fcad_Pai: TFcad_Pai
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'Office2010Black'
       RootLevelOptions.TabsForEmptyDetails = False
-      ExplicitWidth = 650
-      ExplicitHeight = 443
       object grConsultaDBTableView1: TcxGridDBTableView
         OnDblClick = grConsultaDBTableView1DblClick
         Navigator.Buttons.CustomButtons = <>
@@ -1908,7 +1896,7 @@ object Fcad_Pai: TFcad_Pai
     end
   end
   object pnImg: TcxImage
-    Left = 654
+    Left = 652
     Top = 0
     Align = alRight
     Picture.Data = {
@@ -5742,9 +5730,7 @@ object Fcad_Pai: TFcad_Pai
     StyleHot.LookAndFeel.NativeStyle = False
     TabOrder = 2
     Transparent = True
-    ExplicitLeft = 652
-    ExplicitHeight = 570
-    Height = 572
+    Height = 570
     Width = 58
   end
   object cxPopMenu: TRxPopupMenu

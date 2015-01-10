@@ -165,6 +165,7 @@ end;
 procedure TFcad_Pai.cxSalvarClick(Sender: TObject);
 begin
    MostraPainelCadastro(Con);
+   cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Pai.cxVoltarClick(Sender: TObject);
@@ -232,6 +233,8 @@ begin
       MostraPainelBusca(Con);
 
    MOstraPainelCadastro(Con);
+
+   cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Pai.grConsultaDBTableView1CustomDrawCell(

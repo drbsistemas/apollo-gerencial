@@ -5,8 +5,6 @@ inherited Fcad_Cidade: TFcad_Cidade
   ClientWidth = 712
   Visible = False
   WindowState = wsNormal
-  ExplicitWidth = 718
-  ExplicitHeight = 601
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnCad: TPanel

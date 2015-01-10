@@ -64,22 +64,7 @@ type
     grConsultaDBTableView1Column3: TcxGridDBColumn;
     grConsultaDBTableView1Column4: TcxGridDBColumn;
     cxBtnEstoque: TcxButton;
-    cxImage1: TcxImage;
-    cxLabel13: TcxLabel;
-    cxLabel30: TcxLabel;
-    cxLabel31: TcxLabel;
-    cxLabel32: TcxLabel;
-    cxLabel33: TcxLabel;
-    cxDBTextEdit5: TcxDBTextEdit;
-    cxLabel34: TcxLabel;
-    cxDBTextEdit6: TcxDBTextEdit;
-    cxDBTextEdit7: TcxDBTextEdit;
-    cxLabel35: TcxLabel;
-    cxDBCurrencyEdit2: TcxDBCurrencyEdit;
-    cxDBCurrencyEdit3: TcxDBCurrencyEdit;
-    cxDBCurrencyEdit4: TcxDBCurrencyEdit;
-    cxDBCurrencyEdit1: TcxDBCurrencyEdit;
-    Panel1: TPanel;
+    pnDados: TPanel;
     eCodigo: TcxTextEdit;
     cxLabel3: TcxLabel;
     eAtivo: TcxCheckBox;
@@ -115,6 +100,23 @@ type
     eLocal: TcxTextEdit;
     eCodLocal: TcxButtonEdit;
     cxLabel19: TcxLabel;
+    pnInfo: TPanel;
+    pnFotoCon: TPanel;
+    cxImage1: TcxImage;
+    cxLabel13: TcxLabel;
+    cxLabel30: TcxLabel;
+    cxLabel31: TcxLabel;
+    cxLabel32: TcxLabel;
+    cxLabel33: TcxLabel;
+    cxDBTextEdit5: TcxDBTextEdit;
+    cxLabel34: TcxLabel;
+    cxDBTextEdit6: TcxDBTextEdit;
+    cxDBTextEdit7: TcxDBTextEdit;
+    cxLabel35: TcxLabel;
+    cxDBCurrencyEdit2: TcxDBCurrencyEdit;
+    cxDBCurrencyEdit3: TcxDBCurrencyEdit;
+    cxDBCurrencyEdit4: TcxDBCurrencyEdit;
+    cxDBCurrencyEdit1: TcxDBCurrencyEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
@@ -218,6 +220,7 @@ begin
    if cbAtivo.ItemIndex > 0 then
       StrSql := StrSql + ' and ATIVO='+QuotedStr(ifs(cbAtivo.ItemIndex=1, 'S','N'));
 
+   StrSql := StrSql +' order by '+indice;
    ConsultaSql(StrSql, dmcad.qryProd);
    dmcad.qryProd.First;
 
@@ -396,6 +399,7 @@ end;
 procedure TFcad_Produto.FormShow(Sender: TObject);
 begin
    inherited;
+   pnBotaoCon.Align := alBottom;
    cxConsultaPropertiesChange(self);
    VerFoto;
 end;

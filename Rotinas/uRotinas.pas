@@ -346,8 +346,9 @@ Function ExecutaGen(StrTabela : String) : Integer;
 begin
    with dmCad do
    begin
-      ConsultaSql('select GEN_ID(GEN_'+StrTabela+'_ID,1) codigo from dual',dmCad.qryAux);
-      Result := dmCad.qryAux.Fieldbyname('CODIGO').asInteger;
+      ConsultaSql('select GEN_ID(GEN_'+StrTabela+'_ID,1) codigo from dual',dmCad.qryGen);
+      Result := dmCad.qryGen.Fieldbyname('CODIGO').asInteger;
+      dmcad.qryGen.Close;
    end;
 end;
 
@@ -582,7 +583,7 @@ begin
       qrDados.Close;
       qrDados.Sql.Clear;
       qrDados.SQL.Text := StrConsulta;
-      qrDados.ExecSQL;
+      qrDados.Execute;
       qrDados.Close;
    Finally
       GravaSql(StrConsulta, qrDados.Name);

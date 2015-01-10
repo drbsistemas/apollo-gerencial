@@ -57,7 +57,7 @@ begin
       2: indice := 'UF';
    end;
    StrSql := 'select * from CODIBGE where '+indice+' like '+QuotedStr('%'+eConsulta.Text+'%');
-
+   StrSql := StrSql +' order by '+indice;
    ConsultaSql(StrSql, dmcad.qryCidade);
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryCidade.RecordCount);
    eConsulta.setFOcus;

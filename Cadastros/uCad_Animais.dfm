@@ -1,22 +1,22 @@
 inherited Fcad_Animais: TFcad_Animais
   Caption = 'Tela de Animais'
-  ClientHeight = 531
+  ClientHeight = 539
   ClientWidth = 762
-  ExplicitWidth = 778
+  ExplicitWidth = 770
   ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnImg: TcxImage [0]
     Left = 704
     ExplicitLeft = 704
-    ExplicitHeight = 531
-    Height = 531
+    ExplicitHeight = 539
+    Height = 539
   end
   inherited pnCad: TPanel [1]
     Width = 704
-    Height = 531
+    Height = 539
     ExplicitWidth = 704
-    ExplicitHeight = 531
+    ExplicitHeight = 539
     inherited pnMenu: TPanel
       Width = 702
       TabOrder = 1
@@ -26,7 +26,7 @@ inherited Fcad_Animais: TFcad_Animais
       Left = 1
       Top = 301
       Width = 702
-      Height = 229
+      Height = 237
       Align = alClient
       TabOrder = 0
       Properties.ActivePage = cxDados
@@ -36,7 +36,7 @@ inherited Fcad_Animais: TFcad_Animais
       LookAndFeel.Kind = lfUltraFlat
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'Office2010Silver'
-      ClientRectBottom = 223
+      ClientRectBottom = 231
       ClientRectLeft = 2
       ClientRectRight = 696
       ClientRectTop = 27
@@ -87,6 +87,7 @@ inherited Fcad_Animais: TFcad_Animais
       object cxVacinas: TcxTabSheet
         Caption = 'Dados Estoque'
         ImageIndex = 1
+        ExplicitHeight = 196
         object eEstoqueDisp: TcxCurrencyEdit
           Left = 131
           Top = 3
@@ -1735,9 +1736,9 @@ inherited Fcad_Animais: TFcad_Animais
   end
   inherited pnCon: TPanel [2]
     Width = 704
-    Height = 531
+    Height = 539
     ExplicitWidth = 704
-    ExplicitHeight = 531
+    ExplicitHeight = 539
     inherited pnBusca: TPanel
       Width = 702
       ExplicitWidth = 702
@@ -1765,16 +1766,16 @@ inherited Fcad_Animais: TFcad_Animais
       end
     end
     inherited pnBotaoCon: TPanel
-      Top = 480
+      Top = 488
       Width = 702
-      ExplicitTop = 480
+      ExplicitTop = 488
       ExplicitWidth = 702
     end
     inherited grConsulta: TcxGrid
       Width = 702
-      Height = 404
+      Height = 412
       ExplicitWidth = 702
-      ExplicitHeight = 404
+      ExplicitHeight = 412
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmCad.dsAnimais
         DataController.DetailKeyFieldNames = 'IDANIMAL'

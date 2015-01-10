@@ -85,7 +85,6 @@ type
     procedure cxVoltarClick(Sender: TObject);
     procedure cxCancelaClick(Sender: TObject);
     procedure cxConsultaPropertiesChange(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure cxSalvarClick(Sender: TObject);
     procedure cbPessoaPropertiesChange(Sender: TObject);
     procedure cxNovoClick(Sender: TObject);
@@ -102,6 +101,7 @@ type
     procedure cxPrintClick(Sender: TObject);
     procedure cbDtNascimentoExit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -191,7 +191,7 @@ begin
    StrSql := 'select A.* from CLIENTE A where '+indice+' like '+QuotedStr('%'+eConsulta.Text+'%');
    if cbAtivo.ItemIndex > 0 then
       StrSql := StrSql + ' and ATIVO='+QuotedStr(ifs(cbAtivo.ItemIndex=1, 'S','N'));
-
+   StrSql := StrSql +' order by '+indice;
    ConsultaSql(StrSql, dmcad.qryClie);
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryClie.RecordCount);
 end;
@@ -322,7 +322,7 @@ end;
 
 procedure TFcad_Clientes.FormShow(Sender: TObject);
 begin
-   inherited;
+  inherited;
    cxConsultaPropertiesChange(self);
 end;
 
