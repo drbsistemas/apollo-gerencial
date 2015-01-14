@@ -21,7 +21,7 @@ var
 begin
    CriaDmRel;
 
-   dmRel.dbPipeAux.DataSource                  := dmCad.dsClie;
+   dmRel.dbPipeAux.DataSource                  := dsNome;
    dmRel.dbPipeAux.Active;
    if dsNome2 <> nIl then
    begin

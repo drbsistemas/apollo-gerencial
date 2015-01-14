@@ -122,7 +122,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure grConsultaDBTableView1DblClick(Sender: TObject);
     procedure cxApagarClick(Sender: TObject);
-    procedure cxVerClick(Sender: TObject);
     procedure cxEditaClick(Sender: TObject);
     procedure cxNovoClick(Sender: TObject);
     procedure cxSalvarClick(Sender: TObject);
@@ -151,6 +150,10 @@ type
     procedure eCustoProdExit(Sender: TObject);
     procedure eMlExit(Sender: TObject);
     procedure ePrecoVendaExit(Sender: TObject);
+    procedure cxPrintClick(Sender: TObject);
+    procedure eCodFornecKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure cxVerClick(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -170,7 +173,8 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas, uDmCad, uCon_Generica, uCad_Clientes, uCad_Estoque, uCalculos;
+uses uRotinas, uDmCad, uCon_Generica, uCad_Clientes, uCad_Estoque, uCalculos,
+  uRelatorios;
 
 procedure TFcad_Produto.cxApagaFotoClick(Sender: TObject);
 begin
@@ -222,7 +226,6 @@ begin
 
    StrSql := StrSql +' order by '+indice;
    ConsultaSql(StrSql, dmcad.qryProd);
-   dmcad.qryProd.First;
 
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryProd.RecordCount);
 end;
@@ -261,19 +264,35 @@ begin
    eRefProd.SetFocus;
 end;
 
-procedure TFcad_Produto.cxVerClick(Sender: TObject);
+procedure TFcad_Produto.cxPrintClick(Sender: TObject);
 begin
-   inherited;
-   cxEditaClick(self);
-   cxSalvar.Enabled := false;
+///// Impresso
+   Imprime(dmCad.dsProd, NIL,
+            'SIM',
+            'Ficha de Produtos',
+            dmCad.qryConf.FieldByName('PASTASERVIDOR').ASString + '\Relatorios\Impressos\ppFichaProd.rtm',
+            'SIM','',
+            1);
 end;
 
 procedure TFcad_Produto.eCodFornecExit(Sender: TObject);
 begin
    inherited;
-   eFornec.Text :=  ConsultaCampoNomeAtivo(eCodFornec.Text, 'CLIENTE');
+   eFornec.Text :=  ConsultaCampoNomeAtivo(eCodFornec.Text, '0');
    if eFornec.Text ='NENHUM' then
       eCodFornec.Text := '0';
+end;
+
+procedure TFcad_Produto.eCodFornecKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+   if (key = VK_DOWN) and (not grConsulta.Focused = true) then
+      dmCad.qryProd.Next;
+   if (key = VK_UP) and (not grConsulta.Focused = true) then
+      dmcad.qryProd.Prior;
+
+   cxQtdeREg.Caption := 'Registros: '+ intToStr(dmCad.qryProd.RecordCount);
 end;
 
 procedure TFcad_Produto.eCodFornecKeyPress(Sender: TObject; var Key: Char);
@@ -499,6 +518,13 @@ begin
          CancelUpdates;
       end;
    end;
+end;
+
+procedure TFcad_Produto.cxVerClick(Sender: TObject);
+begin
+   cxEditaClick(self);
+  inherited;
+
 end;
 
 procedure TFcad_Produto.Limpa;

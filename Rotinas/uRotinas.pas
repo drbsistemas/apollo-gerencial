@@ -21,6 +21,7 @@ uses
    FUNCTION    ValidaData(const S: string): boolean;
    FUNCTION    Temletra(texto:string) : boolean;
    FUNCTION    DigitoCodigodeBar(EREFERENCIA:string):integer;
+   FUNCTION    DataSql(Data: TDateTime): string;
 
    // Envio de E-mails
    PROCEDURE EnviaEmailDLL(Assunto, Destino, Anexo: String);
@@ -43,7 +44,10 @@ uses
    PROCEDURE   PFundo(mostra: integer);
 
 const
-   SqlBuscaProduto = 'SELECT IDPROD, NOMEPROD, UNPROD, ESTOQUETOTAL, REFPROD, CODBAR FROM PRODUTO';
+   SqlBuscaProduto = 'SELECT IDPROD, NOMEPROD, UNPROD, ESTOQUETOTAL, REFPROD, CODBAR, NCMPROD, MARCAPROD, DTVALIDADE FROM PRODUTO';
+
+type
+   TTipoMov = (ENTRADA, SAIDA);
 
 var
    FVisualizaImagem,
@@ -64,6 +68,7 @@ var
    Diasfim                            : Real;
    Liberacao                          : Boolean;
    ID: Integer;
+   TipoMov                            : TTipoMov;
 
 implementation
 
@@ -505,8 +510,7 @@ begin
    FreeAndNil(TForm(NewForm));
 
    if (TForm(NewForm) = Nil) Or (not TForm(NewForm).HandleAllocated) Then
-//      NewForm := FormClasse.Create(TForm(Application));
-      Application.CreateForm(FormClasse, NewForm);
+      TForm(NewForm) := FormClasse.Create(TForm(NewForm));
 
    TForm(NewForm).FormStyle   := fsNormal;
    TForm(NewForm).WindowState := wsNormal;
@@ -517,6 +521,10 @@ begin
    begin
       Fcad_GEnerica.AbreCom('CON');
       Fcad_GEnerica.TABELA      := StrTabela;
+   end;
+   if (TForm(NewForm ) = Fcad_Clientes) and (StrTabela <> '') then
+   begin
+      Fcad_Clientes.cxTipoClie.ItemIndex := StrToInt(StrTabela);
    end;
 //   FAbreForm.MostraPainelBusca(Con);
    TForm(NewForm).ShowModal;
@@ -687,6 +695,18 @@ begin
    else
 ///// Se achou devolve o codigo
       Result := IntToStr(dmCad.qryAux.Fieldbyname('IDPROD').AsInteger);
+end;
+
+Function DataSql(Data: TDateTime): string;
+var
+   FormatoData: string;
+   DataS: string;
+begin
+   FormatoData := FormatSettings.ShortDateFormat;
+   FormatSettings.ShortDateFormat := 'mm/dd/yyyy';
+   DataS := DateToStr(Data);
+   FormatSettings.ShortDateFormat := FormatoData;
+   Result := DataS;
 end;
 
 end.

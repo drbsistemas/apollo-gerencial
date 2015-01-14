@@ -91,6 +91,27 @@ type
     qryEstoqueESTOQUEDISP: TFloatField;
     qryEstoqueESTOQUETOTAL: TFloatField;
     qryEstoqueUNPROD: TStringField;
+    qryCPagto: TFDQuery;
+    UpdtCPagto: TFDUpdateSQL;
+    dsCPagto: TDataSource;
+    qryCPagtoItem: TFDQuery;
+    UpdtCPagtoItem: TFDUpdateSQL;
+    dsCPagtoItem: TDataSource;
+    qryCPagtoItemIDCPAGTOITEM: TIntegerField;
+    qryCPagtoItemIDCPAGTO: TIntegerField;
+    qryCPagtoItemDIAS: TIntegerField;
+    qryCPagtoItemJUROS: TFloatField;
+    qryCPagtoItemPERCENTUAL: TFloatField;
+    qryCPagtoItemPARCELA: TIntegerField;
+    qryNcm: TFDQuery;
+    IntegerField1: TIntegerField;
+    IntegerField2: TIntegerField;
+    IntegerField3: TIntegerField;
+    FloatField1: TFloatField;
+    FloatField2: TFloatField;
+    IntegerField4: TIntegerField;
+    UpdtNcm: TFDUpdateSQL;
+    dsNcm: TDataSource;
     procedure qryClieAfterInsert(DataSet: TDataSet);
     procedure qryCidadeAfterInsert(DataSet: TDataSet);
     procedure qryGenericoAfterInsert(DataSet: TDataSet);
@@ -98,6 +119,8 @@ type
     procedure qryEstoqueAfterInsert(DataSet: TDataSet);
     procedure qryAnimaisAfterInsert(DataSet: TDataSet);
     procedure qryBalancoAfterInsert(DataSet: TDataSet);
+    procedure qryCPagtoAfterInsert(DataSet: TDataSet);
+    procedure qryCPagtoItemAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -133,6 +156,16 @@ end;
 procedure TdmCad.qryClieAfterInsert(DataSet: TDataSet);
 begin
    dmCad.qryClie.FieldByName('IDCLIE').AsInteger         := ExecutaGen('CLIENTE');
+end;
+
+procedure TdmCad.qryCPagtoAfterInsert(DataSet: TDataSet);
+begin
+   dmCad.qryCPagto.FieldByName('IDCPAGTO').AsInteger       := ExecutaGen('CPAGTO');
+end;
+
+procedure TdmCad.qryCPagtoItemAfterInsert(DataSet: TDataSet);
+begin
+   dmCad.qryCPagtoItem.FieldByName('IDCPAGTOITEM').AsInteger       := ExecutaGen('CPAGTOITEM');
 end;
 
 procedure TdmCad.qryEstoqueAfterInsert(DataSet: TDataSet);

@@ -27,7 +27,12 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   uCalculos in '..\Rotinas\uCalculos.pas',
-  uCad_Balanco in '..\Cadastros\uCad_Balanco.pas' {Fcad_Balanco};
+  uCad_Balanco in '..\Cadastros\uCad_Balanco.pas' {Fcad_Balanco},
+  uCon_Relatorio in '..\Relatorios\uCon_Relatorio.pas' {Fcad_Relatorio},
+  udmMov in '..\Movimentacao\udmMov.pas' {dmMov: TDataModule},
+  uCad_Pedido in '..\Movimentacao\uCad_Pedido.pas' {Fcad_Pedido},
+  uCad_Pagto in '..\Cadastros\uCad_Pagto.pas' {Fcad_Pagto},
+  uCad_Ncm in '..\Cadastros\uCad_Ncm.pas' {Fcad_NCM};
 
 {$R *.res}
 

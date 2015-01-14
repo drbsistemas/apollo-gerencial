@@ -527,7 +527,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       Properties.Items.Strings = (
         'CLIENTE'
         'FORNECEDOR'
-        'VENDEDOR')
+        'VENDEDOR'
+        'TRANSPORTADORA')
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clWindowText
       Style.Font.Height = -11
@@ -1057,7 +1058,6 @@ inherited Fcad_Clientes: TFcad_Clientes
       end
       inherited cxVer: TcxButton
         LookAndFeel.SkinName = ''
-        OnClick = cxVerClick
       end
       inherited cxApagar: TcxButton
         LookAndFeel.SkinName = ''
@@ -1085,15 +1085,66 @@ inherited Fcad_Clientes: TFcad_Clientes
           'CPF')
         Text = 'C'#211'DIGO'
       end
+      inherited cxLabel2: TcxLabel
+        Left = 626
+        ExplicitLeft = 626
+      end
       inherited cbAtivo: TcxComboBox
-        Left = 476
+        Left = 659
         Properties.OnChange = cxConsultaPropertiesChange
         Style.IsFontAssigned = True
-        ExplicitLeft = 476
+        ExplicitLeft = 659
       end
       inherited cxQtdeReg: TcxLabel
-        Left = 557
-        ExplicitLeft = 557
+        Left = 740
+        ExplicitLeft = 740
+      end
+      object cxTipoClie: TcxComboBox
+        Left = 473
+        Top = 1
+        Hint = 'Tipo de Cadastro'
+        ParentFont = False
+        Properties.CharCase = ecUpperCase
+        Properties.DropDownListStyle = lsFixedList
+        Properties.Items.Strings = (
+          'CLIENTE'
+          'FORNECEDOR'
+          'VENDEDOR'
+          'TRANSPORTADORA')
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 13366014
+        TabOrder = 7
+        Text = 'CLIENTE'
+        OnClick = cxConsultaPropertiesChange
+        Width = 150
+      end
+      object cxLabel23: TcxLabel
+        Left = 445
+        Top = 3
+        AutoSize = False
+        Caption = 'Tipo:'
+        ParentFont = False
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.LookAndFeel.NativeStyle = True
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        Properties.Alignment.Horz = taRightJustify
+        Properties.LabelEffect = cxleCool
+        Transparent = True
+        Height = 17
+        Width = 29
+        AnchorX = 474
       end
     end
     inherited pnBotaoCon: TPanel

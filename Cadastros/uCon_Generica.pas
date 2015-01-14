@@ -85,10 +85,6 @@ begin
    StrSql := 'select * from generica where TABELA='+QuotedStr(TABELA)+' and '+indice+
                                   ' like '+QuotedStr('%'+eConsulta.Text+'%')+' order by '+indice;
 
-   if cbAtivo.ItemIndex > 0 then
-      StrSql := StrSql + ' and ATIVO='+QuotedStr(ifs(cbAtivo.ItemIndex=1, 'S','N'));
-
-   StrSql := StrSql +' order by '+indice;
    ConsultaSql(StrSql, dmcad.qryGenerico);
    CaptionForm;
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryGenerico.RecordCount);

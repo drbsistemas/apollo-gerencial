@@ -41,7 +41,7 @@ inherited Fcad_Produto: TFcad_Produto
       Height = 234
       Align = alClient
       TabOrder = 0
-      Properties.ActivePage = cxEstoque
+      Properties.ActivePage = cxVenda
       Properties.CustomButtons.Buttons = <>
       Properties.Style = 11
       Properties.TabWidth = 100
@@ -2101,9 +2101,6 @@ inherited Fcad_Produto: TFcad_Produto
     inherited pnBotaoCad: TPanel
       Width = 849
       ExplicitWidth = 849
-      inherited cxVer: TcxButton
-        OnClick = cxVerClick
-      end
       inherited cxApagar: TcxButton
         OnClick = cxApagarClick
       end
@@ -2112,8 +2109,9 @@ inherited Fcad_Produto: TFcad_Produto
         ExplicitLeft = 470
       end
       inherited cxPrint: TcxButton
-        Left = 411
-        ExplicitLeft = 411
+        Left = 409
+        OnClick = cxPrintClick
+        ExplicitLeft = 409
       end
       object cxBtnEstoque: TcxButton
         Left = 352

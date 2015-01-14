@@ -919,6 +919,7 @@ object Fcad_Pai: TFcad_Pai
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
+        OnClick = cxVerClick
       end
       object cxApagar: TcxButton
         Left = 234

@@ -82,6 +82,8 @@ type
     eCnpj: TcxMaskEdit;
     cxLabel12: TcxLabel;
     eIe: TcxMaskEdit;
+    cxTipoClie: TcxComboBox;
+    cxLabel23: TcxLabel;
     procedure cxVoltarClick(Sender: TObject);
     procedure cxCancelaClick(Sender: TObject);
     procedure cxConsultaPropertiesChange(Sender: TObject);
@@ -104,9 +106,9 @@ type
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
-    indice : String;
-    procedure Edita;
-    procedure Limpa;
+      indice, indiceTipoPessoa : String;
+      procedure Edita;
+      procedure Limpa;
   public
     { Public declarations }
   end;
@@ -188,9 +190,20 @@ begin
       5: indice := 'CNPJ';
       6: indice := 'CPF';
    end;
+
+   case cxTipoClie.ItemIndex of
+      0: indiceTipoPessoa := 'CLI';
+      1: indiceTipoPessoa := 'FOR';
+      2: indiceTipoPessoa := 'VEN';
+      3: indiceTipoPessoa := 'TRA';
+   end;
+
    StrSql := 'select A.* from CLIENTE A where '+indice+' like '+QuotedStr('%'+eConsulta.Text+'%');
    if cbAtivo.ItemIndex > 0 then
       StrSql := StrSql + ' and ATIVO='+QuotedStr(ifs(cbAtivo.ItemIndex=1, 'S','N'));
+
+   StrSql := StrSql + ' and TIPOCLIE='+QuotedStr(indiceTipoPessoa);
+
    StrSql := StrSql +' order by '+indice;
    ConsultaSql(StrSql, dmcad.qryClie);
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryClie.RecordCount);
@@ -218,13 +231,7 @@ begin
 end;
 
 procedure TFcad_Clientes.cxPrintClick(Sender: TObject);
-var
-   IDCLIE : Integer;
 begin
-/////
-   IDCLIE := dmcad.qryClieIDCLIE.Asinteger;
-    StrSql := 'select * from CLIENTE where IDCLIE='+IntTOStr(IDCLIE);
-   ConsultaSql(StrSql, dmcad.qryClie);
 ///// Impresso
    Imprime(dmCad.dsClie, NIL,
             'SIM',
@@ -232,10 +239,6 @@ begin
             dmCad.qryConf.FieldByName('PASTASERVIDOR').ASString + '\Relatorios\Impressos\ppFichaCliente.rtm',
             'SIM',dmcad.qryClieEMAIL.ASString,
             1);
-   Application.ProcessMessages;
-   grCOnsulta.Visible := false;
-   grCOnsulta.Visible := true;
-   cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Clientes.cxVerClick(Sender: TObject);
@@ -322,8 +325,8 @@ end;
 
 procedure TFcad_Clientes.FormShow(Sender: TObject);
 begin
-  inherited;
-   cxConsultaPropertiesChange(self);
+   inherited;
+   cxConsultaPropertiesChange(Self);
 end;
 
 procedure TFcad_Clientes.grConsultaDBTableView1DblClick(Sender: TObject);
@@ -445,5 +448,6 @@ begin
       cbPessoaPropertiesChange(Self);
       cbtpclie.ItemIndex := 0;
 end;
+
 
 end.

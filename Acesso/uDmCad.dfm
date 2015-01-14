@@ -988,4 +988,184 @@ object dmCad: TdmCad
     Left = 384
     Top = 50
   end
+  object qryCPagto: TFDQuery
+    AfterInsert = qryCPagtoAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtCPagto
+    SQL.Strings = (
+      'select * from CPAGTO')
+    Left = 93
+    Top = 152
+  end
+  object UpdtCPagto: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO CPAGTO'
+      '(IDCPAGTO, DESCRICAO)'
+      'VALUES (:NEW_IDCPAGTO, :NEW_DESCRICAO)'
+      'RETURNING IDCPAGTO, DESCRICAO')
+    ModifySQL.Strings = (
+      'UPDATE CPAGTO'
+      'SET IDCPAGTO = :NEW_IDCPAGTO, DESCRICAO = :NEW_DESCRICAO'
+      'WHERE IDCPAGTO = :OLD_IDCPAGTO'
+      'RETURNING IDCPAGTO, DESCRICAO')
+    DeleteSQL.Strings = (
+      'DELETE FROM CPAGTO'
+      'WHERE IDCPAGTO = :OLD_IDCPAGTO')
+    FetchRowSQL.Strings = (
+      'SELECT IDCPAGTO, DESCRICAO'
+      'FROM CPAGTO'
+      'WHERE IDCPAGTO = :IDCPAGTO')
+    Left = 93
+    Top = 196
+  end
+  object dsCPagto: TDataSource
+    DataSet = qryCPagto
+    Left = 93
+    Top = 240
+  end
+  object qryCPagtoItem: TFDQuery
+    AfterInsert = qryCPagtoItemAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtCPagtoItem
+    SQL.Strings = (
+      'select * from CPAGTOITEM')
+    Left = 133
+    Top = 152
+    object qryCPagtoItemIDCPAGTOITEM: TIntegerField
+      FieldName = 'IDCPAGTOITEM'
+      Origin = 'IDCPAGTOITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qryCPagtoItemIDCPAGTO: TIntegerField
+      FieldName = 'IDCPAGTO'
+      Origin = 'IDCPAGTO'
+    end
+    object qryCPagtoItemDIAS: TIntegerField
+      FieldName = 'DIAS'
+      Origin = 'DIAS'
+    end
+    object qryCPagtoItemJUROS: TFloatField
+      FieldName = 'JUROS'
+      Origin = 'JUROS'
+      DisplayFormat = '###,###,0.00'
+    end
+    object qryCPagtoItemPERCENTUAL: TFloatField
+      FieldName = 'PERCENTUAL'
+      Origin = 'PERCENTUAL'
+      DisplayFormat = '###,###,0.00'
+    end
+    object qryCPagtoItemPARCELA: TIntegerField
+      FieldName = 'PARCELA'
+      Origin = 'PARCELA'
+    end
+  end
+  object UpdtCPagtoItem: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO CPAGTOITEM'
+      '(IDCPAGTOITEM, IDCPAGTO, DIAS, JUROS, PERCENTUAL, '
+      '  PARCELA)'
+      
+        'VALUES (:NEW_IDCPAGTOITEM, :NEW_IDCPAGTO, :NEW_DIAS, :NEW_JUROS,' +
+        ' :NEW_PERCENTUAL, '
+      '  :NEW_PARCELA)'
+      'RETURNING IDCPAGTOITEM, IDCPAGTO, DIAS, JUROS, PERCENTUAL')
+    ModifySQL.Strings = (
+      'UPDATE CPAGTOITEM'
+      'SET IDCPAGTOITEM = :NEW_IDCPAGTOITEM, IDCPAGTO = :NEW_IDCPAGTO, '
+      
+        '  DIAS = :NEW_DIAS, JUROS = :NEW_JUROS, PERCENTUAL = :NEW_PERCEN' +
+        'TUAL, '
+      '  PARCELA = :NEW_PARCELA'
+      'WHERE IDCPAGTOITEM = :OLD_IDCPAGTOITEM'
+      'RETURNING IDCPAGTOITEM, IDCPAGTO, DIAS, JUROS, PERCENTUAL')
+    DeleteSQL.Strings = (
+      'DELETE FROM CPAGTOITEM'
+      'WHERE IDCPAGTOITEM = :OLD_IDCPAGTOITEM')
+    FetchRowSQL.Strings = (
+      'SELECT IDCPAGTOITEM, IDCPAGTO, DIAS, JUROS, PERCENTUAL, PARCELA'
+      'FROM CPAGTOITEM'
+      'WHERE IDCPAGTOITEM = :IDCPAGTOITEM')
+    Left = 133
+    Top = 196
+  end
+  object dsCPagtoItem: TDataSource
+    DataSet = qryCPagtoItem
+    Left = 133
+    Top = 240
+  end
+  object qryNcm: TFDQuery
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtNcm
+    SQL.Strings = (
+      'select * from NCM')
+    Left = 178
+    Top = 152
+    object IntegerField1: TIntegerField
+      FieldName = 'IDCPAGTOITEM'
+      Origin = 'IDCPAGTOITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'IDCPAGTO'
+      Origin = 'IDCPAGTO'
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'DIAS'
+      Origin = 'DIAS'
+    end
+    object FloatField1: TFloatField
+      FieldName = 'JUROS'
+      Origin = 'JUROS'
+      DisplayFormat = '###,###,0.00'
+    end
+    object FloatField2: TFloatField
+      FieldName = 'PERCENTUAL'
+      Origin = 'PERCENTUAL'
+      DisplayFormat = '###,###,0.00'
+    end
+    object IntegerField4: TIntegerField
+      FieldName = 'PARCELA'
+      Origin = 'PARCELA'
+    end
+  end
+  object UpdtNcm: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO NCM'
+      '(NCM, DESCRICAO)'
+      'VALUES (:NEW_NCM, :NEW_DESCRICAO)'
+      'RETURNING NCM, DESCRICAO')
+    ModifySQL.Strings = (
+      'UPDATE NCM'
+      'SET NCM = :NEW_NCM, DESCRICAO = :NEW_DESCRICAO'
+      'WHERE NCM = :OLD_NCM'
+      'RETURNING NCM, DESCRICAO')
+    DeleteSQL.Strings = (
+      'DELETE FROM NCM'
+      'WHERE NCM = :OLD_NCM')
+    FetchRowSQL.Strings = (
+      'SELECT NCM, DESCRICAO'
+      'FROM NCM'
+      'WHERE NCM = :NCM')
+    Left = 178
+    Top = 196
+  end
+  object dsNcm: TDataSource
+    DataSet = qryNcm
+    Left = 178
+    Top = 240
+  end
 end

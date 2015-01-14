@@ -486,7 +486,7 @@ object dmRel: TdmRel
     PrinterSetup.mmPaperHeight = 297000
     PrinterSetup.mmPaperWidth = 210000
     PrinterSetup.PaperSize = 9
-    Template.FileName = 'D:\Gerencial\PetClinic\Relatorios\Impressos\ppFichaCliente.rtm'
+    Template.FileName = 'D:\Gerencial\PetClinic\Relatorios\Impressos\ppFichaProd.rtm'
     AllowPrintToArchive = True
     AllowPrintToFile = True
     ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
@@ -964,6 +964,7 @@ object dmRel: TdmRel
         AlignHorizontal = ahCenter
         AlignVertical = avCenter
         MaintainAspectRatio = False
+        Stretch = True
         Border.Weight = 1.000000000000000000
         DataField = 'LOGOEMP'
         DataPipeline = dbEmpresa
@@ -971,9 +972,9 @@ object dmRel: TdmRel
         ParentDataPipeline = False
         DataPipelineName = 'dbEmpresa'
         mmHeight = 24871
-        mmLeft = 159015
+        mmLeft = 162454
         mmTop = 0
-        mmWidth = 38365
+        mmWidth = 35000
         BandType = 0
         LayerName = Foreground1
       end
@@ -1007,8 +1008,8 @@ object dmRel: TdmRel
         BandType = 0
         LayerName = Foreground1
       end
-      object ppLabel2: TppLabel
-        UserName = 'Label2'
+      object ppLabel3: TppLabel
+        UserName = 'Label3'
         AutoSize = False
         Border.Weight = 1.000000000000000000
         Caption = 'Data:'
@@ -1103,8 +1104,8 @@ object dmRel: TdmRel
         BandType = 0
         LayerName = Foreground1
       end
-      object ppLabel3: TppLabel
-        UserName = 'Label3'
+      object ppLabel4: TppLabel
+        UserName = 'Label4'
         AutoSize = False
         Border.Weight = 1.000000000000000000
         Caption = 'Endere'#231'o:'
@@ -1142,8 +1143,8 @@ object dmRel: TdmRel
         BandType = 0
         LayerName = Foreground1
       end
-      object ppLabel4: TppLabel
-        UserName = 'Label4'
+      object ppLabel5: TppLabel
+        UserName = 'Label5'
         AutoSize = False
         Border.Weight = 1.000000000000000000
         Caption = 'Cidade:'
@@ -1202,8 +1203,8 @@ object dmRel: TdmRel
         BandType = 0
         LayerName = Foreground1
       end
-      object ppLabel5: TppLabel
-        UserName = 'Label5'
+      object ppLabel6: TppLabel
+        UserName = 'Label6'
         AutoSize = False
         Border.Weight = 1.000000000000000000
         Caption = 'Cnpj:'
@@ -1241,8 +1242,8 @@ object dmRel: TdmRel
         BandType = 0
         LayerName = Foreground1
       end
-      object ppLabel6: TppLabel
-        UserName = 'Label6'
+      object ppLabel8: TppLabel
+        UserName = 'Label8'
         AutoSize = False
         Border.Weight = 1.000000000000000000
         Caption = 'Ie:'
@@ -1280,8 +1281,8 @@ object dmRel: TdmRel
         BandType = 0
         LayerName = Foreground1
       end
-      object ppLabel8: TppLabel
-        UserName = 'Label8'
+      object ppLabel9: TppLabel
+        UserName = 'Label9'
         AutoSize = False
         Border.Weight = 1.000000000000000000
         Caption = 'Bairro:'
@@ -1342,7 +1343,7 @@ object dmRel: TdmRel
         Lines.Strings = (
           'FICHA '
           'DE '
-          'CLIENTE')
+          'PRODUTO')
         RemoveEmptyLines = False
         TextAlignment = taCentered
         Transparent = True
@@ -1363,13 +1364,13 @@ object dmRel: TdmRel
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
       mmBottomOffset = 0
-      mmHeight = 44715
+      mmHeight = 50536
       mmPrintPosition = 0
-      object ppLabel9: TppLabel
-        UserName = 'Label9'
+      object ppLabel10: TppLabel
+        UserName = 'Label10'
         AutoSize = False
         Border.Weight = 1.000000000000000000
-        Caption = 'Raz'#227'o:'
+        Caption = 'Produto:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Tahoma'
@@ -1378,7 +1379,7 @@ object dmRel: TdmRel
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3440
-        mmLeft = 10583
+        mmLeft = 12700
         mmTop = 4498
         mmWidth = 14817
         BandType = 4
@@ -1387,7 +1388,7 @@ object dmRel: TdmRel
       object ppDBText8: TppDBText
         UserName = 'DBText8'
         Border.Weight = 1.000000000000000000
-        DataField = 'RAZAO'
+        DataField = 'NOMEPROD'
         DataPipeline = dbPipeAux
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1397,51 +1398,13 @@ object dmRel: TdmRel
         Transparent = True
         DataPipelineName = 'dbPipeAux'
         mmHeight = 3440
-        mmLeft = 26458
+        mmLeft = 28575
         mmTop = 4498
         mmWidth = 69321
         BandType = 4
         LayerName = Foreground1
       end
-      object ppLabel10: TppLabel
-        UserName = 'Label101'
-        AutoSize = False
-        Border.Weight = 1.000000000000000000
-        Caption = 'Fantasia:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = [fsBold]
-        TextAlignment = taRightJustified
-        Transparent = True
-        mmHeight = 3440
-        mmLeft = 97896
-        mmTop = 4498
-        mmWidth = 14023
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText9: TppDBText
-        UserName = 'DBText9'
-        Border.Weight = 1.000000000000000000
-        DataField = 'FANTASIA'
-        DataPipeline = dbPipeAux
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'dbPipeAux'
-        mmHeight = 3440
-        mmLeft = 112977
-        mmTop = 4498
-        mmWidth = 69321
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppLabel11: TppLabel
+      object ppLabel12: TppLabel
         UserName = 'Label102'
         AutoSize = False
         Border.Weight = 1.000000000000000000
@@ -1454,8 +1417,8 @@ object dmRel: TdmRel
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3440
-        mmLeft = 10583
-        mmTop = 794
+        mmLeft = 12700
+        mmTop = 529
         mmWidth = 14817
         BandType = 4
         LayerName = Foreground1
@@ -1463,7 +1426,7 @@ object dmRel: TdmRel
       object ppDBText10: TppDBText
         UserName = 'DBText10'
         Border.Weight = 1.000000000000000000
-        DataField = 'IDCLIE'
+        DataField = 'IDPROD'
         DataPipeline = dbPipeAux
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1473,131 +1436,17 @@ object dmRel: TdmRel
         Transparent = True
         DataPipelineName = 'dbPipeAux'
         mmHeight = 3440
-        mmLeft = 26458
-        mmTop = 794
-        mmWidth = 14288
+        mmLeft = 28575
+        mmTop = 529
+        mmWidth = 11377
         BandType = 4
         LayerName = Foreground1
       end
-      object ppLabel12: TppLabel
-        UserName = 'Label103'
-        AutoSize = False
-        Border.Weight = 1.000000000000000000
-        Caption = 'Cnpj/Cpf:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = [fsBold]
-        TextAlignment = taRightJustified
-        Transparent = True
-        mmHeight = 3440
-        mmLeft = 10583
-        mmTop = 8202
-        mmWidth = 14817
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText12: TppDBText
-        UserName = 'DBText12'
-        Border.Weight = 1.000000000000000000
-        DataField = 'CNPJ'
-        DataPipeline = dbPipeAux
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'dbPipeAux'
-        mmHeight = 3440
-        mmLeft = 26458
-        mmTop = 8202
-        mmWidth = 31485
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText13: TppDBText
-        UserName = 'DBText13'
-        Border.Weight = 1.000000000000000000
-        DataField = 'CPF'
-        DataPipeline = dbPipeAux
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'dbPipeAux'
-        mmHeight = 3440
-        mmLeft = 64029
-        mmTop = 8202
-        mmWidth = 31485
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppLabel14: TppLabel
-        UserName = 'Label14'
-        AutoSize = False
-        Border.Weight = 1.000000000000000000
-        Caption = 'Ie/Rg:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = [fsBold]
-        TextAlignment = taRightJustified
-        Transparent = True
-        mmHeight = 3440
-        mmLeft = 97631
-        mmTop = 8202
-        mmWidth = 14288
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText14: TppDBText
-        UserName = 'DBText14'
-        Border.Weight = 1.000000000000000000
-        DataField = 'IE'
-        DataPipeline = dbPipeAux
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'dbPipeAux'
-        mmHeight = 3440
-        mmLeft = 112977
-        mmTop = 8202
-        mmWidth = 31485
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText15: TppDBText
-        UserName = 'DBText15'
-        Border.Weight = 1.000000000000000000
-        DataField = 'RG'
-        DataPipeline = dbPipeAux
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'dbPipeAux'
-        mmHeight = 3440
-        mmLeft = 150813
-        mmTop = 8202
-        mmWidth = 31485
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppLabel15: TppLabel
+      object ppLabel16: TppLabel
         UserName = 'Label104'
         AutoSize = False
         Border.Weight = 1.000000000000000000
-        Caption = 'Endere'#231'o:'
+        Caption = 'Pre'#231'o Compra:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Tahoma'
@@ -1606,83 +1455,30 @@ object dmRel: TdmRel
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3440
-        mmLeft = 10583
-        mmTop = 11906
-        mmWidth = 14817
+        mmLeft = 2117
+        mmTop = 24873
+        mmWidth = 25400
         BandType = 4
         LayerName = Foreground1
       end
       object ppDBText16: TppDBText
         UserName = 'DBText16'
         Border.Weight = 1.000000000000000000
-        DataField = 'ENDERECO'
+        DataField = 'PRECOCOMPRA'
         DataPipeline = dbPipeAux
+        DisplayFormat = '###,###,##0.00'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Tahoma'
         Font.Size = 8
         Font.Style = []
-        Transparent = True
-        DataPipelineName = 'dbPipeAux'
-        mmHeight = 3440
-        mmLeft = 26458
-        mmTop = 11906
-        mmWidth = 55298
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText17: TppDBText
-        UserName = 'DBText17'
-        Border.Weight = 1.000000000000000000
-        DataField = 'NUM'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        Transparent = True
-        mmHeight = 3440
-        mmLeft = 82286
-        mmTop = 11906
-        mmWidth = 13229
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppLabel16: TppLabel
-        UserName = 'Label16'
-        AutoSize = False
-        Border.Weight = 1.000000000000000000
-        Caption = 'Cep:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = [fsBold]
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 3440
-        mmLeft = 97102
-        mmTop = 11906
-        mmWidth = 14817
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText18: TppDBText
-        UserName = 'DBText18'
-        Border.Weight = 1.000000000000000000
-        DataField = 'CEP'
-        DataPipeline = dbPipeAux
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        Transparent = True
         DataPipelineName = 'dbPipeAux'
         mmHeight = 3440
-        mmLeft = 112977
-        mmTop = 11906
-        mmWidth = 16933
+        mmLeft = 28575
+        mmTop = 24873
+        mmWidth = 20373
         BandType = 4
         LayerName = Foreground1
       end
@@ -1690,7 +1486,7 @@ object dmRel: TdmRel
         UserName = 'Label17'
         AutoSize = False
         Border.Weight = 1.000000000000000000
-        Caption = 'Bairro:'
+        Caption = 'Un:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Tahoma'
@@ -1699,54 +1495,16 @@ object dmRel: TdmRel
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3440
-        mmLeft = 132292
-        mmTop = 11906
-        mmWidth = 11377
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText19: TppDBText
-        UserName = 'DBText19'
-        Border.Weight = 1.000000000000000000
-        DataField = 'BAIRRO'
-        DataPipeline = dbPipeAux
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'dbPipeAux'
-        mmHeight = 3440
-        mmLeft = 144463
-        mmTop = 11906
-        mmWidth = 37571
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppLabel18: TppLabel
-        UserName = 'Label18'
-        AutoSize = False
-        Border.Weight = 1.000000000000000000
-        Caption = 'Cidade:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = [fsBold]
-        TextAlignment = taRightJustified
-        Transparent = True
-        mmHeight = 3440
-        mmLeft = 10583
-        mmTop = 15610
+        mmLeft = 12700
+        mmTop = 9792
         mmWidth = 14817
         BandType = 4
         LayerName = Foreground1
       end
-      object ppDBText20: TppDBText
-        UserName = 'DBText20'
+      object ppDBText18: TppDBText
+        UserName = 'DBText18'
         Border.Weight = 1.000000000000000000
-        DataField = 'CIDADE'
+        DataField = 'UNPROD'
         DataPipeline = dbPipeAux
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1756,123 +1514,9 @@ object dmRel: TdmRel
         Transparent = True
         DataPipelineName = 'dbPipeAux'
         mmHeight = 3440
-        mmLeft = 26458
-        mmTop = 15610
-        mmWidth = 55298
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppLabel19: TppLabel
-        UserName = 'Label19'
-        AutoSize = False
-        Border.Weight = 1.000000000000000000
-        Caption = 'Telefone:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = [fsBold]
-        TextAlignment = taRightJustified
-        Transparent = True
-        mmHeight = 3440
-        mmLeft = 10583
-        mmTop = 19315
-        mmWidth = 14817
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText21: TppDBText
-        UserName = 'DBText201'
-        Border.Weight = 1.000000000000000000
-        DataField = 'FONE'
-        DataPipeline = dbPipeAux
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'dbPipeAux'
-        mmHeight = 3440
-        mmLeft = 26458
-        mmTop = 19315
-        mmWidth = 55298
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText22: TppDBText
-        UserName = 'DBText22'
-        Border.Weight = 1.000000000000000000
-        DataField = 'CELULAR'
-        DataPipeline = dbPipeAux
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'dbPipeAux'
-        mmHeight = 3440
-        mmLeft = 112977
-        mmTop = 19315
-        mmWidth = 55298
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppLabel20: TppLabel
-        UserName = 'Label201'
-        AutoSize = False
-        Border.Weight = 1.000000000000000000
-        Caption = 'Celular:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = [fsBold]
-        TextAlignment = taRightJustified
-        Transparent = True
-        mmHeight = 3440
-        mmLeft = 97102
-        mmTop = 19315
-        mmWidth = 14817
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppLabel21: TppLabel
-        UserName = 'Label202'
-        AutoSize = False
-        Border.Weight = 1.000000000000000000
-        Caption = 'E-mail:'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = [fsBold]
-        TextAlignment = taRightJustified
-        Transparent = True
-        mmHeight = 3440
-        mmLeft = 10583
-        mmTop = 23019
-        mmWidth = 14817
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText23: TppDBText
-        UserName = 'DBText23'
-        Border.Weight = 1.000000000000000000
-        DataField = 'EMAIL'
-        DataPipeline = dbPipeAux
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'dbPipeAux'
-        mmHeight = 3440
-        mmLeft = 26458
-        mmTop = 23019
-        mmWidth = 55298
+        mmLeft = 28575
+        mmTop = 9792
+        mmWidth = 16933
         BandType = 4
         LayerName = Foreground1
       end
@@ -1880,7 +1524,7 @@ object dmRel: TdmRel
         UserName = 'Label13'
         AutoSize = False
         Border.Weight = 1.000000000000000000
-        Caption = 'Dt. Nasc:'
+        Caption = 'Dt. Cad:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Tahoma'
@@ -1889,8 +1533,8 @@ object dmRel: TdmRel
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3440
-        mmLeft = 97896
-        mmTop = 794
+        mmLeft = 115623
+        mmTop = 529
         mmWidth = 14023
         BandType = 4
         LayerName = Foreground1
@@ -1898,7 +1542,7 @@ object dmRel: TdmRel
       object ppDBText11: TppDBText
         UserName = 'DBText101'
         Border.Weight = 1.000000000000000000
-        DataField = 'DATANASCE'
+        DataField = 'DTCADASTRO'
         DataPipeline = dbPipeAux
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1908,8 +1552,8 @@ object dmRel: TdmRel
         Transparent = True
         DataPipelineName = 'dbPipeAux'
         mmHeight = 3440
-        mmLeft = 112977
-        mmTop = 794
+        mmLeft = 130704
+        mmTop = 529
         mmWidth = 19315
         BandType = 4
         LayerName = Foreground1
@@ -1918,7 +1562,7 @@ object dmRel: TdmRel
         UserName = 'Label22'
         AutoSize = False
         Border.Weight = 1.000000000000000000
-        Caption = 'Dt. Cadastro:'
+        Caption = 'Dt. Atualizado:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Tahoma'
@@ -1927,17 +1571,17 @@ object dmRel: TdmRel
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3440
-        mmLeft = 141023
-        mmTop = 529
-        mmWidth = 20638
+        mmLeft = 105834
+        mmTop = 4498
+        mmWidth = 23813
         BandType = 4
         LayerName = Foreground1
       end
-      object ppDBText24: TppDBText
-        UserName = 'DBText24'
+      object ppDBText20: TppDBText
+        UserName = 'DBText20'
         Border.Weight = 1.000000000000000000
-        DataField = 'DATACAD'
-        DataPipeline = dbEmpresa
+        DataField = 'DTATUALIZADO'
+        DataPipeline = dbPipeAux
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Tahoma'
@@ -1945,11 +1589,30 @@ object dmRel: TdmRel
         Font.Style = []
         ParentDataPipeline = False
         Transparent = True
-        DataPipelineName = 'dbEmpresa'
+        DataPipelineName = 'dbPipeAux'
         mmHeight = 3440
-        mmLeft = 162719
-        mmTop = 529
+        mmLeft = 130704
+        mmTop = 4498
         mmWidth = 19315
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText21: TppDBText
+        UserName = 'DBText202'
+        Border.Weight = 1.000000000000000000
+        DataField = 'MARCAPROD'
+        DataPipeline = dbPipeAux
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 3440
+        mmLeft = 61119
+        mmTop = 9792
+        mmWidth = 55298
         BandType = 4
         LayerName = Foreground1
       end
@@ -1957,7 +1620,7 @@ object dmRel: TdmRel
         UserName = 'Label23'
         AutoSize = False
         Border.Weight = 1.000000000000000000
-        Caption = 'Hist'#243'rico:'
+        Caption = 'Marca:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Tahoma'
@@ -1966,36 +1629,453 @@ object dmRel: TdmRel
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3440
-        mmLeft = 10583
-        mmTop = 26988
-        mmWidth = 14817
+        mmLeft = 47096
+        mmTop = 9792
+        mmWidth = 12965
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel14: TppLabel
+        UserName = 'Label103'
+        AutoSize = False
+        Border.Weight = 1.000000000000000000
+        Caption = 'C'#243'd. Barras:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3440
+        mmLeft = 9525
+        mmTop = 13761
+        mmWidth = 17992
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText12: TppDBText
+        UserName = 'DBText12'
+        Border.Weight = 1.000000000000000000
+        DataField = 'CODBAR'
+        DataPipeline = dbPipeAux
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 3440
+        mmLeft = 28575
+        mmTop = 13761
+        mmWidth = 69321
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBImage2: TppDBImage
+        UserName = 'pLogoEmpresa1'
+        AlignHorizontal = ahCenter
+        AlignVertical = avCenter
+        MaintainAspectRatio = False
+        Stretch = True
+        Border.Weight = 1.000000000000000000
+        DataField = 'FOTOPROD'
+        DataPipeline = dbPipeAux
+        GraphicType = 'JPEG'
+        ParentDataPipeline = False
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 38365
+        mmLeft = 150813
+        mmTop = 529
+        mmWidth = 36830
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel11: TppLabel
+        UserName = 'Label101'
+        AutoSize = False
+        Border.Weight = 1.000000000000000000
+        Caption = 'Refer'#234'ncia:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3440
+        mmLeft = 42069
+        mmTop = 529
+        mmWidth = 17992
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText9: TppDBText
+        UserName = 'DBText9'
+        Border.Weight = 1.000000000000000000
+        DataField = 'REFPROD'
+        DataPipeline = dbPipeAux
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 3440
+        mmLeft = 61119
+        mmTop = 529
+        mmWidth = 36777
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel15: TppLabel
+        UserName = 'Label15'
+        AutoSize = False
+        Border.Weight = 1.000000000000000000
+        Caption = 'Custo Compra:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3440
+        mmLeft = 54769
+        mmTop = 24873
+        mmWidth = 25400
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText13: TppDBText
+        UserName = 'DBText13'
+        Border.Weight = 1.000000000000000000
+        DataField = 'CUSTOCOMPRA'
+        DataPipeline = dbPipeAux
+        DisplayFormat = '###,###,##0.00'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 3440
+        mmLeft = 80963
+        mmTop = 24873
+        mmWidth = 20373
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText14: TppDBText
+        UserName = 'DBText14'
+        Border.Weight = 1.000000000000000000
+        DataField = 'CUSTOTOTAL'
+        DataPipeline = dbPipeAux
+        DisplayFormat = '###,###,##0.00'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 3440
+        mmLeft = 130704
+        mmTop = 24873
+        mmWidth = 20373
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel18: TppLabel
+        UserName = 'Label18'
+        AutoSize = False
+        Border.Weight = 1.000000000000000000
+        Caption = 'Custo Prod:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3440
+        mmLeft = 104775
+        mmTop = 24873
+        mmWidth = 25400
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel19: TppLabel
+        UserName = 'Label19'
+        AutoSize = False
+        Border.Weight = 1.000000000000000000
+        Caption = 'M. Lucro:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3440
+        mmLeft = 4498
+        mmTop = 28842
+        mmWidth = 23019
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText15: TppDBText
+        UserName = 'DBText15'
+        Border.Weight = 1.000000000000000000
+        DataField = 'MARGEMLUCRO'
+        DataPipeline = dbPipeAux
+        DisplayFormat = '###,###,##0.00%'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 3440
+        mmLeft = 28575
+        mmTop = 28842
+        mmWidth = 20373
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel20: TppLabel
+        UserName = 'Label20'
+        AutoSize = False
+        Border.Weight = 1.000000000000000000
+        Caption = 'Pre'#231'o Venda:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3440
+        mmLeft = 54769
+        mmTop = 28842
+        mmWidth = 25400
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText17: TppDBText
+        UserName = 'DBText17'
+        Border.Weight = 1.000000000000000000
+        DataField = 'PRECOVENDA'
+        DataPipeline = dbPipeAux
+        DisplayFormat = '###,###,##0.00'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 3440
+        mmLeft = 80963
+        mmTop = 28842
+        mmWidth = 20373
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel25: TppLabel
+        UserName = 'Label25'
+        AutoSize = False
+        Border.Weight = 1.000000000000000000
+        Caption = 'Comiss'#227'o:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3440
+        mmLeft = 4498
+        mmTop = 32811
+        mmWidth = 23019
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText22: TppDBText
+        UserName = 'DBText22'
+        Border.Weight = 1.000000000000000000
+        DataField = 'PERCCOMISSAO'
+        DataPipeline = dbPipeAux
+        DisplayFormat = '###,###,##0.00%'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 3440
+        mmLeft = 28575
+        mmTop = 32811
+        mmWidth = 20373
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel26: TppLabel
+        UserName = 'Label26'
+        AutoSize = False
+        Border.Weight = 1.000000000000000000
+        Caption = 'Est. Dispon'#237'vel:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3440
+        mmLeft = 4498
+        mmTop = 37044
+        mmWidth = 23019
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText23: TppDBText
+        UserName = 'DBText23'
+        Border.Weight = 1.000000000000000000
+        DataField = 'ESTOQUEDISP'
+        DataPipeline = dbPipeAux
+        DisplayFormat = '###,###,##0.00'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 3440
+        mmLeft = 28310
+        mmTop = 37044
+        mmWidth = 20373
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText24: TppDBText
+        UserName = 'DBText24'
+        Border.Weight = 1.000000000000000000
+        DataField = 'ESTOQUETOTAL'
+        DataPipeline = dbPipeAux
+        DisplayFormat = '###,###,##0.00'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 3440
+        mmLeft = 28310
+        mmTop = 41013
+        mmWidth = 20373
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel27: TppLabel
+        UserName = 'Label27'
+        AutoSize = False
+        Border.Weight = 1.000000000000000000
+        Caption = 'Est. Total:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3440
+        mmLeft = 4498
+        mmTop = 41013
+        mmWidth = 23019
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel28: TppLabel
+        UserName = 'Label28'
+        AutoSize = False
+        Border.Weight = 1.000000000000000000
+        Caption = 'Qtde M'#237'nima'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = [fsBold]
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 3440
+        mmLeft = 57150
+        mmTop = 37044
+        mmWidth = 23019
         BandType = 4
         LayerName = Foreground1
       end
       object ppDBText25: TppDBText
-        UserName = 'DBText202'
+        UserName = 'DBText25'
         Border.Weight = 1.000000000000000000
-        DataField = 'UF'
+        DataField = 'ESTOQUEMIN'
         DataPipeline = dbPipeAux
+        DisplayFormat = '###,###,##0.00'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Tahoma'
         Font.Size = 8
         Font.Style = []
+        TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'dbPipeAux'
         mmHeight = 3440
-        mmLeft = 112977
-        mmTop = 15875
-        mmWidth = 55298
+        mmLeft = 80963
+        mmTop = 37044
+        mmWidth = 20373
         BandType = 4
         LayerName = Foreground1
       end
-      object ppLabel24: TppLabel
-        UserName = 'Label24'
+      object ppDBText26: TppDBText
+        UserName = 'DBText26'
+        Border.Weight = 1.000000000000000000
+        DataField = 'ESTOQUEMAX'
+        DataPipeline = dbPipeAux
+        DisplayFormat = '###,###,##0.00'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Tahoma'
+        Font.Size = 8
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'dbPipeAux'
+        mmHeight = 3440
+        mmLeft = 80963
+        mmTop = 41013
+        mmWidth = 20373
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel29: TppLabel
+        UserName = 'Label29'
         AutoSize = False
         Border.Weight = 1.000000000000000000
-        Caption = 'Uf:'
+        Caption = 'Qtde M'#225'xima'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Name = 'Tahoma'
@@ -2004,37 +2084,11 @@ object dmRel: TdmRel
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 3440
-        mmLeft = 97102
-        mmTop = 15875
-        mmWidth = 14817
+        mmLeft = 57150
+        mmTop = 41013
+        mmWidth = 23019
         BandType = 4
         LayerName = Foreground1
-      end
-      object ppDBMemo1: TppDBMemo
-        UserName = 'DBMemo1'
-        Border.Weight = 1.000000000000000000
-        CharWrap = False
-        DataField = 'OBS'
-        DataPipeline = dbPipeAux
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Tahoma'
-        Font.Size = 8
-        Font.Style = []
-        RemoveEmptyLines = False
-        Transparent = True
-        DataPipelineName = 'dbPipeAux'
-        mmHeight = 16404
-        mmLeft = 26458
-        mmTop = 26988
-        mmWidth = 155840
-        BandType = 4
-        LayerName = Foreground1
-        mmBottomOffset = 0
-        mmOverFlowOffset = 0
-        mmStopPosition = 0
-        mmMinHeight = 0
-        mmLeading = 0
       end
     end
     object ppFooterBand1: TppFooterBand
@@ -2042,8 +2096,8 @@ object dmRel: TdmRel
       mmBottomOffset = 0
       mmHeight = 3175
       mmPrintPosition = 0
-      object ppLabel25: TppLabel
-        UserName = 'Label25'
+      object ppLabel30: TppLabel
+        UserName = 'Label30'
         AutoSize = False
         Border.Weight = 1.000000000000000000
         Caption = 'DRB - Sistemas Comerciais - 44 9974-4442'
@@ -2060,11 +2114,11 @@ object dmRel: TdmRel
         BandType = 8
         LayerName = Foreground1
       end
-      object ppLabel26: TppLabel
-        UserName = 'Label26'
+      object ppLabel31: TppLabel
+        UserName = 'Label31'
         AutoSize = False
         Border.Weight = 1.000000000000000000
-        Caption = 'ppFichaCliente.rtm'
+        Caption = 'ppFichaProd.rtm'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGray
         Font.Name = 'Tahoma'

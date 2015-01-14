@@ -22,7 +22,7 @@ uses
   Vcl.StdCtrls, dxGDIPlusClasses, cxImage, cxButtons, Vcl.ExtCtrls, Vcl.Grids,
   Vcl.DBGrids, Data.DB, dxSkinsdxBarPainter, dxRibbonSkins,
   dxSkinsdxRibbonPainter, dxBar, dxBarExtItems, dxRibbonRadialMenu, cxClasses,
-  dxRibbon;
+  dxRibbon, RxMenus;
 
 type
    TFPrinc = class(TForm)
@@ -54,7 +54,6 @@ type
     cxCliente: TdxBarLargeButton;
     cxProduto: TdxBarLargeButton;
     cxAnimais: TdxBarLargeButton;
-    cxOutros: TdxBarLargeButton;
     cxBalanco: TdxBarLargeButton;
     dxBarLargeButton6: TdxBarLargeButton;
     dxBarLargeButton7: TdxBarLargeButton;
@@ -85,6 +84,13 @@ type
     tbPetAtendimento: TdxBar;
     dxModuloBar: TdxRibbonTab;
     tbBarVendas: TdxBar;
+    cxPopMenu: TRxPopupMenu;
+    Contagem1: TMenuItem;
+    Diferen1: TMenuItem;
+    cxItemOutros: TdxBarSubItem;
+    cxCfop: TdxBarButton;
+    dxBarLargeButton4: TdxBarLargeButton;
+    cxOutros: TdxBarLargeButton;
    //
    procedure PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
    procedure MostraNomeForm(Str: String);
@@ -97,7 +103,6 @@ type
     procedure cxClienteClick(Sender: TObject);
     procedure cxProdutoClick(Sender: TObject);
     procedure cxAnimaisClick(Sender: TObject);
-    procedure cxOutrosClick(Sender: TObject);
     procedure cxBalancoClick(Sender: TObject);
     procedure ActClienteExecute(Sender: TObject);
     procedure ActProdutoExecute(Sender: TObject);
@@ -105,6 +110,14 @@ type
     procedure ActOutrosExecute(Sender: TObject);
     procedure cxEmpresaClick(Sender: TObject);
     procedure ActFecharExecute(Sender: TObject);
+    procedure cxOutrosClick(Sender: TObject);
+    procedure cxPedidoClick(Sender: TObject);
+    procedure dxBarLargeButton4Click(Sender: TObject);
+    procedure dxBarLargeButton1Click(Sender: TObject);
+    procedure dxBarLargeButton3Click(Sender: TObject);
+    procedure dxBarLargeButton2Click(Sender: TObject);
+    procedure cxReceberClick(Sender: TObject);
+    procedure cxPagarClick(Sender: TObject);
    private
       { Private declarations }
    public
@@ -119,7 +132,8 @@ implementation
 {$R *.dfm}
 
 uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, uCad_Clientes,
-  uCad_Animais, uCon_Generica, uDmRel, uCad_Empresa, uCad_Produto, uCad_Balanco;
+  uCad_Animais, uCon_Generica, uDmRel, uCad_Empresa, uCad_Produto, uCad_Balanco,
+  uCad_Pedido, udmMov, uCad_Pagto;
 
 procedure TFPrinc.cxClienteClick(Sender: TObject);
 begin
@@ -131,9 +145,52 @@ begin
    ExecutaForm(TFCad_Empresa, TObject(Fcad_Empresa));
 end;
 
+procedure TFPrinc.cxOutrosClick(Sender: TObject);
+begin
+   ExecutaForm(TFcad_Generica, TObject(Fcad_Generica));
+end;
+
+procedure TFPrinc.cxPagarClick(Sender: TObject);
+begin
+   TipoMov := SAIDA;
+end;
+
+procedure TFPrinc.cxPedidoClick(Sender: TObject);
+begin
+   TipoMov := ENTRADA;
+   ExecutaForm(TFcad_Pedido, TObject(Fcad_Pedido));
+end;
+
 procedure TFPrinc.cxProdutoClick(Sender: TObject);
 begin
    ExecutaForm(TFcad_Produto, TObject(Fcad_Produto));
+end;
+
+procedure TFPrinc.cxReceberClick(Sender: TObject);
+begin
+   TipoMov := ENTRADA;
+end;
+
+procedure TFPrinc.dxBarLargeButton1Click(Sender: TObject);
+begin
+   TipoMov := ENTRADA;
+
+end;
+
+procedure TFPrinc.dxBarLargeButton2Click(Sender: TObject);
+begin
+   TipoMov := SAIDA;
+end;
+
+procedure TFPrinc.dxBarLargeButton3Click(Sender: TObject);
+begin
+   TipoMov := SAIDA;
+   ExecutaForm(TFcad_Pedido, TObject(Fcad_Pedido));
+end;
+
+procedure TFPrinc.dxBarLargeButton4Click(Sender: TObject);
+begin
+   AbreTelaComShowModal(TFcad_Pagto, TObject(Fcad_Pagto), nil, '');
 end;
 
 procedure TFPrinc.ActAnimaisExecute(Sender: TObject);
@@ -170,11 +227,6 @@ begin
    ExecutaForm(TFcad_Animais, TObject(Fcad_Animais));
 end;
 
-procedure TFPrinc.cxOutrosClick(Sender: TObject);
-begin
-   ExecutaForm(TFcad_Generica, TObject(Fcad_Generica));
-end;
-
 procedure TFPrinc.cxBalancoClick(Sender: TObject);
 begin
    ExecutaForm(TFcad_Balanco, TObject(Fcad_Balanco));
@@ -196,6 +248,8 @@ procedure TFPrinc.FormCreate(Sender: TObject);
 begin
    if dmCad = nil then
       Application.CreateForm(TdmCad, dmCad);
+   if dmMov = nil then
+      Application.CreateForm(TdmMov, dmMov);
 
    Application.OnMessage := PegaNomeForm;
    Application.OnHint := ShowHint;

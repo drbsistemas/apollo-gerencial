@@ -78,6 +78,7 @@ type
     procedure grConsultaDBTableView1DblClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure cxVerClick(Sender: TObject);
   private
 
     { Private declarations }
@@ -166,6 +167,11 @@ procedure TFcad_Pai.cxSalvarClick(Sender: TObject);
 begin
    MostraPainelCadastro(Con);
    cxConsultaPropertiesChange(self);
+end;
+
+procedure TFcad_Pai.cxVerClick(Sender: TObject);
+begin
+   cxSalvar.Enabled := false;
 end;
 
 procedure TFcad_Pai.cxVoltarClick(Sender: TObject);

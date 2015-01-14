@@ -75,9 +75,12 @@
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Debug>true</VerInfo_Debug>
+        <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=DRB Sistemas Comerciais;FileDescription=;FileVersion=1.0.0.0;InternalName=Sitemas Apollo;LegalCopyright=2014;LegalTrademarks=;OriginalFilename=Apollo Gestão;ProductName=Apollo Gestão;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -146,6 +149,27 @@
         <DCCReference Include="..\Rotinas\uCalculos.pas"/>
         <DCCReference Include="..\Cadastros\uCad_Balanco.pas">
             <Form>Fcad_Balanco</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Relatorios\uCon_Relatorio.pas">
+            <Form>Fcad_Relatorio</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Movimentacao\udmMov.pas">
+            <Form>dmMov</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Movimentacao\uCad_Pedido.pas">
+            <Form>Fcad_Pedido</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Cadastros\uCad_Pagto.pas">
+            <Form>Fcad_Pagto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Cadastros\uCad_Ncm.pas">
+            <Form>Fcad_NCM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Debug">
