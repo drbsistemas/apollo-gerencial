@@ -201,8 +201,7 @@ end;
 
 procedure TFPrinc.ActClienteExecute(Sender: TObject);
 begin
-   if Fcad_Clientes = nil then
-      AbreTelaComShowModal(TFcad_Clientes, TObject(Fcad_Clientes), NIL, '');
+   AbreTelaComShowModal(TFcad_Clientes, TObject(Fcad_Clientes), NIL, 'CLI');
 end;
 
 procedure TFPrinc.ActFecharExecute(Sender: TObject);

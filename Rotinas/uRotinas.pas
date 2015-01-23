@@ -561,30 +561,29 @@ end;
 
 Procedure AbreTelaComShowModal(FormClasse: TFormClass; var NewForm: TObject; FNomeFormRetorno: TForm; StrTabela: String);
 begin
-   FreeAndNil(TForm(NewForm));
-
-   if (TForm(NewForm) = Nil) Or (not TForm(NewForm).HandleAllocated) Then
-      TForm(NewForm) := FormClasse.Create(TForm(NewForm));
-
-   TForm(NewForm).FormStyle   := fsNormal;
-   TForm(NewForm).WindowState := wsNormal;
-   TForm(NewForm).Visible     := False;
-   TForm(NewForm).Position    := poMainFormCenter;
-
-   if TForm(NewForm) = Fcad_Generica then
+   with FormClasse.Create(Application) do
    begin
-      Fcad_GEnerica.AbreCom('CON');
-      Fcad_GEnerica.TABELA      := StrTabela;
-   end;
-   if (TForm(NewForm ) = Fcad_Clientes) and (StrTabela <> '') then
-   begin
-      StrTipoPessoa := StrTabela;
-   end;
-//   FAbreForm.MostraPainelBusca(Con);
-   TForm(NewForm).ShowModal;
 
-   TForm(NewForm) := NIl;
-   TForm(NewForm).Free;
+      FormStyle   := fsNormal;
+      WindowState := wsNormal;
+      Visible     := False;
+      Position    := poMainFormCenter;
+
+      if FormClasse = TFcad_Generica then
+      begin
+         Fcad_GEnerica.AbreCom('CON');
+         Fcad_GEnerica.TABELA      := StrTabela;
+      end;
+      if (FormClasse = TFcad_Clientes) and (StrTabela <> '') then
+      begin
+         StrTipoPessoa := StrTabela;
+      end;
+      ShowModal;
+
+   end;
+
+//   TForm(NewForm) := NIl;
+//   TForm(NewForm).Free;
    if FNomeFormRetorno <> NIL then
    begin
       TForm(FNomeFormRetorno).WindowState := wsNormal;

@@ -61,7 +61,7 @@ type
     cxLabel9: TcxLabel;
     cxLabel11: TcxLabel;
     eQtdeItens: TcxCurrencyEdit;
-    cxPageControl1: TcxPageControl;
+    cxPageItens: TcxPageControl;
     cxPageItem: TcxTabSheet;
     pnItem: TPanel;
     cxPageDados: TcxTabSheet;
@@ -115,6 +115,7 @@ type
     eReferencia: TcxTextEdit;
     cxLabel24: TcxLabel;
     eDescItem: TcxCurrencyEdit;
+    grConsultaDBTableView1Column9: TcxGridDBColumn;
     procedure cxNovoClick(Sender: TObject);
     procedure cxEditaClick(Sender: TObject);
     procedure cxSalvarClick(Sender: TObject);
@@ -151,6 +152,11 @@ type
     procedure eQtdeExit(Sender: TObject);
     procedure ePerDescExit(Sender: TObject);
     procedure cxApagarItemClick(Sender: TObject);
+    procedure eVlrDescExit(Sender: TObject);
+    procedure eVlrFreteExit(Sender: TObject);
+    procedure eCodTranspExit(Sender: TObject);
+    procedure eCodTranspPropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
   private
     { Private declarations }
     indice : String;
@@ -162,7 +168,6 @@ type
     procedure VerFoto(StrCaminhoFoto: String);
     procedure CalculaTotalPedido;
     procedure CalculaTotalItens;
-    procedure CalculaDesconto;
   public
     { Public declarations }
   end;
@@ -209,8 +214,8 @@ end;
 procedure TFcad_Pedido.cxCancelaClick(Sender: TObject);
 begin
    inherited;
-   dmMov.qryPedido.CancelUpdates;
-   dmMov.qryItemPed.CancelUpdates;
+   dmMov.qryPedido.Cancel;
+   dmMov.qryItemPed.Cancel;
 end;
 
 procedure TFcad_Pedido.cxConsultaPropertiesChange(Sender: TObject);
@@ -223,19 +228,20 @@ begin
       3: indice := 'DATAENTREGA';
    end;
    StrSql := 'select A.*, '+#13+
-   ' B.ENDERECO, '+#13+
-   ' B.NUMERO, '+#13+
-   ' B.BAIRRO, '+#13+
-   ' B.CEP, '+#13+
-   ' C.RAZAO NOMEVENDEDOR, '+#13+
-   ' D.RAZAO NOMETRANSP, '+#13+
-   ' E.DESCRICAO FCOBRANCA '+#13+
-   ' From PEDIDO A '+#13+
-   ' left join CLIENTE B on A.IDCLIE = B.IDCLIE and B.tipoclie='+QuotedStr('CLI')+#13+
-   ' left join CLIENTE C on A.IDVENDEDOR = C.IDCLIE and C.TIPOCLIE='+QuotedStr('VEND')+#13+
-   ' left join CLIENTE D on A.idtransp = D.IDCLIE and D.TIPOCLIE='+QuotedStr('TRAN')+#13+
-   ' left join CPAGTO E on A.IDCPAGTO = E.idCPAGTO ' +#13+
-   ' where 1=1 and TIPOPEDIDO='+QuotedStr(ifs(TipoMov = ENTRADA, 'ENTRADA ', 'SAIDA '));
+      ' B.RAZAO NOMECLIE, '+#13+
+      ' B.ENDERECO, '+#13+
+      ' B.NUMERO, '+#13+
+      ' B.BAIRRO, '+#13+
+      ' B.CEP, '+#13+
+      ' C.RAZAO NOMEVEND, '+#13+
+      ' D.RAZAO NOMETRANS, '+#13+
+      ' E.DESCRICAO '+#13+
+      ' From PEDIDO A '+#13+
+      ' left join CLIENTE B on A.IDCLIE = B.IDCLIE and B.tipoclie='+QuotedStr('CLI')+#13+
+      ' left join CLIENTE C on A.IDVENDEDOR = C.IDCLIE and C.TIPOCLIE='+QuotedStr('VEN')+#13+
+      ' left join CLIENTE D on A.idtransp = D.IDCLIE and D.TIPOCLIE='+QuotedStr('TRA')+#13+
+      ' left join CPAGTO E on A.IDCPAGTO = E.IDCPAGTO' +
+      ' where 1=1 and TIPOMOV='+QuotedStr(ifs(TipoMov = ENTRADA, 'ENT', 'SAI'));
 
    if (indice='DATAPEDIDO') or (indice ='DATAENTREGA') then
       StrSql := StrSQl +' and '+indice+' = '+QuotedStr(DataSql(StrToDate(eConsulta.Text)) + ' 00:00:00');
@@ -257,6 +263,7 @@ begin
 
    inherited;
    Limpa;
+   LimpaItem;
    Edita;
    eCodFornec.SetFocus;
 end;
@@ -270,7 +277,15 @@ end;
 
 procedure TFcad_Pedido.cxSalvarClick(Sender: TObject);
 begin
-   ValidaCampoTag(Fcad_Pedido);
+   if (eCodFornec.Text = '0') or
+      (eCodVendPedido.Text = '0') or
+      (eCodCPagto.Text = '0') or
+      (eTotalPedido.Value <=0) then
+   begin
+      Msg('Há campos á serem preenchidos, verifique!','I',':|');
+      abort;
+   end;
+
 
    with dmMov.qryPedido do
    begin
@@ -285,12 +300,14 @@ begin
 
          FieldByName('DATAPEDIDO').AsDateTime      := eDataPedido.Date;
          FieldByName('DATAVALIDADE').AsDateTime    := eDataValidade.Date;
-         FieldByName('DATAENTREGA').AsFloat        := eDataEntrega.Date;
+         FieldByName('DATAENTREGA').AsDateTime     := eDataEntrega.Date;
 
          FieldByName('TIPOPEDIDO').AsString        := ifs(cxTipoPedido.ItemIndex = 0,'ORÇAMENTO','PEDIDO');
 
          FieldByName('STATUS').AsString            := eStatusPed.Text;
          FieldByName('OBS').AsString               := eObs.Lines.Text;
+         FieldByName('MOTIVOCAN').AsString         := '';
+
 
          FieldByName('QTDEITENS').AsFloat          := eQtdeItens.Value;
          FieldByName('TOTALITENS').AsFloat         := eTotalItens.Value;
@@ -328,8 +345,8 @@ begin
       FieldByName('IDPROD').AsInteger        := StrToInt(eCodProd.Text);
 
       FieldByName('NOMEPROD').AsString       := eProduto.Text;
-      FieldByName('UNPROD').AsString         := eReferencia.Text;
-      FieldByName('REFPROD').AsString        := eUn.Text;
+      FieldByName('UNPROD').AsString         := eUn.Text;
+      FieldByName('REFPROD').AsString        := eReferencia.Text;
 
       FieldByName('QTDE').AsFloat            := eQtde.Value;
       FieldByName('VLRUNITARIO').AsFloat     := ePrecoVenda.Value;
@@ -440,6 +457,27 @@ begin
    end;
 end;
 
+procedure TFcad_Pedido.eCodTranspExit(Sender: TObject);
+begin
+  inherited;
+   eTransportadora.Text :=  ConsultaCampoNomeAtivo(eCodTransp.Text, 'TRA');
+   if eTransportadora.Text ='NENHUM' then
+      eCodTransp.Text := '0';
+end;
+
+procedure TFcad_Pedido.eCodTranspPropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+   inherited;
+   AbreTelaComShowModal(TFcad_Clientes, TObject(Fcad_Clientes), Fcad_Pedido, 'TRA');
+
+   if ID > 0 then
+   begin
+      eTransportadora.Text := DESCRICAO;
+      eCodTransp.Text      := intToStr(ID);
+   end;
+end;
+
 procedure TFcad_Pedido.eCodVendExit(Sender: TObject);
 begin
   inherited;
@@ -512,29 +550,32 @@ begin
    with dmMov.qryPedido do
    begin
       try
+         eCodigo.Text           := IntToStr(FieldByName('IDPEDIDO').AsInteger);
+         eCodFornec.Text        := IntToStr(FieldByName('IDCLIE').AsInteger);
+         eCodFornecExit(self);
+         eCodVendPedido.Text    := IntToStr(FieldByName('IDVENDEDOR').AsInteger);
+         eCodVendPedidoExit(Self);
+         eCodTransp.Text        := IntToStr(FieldByName('IDTRANSP').AsInteger);
+         eCodTranspExit(Self);
+         eCodCPagto.Text        := IntToStr(FieldByName('IDCPAGTO').AsInteger);
+         eCodCPagtoExit(Self);
 
-         FieldByName('TIPOMOV').AsString           := ifs(TipoMov = ENTRADA,'ENT','SAI');
-         FieldByName('IDCLIE').AsInteger           := StrToInt(eCodFornec.Text);
+         eDataPedido.Date       := FieldByName('DATAPEDIDO').AsDateTime;
+         eDataValidade.Date     := FieldByName('DATAVALIDADE').AsDateTime;
+         eDataEntrega.Date      := FieldByName('DATAENTREGA').AsFloat;
 
-         FieldByName('IDVENDEDOR').AsInteger       := StrToInt(eCodVendPedido.Text);
-         FieldByName('IDTRANSP').AsInteger         := StrToInt(eCodTransp.Text);
-         FieldByName('IDCPAGTO').AsInteger         := StrToInt(eCodCPagto.Text);
+         cxTipoPedido.ItemIndex := ifs(FieldByName('TIPOPEDIDO').AsString='ORÇAMENTO',0,1);
 
-         FieldByName('DATAPEDIDO').AsDateTime      := eDataPedido.Date;
-         FieldByName('DATAVALIDADE').AsDateTime    := eDataValidade.Date;
-         FieldByName('DATAENTREGA').AsFloat        := eDataEntrega.Date;
+         eStatusPed.Text        := FieldByName('STATUS').AsString;
+         eObs.Lines.Text        := FieldByName('OBS').AsString;
 
-         FieldByName('TIPOPEDIDO').AsString        := ifs(cxTipoPedido.ItemIndex = 0,'ORÇAMENTO','PEDIDO');
-
-         FieldByName('STATUS').AsString            := eStatusPed.Text;
-         FieldByName('OBS').AsString               := eObs.Lines.Text;
-
-         FieldByName('QTDEITENS').AsFloat          := eQtdeItens.Value;
-         FieldByName('TOTALITENS').AsFloat         := eTotalItens.Value;
-         FieldByName('TOTALDESC').AsFloat          := eVlrDesc.Value;
-         FieldByName('TOTALFRETE').AsFloat         := eVlrFrete.Value;
-         FieldByName('TOTALPEDIDO').AsFloat        := eTotalPedido.Value;
-
+         eQtdeItens.Value       := FieldByName('QTDEITENS').AsFloat;
+         eTotalItens.Value      := FieldByName('TOTALITENS').AsFloat;
+         eVlrDesc.Value         := FieldByName('TOTALDESC').AsFloat;
+         eVlrFrete.Value        := FieldByName('TOTALFRETE').AsFloat;
+         eTotalPedido.Value     := FieldByName('TOTALPEDIDO').AsFloat;
+         Edit;
+         ConsultaItemPedido(StrToInt(eCodigo.Text));
       Except
 
       end;
@@ -544,6 +585,11 @@ end;
 procedure TFcad_Pedido.ePerDescExit(Sender: TObject);
 begin
   inherited;
+   if eTotalItens.Value = 0 then
+      eVlrDesc.Value := 0
+   else
+      eVlrDesc.Value := (eTotalItens.value) * (ePerDesc.Value / 100);
+
    CalculaTotalPedido;
 end;
 
@@ -551,6 +597,22 @@ procedure TFcad_Pedido.eQtdeExit(Sender: TObject);
 begin
    inherited;
    CalculaTotalItens;
+end;
+
+procedure TFcad_Pedido.eVlrDescExit(Sender: TObject);
+begin
+  inherited;
+   if eTotalItens.Value = 0 then
+      ePerDesc.Value := 0
+   else
+      ePerDesc.Value := (eVlrDesc.Value / (eTotalItens.Value)) * 100;
+   CalculaTotalPedido;
+end;
+
+procedure TFcad_Pedido.eVlrFreteExit(Sender: TObject);
+begin
+   inherited;
+   CalculaTotalPedido;
 end;
 
 procedure TFcad_Pedido.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -619,29 +681,30 @@ end;
 
 procedure TFcad_Pedido.Limpa;
 begin
-   eCodigo.Text           := '0';
+   eCodigo.Text                := '0';
    eStatusPed.Clear;
-   eCodFornec.Text        := '0';
-   eFornec.TExt           := 'NENHUM';
-   eCodVEndPedido.Text    := '0';
-   eVEndedorPedido.Text   := 'NENHUM';
-   eCodCPagto.Text        := '0';
-   eCPagto.Text           := 'NENHUM';
-   eDataValidade.Date     := DAte;
-   eDataEntrega.Date      := DAte;
-   eDataPedido.Date       := DAte;
-   cxTipoPedido.ItemIndex := 0;
-   eQtdeItens.Value       := 0;
-   eTotalItens.Value      := 0;
-   eTotalPedido.Value     := 0;
-   ePerDesc.Value         := 0;
-   eVlrDesc.Value         := 0;
+   eCodFornec.Text             := '0';
+   eFornec.TExt                := 'NENHUM';
+   eCodVEndPedido.Text         := '0';
+   eVEndedorPedido.Text        := 'NENHUM';
+   eCodCPagto.Text             := '0';
+   eCPagto.Text                := 'NENHUM';
+   eDataValidade.Date          := DAte;
+   eDataEntrega.Date           := DAte;
+   eDataPedido.Date            := DAte;
+   cxTipoPedido.ItemIndex      := 0;
+   eQtdeItens.Value            := 0;
+   eTotalItens.Value           := 0;
+   eTotalPedido.Value          := 0;
+   ePerDesc.Value              := 0;
+   eVlrDesc.Value              := 0;
 
-   eVlrFrete.Value        := 0;
+   eVlrFrete.Value             := 0;
    eObs.Lines.Clear;
-   eCodTransp.Text        := '0';
-   eTransportadora.Text   := 'NENHUM';
-   pnItem.Enabled         := False;
+   eCodTransp.Text             := '0';
+   eTransportadora.Text        := 'NENHUM';
+   pnItem.Enabled              := False;
+   cxPageItens.ActivePageIndex := 0;
 end;
 
 procedure TFCad_Pedido.LimpaItem;
@@ -662,12 +725,12 @@ end;
 procedure TFcad_Pedido.ConsultaItemPedido(intPedido: integer);
 begin
    StrSQl := 'select A.*, '+#13+
-   ' B.NOMEPROD, '+#13+
-   ' B.UNPROD, '+#13+
-   ' B.REFPROD '+#13+
-   ' from PEDIDOITEM A '+#13+
-   ' left join PRODUTO B on A.IDPROD = B.IDPROD '+#13+
-   ' WHERE IDPEDIDOITEM='+intToStr(intPedido)+' order by IDPEDIDOITEM';
+      ' B.NOMEPROD, '+#13+
+      ' B.UNPROD, '+#13+
+      ' B.REFPROD '+#13+
+      ' from PEDIDOITEM A '+#13+
+      ' left join PRODUTO B on A.IDPROD = B.IDPROD '+#13+
+      ' WHERE IDPEDIDO='+intToStr(intPedido)+' order by IDPEDIDOITEM';
    ConsultaSql(StrSql, dmMov.qryItemPed);
 end;
 
@@ -699,8 +762,6 @@ begin
    eTotalItens.Value  := FTotalItem;
    eQtdeItens.Value   := FQtde;
 
-   CalculaDesconto;
-
    eTotalPedido.Value := (eVlrFrete.Value + eTotalItens.Value) - (eVlrDesc.Value);
 end;
 
@@ -710,39 +771,6 @@ var
 Begin
    FPrecoVendaDesconto  := CalculoCOrreto(eQtde.Value, ePrecoVenda.Value, '*', 2);
    eTotalItem.Value     := CalculoCOrreto(FPrecoVendaDesconto,((eDescItem.Value/100)*FPrecoVendaDesconto) , '-', 2);
-end;
-
-Procedure TFcad_Pedido.CalculaDesconto;
-begin
-   if eTotalPedido.Value > 0 then
-   begin
-
-   if eVlrDesc.Value > 0 then
-      ePerDesc.Value     := 0;
-   else
-      eVlrDesc.Value     := CalculoCOrreto(eTotalItens.Value,((ePerDesc.Value/100)) , '-', 2);
-   end;
-
-
-//Se for por valor
-   if eTotalProd.Value+etotalServ.Value=0 then
-      eDescontoPer.Value:=0 else
-   begin
-      eDescontoPer.Value:=(eDescontoValor.Value/(EtotalProd.Value+eTotalServ.Value+eValorfrete.Value))*100;
-      RatearDesconto;
-      CalculaTotalNota;
-      CalculaTotais;
-   end;
-
-// Se for por percentual
-  if eTotalProd.Value+etotalServ.Value=0 then
-     eDescontoValor.Value:=0 else
-  begin
-     eDescontoValor.Value:=(eTotalProd.value+eTotalServ.Value+eValorFrete.value)*(eDescontoPer.Value/100);
-     CalculaTotalNota;
-     CalculaTotais;
-  end;
-
 end;
 
 end.

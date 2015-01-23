@@ -686,7 +686,7 @@ inherited Fcad_Produto: TFcad_Produto
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
-        TabOrder = 13
+        TabOrder = 12
         Width = 225
       end
       object cxDBTextEdit7: TcxDBTextEdit
@@ -747,7 +747,7 @@ inherited Fcad_Produto: TFcad_Produto
         Style.Font.Style = [fsBold]
         Style.TextColor = clNone
         Style.IsFontAssigned = True
-        TabOrder = 11
+        TabOrder = 10
         Width = 123
       end
       object cxDBCurrencyEdit3: TcxDBCurrencyEdit
@@ -789,7 +789,7 @@ inherited Fcad_Produto: TFcad_Produto
         Style.Font.Style = [fsBold]
         Style.TextColor = clNone
         Style.IsFontAssigned = True
-        TabOrder = 12
+        TabOrder = 11
         Width = 123
       end
       object cxDBCurrencyEdit1: TcxDBCurrencyEdit
@@ -1904,7 +1904,7 @@ inherited Fcad_Produto: TFcad_Produto
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 14
+        TabOrder = 13
         Text = '0'
         OnExit = eCodGrupoExit
         OnKeyPress = eCodFornecKeyPress
@@ -1935,7 +1935,7 @@ inherited Fcad_Produto: TFcad_Produto
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 15
+        TabOrder = 14
         Text = 'NENHUM'
         Width = 340
       end
@@ -2012,7 +2012,7 @@ inherited Fcad_Produto: TFcad_Produto
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 18
+        TabOrder = 17
         Text = '0'
         OnExit = eCodSubExit
         Height = 21
@@ -2042,7 +2042,7 @@ inherited Fcad_Produto: TFcad_Produto
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 17
+        TabOrder = 16
         Text = 'NENHUM'
         Width = 340
       end
@@ -2577,7 +2577,7 @@ inherited Fcad_Produto: TFcad_Produto
         OptionsImage.Layout = blGlyphTop
         OptionsImage.Margin = 0
         OptionsImage.Spacing = 0
-        TabOrder = 21
+        TabOrder = 20
         TabStop = False
         OnClick = cxApagaFotoClick
       end
@@ -2724,7 +2724,7 @@ inherited Fcad_Produto: TFcad_Produto
         OptionsImage.Spacing = 0
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 20
+        TabOrder = 19
         TabStop = False
         OnClick = cxSalvaFotoClick
       end

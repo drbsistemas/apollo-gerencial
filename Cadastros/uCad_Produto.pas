@@ -397,6 +397,7 @@ begin
       FormAtivo     := Nil;
       pFundo(1);
    end;
+
    Fcad_Produto     := Nil;
    Action           := CaFree;
 end;
@@ -672,4 +673,5 @@ end;
 
 
 end.
+
 

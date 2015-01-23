@@ -1,7 +1,7 @@
 object Fcad_Pai: TFcad_Pai
   Left = 0
   Top = 0
-  BorderIcons = []
+  BorderIcons = [biSystemMenu, biMaximize, biHelp]
   Caption = 'FPai'
   ClientHeight = 570
   ClientWidth = 710
@@ -1869,7 +1869,6 @@ object Fcad_Pai: TFcad_Pai
         OnDblClick = grConsultaDBTableView1DblClick
         Navigator.Buttons.CustomButtons = <>
         OnCustomDrawCell = grConsultaDBTableView1CustomDrawCell
-        DataController.DataSource = dmCad.dsClie
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>

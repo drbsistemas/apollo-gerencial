@@ -15,32 +15,6 @@ type
     dsAux: TDataSource;
     UpdtConf: TFDUpdateSQL;
     dsConf: TDataSource;
-    qryClie: TFDQuery;
-    UpdtClie: TFDUpdateSQL;
-    dsClie: TDataSource;
-    qryClieIDCLIE: TIntegerField;
-    qryClieRAZAO: TStringField;
-    qryClieFANTASIA: TStringField;
-    qryClieENDERECO: TStringField;
-    qryClieNUMERO: TStringField;
-    qryClieCIDADE: TStringField;
-    qryClieUF: TStringField;
-    qryClieBAIRRO: TStringField;
-    qryClieCEP: TStringField;
-    qryClieCNPJ: TStringField;
-    qryClieRG: TStringField;
-    qryClieIE: TStringField;
-    qryClieCPF: TStringField;
-    qryClieFONE: TStringField;
-    qryClieCELULAR: TStringField;
-    qryClieEMAIL: TStringField;
-    qryClieOBS: TStringField;
-    qryClieCOMPLEMENTO: TStringField;
-    qryClieDATACAD: TSQLTimeStampField;
-    qryClieATIVO: TStringField;
-    qryClieDATANASCE: TSQLTimeStampField;
-    qryClieTIPOPESSOA: TStringField;
-    qryClieTIPOCLIE: TStringField;
     qryCidade: TFDQuery;
     UpdtCidade: TFDUpdateSQL;
     dsCidade: TDataSource;
@@ -112,8 +86,6 @@ type
     IntegerField4: TIntegerField;
     UpdtNcm: TFDUpdateSQL;
     dsNcm: TDataSource;
-    procedure qryClieAfterInsert(DataSet: TDataSet);
-    procedure qryCidadeAfterInsert(DataSet: TDataSet);
     procedure qryGenericoAfterInsert(DataSet: TDataSet);
     procedure qryProdAfterInsert(DataSet: TDataSet);
     procedure qryEstoqueAfterInsert(DataSet: TDataSet);
@@ -146,16 +118,6 @@ end;
 procedure TdmCad.qryBalancoAfterInsert(DataSet: TDataSet);
 begin
    dmCad.qryBalanco.FieldByName('IDBALANCO').AsInteger       := ExecutaGen('BALANCO');
-end;
-
-procedure TdmCad.qryCidadeAfterInsert(DataSet: TDataSet);
-begin
-   dmCad.qryClie.FieldByName('CODMUN').AsInteger         := ExecutaGen('CODIBGE');
-end;
-
-procedure TdmCad.qryClieAfterInsert(DataSet: TDataSet);
-begin
-   dmCad.qryClie.FieldByName('IDCLIE').AsInteger         := ExecutaGen('CLIENTE');
 end;
 
 procedure TdmCad.qryCPagtoAfterInsert(DataSet: TDataSet);
