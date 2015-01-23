@@ -104,9 +104,10 @@ type
     procedure cbDtNascimentoExit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
+    procedure eCepExit(Sender: TObject);
   private
     { Private declarations }
-      indice, indiceTipoPessoa : String;
+      indice : String;
       procedure Edita;
       procedure Limpa;
   public
@@ -124,13 +125,8 @@ uses uDmCad, uRotinas, uCad_Cidade, uRelatorios;
 
 procedure TFcad_Clientes.cbDtNascimentoExit(Sender: TObject);
 begin
-  inherited;
-   if cbDtNascimento.Text <>'' then
-      if (not ValidaData(cbDtNascimento.Text)) or (cbDtNascimento.Date >= Date) then
-      begin
-         Msg('A data digitada não é válida!','I',':(');
-         cbDtNascimento.Clear;
-      end;
+   inherited;
+   cbDtNascimento.Text := DATAVALIDA(cbDtNascimento.Text);
 end;
 
 procedure TFcad_Clientes.cbPessoaPropertiesChange(Sender: TObject);
@@ -192,17 +188,17 @@ begin
    end;
 
    case cxTipoClie.ItemIndex of
-      0: indiceTipoPessoa := 'CLI';
-      1: indiceTipoPessoa := 'FOR';
-      2: indiceTipoPessoa := 'VEN';
-      3: indiceTipoPessoa := 'TRA';
+      0: StrTipoPessoa := 'CLI';
+      1: StrTipoPessoa := 'FOR';
+      2: StrTipoPessoa := 'VEN';
+      3: StrTipoPessoa := 'TRA';
    end;
 
    StrSql := 'select A.* from CLIENTE A where '+indice+' like '+QuotedStr('%'+eConsulta.Text+'%');
    if cbAtivo.ItemIndex > 0 then
       StrSql := StrSql + ' and ATIVO='+QuotedStr(ifs(cbAtivo.ItemIndex=1, 'S','N'));
 
-   StrSql := StrSql + ' and TIPOCLIE='+QuotedStr(indiceTipoPessoa);
+   StrSql := StrSql + ' and TIPOCLIE='+QuotedStr(StrTipoPessoa);
 
    StrSql := StrSql +' order by '+indice;
    ConsultaSql(StrSql, dmcad.qryClie);
@@ -255,6 +251,12 @@ begin
    DESCRICAO        := dmCad.qryClie.FieldByName('RAZAO').AsString;
 end;
 
+procedure TFcad_Clientes.eCepExit(Sender: TObject);
+begin
+  inherited;
+   ValidarCep(eCep.Text);
+end;
+
 procedure TFcad_Clientes.eCidadePropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
 begin
@@ -301,6 +303,9 @@ end;
 
 procedure TFcad_Clientes.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+   ID               := dmCad.qryClie.Fieldbyname('IDCLIE').AsInteger;
+   DESCRICAO        := dmCad.qryClie.FieldByName('RAZAO').AsString;
+
   inherited;
    if pnBotaoCon.Visible = False then
    begin
@@ -326,6 +331,14 @@ end;
 procedure TFcad_Clientes.FormShow(Sender: TObject);
 begin
    inherited;
+
+   case AnsiIndexStr(UpperCase(StrTipoPessoa), ['CLI', 'FOR','VEN','TRA']) of
+      0: cxTipoClie.ItemIndex := 0;
+      1: cxTipoClie.ItemIndex := 1;
+      2: cxTipoClie.ItemIndex := 2;
+      3: cxTipoClie.ItemIndex := 3;
+   end;
+
    cxConsultaPropertiesChange(Self);
 end;
 

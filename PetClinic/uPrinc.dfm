@@ -524,7 +524,7 @@ object FPrinc: TFPrinc
         PanelStyle.Font.Name = 'Segoe UI'
         PanelStyle.Font.Style = []
         PanelStyle.ParentFont = False
-        Text = 'Desenvolvimento: DRB Sitemas Comerciais - www.DRBSISTEMAS.com.br'
+        Text = 'DRB Sitemas Comerciais - www.DRBSISTEMAS.com.br'
       end>
     PaintStyle = stpsXP
     LookAndFeel.SkinName = 'Office2013White'
@@ -573,7 +573,7 @@ object FPrinc: TFPrinc
     StyleDisabled.LookAndFeel.SkinName = ''
     StyleFocused.LookAndFeel.SkinName = ''
     StyleHot.LookAndFeel.SkinName = ''
-    TabOrder = 3
+    TabOrder = 0
     Height = 65
     Width = 1024
     object cxImage1: TcxImage
@@ -19616,7 +19616,7 @@ object FPrinc: TFPrinc
     ColorSchemeName = 'Office2010Silver'
     MinimizeOnTabDblClick = False
     Contexts = <>
-    TabOrder = 0
+    TabOrder = 1
     TabStop = False
     object dxModuloPrinc: TdxRibbonTab
       Active = True

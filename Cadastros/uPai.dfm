@@ -1217,7 +1217,7 @@ object Fcad_Pai: TFcad_Pai
         OptionsImage.Spacing = 0
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 5
+        TabOrder = 6
         Font.Charset = ANSI_CHARSET
         Font.Color = clMaroon
         Font.Height = -11
@@ -1370,7 +1370,7 @@ object Fcad_Pai: TFcad_Pai
         OptionsImage.Spacing = 0
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 4
+        TabOrder = 5
         Font.Charset = ANSI_CHARSET
         Font.Color = clMaroon
         Font.Height = -11
@@ -1522,7 +1522,7 @@ object Fcad_Pai: TFcad_Pai
         OptionsImage.Spacing = 0
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 6
+        TabOrder = 4
         Font.Charset = ANSI_CHARSET
         Font.Color = clMaroon
         Font.Height = -11
@@ -1683,7 +1683,7 @@ object Fcad_Pai: TFcad_Pai
         OptionsImage.Spacing = 0
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 1
+        TabOrder = 0
         Font.Charset = ANSI_CHARSET
         Font.Color = clMaroon
         Font.Height = -11
@@ -1834,7 +1834,7 @@ object Fcad_Pai: TFcad_Pai
         OptionsImage.Layout = blGlyphTop
         OptionsImage.Margin = 0
         OptionsImage.Spacing = 0
-        TabOrder = 0
+        TabOrder = 1
         Font.Charset = ANSI_CHARSET
         Font.Color = clMaroon
         Font.Height = -11

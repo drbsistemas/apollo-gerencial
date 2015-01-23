@@ -16,6 +16,7 @@ inherited Fcad_Balanco: TFcad_Balanco
   inherited pnCon: TPanel
     Width = 851
     Height = 537
+    TabOrder = 1
     ExplicitWidth = 851
     ExplicitHeight = 537
     inherited pnBusca: TPanel
@@ -43,23 +44,27 @@ inherited Fcad_Balanco: TFcad_Balanco
       inherited cxEdita: TcxButton
         Left = 704
         Enabled = False
+        TabOrder = 5
         Visible = False
         ExplicitLeft = 704
       end
       inherited cxVer: TcxButton
         Left = 763
         Enabled = False
+        TabOrder = 6
         Visible = False
         ExplicitLeft = 763
       end
       inherited cxApagar: TcxButton
         Left = 116
+        TabOrder = 1
         OnClick = cxApagarClick
         ExplicitLeft = 116
       end
       inherited cxVoltar: TcxButton
         Left = 373
         Width = 59
+        TabOrder = 4
         ExplicitLeft = 373
         ExplicitWidth = 59
       end
@@ -200,6 +205,7 @@ inherited Fcad_Balanco: TFcad_Balanco
           DBE4DADADAE4D9D9DAE4D8D8D9E4D7D7D7E4D7D7D7E4D6D6D6E4DDDDDDECB3B3
           B4D32E2D2E310000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000}
+        TabOrder = 3
         ExplicitLeft = 274
         ExplicitWidth = 100
       end
@@ -338,6 +344,7 @@ inherited Fcad_Balanco: TFcad_Balanco
           DBE4DADADAE4D9D9DAE4D8D8D9E4D7D7D7E4D7D7D7E4D6D6D6E4DDDDDDECB3B3
           B4D32E2D2E310000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000}
+        TabOrder = 2
         OnClick = cxOpcoesClick
         ExplicitLeft = 175
         ExplicitWidth = 100
@@ -412,6 +419,7 @@ inherited Fcad_Balanco: TFcad_Balanco
   inherited pnCad: TPanel [2]
     Width = 851
     Height = 537
+    TabOrder = 0
     ExplicitWidth = 851
     ExplicitHeight = 537
     inherited pnMenu: TPanel
@@ -495,7 +503,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 1
+        TabOrder = 4
         Text = '0'
         OnExit = eCodProdExit
         Width = 200
@@ -525,7 +533,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 2
+        TabOrder = 5
         Text = 'NENHUM'
         Width = 458
       end
@@ -554,7 +562,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 3
+        TabOrder = 8
         Text = 'UN'
         Width = 91
       end
@@ -608,7 +616,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.Kind = lfFlat
         StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 5
+        TabOrder = 9
         Width = 106
       end
       object cxLabel4: TcxLabel
@@ -668,7 +676,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 8
+        TabOrder = 11
         OnExit = eContagemExit
         Width = 200
       end
@@ -718,7 +726,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 10
+        TabOrder = 7
         Visible = False
         Width = 57
       end
@@ -747,7 +755,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 11
+        TabOrder = 6
         Visible = False
         Width = 57
       end

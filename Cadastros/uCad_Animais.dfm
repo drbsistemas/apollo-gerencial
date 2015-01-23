@@ -12,14 +12,103 @@ inherited Fcad_Animais: TFcad_Animais
     ExplicitHeight = 539
     Height = 539
   end
-  inherited pnCad: TPanel [1]
+  inherited pnCon: TPanel
     Width = 704
     Height = 539
+    TabOrder = 1
+    ExplicitWidth = 704
+    ExplicitHeight = 539
+    inherited pnBusca: TPanel
+      Width = 702
+      ExplicitWidth = 702
+      inherited cxConsulta: TcxComboBox
+        Properties.Items.Strings = (
+          'C'#243'digo'
+          'Nome'
+          'Propriet'#225'rio'
+          'Rga'
+          'N'#186' Pedigree')
+        Text = 'C'#211'DIGO'
+      end
+      inherited cbAtivo: TcxComboBox
+        Style.IsFontAssigned = True
+      end
+    end
+    inherited pnBotaoCad: TPanel
+      Width = 702
+      ExplicitWidth = 702
+      inherited cxApagar: TcxButton
+        OnClick = cxApagarClick
+      end
+    end
+    inherited pnBotaoCon: TPanel
+      Top = 488
+      Width = 702
+      ExplicitTop = 488
+      ExplicitWidth = 702
+    end
+    inherited grConsulta: TcxGrid
+      Width = 702
+      Height = 412
+      ExplicitWidth = 702
+      ExplicitHeight = 412
+      inherited grConsultaDBTableView1: TcxGridDBTableView
+        DataController.DataSource = dmCad.dsAnimais
+        DataController.DetailKeyFieldNames = 'IDANIMAL'
+        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
+          DataBinding.FieldName = 'IDANIMAL'
+          Width = 60
+        end
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
+          DataBinding.FieldName = 'NOME'
+          Width = 150
+        end
+        object grConsultaDBTableView1Column1: TcxGridDBColumn
+          Caption = 'Ra'#231'a'
+          DataBinding.FieldName = 'RACA'
+          Width = 80
+        end
+        object grConsultaDBTableView1Column2: TcxGridDBColumn
+          Caption = 'Esp'#233'cie'
+          DataBinding.FieldName = 'ESPECIE'
+          Width = 80
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn
+          Caption = 'Cor'
+          DataBinding.FieldName = 'COR'
+          Width = 80
+        end
+        object grConsultaDBTableView1Column4: TcxGridDBColumn
+          Caption = 'Sexo'
+          DataBinding.FieldName = 'SEXO'
+          Width = 50
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn
+          Caption = 'Propriet'#225'rio'
+          DataBinding.FieldName = 'RAZAO'
+          Width = 200
+        end
+        object grConsultaDBTableView1Column6: TcxGridDBColumn
+          Caption = 'Rga'
+          DataBinding.FieldName = 'RGA'
+          Width = 120
+        end
+        object grConsultaDBTableView1Column7: TcxGridDBColumn
+          Caption = 'N'#186' Pedigree'
+          DataBinding.FieldName = 'NPEDIGREE'
+          Width = 120
+        end
+      end
+    end
+  end
+  inherited pnCad: TPanel [2]
+    Width = 704
+    Height = 539
+    TabOrder = 0
     ExplicitWidth = 704
     ExplicitHeight = 539
     inherited pnMenu: TPanel
       Width = 702
-      TabOrder = 1
       ExplicitWidth = 702
     end
     object cxPage: TcxPageControl
@@ -28,7 +117,7 @@ inherited Fcad_Animais: TFcad_Animais
       Width = 702
       Height = 237
       Align = alClient
-      TabOrder = 0
+      TabOrder = 2
       Properties.ActivePage = cxDados
       Properties.CustomButtons.Buttons = <>
       Properties.Style = 11
@@ -55,7 +144,7 @@ inherited Fcad_Animais: TFcad_Animais
           Style.Font.Style = []
           Style.IsFontAssigned = True
           StyleFocused.Color = 13366014
-          TabOrder = 0
+          TabOrder = 1
           Height = 167
           Width = 400
         end
@@ -87,7 +176,6 @@ inherited Fcad_Animais: TFcad_Animais
       object cxVacinas: TcxTabSheet
         Caption = 'Dados Estoque'
         ImageIndex = 1
-        ExplicitHeight = 196
         object eEstoqueDisp: TcxCurrencyEdit
           Left = 131
           Top = 3
@@ -153,7 +241,7 @@ inherited Fcad_Animais: TFcad_Animais
           Style.Font.Style = []
           Style.IsFontAssigned = True
           StyleFocused.Color = 13366014
-          TabOrder = 3
+          TabOrder = 6
           Width = 75
         end
         object cxLabel24: TcxLabel
@@ -263,7 +351,7 @@ inherited Fcad_Animais: TFcad_Animais
           Style.Font.Style = []
           Style.IsFontAssigned = True
           StyleFocused.Color = 13366014
-          TabOrder = 4
+          TabOrder = 7
           Width = 75
         end
         object cxLabel27: TcxLabel
@@ -325,7 +413,7 @@ inherited Fcad_Animais: TFcad_Animais
           Style.Font.Style = []
           Style.IsFontAssigned = True
           StyleFocused.Color = 13366014
-          TabOrder = 5
+          TabOrder = 8
           Width = 75
         end
         object cxLabel28: TcxLabel
@@ -361,7 +449,7 @@ inherited Fcad_Animais: TFcad_Animais
       Height = 250
       Align = alTop
       BevelOuter = bvNone
-      TabOrder = 2
+      TabOrder = 1
       object cxLabel3: TcxLabel
         Left = 59
         Top = 25
@@ -400,7 +488,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = []
         Style.IsFontAssigned = True
-        TabOrder = 0
+        TabOrder = 1
         Width = 97
       end
       object eAtivo: TcxCheckBox
@@ -420,7 +508,7 @@ inherited Fcad_Animais: TFcad_Animais
         StyleDisabled.LookAndFeel.NativeStyle = True
         StyleFocused.LookAndFeel.NativeStyle = True
         StyleHot.LookAndFeel.NativeStyle = True
-        TabOrder = 1
+        TabOrder = 2
         Width = 77
       end
       object cxLabel14: TcxLabel
@@ -463,7 +551,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.HotTrack = True
         Style.Shadow = False
         Style.IsFontAssigned = True
-        TabOrder = 2
+        TabOrder = 3
         Width = 130
       end
       object cxLabel6: TcxLabel
@@ -508,7 +596,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 4
+        TabOrder = 8
         Width = 200
       end
       object cxNome: TcxLabel
@@ -552,7 +640,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 7
+        TabOrder = 14
         Width = 400
       end
       object cxLabel16: TcxLabel
@@ -590,7 +678,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 3
+        TabOrder = 7
         OnExit = eDtNascimentoExit
         Width = 130
       end
@@ -611,7 +699,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.HotTrack = True
         Style.Shadow = False
         Style.IsFontAssigned = True
-        TabOrder = 17
+        TabOrder = 35
         Width = 130
       end
       object cxLabel12: TcxLabel
@@ -675,7 +763,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 14
+        TabOrder = 28
         Width = 130
       end
       object ePedigree: TcxTextEdit
@@ -693,7 +781,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 15
+        TabOrder = 29
         Width = 130
       end
       object cxLabel4: TcxLabel
@@ -736,7 +824,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 10
+        TabOrder = 18
         Text = 'MACHO'
         Width = 130
       end
@@ -1001,7 +1089,7 @@ inherited Fcad_Animais: TFcad_Animais
         StyleFocused.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = False
-        TabOrder = 27
+        TabOrder = 4
         Transparent = True
         Height = 128
         Width = 130
@@ -1021,7 +1109,7 @@ inherited Fcad_Animais: TFcad_Animais
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 28
+        TabOrder = 0
         Visible = False
         Width = 60
       end
@@ -1168,7 +1256,7 @@ inherited Fcad_Animais: TFcad_Animais
         OptionsImage.Spacing = 0
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 29
+        TabOrder = 26
         TabStop = False
         OnClick = cxSalvaFotoClick
       end
@@ -1314,7 +1402,7 @@ inherited Fcad_Animais: TFcad_Animais
         OptionsImage.Layout = blGlyphTop
         OptionsImage.Margin = 0
         OptionsImage.Spacing = 0
-        TabOrder = 30
+        TabOrder = 27
         TabStop = False
         OnClick = cxApagaFotoClick
       end
@@ -1358,7 +1446,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 16
+        TabOrder = 33
         Width = 75
       end
       object eCor: TcxTextEdit
@@ -1376,7 +1464,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 13
+        TabOrder = 23
         Width = 130
       end
       object cxLabel9: TcxLabel
@@ -1476,7 +1564,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 5
+        TabOrder = 11
         Text = '0'
         OnExit = eCodFornecExit
         OnKeyPress = eCodFornecKeyPress
@@ -1511,7 +1599,7 @@ inherited Fcad_Animais: TFcad_Animais
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 6
+        TabOrder = 12
         Text = 'NENHUM'
         Width = 340
       end
@@ -1589,7 +1677,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 8
+        TabOrder = 16
         Text = '0'
         OnExit = eCodRacaExit
         OnKeyPress = eCodFornecKeyPress
@@ -1620,7 +1708,7 @@ inherited Fcad_Animais: TFcad_Animais
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 9
+        TabOrder = 17
         Text = 'NENHUM'
         Width = 150
       end
@@ -1697,7 +1785,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 11
+        TabOrder = 21
         Text = '0'
         OnExit = eCodEspecieExit
         OnKeyPress = eCodFornecKeyPress
@@ -1728,100 +1816,9 @@ inherited Fcad_Animais: TFcad_Animais
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 12
+        TabOrder = 22
         Text = 'NENHUM'
         Width = 150
-      end
-    end
-  end
-  inherited pnCon: TPanel [2]
-    Width = 704
-    Height = 539
-    ExplicitWidth = 704
-    ExplicitHeight = 539
-    inherited pnBusca: TPanel
-      Width = 702
-      ExplicitWidth = 702
-      inherited cxConsulta: TcxComboBox
-        Properties.Items.Strings = (
-          'C'#243'digo'
-          'Nome'
-          'Propriet'#225'rio'
-          'Rga'
-          'N'#186' Pedigree')
-        Text = 'C'#211'DIGO'
-      end
-      inherited cbAtivo: TcxComboBox
-        Style.IsFontAssigned = True
-      end
-    end
-    inherited pnBotaoCad: TPanel
-      Width = 702
-      ExplicitWidth = 702
-      inherited cxVer: TcxButton
-        OnClick = cxVerClick
-      end
-      inherited cxApagar: TcxButton
-        OnClick = cxApagarClick
-      end
-    end
-    inherited pnBotaoCon: TPanel
-      Top = 488
-      Width = 702
-      ExplicitTop = 488
-      ExplicitWidth = 702
-    end
-    inherited grConsulta: TcxGrid
-      Width = 702
-      Height = 412
-      ExplicitWidth = 702
-      ExplicitHeight = 412
-      inherited grConsultaDBTableView1: TcxGridDBTableView
-        DataController.DataSource = dmCad.dsAnimais
-        DataController.DetailKeyFieldNames = 'IDANIMAL'
-        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
-          DataBinding.FieldName = 'IDANIMAL'
-          Width = 60
-        end
-        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
-          DataBinding.FieldName = 'NOME'
-          Width = 150
-        end
-        object grConsultaDBTableView1Column1: TcxGridDBColumn
-          Caption = 'Ra'#231'a'
-          DataBinding.FieldName = 'RACA'
-          Width = 80
-        end
-        object grConsultaDBTableView1Column2: TcxGridDBColumn
-          Caption = 'Esp'#233'cie'
-          DataBinding.FieldName = 'ESPECIE'
-          Width = 80
-        end
-        object grConsultaDBTableView1Column3: TcxGridDBColumn
-          Caption = 'Cor'
-          DataBinding.FieldName = 'COR'
-          Width = 80
-        end
-        object grConsultaDBTableView1Column4: TcxGridDBColumn
-          Caption = 'Sexo'
-          DataBinding.FieldName = 'SEXO'
-          Width = 50
-        end
-        object grConsultaDBTableView1Column5: TcxGridDBColumn
-          Caption = 'Propriet'#225'rio'
-          DataBinding.FieldName = 'RAZAO'
-          Width = 200
-        end
-        object grConsultaDBTableView1Column6: TcxGridDBColumn
-          Caption = 'Rga'
-          DataBinding.FieldName = 'RGA'
-          Width = 120
-        end
-        object grConsultaDBTableView1Column7: TcxGridDBColumn
-          Caption = 'N'#186' Pedigree'
-          DataBinding.FieldName = 'NPEDIGREE'
-          Width = 120
-        end
       end
     end
   end

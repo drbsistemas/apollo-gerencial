@@ -13,15 +13,19 @@ uses
    // Licenca
    FUNCTION Crypt(Action, Src: String): String;
 
+   // Calculos
+   FUNCTION CalculoCorreto(N1, N2: Extended; Operador: string; Decimal: Integer): Extended;
+
    // Validaçoes
    FUNCTION    VALIDAUF(Dado : string) : boolean;
    FUNCTION    VALIDACNPJ(Dado : string) : boolean;
    FUNCTION    VALIDACPF(Dado : string) : boolean;
    PROCEDURE   ValidaCampoTag(Form: TForm);
-   FUNCTION    ValidaData(const S: string): boolean;
+   FUNCTION    DATAVALIDA(Dado: string): String;
    FUNCTION    Temletra(texto:string) : boolean;
    FUNCTION    DigitoCodigodeBar(EREFERENCIA:string):integer;
    FUNCTION    DataSql(Data: TDateTime): string;
+   FUNCTION    ValidarCEP(const CEP: string): string;
 
    // Envio de E-mails
    PROCEDURE EnviaEmailDLL(Assunto, Destino, Anexo: String);
@@ -44,10 +48,7 @@ uses
    PROCEDURE   PFundo(mostra: integer);
 
 const
-   SqlBuscaProduto = 'SELECT IDPROD, NOMEPROD, UNPROD, ESTOQUETOTAL, REFPROD, CODBAR, NCMPROD, MARCAPROD, DTVALIDADE FROM PRODUTO';
-
-type
-   TTipoMov = (ENTRADA, SAIDA);
+   SqlBuscaProduto = 'SELECT IDPROD, NOMEPROD, UNPROD, ESTOQUETOTAL, REFPROD, CODBAR, NCMPROD, MARCAPROD, PRECOVENDA, DTVALIDADE, FOTOPROD FROM PRODUTO';
 
 var
    FVisualizaImagem,
@@ -64,11 +65,11 @@ var
    Cnpj,
    Usuario,
    DESCRICAO, OBS,
+   StrTipoPessoa,
    NomeEmpresa                        : String;
    Diasfim                            : Real;
    Liberacao                          : Boolean;
    ID: Integer;
-   TipoMov                            : TTipoMov;
 
 implementation
 
@@ -379,13 +380,66 @@ begin
   else Result:=CasoFalso;
 end;
 
-function ValidaData(const S: string): boolean;
+function DATAVALIDA(Dado: string): String;
+var
+   SalvaFormato,
+      DataExterna: string;
+   DataInterna: TDateTime;
+   Separador: string;
 begin
-   try
-      StrToDate(S);
-      Result := true;
-   except
-      Result := false;
+   Result := Dado;
+   Separador := FormatSettings.DateSeparator;
+   while Pos(Separador, Dado) > 0 do
+      Delete(Dado, Pos(Separador, Dado), 1);
+   if Length(Dado) = 6 then
+      Dado := Copy(Dado, 1, 2) + Separador +
+         Copy(Dado, 3, 2) + Separador + '19' +
+         Copy(Dado, 5, 2)
+   else
+      if Length(Dado) = 8 then
+         Dado := Copy(Dado, 1, 2) + Separador +
+            Copy(Dado, 3, 2) + Separador +
+            Copy(Dado, 5, 4)
+      else
+      begin
+         Result := '';
+         Msg('A Data é inválida, verifique!','I',':(');
+      end;
+   if Result=Dado then
+   begin
+      SalvaFormato := FormatSettings.ShortDateFormat;
+      DataInterna := 0;
+      try
+         FormatSettings.ShortDateFormat := 'd' + Separador + 'm' + Separador + 'y';
+         DataInterna := StrToDate(Dado);
+      except
+         on EConvertError do
+         begin
+            Result := '';
+            Msg('A Data é inválida, verifique!','I',':(');
+            FormatSettings.ShortDateFormat := SalvaFormato;
+         end;
+      end;
+      if Result=Dado then
+      begin
+         try
+            FormatSettings.ShortDateFormat := 'dd' + Separador + 'mm' + Separador + 'yyyy';
+            DataExterna := DateToStr(DataInterna);
+         except
+            on EConvertError do
+            begin
+               Result := '';
+               Msg('A Data é inválida, verifique!','I',':(');
+               FormatSettings.ShortDateFormat := SalvaFormato;
+            end;
+         end;
+         if (Result=Dado) and (DataExterna <> Dado) then
+         begin
+            Result := '';
+            Msg('A Data é inválida, verifique!','I',':(');
+         end;
+      end;
+      FormatSettings.ShortDateFormat := SalvaFormato;
    end;
 end;
 
@@ -524,7 +578,7 @@ begin
    end;
    if (TForm(NewForm ) = Fcad_Clientes) and (StrTabela <> '') then
    begin
-      Fcad_Clientes.cxTipoClie.ItemIndex := StrToInt(StrTabela);
+      StrTipoPessoa := StrTabela;
    end;
 //   FAbreForm.MostraPainelBusca(Con);
    TForm(NewForm).ShowModal;
@@ -543,10 +597,13 @@ var oNome:String;
 begin
    dmCad.qryAux.Close;
 
-   If TABELA = 'CLIENTE'         then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('CLI') else
-   If TABELA = 'FORNECEDOR'      then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('FOR') else
-   If TABELA = 'VENDEDOR'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO  Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('VEN') else
-   if TABELA <> ''               then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
+   If TABELA = 'CLI'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO       Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('CLI') else
+   If TABELA = 'FOR'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO       Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('FOR') else
+   If TABELA = 'VEN'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO       Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('VEN') else
+   If TABELA = 'TRA'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO       Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('TRA') else
+   If TABELA = 'CPAGTO'     then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO   Nome FROM CPAGTO WHERE IDCPAGTO=:CODIGO  ' else
+
+   if TABELA <> ''          then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
 
 
    dmCad.qryAux.ParamByName('CODIGO').AsInteger  :=  CODIGO;
@@ -707,6 +764,50 @@ begin
    DataS := DateToStr(Data);
    FormatSettings.ShortDateFormat := FormatoData;
    Result := DataS;
+end;
+
+function CalculoCorreto(N1, N2: Extended; Operador: string; Decimal: Integer): Extended;
+var Masc: string;
+   I: Integer;
+   Resultado: Extended;
+begin
+   Masc := '0.';
+   for I := 0 to decimal - 1 do
+      Masc := Masc + '0';
+   N1 := StrToFloat(FormatFloat(Masc, N1));
+   N2 := StrToFloat(FormatFloat(Masc, N2));
+   if Operador = '+' then
+      Resultado := N1 + N2
+   else if Operador = '-' then
+      Resultado := N1 - N2
+   else if Operador = '/' then
+      begin
+         if (N1 = 0) then
+            Resultado := 0
+         else
+            try
+               Resultado := N1 / N2;
+            except
+               Resultado := 0;
+            end;
+      end
+   else if Operador = '*' then
+      Resultado := N1 * N2;
+   Result := Resultado;
+end;
+
+Function ValidarCEP(const CEP: string): string;
+var
+  I: integer;
+begin
+  Result := '';
+  for I := 1 to Length(CEP) do
+    if CEP[I] in ['0'..'9'] then
+      Result := Result + CEP[I];
+    if Length(Result) <> 8 then
+      Msg('Cep é inválido!','I',':(')
+    else
+      Result := Copy(Result, 1, 2) + '.' + Copy(Result, 3, 3) + '-' + Copy(Result, 6, 3);
 end;
 
 end.

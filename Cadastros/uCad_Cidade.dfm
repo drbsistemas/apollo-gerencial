@@ -5,6 +5,8 @@ inherited Fcad_Cidade: TFcad_Cidade
   ClientWidth = 712
   Visible = False
   WindowState = wsNormal
+  ExplicitWidth = 320
+  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnCad: TPanel
@@ -36,7 +38,7 @@ inherited Fcad_Cidade: TFcad_Cidade
           'C'#243'd. IBGE'
           'Cidade'
           'Uf')
-        TabOrder = 2
+        TabOrder = 3
         Text = 'CIDADE'
       end
       inherited eConsulta: TcxTextEdit
@@ -59,7 +61,7 @@ inherited Fcad_Cidade: TFcad_Cidade
         ExplicitTop = -15
       end
       inherited cxCon: TcxButton
-        TabOrder = 1
+        TabOrder = 2
       end
       inherited cxQtdeReg: TcxLabel
         Left = 481

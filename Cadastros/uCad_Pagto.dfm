@@ -8,8 +8,12 @@ inherited Fcad_Pagto: TFcad_Pagto
   inherited pnCon: TPanel [0]
     Width = 654
     Height = 572
+    TabOrder = 1
+    ExplicitWidth = 654
+    ExplicitHeight = 572
     inherited pnBusca: TPanel
       Width = 652
+      ExplicitWidth = 652
       inherited cxConsulta: TcxComboBox
         Properties.Items.Strings = (
           'C'#243'digo'
@@ -22,6 +26,7 @@ inherited Fcad_Pagto: TFcad_Pagto
     end
     inherited pnBotaoCad: TPanel
       Width = 652
+      ExplicitWidth = 652
       inherited cxApagar: TcxButton
         OnClick = cxApagarClick
       end
@@ -35,10 +40,14 @@ inherited Fcad_Pagto: TFcad_Pagto
     inherited pnBotaoCon: TPanel
       Top = 521
       Width = 652
+      ExplicitTop = 521
+      ExplicitWidth = 652
     end
     inherited grConsulta: TcxGrid
       Width = 652
       Height = 445
+      ExplicitWidth = 652
+      ExplicitHeight = 445
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmCad.dsCPagto
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
@@ -53,15 +62,19 @@ inherited Fcad_Pagto: TFcad_Pagto
   end
   inherited pnImg: TcxImage [1]
     Left = 654
+    ExplicitLeft = 654
+    ExplicitHeight = 572
     Height = 572
   end
   inherited pnCad: TPanel [2]
     Width = 654
     Height = 572
-    ExplicitLeft = -6
+    TabOrder = 0
+    ExplicitWidth = 654
+    ExplicitHeight = 572
     inherited pnMenu: TPanel
       Width = 652
-      TabOrder = 7
+      ExplicitWidth = 652
     end
     object eCodigo: TcxTextEdit
       Left = 101
@@ -78,7 +91,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = []
       Style.IsFontAssigned = True
-      TabOrder = 0
+      TabOrder = 1
       Width = 97
     end
     object cxLabel3: TcxLabel
@@ -145,7 +158,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 1
+      TabOrder = 3
       Width = 200
     end
     object cxGrid1: TcxGrid
@@ -163,7 +176,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
-      TabOrder = 10
+      TabOrder = 14
       LookAndFeel.Kind = lfStandard
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'Office2010Black'
@@ -248,7 +261,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 2
+      TabOrder = 6
       Width = 75
     end
     object cxSalvaFoto: TcxButton
@@ -394,7 +407,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       OptionsImage.Spacing = 0
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 5
+      TabOrder = 12
       OnClick = cxSalvaFotoClick
     end
     object cxApagaFoto: TcxButton
@@ -539,7 +552,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       OptionsImage.Layout = blGlyphTop
       OptionsImage.Margin = 0
       OptionsImage.Spacing = 0
-      TabOrder = 6
+      TabOrder = 13
       OnClick = cxApagaFotoClick
     end
     object cxLabel4: TcxLabel
@@ -582,7 +595,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 3
+      TabOrder = 7
       Width = 75
     end
     object cxLabel5: TcxLabel
@@ -625,7 +638,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 4
+      TabOrder = 8
       Width = 75
     end
     object cxLabel7: TcxLabel

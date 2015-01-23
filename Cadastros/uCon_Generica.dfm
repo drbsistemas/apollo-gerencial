@@ -53,7 +53,7 @@ inherited Fcad_Generica: TFcad_Generica
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = []
       Style.IsFontAssigned = True
-      TabOrder = 2
+      TabOrder = 1
       Width = 97
     end
     object cxNome: TcxLabel
@@ -96,7 +96,7 @@ inherited Fcad_Generica: TFcad_Generica
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 4
+      TabOrder = 3
       Width = 300
     end
     object cxApelido: TcxLabel
@@ -137,7 +137,7 @@ inherited Fcad_Generica: TFcad_Generica
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 6
+      TabOrder = 5
       Width = 300
     end
   end
@@ -149,7 +149,7 @@ inherited Fcad_Generica: TFcad_Generica
     inherited pnBusca: TPanel
       Top = 80
       Width = 644
-      TabOrder = 0
+      TabOrder = 2
       ExplicitTop = 80
       ExplicitWidth = 644
       inherited cxConsulta: TcxComboBox
@@ -178,7 +178,7 @@ inherited Fcad_Generica: TFcad_Generica
     inherited pnBotaoCon: TPanel [1]
       Top = 490
       Width = 644
-      TabOrder = 2
+      TabOrder = 4
       ExplicitTop = 490
       ExplicitWidth = 644
     end
@@ -186,7 +186,7 @@ inherited Fcad_Generica: TFcad_Generica
       Top = 103
       Width = 644
       Height = 387
-      TabOrder = 1
+      TabOrder = 3
       ExplicitTop = 103
       ExplicitWidth = 644
       ExplicitHeight = 387
@@ -206,7 +206,7 @@ inherited Fcad_Generica: TFcad_Generica
       Width = 644
       Height = 27
       Align = alTop
-      TabOrder = 3
+      TabOrder = 0
       object cxLabel3: TcxLabel
         Left = 2
         Top = 5
@@ -226,7 +226,7 @@ inherited Fcad_Generica: TFcad_Generica
           'Cadastro de Formas de Pagamentos')
         Properties.OnChange = cxConsultaPropertiesChange
         StyleFocused.Color = 13366014
-        TabOrder = 1
+        TabOrder = 0
         Text = 'CADASTRO DE GRUPOS'
         OnClick = cxTabelaClick
         Width = 498
@@ -235,12 +235,9 @@ inherited Fcad_Generica: TFcad_Generica
     inherited pnBotaoCad: TPanel [4]
       Top = 28
       Width = 644
-      TabOrder = 4
+      TabOrder = 1
       ExplicitTop = 28
       ExplicitWidth = 644
-      inherited cxVer: TcxButton
-        OnClick = cxVerClick
-      end
       inherited cxApagar: TcxButton
         OnClick = cxApagarClick
       end

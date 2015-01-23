@@ -127,12 +127,12 @@ begin
 end;
 
 Function VerificaLicenca(): Boolean;
-var
-   LicencaValida: Boolean;
 begin
+   Liberacao := True;
    if (dmCad.qryConf.FieldbyName('KEYGEN').AsString='') or (not ValidaLicenca(dmCad.qryConf.FieldbyName('KEYGEN').AsString)) then
    begin
       Msg('Acabamos de identificar sua licença está inválida, precisamos atualizar, clique em ok para continuarmos!', 'I',':S');
+      Liberacao := False;
       Fcad_Serial := TFcad_Serial.Create(Fcad_Serial);
       Fcad_Serial.ShowModal;
       Fcad_Serial.Free;

@@ -476,7 +476,7 @@ object FCad_Estoque: TFCad_Estoque
       Properties.DisplayFormat = '###,###,##0.00'
       Properties.ReadOnly = False
       Style.Color = clBtnFace
-      TabOrder = 2
+      TabOrder = 0
       Width = 121
     end
     object cxDBCurrencyEdit2: TcxDBCurrencyEdit
@@ -490,7 +490,7 @@ object FCad_Estoque: TFCad_Estoque
       Properties.DisplayFormat = '###,###,##0.00'
       Properties.ReadOnly = False
       Style.Color = clBtnFace
-      TabOrder = 3
+      TabOrder = 1
       Width = 121
     end
   end

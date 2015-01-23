@@ -42,7 +42,6 @@ object dmCon: TdmCon
       'PageSize=16384'
       'CharacterSet=WIN1252'
       'DriverID=FB')
-    Connected = True
     LoginPrompt = False
     Transaction = FdSalva
     Left = 27

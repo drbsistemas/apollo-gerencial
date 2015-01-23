@@ -32,7 +32,8 @@ uses
   udmMov in '..\Movimentacao\udmMov.pas' {dmMov: TDataModule},
   uCad_Pedido in '..\Movimentacao\uCad_Pedido.pas' {Fcad_Pedido},
   uCad_Pagto in '..\Cadastros\uCad_Pagto.pas' {Fcad_Pagto},
-  uCad_Ncm in '..\Cadastros\uCad_Ncm.pas' {Fcad_NCM};
+  uCad_Ncm in '..\Cadastros\uCad_Ncm.pas' {Fcad_NCM},
+  uCalculosMovimentacao in '..\Rotinas\uCalculosMovimentacao.pas';
 
 {$R *.res}
 

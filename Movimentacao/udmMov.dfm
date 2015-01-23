@@ -2,22 +2,6 @@ object dmMov: TdmMov
   OldCreateOrder = False
   Height = 357
   Width = 460
-  object qryItemPed: TFDQuery
-    CachedUpdates = True
-    Connection = dmCon.FdCon
-    Transaction = dmCon.FdSalva
-    UpdateTransaction = dmCon.FdSalva
-    UpdateObject = UpdtItemPed
-    SQL.Strings = (
-      'select A.*,'
-      'B.NOMEPROD,'
-      'B.UNPROD,'
-      'B.REFPROD'
-      'from PEDIDOITEM A'
-      'left join PRODUTO B on A.IDPROD = B.IDPROD')
-    Left = 66
-    Top = 14
-  end
   object UpdtItemPed: TFDUpdateSQL
     Connection = dmCon.FdCon
     InsertSQL.Strings = (
@@ -62,12 +46,12 @@ object dmMov: TdmMov
       '  VLRTOTALITEM, OBSITEM, DATAVALIDADE, SALDOQTDE, STATUSITEM'
       'FROM PEDIDOITEM'
       'WHERE IDPEDIDOITEM = :IDPEDIDOITEM')
-    Left = 66
+    Left = 90
     Top = 58
   end
   object dsItemPed: TDataSource
     DataSet = qryItemPed
-    Left = 66
+    Left = 90
     Top = 102
   end
   object qryPedido: TFDQuery
@@ -76,7 +60,6 @@ object dmMov: TdmMov
     Connection = dmCon.FdCon
     Transaction = dmCon.FdSalva
     UpdateTransaction = dmCon.FdSalva
-    UpdateObject = UpdtPedido
     SQL.Strings = (
       'select A.*,'
       'C.ENDERECO,'
@@ -99,63 +82,47 @@ object dmMov: TdmMov
   object UpdtPedido: TFDUpdateSQL
     Connection = dmCon.FdCon
     InsertSQL.Strings = (
-      'INSERT INTO PEDIDO'
-      '(IDPEDIDO, TIPOMOV, IDCLIE, IDVENDEDOR, IDTRANSP, '
-      '  IDCPAGTO, DATAPEDIDO, DATAVALIDADE, DATAENTREGA, '
-      '  TIPOPEDIDO, STATUS, MOTIVOVAN, OBS, '
-      '  QTDEITENS, TOTALITENS, TOTALDESC, TOTALFRETE, '
-      '  TOTALPEDIDO)'
+      'INSERT INTO PEDIDOITEM'
+      '(IDPEDIDOITEM, IDPEDIDO, IDPROD, QTDE, VLRUNITARIO, '
+      '  VLRDESCONTO, VLRTOTALITEM, OBSITEM, DATAVALIDADE, '
+      '  SALDOQTDE, STATUSITEM)'
       
-        'VALUES (:NEW_IDPEDIDO, :NEW_TIPOMOV, :NEW_IDCLIE, :NEW_IDVENDEDO' +
-        'R, :NEW_IDTRANSP, '
+        'VALUES (:NEW_IDPEDIDOITEM, :NEW_IDPEDIDO, :NEW_IDPROD, :NEW_QTDE' +
+        ', :NEW_VLRUNITARIO, '
       
-        '  :NEW_IDCPAGTO, :NEW_DATAPEDIDO, :NEW_DATAVALIDADE, :NEW_DATAEN' +
-        'TREGA, '
-      '  :NEW_TIPOPEDIDO, :NEW_STATUS, :NEW_MOTIVOVAN, :NEW_OBS, '
+        '  :NEW_VLRDESCONTO, :NEW_VLRTOTALITEM, :NEW_OBSITEM, :NEW_DATAVA' +
+        'LIDADE, '
+      '  :NEW_SALDOQTDE, :NEW_STATUSITEM)'
       
-        '  :NEW_QTDEITENS, :NEW_TOTALITENS, :NEW_TOTALDESC, :NEW_TOTALFRE' +
-        'TE, '
-      '  :NEW_TOTALPEDIDO)'
-      
-        'RETURNING IDPEDIDO, TIPOMOV, IDCLIE, IDVENDEDOR, IDTRANSP, IDCPA' +
-        'GTO, DATAPEDIDO, DATAVALIDADE, DATAENTREGA, TIPOPEDIDO, STATUS, ' +
-        'MOTIVOVAN, OBS, QTDEITENS, TOTALITENS, TOTALDESC, TOTALFRETE, TO' +
-        'TALPEDIDO')
+        'RETURNING IDPEDIDOITEM, IDPEDIDO, IDPROD, QTDE, VLRUNITARIO, VLR' +
+        'DESCONTO, VLRTOTALITEM, OBSITEM, DATAVALIDADE, SALDOQTDE, STATUS' +
+        'ITEM')
     ModifySQL.Strings = (
-      'UPDATE PEDIDO'
+      'UPDATE PEDIDOITEM'
+      'SET IDPEDIDOITEM = :NEW_IDPEDIDOITEM, IDPEDIDO = :NEW_IDPEDIDO, '
       
-        'SET IDPEDIDO = :NEW_IDPEDIDO, TIPOMOV = :NEW_TIPOMOV, IDCLIE = :' +
-        'NEW_IDCLIE, '
-      '  IDVENDEDOR = :NEW_IDVENDEDOR, IDTRANSP = :NEW_IDTRANSP, '
-      '  IDCPAGTO = :NEW_IDCPAGTO, DATAPEDIDO = :NEW_DATAPEDIDO, '
+        '  IDPROD = :NEW_IDPROD, QTDE = :NEW_QTDE, VLRUNITARIO = :NEW_VLR' +
+        'UNITARIO, '
       
-        '  DATAVALIDADE = :NEW_DATAVALIDADE, DATAENTREGA = :NEW_DATAENTRE' +
-        'GA, '
+        '  VLRDESCONTO = :NEW_VLRDESCONTO, VLRTOTALITEM = :NEW_VLRTOTALIT' +
+        'EM, '
+      '  OBSITEM = :NEW_OBSITEM, DATAVALIDADE = :NEW_DATAVALIDADE, '
+      '  SALDOQTDE = :NEW_SALDOQTDE, STATUSITEM = :NEW_STATUSITEM'
+      'WHERE IDPEDIDOITEM = :OLD_IDPEDIDOITEM'
       
-        '  TIPOPEDIDO = :NEW_TIPOPEDIDO, STATUS = :NEW_STATUS, MOTIVOVAN ' +
-        '= :NEW_MOTIVOVAN, '
-      
-        '  OBS = :NEW_OBS, QTDEITENS = :NEW_QTDEITENS, TOTALITENS = :NEW_' +
-        'TOTALITENS, '
-      '  TOTALDESC = :NEW_TOTALDESC, TOTALFRETE = :NEW_TOTALFRETE, '
-      '  TOTALPEDIDO = :NEW_TOTALPEDIDO'
-      'WHERE IDPEDIDO = :OLD_IDPEDIDO'
-      
-        'RETURNING IDPEDIDO, TIPOMOV, IDCLIE, IDVENDEDOR, IDTRANSP, IDCPA' +
-        'GTO, DATAPEDIDO, DATAVALIDADE, DATAENTREGA, TIPOPEDIDO, STATUS, ' +
-        'MOTIVOVAN, OBS, QTDEITENS, TOTALITENS, TOTALDESC, TOTALFRETE, TO' +
-        'TALPEDIDO')
+        'RETURNING IDPEDIDOITEM, IDPEDIDO, IDPROD, QTDE, VLRUNITARIO, VLR' +
+        'DESCONTO, VLRTOTALITEM, OBSITEM, DATAVALIDADE, SALDOQTDE, STATUS' +
+        'ITEM')
     DeleteSQL.Strings = (
-      'DELETE FROM PEDIDO'
-      'WHERE IDPEDIDO = :OLD_IDPEDIDO')
+      'DELETE FROM PEDIDOITEM'
+      'WHERE IDPEDIDOITEM = :OLD_IDPEDIDOITEM')
     FetchRowSQL.Strings = (
       
-        'SELECT IDPEDIDO, TIPOMOV, IDCLIE, IDVENDEDOR, IDTRANSP, IDCPAGTO' +
-        ', DATAPEDIDO, '
-      '  DATAVALIDADE, DATAENTREGA, TIPOPEDIDO, STATUS, MOTIVOVAN, '
-      '  OBS, QTDEITENS, TOTALITENS, TOTALDESC, TOTALFRETE, TOTALPEDIDO'
-      'FROM PEDIDO'
-      'WHERE IDPEDIDO = :IDPEDIDO')
+        'SELECT IDPEDIDOITEM, IDPEDIDO, IDPROD, QTDE, VLRUNITARIO, VLRDES' +
+        'CONTO, '
+      '  VLRTOTALITEM, OBSITEM, DATAVALIDADE, SALDOQTDE, STATUSITEM'
+      'FROM PEDIDOITEM'
+      'WHERE IDPEDIDOITEM = :IDPEDIDOITEM')
     Left = 26
     Top = 58
   end
@@ -163,5 +130,97 @@ object dmMov: TdmMov
     DataSet = qryPedido
     Left = 26
     Top = 102
+  end
+  object qryItemPed: TFDQuery
+    AfterInsert = qryItemPedAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
+    UpdateObject = UpdtPedido
+    SQL.Strings = (
+      'select A.*,'
+      'B.NOMEPROD,'
+      'B.UNPROD,'
+      'B.REFPROD'
+      'from PEDIDOITEM A'
+      'left join PRODUTO B on A.IDPROD = B.IDPROD')
+    Left = 92
+    Top = 16
+    object qryItemPedIDPEDIDOITEM: TIntegerField
+      FieldName = 'IDPEDIDOITEM'
+      Origin = 'IDPEDIDOITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qryItemPedIDPEDIDO: TIntegerField
+      FieldName = 'IDPEDIDO'
+      Origin = 'IDPEDIDO'
+    end
+    object qryItemPedIDPROD: TIntegerField
+      FieldName = 'IDPROD'
+      Origin = 'IDPROD'
+    end
+    object qryItemPedQTDE: TFloatField
+      FieldName = 'QTDE'
+      Origin = 'QTDE'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryItemPedVLRUNITARIO: TFloatField
+      FieldName = 'VLRUNITARIO'
+      Origin = 'VLRUNITARIO'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryItemPedVLRDESCONTO: TFloatField
+      FieldName = 'VLRDESCONTO'
+      Origin = 'VLRDESCONTO'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryItemPedVLRTOTALITEM: TFloatField
+      FieldName = 'VLRTOTALITEM'
+      Origin = 'VLRTOTALITEM'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryItemPedOBSITEM: TStringField
+      FieldName = 'OBSITEM'
+      Origin = 'OBSITEM'
+      Size = 1000
+    end
+    object qryItemPedDATAVALIDADE: TSQLTimeStampField
+      FieldName = 'DATAVALIDADE'
+      Origin = 'DATAVALIDADE'
+    end
+    object qryItemPedSALDOQTDE: TFloatField
+      FieldName = 'SALDOQTDE'
+      Origin = 'SALDOQTDE'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryItemPedSTATUSITEM: TStringField
+      FieldName = 'STATUSITEM'
+      Origin = 'STATUSITEM'
+    end
+    object qryItemPedNOMEPROD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOMEPROD'
+      Origin = 'NOMEPROD'
+      ProviderFlags = []
+      Size = 300
+    end
+    object qryItemPedUNPROD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'UNPROD'
+      Origin = 'UNPROD'
+      ProviderFlags = []
+      Size = 5
+    end
+    object qryItemPedREFPROD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'REFPROD'
+      Origin = 'REFPROD'
+      ProviderFlags = []
+      Size = 50
+    end
   end
 end

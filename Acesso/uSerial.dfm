@@ -214,7 +214,7 @@ object FCad_Serial: TFCad_Serial
         B2E72B32A9D931368CAF3032627518192B320000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
       SpeedButtonOptions.Transparent = True
-      TabOrder = 2
+      TabOrder = 3
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
@@ -363,7 +363,7 @@ object FCad_Serial: TFCad_Serial
         54E7535457D94E4F50AF3F4040751E1E1E320000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
       SpeedButtonOptions.Transparent = True
-      TabOrder = 3
+      TabOrder = 4
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
@@ -383,7 +383,7 @@ object FCad_Serial: TFCad_Serial
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 12312063
-      TabOrder = 4
+      TabOrder = 2
       Width = 545
     end
   end

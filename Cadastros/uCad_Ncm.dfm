@@ -1,5 +1,7 @@
 inherited Fcad_NCM: TFcad_NCM
   Caption = 'Tela de NCM'
+  ExplicitWidth = 320
+  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnCon: TPanel

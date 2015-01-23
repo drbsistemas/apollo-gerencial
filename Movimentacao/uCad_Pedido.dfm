@@ -6,16 +6,20 @@ inherited Fcad_Pedido: TFcad_Pedido
   ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCon: TPanel [0]
+  inherited pnImg: TcxImage [0]
+    Left = 853
+    ExplicitLeft = 853
+    ExplicitHeight = 539
+    Height = 539
+  end
+  inherited pnCon: TPanel
     Width = 853
     Height = 539
-    ExplicitWidth = 644
+    ExplicitWidth = 853
     ExplicitHeight = 539
     inherited pnBusca: TPanel
       Width = 851
       Height = 50
-      ExplicitLeft = -4
-      ExplicitTop = 57
       ExplicitWidth = 851
       ExplicitHeight = 50
       inherited cxLabel1: TcxLabel
@@ -29,13 +33,13 @@ inherited Fcad_Pedido: TFcad_Pedido
           'Cliente'
           'Data Pedido'
           'Data Entrega')
-        TabOrder = 2
+        TabOrder = 4
         Text = 'C'#211'DIGO'
         ExplicitTop = 27
       end
       inherited eConsulta: TcxTextEdit
         Top = 27
-        TabOrder = 3
+        TabOrder = 5
         ExplicitTop = 27
       end
       inherited cxLabel2: TcxLabel
@@ -59,7 +63,7 @@ inherited Fcad_Pedido: TFcad_Pedido
           'CANCELADO'
           'BLOQUEADO')
         Style.IsFontAssigned = True
-        TabOrder = 5
+        TabOrder = 6
         Visible = False
         ExplicitLeft = 483
         ExplicitTop = 27
@@ -68,7 +72,7 @@ inherited Fcad_Pedido: TFcad_Pedido
       end
       inherited cxCon: TcxButton
         Top = 26
-        TabOrder = 4
+        TabOrder = 3
         ExplicitTop = 26
       end
       inherited cxQtdeReg: TcxLabel
@@ -193,7 +197,7 @@ inherited Fcad_Pedido: TFcad_Pedido
     end
     inherited pnBotaoCad: TPanel
       Width = 851
-      ExplicitWidth = 642
+      ExplicitWidth = 851
       inherited cxEdita: TcxButton [0]
       end
       inherited cxNovo: TcxButton [1]
@@ -209,14 +213,15 @@ inherited Fcad_Pedido: TFcad_Pedido
       Top = 488
       Width = 851
       ExplicitTop = 488
-      ExplicitWidth = 642
+      ExplicitWidth = 851
     end
     inherited grConsulta: TcxGrid
       Top = 103
       Width = 851
       Height = 385
-      ExplicitWidth = 642
-      ExplicitHeight = 412
+      ExplicitTop = 103
+      ExplicitWidth = 851
+      ExplicitHeight = 385
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = nil
         inherited grConsultaDBTableView1Campo2: TcxGridDBColumn [0]
@@ -270,32 +275,27 @@ inherited Fcad_Pedido: TFcad_Pedido
       end
     end
   end
-  inherited pnImg: TcxImage [1]
-    Left = 853
-    ExplicitLeft = 644
-    ExplicitHeight = 539
-    Height = 539
-  end
   inherited pnCad: TPanel [2]
     Width = 853
     Height = 539
-    ExplicitWidth = 644
+    ExplicitWidth = 853
     ExplicitHeight = 539
     inherited pnMenu: TPanel
       Top = 473
       Width = 851
       Height = 65
       Align = alBottom
-      ExplicitTop = 474
+      TabOrder = 2
+      ExplicitTop = 473
       ExplicitWidth = 851
       ExplicitHeight = 65
       inherited cxSalvar: TcxButton
-        Left = 80
-        ExplicitLeft = 80
+        Left = 82
+        ExplicitLeft = 82
       end
       inherited cxCancela: TcxButton
-        Left = 139
-        ExplicitLeft = 139
+        Left = 141
+        ExplicitLeft = 141
       end
       object eTotalItens: TcxCurrencyEdit
         Left = 499
@@ -315,7 +315,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 2
+        TabOrder = 3
         Width = 135
       end
       object cxLabel32: TcxLabel
@@ -379,7 +379,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.TextColor = clMaroon
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 5
+        TabOrder = 6
         Width = 135
       end
       object cxLabel8: TcxLabel
@@ -419,12 +419,13 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 7
+        TabOrder = 4
+        OnExit = ePerDescExit
         Width = 50
       end
       object eVlrDesc: TcxCurrencyEdit
-        Left = 795
-        Top = 2
+        Left = 796
+        Top = 6
         Hint = 'Total Itens'
         EditValue = 0.000000000000000000
         ParentFont = False
@@ -438,7 +439,8 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 8
+        TabOrder = 5
+        OnExit = ePerDescExit
         Width = 50
       end
       object cxLabel9: TcxLabel
@@ -501,7 +503,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 11
+        TabOrder = 2
         Width = 135
       end
     end
@@ -511,9 +513,7 @@ inherited Fcad_Pedido: TFcad_Pedido
       Width = 851
       Height = 139
       Align = alTop
-      TabOrder = 1
-      ExplicitLeft = -4
-      ExplicitTop = 0
+      TabOrder = 0
       object cxLabel3: TcxLabel
         Left = 4
         Top = 7
@@ -594,7 +594,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.HotTrack = True
         Style.Shadow = False
         Style.IsFontAssigned = True
-        TabOrder = 3
+        TabOrder = 15
         OnExit = eDataPedidoExit
         Width = 110
       end
@@ -671,7 +671,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 5
+        TabOrder = 13
         Text = '0'
         OnExit = eCodFornecExit
         OnKeyPress = eCodVendKeyPress
@@ -706,7 +706,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 6
+        TabOrder = 14
         Text = 'NENHUM'
         Width = 300
       end
@@ -783,7 +783,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 8
+        TabOrder = 16
         Text = '0'
         OnExit = eCodVendPedidoExit
         OnKeyPress = eCodVendKeyPress
@@ -818,7 +818,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 9
+        TabOrder = 17
         Text = 'NENHUM'
         Width = 300
       end
@@ -841,7 +841,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 10
+        TabOrder = 2
         Width = 100
       end
       object cxLabel6: TcxLabel
@@ -877,7 +877,7 @@ inherited Fcad_Pedido: TFcad_Pedido
           'PEDIDO')
         Properties.OnChange = cxConsultaPropertiesChange
         StyleFocused.Color = 13366014
-        TabOrder = 12
+        TabOrder = 3
         Text = 'OR'#199'AMENTO'
         Width = 110
       end
@@ -932,7 +932,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.HotTrack = True
         Style.Shadow = False
         Style.IsFontAssigned = True
-        TabOrder = 15
+        TabOrder = 18
         OnExit = eDataValidadeExit
         Width = 110
       end
@@ -943,9 +943,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Height = 137
         Align = alRight
         BevelOuter = bvNone
-        TabOrder = 16
-        ExplicitLeft = 9
-        ExplicitTop = 2
+        TabOrder = 0
         object cxFotoProd: TcxImage
           Left = 0
           Top = 0
@@ -1188,10 +1186,6 @@ inherited Fcad_Pedido: TFcad_Pedido
           StyleHot.LookAndFeel.NativeStyle = False
           TabOrder = 0
           Transparent = True
-          ExplicitLeft = 31
-          ExplicitTop = 6
-          ExplicitWidth = 108
-          ExplicitHeight = 102
           Height = 137
           Width = 110
         end
@@ -1261,7 +1255,7 @@ inherited Fcad_Pedido: TFcad_Pedido
           end>
         Properties.CharCase = ecUpperCase
         Properties.ClickKey = 114
-        Properties.OnButtonClick = eCodVendPedidoPropertiesButtonClick
+        Properties.OnButtonClick = eCodCPagtoPropertiesButtonClick
         Style.Font.Charset = ANSI_CHARSET
         Style.Font.Color = clWindowText
         Style.Font.Height = -11
@@ -1269,9 +1263,9 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 18
+        TabOrder = 19
         Text = '0'
-        OnExit = eCodVendPedidoExit
+        OnExit = eCodCPagtoExit
         OnKeyPress = eCodVendKeyPress
         Height = 21
         Width = 60
@@ -1304,7 +1298,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 19
+        TabOrder = 20
         Text = 'NENHUM'
         Width = 300
       end
@@ -1358,25 +1352,19 @@ inherited Fcad_Pedido: TFcad_Pedido
       Width = 851
       Height = 333
       Align = alClient
-      TabOrder = 2
+      TabOrder = 1
       Properties.ActivePage = cxPageItem
       Properties.CustomButtons.Buttons = <>
       Properties.Style = 9
       Properties.TabPosition = tpBottom
       LookAndFeel.Kind = lfOffice11
       LookAndFeel.SkinName = ''
-      ExplicitLeft = 280
-      ExplicitTop = 176
-      ExplicitWidth = 289
-      ExplicitHeight = 193
       ClientRectBottom = 313
       ClientRectRight = 851
       ClientRectTop = 0
       object cxPageItem: TcxTabSheet
         Caption = 'Produtos'
         ImageIndex = 0
-        ExplicitTop = 24
-        ExplicitHeight = 298
         object pnItem: TPanel
           Left = 0
           Top = 0
@@ -1386,7 +1374,7 @@ inherited Fcad_Pedido: TFcad_Pedido
           Enabled = False
           TabOrder = 0
           object cxLabel15: TcxLabel
-            Left = 12
+            Left = 19
             Top = 3
             AutoSize = False
             Caption = 'Produto:'
@@ -1407,10 +1395,10 @@ inherited Fcad_Pedido: TFcad_Pedido
             Transparent = True
             Height = 17
             Width = 50
-            AnchorX = 62
+            AnchorX = 69
           end
           object eCodProd: TcxButtonEdit
-            Left = 62
+            Left = 69
             Top = 1
             Hint = '(F3) Busca os Dados de Cadastro'
             AutoSize = False
@@ -1458,7 +1446,7 @@ inherited Fcad_Pedido: TFcad_Pedido
             Style.Font.Style = [fsBold]
             Style.IsFontAssigned = True
             StyleFocused.Color = 13366014
-            TabOrder = 1
+            TabOrder = 0
             Text = '0'
             OnExit = eCodProdExit
             OnKeyPress = eCodVendKeyPress
@@ -1466,7 +1454,7 @@ inherited Fcad_Pedido: TFcad_Pedido
             Width = 110
           end
           object eProduto: TcxTextEdit
-            Left = 173
+            Left = 180
             Top = 1
             TabStop = False
             ParentFont = False
@@ -1493,12 +1481,12 @@ inherited Fcad_Pedido: TFcad_Pedido
             StyleHot.LookAndFeel.Kind = lfStandard
             StyleHot.LookAndFeel.NativeStyle = False
             StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-            TabOrder = 2
+            TabOrder = 1
             Text = 'NENHUM'
-            Width = 280
+            Width = 264
           end
           object eQtde: TcxCurrencyEdit
-            Left = 457
+            Left = 447
             Top = 15
             Hint = 'Quantidade de Itens'
             EditValue = 0.000000000000000000
@@ -1513,11 +1501,12 @@ inherited Fcad_Pedido: TFcad_Pedido
             Style.Font.Style = [fsBold]
             Style.IsFontAssigned = True
             StyleFocused.Color = 13366014
-            TabOrder = 3
-            Width = 67
+            TabOrder = 7
+            OnExit = eQtdeExit
+            Width = 65
           end
           object cxLabel16: TcxLabel
-            Left = 457
+            Left = 447
             Top = 1
             AutoSize = False
             Caption = 'Qtde:'
@@ -1538,10 +1527,10 @@ inherited Fcad_Pedido: TFcad_Pedido
             Transparent = True
             Height = 17
             Width = 32
-            AnchorX = 489
+            AnchorX = 479
           end
           object cxLabel17: TcxLabel
-            Left = 517
+            Left = 506
             Top = 1
             AutoSize = False
             Caption = 'Vlr. Unit:'
@@ -1562,10 +1551,10 @@ inherited Fcad_Pedido: TFcad_Pedido
             Transparent = True
             Height = 17
             Width = 53
-            AnchorX = 570
+            AnchorX = 559
           end
           object ePrecoVenda: TcxCurrencyEdit
-            Left = 525
+            Left = 513
             Top = 15
             Hint = 'Pre'#231'o de Venda do Produto'
             EditValue = 0.000000000000000000
@@ -1580,11 +1569,12 @@ inherited Fcad_Pedido: TFcad_Pedido
             Style.Font.Style = [fsBold]
             Style.IsFontAssigned = True
             StyleFocused.Color = 13366014
-            TabOrder = 6
-            Width = 85
+            TabOrder = 8
+            OnExit = eQtdeExit
+            Width = 70
           end
           object cxLabel18: TcxLabel
-            Left = 607
+            Left = 655
             Top = 1
             AutoSize = False
             Caption = 'Vlr. Total:'
@@ -1605,17 +1595,19 @@ inherited Fcad_Pedido: TFcad_Pedido
             Transparent = True
             Height = 17
             Width = 53
-            AnchorX = 660
+            AnchorX = 708
           end
           object eTotalItem: TcxCurrencyEdit
-            Left = 610
+            Left = 655
             Top = 15
             Hint = 'Pre'#231'o de Venda do Produto'
+            TabStop = False
             EditValue = 0.000000000000000000
             ParentFont = False
             Properties.Alignment.Horz = taRightJustify
             Properties.DecimalPlaces = 2
             Properties.DisplayFormat = '###,###,##0.00'
+            Properties.ReadOnly = True
             Style.Color = clBtnFace
             Style.Font.Charset = ANSI_CHARSET
             Style.Font.Color = clWindowText
@@ -1625,13 +1617,13 @@ inherited Fcad_Pedido: TFcad_Pedido
             Style.TextColor = clMaroon
             Style.IsFontAssigned = True
             StyleFocused.Color = 13366014
-            TabOrder = 8
-            Width = 100
+            TabOrder = 10
+            Width = 85
           end
           object cxSalvarItem: TcxButton
-            Left = 716
+            Left = 741
             Top = 6
-            Width = 67
+            Width = 55
             Height = 39
             Hint = 'Incluir Item no Pedido'
             LookAndFeel.Kind = lfOffice11
@@ -1771,12 +1763,13 @@ inherited Fcad_Pedido: TFcad_Pedido
             OptionsImage.Spacing = 0
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 9
+            TabOrder = 11
+            OnClick = cxSalvarItemClick
           end
           object cxApagarItem: TcxButton
-            Left = 781
+            Left = 794
             Top = 6
-            Width = 65
+            Width = 55
             Height = 39
             Hint = 'Excluir Item do Pedido'
             Cancel = True
@@ -1915,10 +1908,11 @@ inherited Fcad_Pedido: TFcad_Pedido
             OptionsImage.Layout = blGlyphTop
             OptionsImage.Margin = 0
             OptionsImage.Spacing = 0
-            TabOrder = 10
+            TabOrder = 12
+            OnClick = cxApagarItemClick
           end
           object eUn: TcxTextEdit
-            Left = 62
+            Left = 69
             Top = 23
             TabStop = False
             ParentFont = False
@@ -1945,12 +1939,12 @@ inherited Fcad_Pedido: TFcad_Pedido
             StyleHot.LookAndFeel.Kind = lfStandard
             StyleHot.LookAndFeel.NativeStyle = False
             StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-            TabOrder = 11
+            TabOrder = 3
             Text = 'UN'
             Width = 48
           end
           object eMarca: TcxTextEdit
-            Left = 111
+            Left = 118
             Top = 23
             TabStop = False
             ParentFont = False
@@ -1977,12 +1971,12 @@ inherited Fcad_Pedido: TFcad_Pedido
             StyleHot.LookAndFeel.Kind = lfStandard
             StyleHot.LookAndFeel.NativeStyle = False
             StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-            TabOrder = 12
+            TabOrder = 4
             Text = 'MARCA'
             Width = 235
           end
           object eNcm: TcxTextEdit
-            Left = 347
+            Left = 354
             Top = 23
             TabStop = False
             ParentFont = False
@@ -2009,12 +2003,12 @@ inherited Fcad_Pedido: TFcad_Pedido
             StyleHot.LookAndFeel.Kind = lfStandard
             StyleHot.LookAndFeel.NativeStyle = False
             StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-            TabOrder = 13
+            TabOrder = 5
             Text = 'NCM'
-            Width = 106
+            Width = 90
           end
           object eValidadeProd: TcxDateEdit
-            Left = 377
+            Left = 368
             Top = 23
             Hint = 'Data do Pedido'
             ParentFont = False
@@ -2030,10 +2024,87 @@ inherited Fcad_Pedido: TFcad_Pedido
             Style.HotTrack = True
             Style.Shadow = False
             Style.IsFontAssigned = True
-            TabOrder = 14
+            TabOrder = 6
             Visible = False
             OnExit = eDataEntregaExit
             Width = 76
+          end
+          object eReferencia: TcxTextEdit
+            Left = 324
+            Top = -4
+            TabStop = False
+            ParentFont = False
+            Properties.CharCase = ecUpperCase
+            Properties.MaxLength = 30
+            Properties.ReadOnly = True
+            Style.Color = clRed
+            Style.Font.Charset = ANSI_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -11
+            Style.Font.Name = 'Tahoma'
+            Style.Font.Style = [fsBold]
+            Style.LookAndFeel.Kind = lfStandard
+            Style.LookAndFeel.NativeStyle = False
+            Style.LookAndFeel.SkinName = 'Office2010Silver'
+            Style.IsFontAssigned = True
+            StyleDisabled.LookAndFeel.Kind = lfStandard
+            StyleDisabled.LookAndFeel.NativeStyle = False
+            StyleDisabled.LookAndFeel.SkinName = 'Office2010Silver'
+            StyleFocused.Color = 13366014
+            StyleFocused.LookAndFeel.Kind = lfStandard
+            StyleFocused.LookAndFeel.NativeStyle = False
+            StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
+            StyleHot.LookAndFeel.Kind = lfStandard
+            StyleHot.LookAndFeel.NativeStyle = False
+            StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
+            TabOrder = 2
+            Text = 'NCM'
+            Visible = False
+            Width = 100
+          end
+          object cxLabel24: TcxLabel
+            Left = 584
+            Top = 1
+            AutoSize = False
+            Caption = 'Desc (%):'
+            ParentFont = False
+            Style.Font.Charset = ANSI_CHARSET
+            Style.Font.Color = clMaroon
+            Style.Font.Height = -11
+            Style.Font.Name = 'Tahoma'
+            Style.Font.Style = []
+            Style.LookAndFeel.NativeStyle = True
+            Style.TextColor = clBlack
+            Style.IsFontAssigned = True
+            StyleDisabled.LookAndFeel.NativeStyle = True
+            StyleFocused.LookAndFeel.NativeStyle = True
+            StyleHot.LookAndFeel.NativeStyle = True
+            Properties.Alignment.Horz = taRightJustify
+            Properties.LabelEffect = cxleCool
+            Transparent = True
+            Height = 17
+            Width = 53
+            AnchorX = 637
+          end
+          object eDescItem: TcxCurrencyEdit
+            Left = 584
+            Top = 15
+            Hint = 'Pre'#231'o de Venda do Produto'
+            EditValue = 0.000000000000000000
+            ParentFont = False
+            Properties.Alignment.Horz = taRightJustify
+            Properties.DecimalPlaces = 2
+            Properties.DisplayFormat = '###,###,##0.00'
+            Style.Font.Charset = ANSI_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -16
+            Style.Font.Name = 'Segoe UI'
+            Style.Font.Style = [fsBold]
+            Style.IsFontAssigned = True
+            StyleFocused.Color = 13366014
+            TabOrder = 9
+            OnExit = eQtdeExit
+            Width = 70
           end
         end
         object cxGrid1: TcxGrid
@@ -2138,15 +2209,11 @@ inherited Fcad_Pedido: TFcad_Pedido
       object cxPageDados: TcxTabSheet
         Caption = 'Dados Adicionais'
         ImageIndex = 1
-        ExplicitLeft = 2
-        ExplicitTop = 28
-        ExplicitWidth = 847
-        ExplicitHeight = 292
         object cxLabel21: TcxLabel
-          Left = 4
-          Top = 3
+          Left = 3
+          Top = 4
           AutoSize = False
-          Caption = 'Cliente:'
+          Caption = 'Transportadora:'
           ParentFont = False
           Style.Font.Charset = ANSI_CHARSET
           Style.Font.Color = clMaroon
@@ -2163,13 +2230,13 @@ inherited Fcad_Pedido: TFcad_Pedido
           Properties.LabelEffect = cxleCool
           Transparent = True
           Height = 17
-          Width = 66
-          AnchorX = 70
+          Width = 83
+          AnchorX = 86
         end
         object eCodTransp: TcxButtonEdit
-          Left = 69
-          Top = 1
-          Hint = '(F3) Busca Fornecedor'
+          Left = 85
+          Top = 2
+          Hint = '(F3) Busca os Dados de Cadastro'
           AutoSize = False
           ParentFont = False
           Properties.Alignment.Horz = taRightJustify
@@ -2215,7 +2282,7 @@ inherited Fcad_Pedido: TFcad_Pedido
           Style.Font.Style = [fsBold]
           Style.IsFontAssigned = True
           StyleFocused.Color = 13366014
-          TabOrder = 1
+          TabOrder = 0
           Text = '0'
           OnExit = eCodFornecExit
           OnKeyPress = eCodVendKeyPress
@@ -2223,8 +2290,8 @@ inherited Fcad_Pedido: TFcad_Pedido
           Width = 60
         end
         object eTransportadora: TcxTextEdit
-          Left = 129
-          Top = 1
+          Left = 145
+          Top = 2
           TabStop = False
           ParentFont = False
           Properties.CharCase = ecUpperCase
@@ -2250,13 +2317,13 @@ inherited Fcad_Pedido: TFcad_Pedido
           StyleHot.LookAndFeel.Kind = lfStandard
           StyleHot.LookAndFeel.NativeStyle = False
           StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-          TabOrder = 2
+          TabOrder = 1
           Text = 'NENHUM'
           Width = 300
         end
         object cxLabel22: TcxLabel
-          Left = 440
-          Top = 3
+          Left = 456
+          Top = 4
           AutoSize = False
           Caption = 'Vlr. Frete:'
           ParentFont = False
@@ -2276,11 +2343,11 @@ inherited Fcad_Pedido: TFcad_Pedido
           Transparent = True
           Height = 17
           Width = 78
-          AnchorX = 518
+          AnchorX = 534
         end
         object eVlrFrete: TcxCurrencyEdit
-          Left = 519
-          Top = 1
+          Left = 535
+          Top = 2
           Hint = 'Pre'#231'o de Venda do Produto'
           EditValue = 0.000000000000000000
           ParentFont = False
@@ -2294,21 +2361,21 @@ inherited Fcad_Pedido: TFcad_Pedido
           Style.Font.Style = []
           Style.IsFontAssigned = True
           StyleFocused.Color = 13366014
-          TabOrder = 4
+          TabOrder = 2
           Width = 75
         end
         object eObs: TcxMemo
-          Left = 69
-          Top = 22
+          Left = 85
+          Top = 23
           Lines.Strings = (
             'eObs')
-          TabOrder = 5
+          TabOrder = 6
           Height = 89
           Width = 525
         end
         object cxLabel23: TcxLabel
-          Left = 4
-          Top = 22
+          Left = 20
+          Top = 23
           AutoSize = False
           Caption = 'Obs:'
           ParentFont = False
@@ -2328,7 +2395,7 @@ inherited Fcad_Pedido: TFcad_Pedido
           Transparent = True
           Height = 17
           Width = 66
-          AnchorX = 70
+          AnchorX = 86
         end
       end
     end

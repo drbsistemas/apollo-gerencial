@@ -10,13 +10,28 @@ uses
 
 type
   TdmMov = class(TDataModule)
-    qryItemPed: TFDQuery;
     UpdtItemPed: TFDUpdateSQL;
     dsItemPed: TDataSource;
     qryPedido: TFDQuery;
     UpdtPedido: TFDUpdateSQL;
     dsPedido: TDataSource;
+    qryItemPed: TFDQuery;
+    qryItemPedIDPEDIDOITEM: TIntegerField;
+    qryItemPedIDPEDIDO: TIntegerField;
+    qryItemPedIDPROD: TIntegerField;
+    qryItemPedQTDE: TFloatField;
+    qryItemPedVLRUNITARIO: TFloatField;
+    qryItemPedVLRDESCONTO: TFloatField;
+    qryItemPedVLRTOTALITEM: TFloatField;
+    qryItemPedOBSITEM: TStringField;
+    qryItemPedDATAVALIDADE: TSQLTimeStampField;
+    qryItemPedSALDOQTDE: TFloatField;
+    qryItemPedSTATUSITEM: TStringField;
+    qryItemPedNOMEPROD: TStringField;
+    qryItemPedUNPROD: TStringField;
+    qryItemPedREFPROD: TStringField;
     procedure qryPedidoAfterInsert(DataSet: TDataSet);
+    procedure qryItemPedAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -33,6 +48,11 @@ implementation
 uses uDmCon, uRotinas;
 
 {$R *.dfm}
+
+procedure TdmMov.qryItemPedAfterInsert(DataSet: TDataSet);
+begin
+   dmMov.qryItemPed.FieldByName('IDPEDIDOITEM').AsInteger      := ExecutaGen('PEDIDOITEM');
+end;
 
 procedure TdmMov.qryPedidoAfterInsert(DataSet: TDataSet);
 begin

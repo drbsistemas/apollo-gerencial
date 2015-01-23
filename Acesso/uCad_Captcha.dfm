@@ -219,7 +219,7 @@ object Fcon_Captcha: TFcon_Captcha
         B2E72B32A9D931368CAF3032627518192B320000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
       SpeedButtonOptions.Transparent = True
-      TabOrder = 2
+      TabOrder = 3
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -19
@@ -239,7 +239,7 @@ object Fcon_Captcha: TFcon_Captcha
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 12312063
-      TabOrder = 3
+      TabOrder = 2
       Width = 150
     end
   end

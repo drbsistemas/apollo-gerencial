@@ -133,7 +133,7 @@ implementation
 
 uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, uCad_Clientes,
   uCad_Animais, uCon_Generica, uDmRel, uCad_Empresa, uCad_Produto, uCad_Balanco,
-  uCad_Pedido, udmMov, uCad_Pagto;
+  uCad_Pedido, udmMov, uCad_Pagto, uCalculosMovimentacao;
 
 procedure TFPrinc.cxClienteClick(Sender: TObject);
 begin
@@ -277,7 +277,8 @@ begin
    FCorLista := clBtnFace;//$0000002D; //$00F1EDE9;
 
    if Liberacao = false then
-      StBar.Panels[2].Text := 'Licença Expirada!';
+      StBar.Panels[2].Text := 'Licença Expirada!' else
+      StBar.Panels[2].Text := 'Licença Vigente!';
 end;
 
 procedure TFPrinc.PegaNomeForm(var Msg: TMsg; var Handled: Boolean);

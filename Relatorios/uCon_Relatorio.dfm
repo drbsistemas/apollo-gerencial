@@ -328,7 +328,7 @@ object Fcad_Relatorio: TFcad_Relatorio
         0000000000000000000000000000000000000000000000000000}
       SpeedButtonOptions.Flat = True
       SpeedButtonOptions.Transparent = True
-      TabOrder = 0
+      TabOrder = 5
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -640,7 +640,7 @@ object Fcad_Relatorio: TFcad_Relatorio
         0000000000000000000000000000000000000000000000000000}
       SpeedButtonOptions.Flat = True
       SpeedButtonOptions.Transparent = True
-      TabOrder = 1
+      TabOrder = 4
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -951,7 +951,7 @@ object Fcad_Relatorio: TFcad_Relatorio
         0000000000000000000000000000000000000000000000000000}
       SpeedButtonOptions.Flat = True
       SpeedButtonOptions.Transparent = True
-      TabOrder = 2
+      TabOrder = 3
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -1262,7 +1262,7 @@ object Fcad_Relatorio: TFcad_Relatorio
         0000000000000000000000000000000000000000000000000000}
       SpeedButtonOptions.Flat = True
       SpeedButtonOptions.Transparent = True
-      TabOrder = 3
+      TabOrder = 2
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -1573,7 +1573,7 @@ object Fcad_Relatorio: TFcad_Relatorio
         B8E149494A500000000000000000000000000000000000000000}
       SpeedButtonOptions.Flat = True
       SpeedButtonOptions.Transparent = True
-      TabOrder = 4
+      TabOrder = 1
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -1884,7 +1884,7 @@ object Fcad_Relatorio: TFcad_Relatorio
         C0CE777777840E0E0E0F00000000000000000000000000000000}
       SpeedButtonOptions.Flat = True
       SpeedButtonOptions.Transparent = True
-      TabOrder = 5
+      TabOrder = 0
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -13

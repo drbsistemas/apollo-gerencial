@@ -7,10 +7,199 @@ inherited Fcad_Clientes: TFcad_Clientes
   ExplicitHeight = 572
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel
+  inherited pnCon: TPanel [0]
+    Width = 849
+    Height = 541
+    TabOrder = 1
+    ExplicitWidth = 849
+    ExplicitHeight = 541
+    inherited pnBotaoCad: TPanel [0]
+      Width = 847
+      ExplicitWidth = 847
+      inherited cxNovo: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxEdita: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxVer: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxApagar: TcxButton
+        LookAndFeel.SkinName = ''
+        OnClick = cxApagarClick
+      end
+      inherited cxVoltar: TcxButton
+        LookAndFeel.SkinName = ''
+      end
+      inherited cxPrint: TcxButton
+        LookAndFeel.SkinName = ''
+        OnClick = cxPrintClick
+      end
+    end
+    inherited pnBusca: TPanel [1]
+      Width = 847
+      ExplicitWidth = 847
+      inherited cxConsulta: TcxComboBox
+        Properties.Items.Strings = (
+          'C'#243'digo'
+          'Raz'#227'o'
+          'Fantasia'
+          'Fone'
+          'Celular'
+          'CNPJ'
+          'CPF')
+        Text = 'C'#211'DIGO'
+      end
+      inherited cxLabel2: TcxLabel
+        Left = 626
+        ExplicitLeft = 626
+      end
+      inherited cbAtivo: TcxComboBox
+        Left = 659
+        Properties.OnChange = cxConsultaPropertiesChange
+        Style.IsFontAssigned = True
+        TabOrder = 4
+        ExplicitLeft = 659
+      end
+      inherited cxQtdeReg: TcxLabel
+        Left = 740
+        ExplicitLeft = 740
+      end
+      object cxTipoClie: TcxComboBox
+        Left = 473
+        Top = 1
+        Hint = 'Tipo de Cadastro'
+        ParentFont = False
+        Properties.CharCase = ecUpperCase
+        Properties.DropDownListStyle = lsFixedList
+        Properties.Items.Strings = (
+          'CLIENTE'
+          'FORNECEDOR'
+          'VENDEDOR'
+          'TRANSPORTADORA')
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 13366014
+        TabOrder = 3
+        Text = 'CLIENTE'
+        OnClick = cxConsultaPropertiesChange
+        Width = 150
+      end
+      object cxLabel23: TcxLabel
+        Left = 445
+        Top = 3
+        AutoSize = False
+        Caption = 'Tipo:'
+        ParentFont = False
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.LookAndFeel.NativeStyle = True
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        Properties.Alignment.Horz = taRightJustify
+        Properties.LabelEffect = cxleCool
+        Transparent = True
+        Height = 17
+        Width = 29
+        AnchorX = 474
+      end
+    end
+    inherited pnBotaoCon: TPanel
+      Top = 490
+      Width = 847
+      ExplicitTop = 490
+      ExplicitWidth = 847
+      inherited cxCadastro: TcxButton
+        Left = 364
+        LookAndFeel.SkinName = ''
+        ExplicitLeft = 364
+      end
+      inherited cxFechar: TcxButton
+        Left = 423
+        LookAndFeel.SkinName = ''
+        ExplicitLeft = 423
+      end
+    end
+    inherited grConsulta: TcxGrid
+      Width = 847
+      Height = 414
+      ExplicitWidth = 847
+      ExplicitHeight = 414
+      inherited grConsultaDBTableView1: TcxGridDBTableView
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
+          Caption = 'Fantasia'
+          DataBinding.FieldName = 'FANTASIA'
+        end
+        object grConsultaDBTableView1Column1: TcxGridDBColumn
+          Caption = 'Fone'
+          DataBinding.FieldName = 'FONE'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column2: TcxGridDBColumn
+          Caption = 'Celular'
+          DataBinding.FieldName = 'CELULAR'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn
+          Caption = 'Cnpj'
+          DataBinding.FieldName = 'CNPJ'
+          Width = 130
+        end
+        object grConsultaDBTableView1Column4: TcxGridDBColumn
+          Caption = 'Endere'#231'o'
+          DataBinding.FieldName = 'ENDERECO'
+          Width = 200
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn
+          Caption = 'N'#186
+          DataBinding.FieldName = 'NUMERO'
+          Width = 40
+        end
+        object grConsultaDBTableView1Column6: TcxGridDBColumn
+          Caption = 'Cidade'
+          DataBinding.FieldName = 'CIDADE'
+          Width = 150
+        end
+        object grConsultaDBTableView1Column7: TcxGridDBColumn
+          Caption = 'Uf'
+          DataBinding.FieldName = 'UF'
+        end
+        object grConsultaDBTableView1Column8: TcxGridDBColumn
+          Caption = 'Bairro'
+          DataBinding.FieldName = 'BAIRRO'
+          Width = 150
+        end
+        object grConsultaDBTableView1Column9: TcxGridDBColumn
+          Caption = 'Obs'
+          DataBinding.FieldName = 'OBS'
+          Width = 1000
+        end
+      end
+    end
+  end
+  inherited pnImg: TcxImage [1]
+    Left = 849
+    Properties.GraphicClassName = 'TdxPNGImage'
+    Style.BorderStyle = ebsFlat
+    ExplicitLeft = 849
+    ExplicitHeight = 541
+    Height = 541
+  end
+  inherited pnCad: TPanel [2]
     Width = 849
     Height = 541
     BevelOuter = bvNone
+    TabOrder = 0
     ExplicitWidth = 849
     ExplicitHeight = 541
     inherited pnMenu: TPanel
@@ -53,7 +242,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 7
+      TabOrder = 12
       Width = 481
     end
     object eCodigo: TcxTextEdit
@@ -90,7 +279,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 14
+      TabOrder = 25
       Width = 233
     end
     object eBairro: TcxTextEdit
@@ -108,7 +297,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 17
+      TabOrder = 31
       Width = 233
     end
     object eCidade: TcxButtonEdit
@@ -161,7 +350,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 26
+      TabOrder = 35
       Width = 233
     end
     object cxLabel3: TcxLabel
@@ -341,7 +530,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 30
+      TabOrder = 37
       OnExit = eUfExit
       Width = 31
     end
@@ -382,8 +571,9 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 16
+      TabOrder = 27
       Text = '        '
+      OnExit = eCepExit
       Width = 127
     end
     object cxLabel11: TcxLabel
@@ -426,7 +616,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 12
+      TabOrder = 21
       Text = '          '
       Width = 120
     end
@@ -468,7 +658,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 38
+      TabOrder = 40
       Width = 482
     end
     object cxLabel14: TcxLabel
@@ -536,7 +726,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 4
+      TabOrder = 6
       Text = 'CLIENTE'
       Width = 150
     end
@@ -567,6 +757,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Left = 483
       Top = 113
       Hint = 'Data de Nascimento/Cria'#231#227'o se empresa'
+      EditValue = 0d
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clWindowText
@@ -575,7 +766,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 6
+      TabOrder = 8
       OnExit = cbDtNascimentoExit
       Width = 130
     end
@@ -617,7 +808,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 10
+      TabOrder = 17
       Text = '           '
       OnExit = eCpfExit
       Width = 120
@@ -635,7 +826,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 11
+      TabOrder = 18
       Text = '              '
       Width = 120
     end
@@ -699,7 +890,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 13
+      TabOrder = 22
       Text = '          '
       Width = 120
     end
@@ -805,7 +996,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 5
+      TabOrder = 7
       Text = 'F'#205'SICA'
       Width = 98
     end
@@ -844,7 +1035,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 8
+      TabOrder = 14
       Width = 481
     end
     object cxLabel4: TcxLabel
@@ -885,7 +1076,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 15
+      TabOrder = 26
       Text = '        '
       Width = 40
     end
@@ -903,7 +1094,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 15921919
-      TabOrder = 31
+      TabOrder = 38
       Text = '        '
       Visible = False
       Width = 40
@@ -923,7 +1114,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 18
+      TabOrder = 32
       Width = 205
     end
     object cxLabel22: TcxLabel
@@ -955,7 +1146,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       Width = 552
       Height = 22
       BevelOuter = bvNone
-      TabOrder = 9
+      TabOrder = 16
       object cxLabel6: TcxLabel
         Left = 11
         Top = 3
@@ -1041,191 +1232,5 @@ inherited Fcad_Clientes: TFcad_Clientes
         Width = 120
       end
     end
-  end
-  inherited pnCon: TPanel
-    Width = 849
-    Height = 541
-    ExplicitWidth = 849
-    ExplicitHeight = 541
-    inherited pnBotaoCad: TPanel [0]
-      Width = 847
-      ExplicitWidth = 847
-      inherited cxNovo: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxEdita: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxVer: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxApagar: TcxButton
-        LookAndFeel.SkinName = ''
-        OnClick = cxApagarClick
-      end
-      inherited cxVoltar: TcxButton
-        LookAndFeel.SkinName = ''
-      end
-      inherited cxPrint: TcxButton
-        LookAndFeel.SkinName = ''
-        OnClick = cxPrintClick
-      end
-    end
-    inherited pnBusca: TPanel [1]
-      Width = 847
-      ExplicitWidth = 847
-      inherited cxConsulta: TcxComboBox
-        Properties.Items.Strings = (
-          'C'#243'digo'
-          'Raz'#227'o'
-          'Fantasia'
-          'Fone'
-          'Celular'
-          'CNPJ'
-          'CPF')
-        Text = 'C'#211'DIGO'
-      end
-      inherited cxLabel2: TcxLabel
-        Left = 626
-        ExplicitLeft = 626
-      end
-      inherited cbAtivo: TcxComboBox
-        Left = 659
-        Properties.OnChange = cxConsultaPropertiesChange
-        Style.IsFontAssigned = True
-        ExplicitLeft = 659
-      end
-      inherited cxQtdeReg: TcxLabel
-        Left = 740
-        ExplicitLeft = 740
-      end
-      object cxTipoClie: TcxComboBox
-        Left = 473
-        Top = 1
-        Hint = 'Tipo de Cadastro'
-        ParentFont = False
-        Properties.CharCase = ecUpperCase
-        Properties.DropDownListStyle = lsFixedList
-        Properties.Items.Strings = (
-          'CLIENTE'
-          'FORNECEDOR'
-          'VENDEDOR'
-          'TRANSPORTADORA')
-        Style.Font.Charset = ANSI_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = []
-        Style.IsFontAssigned = True
-        StyleFocused.Color = 13366014
-        TabOrder = 7
-        Text = 'CLIENTE'
-        OnClick = cxConsultaPropertiesChange
-        Width = 150
-      end
-      object cxLabel23: TcxLabel
-        Left = 445
-        Top = 3
-        AutoSize = False
-        Caption = 'Tipo:'
-        ParentFont = False
-        Style.Font.Charset = ANSI_CHARSET
-        Style.Font.Color = clBlack
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = []
-        Style.LookAndFeel.NativeStyle = True
-        Style.IsFontAssigned = True
-        StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
-        Properties.Alignment.Horz = taRightJustify
-        Properties.LabelEffect = cxleCool
-        Transparent = True
-        Height = 17
-        Width = 29
-        AnchorX = 474
-      end
-    end
-    inherited pnBotaoCon: TPanel
-      Top = 490
-      Width = 847
-      ExplicitTop = 490
-      ExplicitWidth = 847
-      inherited cxCadastro: TcxButton
-        Left = 364
-        LookAndFeel.SkinName = ''
-        ExplicitLeft = 364
-      end
-      inherited cxFechar: TcxButton
-        Left = 423
-        LookAndFeel.SkinName = ''
-        ExplicitLeft = 423
-      end
-    end
-    inherited grConsulta: TcxGrid
-      Width = 847
-      Height = 414
-      ExplicitWidth = 847
-      ExplicitHeight = 414
-      inherited grConsultaDBTableView1: TcxGridDBTableView
-        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
-          Caption = 'Fantasia'
-          DataBinding.FieldName = 'FANTASIA'
-        end
-        object grConsultaDBTableView1Column1: TcxGridDBColumn
-          Caption = 'Fone'
-          DataBinding.FieldName = 'FONE'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column2: TcxGridDBColumn
-          Caption = 'Celular'
-          DataBinding.FieldName = 'CELULAR'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column3: TcxGridDBColumn
-          Caption = 'Cnpj'
-          DataBinding.FieldName = 'CNPJ'
-          Width = 130
-        end
-        object grConsultaDBTableView1Column4: TcxGridDBColumn
-          Caption = 'Endere'#231'o'
-          DataBinding.FieldName = 'ENDERECO'
-          Width = 200
-        end
-        object grConsultaDBTableView1Column5: TcxGridDBColumn
-          Caption = 'N'#186
-          DataBinding.FieldName = 'NUMERO'
-          Width = 40
-        end
-        object grConsultaDBTableView1Column6: TcxGridDBColumn
-          Caption = 'Cidade'
-          DataBinding.FieldName = 'CIDADE'
-          Width = 150
-        end
-        object grConsultaDBTableView1Column7: TcxGridDBColumn
-          Caption = 'Uf'
-          DataBinding.FieldName = 'UF'
-        end
-        object grConsultaDBTableView1Column8: TcxGridDBColumn
-          Caption = 'Bairro'
-          DataBinding.FieldName = 'BAIRRO'
-          Width = 150
-        end
-        object grConsultaDBTableView1Column9: TcxGridDBColumn
-          Caption = 'Obs'
-          DataBinding.FieldName = 'OBS'
-          Width = 1000
-        end
-      end
-    end
-  end
-  inherited pnImg: TcxImage
-    Left = 849
-    Properties.GraphicClassName = 'TdxPNGImage'
-    Style.BorderStyle = ebsFlat
-    ExplicitLeft = 849
-    ExplicitHeight = 541
-    Height = 541
   end
 end

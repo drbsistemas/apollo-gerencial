@@ -2,7 +2,6 @@ inherited FCad_Empresa: TFCad_Empresa
   Caption = 'Tela de Configura'#231#245'es'
   ClientHeight = 539
   ClientWidth = 702
-  ExplicitWidth = 718
   ExplicitHeight = 578
   PixelsPerInch = 96
   TextHeight = 13
@@ -36,9 +35,6 @@ inherited FCad_Empresa: TFCad_Empresa
       ExplicitWidth = 642
       inherited cxNovo: TcxButton
         Enabled = False
-      end
-      inherited cxVer: TcxButton
-        OnClick = cxVerClick
       end
       inherited cxApagar: TcxButton
         Enabled = False
@@ -1185,7 +1181,7 @@ inherited FCad_Empresa: TFCad_Empresa
           Style.Font.Style = []
           Style.IsFontAssigned = True
           StyleFocused.Color = 15921919
-          TabOrder = 0
+          TabOrder = 1
           Width = 400
         end
         object eUsuario: TcxTextEdit
@@ -1195,7 +1191,7 @@ inherited FCad_Empresa: TFCad_Empresa
           Properties.CharCase = ecLowerCase
           Style.Color = clWhite
           StyleFocused.Color = 15921919
-          TabOrder = 1
+          TabOrder = 3
           Width = 400
         end
         object eSenha: TcxTextEdit
@@ -1213,7 +1209,7 @@ inherited FCad_Empresa: TFCad_Empresa
           Style.Font.Style = [fsBold]
           Style.IsFontAssigned = True
           StyleFocused.Color = 15921919
-          TabOrder = 2
+          TabOrder = 6
           Width = 130
         end
         object cbSSL: TcxComboBox
@@ -1231,7 +1227,7 @@ inherited FCad_Empresa: TFCad_Empresa
           Style.Font.Name = 'Tahoma'
           Style.Font.Style = []
           Style.IsFontAssigned = True
-          TabOrder = 3
+          TabOrder = 7
           Text = 'SIM'
           Width = 65
         end
@@ -1242,7 +1238,7 @@ inherited FCad_Empresa: TFCad_Empresa
           Properties.CharCase = ecLowerCase
           Style.Color = clWhite
           StyleFocused.Color = 15921919
-          TabOrder = 4
+          TabOrder = 8
           Width = 60
         end
         object cxLabel17: TcxLabel
@@ -1366,7 +1362,7 @@ inherited FCad_Empresa: TFCad_Empresa
           Width = 75
           Height = 25
           Caption = 'cxButton1'
-          TabOrder = 10
+          TabOrder = 4
           OnClick = cxButton1Click
         end
       end

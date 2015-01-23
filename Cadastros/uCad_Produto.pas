@@ -278,7 +278,7 @@ end;
 procedure TFcad_Produto.eCodFornecExit(Sender: TObject);
 begin
    inherited;
-   eFornec.Text :=  ConsultaCampoNomeAtivo(eCodFornec.Text, '0');
+   eFornec.Text :=  ConsultaCampoNomeAtivo(eCodFornec.Text, 'CLI');
    if eFornec.Text ='NENHUM' then
       eCodFornec.Text := '0';
 end;
@@ -304,7 +304,7 @@ procedure TFcad_Produto.eCodFornecPropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
 begin
   inherited;
-   AbreTelaComShowModal(TFcad_Clientes, TObject(Fcad_Clientes), Fcad_Produto, 'CLIENTE');
+   AbreTelaComShowModal(TFcad_Clientes, TObject(Fcad_Clientes), Fcad_Produto, 'CLI');
 
    if ID > 0 then
    begin

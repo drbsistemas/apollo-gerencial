@@ -311,7 +311,7 @@ end;
 procedure TFcad_Animais.eCodFornecExit(Sender: TObject);
 begin
   inherited;
-   eFornec.Text :=  ConsultaCampoNomeAtivo(eCodFornec.Text, 'CLIENTE');
+   eFornec.Text :=  ConsultaCampoNomeAtivo(eCodFornec.Text, 'CLI');
    if eFornec.Text ='NENHUM' then
       eCodFornec.Text := '0';
 end;
@@ -326,7 +326,7 @@ procedure TFcad_Animais.eCodFornecPropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
 begin
   inherited;
-   AbreTelaComShowModal(TFcad_Clientes, TObject(Fcad_Clientes), Fcad_Animais, 'CLIENTE');
+   AbreTelaComShowModal(TFcad_Clientes, TObject(Fcad_Clientes), Fcad_Animais, 'CLI');
 
    if ID > 0 then
    begin
@@ -437,7 +437,7 @@ procedure TFcad_Animais.eDtNascimentoExit(Sender: TObject);
 var
    intAnos, intMes, intDias: Integer;
 begin
-   if not ValidaData(eDtNascimento.Text) then eDtNascimento.Date := Date;
+   eDtNascimento.Text := DATAVALIDA(eDtNascimento.Text);
 
    intAnos := YearsBetween(Date, StrToDate(eDtNascimento.Text));
    intDias := DaysBetween(Date, (StrToDate(eDtNascimento.Text) + (intAnos*365)));
