@@ -86,6 +86,9 @@ type
     IntegerField4: TIntegerField;
     UpdtNcm: TFDUpdateSQL;
     dsNcm: TDataSource;
+    qryEndereco: TFDQuery;
+    UpdtEndereco: TFDUpdateSQL;
+    dsEndereco: TDataSource;
     procedure qryGenericoAfterInsert(DataSet: TDataSet);
     procedure qryProdAfterInsert(DataSet: TDataSet);
     procedure qryEstoqueAfterInsert(DataSet: TDataSet);
@@ -93,6 +96,7 @@ type
     procedure qryBalancoAfterInsert(DataSet: TDataSet);
     procedure qryCPagtoAfterInsert(DataSet: TDataSet);
     procedure qryCPagtoItemAfterInsert(DataSet: TDataSet);
+    procedure qryEnderecoAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -128,6 +132,11 @@ end;
 procedure TdmCad.qryCPagtoItemAfterInsert(DataSet: TDataSet);
 begin
    dmCad.qryCPagtoItem.FieldByName('IDCPAGTOITEM').AsInteger       := ExecutaGen('CPAGTOITEM');
+end;
+
+procedure TdmCad.qryEnderecoAfterInsert(DataSet: TDataSet);
+begin
+   dmCad.qryEndereco.FieldByName('IDEND').AsInteger := ExecutaGen('ENDERECO');
 end;
 
 procedure TdmCad.qryEstoqueAfterInsert(DataSet: TDataSet);

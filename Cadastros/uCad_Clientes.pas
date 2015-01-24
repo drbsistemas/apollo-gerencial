@@ -204,6 +204,8 @@ type
     qryClieDESCRICAO: TStringField;
     UpdtClie: TFDUpdateSQL;
     dsClie: TDataSource;
+    cxEndereco: TcxButton;
+    CrditodeCliente1: TMenuItem;
     procedure cxVoltarClick(Sender: TObject);
     procedure cxCancelaClick(Sender: TObject);
     procedure cxConsultaPropertiesChange(Sender: TObject);
@@ -236,6 +238,8 @@ type
     procedure eCodTranspPropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure qryClieAfterInsert(DataSet: TDataSet);
+    procedure cxEnderecoClick(Sender: TObject);
+    procedure CrditodeCliente1Click(Sender: TObject);
   private
     { Private declarations }
       indice : String;
@@ -253,7 +257,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDmCad, uRotinas, uCad_Cidade, uRelatorios, uCad_Pagto;
+uses uDmCad, uRotinas, uCad_Cidade, uRelatorios, uCad_Pagto, uCad_Credito;
 
 procedure TFcad_Clientes.cbDtNascimentoExit(Sender: TObject);
 begin
@@ -284,6 +288,12 @@ begin
       eRg.Tag           := 0;
       eCnpj.Tag         := 1;
    end;
+end;
+
+procedure TFcad_Clientes.CrditodeCliente1Click(Sender: TObject);
+begin
+   inherited;
+   AbreTelaComShowModal(TFcad_Credito, TObject(Fcad_Credito), Fcad_CLientes, '');
 end;
 
 procedure TFcad_Clientes.cxApagarClick(Sender: TObject);
@@ -358,6 +368,12 @@ begin
 
    Limpa;
    Edita;
+end;
+
+procedure TFcad_Clientes.cxEnderecoClick(Sender: TObject);
+begin
+  inherited;
+   AbreEnderecoDeCliente(eCOdigo.Text, eRazao.TExt, Fcad_Clientes);
 end;
 
 procedure TFcad_Clientes.cxNovoClick(Sender: TObject);
@@ -667,11 +683,14 @@ begin
       eObs.Text                := Fieldbyname('OBS').AsString;
 
       eCodVend.Text            := Fieldbyname('IDVENDEDOR').AsString;
+      eCodVendExit(self);
       eCodCPagto.Text          := Fieldbyname('IDCPAGTO').AsString;
+      eCodCPagtoExit(self);
       eCodTransp.Text          := Fieldbyname('IDTRANSP').AsString;
+      eCodTranspExit(self);
       eCredito.Value           := Fieldbyname('CREDITO').AsFloat;
       eLimite.Value            := Fieldbyname('LIMITEFINANCEIRO').AsFloat;
-      cxBloqueado.Checked      := ifs(Fieldbyname('BLOQUEADO').AsString = 'S', 0, 1);
+      cxBloqueado.Checked      := ifs(Fieldbyname('BLOQUEADO').AsString = 'S', True, False);
 
       cxAlerta.Checked         := ifs(Fieldbyname('ALERTACLIE').AsInteger = 1, True, False);
 
@@ -696,6 +715,8 @@ begin
       eFoneEmpresaConjuge.Text := Fieldbyname('FONETRABCONJ').AsString;
       eEmailConjuge.TExt       := Fieldbyname('EMAILCONJ').AsString;
       eFoneConjuge.TExt        := Fieldbyname('FONECONJ').AsString;
+
+      cxEndereco.Enabled       := True;
    end;
 end;
 
@@ -713,6 +734,7 @@ end;
 
 Procedure TFcad_Clientes.Limpa;
 begin
+   eCOdigo.TExt           := '0';
    eRazao.Text            := EmptyStr;
    eFantasia.Text         := EmptyStr;
    eEndereco.Text         := EmptyStr;
@@ -734,6 +756,41 @@ begin
    cbPessoa.Itemindex     := 0;
    cbPessoaPropertiesChange(Self);
    cbtpclie.ItemIndex     := 0;
+
+   eCodVend.Text          := '0';
+   eVendedor.Text         := 'NEHUM';
+   eCodCPagto.Text        := '0';
+   eCPagto.Text           :='NENHUM';
+   eCodTransp.Text        := '0';
+   eTransportadora.Text   := 'NENHUM';
+   eCredito.Value         := 0;
+   eLimite.Value          := 0;
+   cxBloqueado.Checked    := False;
+
+   cxAlerta.Checked       := False;
+
+   cxREsidencia.ItemIndex := 0;
+   eAluguel.Value         := 0;
+   eTempoMoradia.CLear;
+   eEmpresa.Clear;
+   eFoneEmpresa.Clear;
+   eEnderecoEmpresa.Clear;
+   eCidadeEmpresa.Clear;
+   eProfissao.Clear;
+   eSalario.Value         := 0;
+   eOutrasREndas.Value    := 0;
+   eDescricaoRenda.Clear;
+
+   eNomeConjuge.Clear;
+   eCpfConjuge.Clear;
+   eRgConjuge.Clear;
+   eDataNasceConjuge.Date := Date;
+   eSalarioConjuge.Value  := 0;
+   eEmpresaConjuge.Clear;
+   eFoneEmpresaConjuge.Clear;
+   eEmailConjuge.Clear;
+   eFoneConjuge.Clear;
+   cxEndereco.Enabled     := False;
 
    cxPage.ActivePageIndex := 0;
 end;

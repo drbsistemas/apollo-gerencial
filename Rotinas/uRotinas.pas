@@ -44,6 +44,7 @@ uses
    // Chama/Configura Forms
    PROCEDURE   ExecutaForm(FormClasse: TFormClass; var NewForm: TObject);
    PROCEDURE   AbreTelaComShowModal(FormClasse: TFormClass; var NewForm: TObject; FNomeFormRetorno: TForm; StrTabela: String);
+   procedure   AbreEnderecoDeCliente(StrCodCliente, StrNome: String; FNomeFormRetorno: TForm);
 
    PROCEDURE   PFundo(mostra: integer);
 
@@ -74,7 +75,7 @@ var
 implementation
 
 uses uMsg, uDmCad, uDmCon, UPrinc, uCon_Generica, uCad_Produto, uPai,
-  uCad_Clientes;
+  uCad_Clientes, uCad_Endereco;
 
 function VALIDACNPJ(Dado : string) : boolean;
 var  D1            : array[1..12] of byte;
@@ -807,6 +808,21 @@ begin
       Msg('Cep é inválido!','I',':(')
     else
       Result := Copy(Result, 1, 2) + '.' + Copy(Result, 3, 3) + '-' + Copy(Result, 6, 3);
+end;
+
+Procedure AbreEnderecoDeCliente(StrCodCliente, StrNome: String; FNomeFormRetorno: TForm);
+begin
+   Fcad_Endereco := TFcad_Endereco.Create(Fcad_Endereco);
+   Fcad_Endereco.eCOdCLiente.Text := StrCodCliente;
+   Fcad_Endereco.eCliente.TExt    := StrNome;
+   Fcad_Endereco.ShowModal;
+   Fcad_Endereco.Free;
+
+   if FNomeFormRetorno <> NIL then
+   begin
+      TForm(FNomeFormRetorno).WindowState := wsNormal;
+      TForm(FNomeFormRetorno).WindowState := wsMaximized;
+   end;
 end;
 
 end.

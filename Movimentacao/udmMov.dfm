@@ -46,13 +46,13 @@ object dmMov: TdmMov
       '  VLRTOTALITEM, OBSITEM, DATAVALIDADE, SALDOQTDE, STATUSITEM'
       'FROM PEDIDOITEM'
       'WHERE IDPEDIDOITEM = :IDPEDIDOITEM')
-    Left = 90
-    Top = 58
+    Left = 73
+    Top = 187
   end
   object dsItemPed: TDataSource
     DataSet = qryItemPed
-    Left = 90
-    Top = 102
+    Left = 73
+    Top = 231
   end
   object qryPedido: TFDQuery
     AfterInsert = qryPedidoAfterInsert
@@ -80,8 +80,8 @@ object dmMov: TdmMov
         'left join CLIENTE D on A.idtransp = D.IDCLIE and D.TIPOCLIE='#39'TRA' +
         #39
       'left join CPAGTO E on A.IDCPAGTO = E.IDCPAGTO')
-    Left = 26
-    Top = 14
+    Left = 18
+    Top = 143
     object qryPedidoIDPEDIDO: TIntegerField
       FieldName = 'IDPEDIDO'
       Origin = 'IDPEDIDO'
@@ -290,13 +290,13 @@ object dmMov: TdmMov
       '  OBS, QTDEITENS, TOTALITENS, TOTALDESC, TOTALFRETE, TOTALPEDIDO'
       'FROM PEDIDO'
       'WHERE IDPEDIDO = :IDPEDIDO')
-    Left = 26
-    Top = 58
+    Left = 18
+    Top = 187
   end
   object dsPedido: TDataSource
     DataSet = qryPedido
-    Left = 26
-    Top = 102
+    Left = 18
+    Top = 231
   end
   object qryItemPed: TFDQuery
     AfterInsert = qryItemPedAfterInsert
@@ -313,8 +313,8 @@ object dmMov: TdmMov
       'B.REFPROD'
       'from PEDIDOITEM A'
       'left join PRODUTO B on A.IDPROD = B.IDPROD')
-    Left = 92
-    Top = 16
+    Left = 73
+    Top = 145
     object qryItemPedIDPEDIDOITEM: TIntegerField
       FieldName = 'IDPEDIDOITEM'
       Origin = 'IDPEDIDOITEM'
@@ -388,5 +388,64 @@ object dmMov: TdmMov
       ProviderFlags = []
       Size = 50
     end
+  end
+  object UpdtCredito: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO CLIENTECREDITO'
+      '(IDCREDITO, "DATA", DOCUMENTO, DESCRICAO, SALDOANTES, '
+      '  CREDITO, DEBITO, SALDO, IDCLIE)'
+      
+        'VALUES (:NEW_IDCREDITO, :NEW_DATA, :NEW_DOCUMENTO, :NEW_DESCRICA' +
+        'O, :NEW_SALDOANTES, '
+      '  :NEW_CREDITO, :NEW_DEBITO, :NEW_SALDO, :NEW_IDCLIE)'
+      
+        'RETURNING IDCREDITO, "DATA", DOCUMENTO, DESCRICAO, SALDOANTES, C' +
+        'REDITO, DEBITO, SALDO, IDCLIE')
+    ModifySQL.Strings = (
+      'UPDATE CLIENTECREDITO'
+      
+        'SET IDCREDITO = :NEW_IDCREDITO, "DATA" = :NEW_DATA, DOCUMENTO = ' +
+        ':NEW_DOCUMENTO, '
+      '  DESCRICAO = :NEW_DESCRICAO, SALDOANTES = :NEW_SALDOANTES, '
+      
+        '  CREDITO = :NEW_CREDITO, DEBITO = :NEW_DEBITO, SALDO = :NEW_SAL' +
+        'DO, '
+      '  IDCLIE = :NEW_IDCLIE'
+      'WHERE IDCREDITO = :OLD_IDCREDITO'
+      
+        'RETURNING IDCREDITO, "DATA", DOCUMENTO, DESCRICAO, SALDOANTES, C' +
+        'REDITO, DEBITO, SALDO, IDCLIE')
+    DeleteSQL.Strings = (
+      'DELETE FROM CLIENTECREDITO'
+      'WHERE IDCREDITO = :OLD_IDCREDITO')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDCREDITO, "DATA" AS "DATA", DOCUMENTO, DESCRICAO, SALDOA' +
+        'NTES, '
+      '  CREDITO, DEBITO, SALDO, IDCLIE'
+      'FROM CLIENTECREDITO'
+      'WHERE IDCREDITO = :IDCREDITO')
+    Left = 17
+    Top = 43
+  end
+  object dsCredito: TDataSource
+    DataSet = qryCredito
+    Left = 17
+    Top = 87
+  end
+  object qryCredito: TFDQuery
+    AfterInsert = qryCreditoAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
+    UpdateObject = UpdtCredito
+    SQL.Strings = (
+      'select * from CLIENTECREDITO')
+    Left = 17
+    Top = 1
   end
 end

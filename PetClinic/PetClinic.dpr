@@ -33,7 +33,10 @@ uses
   uCad_Pedido in '..\Movimentacao\uCad_Pedido.pas' {Fcad_Pedido},
   uCad_Pagto in '..\Cadastros\uCad_Pagto.pas' {Fcad_Pagto},
   uCad_Ncm in '..\Cadastros\uCad_Ncm.pas' {Fcad_NCM},
-  uCalculosMovimentacao in '..\Rotinas\uCalculosMovimentacao.pas';
+  uCalculosMovimentacao in '..\Rotinas\uCalculosMovimentacao.pas',
+  uCad_Endereco in '..\Cadastros\uCad_Endereco.pas' {Fcad_Endereco},
+  uCad_Credito in '..\Financeiro\uCad_Credito.pas' {FCad_Credito},
+  uPaiFinanceiro in '..\Financeiro\uPaiFinanceiro.pas' {Fcad_PaiFinanceiro};
 
 {$R *.res}
 

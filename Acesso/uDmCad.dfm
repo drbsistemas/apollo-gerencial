@@ -978,4 +978,68 @@ object dmCad: TdmCad
     Left = 178
     Top = 240
   end
+  object qryEndereco: TFDQuery
+    AfterInsert = qryEnderecoAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtEndereco
+    SQL.Strings = (
+      'select * from endereco')
+    Left = 17
+    Top = 6
+  end
+  object UpdtEndereco: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO ENDERECO'
+      '(IDEND, IDCLIE, LOCALEND, CONTATOEND, BAIRROEND, '
+      '  FONEEND, CIDADEEND, UFEND, CEPEND, NUMEROEND, '
+      '  ENDERECOEND, ATIVO)'
+      
+        'VALUES (:NEW_IDEND, :NEW_IDCLIE, :NEW_LOCALEND, :NEW_CONTATOEND,' +
+        ' :NEW_BAIRROEND, '
+      
+        '  :NEW_FONEEND, :NEW_CIDADEEND, :NEW_UFEND, :NEW_CEPEND, :NEW_NU' +
+        'MEROEND, '
+      '  :NEW_ENDERECOEND, :NEW_ATIVO)'
+      
+        'RETURNING IDEND, IDCLIE, LOCALEND, CONTATOEND, BAIRROEND, FONEEN' +
+        'D, CIDADEEND, UFEND, CEPEND, NUMEROEND, ENDERECOEND, ATIVO')
+    ModifySQL.Strings = (
+      'UPDATE ENDERECO'
+      
+        'SET IDEND = :NEW_IDEND, IDCLIE = :NEW_IDCLIE, LOCALEND = :NEW_LO' +
+        'CALEND, '
+      '  CONTATOEND = :NEW_CONTATOEND, BAIRROEND = :NEW_BAIRROEND, '
+      
+        '  FONEEND = :NEW_FONEEND, CIDADEEND = :NEW_CIDADEEND, UFEND = :N' +
+        'EW_UFEND, '
+      
+        '  CEPEND = :NEW_CEPEND, NUMEROEND = :NEW_NUMEROEND, ENDERECOEND ' +
+        '= :NEW_ENDERECOEND, '
+      '  ATIVO = :NEW_ATIVO'
+      'WHERE IDEND = :OLD_IDEND'
+      
+        'RETURNING IDEND, IDCLIE, LOCALEND, CONTATOEND, BAIRROEND, FONEEN' +
+        'D, CIDADEEND, UFEND, CEPEND, NUMEROEND, ENDERECOEND, ATIVO')
+    DeleteSQL.Strings = (
+      'DELETE FROM ENDERECO'
+      'WHERE IDEND = :OLD_IDEND')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDEND, IDCLIE, LOCALEND, CONTATOEND, BAIRROEND, FONEEND, ' +
+        'CIDADEEND, '
+      '  UFEND, CEPEND, NUMEROEND, ENDERECOEND, ATIVO'
+      'FROM ENDERECO'
+      'WHERE IDEND = :IDEND')
+    Left = 17
+    Top = 50
+  end
+  object dsEndereco: TDataSource
+    DataSet = qryEndereco
+    Left = 17
+    Top = 94
+  end
 end

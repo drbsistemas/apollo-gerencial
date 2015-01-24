@@ -543,7 +543,7 @@ object FPrinc: TFPrinc
     BevelOuter = bvLowered
     Font.Charset = ANSI_CHARSET
     Font.Color = clMaroon
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentBackground = False

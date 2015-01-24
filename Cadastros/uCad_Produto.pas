@@ -530,6 +530,7 @@ end;
 
 procedure TFcad_Produto.Limpa;
 begin
+    eCOdigo.TExt        := '0';
     eNomeProd.Clear;
     eRefProd.Clear;
     eMarca.Clear;
@@ -564,8 +565,6 @@ begin
     eComissao.Value     := 0;
 
     cxPage.Properties.ActivePage := cxVenda;
-
-
     eObs.Lines.Clear;
 end;
 

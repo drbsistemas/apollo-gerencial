@@ -56,8 +56,12 @@ type
     qryPedidoNOMEVEND: TStringField;
     qryPedidoNOMETRANS: TStringField;
     qryPedidoDESCRICAO: TStringField;
+    UpdtCredito: TFDUpdateSQL;
+    dsCredito: TDataSource;
+    qryCredito: TFDQuery;
     procedure qryPedidoAfterInsert(DataSet: TDataSet);
     procedure qryItemPedAfterInsert(DataSet: TDataSet);
+    procedure qryCreditoAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -74,6 +78,11 @@ implementation
 uses uDmCon, uRotinas;
 
 {$R *.dfm}
+
+procedure TdmMov.qryCreditoAfterInsert(DataSet: TDataSet);
+begin
+   dmMov.qryCredito.FieldByName('IDCREDITO').AsInteger      := ExecutaGen('CLIENTECREDITO');
+end;
 
 procedure TdmMov.qryItemPedAfterInsert(DataSet: TDataSet);
 begin
