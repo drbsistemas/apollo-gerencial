@@ -605,7 +605,6 @@ begin
 
    if TABELA <> ''          then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
 
-
    dmCad.qryAux.ParamByName('CODIGO').AsInteger  :=  CODIGO;
    dmCad.qryAux.Active   := true;
 
@@ -816,6 +815,7 @@ begin
    Fcad_Endereco.eCOdCLiente.Text := StrCodCliente;
    Fcad_Endereco.eCliente.TExt    := StrNome;
    Fcad_Endereco.ShowModal;
+   Fcad_Endereco := NIl;
    Fcad_Endereco.Free;
 
    if FNomeFormRetorno <> NIL then

@@ -157,6 +157,7 @@ type
     procedure eCodTranspExit(Sender: TObject);
     procedure eCodTranspPropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
+    procedure cxTipoPedidoExit(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -181,7 +182,7 @@ implementation
 {$R *.dfm}
 
 uses uRotinas, udmMov, uCad_Clientes, uDmCad, uCad_Produto, uCad_Pagto,
-  uCalculosMovimentacao;
+  uCalculosMovimentacao, uConsultaDadosCliente;
 
 procedure TFcad_Pedido.cxApagarClick(Sender: TObject);
 begin
@@ -363,6 +364,16 @@ begin
    eCodProd.SetFocus;
 end;
 
+procedure TFcad_Pedido.cxTipoPedidoExit(Sender: TObject);
+begin
+   inherited;
+
+   if dm.qr_orcamentoTIPOORCAMENTO.AsString = 'ORCAMENTO' then
+          if (Application.MessageBox('Deseja realmente alterar este orçamento para pedido? É uma opção irreversivel!', 'Aviso Importante', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = mrYes) then
+            OrcamentoParaPedido else
+            cbTipo.Itemindex := 0;
+end;
+
 procedure TFcad_Pedido.cxVerClick(Sender: TObject);
 begin
    cxEditaClick(self);
@@ -397,8 +408,10 @@ procedure TFcad_Pedido.eCodFornecExit(Sender: TObject);
 begin
   inherited;
    eFornec.Text :=  ConsultaCampoNomeAtivo(eCodFornec.Text, 'CLI');
-   if eFornec.Text ='NENHUM' then
-      eCodFornec.Text := '0';
+   eFornec.Text := VerificaDadoDoCliente(eCOdFOrnec.TExt);
+
+   if (eFornec.Text ='NENHUM') then
+      eCodFornec.Text := '0' else
 end;
 
 procedure TFcad_Pedido.eCodFornecPropertiesButtonClick(Sender: TObject;

@@ -12,7 +12,7 @@ inherited Fcad_Pedido: TFcad_Pedido
     ExplicitHeight = 539
     Height = 539
   end
-  inherited pnCon: TPanel
+  inherited pnCon: TPanel [1]
     Width = 853
     Height = 539
     ExplicitWidth = 853
@@ -604,7 +604,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.HotTrack = True
         Style.Shadow = False
         Style.IsFontAssigned = True
-        TabOrder = 13
+        TabOrder = 11
         OnExit = eDataPedidoExit
         Width = 110
       end
@@ -682,7 +682,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 9
+        TabOrder = 7
         Text = '0'
         OnExit = eCodFornecExit
         OnKeyPress = eCodVendKeyPress
@@ -717,7 +717,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 11
+        TabOrder = 9
         Text = 'NENHUM'
         Width = 300
       end
@@ -795,7 +795,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 14
+        TabOrder = 13
         Text = '0'
         OnExit = eCodVendPedidoExit
         OnKeyPress = eCodVendKeyPress
@@ -830,7 +830,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 16
+        TabOrder = 15
         Text = 'NENHUM'
         Width = 300
       end
@@ -891,6 +891,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         StyleFocused.Color = 13366014
         TabOrder = 3
         Text = 'OR'#199'AMENTO'
+        OnExit = cxTipoPedidoExit
         Width = 110
       end
       object cxLabel12: TcxLabel
@@ -1366,7 +1367,7 @@ inherited Fcad_Pedido: TFcad_Pedido
       Height = 333
       Align = alClient
       TabOrder = 1
-      Properties.ActivePage = cxPageDados
+      Properties.ActivePage = cxPageItem
       Properties.CustomButtons.Buttons = <>
       Properties.Style = 9
       Properties.TabPosition = tpBottom

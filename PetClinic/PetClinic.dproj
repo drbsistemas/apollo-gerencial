@@ -185,6 +185,7 @@
             <Form>Fcad_PaiFinanceiro</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Rotinas\uConsultaDadosCliente.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -36,7 +36,8 @@ uses
   uCalculosMovimentacao in '..\Rotinas\uCalculosMovimentacao.pas',
   uCad_Endereco in '..\Cadastros\uCad_Endereco.pas' {Fcad_Endereco},
   uCad_Credito in '..\Financeiro\uCad_Credito.pas' {FCad_Credito},
-  uPaiFinanceiro in '..\Financeiro\uPaiFinanceiro.pas' {Fcad_PaiFinanceiro};
+  uPaiFinanceiro in '..\Financeiro\uPaiFinanceiro.pas' {Fcad_PaiFinanceiro},
+  uConsultaDadosCliente in '..\Rotinas\uConsultaDadosCliente.pas';
 
 {$R *.res}
 
