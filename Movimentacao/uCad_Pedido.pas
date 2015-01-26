@@ -116,6 +116,7 @@ type
     cxLabel24: TcxLabel;
     eDescItem: TcxCurrencyEdit;
     grConsultaDBTableView1Column9: TcxGridDBColumn;
+    FixarComoPedido1: TMenuItem;
     procedure cxNovoClick(Sender: TObject);
     procedure cxEditaClick(Sender: TObject);
     procedure cxSalvarClick(Sender: TObject);
@@ -157,7 +158,7 @@ type
     procedure eCodTranspExit(Sender: TObject);
     procedure eCodTranspPropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
-    procedure cxTipoPedidoExit(Sender: TObject);
+    procedure FixarComoPedido1Click(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -182,7 +183,7 @@ implementation
 {$R *.dfm}
 
 uses uRotinas, udmMov, uCad_Clientes, uDmCad, uCad_Produto, uCad_Pagto,
-  uCalculosMovimentacao, uConsultaDadosCliente;
+  uCalculosMovimentacao, uConsultaDadosCliente, uEstoque;
 
 procedure TFcad_Pedido.cxApagarClick(Sender: TObject);
 begin
@@ -287,7 +288,6 @@ begin
       abort;
    end;
 
-
    with dmMov.qryPedido do
    begin
       try
@@ -364,16 +364,6 @@ begin
    eCodProd.SetFocus;
 end;
 
-procedure TFcad_Pedido.cxTipoPedidoExit(Sender: TObject);
-begin
-   inherited;
-
-   if dm.qr_orcamentoTIPOORCAMENTO.AsString = 'ORCAMENTO' then
-          if (Application.MessageBox('Deseja realmente alterar este orçamento para pedido? É uma opção irreversivel!', 'Aviso Importante', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = mrYes) then
-            OrcamentoParaPedido else
-            cbTipo.Itemindex := 0;
-end;
-
 procedure TFcad_Pedido.cxVerClick(Sender: TObject);
 begin
    cxEditaClick(self);
@@ -408,7 +398,8 @@ procedure TFcad_Pedido.eCodFornecExit(Sender: TObject);
 begin
   inherited;
    eFornec.Text :=  ConsultaCampoNomeAtivo(eCodFornec.Text, 'CLI');
-   eFornec.Text := VerificaDadoDoCliente(eCOdFOrnec.TExt);
+   if eCodigo.Text = '0' then
+      eFornec.Text := VerificaDadoDoCliente(eCOdFOrnec.TExt);
 
    if (eFornec.Text ='NENHUM') then
       eCodFornec.Text := '0' else
@@ -578,6 +569,7 @@ begin
          eDataEntrega.Date      := FieldByName('DATAENTREGA').AsFloat;
 
          cxTipoPedido.ItemIndex := ifs(FieldByName('TIPOPEDIDO').AsString='ORÇAMENTO',0,1);
+         cxTipoPedido.Enabled := false;
 
          eStatusPed.Text        := FieldByName('STATUS').AsString;
          eObs.Lines.Text        := FieldByName('OBS').AsString;
@@ -626,6 +618,35 @@ procedure TFcad_Pedido.eVlrFreteExit(Sender: TObject);
 begin
    inherited;
    CalculaTotalPedido;
+end;
+
+procedure TFcad_Pedido.FixarComoPedido1Click(Sender: TObject);
+begin
+  inherited;
+   if Msg('Deseja realmente modificar este orçamento para pedido e reservar estoque ? Esta é uma opção irreversível!','P','=P') then
+   begin
+      try
+         dmMov.qryPedido.Edit;
+         dmMov.qryPedido.FieldByName('TIPOPEDIDO').AsString := 'PEDIDO';
+         dmMov.qryPedido.Post;
+
+         ConsultaItemPedido(dmMov.qryPedido.FieldByName('IDPEDIDO').AsInteger);
+         while not dmMov.qryItemPed.Eof do
+         begin
+            Estoque(dmMov.qryItemPedIDPROD.AsInteger,
+               dmMov.qryPedidoIDCLIE.AsInteger,
+               ORCAMENTO, ENTRADA,
+               dmMov.qryPedidoIDPEDIDO.AsString,
+               'PEDIDO DE VENDA',
+               dmMov.qryItemPedVLRUNITARIO.AsFloat,
+               dmMov.qryItemPedQTDE.AsFloat);
+            dmMov.qryItemPed.Next;
+         end;
+
+         dmMov.qryPedido.ApplyUpdates(0);
+      except
+      end;
+   end;
 end;
 
 procedure TFcad_Pedido.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -717,6 +738,7 @@ begin
    eCodTransp.Text             := '0';
    eTransportadora.Text        := 'NENHUM';
    pnItem.Enabled              := False;
+   cxTipoPedido.Enabled        := True;
    cxPageItens.ActivePageIndex := 0;
 end;
 

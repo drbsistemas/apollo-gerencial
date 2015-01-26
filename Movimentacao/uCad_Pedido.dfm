@@ -6,280 +6,7 @@ inherited Fcad_Pedido: TFcad_Pedido
   ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnImg: TcxImage [0]
-    Left = 853
-    ExplicitLeft = 853
-    ExplicitHeight = 539
-    Height = 539
-  end
-  inherited pnCon: TPanel [1]
-    Width = 853
-    Height = 539
-    ExplicitWidth = 853
-    ExplicitHeight = 539
-    inherited pnBusca: TPanel
-      Width = 851
-      Height = 50
-      ExplicitWidth = 851
-      ExplicitHeight = 50
-      inherited cxLabel1: TcxLabel
-        Top = 29
-        ExplicitTop = 29
-      end
-      inherited cxConsulta: TcxComboBox
-        Top = 27
-        Properties.Items.Strings = (
-          'C'#243'digo'
-          'Cliente'
-          'Data Pedido'
-          'Data Entrega')
-        TabOrder = 3
-        Text = 'C'#211'DIGO'
-        ExplicitTop = 27
-      end
-      inherited eConsulta: TcxTextEdit
-        Top = 27
-        TabOrder = 4
-        ExplicitTop = 27
-      end
-      inherited cxLabel2: TcxLabel
-        Left = 446
-        Top = 29
-        Caption = 'Status:'
-        Visible = False
-        ExplicitLeft = 446
-        ExplicitTop = 29
-        ExplicitWidth = 39
-      end
-      inherited cbAtivo: TcxComboBox
-        Left = 483
-        Top = 27
-        Properties.Items.Strings = (
-          'TODOS'
-          'ABERTO/PARCIAL'
-          'ABERTO'
-          'PARCIAL'
-          'ATENDIDO'
-          'CANCELADO'
-          'BLOQUEADO')
-        Style.IsFontAssigned = True
-        TabOrder = 6
-        Visible = False
-        ExplicitLeft = 483
-        ExplicitTop = 27
-        ExplicitWidth = 111
-        Width = 111
-      end
-      inherited cxCon: TcxButton
-        Top = 26
-        TabOrder = 2
-        ExplicitTop = 26
-      end
-      inherited cxQtdeReg: TcxLabel
-        Left = 597
-        Top = 29
-        Caption = 'Qtde Registros:'
-        ExplicitLeft = 597
-        ExplicitTop = 29
-      end
-      object cxLabel10: TcxLabel
-        Left = -34
-        Top = 8
-        AutoSize = False
-        Caption = 'Vendedor:'
-        ParentFont = False
-        Style.Font.Charset = ANSI_CHARSET
-        Style.Font.Color = clMaroon
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = []
-        Style.LookAndFeel.NativeStyle = True
-        Style.TextColor = clBlack
-        Style.IsFontAssigned = True
-        StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
-        Properties.Alignment.Horz = taRightJustify
-        Properties.LabelEffect = cxleCool
-        Transparent = True
-        Height = 17
-        Width = 90
-        AnchorX = 56
-      end
-      object eCodVend: TcxButtonEdit
-        Left = 57
-        Top = 6
-        Hint = '(F3) Busca os Dados de Cadastro'
-        AutoSize = False
-        ParentFont = False
-        Properties.Alignment.Horz = taRightJustify
-        Properties.Buttons = <
-          item
-            Default = True
-            Glyph.Data = {
-              36030000424D3603000000000000360000002800000010000000100000000100
-              18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFD6D6D7ABACACFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E4E5959596BDBEBFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E7
-              E7979798C0C0C0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFEAEAEA9B9B9CC2C2C3FFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAEAEA9E9E9FC2C2
-              C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8ECECEDEDEDEDF2F2F2FF
-              FFFFFFFFFFF3F3F39F9FA0C4C4C5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              DCDCDDD7D7D8E6E6E6E9E9E8E1E2E2DCDCDEDADBDB9E9E9FDBDBDCFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFD7D7D8E4E4E4FEFEFEFFFFFFFDFDFDFEFEFDFE
-              FEFEC0C1C2DEDEDEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEEEEFD7D8D8
-              FEFEFEFCFCFCF9F9F9F9F9F9F6F6F6F2F2F2F4F4F4E5E5E5FFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFD3D3D4E5E6E6F8F8F8F9F9F9FEFEFEFCFCFCF6F6F6ED
-              EDECEAEAEAD5D6D6F6F6F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D2D3E5E5E5
-              F2F2F2F9F9F9FCFCFCFBFBFBF7F7F7ECECEDE1E1E1D8D9D9ECECEDFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFD0D0D1DEDDDEF3F3F3FAFAFAFAFAFAFAFAFAF8F8F8F1
-              F1F2E1E1E2D3D3D3EAEAEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD7D7D8D0D1D1
-              FFFFFFFBFBFBFAFAFAF9F9FAF8F8F8FEFEFEE4E4E5C4C5C6FCFCFCFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFF9F9FABCBDBEF2F2F2FFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFCECECFE3E3E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F0F0
-              C1C1C2DFDFE0F5F4F5F9F9F9EEEEEED4D4D5CFD0D1FFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F6D7D8D9D0D0D1D2D2D3CFCFD0E7
-              E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-            Kind = bkGlyph
-          end>
-        Properties.CharCase = ecUpperCase
-        Properties.ClickKey = 114
-        Properties.OnButtonClick = eCodVendPropertiesButtonClick
-        Style.Font.Charset = ANSI_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.IsFontAssigned = True
-        StyleFocused.Color = 13366014
-        TabOrder = 0
-        Text = '0'
-        OnExit = eCodVendExit
-        OnKeyPress = eCodVendKeyPress
-        Height = 21
-        Width = 60
-      end
-      object eVendedor: TcxTextEdit
-        Left = 117
-        Top = 6
-        TabStop = False
-        ParentFont = False
-        Properties.CharCase = ecUpperCase
-        Properties.MaxLength = 30
-        Properties.ReadOnly = True
-        Style.Color = clBtnFace
-        Style.Font.Charset = ANSI_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.LookAndFeel.Kind = lfStandard
-        Style.LookAndFeel.NativeStyle = False
-        Style.LookAndFeel.SkinName = 'Office2010Silver'
-        Style.IsFontAssigned = True
-        StyleDisabled.LookAndFeel.Kind = lfStandard
-        StyleDisabled.LookAndFeel.NativeStyle = False
-        StyleDisabled.LookAndFeel.SkinName = 'Office2010Silver'
-        StyleFocused.Color = 13366014
-        StyleFocused.LookAndFeel.Kind = lfStandard
-        StyleFocused.LookAndFeel.NativeStyle = False
-        StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
-        StyleHot.LookAndFeel.Kind = lfStandard
-        StyleHot.LookAndFeel.NativeStyle = False
-        StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 1
-        Text = 'NENHUM'
-        Width = 295
-      end
-    end
-    inherited pnBotaoCad: TPanel
-      Width = 851
-      ExplicitWidth = 851
-      inherited cxEdita: TcxButton [0]
-      end
-      inherited cxNovo: TcxButton [1]
-      end
-      inherited cxApagar: TcxButton
-        OnClick = cxApagarClick
-      end
-      inherited cxOpcoes: TcxButton
-        Enabled = False
-      end
-    end
-    inherited pnBotaoCon: TPanel
-      Top = 488
-      Width = 851
-      ExplicitTop = 488
-      ExplicitWidth = 851
-    end
-    inherited grConsulta: TcxGrid
-      Top = 103
-      Width = 851
-      Height = 385
-      ExplicitTop = 103
-      ExplicitWidth = 851
-      ExplicitHeight = 385
-      inherited grConsultaDBTableView1: TcxGridDBTableView
-        DataController.DataSource = dmMov.dsPedido
-        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn [0]
-          Caption = 'ST'
-          DataBinding.FieldName = 'STATUS'
-          Width = 25
-        end
-        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn [1]
-          DataBinding.FieldName = 'IDPEDIDO'
-          Width = 60
-        end
-        object grConsultaDBTableView1Column3: TcxGridDBColumn
-          Caption = 'Data'
-          DataBinding.FieldName = 'DATAPEDIDO'
-        end
-        object grConsultaDBTableView1Column1: TcxGridDBColumn
-          Caption = 'Cliente'
-          DataBinding.FieldName = 'NOMECLIE'
-          Width = 250
-        end
-        object grConsultaDBTableView1Column2: TcxGridDBColumn
-          Caption = 'Vendedor'
-          DataBinding.FieldName = 'NOMEVEND'
-          Width = 200
-        end
-        object grConsultaDBTableView1Column5: TcxGridDBColumn
-          Caption = 'Data Validade'
-          DataBinding.FieldName = 'DATAVALIDADE'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column6: TcxGridDBColumn
-          Caption = 'Vlr. Produtos'
-          DataBinding.FieldName = 'TOTALITENS'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column7: TcxGridDBColumn
-          Caption = 'Vlr. Desconto'
-          DataBinding.FieldName = 'TOTALDESC'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column9: TcxGridDBColumn
-          Caption = 'Vlr. Frete'
-          DataBinding.FieldName = 'TOTALFRETE'
-        end
-        object grConsultaDBTableView1Column4: TcxGridDBColumn
-          Caption = 'Vlr. Total'
-          DataBinding.FieldName = 'TOTALPEDIDO'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column8: TcxGridDBColumn
-          Caption = 'Motivo Cancelamento'
-          DataBinding.FieldName = 'MOTIVOVAN'
-          Width = 250
-        end
-      end
-    end
-  end
-  inherited pnCad: TPanel [2]
+  inherited pnCad: TPanel
     Width = 853
     Height = 539
     ExplicitWidth = 853
@@ -604,7 +331,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.HotTrack = True
         Style.Shadow = False
         Style.IsFontAssigned = True
-        TabOrder = 11
+        TabOrder = 10
         OnExit = eDataPedidoExit
         Width = 110
       end
@@ -682,7 +409,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 7
+        TabOrder = 6
         Text = '0'
         OnExit = eCodFornecExit
         OnKeyPress = eCodVendKeyPress
@@ -717,7 +444,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 9
+        TabOrder = 8
         Text = 'NENHUM'
         Width = 300
       end
@@ -795,7 +522,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 13
+        TabOrder = 12
         Text = '0'
         OnExit = eCodVendPedidoExit
         OnKeyPress = eCodVendKeyPress
@@ -891,7 +618,6 @@ inherited Fcad_Pedido: TFcad_Pedido
         StyleFocused.Color = 13366014
         TabOrder = 3
         Text = 'OR'#199'AMENTO'
-        OnExit = cxTipoPedidoExit
         Width = 110
       end
       object cxLabel12: TcxLabel
@@ -2413,8 +2139,286 @@ inherited Fcad_Pedido: TFcad_Pedido
       end
     end
   end
+  inherited pnImg: TcxImage
+    Left = 853
+    ExplicitLeft = 853
+    ExplicitHeight = 539
+    Height = 539
+  end
+  inherited pnCon: TPanel
+    Width = 853
+    Height = 539
+    ExplicitWidth = 853
+    ExplicitHeight = 539
+    inherited pnBusca: TPanel
+      Width = 851
+      Height = 50
+      ExplicitWidth = 851
+      ExplicitHeight = 50
+      inherited cxLabel1: TcxLabel
+        Top = 29
+        ExplicitTop = 29
+      end
+      inherited cxConsulta: TcxComboBox
+        Top = 27
+        Properties.Items.Strings = (
+          'C'#243'digo'
+          'Cliente'
+          'Data Pedido'
+          'Data Entrega')
+        TabOrder = 3
+        Text = 'C'#211'DIGO'
+        ExplicitTop = 27
+      end
+      inherited eConsulta: TcxTextEdit
+        Top = 27
+        TabOrder = 4
+        ExplicitTop = 27
+      end
+      inherited cxLabel2: TcxLabel
+        Left = 446
+        Top = 29
+        Caption = 'Status:'
+        Visible = False
+        ExplicitLeft = 446
+        ExplicitTop = 29
+        ExplicitWidth = 39
+      end
+      inherited cbAtivo: TcxComboBox
+        Left = 483
+        Top = 27
+        Properties.Items.Strings = (
+          'TODOS'
+          'ABERTO/PARCIAL'
+          'ABERTO'
+          'PARCIAL'
+          'ATENDIDO'
+          'CANCELADO'
+          'BLOQUEADO')
+        Style.IsFontAssigned = True
+        TabOrder = 6
+        Visible = False
+        ExplicitLeft = 483
+        ExplicitTop = 27
+        ExplicitWidth = 111
+        Width = 111
+      end
+      inherited cxCon: TcxButton
+        Top = 26
+        TabOrder = 2
+        ExplicitTop = 26
+      end
+      inherited cxQtdeReg: TcxLabel
+        Left = 597
+        Top = 29
+        Caption = 'Qtde Registros:'
+        ExplicitLeft = 597
+        ExplicitTop = 29
+      end
+      object cxLabel10: TcxLabel
+        Left = -34
+        Top = 8
+        AutoSize = False
+        Caption = 'Vendedor:'
+        ParentFont = False
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clMaroon
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.LookAndFeel.NativeStyle = True
+        Style.TextColor = clBlack
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        Properties.Alignment.Horz = taRightJustify
+        Properties.LabelEffect = cxleCool
+        Transparent = True
+        Height = 17
+        Width = 90
+        AnchorX = 56
+      end
+      object eCodVend: TcxButtonEdit
+        Left = 57
+        Top = 6
+        Hint = '(F3) Busca os Dados de Cadastro'
+        AutoSize = False
+        ParentFont = False
+        Properties.Alignment.Horz = taRightJustify
+        Properties.Buttons = <
+          item
+            Default = True
+            Glyph.Data = {
+              36030000424D3603000000000000360000002800000010000000100000000100
+              18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFD6D6D7ABACACFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E4E5959596BDBEBFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E7
+              E7979798C0C0C0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFEAEAEA9B9B9CC2C2C3FFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAEAEA9E9E9FC2C2
+              C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8ECECEDEDEDEDF2F2F2FF
+              FFFFFFFFFFF3F3F39F9FA0C4C4C5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              DCDCDDD7D7D8E6E6E6E9E9E8E1E2E2DCDCDEDADBDB9E9E9FDBDBDCFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFD7D7D8E4E4E4FEFEFEFFFFFFFDFDFDFEFEFDFE
+              FEFEC0C1C2DEDEDEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEEEEFD7D8D8
+              FEFEFEFCFCFCF9F9F9F9F9F9F6F6F6F2F2F2F4F4F4E5E5E5FFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFD3D3D4E5E6E6F8F8F8F9F9F9FEFEFEFCFCFCF6F6F6ED
+              EDECEAEAEAD5D6D6F6F6F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D2D3E5E5E5
+              F2F2F2F9F9F9FCFCFCFBFBFBF7F7F7ECECEDE1E1E1D8D9D9ECECEDFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFD0D0D1DEDDDEF3F3F3FAFAFAFAFAFAFAFAFAF8F8F8F1
+              F1F2E1E1E2D3D3D3EAEAEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD7D7D8D0D1D1
+              FFFFFFFBFBFBFAFAFAF9F9FAF8F8F8FEFEFEE4E4E5C4C5C6FCFCFCFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFF9F9FABCBDBEF2F2F2FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFCECECFE3E3E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F0F0
+              C1C1C2DFDFE0F5F4F5F9F9F9EEEEEED4D4D5CFD0D1FFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F6D7D8D9D0D0D1D2D2D3CFCFD0E7
+              E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+            Kind = bkGlyph
+          end>
+        Properties.CharCase = ecUpperCase
+        Properties.ClickKey = 114
+        Properties.OnButtonClick = eCodVendPropertiesButtonClick
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 13366014
+        TabOrder = 0
+        Text = '0'
+        OnExit = eCodVendExit
+        OnKeyPress = eCodVendKeyPress
+        Height = 21
+        Width = 60
+      end
+      object eVendedor: TcxTextEdit
+        Left = 117
+        Top = 6
+        TabStop = False
+        ParentFont = False
+        Properties.CharCase = ecUpperCase
+        Properties.MaxLength = 30
+        Properties.ReadOnly = True
+        Style.Color = clBtnFace
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfStandard
+        Style.LookAndFeel.NativeStyle = False
+        Style.LookAndFeel.SkinName = 'Office2010Silver'
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfStandard
+        StyleDisabled.LookAndFeel.NativeStyle = False
+        StyleDisabled.LookAndFeel.SkinName = 'Office2010Silver'
+        StyleFocused.Color = 13366014
+        StyleFocused.LookAndFeel.Kind = lfStandard
+        StyleFocused.LookAndFeel.NativeStyle = False
+        StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
+        StyleHot.LookAndFeel.Kind = lfStandard
+        StyleHot.LookAndFeel.NativeStyle = False
+        StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
+        TabOrder = 1
+        Text = 'NENHUM'
+        Width = 295
+      end
+    end
+    inherited pnBotaoCad: TPanel
+      Width = 851
+      ExplicitWidth = 851
+      inherited cxEdita: TcxButton [0]
+      end
+      inherited cxNovo: TcxButton [1]
+      end
+      inherited cxApagar: TcxButton
+        OnClick = cxApagarClick
+      end
+      inherited cxOpcoes: TcxButton
+        Enabled = False
+      end
+    end
+    inherited pnBotaoCon: TPanel
+      Top = 488
+      Width = 851
+      ExplicitTop = 488
+      ExplicitWidth = 851
+    end
+    inherited grConsulta: TcxGrid
+      Top = 103
+      Width = 851
+      Height = 385
+      ExplicitTop = 103
+      ExplicitWidth = 851
+      ExplicitHeight = 385
+      inherited grConsultaDBTableView1: TcxGridDBTableView
+        PopupMenu = cxPopMenu
+        DataController.DataSource = dmMov.dsPedido
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn [0]
+          Caption = 'ST'
+          DataBinding.FieldName = 'STATUS'
+          Width = 25
+        end
+        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn [1]
+          DataBinding.FieldName = 'IDPEDIDO'
+          Width = 60
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn
+          Caption = 'Data'
+          DataBinding.FieldName = 'DATAPEDIDO'
+        end
+        object grConsultaDBTableView1Column1: TcxGridDBColumn
+          Caption = 'Cliente'
+          DataBinding.FieldName = 'NOMECLIE'
+          Width = 250
+        end
+        object grConsultaDBTableView1Column2: TcxGridDBColumn
+          Caption = 'Vendedor'
+          DataBinding.FieldName = 'NOMEVEND'
+          Width = 200
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn
+          Caption = 'Data Validade'
+          DataBinding.FieldName = 'DATAVALIDADE'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column6: TcxGridDBColumn
+          Caption = 'Vlr. Produtos'
+          DataBinding.FieldName = 'TOTALITENS'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column7: TcxGridDBColumn
+          Caption = 'Vlr. Desconto'
+          DataBinding.FieldName = 'TOTALDESC'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column9: TcxGridDBColumn
+          Caption = 'Vlr. Frete'
+          DataBinding.FieldName = 'TOTALFRETE'
+        end
+        object grConsultaDBTableView1Column4: TcxGridDBColumn
+          Caption = 'Vlr. Total'
+          DataBinding.FieldName = 'TOTALPEDIDO'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column8: TcxGridDBColumn
+          Caption = 'Motivo Cancelamento'
+          DataBinding.FieldName = 'MOTIVOVAN'
+          Width = 250
+        end
+      end
+    end
+  end
   inherited cxPopMenu: TRxPopupMenu
     Left = 792
     Top = 192
+    object FixarComoPedido1: TMenuItem
+      Caption = '&Fixar Como Pedido'
+      OnClick = FixarComoPedido1Click
+    end
   end
 end
