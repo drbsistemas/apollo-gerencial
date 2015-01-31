@@ -4,7 +4,7 @@ interface
 
 uses
    MMSystem, Graphics, System.SysUtils, Forms, System.Classes, TypInfo,
-   cxButtons, CxGroupBox, cxLabel, cxCheckBox, cxTextEdit, cxMaskEdit, Controls,
+   cxButtons, CxGroupBox, cxLabel, cxCheckBox, cxTextEdit, cxMaskEdit, cxCurrencyEdit, Controls,
    FireDAC.Comp.Client, Windows, StdCtrls, Vcl.DIalogs, ComObj, ComCtrls, cxImage,
    NFe_Util_2G_TLB ; // acrescentar essa linha no use da unit para NF-E DLL;
 
@@ -14,6 +14,7 @@ uses
    FUNCTION Crypt(Action, Src: String): String;
 
    // Calculos
+   FUNCTION MenorDataValida (Ano, Mes, Dia : Word) : TDateTime;
    FUNCTION CalculoCorreto(N1, N2: Extended; Operador: string; Decimal: Integer): Extended;
 
    // Validaçoes
@@ -26,6 +27,7 @@ uses
    FUNCTION    DigitoCodigodeBar(EREFERENCIA:string):integer;
    FUNCTION    DataSql(Data: TDateTime): string;
    FUNCTION    ValidarCEP(const CEP: string): string;
+   FUNCTION    ValidaAcessoUsuario(formulario, componente: string): Boolean;
 
    // Envio de E-mails
    PROCEDURE EnviaEmailDLL(Assunto, Destino, Anexo: String);
@@ -48,8 +50,12 @@ uses
 
    PROCEDURE   PFundo(mostra: integer);
 
+
 const
    SqlBuscaProduto = 'SELECT IDPROD, NOMEPROD, UNPROD, ESTOQUETOTAL, REFPROD, CODBAR, NCMPROD, MARCAPROD, PRECOVENDA, DTVALIDADE, FOTOPROD FROM PRODUTO';
+
+type
+   TTipoMov = (ENTRADA, SAIDA);
 
 var
    FVisualizaImagem,
@@ -214,20 +220,18 @@ end;
 
 procedure ExecutaForm(FormClasse: TFormClass; var NewForm: TObject);
 begin
-     Try
-//       WaitMouse; // Veja outra dica para funções de ponteiro do mouse.
-       if (TForm(NewForm) = Nil) Or (not TForm(NewForm).HandleAllocated) Then
-          NewForm := FormClasse.Create(TForm(NewForm))
-       else
-          begin
-           if (TForm(NewForm).WindowState = WsMinimized) Then
-              TForm(NewForm).WindowState := wsNormal;
-           end;
-       TForm(NewForm).Show;
-     Finally
-//       ResetMouse;
-         FormAtivo := TForm(NewForm);
-       end;
+   Try
+      if (TForm(NewForm) = Nil) Or (not TForm(NewForm).HandleAllocated) Then
+         NewForm := FormClasse.Create(TForm(NewForm))
+      else
+      begin
+         if (TForm(NewForm).WindowState = WsMinimized) Then
+            TForm(NewForm).WindowState := wsNormal;
+      end;
+      TForm(NewForm).Show;
+   Finally
+      FormAtivo := TForm(NewForm);
+   end;
    PFundo(0);
 end;
 
@@ -498,6 +502,26 @@ begin
             end;
          end;
 
+         if ((Components[i] is TcxCurrencyEdit)) then
+         begin
+            if ((Components[i] as TcxCurrencyEdit).Tag > 0) then
+               (Components[i] as TcxCurrencyEdit).Style.Color := clWhite;
+
+            if ((Components[i] as TcxCurrencyEdit).Tag = 1) and ((Components[i] as TcxCurrencyEdit).Value <= 0) then
+            begin
+               (Components[i] as TcxCurrencyEdit).Style.Color := FCorSelec;
+               (Components[i] as TcxCurrencyEdit).Value := 0;
+               StrPreenche := StrPreenche + '-> '+(Components[i] as TcxCurrencyEdit).Hint+#13;
+               intPassou := intPassou + 1;
+            end;
+
+            if intPassou = 1 then
+            begin
+               (Components[i] as TcxCurrencyEdit).SetFocus;
+               intPassou := 2;
+            end;
+         end;
+
       end;
    end; // with
 
@@ -564,7 +588,6 @@ Procedure AbreTelaComShowModal(FormClasse: TFormClass; var NewForm: TObject; FNo
 begin
    with FormClasse.Create(Application) do
    begin
-
       FormStyle   := fsNormal;
       WindowState := wsNormal;
       Visible     := False;
@@ -579,8 +602,9 @@ begin
       begin
          StrTipoPessoa := StrTabela;
       end;
-      ShowModal;
+      Tag := 1;
 
+      ShowModal;
    end;
 
 //   TForm(NewForm) := NIl;
@@ -823,6 +847,33 @@ begin
       TForm(FNomeFormRetorno).WindowState := wsNormal;
       TForm(FNomeFormRetorno).WindowState := wsMaximized;
    end;
+end;
+
+function ValidaAcessoUsuario(formulario, componente: string): Boolean;
+begin
+   StrSql := ' select us.uciduser, us.uccompname ,us.ucformname from UCTABRIGHTSEX us where ((us.uciduser=' + intToStr(FPrinc.UserControl1.CurrentUser.UserID) + ') or (us.uciduser=' + intToStr(FPrinc.UserControl1.CurrentUser.Profile) + ')) and upper(us.ucformname)= upper(' + QuotedStr(formulario) + ')';
+   ConsultaSql(StrSql, dmCad.qryAcesso);
+
+   if (dmCad.qryAcesso.Locate('UCCOMPNAME', componente, [])) then
+      Result := true else
+      Result := False;
+end;
+
+Function MenorDataValida (Ano, Mes, Dia : Word) : TDateTime;
+Var
+   Continua : Boolean;
+   DataAux : TDateTime;
+begin
+   Continua := True;
+   DataAux := date;
+   while Continua do
+      Try
+         DataAux := EncodeDate(Ano, Mes, Dia);
+         Continua := False;
+      Except
+         Dec (Dia);
+      End;
+   MenorDataValida := DataAux;
 end;
 
 end.

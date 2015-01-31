@@ -8,19 +8,19 @@ inherited Fcad_Produto: TFcad_Produto
   TextHeight = 13
   inherited pnImg: TcxImage [0]
     Left = 852
-    ExplicitLeft = 851
-    ExplicitHeight = 541
+    ExplicitLeft = 852
+    ExplicitHeight = 540
     Height = 540
   end
   inherited pnCad: TPanel [1]
     Width = 852
     Height = 540
     TabOrder = 0
-    ExplicitWidth = 851
-    ExplicitHeight = 541
+    ExplicitWidth = 852
+    ExplicitHeight = 540
     inherited pnMenu: TPanel
       Width = 850
-      ExplicitWidth = 849
+      ExplicitWidth = 850
       inherited cxSalvar: TcxButton
         Left = 50
         Top = -1
@@ -48,8 +48,6 @@ inherited Fcad_Produto: TFcad_Produto
       LookAndFeel.Kind = lfUltraFlat
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'Office2010Silver'
-      ExplicitWidth = 849
-      ExplicitHeight = 234
       ClientRectBottom = 227
       ClientRectLeft = 2
       ClientRectRight = 844
@@ -57,8 +55,6 @@ inherited Fcad_Produto: TFcad_Produto
       object cxVenda: TcxTabSheet
         Caption = 'Dados Venda'
         ImageIndex = 0
-        ExplicitWidth = 841
-        ExplicitHeight = 201
         object ePrecoCpr: TcxCurrencyEdit
           Left = 132
           Top = 3
@@ -372,8 +368,6 @@ inherited Fcad_Produto: TFcad_Produto
       object cxEstoque: TcxTabSheet
         Caption = 'Dados Estoque'
         ImageIndex = 1
-        ExplicitWidth = 841
-        ExplicitHeight = 201
         object eEstoqueDisp: TcxCurrencyEdit
           Left = 131
           Top = 3
@@ -688,7 +682,6 @@ inherited Fcad_Produto: TFcad_Produto
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 849
       object eCodigo: TcxTextEdit
         Left = 134
         Top = 29
@@ -1781,7 +1774,7 @@ inherited Fcad_Produto: TFcad_Produto
         OptionsImage.Layout = blGlyphTop
         OptionsImage.Margin = 0
         OptionsImage.Spacing = 0
-        TabOrder = 19
+        TabOrder = 18
         TabStop = False
         OnClick = cxApagaFotoClick
       end
@@ -1928,7 +1921,7 @@ inherited Fcad_Produto: TFcad_Produto
         OptionsImage.Spacing = 0
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 18
+        TabOrder = 17
         TabStop = False
         OnClick = cxSalvaFotoClick
       end
@@ -2089,11 +2082,11 @@ inherited Fcad_Produto: TFcad_Produto
     Width = 852
     Height = 540
     TabOrder = 1
-    ExplicitWidth = 851
-    ExplicitHeight = 541
+    ExplicitWidth = 852
+    ExplicitHeight = 540
     inherited pnBusca: TPanel
       Width = 850
-      ExplicitWidth = 849
+      ExplicitWidth = 850
       inherited cxConsulta: TcxComboBox
         Properties.Items.Strings = (
           'C'#243'digo'
@@ -2108,7 +2101,7 @@ inherited Fcad_Produto: TFcad_Produto
     end
     inherited pnBotaoCad: TPanel
       Width = 850
-      ExplicitWidth = 849
+      ExplicitWidth = 850
       inherited cxApagar: TcxButton
         OnClick = cxApagarClick
       end
@@ -2280,8 +2273,8 @@ inherited Fcad_Produto: TFcad_Produto
     inherited grConsulta: TcxGrid [2]
       Width = 850
       Height = 311
-      ExplicitWidth = 849
-      ExplicitHeight = 312
+      ExplicitWidth = 850
+      ExplicitHeight = 311
       inherited grConsultaDBTableView1: TcxGridDBTableView
         OnCellClick = grConsultaDBTableView1CellClick
         DataController.DataSource = dmCad.dsProd
@@ -2320,8 +2313,8 @@ inherited Fcad_Produto: TFcad_Produto
       Width = 850
       Height = 48
       TabOrder = 4
-      ExplicitTop = 492
-      ExplicitWidth = 849
+      ExplicitTop = 491
+      ExplicitWidth = 850
       ExplicitHeight = 48
       inherited cxCadastro: TcxButton
         Left = 364
@@ -2344,8 +2337,6 @@ inherited Fcad_Produto: TFcad_Produto
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitTop = 388
-      ExplicitWidth = 849
       object pnFotoCon: TPanel
         Left = 0
         Top = 0
@@ -2895,5 +2886,13 @@ inherited Fcad_Produto: TFcad_Produto
     FilterIndex = 6
     Left = 602
     Top = 250
+  end
+  object UCControls1: TUCControls
+    GroupName = 'Cadastro de Produtos'
+    UserControl = FPrinc.UserControl1
+    Components = ''
+    NotAllowed = naDisabled
+    Left = 584
+    Top = 136
   end
 end

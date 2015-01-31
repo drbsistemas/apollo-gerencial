@@ -22,18 +22,16 @@ uses
   Vcl.StdCtrls, dxGDIPlusClasses, cxImage, cxButtons, Vcl.ExtCtrls, Vcl.Grids,
   Vcl.DBGrids, Data.DB, dxSkinsdxBarPainter, dxRibbonSkins,
   dxSkinsdxRibbonPainter, dxBar, dxBarExtItems, dxRibbonRadialMenu, cxClasses,
-  dxRibbon, RxMenus;
+  dxRibbon, RxMenus, UCHist_Base;
+
+   procedure VerificaAcessos;
 
 type
    TFPrinc = class(TForm)
     UserControl1: TUserControl;
     UCFireDACConn1: TUCFireDACConn;
-    UCControls1: TUCControls;
+    ucPrinc: TUCControls;
     ActionList1: TActionList;
-    actUsuarios: TAction;
-    actTrocadoUsuario: TAction;
-    actLog: TAction;
-    actlongoff: TAction;
     StBar: TdxStatusBar;
     cxHint: TPanel;
     pnTop: TcxGroupBox;
@@ -58,7 +56,7 @@ type
     dxBarLargeButton6: TdxBarLargeButton;
     dxBarLargeButton7: TdxBarLargeButton;
     dxBarLargeButton8: TdxBarLargeButton;
-    dxBarLargeButton9: TdxBarLargeButton;
+    cxRelatorios: TdxBarLargeButton;
     cxConCliente: TdxBarLargeButton;
     cxConProduto: TdxBarLargeButton;
     cxConAnimais: TdxBarLargeButton;
@@ -69,28 +67,50 @@ type
     ActOutros: TAction;
     cxReceber: TdxBarLargeButton;
     cxPagar: TdxBarLargeButton;
-    dxBarButton1: TdxBarButton;
+    cxConf: TdxBarButton;
     cxEmpresa: TdxBarButton;
     cxSair: TdxBarButton;
     cxCaixa: TdxBarLargeButton;
-    dxBarLargeButton1: TdxBarLargeButton;
+    cxCompras: TdxBarLargeButton;
     cxPedido: TdxBarLargeButton;
     tbVendas: TdxBar;
-    dxBarLargeButton2: TdxBarLargeButton;
-    dxBarLargeButton3: TdxBarLargeButton;
-    ActFechar: TAction;
+    cxVendas: TdxBarLargeButton;
+    cxPedidoVenda: TdxBarLargeButton;
     dxModuloPet: TdxRibbonTab;
     tbPetCadastro: TdxBar;
     tbPetAtendimento: TdxBar;
     dxModuloBar: TdxRibbonTab;
     tbBarVendas: TdxBar;
-    cxPopMenu: TRxPopupMenu;
-    Contagem1: TMenuItem;
-    Diferen1: TMenuItem;
     cxItemOutros: TdxBarSubItem;
     cxCfop: TdxBarButton;
-    dxBarLargeButton4: TdxBarLargeButton;
+    cxcPagto: TdxBarLargeButton;
     cxOutros: TdxBarLargeButton;
+    dxBarSubItem1: TdxBarSubItem;
+    cxCadastroUsuario: TdxBarLargeButton;
+    cxTrocadeUsuario: TdxBarLargeButton;
+    cxLogOff: TdxBarLargeButton;
+    uHistorico: TUCControlHistorico;
+    cxHistorico: TdxBarLargeButton;
+    actCadastro: TAction;
+    actTrocarSenha: TAction;
+    actLogOff: TAction;
+    actHistorico: TAction;
+    cadClientes: TAction;
+    cadProduto: TAction;
+    cadCfop: TAction;
+    cadCpagto: TAction;
+    cadOutros: TAction;
+    cadBalanco: TAction;
+    cadPedido: TAction;
+    cadCompra: TAction;
+    cadPedidoVenda: TAction;
+    cadVendas: TAction;
+    cadReceber: TAction;
+    cadPagar: TAction;
+    cadCaixa: TAction;
+    cadRelatorios: TAction;
+    cadConf: TAction;
+    cadEmpresa: TAction;
    //
    procedure PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
    procedure MostraNomeForm(Str: String);
@@ -112,12 +132,17 @@ type
     procedure ActFecharExecute(Sender: TObject);
     procedure cxOutrosClick(Sender: TObject);
     procedure cxPedidoClick(Sender: TObject);
-    procedure dxBarLargeButton4Click(Sender: TObject);
-    procedure dxBarLargeButton1Click(Sender: TObject);
-    procedure dxBarLargeButton3Click(Sender: TObject);
-    procedure dxBarLargeButton2Click(Sender: TObject);
+    procedure cxcPagtoClick(Sender: TObject);
+    procedure cxComprasClick(Sender: TObject);
+    procedure cxPedidoVendaClick(Sender: TObject);
+    procedure cxVendasClick(Sender: TObject);
     procedure cxReceberClick(Sender: TObject);
     procedure cxPagarClick(Sender: TObject);
+    procedure cxRelatoriosClick(Sender: TObject);
+    procedure cxCadastroUsuarioClick(Sender: TObject);
+    procedure cxTrocadeUsuarioClick(Sender: TObject);
+    procedure cxLogOffClick(Sender: TObject);
+    procedure cxHistoricoClick(Sender: TObject);
    private
       { Private declarations }
    public
@@ -133,7 +158,13 @@ implementation
 
 uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, uCad_Clientes,
   uCad_Animais, uCon_Generica, uDmRel, uCad_Empresa, uCad_Produto, uCad_Balanco,
-  uCad_Pedido, udmMov, uCad_Pagto, uCalculosMovimentacao;
+  uCad_Pedido, udmMov, uCad_Pagto, uRotinaDeCalculosMovimentacao, udmFin,
+  uCon_Relatorio, LoginWindow_U;
+
+procedure TFPrinc.cxCadastroUsuarioClick(Sender: TObject);
+begin
+   actCadastro.Execute;
+end;
 
 procedure TFPrinc.cxClienteClick(Sender: TObject);
 begin
@@ -143,6 +174,13 @@ end;
 procedure TFPrinc.cxEmpresaClick(Sender: TObject);
 begin
    ExecutaForm(TFCad_Empresa, TObject(Fcad_Empresa));
+end;
+
+procedure TFPrinc.cxHistoricoClick(Sender: TObject);
+begin
+   actHistorico.OnExecute(sender);
+//   Historico1.Click;
+
 end;
 
 procedure TFPrinc.cxOutrosClick(Sender: TObject);
@@ -171,26 +209,41 @@ begin
    TipoMov := ENTRADA;
 end;
 
-procedure TFPrinc.dxBarLargeButton1Click(Sender: TObject);
+procedure TFPrinc.cxTrocadeUsuarioClick(Sender: TObject);
+begin
+   actTrocarSenha.Execute;
+end;
+
+procedure TFPrinc.cxComprasClick(Sender: TObject);
 begin
    TipoMov := ENTRADA;
 
 end;
 
-procedure TFPrinc.dxBarLargeButton2Click(Sender: TObject);
+procedure TFPrinc.cxVendasClick(Sender: TObject);
 begin
    TipoMov := SAIDA;
 end;
 
-procedure TFPrinc.dxBarLargeButton3Click(Sender: TObject);
+procedure TFPrinc.cxPedidoVendaClick(Sender: TObject);
 begin
    TipoMov := SAIDA;
    ExecutaForm(TFcad_Pedido, TObject(Fcad_Pedido));
 end;
 
-procedure TFPrinc.dxBarLargeButton4Click(Sender: TObject);
+procedure TFPrinc.cxcPagtoClick(Sender: TObject);
 begin
    AbreTelaComShowModal(TFcad_Pagto, TObject(Fcad_Pagto), nil, '');
+end;
+
+procedure TFPrinc.cxLogOffClick(Sender: TObject);
+begin
+   actLogOff.Execute;
+end;
+
+procedure TFPrinc.cxRelatoriosClick(Sender: TObject);
+begin
+   ExecutaForm(TFcon_RElatorio, TObject(Fcon_Relatorio));
 end;
 
 procedure TFPrinc.ActAnimaisExecute(Sender: TObject);
@@ -249,14 +302,20 @@ begin
       Application.CreateForm(TdmCad, dmCad);
    if dmMov = nil then
       Application.CreateForm(TdmMov, dmMov);
+   if dmFin = nil then
+      Application.CreateForm(TdmFin, dmFin);
+   Application.UpdateFormatSettings := False;
+   FormatSettings.ShortDateFormat := 'dd/mm/yyyy';
+
 
    Application.OnMessage := PegaNomeForm;
    Application.OnHint := ShowHint;
    AbreIni;
 
    AbreAcesso;
-//   UserControl1.StartLogin;
-   CarregaEmpresa('LOJA '+FormatFloat('###0',1), 'Padrão');
+   UserControl1.StartLogin;
+   uHistorico.Active := true;
+//   CarregaEmpresa('LOJA '+FormatFloat('###0',1), 'Padrão');
 
    if not dmcad.qryConf.Active = true then
       dmCad.qryConf.Open;
@@ -297,10 +356,10 @@ begin
 
          MostraNomeForm(StrMsg);
       end;
-   end
-   else
-      if (msg.Message = WM_RBUTTONDOWN) then
+
+      if (msg.Message =  WM_LBUTTONDOWN) then
          FPrinc.dxRadialMenu.Popup(mouse.cursorpos.x, mouse.cursorpos.y);
+   end;
 end;
 
 procedure TFprinc.MostraNomeForm(Str: String);
@@ -314,6 +373,40 @@ begin
       FPrinc.cxHint.caption := Application.Hint
    else
       FPrinc.cxHint.caption := '';
+end;
+
+Procedure VerificaAcessos;
+begin
+   with FPrinc do
+   begin
+      cxConCliente.Enabled      := ValidaAcessoUsuario('FPrinc','ActCliente');
+      cxConProduto.Enabled      := ValidaAcessoUsuario('FPrinc','ActProduto');
+      cxConAnimais.Enabled      := ValidaAcessoUsuario('FPrinc','ActAnimais');
+      cxConOutros.Enabled       := ValidaAcessoUsuario('FPrinc','ActOutros');
+
+      cxCliente.Enabled         := ValidaAcessoUsuario('FPrinc','cadClientes');
+      cxProduto.Enabled         := ValidaAcessoUsuario('FPrinc','cadProduto');
+      cxCfop.Enabled            := ValidaAcessoUsuario('FPrinc','cadCfop');
+      cxCpagto.Enabled          := ValidaAcessoUsuario('FPrinc','cadCpagto');
+      cxOutros.Enabled          := ValidaAcessoUsuario('FPrinc','cadOutros');
+      cxBalanco.Enabled         := ValidaAcessoUsuario('FPrinc','cadBalanco');
+      cxCadastroUsuario.Enabled := ValidaAcessoUsuario('FPrinc','actCadastro');
+      cxTrocadeUsuario.Enabled  := ValidaAcessoUsuario('FPrinc','actTrocarSenha');
+   //   cxLogOff.Enabled          := ValidaAcessoUsuario('FPrinc','actLogOff');
+      cxHistorico.Enabled       := ValidaAcessoUsuario('FPrinc','actHistorico');
+
+      cxPedido.Enabled          := ValidaAcessoUsuario('FPrinc','cadPedido');
+      cxCompras.Enabled         := ValidaAcessoUsuario('FPrinc','cadCompra');
+      cxPedidoVEnda.Enabled     := ValidaAcessoUsuario('FPrinc','cadPedidoVenda');
+      cxVendas.Enabled          := ValidaAcessoUsuario('FPrinc','cadVenda');
+      cxReceber.Enabled         := ValidaAcessoUsuario('FPrinc','cadReceber');
+      cxPagar.Enabled           := ValidaAcessoUsuario('FPrinc','cadPagar');
+      cxCaixa.Enabled           := ValidaAcessoUsuario('FPrinc','cadCaixa');
+      cxRelatorios.Enabled      := ValidaAcessoUsuario('FPrinc','cadRelatorios');
+      cxConf.Enabled            := ValidaAcessoUsuario('FPrinc','cadConf');
+      cxEmpresa.Enabled         := ValidaAcessoUsuario('FPrinc','cadEmpresa');
+   end;
+
 end;
 
 end.

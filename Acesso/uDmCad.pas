@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client,
-  Data.DB, FireDAC.Comp.DataSet, Datasnap.Provider, Datasnap.DBClient, MidasLib ;
+  Data.DB, FireDAC.Comp.DataSet, Datasnap.Provider, Datasnap.DBClient, MidasLib,
+  UCHistDataset ;
 
 type
   TdmCad = class(TDataModule)
@@ -89,6 +90,16 @@ type
     qryEndereco: TFDQuery;
     UpdtEndereco: TFDUpdateSQL;
     dsEndereco: TDataSource;
+    uHis_Prod: TUCHist_DataSet;
+    UHis_Estoque: TUCHist_DataSet;
+    uHis_Generico: TUCHist_DataSet;
+    uHis_Endereco: TUCHist_DataSet;
+    uHis_Conf: TUCHist_DataSet;
+    uHis_Animais: TUCHist_DataSet;
+    uHis_Balanco: TUCHist_DataSet;
+    uHis_CPagto: TUCHist_DataSet;
+    qryAcesso: TFDQuery;
+    dsAcesso: TDataSource;
     procedure qryGenericoAfterInsert(DataSet: TDataSet);
     procedure qryProdAfterInsert(DataSet: TDataSet);
     procedure qryEstoqueAfterInsert(DataSet: TDataSet);
@@ -110,7 +121,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses uDmCon, uRotinas;
+uses uDmCon, uRotinas, uPrinc;
 
 {$R *.dfm}
 

@@ -23,7 +23,7 @@ uses
   cxClasses, cxGridCustomView, cxGrid, cxTextEdit, cxMaskEdit, cxDropDownEdit,
   cxLabel, Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, cxButtonEdit, Vcl.ComCtrls,
   dxCore, cxDateUtils, cxCalendar, cxCurrencyEdit, cxPCdxBarPopupMenu, cxPC,
-  cxMemo, FireDAC.Comp.Client;
+  cxMemo, FireDAC.Comp.Client, UCBase, Datasnap.DBClient;
 
 type
   TFcad_Pedido = class(TFcad_Pai)
@@ -117,6 +117,28 @@ type
     eDescItem: TcxCurrencyEdit;
     grConsultaDBTableView1Column9: TcxGridDBColumn;
     FixarComoPedido1: TMenuItem;
+    cxLabel25: TcxLabel;
+    cxStatus: TcxComboBox;
+    cxLabel26: TcxLabel;
+    cxTipo: TcxComboBox;
+    grConsultaDBTableView1Column10: TcxGridDBColumn;
+    grConsultaDBTableView1Column11: TcxGridDBColumn;
+    UCControls1: TUCControls;
+    pnPagar: TPanel;
+    Panel1: TPanel;
+    cxRecalcular: TcxButton;
+    cxCancelar: TcxButton;
+    grDadosBalanco: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGridDBColumn7: TcxGridDBColumn;
+    cxGridDBColumn8: TcxGridDBColumn;
+    cxGridDBColumn9: TcxGridDBColumn;
+    cxGridLevel2: TcxGridLevel;
+    RxParcela: TClientDataSet;
+    dsParcela: TDataSource;
+    RxParcelaDOC: TStringField;
+    RxParcelaVCTO: TDateTimeField;
+    RxParcelaVALOR: TFloatField;
     procedure cxNovoClick(Sender: TObject);
     procedure cxEditaClick(Sender: TObject);
     procedure cxSalvarClick(Sender: TObject);
@@ -159,6 +181,8 @@ type
     procedure eCodTranspPropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure FixarComoPedido1Click(Sender: TObject);
+    procedure cxCancelarClick(Sender: TObject);
+    procedure cxPrintClick(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -170,10 +194,11 @@ type
     procedure VerFoto(StrCaminhoFoto: String);
     procedure CalculaTotalPedido;
     procedure CalculaTotalItens;
+    procedure GeraSimulacaoDeParcelas;
+    procedure ConsultaPedido(intPedido: Integer);
   public
     { Public declarations }
   end;
-
 
 var
   Fcad_Pedido: TFcad_Pedido;
@@ -183,7 +208,8 @@ implementation
 {$R *.dfm}
 
 uses uRotinas, udmMov, uCad_Clientes, uDmCad, uCad_Produto, uCad_Pagto,
-  uCalculosMovimentacao, uConsultaDadosCliente, uEstoque;
+  uRotinaDeCalculosMovimentacao, uConsultaDadosCliente, uRotinaDeEstoque,
+  uPrinc, uRotinaDeImpressaoDeRelatorios;
 
 procedure TFcad_Pedido.cxApagarClick(Sender: TObject);
 begin
@@ -209,6 +235,25 @@ end;
 procedure TFcad_Pedido.cxApagarItemClick(Sender: TObject);
 begin
    inherited;
+   if (cxTipoPedido.ItemIndex = 1) then
+   begin
+      if TipoMov = ENTRADA then
+         Estoque(StrToInt(ecodProd.Text),
+               StrToInt(eCodFornec.Text),
+               PEDIDOCPR, SAIDA,
+               eCodigo.Text,
+               'PEDIDO DE COMPRA',
+               ePrecoVenda.Value,
+               eQtde.Value)
+      else
+         Estoque(StrToInt(ecodProd.Text),
+               StrToInt(eCodFornec.Text),
+               PEDIDOVDA, SAIDA,
+               eCodigo.Text,
+               'PEDIDO DE VENDA',
+               ePrecoVenda.Value,
+               eQtde.Value)
+   end;
    dmMov.qryItemPed.Delete;
    CalculaTotalPedido;
 end;
@@ -218,6 +263,12 @@ begin
    inherited;
    dmMov.qryPedido.Cancel;
    dmMov.qryItemPed.Cancel;
+end;
+
+procedure TFcad_Pedido.cxCancelarClick(Sender: TObject);
+begin
+  inherited;
+   pnPagar.Visible := False;
 end;
 
 procedure TFcad_Pedido.cxConsultaPropertiesChange(Sender: TObject);
@@ -232,9 +283,12 @@ begin
    StrSql := 'select A.*, '+#13+
       ' B.RAZAO NOMECLIE, '+#13+
       ' B.ENDERECO, '+#13+
+      ' B.CNPJ, '+#13+
+      ' B.IE, '+#13+
       ' B.NUMERO, '+#13+
       ' B.BAIRRO, '+#13+
       ' B.CEP, '+#13+
+      ' B.CIDADE, '+#13+
       ' C.RAZAO NOMEVEND, '+#13+
       ' D.RAZAO NOMETRANS, '+#13+
       ' E.DESCRICAO '+#13+
@@ -244,6 +298,17 @@ begin
       ' left join CLIENTE D on A.idtransp = D.IDCLIE and D.TIPOCLIE='+QuotedStr('TRA')+#13+
       ' left join CPAGTO E on A.IDCPAGTO = E.IDCPAGTO' +
       ' where 1=1 and TIPOMOV='+QuotedStr(ifs(TipoMov = ENTRADA, 'ENT', 'SAI'));
+
+   if cxTipo.ItemIndex > 0 then
+      StrSQl := StrSQl + ' and TIPOPEDIDO = '+QuotedStr(cxTipo.Text);
+
+   case cxStatus.Itemindex of
+      1 : StrSql := StrSQL + ' and STATUS = '+QuotedStr('ABERTO');
+      2 : StrSql := StrSQL + ' and (STATUS = '+QuotedStr('ABERTO')+' or STATUS = '+QuotedStr('PARCIAL')+')';
+      3 : StrSql := StrSQL + ' and STATUS = '+QuotedStr('ATENDIDO');
+      4 : StrSql := StrSQL + ' and STATUS = '+QuotedStr('CONCLUÍDO');
+      5 : StrSql := StrSQL + ' and STATUS = '+QuotedStr('BLOQUEADO');
+   end;
 
    if (indice='DATAPEDIDO') or (indice ='DATAENTREGA') then
       StrSql := StrSQl +' and '+indice+' = '+QuotedStr(DataSql(StrToDate(eConsulta.Text)) + ' 00:00:00');
@@ -275,6 +340,22 @@ begin
    inherited;
    Limpa;
    eCodFornec.SetFocus;
+end;
+
+procedure TFcad_Pedido.cxPrintClick(Sender: TObject);
+begin
+   inherited;
+   ConsultaPedido(dmMov.qryPedidoIDPEDIDO.AsInteger);
+
+   ConsultaItemPedido(dmMov.qryPedidoIDPEDIDO.AsInteger);
+   ConsultaSql('select * from PEDIDOFINANCEIRO where IDPEDIDO='+dmMov.qryPedidoIDPEDIDO.AsString,dmMov.qryPedidoFin);
+   Imprime(dmMov.dsPedido, dmMov.dsItemPed, dmMov.dsPedidoFin,
+            'SIM',
+            'Romaneio de Pedido',
+            dmCad.qryConf.FieldByName('PASTASERVIDOR').ASString + '\Relatorios\Faturamentos\ppPedido.rtm',
+            'SIM','',
+            1);
+   cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Pedido.cxSalvarClick(Sender: TObject);
@@ -319,6 +400,7 @@ begin
          Post;
          ApplyUpdates(0);
          dmMov.qryItemPed.ApplyUpdates(0);
+         GeraSimulacaoDeParcelas;
          inherited;
       Except
          CancelUpdates;
@@ -358,9 +440,31 @@ begin
       FieldByName('SALDOQTDE').AsFloat       := eQtde.Value;
       FieldByName('STATUSITEM').AsString     := 'ABERTO';
       post;
+
+      if (cxTipoPedido.ItemIndex = 1) then
+      begin
+         if TipoMov = ENTRADA then
+            Estoque(StrToInt(ecodProd.Text),
+                  StrToInt(eCodFornec.Text),
+                  PEDIDOCPR, ENTRADA,
+                  eCodigo.Text,
+                  'PEDIDO DE COMPRA',
+                  ePrecoVenda.Value,
+                  eQtde.Value)
+         else
+            Estoque(StrToInt(ecodProd.Text),
+                  StrToInt(eCodFornec.Text),
+                  PEDIDOVDA, ENTRADA,
+                  eCodigo.Text,
+                  'PEDIDO DE VENDA',
+                  ePrecoVenda.Value,
+                  eQtde.Value)
+      end;
+
    end;
    CalculaTotalPedido;
    LimpaItem;
+   cxTipoPedido.Enabled := false;
    eCodProd.SetFocus;
 end;
 
@@ -372,7 +476,7 @@ end;
 
 procedure TFcad_Pedido.eCodCPagtoExit(Sender: TObject);
 begin
-  inherited;
+   inherited;
    eCPagto.Text :=  ConsultaCampoNomeAtivo(eCodCPagto.Text, 'CPAGTO');
    if eCPagto.Text ='NENHUM' then
       eCodCPagto.Text := '0';
@@ -633,13 +737,23 @@ begin
          ConsultaItemPedido(dmMov.qryPedido.FieldByName('IDPEDIDO').AsInteger);
          while not dmMov.qryItemPed.Eof do
          begin
-            Estoque(dmMov.qryItemPedIDPROD.AsInteger,
-               dmMov.qryPedidoIDCLIE.AsInteger,
-               ORCAMENTO, ENTRADA,
-               dmMov.qryPedidoIDPEDIDO.AsString,
-               'PEDIDO DE VENDA',
-               dmMov.qryItemPedVLRUNITARIO.AsFloat,
-               dmMov.qryItemPedQTDE.AsFloat);
+            if TipoMov = ENTRADA then // Pedido de Compra
+               Estoque(dmMov.qryItemPedIDPROD.AsInteger,
+                  dmMov.qryPedidoIDCLIE.AsInteger,
+                  PEDIDOCPR, ENTRADA,
+                  dmMov.qryPedidoIDPEDIDO.AsString,
+                  Fcad_Pedido.Caption,
+                  dmMov.qryItemPedVLRUNITARIO.AsFloat,
+                  dmMov.qryItemPedQTDE.AsFloat)
+            else                      // Pedido de Venda
+               Estoque(dmMov.qryItemPedIDPROD.AsInteger,
+                  dmMov.qryPedidoIDCLIE.AsInteger,
+                  PEDIDOVDA, ENTRADA,
+                  dmMov.qryPedidoIDPEDIDO.AsString,
+                  Fcad_Pedido.Caption,
+                  dmMov.qryItemPedVLRUNITARIO.AsFloat,
+                  dmMov.qryItemPedQTDE.AsFloat);
+
             dmMov.qryItemPed.Next;
          end;
 
@@ -677,6 +791,9 @@ procedure TFcad_Pedido.FormShow(Sender: TObject);
 begin
   inherited;
    cxConsultaPropertiesChange(Self);
+   if TipoMov = ENTRADA then
+      Caption := 'Tela de Orçamentos/Pedidos de Compra' else
+      Caption := 'Tela de Orçamentos/Pedidos de Venda';
 end;
 
 procedure TFcad_Pedido.grConsultaDBTableView1CustomDrawCell(
@@ -716,7 +833,7 @@ end;
 procedure TFcad_Pedido.Limpa;
 begin
    eCodigo.Text                := '0';
-   eStatusPed.Clear;
+   eStatusPed.TExt             := 'ABERTO';
    eCodFornec.Text             := '0';
    eFornec.TExt                := 'NENHUM';
    eCodVEndPedido.Text         := '0';
@@ -761,12 +878,37 @@ procedure TFcad_Pedido.ConsultaItemPedido(intPedido: integer);
 begin
    StrSQl := 'select A.*, '+#13+
       ' B.NOMEPROD, '+#13+
+      ' B.MARCAPROD, '+#13+
       ' B.UNPROD, '+#13+
       ' B.REFPROD '+#13+
       ' from PEDIDOITEM A '+#13+
       ' left join PRODUTO B on A.IDPROD = B.IDPROD '+#13+
       ' WHERE IDPEDIDO='+intToStr(intPedido)+' order by IDPEDIDOITEM';
    ConsultaSql(StrSql, dmMov.qryItemPed);
+end;
+
+Procedure TFcad_Pedido.ConsultaPedido(intPedido : Integer);
+begin
+   StrSql := 'select A.*, '+#13+
+      ' B.RAZAO NOMECLIE, '+#13+
+      ' B.ENDERECO, '+#13+
+      ' B.CNPJ, '+#13+
+      ' B.IE, '+#13+
+      ' B.NUMERO, '+#13+
+      ' B.BAIRRO, '+#13+
+      ' B.CEP, '+#13+
+      ' B.CIDADE, '+#13+
+      ' C.RAZAO NOMEVEND, '+#13+
+      ' D.RAZAO NOMETRANS, '+#13+
+      ' E.DESCRICAO '+#13+
+      ' From PEDIDO A '+#13+
+      ' left join CLIENTE B on A.IDCLIE = B.IDCLIE and B.tipoclie='+QuotedStr('CLI')+#13+
+      ' left join CLIENTE C on A.IDVENDEDOR = C.IDCLIE and C.TIPOCLIE='+QuotedStr('VEN')+#13+
+      ' left join CLIENTE D on A.idtransp = D.IDCLIE and D.TIPOCLIE='+QuotedStr('TRA')+#13+
+      ' left join CPAGTO E on A.IDCPAGTO = E.IDCPAGTO' +
+      ' where 1=1 and TIPOMOV='+QuotedStr(ifs(TipoMov = ENTRADA, 'ENT', 'SAI'))+' and IDPEDIDO='+IntToStr(intPedido);
+
+   ConsultaSql(StrSql, dmMov.qryPedido);
 end;
 
 procedure TFcad_Pedido.ABrePEdido;
@@ -808,4 +950,39 @@ Begin
    eTotalItem.Value     := CalculoCOrreto(FPrecoVendaDesconto,((eDescItem.Value/100)*FPrecoVendaDesconto) , '-', 2);
 end;
 
+Procedure TFcad_PEdido.GeraSimulacaoDeParcelas;
+begin
+   ExecutaSql('delete from PEDIDOFINANCEIRO where IDPEDIDO='+eCodigo.Text, dmMov.qryAux);
+
+   pnPagar.Left := (ClientWidth div 2)-200;
+   pnPagar.Top  := (ClientHeight div 2)-115;
+
+   pnPagar.BringToFront;
+   pnPagar.Visible := true;
+
+   GerarCobranca(Date, eTotalPedido.Value, eCodigo.Text, 'PEDIDO', eCodCPagto.Text, Rxparcela);
+   while not pnPagar.Visible = False do
+   begin
+      Application.ProcessMessages;
+   end;
+   RxParcela.First;
+
+   dmMov.qryPedidoFin.Close;
+   dmMov.qryPedidoFin.Open;
+   while not RxParcela.Eof do
+   begin
+      dmMov.qryPedidoFin.Insert;
+      dmMov.qryPedidoFin.FieldByName('IDPEDIDO').AsInteger    := StrToInt(eCodigo.TExt);
+      dmMov.qryPedidoFin.FieldByName('VENCIMENTO').AsDateTime := RxParcelaVCTO.AsDateTime;
+      dmMov.qryPedidoFin.FieldByName('VALOR').AsFloat         := RxParcelaVALOR.AsFloat;
+      dmMov.qryPedidoFin.FieldByName('DOCUMENTO').AsString    := RxParcelaDOC.ASString;
+      dmMov.qryPedidoFin.Post;
+      rxParcela.Next;
+   end;
+   RxParcela.Close;
+   dmMov.qryPedidoFin.ApplyUpdates(0);
+   dmMov.qryPedidoFin.Close;
+end;
+
 end.
+

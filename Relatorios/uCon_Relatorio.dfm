@@ -1,4 +1,4 @@
-object Fcad_Relatorio: TFcad_Relatorio
+object Fcon_Relatorio: TFcon_Relatorio
   Left = 0
   Top = 0
   BorderIcons = []
@@ -11,9 +11,13 @@ object Fcad_Relatorio: TFcad_Relatorio
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  FormStyle = fsMDIChild
   KeyPreview = True
   OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
   WindowState = wsMaximized
+  OnClose = FormClose
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
@@ -335,6 +339,7 @@ object Fcad_Relatorio: TFcad_Relatorio
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
+      OnClick = cxButton5Click
     end
     object cxGerencial: TcxButton
       Left = 2

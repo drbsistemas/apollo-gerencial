@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Classes, Data.DB, ppEndUsr, ppDB, ppComm,
   ppRelatv, ppDBPipe, ppProd, ppClass, ppReport, ppDesignLayer, ppParameter,
-  ppBands, ppMemo, ppStrtch, ppCtrls, ppVar, ppPrnabl, ppCache;
+  ppBands, ppMemo, ppStrtch, ppCtrls, ppVar, ppPrnabl, ppCache, ppSubRpt;
 
 type
   TdmRel = class(TDataModule)
@@ -17,7 +17,6 @@ type
     ppCabec: TppDBPipeline;
     ppReport: TppReport;
     ppHeaderBand1: TppHeaderBand;
-    ppDBImage1: TppDBImage;
     ppShape1: TppShape;
     ppSystemVariable1: TppSystemVariable;
     ppLabel3: TppLabel;
@@ -42,36 +41,22 @@ type
     ppLabel10: TppLabel;
     ppDBText8: TppDBText;
     ppLabel12: TppLabel;
-    ppDBText10: TppDBText;
     ppLabel16: TppLabel;
     ppDBText16: TppDBText;
     ppLabel17: TppLabel;
     ppDBText18: TppDBText;
     ppLabel13: TppLabel;
-    ppDBText11: TppDBText;
-    ppLabel22: TppLabel;
-    ppDBText20: TppDBText;
     ppDBText21: TppDBText;
-    ppLabel23: TppLabel;
     ppLabel14: TppLabel;
-    ppDBText12: TppDBText;
-    ppDBImage2: TppDBImage;
-    ppLabel11: TppLabel;
     ppDBText9: TppDBText;
     ppLabel15: TppLabel;
     ppDBText13: TppDBText;
-    ppDBText14: TppDBText;
-    ppLabel18: TppLabel;
     ppLabel19: TppLabel;
     ppDBText15: TppDBText;
     ppLabel20: TppLabel;
     ppDBText17: TppDBText;
     ppLabel25: TppLabel;
     ppDBText22: TppDBText;
-    ppLabel26: TppLabel;
-    ppDBText23: TppDBText;
-    ppDBText24: TppDBText;
-    ppLabel27: TppLabel;
     ppLabel28: TppLabel;
     ppDBText25: TppDBText;
     ppDBText26: TppDBText;
@@ -81,6 +66,13 @@ type
     ppLabel31: TppLabel;
     ppDesignLayers1: TppDesignLayers;
     ppDesignLayer1: TppDesignLayer;
+    dbPipeAux3: TppDBPipeline;
+    ppLabel2: TppLabel;
+    ppDBText10: TppDBText;
+    ppDBText11: TppDBText;
+    ppLabel11: TppLabel;
+    ppDBText12: TppDBText;
+    ppDBText14: TppDBText;
   private
     { Private declarations }
   public

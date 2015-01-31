@@ -23,7 +23,7 @@ uses
   cxGridCustomView, cxGrid, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLabel,
   Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, RxMenus, Vcl.ComCtrls, dxCore,
   cxDateUtils, cxCalendar, cxCheckBox, cxPCdxBarPopupMenu, cxButtonEdit, cxMemo,
-  cxCurrencyEdit, cxPC, Vcl.ExtDlgs, System.DateUtils;
+  cxCurrencyEdit, cxPC, Vcl.ExtDlgs, System.DateUtils, UCBase;
 
 type
   TFcad_Animais = class(TFcad_Pai)
@@ -89,6 +89,7 @@ type
     grConsultaDBTableView1Column5: TcxGridDBColumn;
     grConsultaDBTableView1Column6: TcxGridDBColumn;
     grConsultaDBTableView1Column7: TcxGridDBColumn;
+    UCControls1: TUCControls;
     procedure cxVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

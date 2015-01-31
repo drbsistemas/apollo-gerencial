@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.Client, FireDAC.Comp.DataSet;
+  FireDAC.Comp.Client, FireDAC.Comp.DataSet, UCHistDataset;
 
 type
   TdmMov = class(TDataModule)
@@ -56,12 +56,22 @@ type
     qryPedidoNOMEVEND: TStringField;
     qryPedidoNOMETRANS: TStringField;
     qryPedidoDESCRICAO: TStringField;
-    UpdtCredito: TFDUpdateSQL;
-    dsCredito: TDataSource;
-    qryCredito: TFDQuery;
+    uHis_Pedido: TUCHist_DataSet;
+    uHis_ItemPed: TUCHist_DataSet;
+    qryAux: TFDQuery;
+    dsAux: TDataSource;
+    qryAux2: TFDQuery;
+    dsAux2: TDataSource;
+    UpdtPedidoFin: TFDUpdateSQL;
+    dsPedidoFin: TDataSource;
+    qryPedidoFin: TFDQuery;
+    uHis_PedidoFin: TUCHist_DataSet;
+    qryPedidoCNPJ: TStringField;
+    qryPedidoIE: TStringField;
+    qryPedidoCIDADE: TStringField;
     procedure qryPedidoAfterInsert(DataSet: TDataSet);
     procedure qryItemPedAfterInsert(DataSet: TDataSet);
-    procedure qryCreditoAfterInsert(DataSet: TDataSet);
+    procedure qryPedidoFinAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -75,14 +85,9 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses uDmCon, uRotinas;
+uses uDmCon, uRotinas, uPrinc;
 
 {$R *.dfm}
-
-procedure TdmMov.qryCreditoAfterInsert(DataSet: TDataSet);
-begin
-   dmMov.qryCredito.FieldByName('IDCREDITO').AsInteger      := ExecutaGen('CLIENTECREDITO');
-end;
 
 procedure TdmMov.qryItemPedAfterInsert(DataSet: TDataSet);
 begin
@@ -92,6 +97,11 @@ end;
 procedure TdmMov.qryPedidoAfterInsert(DataSet: TDataSet);
 begin
    dmMov.qryPedido.FieldByName('IDPEDIDO').AsInteger      := ExecutaGen('PEDIDO');
+end;
+
+procedure TdmMov.qryPedidoFinAfterInsert(DataSet: TDataSet);
+begin
+   dmMov.qryPedidoFin.FieldByName('IDPEDIDOFINANCEIRO').AsInteger := ExecutaGen('PEDIDOFINANCEIRO');
 end;
 
 end.

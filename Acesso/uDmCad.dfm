@@ -1,7 +1,7 @@
 object dmCad: TdmCad
   OldCreateOrder = False
-  Height = 355
-  Width = 453
+  Height = 384
+  Width = 481
   object qryConf: TFDQuery
     CachedUpdates = True
     Connection = dmCon.FdCon
@@ -121,7 +121,7 @@ object dmCad: TdmCad
   object dsConf: TDataSource
     DataSet = qryConf
     Left = 257
-    Top = 94
+    Top = 92
   end
   object qryCidade: TFDQuery
     CachedUpdates = True
@@ -192,7 +192,7 @@ object dmCad: TdmCad
   object dsCidade: TDataSource
     DataSet = qryCidade
     Left = 58
-    Top = 94
+    Top = 92
   end
   object qryGenerico: TFDQuery
     AfterInsert = qryGenericoAfterInsert
@@ -203,7 +203,7 @@ object dmCad: TdmCad
     UpdateObject = UpdtGenerico
     SQL.Strings = (
       'select * from GENERICA')
-    Left = 102
+    Left = 97
     Top = 5
   end
   object UpdtGenerico: TFDUpdateSQL
@@ -228,13 +228,13 @@ object dmCad: TdmCad
       'SELECT IDGENERICA, TABELA, DESCRICAO, VALOR, OBS'
       'FROM GENERICA'
       'WHERE IDGENERICA = :IDGENERICA')
-    Left = 102
+    Left = 97
     Top = 49
   end
   object dsGenerico: TDataSource
     DataSet = qryGenerico
-    Left = 102
-    Top = 94
+    Left = 97
+    Top = 92
   end
   object qryProd: TFDQuery
     AfterInsert = qryProdAfterInsert
@@ -260,7 +260,7 @@ object dmCad: TdmCad
         'LEFT JOIN GENERICA E ON A.idLocal=E.IDGENERICA AND C.TABELA='#39'LOC' +
         'ALIZACAO'#39
       'LEFT JOIN CLIENTE D ON A.IDFORNEC=D.IDCLIE')
-    Left = 142
+    Left = 137
     Top = 5
   end
   object UpdtProd: TFDUpdateSQL
@@ -357,13 +357,13 @@ object dmCad: TdmCad
       '  DTATUALIZADO, CODBAR, OBS, IDLOCAL'
       'FROM PRODUTO'
       'WHERE IDPROD = :IDPROD')
-    Left = 142
+    Left = 137
     Top = 49
   end
   object dsProd: TDataSource
     DataSet = qryProd
-    Left = 142
-    Top = 94
+    Left = 137
+    Top = 92
   end
   object qryEstoque: TFDQuery
     AfterInsert = qryEstoqueAfterInsert
@@ -378,7 +378,7 @@ object dmCad: TdmCad
         'TAL, B.UNPROD'
       'from Estoque A'
       'left join Produto B on A.IDPROD = B.IDPROD')
-    Left = 182
+    Left = 177
     Top = 5
     object qryEstoqueIDESTOQUE: TIntegerField
       FieldName = 'IDESTOQUE'
@@ -529,13 +529,13 @@ object dmCad: TdmCad
       '  IDCLIE'
       'FROM ESTOQUE'
       'WHERE IDESTOQUE = :IDESTOQUE')
-    Left = 182
+    Left = 177
     Top = 49
   end
   object dsEstoque: TDataSource
     DataSet = qryEstoque
-    Left = 182
-    Top = 94
+    Left = 177
+    Top = 92
   end
   object qryAnimais: TFDQuery
     AfterInsert = qryAnimaisAfterInsert
@@ -558,7 +558,7 @@ object dmCad: TdmCad
         'SPECIE'#39
       'LEFT JOIN CLIENTE D ON A.IDCLIE=D.IDCLIE')
     Left = 11
-    Top = 152
+    Top = 195
   end
   object UpdtAnimais: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -658,12 +658,12 @@ object dmCad: TdmCad
         '  HISTORICO = :HISTORICO AND FOTO = :FOTO AND PESOATUAL = :PESOA' +
         'TUAL')
     Left = 11
-    Top = 196
+    Top = 239
   end
   object dsAnimais: TDataSource
     DataSet = qryAnimais
     Left = 11
-    Top = 240
+    Top = 283
   end
   object qryAux2: TFDQuery
     CachedUpdates = True
@@ -688,8 +688,8 @@ object dmCad: TdmCad
     SQL.Strings = (
       'select A.*, B.REFPROD, B.NOMEPROD from BALANCO A '
       'LEFT JOIN PRODUTO B on A.IDPROD=B.IDPROD')
-    Left = 53
-    Top = 152
+    Left = 58
+    Top = 195
     object qryBalancoIDBALANCO: TIntegerField
       FieldName = 'IDBALANCO'
       Origin = 'IDBALANCO'
@@ -777,13 +777,13 @@ object dmCad: TdmCad
       '  ESTOQUECONT, ESTOQUEDIF'
       'FROM BALANCO'
       'WHERE IDBALANCO = :IDBALANCO')
-    Left = 53
-    Top = 196
+    Left = 58
+    Top = 239
   end
   object dsBalanco: TDataSource
     DataSet = qryBalanco
-    Left = 53
-    Top = 240
+    Left = 58
+    Top = 283
   end
   object qryGen: TFDQuery
     CachedUpdates = True
@@ -791,12 +791,12 @@ object dmCad: TdmCad
     Transaction = dmCon.FdSalva
     UpdateTransaction = dmCon.FdSalva
     Left = 384
-    Top = 6
+    Top = 5
   end
   object dsGen: TDataSource
     DataSet = qryGen
     Left = 384
-    Top = 50
+    Top = 49
   end
   object qryCPagto: TFDQuery
     AfterInsert = qryCPagtoAfterInsert
@@ -807,8 +807,8 @@ object dmCad: TdmCad
     UpdateObject = UpdtCPagto
     SQL.Strings = (
       'select * from CPAGTO')
-    Left = 93
-    Top = 152
+    Left = 97
+    Top = 195
   end
   object UpdtCPagto: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -829,13 +829,13 @@ object dmCad: TdmCad
       'SELECT IDCPAGTO, DESCRICAO'
       'FROM CPAGTO'
       'WHERE IDCPAGTO = :IDCPAGTO')
-    Left = 93
-    Top = 196
+    Left = 97
+    Top = 239
   end
   object dsCPagto: TDataSource
     DataSet = qryCPagto
-    Left = 93
-    Top = 240
+    Left = 97
+    Top = 283
   end
   object qryCPagtoItem: TFDQuery
     AfterInsert = qryCPagtoItemAfterInsert
@@ -846,8 +846,8 @@ object dmCad: TdmCad
     UpdateObject = UpdtCPagtoItem
     SQL.Strings = (
       'select * from CPAGTOITEM')
-    Left = 133
-    Top = 152
+    Left = 137
+    Top = 195
     object qryCPagtoItemIDCPAGTOITEM: TIntegerField
       FieldName = 'IDCPAGTOITEM'
       Origin = 'IDCPAGTOITEM'
@@ -904,13 +904,13 @@ object dmCad: TdmCad
       'SELECT IDCPAGTOITEM, IDCPAGTO, DIAS, JUROS, PERCENTUAL, PARCELA'
       'FROM CPAGTOITEM'
       'WHERE IDCPAGTOITEM = :IDCPAGTOITEM')
-    Left = 133
-    Top = 196
+    Left = 137
+    Top = 239
   end
   object dsCPagtoItem: TDataSource
     DataSet = qryCPagtoItem
-    Left = 133
-    Top = 240
+    Left = 137
+    Top = 283
   end
   object qryNcm: TFDQuery
     CachedUpdates = True
@@ -920,8 +920,8 @@ object dmCad: TdmCad
     UpdateObject = UpdtNcm
     SQL.Strings = (
       'select * from NCM')
-    Left = 178
-    Top = 152
+    Left = 177
+    Top = 195
     object IntegerField1: TIntegerField
       FieldName = 'IDCPAGTOITEM'
       Origin = 'IDCPAGTOITEM'
@@ -970,13 +970,13 @@ object dmCad: TdmCad
       'SELECT NCM, DESCRICAO'
       'FROM NCM'
       'WHERE NCM = :NCM')
-    Left = 178
-    Top = 196
+    Left = 177
+    Top = 239
   end
   object dsNcm: TDataSource
     DataSet = qryNcm
-    Left = 178
-    Top = 240
+    Left = 177
+    Top = 283
   end
   object qryEndereco: TFDQuery
     AfterInsert = qryEnderecoAfterInsert
@@ -987,8 +987,8 @@ object dmCad: TdmCad
     UpdateObject = UpdtEndereco
     SQL.Strings = (
       'select * from endereco')
-    Left = 17
-    Top = 6
+    Left = 11
+    Top = 5
   end
   object UpdtEndereco: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -1034,12 +1034,73 @@ object dmCad: TdmCad
       '  UFEND, CEPEND, NUMEROEND, ENDERECOEND, ATIVO'
       'FROM ENDERECO'
       'WHERE IDEND = :IDEND')
-    Left = 17
-    Top = 50
+    Left = 11
+    Top = 49
   end
   object dsEndereco: TDataSource
     DataSet = qryEndereco
-    Left = 17
-    Top = 94
+    Left = 11
+    Top = 92
+  end
+  object uHis_Prod: TUCHist_DataSet
+    DataSet = qryProd
+    ControlHistorico = FPrinc.uHistorico
+    Left = 137
+    Top = 135
+  end
+  object UHis_Estoque: TUCHist_DataSet
+    DataSet = qryEstoque
+    ControlHistorico = FPrinc.uHistorico
+    Left = 177
+    Top = 135
+  end
+  object uHis_Generico: TUCHist_DataSet
+    DataSet = qryGenerico
+    ControlHistorico = FPrinc.uHistorico
+    Left = 97
+    Top = 135
+  end
+  object uHis_Endereco: TUCHist_DataSet
+    DataSet = qryEndereco
+    ControlHistorico = FPrinc.uHistorico
+    Left = 11
+    Top = 135
+  end
+  object uHis_Conf: TUCHist_DataSet
+    DataSet = qryConf
+    ControlHistorico = FPrinc.uHistorico
+    Left = 256
+    Top = 135
+  end
+  object uHis_Animais: TUCHist_DataSet
+    DataSet = qryAnimais
+    ControlHistorico = FPrinc.uHistorico
+    Left = 8
+    Top = 328
+  end
+  object uHis_Balanco: TUCHist_DataSet
+    DataSet = qryBalanco
+    ControlHistorico = FPrinc.uHistorico
+    Left = 56
+    Top = 328
+  end
+  object uHis_CPagto: TUCHist_DataSet
+    DataSet = qryCPagto
+    ControlHistorico = FPrinc.uHistorico
+    Left = 94
+    Top = 328
+  end
+  object qryAcesso: TFDQuery
+    CachedUpdates = True
+    Connection = dmCon.FdConAcesso
+    Transaction = dmCon.FdSalvaAcesso
+    UpdateTransaction = dmCon.FdSalvaAcesso
+    Left = 433
+    Top = 5
+  end
+  object dsAcesso: TDataSource
+    DataSet = qryAcesso
+    Left = 433
+    Top = 49
   end
 end

@@ -3,6 +3,9 @@ inherited Fcad_Pagto: TFcad_Pagto
   Caption = 'Cond. Pagamento'
   ClientHeight = 572
   ClientWidth = 712
+  ExplicitTop = -15
+  ExplicitWidth = 718
+  ExplicitHeight = 601
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnCon: TPanel [0]
@@ -60,7 +63,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       end
     end
   end
-  inherited pnImg: TcxImage [1]
+  inherited pnImg: TcxImage
     Left = 654
     ExplicitLeft = 654
     ExplicitHeight = 572
@@ -261,7 +264,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 6
+      TabOrder = 5
       Width = 75
     end
     object cxSalvaFoto: TcxButton
@@ -407,7 +410,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       OptionsImage.Spacing = 0
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 12
+      TabOrder = 10
       OnClick = cxSalvaFotoClick
     end
     object cxApagaFoto: TcxButton
@@ -552,7 +555,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       OptionsImage.Layout = blGlyphTop
       OptionsImage.Margin = 0
       OptionsImage.Spacing = 0
-      TabOrder = 13
+      TabOrder = 12
       OnClick = cxApagaFotoClick
     end
     object cxLabel4: TcxLabel
@@ -595,7 +598,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 7
+      TabOrder = 6
       Width = 75
     end
     object cxLabel5: TcxLabel
@@ -638,7 +641,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 8
+      TabOrder = 7
       Width = 75
     end
     object cxLabel7: TcxLabel
@@ -664,5 +667,13 @@ inherited Fcad_Pagto: TFcad_Pagto
       Height = 17
       Width = 172
     end
+  end
+  object UCControls1: TUCControls
+    GroupName = 'Cadastro de Cond. Pagametno'
+    UserControl = FPrinc.UserControl1
+    Components = ''
+    NotAllowed = naDisabled
+    Left = 560
+    Top = 144
   end
 end

@@ -2,7 +2,7 @@ object FPrinc: TFPrinc
   Left = 0
   Top = 0
   Caption = 'Sistema PetClinic'
-  ClientHeight = 600
+  ClientHeight = 640
   ClientWidth = 1024
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -470,7 +470,7 @@ object FPrinc: TFPrinc
     FFFFFFFF0000FFFFFFFFFFFF0000}
   KeyPreview = True
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
@@ -480,7 +480,7 @@ object FPrinc: TFPrinc
   TextHeight = 13
   object StBar: TdxStatusBar
     Left = 0
-    Top = 580
+    Top = 620
     Width = 1024
     Height = 20
     Panels = <
@@ -19676,20 +19676,483 @@ object FPrinc: TFPrinc
   object UserControl1: TUserControl
     ApplicationID = 'Controle de Usu'#225'rios'
     ControlRight.ActionList = ActionList1
-    User.Action = actUsuarios
-    UserPasswordChange.Action = actTrocadoUsuario
+    User.Action = actCadastro
+    User.UsePrivilegedField = True
+    UserPasswordChange.Action = actTrocarSenha
     UserPasswordChange.MinPasswordLength = 3
-    UsersLogoff.Action = actlongoff
+    UsersLogoff.Action = actLogOff
     LogControl.TableLog = 'UCLog'
     Language = ucPortuguesBr
     EncryptKey = 0
-    Login.InitialLogin.User = 'ADMIN'
+    Login.InitialLogin.User = 'DRB'
     Login.InitialLogin.Email = 'comercial@drbsistemas.com.br'
-    Login.InitialLogin.Password = 'DRB4442+'
+    Login.InitialLogin.Password = '1054669+'
     Login.MaxLoginAttempts = 3
     Login.CharCaseUser = ecUpperCase
     Login.CharCasePass = ecUpperCase
-    ExtraRights = <>
+    ExtraRights = <
+      item
+        FormName = 'Fcad_Clientes'
+        CompName = 'cxSalvar'
+        Caption = 'Salvar'
+        GroupName = 'Cadastro de Clientes'
+      end
+      item
+        FormName = 'Fcad_Clientes'
+        CompName = 'cxCancela'
+        Caption = 'Cancelar'
+        GroupName = 'Cadastro de Clientes'
+      end
+      item
+        FormName = 'Fcad_Clientes'
+        CompName = 'cxNovo'
+        Caption = 'Novo'
+        GroupName = 'Cadastro de Clientes'
+      end
+      item
+        FormName = 'Fcad_Clientes'
+        CompName = 'cxEdita'
+        Caption = 'Editar'
+        GroupName = 'Cadastro de Clientes'
+      end
+      item
+        FormName = 'Fcad_Clientes'
+        CompName = 'cxVer'
+        Caption = 'Visualizar'
+        GroupName = 'Cadastro de Clientes'
+      end
+      item
+        FormName = 'Fcad_Clientes'
+        CompName = 'cxApagar'
+        Caption = 'Apagar'
+        GroupName = 'Cadastro de Clientes'
+      end
+      item
+        FormName = 'Fcad_Clientes'
+        CompName = 'cxPrint'
+        Caption = 'Imprimir'
+        GroupName = 'Cadastro de Clientes'
+      end
+      item
+        FormName = 'Fcad_Clientes'
+        CompName = 'cxOpcoes'
+        Caption = 'Op'#231#245'es'
+        GroupName = 'Cadastro de Clientes'
+      end
+      item
+        FormName = 'Fcad_Clientes'
+        CompName = 'cxCadastro'
+        Caption = 'Cadastro'
+        GroupName = 'Cadastro de Clientes'
+      end
+      item
+        FormName = 'Fcad_Produto'
+        CompName = 'cxSalvar'
+        Caption = 'Salvar'
+        GroupName = 'Cadastro de Produtos'
+      end
+      item
+        FormName = 'Fcad_Produto'
+        CompName = 'cxCancela'
+        Caption = 'Cancelar'
+        GroupName = 'Cadastro de Produtos'
+      end
+      item
+        FormName = 'Fcad_Produto'
+        CompName = 'cxNovo'
+        Caption = 'Novo'
+        GroupName = 'Cadastro de Produtos'
+      end
+      item
+        FormName = 'Fcad_Produto'
+        CompName = 'cxEdita'
+        Caption = 'Editar'
+        GroupName = 'Cadastro de Produtos'
+      end
+      item
+        FormName = 'Fcad_Produto'
+        CompName = 'cxVer'
+        Caption = 'Visualizar'
+        GroupName = 'Cadastro de Produtos'
+      end
+      item
+        FormName = 'Fcad_Produto'
+        CompName = 'cxApagar'
+        Caption = 'Apagar'
+        GroupName = 'Cadastro de Produtos'
+      end
+      item
+        FormName = 'Fcad_Produto'
+        CompName = 'cxPrint'
+        Caption = 'Imprimir'
+        GroupName = 'Cadastro de Produtos'
+      end
+      item
+        FormName = 'Fcad_Produto'
+        CompName = 'cxOpcoes'
+        Caption = 'Op'#231#245'es'
+        GroupName = 'Cadastro de Produtos'
+      end
+      item
+        FormName = 'Fcad_Produto'
+        CompName = 'cxCadastro'
+        Caption = 'Cadastro'
+        GroupName = 'Cadastro de Produtos'
+      end
+      item
+        FormName = 'Fcad_Animais'
+        CompName = 'cxSalvar'
+        Caption = 'Salvar'
+        GroupName = 'Cadastro de Animais'
+      end
+      item
+        FormName = 'Fcad_Animais'
+        CompName = 'cxCancela'
+        Caption = 'Cancelar'
+        GroupName = 'Cadastro de Animais'
+      end
+      item
+        FormName = 'Fcad_Animais'
+        CompName = 'cxNovo'
+        Caption = 'Novo'
+        GroupName = 'Cadastro de Animais'
+      end
+      item
+        FormName = 'Fcad_Animais'
+        CompName = 'cxEdita'
+        Caption = 'Editar'
+        GroupName = 'Cadastro de Animais'
+      end
+      item
+        FormName = 'Fcad_Animais'
+        CompName = 'cxVer'
+        Caption = 'Visualizar'
+        GroupName = 'Cadastro de Animais'
+      end
+      item
+        FormName = 'Fcad_Animais'
+        CompName = 'cxApagar'
+        Caption = 'Apagar'
+        GroupName = 'Cadastro de Animais'
+      end
+      item
+        FormName = 'Fcad_Animais'
+        CompName = 'cxPrint'
+        Caption = 'Imprimir'
+        GroupName = 'Cadastro de Animais'
+      end
+      item
+        FormName = 'Fcad_Animais'
+        CompName = 'cxOpcoes'
+        Caption = 'Op'#231#245'es'
+        GroupName = 'Cadastro de Animais'
+      end
+      item
+        FormName = 'Fcad_Animais'
+        CompName = 'cxCadastro'
+        Caption = 'Cadastro'
+        GroupName = 'Cadastro de Animais'
+      end
+      item
+        FormName = 'Fcad_Balanco'
+        CompName = 'cxSalvar'
+        Caption = 'Salvar'
+        GroupName = 'Balan'#231'o de Produtos'
+      end
+      item
+        FormName = 'Fcad_Balanco'
+        CompName = 'cxCancela'
+        Caption = 'Cancelar'
+        GroupName = 'Balan'#231'o de Produtos'
+      end
+      item
+        FormName = 'Fcad_Balanco'
+        CompName = 'cxNovo'
+        Caption = 'Novo'
+        GroupName = 'Balan'#231'o de Produtos'
+      end
+      item
+        FormName = 'Fcad_Balanco'
+        CompName = 'cxEdita'
+        Caption = 'Editar'
+        GroupName = 'Balan'#231'o de Produtos'
+      end
+      item
+        FormName = 'Fcad_Balanco'
+        CompName = 'cxVer'
+        Caption = 'Visualizar'
+        GroupName = 'Balan'#231'o de Produtos'
+      end
+      item
+        FormName = 'Fcad_Balanco'
+        CompName = 'cxApagar'
+        Caption = 'Apagar'
+        GroupName = 'Balan'#231'o de Produtos'
+      end
+      item
+        FormName = 'Fcad_Balanco'
+        CompName = 'cxPrint'
+        Caption = 'Sincronizar'
+        GroupName = 'Balan'#231'o de Produtos'
+      end
+      item
+        FormName = 'Fcad_Balanco'
+        CompName = 'cxOpcoes'
+        Caption = 'Zerar Estoque'
+        GroupName = 'Balan'#231'o de Produtos'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'actCadastro'
+        Caption = 'Usu'#225'rio - Cadastro'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'actTrocarSenha'
+        Caption = 'Usu'#225'rio - Trocar Senha'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'actLogOff'
+        Caption = 'Usu'#225'rio  - LogOff'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'actHistorico'
+        Caption = 'Usu'#225'rio - Hist'#243'rico'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadClientes'
+        Caption = 'Cadastro - Clientes'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadProduto'
+        Caption = 'Cadastro - Produtos'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadCfop'
+        Caption = 'Cadastro - Cfop'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadCpagto'
+        Caption = 'Cadastro - Cond. Pagamento'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadOutros'
+        Caption = 'Cadastro - Outros'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadBalanco'
+        Caption = 'Cadastro - Balan'#231'o'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadPedido'
+        Caption = 'Pedido de Compra'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadCompra'
+        Caption = 'Compras'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadPedidoVenda'
+        Caption = 'Pedido de Venda'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadVendas'
+        Caption = 'Vendas'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadReceber'
+        Caption = 'Contas '#225' Receber'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadPagar'
+        Caption = 'Contas '#225' Pagar'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadCaixa'
+        Caption = 'Conta Corrente (Caixa)'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadRelatorios'
+        Caption = 'Relat'#243'rios'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadConf'
+        Caption = 'Configura'#231#245'es (Parametros)'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'cadEmpresa'
+        Caption = 'Cadastro da Empresa'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'ActCliente'
+        Caption = 'Consulta - Clientes'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'ActProduto'
+        Caption = 'Consulta - Produtos'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'ActAnimais'
+        Caption = 'Consulta - Animais'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'FPrinc'
+        CompName = 'ActOutros'
+        Caption = 'Consulta - Outros Cadastros'
+        GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'Fcad_Pagto'
+        CompName = 'cxSalvar'
+        Caption = 'Salvar'
+        GroupName = 'Cadastro de Cond. Pagametno'
+      end
+      item
+        FormName = 'Fcad_Pagto'
+        CompName = 'cxCancela'
+        Caption = 'Cancelar'
+        GroupName = 'Cadastro de Cond. Pagametno'
+      end
+      item
+        FormName = 'Fcad_Pagto'
+        CompName = 'cxNovo'
+        Caption = 'Novo'
+        GroupName = 'Cadastro de Cond. Pagametno'
+      end
+      item
+        FormName = 'Fcad_Pagto'
+        CompName = 'cxEdita'
+        Caption = 'Editar'
+        GroupName = 'Cadastro de Cond. Pagametno'
+      end
+      item
+        FormName = 'Fcad_Pagto'
+        CompName = 'cxVer'
+        Caption = 'Visualizar'
+        GroupName = 'Cadastro de Cond. Pagametno'
+      end
+      item
+        FormName = 'Fcad_Pagto'
+        CompName = 'cxApagar'
+        Caption = 'Apagar'
+        GroupName = 'Cadastro de Cond. Pagametno'
+      end
+      item
+        FormName = 'Fcad_Pagto'
+        CompName = 'cxPrint'
+        Caption = 'Imprimir'
+        GroupName = 'Cadastro de Cond. Pagametno'
+      end
+      item
+        FormName = 'Fcad_Pagto'
+        CompName = 'cxOpcoes'
+        Caption = 'Op'#231#245'es'
+        GroupName = 'Cadastro de Cond. Pagametno'
+      end
+      item
+        FormName = 'Fcad_Pagto'
+        CompName = 'cxCadastro'
+        Caption = 'Cadastro'
+        GroupName = 'Cadastro de Cond. Pagametno'
+      end
+      item
+        FormName = 'Fcad_Pedido'
+        CompName = 'cxSalvar'
+        Caption = 'Salvar'
+        GroupName = 'Or'#231'amentos e Pedidos'
+      end
+      item
+        FormName = 'Fcad_Pedido'
+        CompName = 'cxCancela'
+        Caption = 'Cancelar'
+        GroupName = 'Or'#231'amentos e Pedidos'
+      end
+      item
+        FormName = 'Fcad_Pedido'
+        CompName = 'cxNovo'
+        Caption = 'Novo'
+        GroupName = 'Or'#231'amentos e Pedidos'
+      end
+      item
+        FormName = 'Fcad_Pedido'
+        CompName = 'cxEdita'
+        Caption = 'Editar'
+        GroupName = 'Or'#231'amentos e Pedidos'
+      end
+      item
+        FormName = 'Fcad_Pedido'
+        CompName = 'cxVer'
+        Caption = 'Visualizar'
+        GroupName = 'Or'#231'amentos e Pedidos'
+      end
+      item
+        FormName = 'Fcad_Pedido'
+        CompName = 'cxApagar'
+        Caption = 'Apagar'
+        GroupName = 'Or'#231'amentos e Pedidos'
+      end
+      item
+        FormName = 'Fcad_Pedido'
+        CompName = 'cxPrint'
+        Caption = 'Imprimir'
+        GroupName = 'Or'#231'amentos e Pedidos'
+      end
+      item
+        FormName = 'Fcad_Pedido'
+        CompName = 'cxOpcoes'
+        Caption = 'Op'#231#245'es'
+        GroupName = 'Or'#231'amentos e Pedidos'
+      end
+      item
+        FormName = 'Fcad_Pedido'
+        CompName = 'FixarComoPedido1'
+        Caption = 'Fixar Or'#231'amento Como Pedido'
+        GroupName = 'Or'#231'amentos e Pedidos'
+      end>
     TableUsers.FieldUserID = 'UCIdUser'
     TableUsers.FieldUserName = 'UCUserName'
     TableUsers.FieldLogin = 'UCLogin'
@@ -19725,10 +20188,10 @@ object FPrinc: TFPrinc
     Left = 40
     Top = 216
   end
-  object UCControls1: TUCControls
+  object ucPrinc: TUCControls
     GroupName = 'Tela Principal'
     UserControl = UserControl1
-    Components = ''
+    Components = 'Principal'
     NotAllowed = naDisabled
     Left = 40
     Top = 312
@@ -19736,43 +20199,87 @@ object FPrinc: TFPrinc
   object ActionList1: TActionList
     Left = 40
     Top = 360
-    object actUsuarios: TAction
-      Caption = 'Usu'#225'rios'
+    object actCadastro: TAction
+      Caption = 'Usu'#225'rios - Cadastro'
     end
-    object actTrocadoUsuario: TAction
-      Caption = 'Troca de Usuario'
+    object actTrocarSenha: TAction
+      Caption = 'Usu'#225'rio - Trocar Senha'
     end
-    object actLog: TAction
-      Caption = 'Log'
-    end
-    object actlongoff: TAction
-      Caption = 'Trocar Usu'#225'rio'
+    object actLogOff: TAction
+      Caption = 'Usu'#225'rio - LogOff'
       ShortCut = 16507
     end
+    object actHistorico: TAction
+      Caption = 'Usu'#225'rio - Hist'#243'rico'
+      ShortCut = 16456
+    end
     object ActCliente: TAction
-      Caption = 'Clientes'
+      Caption = 'Consulta - Clientes'
       ShortCut = 116
       OnExecute = ActClienteExecute
     end
     object ActProduto: TAction
-      Caption = 'Produto'
+      Caption = 'Consulta - Produto'
       ShortCut = 117
       OnExecute = ActProdutoExecute
     end
     object ActAnimais: TAction
-      Caption = 'Animais'
+      Caption = 'Consulta - Animais'
       ShortCut = 118
       OnExecute = ActAnimaisExecute
     end
     object ActOutros: TAction
-      Caption = 'Outros Cadastros'
+      Caption = 'Consulta - Outros Cadastros'
       ShortCut = 119
       OnExecute = ActOutrosExecute
     end
-    object ActFechar: TAction
-      Caption = 'ActFechar'
-      ShortCut = 121
-      OnExecute = ActFecharExecute
+    object cadClientes: TAction
+      Caption = 'Cadastro - Clientes'
+    end
+    object cadProduto: TAction
+      Caption = 'Cadastro - Produtos'
+    end
+    object cadCfop: TAction
+      Caption = 'Cadastro - Cfop'
+    end
+    object cadCpagto: TAction
+      Caption = 'Cadatro - Cond. Pagamento'
+    end
+    object cadOutros: TAction
+      Caption = 'Cadastro - Outros'
+    end
+    object cadBalanco: TAction
+      Caption = 'Cadastro - Balan'#231'o'
+    end
+    object cadPedido: TAction
+      Caption = 'Pedido de Compra'
+    end
+    object cadCompra: TAction
+      Caption = 'Compras'
+    end
+    object cadPedidoVenda: TAction
+      Caption = 'Pedido de Venda'
+    end
+    object cadVendas: TAction
+      Caption = 'Vendas'
+    end
+    object cadReceber: TAction
+      Caption = 'Contas '#225' Receber'
+    end
+    object cadPagar: TAction
+      Caption = 'Contas '#225' Pagar'
+    end
+    object cadCaixa: TAction
+      Caption = 'Conta Corrente (Caixa)'
+    end
+    object cadRelatorios: TAction
+      Caption = 'Relat'#243'rios'
+    end
+    object cadConf: TAction
+      Caption = 'Configura'#231#245'es (Parametros)'
+    end
+    object cadEmpresa: TAction
+      Caption = 'Cadastro da Empresa'
     end
   end
   object dxBarManager: TdxBarManager
@@ -19800,7 +20307,7 @@ object FPrinc: TFPrinc
     object tbFinanceiro: TdxBar
       Caption = 'Financeiro'
       CaptionButtons = <>
-      DockedLeft = 532
+      DockedLeft = 593
       DockedTop = 0
       FloatLeft = 804
       FloatTop = 8
@@ -19828,7 +20335,7 @@ object FPrinc: TFPrinc
     object tbCompras: TdxBar
       Caption = 'Compras'
       CaptionButtons = <>
-      DockedLeft = 247
+      DockedLeft = 308
       DockedTop = 0
       FloatLeft = 804
       FloatTop = 8
@@ -19841,7 +20348,7 @@ object FPrinc: TFPrinc
         end
         item
           Visible = True
-          ItemName = 'dxBarLargeButton1'
+          ItemName = 'cxCompras'
         end>
       OneOnRow = False
       Row = 0
@@ -19852,7 +20359,7 @@ object FPrinc: TFPrinc
     object tbConfiguracoes: TdxBar
       Caption = 'Configura'#231#245'es'
       CaptionButtons = <>
-      DockedLeft = 778
+      DockedLeft = 839
       DockedTop = 0
       FloatLeft = 804
       FloatTop = 8
@@ -19861,7 +20368,7 @@ object FPrinc: TFPrinc
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarButton1'
+          ItemName = 'cxConf'
         end
         item
           Visible = True
@@ -19880,7 +20387,7 @@ object FPrinc: TFPrinc
     object tbRelatorios: TdxBar
       Caption = 'Relat'#243'rios'
       CaptionButtons = <>
-      DockedLeft = 695
+      DockedLeft = 756
       DockedTop = 0
       FloatLeft = 804
       FloatTop = 8
@@ -19889,7 +20396,7 @@ object FPrinc: TFPrinc
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton9'
+          ItemName = 'cxRelatorios'
         end>
       OneOnRow = False
       Row = 0
@@ -19922,6 +20429,10 @@ object FPrinc: TFPrinc
         item
           Visible = True
           ItemName = 'cxBalanco'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarSubItem1'
         end>
       OneOnRow = False
       Row = 0
@@ -19932,7 +20443,7 @@ object FPrinc: TFPrinc
     object tbVendas: TdxBar
       Caption = 'Vendas'
       CaptionButtons = <>
-      DockedLeft = 381
+      DockedLeft = 442
       DockedTop = 0
       FloatLeft = 1050
       FloatTop = 8
@@ -19941,11 +20452,11 @@ object FPrinc: TFPrinc
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton3'
+          ItemName = 'cxPedidoVenda'
         end
         item
           Visible = True
-          ItemName = 'dxBarLargeButton2'
+          ItemName = 'cxVendas'
         end>
       OneOnRow = False
       Row = 0
@@ -21493,7 +22004,7 @@ object FPrinc: TFPrinc
         0000000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
     end
-    object dxBarLargeButton9: TdxBarLargeButton
+    object cxRelatorios: TdxBarLargeButton
       Caption = '&Relat'#243'rios'
       Category = 0
       Hint = 'Relat'#243'rios do Sistema'
@@ -21704,6 +22215,7 @@ object FPrinc: TFPrinc
         000005050506414141537A7A7A9BA09F9FCAB7B6B6E6BCBBBAEBBCBBBAEBB7B6
         B6E6A09F9FCA7A7A7A9B41414153050505060000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
+      OnClick = cxRelatoriosClick
     end
     object cxConCliente: TdxBarLargeButton
       Caption = 'Clientes'
@@ -22462,7 +22974,7 @@ object FPrinc: TFPrinc
         0000000000000000000000000000000000000000000000000000}
       OnClick = cxPagarClick
     end
-    object dxBarButton1: TdxBarButton
+    object cxConf: TdxBarButton
       Caption = 'Configura'#231#245'es     '
       Category = 0
       Hint = 'Configura'#231#245'es     '
@@ -22920,10 +23432,10 @@ object FPrinc: TFPrinc
         416F000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
     end
-    object dxBarLargeButton1: TdxBarLargeButton
+    object cxCompras: TdxBarLargeButton
       Caption = 'Entradas'
       Category = 0
-      Hint = 'Entradas'
+      Hint = '&Compras'
       Visible = ivAlways
       Glyph.Data = {
         36090000424D3609000000000000360000002800000018000000180000000100
@@ -23131,7 +23643,7 @@ object FPrinc: TFPrinc
         D4F9B1B1B2CABEBEBED4C9C9C9EEA4A4A4B4CDCDCDEAABABABC3A6A7A6B5CFCF
         CFE98F90919DCDCECEE3AFAFAFC5A3A3A4B1D2D2D2ED929292A1C6C6C6DBB0B0
         B0C89090919DD9D9D9F18A8A8A98020202020000000000000000}
-      OnClick = dxBarLargeButton1Click
+      OnClick = cxComprasClick
     end
     object cxPedido: TdxBarLargeButton
       Caption = '&Pedidos'
@@ -23346,7 +23858,7 @@ object FPrinc: TFPrinc
         B0C89090919DD9D9D9F18A8A8A98020202020000000000000000}
       OnClick = cxPedidoClick
     end
-    object dxBarLargeButton2: TdxBarLargeButton
+    object cxVendas: TdxBarLargeButton
       Caption = '&Vendas'
       Category = 0
       Hint = 'Vendas'
@@ -23557,9 +24069,9 @@ object FPrinc: TFPrinc
         3D56353753603F415E6E3B3F718C383C88BB2C3280BA35387FB33C407EAD2F34
         74A70D1260A113186DB23B4194D125296D921E226281484A677532345161080A
         354E1718303D0F10161900000000000000000000000000000000}
-      OnClick = dxBarLargeButton2Click
+      OnClick = cxVendasClick
     end
-    object dxBarLargeButton3: TdxBarLargeButton
+    object cxPedidoVenda: TdxBarLargeButton
       Caption = '&Or'#231'/Pedidos'
       Category = 0
       Hint = 'Or'#231'/Pedidos'
@@ -23770,7 +24282,7 @@ object FPrinc: TFPrinc
         3D56353753603F415E6E3B3F718C383C88BB2C3280BA35387FB33C407EAD2F34
         74A70D1260A113186DB23B4194D125296D921E226281484A677532345161080A
         354E1718303D0F10161900000000000000000000000000000000}
-      OnClick = dxBarLargeButton3Click
+      OnClick = cxPedidoVendaClick
     end
     object cxItemOutros: TdxBarSubItem
       Caption = 'Outros'
@@ -23989,7 +24501,7 @@ object FPrinc: TFPrinc
         end
         item
           Visible = True
-          ItemName = 'dxBarLargeButton4'
+          ItemName = 'cxcPagto'
         end
         item
           Visible = True
@@ -24077,7 +24589,7 @@ object FPrinc: TFPrinc
         00001E1E1E26CAC9C9F2C8C8C8F01A1919200000000000000000000000000000
         000000000000828181A0CDCDCCF26262627A0000000000000000}
     end
-    object dxBarLargeButton4: TdxBarLargeButton
+    object cxcPagto: TdxBarLargeButton
       Caption = 'Cond. Pagamento'
       Category = 0
       Hint = 'Cond. Pagamento'
@@ -24157,7 +24669,7 @@ object FPrinc: TFPrinc
         0000000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
-      OnClick = dxBarLargeButton4Click
+      OnClick = cxcPagtoClick
     end
     object cxOutros: TdxBarLargeButton
       Caption = 'Outros'
@@ -24241,6 +24753,187 @@ object FPrinc: TFPrinc
         113A131313370B0B0B0F02020202000000000000000000000000}
       OnClick = cxOutrosClick
     end
+    object dxBarSubItem1: TdxBarSubItem
+      Caption = '&Usu'#225'rios'
+      Category = 0
+      Visible = ivAlways
+      LargeGlyph.Data = {
+        36100000424D3610000000000000360000002800000020000000200000000100
+        2000000000000010000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000A0A13161B1D3C482E3061733134
+        7F992B2F90B33338A0C82229ABDC1920AEE61920ACE51A21AAE51A21A8E51920
+        A5E51920A2E5181F9FE71D249AE12C3191D02B307DB53539688C2A2C49621011
+        1B25000000000000000000000000000000000000000000000000000000000000
+        000000000000000000001B1C323A2D3292B63036BEF01921C5FF0F17C4FF1018
+        C4FF131BC4FF1019C3FF1A22C5FF1D25C5FF1D25C2FF1D25C0FF1D25BFFF1D25
+        BCFF1C24B8FF1C24B5FF1B22AFFF131BA8FF111AA3FF0B149BFF0C1495FF2127
+        95FB3B3F81C72627395000000000000000000000000000000000000000000000
+        00000202030328293F47252DBDF30C14C2FF1019C5FF1921C9FF1D24CBFF1E26
+        CCFF1E26CCFF1F27CBFF1E26C9FF1D25C8FF1D25C5FF1D25C3FF1D25C1FF1D25
+        BFFF1D25BBFF1C24B7FF1C24B3FF1D25AEFF1D25AAFF1D25A5FF1B23A0FF1119
+        93FF000781FF0E1380FF43445C7B1F1F23290000000000000000000000000000
+        0000292B718A2C33B9EB2027C7FF3139CFFF1D25CCFF1C24CDFF1D25CFFF1D25
+        D0FF1D25CFFF1D25CFFF1D25CDFF1D25CCFF1D25C9FF1D25C6FF1D25C3FF1D25
+        C1FF1D25BDFF1C24B9FF1C24B6FF1C24B1FF1C24ACFF1C24A6FF1C24A2FF1C24
+        9CFF1B2294FF121986FF171D7FFD1317519E0000000000000000000000000000
+        0000161B7B9D1F27C5FC3038CEFF343BD2FF1D25CFFF1C24D1FF1D25D2FF1D25
+        D3FF1D25D2FF1D25D2FF1D25D0FF1D25CEFF1D25CBFF1D25C9FF1D25C6FF1D25
+        C2FF1D25C0FF1D25BCFF1C24B7FF1C24B2FF1C24ADFF1C24A8FF1C24A2FF1B23
+        9EFF1B2196FF131A88FF2D3184E9272A548A0000000000000000000000000000
+        00002B2C424A3D418DA61B22CBFF353DD4FF1F27D2FF1B23D3FF1D25D4FF1D25
+        D4FF1D25D4FF1D25D3FF1D25D3FF1D25D1FF1E26CEFF1E26CBFF1E26C9FF1D25
+        C5FF1D25C3FF1D25C0FF1C24BBFF1C24B4FF1C24AEFF1C24AAFF1C24A5FF1C24
+        A0FF192197FF0B1286FF4143648B222229310000000000000000000000000000
+        000000000000232330341E24CAFB3037D4FF262DD5FF1A22D3FF1D25D5FF1D25
+        D5FF1D25D5FF1D25D5FF1C24D6FF1720D6FF121BD3FF0F19CCFF111AC5FF151E
+        BFFF1A23B8FF1D25B7FF1D25BBFF1C24B8FF1C24B0FF1C24ABFF1C24A5FF1E26
+        A1FF101793FF20268EF71B1C2127000000000000000000000000000000000000
+        000000000000000000003D428FA60F16CFFF3239D9FF1A22D5FF1D25D6FF1E26
+        D7FF1E26D7FF121ADEFF0D17D8FF1D26C8FF2E36BCFF3840B4FF353CAFFF252C
+        AEFF121CAFFF0F19ABFF1B23A6FF1D25B0FF1C24B4FF1C24ACFF1C24A6FF1D25
+        A1FF00048BFF3C3E668D00000000000000000000000000000000000000000000
+        0000000000000000000023232829181FCBF71C23D4FF232BD7FF1B23D6FF1D25
+        D9FF0F19E2FF252DC7FF6064A5FF9091A1FFABABAAFFB2B3ACFFA5A6A2FF8F90
+        98FF6C6F94FF3137A0FF1019A8FF1A22A1FF1C24ADFF1C24AEFF1E26A7FF0004
+        93FF2B318CD809090A0B00000000000000000000000000000000000000000000
+        00000000000000000000000000003A3C585F141CD2FF141DD4FF1F27D8FF131B
+        E0FF363CBCFF8F8F82FFAFAE93FFBBBBB0FFC7C7C2FFC9CAC6FFBEBEBBFFB0B0
+        A9FFA1A08EFF888879FF434893FF121AA4FF1C24A3FF1D25AEFF00099BFF272E
+        92DF2324272A0000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000003537575F1E25D3FD040DD8FF1B23
+        CBFF7D7E81FFB7B69FFFD2D3D7FFE6E6E7FFEDEEEEFFF0F1F1FFEFEEEEFFE7E7
+        E8FFD6D7DAFFA8A89DFF7D7D70FF262D94FF0811A2FF020BA3FF2A309AE22222
+        2629000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000000000001D1E282B2B30A4BA1B22
+        CAFF5F617CFFCDCDC1FFF5F5F6FFEAEAEAFFEAEAEBFFEAEAEBFFEAEAEBFFE9E9
+        E9FFF1F1F3FFDDDDD6FF6C6E6CFF1B228FFF1D24B0FA2F336C8F0B0B10130000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000001D1E
+        3F453D407E9BA9A9BEEEE7E7E0FFDEDEDFFFDEDEDFFFDDDDDEFFDDDDDEFFDDDD
+        DEFFE2E2DFFFCBCCCFFF4E5289C6292C5F7A16161E2200000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000004B4C555BD8D8D0FFD3D3D3FFDDDDDEFFE5E5E5FFDFDFE0FFD4D4
+        D5FFD2D2CEFF8A8A91A700000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000002B2B2A37CDCDCCFCE8E8E8FFF8F8F8FFFCFCFCFFFAFAFAFFECEC
+        EDFFCCCCCDFF6868657300000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00000000000046464651E8E8E9FFFDFDFDFFF9F9F9FFF8F8F7FFF9F9F8FFFCFC
+        FBFFEBEBECFF7C7C7C8800000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00000D0D0D0DC9C9C9CFF2F2F2FFF2F2F2FFF3F3F3FFF3F3F3FFF4F4F3FFF1F1
+        F1FFF1F1F1FFE0E0E0F03939393A000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000969697A2E9E9E9FFEDEDECFFEDEDEDFFEEEEEFFFEFEFEFFFEEEEEFFFECEC
+        EDFFEBEBEBFFE4E4E6FFC7C7C8DC0E0E0E0E0000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000005050
+        5054E3E3E3FFE8E8E9FFE6E6E7FFE8E8E9FFE9E9EAFFE9E9EAFFE9E9E9FFE8E8
+        E8FFE6E6E7FFE3E3E5FFDCDCDCFF7B7B7C860000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000000000000000000000000000B2B2
+        B2C7E1E1E1FFE3E3E4FFE1E1E2FFE4E4E4FFE5E5E5FFE5E5E5FFE5E5E5FFE4E4
+        E4FFE2E2E3FFE0E0E1FFDADADBFFD2D2D3F32121212300000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000000000000000000035353537DCDC
+        DCFFE1E1E1FFDDDDDEFFDDDDDEFFDFDFDFFFE0E0E0FFE0E0E1FFE0E0E0FFDFDF
+        DFFFDDDDDEFFDCDCDBFFDBDBDBFFD3D3D3FF6161638E00000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000000000000000000064636472D9D9
+        DAFFE0E0E0FFD8D8D8FFD9D9DAFFDBDBDBFFDCDCDCFFDCDCDCFFDBDBDBFFD9D9
+        DAFFDBDBDBFFDEDEDEFFE2E2E2FFE7E6E7FF828285FF2A2A2B40000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000727273C0C0C0
+        C1FFE6E6E6FFD3D3D3FFD4D4D5FFD5D5D6FFD6D6D6FFD8D8D8FFDFDFDFFFE4E4
+        E4FFE0E0E0FFD5D5D6FFCCCDCEFFCDCDCEFF6A6A6EFF414244A6000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000000000002121212979797CF88F90
+        92FFCDCECFFFD9D8D9FFD2D2D3FFCFCFD0FFD8D8D9FFDCDCDDFFC2C2C2FF9D9D
+        9EFF7F7F82FF67686BFF56585BFF494B4EFF45464AFF414246E7050505130000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000027272848828384FF7F81
+        82FF939394FFB9B8BAFFD1D1D2FFD6D6D6FFD0D0D1FF959698FF666669FF5253
+        56FF4C4D50FF494A4EFF47484CFF44454AFF494A4EFF404144EF0707071A0000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000028282849878889FF8485
+        86FF808182FF808282FFA4A5A6FFD1D0D1FF8C8C8DFF585A5CFF5F6063FF6061
+        65FF5E5F62FF595A5EFF545559FF4E5053FF484B4DFF434447E9060607140000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000000000002222222A898A8CF88485
+        87FF848587FF7D7E7FFF8A8B8CFF9C9D9EFF6A6B6DFF696A6CFF696A6DFF6667
+        68FF606164FF595A5DFF535558FF505154FF3B3D41FF4A4A4CB8000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00000000000000000000000000000000000000000000000000007A7A7CBC7E7F
+        80FF898A8BFF838485FF828385FF797A7CFF707173FF717273FF6D6E70FF6869
+        6BFF626365FF5C5D60FF56575AFF494A4DFF35383BFF3D3E3E55000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000454545538384
+        85FF838485FF878888FF808183FF78797BFF767779FF747577FF727375FF6E6F
+        71FF66676AFF5E6162FF555759FF36383BFF4D4E4FB900000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000005C5C
+        5D85828383FF7B7C7DFF7E7F81FF7C7D7FFF797A7CFF757678FF717274FF6D6E
+        70FF67686AFF57585BFF414246FF555758C51010101200000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000048484869848588EF737477FF707173FF757678FF747577FF717274FF6869
+        6BFF57585AFF535558FF565658AF0808080C0000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000E0E0E124141425969696AAC6D6D6FE1666769E9646566E96263
+        65DD575758A429292A3D00000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000}
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'cxCadastroUsuario'
+        end
+        item
+          Visible = True
+          ItemName = 'cxTrocadeUsuario'
+        end
+        item
+          Visible = True
+          ItemName = 'cxLogOff'
+        end
+        item
+          Visible = True
+          ItemName = 'cxHistorico'
+        end>
+    end
+    object cxCadastroUsuario: TdxBarLargeButton
+      Caption = '&Cadastro'
+      Category = 0
+      Hint = 'Cadastro'
+      Visible = ivAlways
+      OnClick = cxCadastroUsuarioClick
+    end
+    object cxTrocadeUsuario: TdxBarLargeButton
+      Caption = '&Troca Senha'
+      Category = 0
+      Hint = 'Troca Senha'
+      Visible = ivAlways
+      OnClick = cxTrocadeUsuarioClick
+    end
+    object cxLogOff: TdxBarLargeButton
+      Caption = 'Log-Off'
+      Category = 0
+      Hint = 'Log-Off'
+      Visible = ivAlways
+      OnClick = cxLogOffClick
+    end
+    object cxHistorico: TdxBarLargeButton
+      Caption = '&Hist'#243'rico'
+      Category = 0
+      Hint = 'Hist'#243'rico de Usu'#225'rio'
+      Visible = ivAlways
+      OnClick = cxHistoricoClick
+    end
   end
   object dxRadialMenu: TdxRibbonRadialMenu
     Glyph.Data = {
@@ -24300,7 +24993,7 @@ object FPrinc: TFPrinc
     ItemLinks = <
       item
         Visible = True
-        ItemName = 'dxBarLargeButton9'
+        ItemName = 'cxRelatorios'
       end
       item
         Visible = True
@@ -24323,14 +25016,46 @@ object FPrinc: TFPrinc
     Left = 720
     Top = 248
   end
-  object cxPopMenu: TRxPopupMenu
-    Left = 192
-    Top = 216
-    object Contagem1: TMenuItem
-      Caption = 'Por Contagem'
-    end
-    object Diferen1: TMenuItem
-      Caption = 'Por Diferen'#231'a'
-    end
+  object uHistorico: TUCControlHistorico
+    Active = False
+    UserControl = UserControl1
+    Options.SaveNewRecord = True
+    Options.SaveDelete = True
+    Options.SavePostInsert = True
+    Options.SavePostEdit = True
+    Options.TypeSavePostEdit = tpSaveAllFields
+    TableHistory.TableName = 'UCTABHistory'
+    TableHistory.FieldApplicationID = 'ApplicationID'
+    TableHistory.FieldUserID = 'UserID'
+    TableHistory.FieldEventDate = 'EventDate'
+    TableHistory.FieldEventTime = 'EventTime'
+    TableHistory.FieldForm = 'Form'
+    TableHistory.FieldCaptionForm = 'FormCaption'
+    TableHistory.FieldEvent = 'Event'
+    TableHistory.FieldObs = 'Obs'
+    TableHistory.FieldTableName = 'tName'
+    UsersHistory.Action = actHistorico
+    HistoryMsg.Evento_Insert = 'Inserido'
+    HistoryMsg.Evento_Delete = 'Apagado'
+    HistoryMsg.Evento_Edit = 'Editado'
+    HistoryMsg.Evento_NewRecord = 'Novo registro'
+    HistoryMsg.Hist_All = 'Todos'
+    HistoryMsg.Msg_LimpHistorico = 'Excluir todo o conte'#250'do do hist'#243'rico ?'
+    HistoryMsg.Msg_MensConfirma = 'Confirma'#231#227'o'
+    HistoryMsg.Msg_LogEmptyHistory = 'Usu'#225'rio %s apagou todo o hist'#243'rico as %s'
+    HistoryMsg.LabelDescricao = 'Hist'#243'rico de tabelas'
+    HistoryMsg.LabelUser = 'Usu'#225'rio'
+    HistoryMsg.LabelForm = 'Formul'#225'rio'
+    HistoryMsg.LabelEvento = 'Evento'
+    HistoryMsg.LabelTabela = 'Tabela'
+    HistoryMsg.LabelDataEvento = 'Data'
+    HistoryMsg.LabelHoraEvento = 'Hora'
+    HistoryMsg.Msg_NewRecord = '%s inseriu um novo registro'
+    HistoryMsg.Hist_MsgExceptPropr = 'Favor informar a propriedade %s'
+    HistoryMsg.Hist_BtnFiltro = '&Aplicar Filtro'
+    HistoryMsg.Hist_BtnExcluir = '&Excluir Hist'#243'rico'
+    HistoryMsg.Hist_BtnFechar = '&Fechar'
+    Left = 88
+    Top = 264
   end
 end

@@ -23,7 +23,7 @@ uses
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, Vcl.StdCtrls,
   cxButtons, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLabel, Vcl.ExtCtrls,
   Vcl.ComCtrls, dxCore, cxDateUtils, cxPCdxBarPopupMenu, cxButtonEdit, cxMemo,
-  cxCurrencyEdit, cxPC, cxCalendar, cxCheckBox, Vcl.ExtDlgs, cxDBEdit;
+  cxCurrencyEdit, cxPC, cxCalendar, cxCheckBox, Vcl.ExtDlgs, cxDBEdit, UCBase;
 
 type
   TFcad_Produto = class(TFcad_Pai)
@@ -117,6 +117,7 @@ type
     cxDBCurrencyEdit3: TcxDBCurrencyEdit;
     cxDBCurrencyEdit4: TcxDBCurrencyEdit;
     cxDBCurrencyEdit1: TcxDBCurrencyEdit;
+    UCControls1: TUCControls;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
@@ -173,8 +174,8 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas, uDmCad, uCon_Generica, uCad_Clientes, uCad_Estoque, uCalculos,
-  uRelatorios;
+uses uRotinas, uDmCad, uCon_Generica, uCad_Clientes, uCad_Estoque, uRotinaDeCalculosMatematicos,
+  uRotinaDeImpressaoDeRelatorios, uPrinc;
 
 procedure TFcad_Produto.cxApagaFotoClick(Sender: TObject);
 begin
@@ -267,7 +268,7 @@ end;
 procedure TFcad_Produto.cxPrintClick(Sender: TObject);
 begin
 ///// Impresso
-   Imprime(dmCad.dsProd, NIL,
+   Imprime(dmCad.dsProd, NIL, NIL,
             'SIM',
             'Ficha de Produtos',
             dmCad.qryConf.FieldByName('PASTASERVIDOR').ASString + '\Relatorios\Impressos\ppFichaProd.rtm',
@@ -672,5 +673,6 @@ end;
 
 
 end.
+
 
 

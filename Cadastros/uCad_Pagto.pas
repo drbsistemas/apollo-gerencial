@@ -21,7 +21,7 @@ uses
   cxNavigator, Data.DB, cxDBData, RxMenus, dxGDIPlusClasses, cxImage,
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxGridCustomView, cxGrid, cxTextEdit, cxMaskEdit, cxDropDownEdit,
-  cxLabel, Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, cxCurrencyEdit;
+  cxLabel, Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls, cxCurrencyEdit, UCBase;
 
 type
   TFcad_Pagto = class(TFcad_Pai)
@@ -45,6 +45,7 @@ type
     cxLabel5: TcxLabel;
     ePercentual: TcxCurrencyEdit;
     cxLabel7: TcxLabel;
+    UCControls1: TUCControls;
     procedure cxNovoClick(Sender: TObject);
     procedure cxEditaClick(Sender: TObject);
     procedure cxApagarClick(Sender: TObject);
@@ -75,7 +76,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDmCad, uRotinas;
+uses uDmCad, uRotinas, uPrinc;
 
 procedure TFcad_Pagto.cxApagaFotoClick(Sender: TObject);
 begin

@@ -194,9 +194,6 @@ end;
 procedure TFcad_Pai.FormCreate(Sender: TObject);
 begin
    grConsulta.Tag := 0;
-   ID             := 0;
-   DESCRICAO      := EmptyStr;
-   OBS            := EmptyStr;
    MostraPainelBusca(Cad);
 end;
 
@@ -237,6 +234,10 @@ procedure TFcad_Pai.FormShow(Sender: TObject);
 begin
    if FormStyle = fsNormal then
       MostraPainelBusca(Con);
+
+   ID        :=0;
+   DESCRICAO := EmptyStr;
+   OBS       := EmptyStr;
 
    MOstraPainelCadastro(Con);
 

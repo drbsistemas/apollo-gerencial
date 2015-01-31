@@ -46,13 +46,13 @@ object dmMov: TdmMov
       '  VLRTOTALITEM, OBSITEM, DATAVALIDADE, SALDOQTDE, STATUSITEM'
       'FROM PEDIDOITEM'
       'WHERE IDPEDIDOITEM = :IDPEDIDOITEM')
-    Left = 73
-    Top = 187
+    Left = 53
+    Top = 51
   end
   object dsItemPed: TDataSource
     DataSet = qryItemPed
-    Left = 73
-    Top = 231
+    Left = 53
+    Top = 95
   end
   object qryPedido: TFDQuery
     AfterInsert = qryPedidoAfterInsert
@@ -64,10 +64,13 @@ object dmMov: TdmMov
     SQL.Strings = (
       'select A.*,'
       'B.RAZAO NOMECLIE,'
+      'B.CNPJ,'
+      'B.IE,'
       'B.ENDERECO,'
       'B.NUMERO,'
       'B.BAIRRO,'
       'B.CEP,'
+      'B.CIDADE,'
       'C.RAZAO NOMEVEND,'
       'D.RAZAO NOMETRANS,'
       'E.DESCRICAO'
@@ -81,7 +84,7 @@ object dmMov: TdmMov
         #39
       'left join CPAGTO E on A.IDCPAGTO = E.IDCPAGTO')
     Left = 18
-    Top = 143
+    Top = 7
     object qryPedidoIDPEDIDO: TIntegerField
       FieldName = 'IDPEDIDO'
       Origin = 'IDPEDIDO'
@@ -229,6 +232,28 @@ object dmMov: TdmMov
       ReadOnly = True
       Size = 200
     end
+    object qryPedidoCNPJ: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CNPJ'
+      Origin = 'CNPJ'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryPedidoIE: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'IE'
+      Origin = 'IE'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryPedidoCIDADE: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CIDADE'
+      Origin = 'CIDADE'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 150
+    end
   end
   object UpdtPedido: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -291,12 +316,12 @@ object dmMov: TdmMov
       'FROM PEDIDO'
       'WHERE IDPEDIDO = :IDPEDIDO')
     Left = 18
-    Top = 187
+    Top = 51
   end
   object dsPedido: TDataSource
     DataSet = qryPedido
     Left = 18
-    Top = 231
+    Top = 95
   end
   object qryItemPed: TFDQuery
     AfterInsert = qryItemPedAfterInsert
@@ -306,15 +331,17 @@ object dmMov: TdmMov
     UpdateTransaction = dmCon.FdSalva
     UpdateOptions.AssignedValues = [uvRefreshMode]
     UpdateOptions.RefreshMode = rmAll
+    UpdateObject = UpdtItemPed
     SQL.Strings = (
       'select A.*,'
       'B.NOMEPROD,'
+      'B.MARCAPROD,'
       'B.UNPROD,'
       'B.REFPROD'
       'from PEDIDOITEM A'
       'left join PRODUTO B on A.IDPROD = B.IDPROD')
-    Left = 73
-    Top = 145
+    Left = 53
+    Top = 9
     object qryItemPedIDPEDIDOITEM: TIntegerField
       FieldName = 'IDPEDIDOITEM'
       Origin = 'IDPEDIDOITEM'
@@ -389,63 +416,100 @@ object dmMov: TdmMov
       Size = 50
     end
   end
-  object UpdtCredito: TFDUpdateSQL
+  object uHis_Pedido: TUCHist_DataSet
+    DataSet = qryPedido
+    ControlHistorico = FPrinc.uHistorico
+    Left = 16
+    Top = 144
+  end
+  object uHis_ItemPed: TUCHist_DataSet
+    DataSet = qryItemPed
+    ControlHistorico = FPrinc.uHistorico
+    Left = 53
+    Top = 144
+  end
+  object qryAux: TFDQuery
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    Left = 304
+    Top = 5
+  end
+  object dsAux: TDataSource
+    DataSet = qryAux
+    Left = 304
+    Top = 49
+  end
+  object qryAux2: TFDQuery
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    Left = 344
+    Top = 5
+  end
+  object dsAux2: TDataSource
+    DataSet = qryAux2
+    Left = 344
+    Top = 49
+  end
+  object UpdtPedidoFin: TFDUpdateSQL
     Connection = dmCon.FdCon
     InsertSQL.Strings = (
-      'INSERT INTO CLIENTECREDITO'
-      '(IDCREDITO, "DATA", DOCUMENTO, DESCRICAO, SALDOANTES, '
-      '  CREDITO, DEBITO, SALDO, IDCLIE)'
+      'INSERT INTO PEDIDOFINANCEIRO'
+      '(IDPEDIDOFINANCEIRO, IDPEDIDO, VENCIMENTO, VALOR, '
+      '  DOCUMENTO)'
       
-        'VALUES (:NEW_IDCREDITO, :NEW_DATA, :NEW_DOCUMENTO, :NEW_DESCRICA' +
-        'O, :NEW_SALDOANTES, '
-      '  :NEW_CREDITO, :NEW_DEBITO, :NEW_SALDO, :NEW_IDCLIE)'
-      
-        'RETURNING IDCREDITO, "DATA", DOCUMENTO, DESCRICAO, SALDOANTES, C' +
-        'REDITO, DEBITO, SALDO, IDCLIE')
+        'VALUES (:NEW_IDPEDIDOFINANCEIRO, :NEW_IDPEDIDO, :NEW_VENCIMENTO,' +
+        ' :NEW_VALOR, '
+      '  :NEW_DOCUMENTO)'
+      'RETURNING IDPEDIDOFINANCEIRO, IDPEDIDO, VENCIMENTO, VALOR')
     ModifySQL.Strings = (
-      'UPDATE CLIENTECREDITO'
+      'UPDATE PEDIDOFINANCEIRO'
       
-        'SET IDCREDITO = :NEW_IDCREDITO, "DATA" = :NEW_DATA, DOCUMENTO = ' +
-        ':NEW_DOCUMENTO, '
-      '  DESCRICAO = :NEW_DESCRICAO, SALDOANTES = :NEW_SALDOANTES, '
+        'SET IDPEDIDOFINANCEIRO = :NEW_IDPEDIDOFINANCEIRO, IDPEDIDO = :NE' +
+        'W_IDPEDIDO, '
       
-        '  CREDITO = :NEW_CREDITO, DEBITO = :NEW_DEBITO, SALDO = :NEW_SAL' +
-        'DO, '
-      '  IDCLIE = :NEW_IDCLIE'
-      'WHERE IDCREDITO = :OLD_IDCREDITO'
-      
-        'RETURNING IDCREDITO, "DATA", DOCUMENTO, DESCRICAO, SALDOANTES, C' +
-        'REDITO, DEBITO, SALDO, IDCLIE')
+        '  VENCIMENTO = :NEW_VENCIMENTO, VALOR = :NEW_VALOR, DOCUMENTO = ' +
+        ':NEW_DOCUMENTO'
+      'WHERE IDPEDIDOFINANCEIRO = :OLD_IDPEDIDOFINANCEIRO'
+      'RETURNING IDPEDIDOFINANCEIRO, IDPEDIDO, VENCIMENTO, VALOR')
     DeleteSQL.Strings = (
-      'DELETE FROM CLIENTECREDITO'
-      'WHERE IDCREDITO = :OLD_IDCREDITO')
+      'DELETE FROM PEDIDOFINANCEIRO'
+      'WHERE IDPEDIDOFINANCEIRO = :OLD_IDPEDIDOFINANCEIRO')
     FetchRowSQL.Strings = (
       
-        'SELECT IDCREDITO, "DATA" AS "DATA", DOCUMENTO, DESCRICAO, SALDOA' +
-        'NTES, '
-      '  CREDITO, DEBITO, SALDO, IDCLIE'
-      'FROM CLIENTECREDITO'
-      'WHERE IDCREDITO = :IDCREDITO')
-    Left = 17
-    Top = 43
+        'SELECT IDPEDIDOFINANCEIRO, IDPEDIDO, VENCIMENTO, VALOR, DOCUMENT' +
+        'O'
+      'FROM PEDIDOFINANCEIRO'
+      'WHERE IDPEDIDOFINANCEIRO = :IDPEDIDOFINANCEIRO')
+    Left = 113
+    Top = 51
   end
-  object dsCredito: TDataSource
-    DataSet = qryCredito
-    Left = 17
-    Top = 87
+  object dsPedidoFin: TDataSource
+    DataSet = qryPedidoFin
+    Left = 113
+    Top = 95
   end
-  object qryCredito: TFDQuery
-    AfterInsert = qryCreditoAfterInsert
+  object qryPedidoFin: TFDQuery
+    AfterInsert = qryPedidoFinAfterInsert
     CachedUpdates = True
     Connection = dmCon.FdCon
     Transaction = dmCon.FdSalva
     UpdateTransaction = dmCon.FdSalva
     UpdateOptions.AssignedValues = [uvRefreshMode]
     UpdateOptions.RefreshMode = rmAll
-    UpdateObject = UpdtCredito
+    UpdateObject = UpdtPedidoFin
     SQL.Strings = (
-      'select * from CLIENTECREDITO')
-    Left = 17
-    Top = 1
+      'select * from PEDIDOFINANCEIRO')
+    Left = 113
+    Top = 9
+  end
+  object uHis_PedidoFin: TUCHist_DataSet
+    DataSet = qryPedidoFin
+    ControlHistorico = FPrinc.uHistorico
+    Left = 113
+    Top = 144
   end
 end

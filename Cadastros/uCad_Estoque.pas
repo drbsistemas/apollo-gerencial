@@ -63,7 +63,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDmCad, uRotinas, uRelatorios;
+uses uDmCad, uRotinas, uRotinaDeImpressaoDeRelatorios;
 
 procedure TFCad_Estoque.cxCancelaClick(Sender: TObject);
 begin
@@ -72,7 +72,7 @@ end;
 
 procedure TFCad_Estoque.cxSalvarClick(Sender: TObject);
 begin
-   Imprime(dmcad.dsEstoque, NIl,
+   Imprime(dmcad.dsEstoque, NIl, NIL,
             'SIM',
             'Ficha de Estoque',
             dmCad.qryConf.FieldByName('PASTASERVIDOR').ASString + '\Relatorios\Estoque\ppFichaEstoque.rtm',

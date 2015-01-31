@@ -26,7 +26,7 @@ uses
   cxPCdxBarPopupMenu, cxCurrencyEdit, cxPC, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.Client, FireDAC.Comp.DataSet;
+  FireDAC.Comp.Client, FireDAC.Comp.DataSet, UCHistDataset, UCBase;
 
 type
   TFcad_Clientes = class(TFcad_Pai)
@@ -206,8 +206,9 @@ type
     dsClie: TDataSource;
     cxEndereco: TcxButton;
     CrditodeCliente1: TMenuItem;
+    uHis_Cliente: TUCHist_DataSet;
+    UCControls1: TUCControls;
     procedure cxVoltarClick(Sender: TObject);
-    procedure cxCancelaClick(Sender: TObject);
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure cxSalvarClick(Sender: TObject);
     procedure cbPessoaPropertiesChange(Sender: TObject);
@@ -240,6 +241,7 @@ type
     procedure qryClieAfterInsert(DataSet: TDataSet);
     procedure cxEnderecoClick(Sender: TObject);
     procedure CrditodeCliente1Click(Sender: TObject);
+    procedure cxCancelaClick(Sender: TObject);
   private
     { Private declarations }
       indice : String;
@@ -257,7 +259,8 @@ implementation
 
 {$R *.dfm}
 
-uses uDmCad, uRotinas, uCad_Cidade, uRelatorios, uCad_Pagto, uCad_Credito;
+uses uDmCad, uRotinas, uCad_Cidade, uCad_Pagto, uCad_Credito,
+  uRotinaDeImpressaoDeRelatorios, uPrinc;
 
 procedure TFcad_Clientes.cbDtNascimentoExit(Sender: TObject);
 begin
@@ -293,7 +296,17 @@ end;
 procedure TFcad_Clientes.CrditodeCliente1Click(Sender: TObject);
 begin
    inherited;
-   AbreTelaComShowModal(TFcad_Credito, TObject(Fcad_Credito), Fcad_CLientes, '');
+   Fcad_Credito := TFcad_Credito.Create(self);
+   Fcad_Credito.eCodCliente.Text := qryClie.FieldByName('IDCLIE').AsString;
+   Fcad_Credito.eCliente.TExt    := qryClie.FieldByName('RAZAO').AsString;
+   Fcad_Credito.ShowModal;
+
+   if FormATivo <> NIl then
+   begin
+      FormAtivo.WindowState := wsNormal;
+      FormAtivo.WindowState := wsMaximized;
+   end;
+   FreeAndNil(FCad_Credito);
 end;
 
 procedure TFcad_Clientes.cxApagarClick(Sender: TObject);
@@ -386,7 +399,7 @@ end;
 procedure TFcad_Clientes.cxPrintClick(Sender: TObject);
 begin
 ///// Impresso
-   Imprime(dsClie, NIL,
+   Imprime(dsClie, NIL, NIL,
             'SIM',
             'Ficha de Cliente',
             dmCad.qryConf.FieldByName('PASTASERVIDOR').ASString + '\Relatorios\Impressos\ppFichaCliente.rtm',
@@ -567,7 +580,6 @@ begin
       2: cxTipoClie.ItemIndex := 2;
       3: cxTipoClie.ItemIndex := 3;
    end;
-
    cxConsultaPropertiesChange(Self);
 end;
 
@@ -803,3 +815,4 @@ begin
 end;
 
 end.
+

@@ -75,12 +75,13 @@
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_Build>2</VerInfo_Build>
         <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Debug>true</VerInfo_Debug>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=DRB Sistemas Comerciais;FileDescription=;FileVersion=1.0.0.0;InternalName=Sitemas Apollo;LegalCopyright=2014;LegalTrademarks=;OriginalFilename=Apollo Gestão;ProductName=Apollo Gestão;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=DRB Sistemas Comerciais;FileDescription=;FileVersion=1.0.0.2;InternalName=Sitemas Apollo;LegalCopyright=2014;LegalTrademarks=;OriginalFilename=Apollo Gestão;ProductName=Apollo Gestão;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -131,7 +132,7 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\Rotinas\uRelatorios.pas"/>
+        <DCCReference Include="..\Rotinas\uRotinaDeImpressaoDeRelatorios.pas"/>
         <DCCReference Include="..\Cadastros\uCad_Empresa.pas">
             <Form>FCad_Empresa</Form>
             <FormType>dfm</FormType>
@@ -141,18 +142,18 @@
             <Form>Fcad_Produto</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Rotinas\uEstoque.pas"/>
+        <DCCReference Include="..\Rotinas\uRotinaDeEstoque.pas"/>
         <DCCReference Include="..\Cadastros\uCad_Estoque.pas">
             <Form>FCad_Estoque</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Rotinas\uCalculos.pas"/>
+        <DCCReference Include="..\Rotinas\uRotinaDeCalculosMatematicos.pas"/>
         <DCCReference Include="..\Cadastros\uCad_Balanco.pas">
             <Form>Fcad_Balanco</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Relatorios\uCon_Relatorio.pas">
-            <Form>Fcad_Relatorio</Form>
+            <Form>Fcon_Relatorio</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Movimentacao\udmMov.pas">
@@ -172,7 +173,7 @@
             <Form>Fcad_NCM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Rotinas\uCalculosMovimentacao.pas"/>
+        <DCCReference Include="..\Rotinas\uRotinaDeCalculosMovimentacao.pas"/>
         <DCCReference Include="..\Cadastros\uCad_Endereco.pas">
             <Form>Fcad_Endereco</Form>
             <FormType>dfm</FormType>
@@ -186,6 +187,12 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Rotinas\uConsultaDadosCliente.pas"/>
+        <DCCReference Include="..\Financeiro\udmFin.pas">
+            <Form>dmFin</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Rotinas\uRotinaLancamentoFinanceiro.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

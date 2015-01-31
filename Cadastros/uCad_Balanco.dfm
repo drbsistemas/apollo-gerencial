@@ -13,7 +13,7 @@ inherited Fcad_Balanco: TFcad_Balanco
     ExplicitHeight = 537
     Height = 537
   end
-  inherited pnCon: TPanel
+  inherited pnCon: TPanel [1]
     Width = 851
     Height = 537
     TabOrder = 1
@@ -503,7 +503,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 4
+        TabOrder = 1
         Text = '0'
         OnExit = eCodProdExit
         Width = 200
@@ -533,7 +533,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 5
+        TabOrder = 2
         Text = 'NENHUM'
         Width = 458
       end
@@ -562,7 +562,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 8
+        TabOrder = 6
         Text = 'UN'
         Width = 91
       end
@@ -726,7 +726,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 7
+        TabOrder = 4
         Visible = False
         Width = 57
       end
@@ -755,7 +755,7 @@ inherited Fcad_Balanco: TFcad_Balanco
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 6
+        TabOrder = 3
         Visible = False
         Width = 57
       end
@@ -859,7 +859,6 @@ inherited Fcad_Balanco: TFcad_Balanco
     Top = 256
   end
   object RxBal: TClientDataSet
-    Active = True
     Aggregates = <>
     FieldDefs = <
       item
@@ -896,15 +895,8 @@ inherited Fcad_Balanco: TFcad_Balanco
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 528
-    Top = 256
-    Data = {
-      B90000009619E0BD010000001800000007000000000003000000B90006494450
-      524F440400010000000000084E4F4D4550524F44020049000000010005574944
-      5448020002002C010752454650524F4401004900000001000557494454480200
-      0200320006554E50524F4401004900000001000557494454480200020005000C
-      4553544F515545544F54414C08000400000000000B4553544F515545434F4E54
-      08000400000000000A4553544F51554544494608000400000000000000}
+    Left = 744
+    Top = 208
     object RxBalIDPROD: TIntegerField
       FieldName = 'IDPROD'
     end
@@ -929,5 +921,13 @@ inherited Fcad_Balanco: TFcad_Balanco
     object RxBalESTOQUEDIF: TFloatField
       FieldName = 'ESTOQUEDIF'
     end
+  end
+  object UCControls1: TUCControls
+    GroupName = 'Balan'#231'o de Produtos'
+    UserControl = FPrinc.UserControl1
+    Components = ''
+    NotAllowed = naDisabled
+    Left = 704
+    Top = 256
   end
 end

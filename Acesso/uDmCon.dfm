@@ -17,7 +17,7 @@ object dmCon: TdmCon
   end
   object FdSalvaAcesso: TFDTransaction
     Connection = FdConAcesso
-    Left = 101
+    Left = 77
     Top = 11
   end
   object FDPhysFBDriverLink1: TFDPhysFBDriverLink
@@ -49,7 +49,7 @@ object dmCon: TdmCon
   end
   object FdSalva: TFDTransaction
     Connection = FdCon
-    Left = 101
+    Left = 77
     Top = 59
   end
 end

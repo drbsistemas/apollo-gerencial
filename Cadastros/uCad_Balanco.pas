@@ -22,7 +22,7 @@ uses
   dxGDIPlusClasses, cxImage, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid,
   cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLabel, Vcl.StdCtrls, cxButtons,
-  Vcl.ExtCtrls, Datasnap.DBClient, Datasnap.Provider;
+  Vcl.ExtCtrls, Datasnap.DBClient, Datasnap.Provider, UCBase;
 
 type
   TFcad_Balanco = class(TFcad_Pai)
@@ -68,6 +68,7 @@ type
     RxBalESTOQUEDIF: TFloatField;
     Contagem1: TMenuItem;
     Diferen1: TMenuItem;
+    UCControls1: TUCControls;
     procedure eContagemExit(Sender: TObject);
     procedure eCodProdPropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
@@ -104,7 +105,7 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas, uDmCad, uPrinc, uCad_Produto, uEstoque;
+uses uRotinas, uDmCad, uPrinc, uCad_Produto, uRotinaDeEstoque;
 
 procedure TFcad_Balanco.Contagem1Click(Sender: TObject);
 begin
@@ -232,6 +233,7 @@ begin
   inherited;
    Limpa;
 ///// Padroniza
+   RxBal.CreateDataSet;
    RxBal.Open;
    RxBal.EmptyDataSet;
    RxBal.Close;

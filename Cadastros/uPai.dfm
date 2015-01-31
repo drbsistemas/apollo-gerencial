@@ -5704,8 +5704,6 @@ object Fcad_Pai: TFcad_Pai
       LookAndFeel.NativeStyle = False
       LookAndFeel.SkinName = 'Office2010Black'
       RootLevelOptions.TabsForEmptyDetails = False
-      ExplicitLeft = 153
-      ExplicitTop = 92
       object grConsultaDBTableView1: TcxGridDBTableView
         OnDblClick = grConsultaDBTableView1DblClick
         Navigator.Buttons.CustomButtons = <>

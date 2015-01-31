@@ -23,6 +23,9 @@ uses
   cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLabel, Vcl.StdCtrls, cxButtons,
   Vcl.ExtCtrls;
 
+Type
+   TAbrePainel = (Cad, Con);
+
 type
   TFcad_PaiFinanceiro = class(TForm)
     pnCad: TPanel;
@@ -46,10 +49,18 @@ type
     grConsultaDBTableView1Campo2: TcxGridDBColumn;
     grConsultaLevel1: TcxGridLevel;
     pnBotaoCon: TPanel;
+    procedure MOstraPainelCadastro(AbrePainel: TAbrePainel);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+    procedure cxSalvarClick(Sender: TObject);
+    procedure cxCancelaClick(Sender: TObject);
+    procedure grConsultaDBTableView1CustomDrawCell(
+      Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+      AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
   private
+
     { Private declarations }
   public
     { Public declarations }
@@ -62,7 +73,35 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas;
+uses uRotinas, uCad_Credito;
+
+procedure TFcad_PaiFinanceiro.MOstraPainelCadastro(AbrePainel: TAbrePainel);
+begin
+   case AbrePainel of
+      Cad:
+         begin
+            pnCad.Visible    := True;
+            pnCon.Visible    := False;
+         end;
+      Con:
+         begin
+            pnCad.Visible    := False;
+            pnCon.Visible    := True;
+            cxSalvar.Enabled := True;
+            cxSalvar.Tag     := 0;
+         end;
+   end;
+end;
+
+procedure TFcad_PaiFinanceiro.cxCancelaClick(Sender: TObject);
+begin
+   MOstraPainelCadastro(Con);
+end;
+
+procedure TFcad_PaiFinanceiro.cxSalvarClick(Sender: TObject);
+begin
+   MOstraPainelCadastro(Con);
+end;
 
 procedure TFcad_PaiFinanceiro.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -77,9 +116,6 @@ end;
 procedure TFcad_PaiFinanceiro.FormCreate(Sender: TObject);
 begin
    grConsulta.Tag := 0;
-   ID             := 0;
-   DESCRICAO      := EmptyStr;
-   OBS            := EmptyStr;
 end;
 
 procedure TFcad_PaiFinanceiro.FormKeyPress(Sender: TObject; var Key: Char);
@@ -95,6 +131,33 @@ begin
    begin
      Key := #0;
      Perform(WM_NEXTDLGCTL, 0, 0);
+   end;
+end;
+
+procedure TFcad_PaiFinanceiro.FormShow(Sender: TObject);
+begin
+   ID        :=0;
+   DESCRICAO := EmptyStr;
+   OBS       := EmptyStr;
+   MOstraPainelCadastro(Con);
+end;
+
+procedure TFcad_PaiFinanceiro.grConsultaDBTableView1CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+   if AViewInfo.GridRecord.Selected then
+   begin
+      ACanvas.Brush.Color       := FCorSelec;
+      ACanvas.Canvas.Font.Color := clBlack;
+      //ACanvas.Canvas.Font.Style :=[fsBold];
+   end
+   else
+   begin
+      if AViewInfo.GridRecord.RecordIndex mod 2 = 0 then
+         ACanvas.Brush.Color := clWindow
+      else
+         ACanvas.Brush.Color := FCorLista;
    end;
 end;
 

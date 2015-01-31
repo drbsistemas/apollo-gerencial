@@ -12,7 +12,7 @@ inherited Fcad_Animais: TFcad_Animais
     ExplicitHeight = 539
     Height = 539
   end
-  inherited pnCon: TPanel
+  inherited pnCon: TPanel [1]
     Width = 704
     Height = 539
     TabOrder = 1
@@ -763,7 +763,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 28
+        TabOrder = 25
         Width = 130
       end
       object ePedigree: TcxTextEdit
@@ -781,7 +781,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 29
+        TabOrder = 27
         Width = 130
       end
       object cxLabel4: TcxLabel
@@ -824,7 +824,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 18
+        TabOrder = 17
         Text = 'MACHO'
         Width = 130
       end
@@ -1256,7 +1256,7 @@ inherited Fcad_Animais: TFcad_Animais
         OptionsImage.Spacing = 0
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 26
+        TabOrder = 22
         TabStop = False
         OnClick = cxSalvaFotoClick
       end
@@ -1402,7 +1402,7 @@ inherited Fcad_Animais: TFcad_Animais
         OptionsImage.Layout = blGlyphTop
         OptionsImage.Margin = 0
         OptionsImage.Spacing = 0
-        TabOrder = 27
+        TabOrder = 23
         TabStop = False
         OnClick = cxApagaFotoClick
       end
@@ -1446,7 +1446,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 33
+        TabOrder = 31
         Width = 75
       end
       object eCor: TcxTextEdit
@@ -1464,7 +1464,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 23
+        TabOrder = 21
         Width = 130
       end
       object cxLabel9: TcxLabel
@@ -1677,7 +1677,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 16
+        TabOrder = 15
         Text = '0'
         OnExit = eCodRacaExit
         OnKeyPress = eCodFornecKeyPress
@@ -1708,7 +1708,7 @@ inherited Fcad_Animais: TFcad_Animais
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 17
+        TabOrder = 16
         Text = 'NENHUM'
         Width = 150
       end
@@ -1785,7 +1785,7 @@ inherited Fcad_Animais: TFcad_Animais
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 21
+        TabOrder = 19
         Text = '0'
         OnExit = eCodEspecieExit
         OnKeyPress = eCodFornecKeyPress
@@ -1816,7 +1816,7 @@ inherited Fcad_Animais: TFcad_Animais
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 22
+        TabOrder = 20
         Text = 'NENHUM'
         Width = 150
       end
@@ -1827,5 +1827,13 @@ inherited Fcad_Animais: TFcad_Animais
     FilterIndex = 6
     Left = 602
     Top = 250
+  end
+  object UCControls1: TUCControls
+    GroupName = 'Cadastro de Animais'
+    UserControl = FPrinc.UserControl1
+    Components = ''
+    NotAllowed = naDisabled
+    Left = 553
+    Top = 259
   end
 end

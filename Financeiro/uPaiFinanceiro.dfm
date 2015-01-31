@@ -22,18 +22,20 @@ object Fcad_PaiFinanceiro: TFcad_PaiFinanceiro
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnCad: TPanel
-    Left = 80
-    Top = 274
-    Width = 652
-    Height = 570
+    Left = 0
+    Top = 0
+    Width = 910
+    Height = 540
+    Align = alClient
     TabOrder = 0
     object pnMenu: TPanel
       Left = 1
       Top = 1
-      Width = 650
+      Width = 908
       Height = 50
       Align = alTop
       BevelOuter = bvNone
@@ -183,6 +185,7 @@ object Fcad_PaiFinanceiro: TFcad_PaiFinanceiro
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
+        OnClick = cxSalvarClick
       end
       object cxCancela: TcxButton
         Left = 116
@@ -328,6 +331,7 @@ object Fcad_PaiFinanceiro: TFcad_PaiFinanceiro
         OptionsImage.Margin = 0
         OptionsImage.Spacing = 0
         TabOrder = 1
+        OnClick = cxCancelaClick
       end
     end
   end
@@ -631,6 +635,7 @@ object Fcad_PaiFinanceiro: TFcad_PaiFinanceiro
       RootLevelOptions.TabsForEmptyDetails = False
       object grConsultaDBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
+        OnCustomDrawCell = grConsultaDBTableView1CustomDrawCell
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>

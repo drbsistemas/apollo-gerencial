@@ -23,7 +23,7 @@ uses
   Vcl.StdCtrls, cxButtons, Vcl.ExtCtrls;
 
 type
-  TFcad_Relatorio = class(TForm)
+  TFcon_Relatorio = class(TForm)
     Panel1: TPanel;
     cxButton5: TcxButton;
     cxGerencial: TcxButton;
@@ -39,6 +39,8 @@ type
     CAMINHO: TcxGridDBColumn;
     grConsultaLevel1: TcxGridLevel;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure cxButton5Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -46,13 +48,24 @@ type
   end;
 
 var
-  Fcad_Relatorio: TFcad_Relatorio;
+  Fcon_Relatorio: TFcon_Relatorio;
 
 implementation
 
 {$R *.dfm}
 
-procedure TFcad_Relatorio.FormKeyPress(Sender: TObject; var Key: Char);
+procedure TFcon_Relatorio.cxButton5Click(Sender: TObject);
+begin
+   Close;
+end;
+
+procedure TFcon_Relatorio.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   FCon_Relatorio   := Nil;
+   Action           := CaFree;
+end;
+
+procedure TFcon_Relatorio.FormKeyPress(Sender: TObject; var Key: Char);
 begin
    if Key = #13 then
    begin
