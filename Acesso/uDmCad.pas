@@ -100,6 +100,19 @@ type
     uHis_CPagto: TUCHist_DataSet;
     qryAcesso: TFDQuery;
     dsAcesso: TDataSource;
+    qryPlanoConta: TFDQuery;
+    UpdtPlanoConta: TFDUpdateSQL;
+    dsPlanoConta: TDataSource;
+    uHis_PlanoConta: TUCHist_DataSet;
+    qryPlanoContaItem: TFDQuery;
+    UpdtPlanoContaItem: TFDUpdateSQL;
+    dsPlanoContaItem: TDataSource;
+    uHis_PlanoContaItem: TUCHist_DataSet;
+    qryPlanoContaItemIDPLANOITEM: TIntegerField;
+    qryPlanoContaItemIDCCUSTO: TIntegerField;
+    qryPlanoContaItemIDPLANO: TIntegerField;
+    qryPlanoContaItemPERCENTUAL: TFloatField;
+    qryPlanoContaItemDESCRICAO: TStringField;
     procedure qryGenericoAfterInsert(DataSet: TDataSet);
     procedure qryProdAfterInsert(DataSet: TDataSet);
     procedure qryEstoqueAfterInsert(DataSet: TDataSet);
@@ -108,6 +121,8 @@ type
     procedure qryCPagtoAfterInsert(DataSet: TDataSet);
     procedure qryCPagtoItemAfterInsert(DataSet: TDataSet);
     procedure qryEnderecoAfterInsert(DataSet: TDataSet);
+    procedure qryPlanoContaAfterInsert(DataSet: TDataSet);
+    procedure qryPlanoContaItemAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -158,6 +173,16 @@ end;
 procedure TdmCad.qryGenericoAfterInsert(DataSet: TDataSet);
 begin
    dmCad.qryGenerico.FieldByName('IDGENERICA').AsInteger := ExecutaGen('GENERICA');
+end;
+
+procedure TdmCad.qryPlanoContaAfterInsert(DataSet: TDataSet);
+begin
+   dmCad.qryPlanoConta.FieldByName('IDPLANO').AsInteger       := ExecutaGen('PLANOCONTA');
+end;
+
+procedure TdmCad.qryPlanoContaItemAfterInsert(DataSet: TDataSet);
+begin
+   dmCad.qryPlanoContaItem.FieldByName('IDPLANOITEM').AsInteger       := ExecutaGen('PLANOCONTAITEM');
 end;
 
 procedure TdmCad.qryProdAfterInsert(DataSet: TDataSet);

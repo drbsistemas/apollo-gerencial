@@ -141,6 +141,12 @@ inherited Fcad_Generica: TFcad_Generica
       Width = 300
     end
   end
+  inherited pnImg: TcxImage
+    Left = 646
+    ExplicitLeft = 646
+    ExplicitHeight = 541
+    Height = 541
+  end
   inherited pnCon: TPanel
     Width = 646
     Height = 541
@@ -248,11 +254,5 @@ inherited Fcad_Generica: TFcad_Generica
         Enabled = False
       end
     end
-  end
-  inherited pnImg: TcxImage
-    Left = 646
-    ExplicitLeft = 646
-    ExplicitHeight = 541
-    Height = 541
   end
 end

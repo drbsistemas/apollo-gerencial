@@ -111,6 +111,7 @@ type
     cadRelatorios: TAction;
     cadConf: TAction;
     cadEmpresa: TAction;
+    cxPlanoConta: TdxBarLargeButton;
    //
    procedure PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
    procedure MostraNomeForm(Str: String);
@@ -143,6 +144,7 @@ type
     procedure cxTrocadeUsuarioClick(Sender: TObject);
     procedure cxLogOffClick(Sender: TObject);
     procedure cxHistoricoClick(Sender: TObject);
+    procedure cxPlanoContaClick(Sender: TObject);
    private
       { Private declarations }
    public
@@ -159,7 +161,7 @@ implementation
 uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, uCad_Clientes,
   uCad_Animais, uCon_Generica, uDmRel, uCad_Empresa, uCad_Produto, uCad_Balanco,
   uCad_Pedido, udmMov, uCad_Pagto, uRotinaDeCalculosMovimentacao, udmFin,
-  uCon_Relatorio, LoginWindow_U;
+  uCon_Relatorio, LoginWindow_U, uCad_Conta, uCad_PlanoConta;
 
 procedure TFPrinc.cxCadastroUsuarioClick(Sender: TObject);
 begin
@@ -191,6 +193,7 @@ end;
 procedure TFPrinc.cxPagarClick(Sender: TObject);
 begin
    TipoMov := SAIDA;
+   ExecutaForm(TFcad_Contas, Tobject(Fcad_Contas));
 end;
 
 procedure TFPrinc.cxPedidoClick(Sender: TObject);
@@ -207,6 +210,7 @@ end;
 procedure TFPrinc.cxReceberClick(Sender: TObject);
 begin
    TipoMov := ENTRADA;
+   ExecutaForm(TFcad_Contas, Tobject(Fcad_Contas));
 end;
 
 procedure TFPrinc.cxTrocadeUsuarioClick(Sender: TObject);
@@ -229,6 +233,12 @@ procedure TFPrinc.cxPedidoVendaClick(Sender: TObject);
 begin
    TipoMov := SAIDA;
    ExecutaForm(TFcad_Pedido, TObject(Fcad_Pedido));
+end;
+
+procedure TFPrinc.cxPlanoContaClick(Sender: TObject);
+begin
+   TipoPlano := TODOS;
+   AbreTelaComShowModal(TFcad_PlanoConta, TObject(Fcad_PlanoConta), nil, '');
 end;
 
 procedure TFPrinc.cxcPagtoClick(Sender: TObject);

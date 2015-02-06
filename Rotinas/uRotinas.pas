@@ -56,6 +56,7 @@ const
 
 type
    TTipoMov = (ENTRADA, SAIDA);
+   TTipoPlano = (TODOS, RECEITA, DESPESA);
 
 var
    FVisualizaImagem,
@@ -76,6 +77,7 @@ var
    NomeEmpresa                        : String;
    Diasfim                            : Real;
    Liberacao                          : Boolean;
+   TipoPlano                          : TTipoPlano;
    ID: Integer;
 
 implementation
@@ -407,7 +409,7 @@ begin
             Copy(Dado, 5, 4)
       else
       begin
-         Result := '';
+         Result := EmptyStr;
          Msg('A Data é inválida, verifique!','I',':(');
       end;
    if Result=Dado then
@@ -420,7 +422,7 @@ begin
       except
          on EConvertError do
          begin
-            Result := '';
+            Result := EmptyStr;
             Msg('A Data é inválida, verifique!','I',':(');
             FormatSettings.ShortDateFormat := SalvaFormato;
          end;
@@ -433,14 +435,14 @@ begin
          except
             on EConvertError do
             begin
-               Result := '';
+               Result := EmptyStr;
                Msg('A Data é inválida, verifique!','I',':(');
                FormatSettings.ShortDateFormat := SalvaFormato;
             end;
          end;
          if (Result=Dado) and (DataExterna <> Dado) then
          begin
-            Result := '';
+            Result := EmptyStr;
             Msg('A Data é inválida, verifique!','I',':(');
          end;
       end;
@@ -586,29 +588,40 @@ end;
 
 Procedure AbreTelaComShowModal(FormClasse: TFormClass; var NewForm: TObject; FNomeFormRetorno: TForm; StrTabela: String);
 begin
-   with FormClasse.Create(Application) do
+   if FormClasse = TFcad_Clientes then
    begin
-      FormStyle   := fsNormal;
-      WindowState := wsNormal;
-      Visible     := False;
-      Position    := poMainFormCenter;
+      with FormClasse.Create(Application) do
+      begin
+         FormStyle   := fsNormal;
+         WindowState := wsNormal;
+         Visible     := False;
+         Position    := poMainFormCenter;
 
-      if FormClasse = TFcad_Generica then
+         if (FormClasse = TFcad_Clientes) and (StrTabela <> '') then
+         begin
+            StrTipoPessoa := StrTabela;
+         end;
+         Tag := 1;
+         ShowModal;
+      end;
+   end else
+   begin
+      if (TForm(NewForm) = Nil) Or (not TForm(NewForm).HandleAllocated) Then
+         TForm(NewForm) := FormClasse.Create(TForm(NewForm));
+
+      TForm(NewForm).FormStyle   := fsNormal;
+      TForm(NewForm).WindowState := wsNormal;
+      TForm(NewForm).Visible     := False;
+      TForm(NewForm).Position    := poMainFormCenter;
+
+      if TForm(NewForm) = Fcad_Generica then
       begin
          Fcad_GEnerica.AbreCom('CON');
          Fcad_GEnerica.TABELA      := StrTabela;
       end;
-      if (FormClasse = TFcad_Clientes) and (StrTabela <> '') then
-      begin
-         StrTipoPessoa := StrTabela;
-      end;
-      Tag := 1;
-
-      ShowModal;
+      TForm(NewForm).ShowModal;
    end;
 
-//   TForm(NewForm) := NIl;
-//   TForm(NewForm).Free;
    if FNomeFormRetorno <> NIL then
    begin
       TForm(FNomeFormRetorno).WindowState := wsNormal;
@@ -619,18 +632,16 @@ end;
 function BuscaNomeAtivo(TABELA:String;CODIGO:Integer):String;
 var oNome:String;
 begin
-   dmCad.qryAux.Close;
+   If TABELA = 'CLI'        then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('CLI') else
+   If TABELA = 'FOR'        then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('FOR') else
+   If TABELA = 'VEN'        then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('VEN') else
+   If TABELA = 'TRA'        then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('TRA') else
+   If TABELA = 'CPAGTO'     then StrSql := 'SELECT DESCRICAO   Nome FROM CPAGTO     WHERE IDCPAGTO='+IntToStr(CODIGO)+'  ' else
+   if TABELA = 'PLANOCONTA' then StrSql := 'SELECT NOMEPLANO   Nome FROM PLANOCONTA WHERE IDPLANO='+IntToStr(CODIGO)+' AND ATIVO = '+QUotedStr('S') else
 
-   If TABELA = 'CLI'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO       Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('CLI') else
-   If TABELA = 'FOR'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO       Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('FOR') else
-   If TABELA = 'VEN'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO       Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('VEN') else
-   If TABELA = 'TRA'        then dmCad.qryAux.Sql.Text := 'SELECT RAZAO       Nome FROM CLIENTE WHERE IDCLIE=:CODIGO AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('TRA') else
-   If TABELA = 'CPAGTO'     then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO   Nome FROM CPAGTO WHERE IDCPAGTO=:CODIGO  ' else
+   if TABELA <> ''          then StrSql := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
 
-   if TABELA <> ''          then dmCad.qryAux.Sql.Text := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
-
-   dmCad.qryAux.ParamByName('CODIGO').AsInteger  :=  CODIGO;
-   dmCad.qryAux.Active   := true;
+   ConsultaSql(StrSql, dmCad.qryAux);
 
    If not dmCad.qryAux.IsEmpty then
       oNome := dmCad.qryAux.FieldbyName('NOME').AsString

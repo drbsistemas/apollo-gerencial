@@ -15,12 +15,13 @@ inherited Fcad_Endereco: TFcad_Endereco
     Top = 23
     Width = 654
     Height = 518
-    ExplicitLeft = -6
-    ExplicitTop = 26
-    ExplicitHeight = 516
+    ExplicitTop = 23
+    ExplicitWidth = 654
+    ExplicitHeight = 518
     inherited pnMenu: TPanel
       Width = 652
       TabOrder = 11
+      ExplicitWidth = 652
     end
     object cxLabel5: TcxLabel
       Left = 53
@@ -459,13 +460,25 @@ inherited Fcad_Endereco: TFcad_Endereco
       Width = 54
     end
   end
+  inherited pnImg: TcxImage
+    Left = 654
+    Top = 23
+    ExplicitLeft = 654
+    ExplicitTop = 23
+    ExplicitHeight = 518
+    Height = 518
+  end
   inherited pnCon: TPanel
     Top = 23
     Width = 654
     Height = 518
+    ExplicitTop = 23
+    ExplicitWidth = 654
+    ExplicitHeight = 518
     inherited pnBusca: TPanel
       Width = 652
       Height = 24
+      ExplicitWidth = 652
       ExplicitHeight = 24
       inherited cxConsulta: TcxComboBox
         Properties.Items.Strings = (
@@ -486,6 +499,7 @@ inherited Fcad_Endereco: TFcad_Endereco
     end
     inherited pnBotaoCad: TPanel
       Width = 652
+      ExplicitWidth = 652
       inherited cxApagar: TcxButton
         OnClick = cxApagarClick
       end
@@ -499,11 +513,16 @@ inherited Fcad_Endereco: TFcad_Endereco
     inherited pnBotaoCon: TPanel
       Top = 467
       Width = 652
+      ExplicitTop = 467
+      ExplicitWidth = 652
     end
     inherited grConsulta: TcxGrid
       Top = 77
       Width = 652
       Height = 390
+      ExplicitTop = 77
+      ExplicitWidth = 652
+      ExplicitHeight = 390
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmCad.dsEndereco
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
@@ -540,11 +559,6 @@ inherited Fcad_Endereco: TFcad_Endereco
       end
     end
   end
-  inherited pnImg: TcxImage
-    Left = 654
-    Top = 23
-    Height = 518
-  end
   object Panel1: TPanel [3]
     Left = 0
     Top = 0
@@ -552,7 +566,6 @@ inherited Fcad_Endereco: TFcad_Endereco
     Height = 23
     Align = alTop
     TabOrder = 3
-    ExplicitWidth = 710
     object cxLabel3: TcxLabel
       Left = -18
       Top = 3

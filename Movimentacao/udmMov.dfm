@@ -46,13 +46,13 @@ object dmMov: TdmMov
       '  VLRTOTALITEM, OBSITEM, DATAVALIDADE, SALDOQTDE, STATUSITEM'
       'FROM PEDIDOITEM'
       'WHERE IDPEDIDOITEM = :IDPEDIDOITEM')
-    Left = 53
-    Top = 51
+    Left = 54
+    Top = 48
   end
   object dsItemPed: TDataSource
     DataSet = qryItemPed
-    Left = 53
-    Top = 95
+    Left = 54
+    Top = 92
   end
   object qryPedido: TFDQuery
     AfterInsert = qryPedidoAfterInsert
@@ -340,8 +340,8 @@ object dmMov: TdmMov
       'B.REFPROD'
       'from PEDIDOITEM A'
       'left join PRODUTO B on A.IDPROD = B.IDPROD')
-    Left = 53
-    Top = 9
+    Left = 54
+    Top = 6
     object qryItemPedIDPEDIDOITEM: TIntegerField
       FieldName = 'IDPEDIDOITEM'
       Origin = 'IDPEDIDOITEM'
@@ -415,6 +415,14 @@ object dmMov: TdmMov
       ProviderFlags = []
       Size = 50
     end
+    object qryItemPedMARCAPROD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MARCAPROD'
+      Origin = 'MARCAPROD'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
   end
   object uHis_Pedido: TUCHist_DataSet
     DataSet = qryPedido
@@ -425,8 +433,8 @@ object dmMov: TdmMov
   object uHis_ItemPed: TUCHist_DataSet
     DataSet = qryItemPed
     ControlHistorico = FPrinc.uHistorico
-    Left = 53
-    Top = 144
+    Left = 54
+    Top = 141
   end
   object qryAux: TFDQuery
     CachedUpdates = True
@@ -484,13 +492,13 @@ object dmMov: TdmMov
         'O'
       'FROM PEDIDOFINANCEIRO'
       'WHERE IDPEDIDOFINANCEIRO = :IDPEDIDOFINANCEIRO')
-    Left = 113
-    Top = 51
+    Left = 114
+    Top = 48
   end
   object dsPedidoFin: TDataSource
     DataSet = qryPedidoFin
-    Left = 113
-    Top = 95
+    Left = 114
+    Top = 92
   end
   object qryPedidoFin: TFDQuery
     AfterInsert = qryPedidoFinAfterInsert
@@ -503,13 +511,13 @@ object dmMov: TdmMov
     UpdateObject = UpdtPedidoFin
     SQL.Strings = (
       'select * from PEDIDOFINANCEIRO')
-    Left = 113
-    Top = 9
+    Left = 114
+    Top = 6
   end
   object uHis_PedidoFin: TUCHist_DataSet
     DataSet = qryPedidoFin
     ControlHistorico = FPrinc.uHistorico
-    Left = 113
-    Top = 144
+    Left = 114
+    Top = 141
   end
 end

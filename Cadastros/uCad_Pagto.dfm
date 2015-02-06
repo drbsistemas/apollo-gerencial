@@ -3,7 +3,6 @@ inherited Fcad_Pagto: TFcad_Pagto
   Caption = 'Cond. Pagamento'
   ClientHeight = 572
   ClientWidth = 712
-  ExplicitTop = -15
   ExplicitWidth = 718
   ExplicitHeight = 601
   PixelsPerInch = 96
@@ -268,7 +267,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       Width = 75
     end
     object cxSalvaFoto: TcxButton
-      Left = 261
+      Left = 259
       Top = 211
       Width = 67
       Height = 39
@@ -410,7 +409,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       OptionsImage.Spacing = 0
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 10
+      TabOrder = 8
       OnClick = cxSalvaFotoClick
     end
     object cxApagaFoto: TcxButton
@@ -555,7 +554,7 @@ inherited Fcad_Pagto: TFcad_Pagto
       OptionsImage.Layout = blGlyphTop
       OptionsImage.Margin = 0
       OptionsImage.Spacing = 0
-      TabOrder = 12
+      TabOrder = 10
       OnClick = cxApagaFotoClick
     end
     object cxLabel4: TcxLabel
@@ -645,8 +644,8 @@ inherited Fcad_Pagto: TFcad_Pagto
       Width = 75
     end
     object cxLabel7: TcxLabel
-      Left = 101
-      Top = 165
+      Left = 96
+      Top = 166
       AutoSize = False
       Caption = 'Condi'#231#245'es de Parcelamentos'
       ParentFont = False

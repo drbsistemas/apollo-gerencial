@@ -332,6 +332,7 @@ begin
    Limpa;
    LimpaItem;
    Edita;
+   pnItem.Enabled              := True;
    eCodFornec.SetFocus;
 end;
 
@@ -960,7 +961,7 @@ begin
    pnPagar.BringToFront;
    pnPagar.Visible := true;
 
-   GerarCobranca(Date, eTotalPedido.Value, eCodigo.Text, 'PEDIDO', eCodCPagto.Text, Rxparcela);
+   GerarCobranca(Date, eTotalPedido.Value, 'PD'+FormatFloat('000000',StrToInt(eCodigo.Text)), 'PEDIDO', eCodCPagto.Text, Rxparcela);
    while not pnPagar.Visible = False do
    begin
       Application.ProcessMessages;

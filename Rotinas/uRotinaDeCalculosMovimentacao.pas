@@ -68,7 +68,7 @@ begin
 
    while not dmMov.qryAux.Eof do
    begin
-      StrDoc := IntToStr(i)+'/'+IntToStr(intQtdeParc);
+      StrDoc := StrCodigoMov+'-'+IntToStr(i)+'/'+IntToStr(intQtdeParc);
       RxParcela.Append;
       RxParcela.Fieldbyname('DOC').AsString  := StrDoc;
       if i=1 then // 1 Parcela

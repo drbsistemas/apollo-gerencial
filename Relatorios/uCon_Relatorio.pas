@@ -54,6 +54,8 @@ implementation
 
 {$R *.dfm}
 
+uses uRotinas;
+
 procedure TFcon_Relatorio.cxButton5Click(Sender: TObject);
 begin
    Close;
@@ -61,6 +63,8 @@ end;
 
 procedure TFcon_Relatorio.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+   FormAtivo        := Nil;
+   pFundo(1);
    FCon_Relatorio   := Nil;
    Action           := CaFree;
 end;

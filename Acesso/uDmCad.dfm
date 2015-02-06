@@ -1103,4 +1103,136 @@ object dmCad: TdmCad
     Left = 433
     Top = 49
   end
+  object qryPlanoConta: TFDQuery
+    AfterInsert = qryPlanoContaAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtPlanoConta
+    SQL.Strings = (
+      'select * from PLANOCONTA')
+    Left = 255
+    Top = 195
+  end
+  object UpdtPlanoConta: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO PLANOCONTA'
+      '(IDPLANO, NOMEPLANO, ATIVO, TIPOPLANO, DRE)'
+      
+        'VALUES (:NEW_IDPLANO, :NEW_NOMEPLANO, :NEW_ATIVO, :NEW_TIPOPLANO' +
+        ', :NEW_DRE)'
+      'RETURNING IDPLANO, NOMEPLANO, ATIVO, TIPOPLANO, DRE')
+    ModifySQL.Strings = (
+      'UPDATE PLANOCONTA'
+      
+        'SET IDPLANO = :NEW_IDPLANO, NOMEPLANO = :NEW_NOMEPLANO, ATIVO = ' +
+        ':NEW_ATIVO, '
+      '  TIPOPLANO = :NEW_TIPOPLANO, DRE = :NEW_DRE'
+      'WHERE IDPLANO = :OLD_IDPLANO'
+      'RETURNING IDPLANO, NOMEPLANO, ATIVO, TIPOPLANO, DRE')
+    DeleteSQL.Strings = (
+      'DELETE FROM PLANOCONTA'
+      'WHERE IDPLANO = :OLD_IDPLANO')
+    FetchRowSQL.Strings = (
+      'SELECT IDPLANO, NOMEPLANO, ATIVO, TIPOPLANO, DRE'
+      'FROM PLANOCONTA'
+      'WHERE IDPLANO = :IDPLANO')
+    Left = 255
+    Top = 239
+  end
+  object dsPlanoConta: TDataSource
+    DataSet = qryPlanoConta
+    Left = 255
+    Top = 283
+  end
+  object uHis_PlanoConta: TUCHist_DataSet
+    DataSet = qryPlanoConta
+    ControlHistorico = FPrinc.uHistorico
+    Left = 255
+    Top = 328
+  end
+  object qryPlanoContaItem: TFDQuery
+    AfterInsert = qryPlanoContaItemAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UpdtPlanoContaItem
+    SQL.Strings = (
+      'select'
+      'A.*,'
+      'B.DESCRICAO'
+      'from PLANOCONTAITEM A'
+      
+        '    left join GENERICA B on A.idccusto = B.idgenerica and TABELA' +
+        '='#39'CCUSTO'#39)
+    Left = 295
+    Top = 195
+    object qryPlanoContaItemIDPLANOITEM: TIntegerField
+      FieldName = 'IDPLANOITEM'
+      Origin = 'IDPLANOITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qryPlanoContaItemIDCCUSTO: TIntegerField
+      FieldName = 'IDCCUSTO'
+      Origin = 'IDCCUSTO'
+    end
+    object qryPlanoContaItemIDPLANO: TIntegerField
+      FieldName = 'IDPLANO'
+      Origin = 'IDPLANO'
+    end
+    object qryPlanoContaItemPERCENTUAL: TFloatField
+      FieldName = 'PERCENTUAL'
+      Origin = 'PERCENTUAL'
+      DisplayFormat = '###,###,##0.00%'
+    end
+    object qryPlanoContaItemDESCRICAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      Size = 100
+    end
+  end
+  object UpdtPlanoContaItem: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO PLANOCONTAITEM'
+      '(IDPLANOITEM, IDCCUSTO, IDPLANO, PERCENTUAL)'
+      
+        'VALUES (:NEW_IDPLANOITEM, :NEW_IDCCUSTO, :NEW_IDPLANO, :NEW_PERC' +
+        'ENTUAL)'
+      'RETURNING IDPLANOITEM, IDCCUSTO, IDPLANO, PERCENTUAL')
+    ModifySQL.Strings = (
+      'UPDATE PLANOCONTAITEM'
+      
+        'SET IDPLANOITEM = :NEW_IDPLANOITEM, IDCCUSTO = :NEW_IDCCUSTO, ID' +
+        'PLANO = :NEW_IDPLANO, '
+      '  PERCENTUAL = :NEW_PERCENTUAL'
+      'WHERE IDPLANOITEM = :OLD_IDPLANOITEM'
+      'RETURNING IDPLANOITEM, IDCCUSTO, IDPLANO, PERCENTUAL')
+    DeleteSQL.Strings = (
+      'DELETE FROM PLANOCONTAITEM'
+      'WHERE IDPLANOITEM = :OLD_IDPLANOITEM')
+    FetchRowSQL.Strings = (
+      'SELECT IDPLANOITEM, IDCCUSTO, IDPLANO, PERCENTUAL'
+      'FROM PLANOCONTAITEM'
+      'WHERE IDPLANOITEM = :IDPLANOITEM')
+    Left = 295
+    Top = 239
+  end
+  object dsPlanoContaItem: TDataSource
+    DataSet = qryPlanoContaItem
+    Left = 295
+    Top = 283
+  end
+  object uHis_PlanoContaItem: TUCHist_DataSet
+    DataSet = qryPlanoContaItem
+    ControlHistorico = FPrinc.uHistorico
+    Left = 295
+    Top = 328
+  end
 end

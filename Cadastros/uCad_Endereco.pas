@@ -107,7 +107,7 @@ begin
       4: indice := 'FONEEND';
    end;
    StrSql := 'Select * from ENDERECO '+#13+
-      ' where '+indice+' like '+QuotedStr('%'+eConsulta.Text+'%');
+      ' where idclie= '+eCodCliente.TExt+'and '+indice+' like '+QuotedStr('%'+eConsulta.Text+'%');
    if cbAtivo.ItemIndex > 0 then
       StrSql := StrSql + ' and ATIVO='+QuotedStr(ifs(cbAtivo.ItemIndex=1, 'S','N'));
 

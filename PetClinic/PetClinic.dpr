@@ -39,7 +39,9 @@ uses
   uPaiFinanceiro in '..\Financeiro\uPaiFinanceiro.pas' {Fcad_PaiFinanceiro},
   uConsultaDadosCliente in '..\Rotinas\uConsultaDadosCliente.pas',
   udmFin in '..\Financeiro\udmFin.pas' {dmFin: TDataModule},
-  uRotinaLancamentoFinanceiro in '..\Rotinas\uRotinaLancamentoFinanceiro.pas';
+  uRotinaLancamentoFinanceiro in '..\Rotinas\uRotinaLancamentoFinanceiro.pas',
+  uCad_Conta in '..\Financeiro\uCad_Conta.pas' {Fcad_Contas},
+  uCad_PlanoConta in '..\Cadastros\uCad_PlanoConta.pas' {Fcad_PlanoConta};
 
 {$R *.res}
 

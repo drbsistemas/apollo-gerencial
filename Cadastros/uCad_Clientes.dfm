@@ -1,22 +1,14 @@
 inherited Fcad_Clientes: TFcad_Clientes
   Caption = 'Cadastro de Pessoas'
-  ClientHeight = 539
-  ClientWidth = 900
-  ExplicitWidth = 908
-  ExplicitHeight = 570
+  ClientHeight = 540
+  ClientWidth = 910
+  ExplicitWidth = 918
+  ExplicitHeight = 571
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnImg: TcxImage [0]
-    Left = 842
-    Properties.GraphicClassName = 'TdxPNGImage'
-    Style.BorderStyle = ebsFlat
-    ExplicitLeft = 842
-    ExplicitHeight = 539
-    Height = 539
-  end
-  inherited pnCad: TPanel [1]
-    Width = 842
-    Height = 539
+  inherited pnCad: TPanel
+    Width = 852
+    Height = 540
     BevelOuter = bvNone
     TabOrder = 0
     ExplicitWidth = 842
@@ -24,7 +16,7 @@ inherited Fcad_Clientes: TFcad_Clientes
     inherited pnMenu: TPanel
       Left = 0
       Top = 0
-      Width = 842
+      Width = 852
       Height = 51
       ExplicitLeft = 0
       ExplicitTop = 0
@@ -46,19 +38,23 @@ inherited Fcad_Clientes: TFcad_Clientes
     object cxPage: TcxPageControl
       Left = 0
       Top = 316
-      Width = 842
-      Height = 223
+      Width = 852
+      Height = 224
       Align = alClient
       TabOrder = 1
       Properties.ActivePage = cxDados
       Properties.CustomButtons.Buttons = <>
       Properties.Style = 9
-      ClientRectBottom = 223
-      ClientRectRight = 842
+      ExplicitWidth = 842
+      ExplicitHeight = 223
+      ClientRectBottom = 224
+      ClientRectRight = 852
       ClientRectTop = 20
       object cxDados: TcxTabSheet
         Caption = 'Dados Para Venda'
         ImageIndex = 0
+        ExplicitWidth = 842
+        ExplicitHeight = 203
         object cxLabel24: TcxLabel
           Left = 32
           Top = 14
@@ -509,6 +505,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       object cxPessoal: TcxTabSheet
         Caption = 'Dados Pessoais'
         ImageIndex = 1
+        ExplicitWidth = 842
+        ExplicitHeight = 203
         object cxREsidencia: TcxComboBox
           Left = 131
           Top = 12
@@ -987,6 +985,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       object cxTabSheet1: TcxTabSheet
         Caption = 'Dados Conjuge'
         ImageIndex = 2
+        ExplicitWidth = 842
+        ExplicitHeight = 203
         object cxLabel40: TcxLabel
           Left = 56
           Top = 40
@@ -1371,14 +1371,15 @@ inherited Fcad_Clientes: TFcad_Clientes
     object pnDados: TPanel
       Left = 0
       Top = 51
-      Width = 842
+      Width = 852
       Height = 265
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
+      ExplicitWidth = 842
       object eRazao: TcxTextEdit
         Tag = 1
-        Left = 132
+        Left = 131
         Top = 55
         Hint = 'Raz'#227'o/Nome do Cliente.'
         ParentFont = False
@@ -2563,14 +2564,22 @@ inherited Fcad_Clientes: TFcad_Clientes
       end
     end
   end
+  inherited pnImg: TcxImage
+    Left = 852
+    Properties.GraphicClassName = 'TdxPNGImage'
+    Style.BorderStyle = ebsFlat
+    ExplicitLeft = 842
+    ExplicitHeight = 539
+    Height = 540
+  end
   inherited pnCon: TPanel
-    Width = 842
-    Height = 539
+    Width = 852
+    Height = 540
     TabOrder = 1
     ExplicitWidth = 842
     ExplicitHeight = 539
     inherited pnBotaoCad: TPanel [0]
-      Width = 840
+      Width = 850
       ExplicitWidth = 840
       inherited cxNovo: TcxButton
         LookAndFeel.SkinName = ''
@@ -2599,7 +2608,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       end
     end
     inherited pnBusca: TPanel [1]
-      Width = 840
+      Width = 850
       ExplicitWidth = 840
       inherited cxConsulta: TcxComboBox
         Properties.Items.Strings = (
@@ -2676,8 +2685,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       end
     end
     inherited pnBotaoCon: TPanel
-      Top = 488
-      Width = 840
+      Top = 489
+      Width = 850
       ExplicitTop = 488
       ExplicitWidth = 840
       inherited cxCadastro: TcxButton
@@ -2692,8 +2701,8 @@ inherited Fcad_Clientes: TFcad_Clientes
       end
     end
     inherited grConsulta: TcxGrid
-      Width = 840
-      Height = 412
+      Width = 850
+      Height = 413
       ExplicitWidth = 840
       ExplicitHeight = 412
       inherited grConsultaDBTableView1: TcxGridDBTableView
@@ -2753,6 +2762,10 @@ inherited Fcad_Clientes: TFcad_Clientes
     object CrditodeCliente1: TMenuItem
       Caption = '&Cr'#233'dito de Cliente'
       OnClick = CrditodeCliente1Click
+    end
+    object Endereos1: TMenuItem
+      Caption = '&Endere'#231'os'
+      OnClick = cxEnderecoClick
     end
   end
   object qryClie: TFDQuery
@@ -3040,10 +3053,10 @@ inherited Fcad_Clientes: TFcad_Clientes
     Connection = dmCon.FdCon
     InsertSQL.Strings = (
       'INSERT INTO CLIENTE'
-      '(IDCLIE, FANTASIA, ENDERECO, NUMERO, CIDADE, '
-      '  UF, BAIRRO, CEP, CNPJ, RG, IE, '
-      '  CPF, FONE, CELULAR, EMAIL, OBS, '
-      '  COMPLEMENTO, DATACAD, ATIVO, DATANASCE, '
+      '(IDCLIE, RAZAO, FANTASIA, ENDERECO, NUMERO, '
+      '  CIDADE, UF, BAIRRO, CEP, CNPJ, '
+      '  RG, IE, CPF, FONE, CELULAR, EMAIL, '
+      '  OBS, COMPLEMENTO, DATACAD, ATIVO, DATANASCE, '
       '  TIPOPESSOA, TIPOCLIE, IDVENDEDOR, IDCPAGTO, '
       '  IDTRANSP, CREDITO, LIMITEFINANCEIRO, BLOQUEADO, '
       '  ALERTACLIE, TIPORESID, ALUGUEL, TEMPORESID, '
@@ -3053,11 +3066,15 @@ inherited Fcad_Clientes: TFcad_Clientes
       '  DATANASCCONJ, SALARIOCONJ, TRABALHOCONJ, '
       '  FONETRABCONJ, EMAILCONJ, FONECONJ)'
       
-        'VALUES (:NEW_IDCLIE, :NEW_FANTASIA, :NEW_ENDERECO, :NEW_NUMERO, ' +
-        ':NEW_CIDADE, '
-      '  :NEW_UF, :NEW_BAIRRO, :NEW_CEP, :NEW_CNPJ, :NEW_RG, :NEW_IE, '
-      '  :NEW_CPF, :NEW_FONE, :NEW_CELULAR, :NEW_EMAIL, :NEW_OBS, '
-      '  :NEW_COMPLEMENTO, :NEW_DATACAD, :NEW_ATIVO, :NEW_DATANASCE, '
+        'VALUES (:NEW_IDCLIE, :NEW_RAZAO, :NEW_FANTASIA, :NEW_ENDERECO, :' +
+        'NEW_NUMERO, '
+      '  :NEW_CIDADE, :NEW_UF, :NEW_BAIRRO, :NEW_CEP, :NEW_CNPJ, '
+      
+        '  :NEW_RG, :NEW_IE, :NEW_CPF, :NEW_FONE, :NEW_CELULAR, :NEW_EMAI' +
+        'L, '
+      
+        '  :NEW_OBS, :NEW_COMPLEMENTO, :NEW_DATACAD, :NEW_ATIVO, :NEW_DAT' +
+        'ANASCE, '
       
         '  :NEW_TIPOPESSOA, :NEW_TIPOCLIE, :NEW_IDVENDEDOR, :NEW_IDCPAGTO' +
         ', '
@@ -3088,10 +3105,14 @@ inherited Fcad_Clientes: TFcad_Clientes
     ModifySQL.Strings = (
       'UPDATE CLIENTE'
       
-        'SET IDCLIE = :NEW_IDCLIE, FANTASIA = :NEW_FANTASIA, ENDERECO = :' +
-        'NEW_ENDERECO, '
-      '  NUMERO = :NEW_NUMERO, CIDADE = :NEW_CIDADE, UF = :NEW_UF, '
-      '  BAIRRO = :NEW_BAIRRO, CEP = :NEW_CEP, CNPJ = :NEW_CNPJ, '
+        'SET IDCLIE = :NEW_IDCLIE, RAZAO = :NEW_RAZAO, FANTASIA = :NEW_FA' +
+        'NTASIA, '
+      
+        '  ENDERECO = :NEW_ENDERECO, NUMERO = :NEW_NUMERO, CIDADE = :NEW_' +
+        'CIDADE, '
+      
+        '  UF = :NEW_UF, BAIRRO = :NEW_BAIRRO, CEP = :NEW_CEP, CNPJ = :NE' +
+        'W_CNPJ, '
       '  RG = :NEW_RG, IE = :NEW_IE, CPF = :NEW_CPF, FONE = :NEW_FONE, '
       '  CELULAR = :NEW_CELULAR, EMAIL = :NEW_EMAIL, OBS = :NEW_OBS, '
       '  COMPLEMENTO = :NEW_COMPLEMENTO, DATACAD = :NEW_DATACAD, '

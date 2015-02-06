@@ -69,6 +69,7 @@ type
     qryPedidoCNPJ: TStringField;
     qryPedidoIE: TStringField;
     qryPedidoCIDADE: TStringField;
+    qryItemPedMARCAPROD: TStringField;
     procedure qryPedidoAfterInsert(DataSet: TDataSet);
     procedure qryItemPedAfterInsert(DataSet: TDataSet);
     procedure qryPedidoFinAfterInsert(DataSet: TDataSet);

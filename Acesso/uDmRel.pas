@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Classes, Data.DB, ppEndUsr, ppDB, ppComm,
   ppRelatv, ppDBPipe, ppProd, ppClass, ppReport, ppDesignLayer, ppParameter,
-  ppBands, ppMemo, ppStrtch, ppCtrls, ppVar, ppPrnabl, ppCache, ppSubRpt;
+  ppBands, ppMemo, ppStrtch, ppCtrls, ppVar, ppPrnabl, ppCache, ppSubRpt,
+  ppTableGrid, ppRegion;
 
 type
   TdmRel = class(TDataModule)
@@ -16,6 +17,7 @@ type
     dsCabec: TDataSource;
     ppCabec: TppDBPipeline;
     ppReport: TppReport;
+    dbPipeAux3: TppDBPipeline;
     ppHeaderBand1: TppHeaderBand;
     ppShape1: TppShape;
     ppSystemVariable1: TppSystemVariable;
@@ -37,42 +39,66 @@ type
     ppShape2: TppShape;
     ppLabel7: TppLabel;
     ppMemo1: TppMemo;
+    ppLabel11: TppLabel;
+    ppDBText12: TppDBText;
+    ppDBText14: TppDBText;
+    ppLabel18: TppLabel;
+    ppDBText24: TppDBText;
     ppDetailBand1: TppDetailBand;
-    ppLabel10: TppLabel;
-    ppDBText8: TppDBText;
-    ppLabel12: TppLabel;
+    ppFooterBand1: TppFooterBand;
+    ppLine1: TppLine;
+    ppLabel30: TppLabel;
+    ppLabel31: TppLabel;
     ppLabel16: TppLabel;
     ppDBText16: TppDBText;
-    ppLabel17: TppLabel;
-    ppDBText18: TppDBText;
-    ppLabel13: TppLabel;
-    ppDBText21: TppDBText;
-    ppLabel14: TppLabel;
-    ppDBText9: TppDBText;
-    ppLabel15: TppLabel;
-    ppDBText13: TppDBText;
     ppLabel19: TppLabel;
     ppDBText15: TppDBText;
-    ppLabel20: TppLabel;
-    ppDBText17: TppDBText;
     ppLabel25: TppLabel;
     ppDBText22: TppDBText;
     ppLabel28: TppLabel;
     ppDBText25: TppDBText;
     ppDBText26: TppDBText;
     ppLabel29: TppLabel;
-    ppFooterBand1: TppFooterBand;
-    ppLabel30: TppLabel;
-    ppLabel31: TppLabel;
     ppDesignLayers1: TppDesignLayers;
     ppDesignLayer1: TppDesignLayer;
-    dbPipeAux3: TppDBPipeline;
+    ppSubReport2: TppSubReport;
+    ppChildReport2: TppChildReport;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer3: TppDesignLayer;
+    ppTitleBand2: TppTitleBand;
+    ppDetailBand3: TppDetailBand;
+    ppSummaryBand2: TppSummaryBand;
+    ppLabel12: TppLabel;
+    ppLabel10: TppLabel;
+    ppLabel17: TppLabel;
+    ppLabel20: TppLabel;
+    ppLabel14: TppLabel;
+    ppLabel15: TppLabel;
+    ppLabel13: TppLabel;
     ppLabel2: TppLabel;
+    ppDBText8: TppDBText;
+    ppDBText18: TppDBText;
+    ppDBText21: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText13: TppDBText;
+    ppDBText17: TppDBText;
     ppDBText10: TppDBText;
     ppDBText11: TppDBText;
-    ppLabel11: TppLabel;
-    ppDBText12: TppDBText;
-    ppDBText14: TppDBText;
+    ppSubReport1: TppSubReport;
+    ppChildReport1: TppChildReport;
+    ppTitleBand1: TppTitleBand;
+    ppDetailBand2: TppDetailBand;
+    ppDBText19: TppDBText;
+    ppDBText23: TppDBText;
+    ppDBText20: TppDBText;
+    ppSummaryBand1: TppSummaryBand;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    ppLabel21: TppLabel;
+    ppColumnHeaderBand1: TppColumnHeaderBand;
+    ppColumnFooterBand1: TppColumnFooterBand;
+    ppLine2: TppLine;
+    ppLine3: TppLine;
   private
     { Private declarations }
   public

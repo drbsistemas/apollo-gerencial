@@ -176,17 +176,18 @@ begin
    dmcad.qryCPagtoItem.Fieldbyname('PARCELA').AsInteger    := dmcad.qryCPagtoItem.RecordCount+1;
    dmcad.qryCPagtoItem.Post;
    LimpaItem;
-
 end;
 
 procedure TFcad_Pagto.cxSalvarClick(Sender: TObject);
 begin
    ValidaCampoTag(Fcad_Pagto);
+
    if dmcad.qryCPagtoItem.RecordCount <= 0 then
    begin
       MSg('É necessário ter itens na condição de pagamento para salvar, verifique!','I', ';S');
       Abort;
    end;
+
   dmCad.qryCPagto.FieldByName('DESCRICAO').AsString := eDescricao.Text;
   dmcad.qryCPagto.Post;
   try
@@ -207,9 +208,13 @@ end;
 
 procedure TFcad_Pagto.Edita;
 begin
-   eCodigo.Text := dmcad.qryCPagto.FieldByName('IDCPAGTO').AsString;
-   eDescricao.TExt := dmcad.qryCPagto.FieldByName('DESCRICAO').AsString;
-   ConsultaItemCPagto(dmcad.qryCPagto.FieldByName('IDCPAGTO').AsInteger);
+   with dmcad.qryCPagto do
+   begin
+      eCodigo.Text := FieldByName('IDCPAGTO').AsString;
+      eDescricao.TExt := FieldByName('DESCRICAO').AsString;
+      ConsultaItemCPagto(FieldByName('IDCPAGTO').AsInteger);
+      Edit;
+   end;
 end;
 
 procedure TFcad_Pagto.FormClose(Sender: TObject; var Action: TCloseAction);

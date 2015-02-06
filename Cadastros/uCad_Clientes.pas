@@ -208,6 +208,7 @@ type
     CrditodeCliente1: TMenuItem;
     uHis_Cliente: TUCHist_DataSet;
     UCControls1: TUCControls;
+    Endereos1: TMenuItem;
     procedure cxVoltarClick(Sender: TObject);
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure cxSalvarClick(Sender: TObject);
@@ -385,8 +386,8 @@ end;
 
 procedure TFcad_Clientes.cxEnderecoClick(Sender: TObject);
 begin
-  inherited;
-   AbreEnderecoDeCliente(eCOdigo.Text, eRazao.TExt, Fcad_Clientes);
+   inherited;
+   AbreEnderecoDeCliente(qryClieIDCLIE.AsString, qryClieRAZAO.AsString, Fcad_Clientes);
 end;
 
 procedure TFcad_Clientes.cxNovoClick(Sender: TObject);
