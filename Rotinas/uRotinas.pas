@@ -639,7 +639,7 @@ begin
    If TABELA = 'CPAGTO'     then StrSql := 'SELECT DESCRICAO   Nome FROM CPAGTO     WHERE IDCPAGTO='+IntToStr(CODIGO)+'  ' else
    if TABELA = 'PLANOCONTA' then StrSql := 'SELECT NOMEPLANO   Nome FROM PLANOCONTA WHERE IDPLANO='+IntToStr(CODIGO)+' AND ATIVO = '+QUotedStr('S') else
 
-   if TABELA <> ''          then StrSql := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA=:CODIGO';
+   if TABELA <> ''          then StrSql := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA='+IntToStr(CODIGO);
 
    ConsultaSql(StrSql, dmCad.qryAux);
 

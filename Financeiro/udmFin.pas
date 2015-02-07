@@ -79,8 +79,21 @@ type
     cdsSelecHISTORICO: TStringField;
     cdsSelecSTATUS: TStringField;
     cdsSelecVLRPAGO: TFloatField;
+    UpdtContaRateio: TFDUpdateSQL;
+    dsContaRateio: TDataSource;
+    qryContaRateio: TFDQuery;
+    uHis_ContaRateio: TUCHist_DataSet;
+    qryContaRateioIDCONTARATEIO: TIntegerField;
+    qryContaRateioIDCONTA: TIntegerField;
+    qryContaRateioIDPLANO: TIntegerField;
+    qryContaRateioVLRPERC: TIntegerField;
+    qryContaRateioVLRRATEIO: TIntegerField;
+    qryContaRateioIDCCUSTO: TIntegerField;
+    qryContaRateioDESCRICAO: TStringField;
+    qryContaRateioNOMEPLANO: TStringField;
     procedure qryCreditoAfterInsert(DataSet: TDataSet);
     procedure qryContaAfterInsert(DataSet: TDataSet);
+    procedure qryContaRateioAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -101,6 +114,11 @@ uses uDmCon, uRotinas, uPrinc;
 procedure TdmFin.qryContaAfterInsert(DataSet: TDataSet);
 begin
    dmFin.qryConta.FieldByName('IDCONTA').AsInteger      := ExecutaGen('CONTA');
+end;
+
+procedure TdmFin.qryContaRateioAfterInsert(DataSet: TDataSet);
+begin
+   dmFin.qryContaRateio.FieldByName('IDCONTARATEIO').AsInteger      := ExecutaGen('CONTARATEIO');
 end;
 
 procedure TdmFin.qryCreditoAfterInsert(DataSet: TDataSet);

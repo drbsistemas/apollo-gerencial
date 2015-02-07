@@ -171,7 +171,7 @@ begin
    if cbAtivo.ItemIndex > 0 then
       StrSql := StrSql + ' and ATIVO='+QuotedStr(ifs(cbAtivo.ItemIndex=1, 'S','N'));
    if TipoPlano <> TODOS then
-      StrSQl := StrSql + ' and TIPOPLANO LIKE '+QuotedStr(ifs(TipoPlano = RECEITA,'RECEITAS', 'DESPESAS'));
+      StrSQl := StrSql + ' and TIPOPLANO LIKE '+QuotedStr('%'+ifs(TipoPlano = RECEITA,'RECEITAS', 'DESPESAS')+'%');
 
    StrSql := StrSql +' order by '+indice;
    ConsultaSql(StrSql, dmCad.qryPlanoConta);

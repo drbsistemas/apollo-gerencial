@@ -207,12 +207,12 @@ object dmFin: TdmFin
       '  OBS'
       'FROM CONTA'
       'WHERE IDCONTA = :IDCONTA')
-    Left = 57
+    Left = 56
     Top = 43
   end
   object dsConta: TDataSource
     DataSet = qryConta
-    Left = 57
+    Left = 56
     Top = 87
   end
   object qryConta: TFDQuery
@@ -240,7 +240,7 @@ object dmFin: TdmFin
       
         'left join GENERICA D on A.idCpagto = D.idgenerica and D.TABELA= ' +
         #39'FPAGTO'#39)
-    Left = 57
+    Left = 56
     Top = 1
     object qryContaIDCONTA: TIntegerField
       FieldName = 'IDCONTA'
@@ -402,7 +402,7 @@ object dmFin: TdmFin
   object uHis_Conta: TUCHist_DataSet
     DataSet = qryConta
     ControlHistorico = FPrinc.uHistorico
-    Left = 57
+    Left = 56
     Top = 136
   end
   object cdsSelec: TClientDataSet
@@ -479,8 +479,8 @@ object dmFin: TdmFin
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 128
-    Top = 40
+    Left = 274
+    Top = 117
     object cdsSelecIDCONTA: TIntegerField
       FieldName = 'IDCONTA'
     end
@@ -538,7 +538,118 @@ object dmFin: TdmFin
   end
   object dsSelec: TDataSource
     DataSet = cdsSelec
-    Left = 128
+    Left = 274
+    Top = 161
+  end
+  object UpdtContaRateio: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO CONTARATEIO'
+      '(IDCONTARATEIO, IDCONTA, IDPLANO, VLRPERC, '
+      '  VLRRATEIO, IDCCUSTO)'
+      
+        'VALUES (:NEW_IDCONTARATEIO, :NEW_IDCONTA, :NEW_IDPLANO, :NEW_VLR' +
+        'PERC, '
+      '  :NEW_VLRRATEIO, :NEW_IDCCUSTO)'
+      
+        'RETURNING IDCONTARATEIO, IDCONTA, IDPLANO, VLRPERC, VLRRATEIO, I' +
+        'DCCUSTO')
+    ModifySQL.Strings = (
+      'UPDATE CONTARATEIO'
+      'SET IDCONTARATEIO = :NEW_IDCONTARATEIO, IDCONTA = :NEW_IDCONTA, '
+      
+        '  IDPLANO = :NEW_IDPLANO, VLRPERC = :NEW_VLRPERC, VLRRATEIO = :N' +
+        'EW_VLRRATEIO, '
+      '  IDCCUSTO = :NEW_IDCCUSTO'
+      'WHERE IDCONTARATEIO = :OLD_IDCONTARATEIO'
+      
+        'RETURNING IDCONTARATEIO, IDCONTA, IDPLANO, VLRPERC, VLRRATEIO, I' +
+        'DCCUSTO')
+    DeleteSQL.Strings = (
+      'DELETE FROM CONTARATEIO'
+      'WHERE IDCONTARATEIO = :OLD_IDCONTARATEIO')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDCONTARATEIO, IDCONTA, IDPLANO, VLRPERC, VLRRATEIO, IDCC' +
+        'USTO'
+      'FROM CONTARATEIO'
+      'WHERE IDCONTARATEIO = :IDCONTARATEIO')
+    Left = 91
+    Top = 44
+  end
+  object dsContaRateio: TDataSource
+    DataSet = qryContaRateio
+    Left = 91
     Top = 88
+  end
+  object qryContaRateio: TFDQuery
+    AfterInsert = qryContaRateioAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
+    UpdateObject = UpdtContaRateio
+    SQL.Strings = (
+      'select '
+      'A.*,'
+      'B.DESCRICAO,'
+      'C.NOMEPLANO'
+      'from CONTARATEIO A'
+      
+        'left join GENERICA B on A.IDCCUSTO = B.IDGENERICA and TABELA='#39'CC' +
+        'USTO'#39
+      'left join PLANOCONTA C on A.IDPLANO = C.IDPLANO')
+    Left = 91
+    Top = 2
+    object qryContaRateioIDCONTARATEIO: TIntegerField
+      FieldName = 'IDCONTARATEIO'
+      Origin = 'IDCONTARATEIO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qryContaRateioIDCONTA: TIntegerField
+      FieldName = 'IDCONTA'
+      Origin = 'IDCONTA'
+    end
+    object qryContaRateioIDPLANO: TIntegerField
+      FieldName = 'IDPLANO'
+      Origin = 'IDPLANO'
+    end
+    object qryContaRateioVLRPERC: TIntegerField
+      FieldName = 'VLRPERC'
+      Origin = 'VLRPERC'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryContaRateioVLRRATEIO: TIntegerField
+      FieldName = 'VLRRATEIO'
+      Origin = 'VLRRATEIO'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object qryContaRateioIDCCUSTO: TIntegerField
+      FieldName = 'IDCCUSTO'
+      Origin = 'IDCCUSTO'
+    end
+    object qryContaRateioDESCRICAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      Size = 100
+    end
+    object qryContaRateioNOMEPLANO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOMEPLANO'
+      Origin = 'NOMEPLANO'
+      ProviderFlags = []
+      Size = 50
+    end
+  end
+  object uHis_ContaRateio: TUCHist_DataSet
+    DataSet = qryContaRateio
+    ControlHistorico = FPrinc.uHistorico
+    Left = 91
+    Top = 137
   end
 end

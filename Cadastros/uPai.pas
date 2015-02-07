@@ -138,6 +138,9 @@ end;
 
 procedure TFcad_Pai.cxCancelaClick(Sender: TObject);
 begin
+   if Msg('Verificamos que pode perder dados executando esta ação, deseja realmente cancelar ?','P',';O') = False then
+      Abort;
+
    MostraPainelCadastro(Con);
 end;
 

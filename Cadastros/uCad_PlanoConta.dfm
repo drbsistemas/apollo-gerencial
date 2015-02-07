@@ -701,7 +701,7 @@ inherited Fcad_PlanoConta: TFcad_PlanoConta
       Left = 28
       Top = 251
       AutoSize = False
-      Caption = 'Custo Produto:'
+      Caption = 'Percentual:'
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clMaroon

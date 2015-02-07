@@ -11,7 +11,7 @@ uses
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxLabel, dxGDIPlusClasses, cxImage, Vcl.StdCtrls,
   cxButtons, Vcl.ExtCtrls, Vcl.ComCtrls, dxCore, cxDateUtils, cxCalendar,
-  cxButtonEdit, cxCurrencyEdit;
+  cxButtonEdit, cxCurrencyEdit, Datasnap.DBClient, FireDAC.Comp.Client;
 
 type
   TFcad_Contas = class(TFcad_Pai)
@@ -92,6 +92,20 @@ type
     pnTop: TPanel;
     cxContas: TcxLabel;
     cxTotal: TcxLabel;
+    cxGrid1: TcxGrid;
+    cxGridDBTableView2: TcxGridDBTableView;
+    cxGridDBColumn14: TcxGridDBColumn;
+    cxGridDBColumn15: TcxGridDBColumn;
+    cxGridLevel2: TcxGridLevel;
+    cxGridDBTableView2Column1: TcxGridDBColumn;
+    cdsRateio: TClientDataSet;
+    dsRateio: TDataSource;
+    cdsRateioIDCONTA: TIntegerField;
+    cdsRateioIDPLANO: TIntegerField;
+    cdsRateioIDCCUSTO: TIntegerField;
+    cdsRateioVLRPERC: TFloatField;
+    cdsRateioVLRRATEIO: TFloatField;
+    cdsRateioDESCRICAO: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure cxConsultaPropertiesChange(Sender: TObject);
@@ -128,6 +142,7 @@ type
     procedure SomaValorConta;
     procedure Marca(intTipo: Integer);
     procedure TotalContas(FValor: Double);
+    procedure ConsultaRateio(FTotalConta: Double; StrCodPlano, StrCodConta, StrDados: String);
   public
     { Public declarations }
   end;
@@ -149,6 +164,7 @@ begin
    begin
       try
          dmFin.qryConta.Delete;
+         ExecutaSql('delete from CONTARATEIO where IDCONTA='+dmFin.qryConta.FieldByName('IDCONTA').AsString, dmFin.qryAux);
          dmFin.qryConta.ApplyUpdates(0);
       Except
          dmFin.qryConta.CancelUpdates;
@@ -159,6 +175,8 @@ end;
 procedure TFcad_Contas.cxCancelaClick(Sender: TObject);
 begin
    inherited;
+   if dmFin.qryContaRateio.RecordCount>0 then
+      dmFin.qryContaRateio.CancelUpdates;
    cxConsultaPropertiesChange(self);
 end;
 
@@ -244,7 +262,7 @@ end;
 
 procedure TFcad_Contas.cxNovoClick(Sender: TObject);
 begin
-  inherited;
+   inherited;
    Limpa;
    eDocumento.SetFocus;
 end;
@@ -283,6 +301,11 @@ begin
 
          Post;
          ApplyUpdates(0);
+         if dmFin.qryContaRateio.RecordCount>0 then
+         begin
+            ExecutaSql('delete from CONTARATEIO where IDCONTA='+eCOdigo.TExt, dmFin.qryAux);
+            dmFin.qryContaRateio.ApplyUpdates(0);
+         end;
          inherited;
       Except
          CancelUpdates;
@@ -323,7 +346,10 @@ begin
   inherited;
    ePlanoCta.Text       :=  ConsultaCampoNomeAtivo(eCodPlano.Text, 'PLANOCONTA');
    if ePlanoCta.Text ='NENHUM' then
-      eCodPlano.Text := '0';
+      eCodPlano.Text := '0' else
+      begin
+         ConsultaRateio(eValorTotal.Value, eCodPlano.Text, eCodigo.Text, 'CONSULTA');
+      end;
 end;
 
 procedure TFcad_Contas.eCodPlanoKeyPress(Sender: TObject; var Key: Char);
@@ -477,8 +503,8 @@ begin
       try
          eCodigo.Text          := FieldByName('IDCONTA').AsString;
          eCodCLie.Text         := FieldByName('IDCLIE').AsString;
+         eCodClieExit(Self);
          eCodOrigem.Text       := FieldByName('IDORIGEM').AsString;
-         eCodPlano.Text        := FieldByName('IDPLANOCTA').AsString;
 
          eDtEmissao.Date       := FieldByName('DTEMISSAO').AsDateTime;
          eDtLancamento.Date    := FieldByName('DTLANCTO').AsDAteTime;
@@ -491,6 +517,9 @@ begin
          eValorDesconto.Value  := FieldByName('VLRDESC').AsFloat;
          eValorTotal.Value     := FieldByName('VLRBRUTO').AsFloat;
          eValorPago.Value      := FieldByName('VLRPAGO').AsFloat;
+
+         eCodPlano.Text        := FieldByName('IDPLANOCTA').AsString;
+         eCodPlanoExit(Self);
 
          eDocumento.TExt       := FieldByName('DOCUMENTO').AsString;
          eHistorico.Text       := FieldByName('HISTORICO').AsString;
@@ -575,6 +604,42 @@ begin
       FTotalContas:= FTotalContas + FValor;
 
    cxTotal.Caption := 'Total de Contas R$: '+FormatFloat('###,###,##0.00',FTotalContas);
+end;
+
+Procedure TFcad_Contas.ConsultaRateio(FTotalConta: Double; StrCodPlano, StrCodConta, StrDados: String);
+begin  
+   with dmFin do
+   begin
+      if StrDados = 'BANCO' then
+         ConsultaSql('select '+#13+
+            ' A.*, '+#13+
+            ' B.DESCRICAO, '+#13+
+            ' C.NOMEPLANO '+#13+
+            ' from CONTARATEIO A '+#13+
+            ' left join GENERICA B on A.IDCCUSTO = B.IDGENERICA and TABELA='+QuotedStr('CCUSTO')+' '+#13+
+            ' left join PLANOCONTA C on A.IDPLANO = C.IDPLANO '+#13+
+            ' where IDCONTA='+StrCodConta, qryAux)
+      else   
+      if StrDados = 'CONSULTA' then      
+         ConsultaSql('SELECT A.*, B.DESCRICAO FROM PLANOCONTAITEM A '+#13+
+            ' LEFT JOIN GENERICA B  on A.IDCCUSTO = B.IDGENERICA AND TABELA='+QuotedStr('CCUSTO')+' WHERE IDPLANO='+StrCodPlano, qryAux);
+
+      if qryAux.RecordCount>0 then
+      begin
+         while not qryAux.Eof do
+         begin
+            cdsRateio.Append;
+            cdsRateioIDCONTA.AsInteger  := StrToInt(StrCodConta);
+            cdsRateioIDPLANO.AsInteger  := StrToInt(StrCodPlano);  
+            cdsRateioIDCCUSTO.AsInteger := qryAux.FIeldbyname('IDCCUSTO').asInteger;
+            cdsRateioVLRPERC.ASFloat    := qryAux.FIeldbyname('PERCENTUAL').AsFloat;
+            cdsRateioVLRRATEIO.AsFloat  := CalculoCorreto((qryAux.FIeldbyname('PERCENTUAL').AsFloat/100),FTotalConta,'*',2);
+            cdsRateioDESCRICAO.AsString := qryAux.FieldByName('DESCRICAO').AsString;
+            cdsRateio.Post;
+            qryAux.Next;
+         end;
+      end;
+   end;
 end;
 
 end.

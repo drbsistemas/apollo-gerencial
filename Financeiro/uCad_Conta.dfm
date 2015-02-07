@@ -98,10 +98,8 @@ inherited Fcad_Contas: TFcad_Contas
     inherited grConsulta: TcxGrid
       Width = 642
       Height = 178
-      ExplicitLeft = 322
-      ExplicitTop = 57
       ExplicitWidth = 642
-      ExplicitHeight = 412
+      ExplicitHeight = 178
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmFin.dsConta
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
@@ -189,7 +187,6 @@ inherited Fcad_Contas: TFcad_Contas
       Align = alBottom
       TabOrder = 4
       Visible = False
-      ExplicitLeft = -4
       object grConsulta2: TcxGrid
         Left = 1
         Top = 25
@@ -211,9 +208,6 @@ inherited Fcad_Contas: TFcad_Contas
         LookAndFeel.NativeStyle = False
         LookAndFeel.SkinName = 'Office2010Black'
         RootLevelOptions.TabsForEmptyDetails = False
-        ExplicitLeft = 106
-        ExplicitTop = 91
-        ExplicitHeight = 232
         object cxGridDBTableView1: TcxGridDBTableView
           OnDblClick = cxGridDBTableView1DblClick
           Navigator.Buttons.CustomButtons = <>
@@ -1122,11 +1116,14 @@ inherited Fcad_Contas: TFcad_Contas
       Left = 282
       Top = 271
       Hint = 'Valor de Total da Movimenta'#231#227'o'
+      TabStop = False
       EditValue = 0.000000000000000000
       ParentFont = False
       Properties.Alignment.Horz = taRightJustify
       Properties.DecimalPlaces = 3
       Properties.DisplayFormat = '###,###,##0.00'
+      Properties.ReadOnly = True
+      Style.Color = clBtnFace
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clWindowText
       Style.Font.Height = -11
@@ -1384,5 +1381,117 @@ inherited Fcad_Contas: TFcad_Contas
       Text = 'NENHUM'
       Width = 355
     end
+    object cxGrid1: TcxGrid
+      Left = 118
+      Top = 352
+      Width = 438
+      Height = 186
+      Hint = 'Grid de Dados'
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = cxcbsNone
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 43
+      LookAndFeel.Kind = lfStandard
+      LookAndFeel.NativeStyle = False
+      LookAndFeel.SkinName = 'Office2010Black'
+      RootLevelOptions.TabsForEmptyDetails = False
+      object cxGridDBTableView2: TcxGridDBTableView
+        OnDblClick = grConsultaDBTableView1DblClick
+        Navigator.Buttons.CustomButtons = <>
+        OnCustomDrawCell = grConsultaDBTableView1CustomDrawCell
+        DataController.DataSource = dsRateio
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsView.NoDataToDisplayInfoText = '<N'#227'o h'#225' registros>'
+        OptionsView.GroupByBox = False
+        object cxGridDBColumn14: TcxGridDBColumn
+          Caption = 'Descri'#231#227'o'
+          DataBinding.FieldName = 'DESCRICAO'
+          Width = 259
+        end
+        object cxGridDBColumn15: TcxGridDBColumn
+          Caption = 'Perc (%)'
+          DataBinding.FieldName = 'VLRPERC'
+          Width = 75
+        end
+        object cxGridDBTableView2Column1: TcxGridDBColumn
+          Caption = 'Vlr. Rateio'
+          DataBinding.FieldName = 'VLRRATEIO'
+          Width = 75
+        end
+      end
+      object cxGridLevel2: TcxGridLevel
+        GridView = cxGridDBTableView2
+      end
+    end
+  end
+  object cdsRateio: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'IDCONTA'
+        DataType = ftInteger
+      end
+      item
+        Name = 'IDPLANO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'VLRPERC'
+        DataType = ftFloat
+      end
+      item
+        Name = 'VLRRATEIO'
+        DataType = ftFloat
+      end
+      item
+        Name = 'IDCCUSTO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Size = 100
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 570
+    Top = 317
+    object cdsRateioIDCONTA: TIntegerField
+      FieldName = 'IDCONTA'
+    end
+    object cdsRateioIDPLANO: TIntegerField
+      FieldName = 'IDPLANO'
+    end
+    object cdsRateioIDCCUSTO: TIntegerField
+      FieldName = 'IDCCUSTO'
+    end
+    object cdsRateioVLRPERC: TFloatField
+      FieldName = 'VLRPERC'
+    end
+    object cdsRateioVLRRATEIO: TFloatField
+      FieldName = 'VLRRATEIO'
+    end
+    object cdsRateioDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+    end
+  end
+  object dsRateio: TDataSource
+    DataSet = cdsRateio
+    Left = 570
+    Top = 361
   end
 end
