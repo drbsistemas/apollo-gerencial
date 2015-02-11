@@ -632,12 +632,13 @@ end;
 function BuscaNomeAtivo(TABELA:String;CODIGO:Integer):String;
 var oNome:String;
 begin
-   If TABELA = 'CLI'        then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('CLI') else
-   If TABELA = 'FOR'        then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('FOR') else
-   If TABELA = 'VEN'        then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('VEN') else
-   If TABELA = 'TRA'        then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('TRA') else
-   If TABELA = 'CPAGTO'     then StrSql := 'SELECT DESCRICAO   Nome FROM CPAGTO     WHERE IDCPAGTO='+IntToStr(CODIGO)+'  ' else
-   if TABELA = 'PLANOCONTA' then StrSql := 'SELECT NOMEPLANO   Nome FROM PLANOCONTA WHERE IDPLANO='+IntToStr(CODIGO)+' AND ATIVO = '+QUotedStr('S') else
+   If TABELA = 'CLI'             then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('CLI') else
+   If TABELA = 'FOR'             then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('FOR') else
+   If TABELA = 'VEN'             then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('VEN') else
+   If TABELA = 'TRA'             then StrSql := 'SELECT RAZAO       Nome FROM CLIENTE    WHERE IDCLIE='+IntToStr(CODIGO)+' AND ATIVO = '+QuotedStr('S')+' AND TIPOCLIE='+QuotedStr('TRA') else
+   If TABELA = 'CPAGTO'          then StrSql := 'SELECT DESCRICAO   Nome FROM CPAGTO     WHERE IDCPAGTO='+IntToStr(CODIGO)+'  ' else
+   if TABELA = 'PLANOCONTAREC'   then StrSql := 'SELECT NOMEPLANO   Nome FROM PLANOCONTA WHERE TIPOPLANO LIKE '+QuotedStr('%RECEITAS%')+' and IDPLANO='+IntToStr(CODIGO)+' AND ATIVO = '+QUotedStr('S') else
+   if TABELA = 'PLANOCONTAPAG'   then StrSql := 'SELECT NOMEPLANO   Nome FROM PLANOCONTA WHERE TIPOPLANO LIKE '+QuotedStr('%DESPESAS%')+' and IDPLANO='+IntToStr(CODIGO)+' AND ATIVO = '+QUotedStr('S') else
 
    if TABELA <> ''          then StrSql := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA='+IntToStr(CODIGO);
 
@@ -664,14 +665,13 @@ end;
 function BUSCACONF(CAMPO:String):String;
 var oNome:String;
 begin
-   ConsultaSql('select VALORCONF from ITEMCONF where CAMPO='+QuotedStr(CAMPO), dmCad.qryAux);
+   ConsultaSql('select VALORCONF from PARAMETRO where CAMPO='+QuotedStr(CAMPO), dmCad.qryAux);
 
    if not dmcad.qryAux.IsEmpty then
       oNome:= dmCad.qryAux.FieldByname('VALORCONF').asString else
    begin
       oNome:='ERRO';
-      ShowMessage('Atenção! Configuração não encontrada, contate suporte!');
-      Msg('Não encontramos uma configuração correta, contate suporte!', 'I',':(');
+      Msg('Atenção! Configuração não encontrada, contate suporte!','I',':(');
    end;
    ReSult := oNome;
 end;

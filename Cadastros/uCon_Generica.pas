@@ -3,7 +3,7 @@ unit uCon_Generica;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  System.StrUtils, Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPai, cxGraphics, cxLookAndFeels,
   cxLookAndFeelPainters, Vcl.Menus, dxSkinsCore, dxSkinBlack, dxSkinBlue,
   dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
@@ -35,7 +35,6 @@ type
     cxApelido: TcxLabel;
     eObs: TcxTextEdit;
     procedure AbreCom(StrAbre: String);
-    procedure CaptionForm;
     procedure CarregaTabelas();
 
     procedure FormShow(Sender: TObject);
@@ -46,15 +45,17 @@ type
     procedure cxVerClick(Sender: TObject);
     procedure cxNovoClick(Sender: TObject);
     procedure cxSalvarClick(Sender: TObject);
-    procedure cxVoltarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
+    procedure cxVoltarClick(Sender: TObject);
   private
     { Private declarations }
     indice : String;
     procedure Edita;
     procedure Limpa;
+    procedure CaptionForm;
+    function BuscaID: Integer;
   public
     { Public declarations }
      TABELA: string;
@@ -86,7 +87,7 @@ begin
                                   ' like '+QuotedStr('%'+eConsulta.Text+'%')+' order by '+indice;
 
    ConsultaSql(StrSql, dmcad.qryGenerico);
-   CaptionForm;
+   CaptionFOrm;
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmCad.qryGenerico.RecordCount);
 end;
 
@@ -113,18 +114,17 @@ end;
 
 procedure TFcad_Generica.cxSalvarClick(Sender: TObject);
 begin
-
    with dmCad.qryGenerico do
    begin
       if cxSalvar.Tag = 1 then // Salvar
          Insert else
          Edit;
       try
-         FieldByName('DESCRICAO').AsString          := eDescricao.Text;
-         FieldByName('OBS').AsString                := eObs.Text;
-         FieldByName('VALOR').AsFloat               := 0;
-         FieldByName('TABELA').AsString             := TABELA;
-
+         FieldByName('IDGENERICA').AsInteger          := BuscaID;
+         FieldByName('DESCRICAO').AsString            := eDescricao.Text;
+         FieldByName('OBS').AsString                  := eObs.Text;
+         FieldByName('VALOR').AsFloat                 := 0;
+         FieldByName('TABELA').AsString               := TABELA;
          Post;
          ApplyUpdates(0);
          inherited;
@@ -132,15 +132,6 @@ begin
          CancelUpdates;
       end;
    end;
-end;
-
-procedure TFcad_Generica.cxTabelaClick(Sender: TObject);
-begin
-   inherited;
-   ConsultaSql('select TABELA from generica where NOMETABELA='+QuotedStr(cxTAbela.Text), dmcad.qryAux);
-   TABELA := dmCad.qryAux.FieldByName('TABELA').AsString;
-
-   cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Generica.cxVerClick(Sender: TObject);
@@ -153,9 +144,9 @@ end;
 procedure TFcad_Generica.cxVoltarClick(Sender: TObject);
 begin
   inherited;
-   if pnBotaoCon.Tag = 1 then
-      MostraPainelBusca(Con) else
-      Close;
+   ID               := dmCad.qryGenerico.Fieldbyname('IDGENERICA').AsInteger;
+   DESCRICAO        := dmCad.qryGenerico.FieldByName('DESCRICAO').AsString;
+   OBS              := dmCad.qryGenerico.FieldByName('OBS').AsString;
 end;
 
 procedure TFcad_Generica.Edita;
@@ -223,28 +214,53 @@ begin
       pnTabela.Visible        := True;
 end;
 
-procedure TFcad_Generica.CaptionForm;
+procedure TFcad_Generica.cxTabelaClick(Sender: TObject);
 begin
-   Fcad_Generica.Caption := 'Cadastro de '+dmcad.qryGenerico.FieldByName('NOMETABELA').AsString;
+   inherited;
+   case cxTabela.Itemindex of
+      0: TABELA := 'CCUSTO';
+      1: TABELA := 'FPAGTO';
+      2: TABELA := 'GRUPO';
+      3: TABELA := 'SUBGRUPO';
+      4: TABELA := 'LOCALIZACAO';
+   end;
+   cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Generica.CarregaTabelas();
 begin
-   ConsultaSql('select NOMETABELA from generica group by TABELA, NOMETABELA order by TABELA', dmcad.qryAux);
-   dmcad.qryAux.First;
+   cxTabela.Properties.Items.Add('CENTRO DE CUSTO');
+   cxTabela.Properties.Items.Add('FORMA DE PAGAMENTO');
+   cxTabela.Properties.Items.Add('GRUPOS');
+   cxTabela.Properties.Items.Add('SUBGRUPOS');
+   cxTabela.Properties.Items.Add('LOCALIZAÇÃO');
+{   cxTabela.Properties.Items.Add('RAÇA');
+   cxTabela.Properties.Items.Add('ESPÉCIE');
+   cxTabela.Properties.Items.Add('TIPO DE TRABALHO');
+   cxTabela.Properties.Items.Add('VACINA'); }
 
-   cxTabela.Properties.Items.Clear;
-   while not dmcad.qryAux.Eof do
-   begin
-      cxTabela.Properties.Items.Add(dmcad.qryAux.FieldByName('NOMETABELA').AsString);
-      dmCad.qryAux.Next;
-   end;
    pnTabela.Visible := true;
    cxTabela.ItemIndex := 0;
    cxTabelaClick(self);
 end;
 
+Procedure TFcad_Generica.CaptionForm;
+begin
+   case AnsiIndexStr(UpperCase(TABELA), ['CCUSTO', 'FPAGTO','GRUPO','SUBGRUPO','LOCALIZACAO']) of
+         0: Caption := 'CENTRO DE CUSTO';
+         1: Caption := 'FORMA DE PAGAMENTO';
+         2: Caption := 'GRUPOS';
+         3: Caption := 'SUBGRUPOS';
+         4: Caption := 'LOCALIZAÇÃO';
+   end;
+   Caption := 'Cadastro de : '+Caption;
+end;
+
+Function TFcad_GEnerica.BuscaID(): Integer;
+begin
+   ConsultaSql('select MAx(IDGENERICA) ID from GENERICA where TABELA='+QuotedStr(TABELA), dmCad.qryAux);
+   Result := dmCad.qryAux.Fieldbyname('ID').asInteger+1;
+end;
+
 end.
-
-
 

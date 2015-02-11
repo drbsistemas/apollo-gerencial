@@ -10,7 +10,8 @@ uses
   RxMenus, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxLabel, dxGDIPlusClasses, cxImage, Vcl.StdCtrls,
-  cxButtons, Vcl.ExtCtrls, cxCheckBox, cxButtonEdit, cxCurrencyEdit;
+  cxButtons, Vcl.ExtCtrls, cxCheckBox, cxButtonEdit, cxCurrencyEdit,
+  dxSkinsCore, dxSkinOffice2010Silver, dxSkinscxPCPainter;
 
 type
   TFcad_PlanoConta = class(TFcad_Pai)
@@ -99,10 +100,13 @@ procedure TFcad_PlanoConta.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
    inherited;
-   if (key = VK_DOWN) and (not grConsulta.Focused = true) then
-      dmCad.qryPlanoCOnta.Next;
-   if (key = VK_UP) and (not grConsulta.Focused = true) then
-      dmCad.qryPlanoCOnta.Prior;
+   if pnCon.Visible = True then
+   begin
+      if (key = VK_DOWN) and (not grConsulta.Focused = true) then
+         dmCad.qryPlanoCOnta.Next;
+      if (key = VK_UP) and (not grConsulta.Focused = true) then
+         dmCad.qryPlanoCOnta.Prior;
+   end;
 
    cxQtdeREg.Caption := 'Registros: '+ intToStr(dmCad.qryPlanoCOnta.RecordCount);
 end;
@@ -157,8 +161,8 @@ end;
 
 procedure TFcad_PlanoConta.cxConsultaPropertiesChange(Sender: TObject);
 begin
-  inherited;
-    case cxConsulta.ItemIndex of
+   inherited;
+   case cxConsulta.ItemIndex of
       0: indice := 'IDPLANO';
       1: indice := 'NOMEPLANO';
    end;
@@ -213,9 +217,9 @@ begin
       Msg('Este Centro de Custo já foi incluído!','I',';P');
       abort;
    end;
-   if (eTotalPerc.Value >=100) then
+   if ((eTotalPerc.Value+ePercentual.Value) >100) then
    begin
-      Msg('O total de percentual para rateio já foi atingido (100%)!','I',';P');
+      Msg('O total de percentual para rateio deve ser de (100%)!','I',';P');
       Abort;
    end;
    dmcad.qryPlanoContaItem.Append;

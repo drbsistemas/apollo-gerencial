@@ -201,6 +201,18 @@
             <Form>Fcad_PlanoConta</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Financeiro\uCad_Baixa.pas">
+            <Form>Fcad_Baixa</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Cadastros\uCad_Parametro.pas">
+            <Form>FCad_Parametro</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Financeiro\uCad_Caixa.pas">
+            <Form>Fcad_Caixa</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

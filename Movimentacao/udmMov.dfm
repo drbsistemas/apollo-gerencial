@@ -46,13 +46,13 @@ object dmMov: TdmMov
       '  VLRTOTALITEM, OBSITEM, DATAVALIDADE, SALDOQTDE, STATUSITEM'
       'FROM PEDIDOITEM'
       'WHERE IDPEDIDOITEM = :IDPEDIDOITEM')
-    Left = 54
-    Top = 48
+    Left = 53
+    Top = 51
   end
   object dsItemPed: TDataSource
     DataSet = qryItemPed
-    Left = 54
-    Top = 92
+    Left = 53
+    Top = 94
   end
   object qryPedido: TFDQuery
     AfterInsert = qryPedidoAfterInsert
@@ -83,7 +83,7 @@ object dmMov: TdmMov
         'left join CLIENTE D on A.idtransp = D.IDCLIE and D.TIPOCLIE='#39'TRA' +
         #39
       'left join CPAGTO E on A.IDCPAGTO = E.IDCPAGTO')
-    Left = 18
+    Left = 17
     Top = 7
     object qryPedidoIDPEDIDO: TIntegerField
       FieldName = 'IDPEDIDO'
@@ -315,13 +315,13 @@ object dmMov: TdmMov
       '  OBS, QTDEITENS, TOTALITENS, TOTALDESC, TOTALFRETE, TOTALPEDIDO'
       'FROM PEDIDO'
       'WHERE IDPEDIDO = :IDPEDIDO')
-    Left = 18
+    Left = 17
     Top = 51
   end
   object dsPedido: TDataSource
     DataSet = qryPedido
-    Left = 18
-    Top = 95
+    Left = 17
+    Top = 94
   end
   object qryItemPed: TFDQuery
     AfterInsert = qryItemPedAfterInsert
@@ -340,8 +340,8 @@ object dmMov: TdmMov
       'B.REFPROD'
       'from PEDIDOITEM A'
       'left join PRODUTO B on A.IDPROD = B.IDPROD')
-    Left = 54
-    Top = 6
+    Left = 53
+    Top = 7
     object qryItemPedIDPEDIDOITEM: TIntegerField
       FieldName = 'IDPEDIDOITEM'
       Origin = 'IDPEDIDOITEM'
@@ -427,26 +427,26 @@ object dmMov: TdmMov
   object uHis_Pedido: TUCHist_DataSet
     DataSet = qryPedido
     ControlHistorico = FPrinc.uHistorico
-    Left = 16
-    Top = 144
+    Left = 15
+    Top = 138
   end
   object uHis_ItemPed: TUCHist_DataSet
     DataSet = qryItemPed
     ControlHistorico = FPrinc.uHistorico
-    Left = 54
-    Top = 141
+    Left = 53
+    Top = 138
   end
   object qryAux: TFDQuery
     CachedUpdates = True
     Connection = dmCon.FdCon
     Transaction = dmCon.FdSalva
     UpdateTransaction = dmCon.FdSalva
-    Left = 304
+    Left = 376
     Top = 5
   end
   object dsAux: TDataSource
     DataSet = qryAux
-    Left = 304
+    Left = 376
     Top = 49
   end
   object qryAux2: TFDQuery
@@ -454,12 +454,12 @@ object dmMov: TdmMov
     Connection = dmCon.FdCon
     Transaction = dmCon.FdSalva
     UpdateTransaction = dmCon.FdSalva
-    Left = 344
+    Left = 416
     Top = 5
   end
   object dsAux2: TDataSource
     DataSet = qryAux2
-    Left = 344
+    Left = 416
     Top = 49
   end
   object UpdtPedidoFin: TFDUpdateSQL
@@ -492,13 +492,13 @@ object dmMov: TdmMov
         'O'
       'FROM PEDIDOFINANCEIRO'
       'WHERE IDPEDIDOFINANCEIRO = :IDPEDIDOFINANCEIRO')
-    Left = 114
-    Top = 48
+    Left = 87
+    Top = 51
   end
   object dsPedidoFin: TDataSource
     DataSet = qryPedidoFin
-    Left = 114
-    Top = 92
+    Left = 87
+    Top = 94
   end
   object qryPedidoFin: TFDQuery
     AfterInsert = qryPedidoFinAfterInsert
@@ -511,13 +511,13 @@ object dmMov: TdmMov
     UpdateObject = UpdtPedidoFin
     SQL.Strings = (
       'select * from PEDIDOFINANCEIRO')
-    Left = 114
-    Top = 6
+    Left = 87
+    Top = 7
   end
   object uHis_PedidoFin: TUCHist_DataSet
     DataSet = qryPedidoFin
     ControlHistorico = FPrinc.uHistorico
-    Left = 114
-    Top = 141
+    Left = 87
+    Top = 138
   end
 end

@@ -1,7 +1,7 @@
 object dmFin: TdmFin
   OldCreateOrder = False
   Height = 222
-  Width = 327
+  Width = 408
   object UpdtCredito: TFDUpdateSQL
     Connection = dmCon.FdCon
     InsertSQL.Strings = (
@@ -117,12 +117,12 @@ object dmFin: TdmFin
     Connection = dmCon.FdCon
     Transaction = dmCon.FdSalva
     UpdateTransaction = dmCon.FdSalva
-    Left = 274
+    Left = 370
     Top = 5
   end
   object dsAux: TDataSource
     DataSet = qryAux
-    Left = 274
+    Left = 370
     Top = 49
   end
   object uHis_Credito: TUCHist_DataSet
@@ -135,39 +135,37 @@ object dmFin: TdmFin
     Connection = dmCon.FdCon
     InsertSQL.Strings = (
       'INSERT INTO CONTA'
-      '(IDCONTA, IDCLIE, IDCCUSTO, IDCPAGTO, IDLOTE, '
-      '  IDPAI, IDORIGEM, IDPLANOCTA, DIASATRASO, '
-      '  DTEMISSAO, DTLANCTO, DTVENCTO, DTBAIXA, '
-      '  VLRINI, VLRJUROS, VLRMULTA, VLRDESC, '
-      '  VLRBRUTO, VLRPAGO, PARCELA, DOCUMENTO, '
-      '  HISTORICO, TIPOCONTA, STATUSCONTA, ORIGEM, '
-      '  OBS)'
+      '(IDCONTA, IDCLIE, IDLOTE, IDPAI, IDORIGEM, '
+      '  IDPLANOCTA, DIASATRASO, DTEMISSAO, DTLANCTO, '
+      '  DTVENCTO, DTBAIXA, VLRINI, VLRJUROS, '
+      '  VLRMULTA, VLRDESC, VLRBRUTO, VLRPAGO, '
+      '  DOCUMENTO, HISTORICO, TIPOCONTA, STATUSCONTA, '
+      '  ORIGEM, OBS)'
       
-        'VALUES (:NEW_IDCONTA, :NEW_IDCLIE, :NEW_IDCCUSTO, :NEW_IDCPAGTO,' +
-        ' :NEW_IDLOTE, '
-      '  :NEW_IDPAI, :NEW_IDORIGEM, :NEW_IDPLANOCTA, :NEW_DIASATRASO, '
-      '  :NEW_DTEMISSAO, :NEW_DTLANCTO, :NEW_DTVENCTO, :NEW_DTBAIXA, '
-      '  :NEW_VLRINI, :NEW_VLRJUROS, :NEW_VLRMULTA, :NEW_VLRDESC, '
-      '  :NEW_VLRBRUTO, :NEW_VLRPAGO, :NEW_PARCELA, :NEW_DOCUMENTO, '
+        'VALUES (:NEW_IDCONTA, :NEW_IDCLIE, :NEW_IDLOTE, :NEW_IDPAI, :NEW' +
+        '_IDORIGEM, '
       
-        '  :NEW_HISTORICO, :NEW_TIPOCONTA, :NEW_STATUSCONTA, :NEW_ORIGEM,' +
-        ' '
-      '  :NEW_OBS)'
+        '  :NEW_IDPLANOCTA, :NEW_DIASATRASO, :NEW_DTEMISSAO, :NEW_DTLANCT' +
+        'O, '
+      '  :NEW_DTVENCTO, :NEW_DTBAIXA, :NEW_VLRINI, :NEW_VLRJUROS, '
+      '  :NEW_VLRMULTA, :NEW_VLRDESC, :NEW_VLRBRUTO, :NEW_VLRPAGO, '
       
-        'RETURNING IDCONTA, IDCLIE, IDCCUSTO, IDCPAGTO, IDLOTE, IDPAI, ID' +
-        'ORIGEM, IDPLANOCTA, DIASATRASO, DTEMISSAO, DTLANCTO, DTVENCTO, D' +
-        'TBAIXA, VLRINI, VLRJUROS, VLRMULTA, VLRDESC, VLRBRUTO, VLRPAGO, ' +
-        'PARCELA, DOCUMENTO, HISTORICO, TIPOCONTA, STATUSCONTA, ORIGEM, O' +
-        'BS')
+        '  :NEW_DOCUMENTO, :NEW_HISTORICO, :NEW_TIPOCONTA, :NEW_STATUSCON' +
+        'TA, '
+      '  :NEW_ORIGEM, :NEW_OBS)'
+      
+        'RETURNING IDCONTA, IDCLIE, IDLOTE, IDPAI, IDORIGEM, IDPLANOCTA, ' +
+        'DIASATRASO, DTEMISSAO, DTLANCTO, DTVENCTO, DTBAIXA, VLRINI, VLRJ' +
+        'UROS, VLRMULTA, VLRDESC, VLRBRUTO, VLRPAGO, DOCUMENTO, HISTORICO' +
+        ', TIPOCONTA, STATUSCONTA, ORIGEM, OBS')
     ModifySQL.Strings = (
       'UPDATE CONTA'
       
-        'SET IDCONTA = :NEW_IDCONTA, IDCLIE = :NEW_IDCLIE, IDCCUSTO = :NE' +
-        'W_IDCCUSTO, '
+        'SET IDCONTA = :NEW_IDCONTA, IDCLIE = :NEW_IDCLIE, IDLOTE = :NEW_' +
+        'IDLOTE, '
       
-        '  IDCPAGTO = :NEW_IDCPAGTO, IDLOTE = :NEW_IDLOTE, IDPAI = :NEW_I' +
-        'DPAI, '
-      '  IDORIGEM = :NEW_IDORIGEM, IDPLANOCTA = :NEW_IDPLANOCTA, '
+        '  IDPAI = :NEW_IDPAI, IDORIGEM = :NEW_IDORIGEM, IDPLANOCTA = :NE' +
+        'W_IDPLANOCTA, '
       '  DIASATRASO = :NEW_DIASATRASO, DTEMISSAO = :NEW_DTEMISSAO, '
       
         '  DTLANCTO = :NEW_DTLANCTO, DTVENCTO = :NEW_DTVENCTO, DTBAIXA = ' +
@@ -178,33 +176,25 @@ object dmFin: TdmFin
       
         '  VLRDESC = :NEW_VLRDESC, VLRBRUTO = :NEW_VLRBRUTO, VLRPAGO = :N' +
         'EW_VLRPAGO, '
-      
-        '  PARCELA = :NEW_PARCELA, DOCUMENTO = :NEW_DOCUMENTO, HISTORICO ' +
-        '= :NEW_HISTORICO, '
+      '  DOCUMENTO = :NEW_DOCUMENTO, HISTORICO = :NEW_HISTORICO, '
       '  TIPOCONTA = :NEW_TIPOCONTA, STATUSCONTA = :NEW_STATUSCONTA, '
       '  ORIGEM = :NEW_ORIGEM, OBS = :NEW_OBS'
       'WHERE IDCONTA = :OLD_IDCONTA'
       
-        'RETURNING IDCONTA, IDCLIE, IDCCUSTO, IDCPAGTO, IDLOTE, IDPAI, ID' +
-        'ORIGEM, IDPLANOCTA, DIASATRASO, DTEMISSAO, DTLANCTO, DTVENCTO, D' +
-        'TBAIXA, VLRINI, VLRJUROS, VLRMULTA, VLRDESC, VLRBRUTO, VLRPAGO, ' +
-        'PARCELA, DOCUMENTO, HISTORICO, TIPOCONTA, STATUSCONTA, ORIGEM, O' +
-        'BS')
+        'RETURNING IDCONTA, IDCLIE, IDLOTE, IDPAI, IDORIGEM, IDPLANOCTA, ' +
+        'DIASATRASO, DTEMISSAO, DTLANCTO, DTVENCTO, DTBAIXA, VLRINI, VLRJ' +
+        'UROS, VLRMULTA, VLRDESC, VLRBRUTO, VLRPAGO, DOCUMENTO, HISTORICO' +
+        ', TIPOCONTA, STATUSCONTA, ORIGEM, OBS')
     DeleteSQL.Strings = (
       'DELETE FROM CONTA'
       'WHERE IDCONTA = :OLD_IDCONTA')
     FetchRowSQL.Strings = (
       
-        'SELECT IDCONTA, IDCLIE, IDCCUSTO, IDCPAGTO, IDLOTE, IDPAI, IDORI' +
-        'GEM, '
-      
-        '  IDPLANOCTA, DIASATRASO, DTEMISSAO, DTLANCTO, DTVENCTO, DTBAIXA' +
-        ', '
-      '  VLRINI, VLRJUROS, VLRMULTA, VLRDESC, VLRBRUTO, VLRPAGO, '
-      
-        '  PARCELA, DOCUMENTO, HISTORICO, TIPOCONTA, STATUSCONTA, ORIGEM,' +
-        ' '
-      '  OBS'
+        'SELECT IDCONTA, IDCLIE, IDLOTE, IDPAI, IDORIGEM, IDPLANOCTA, DIA' +
+        'SATRASO, '
+      '  DTEMISSAO, DTLANCTO, DTVENCTO, DTBAIXA, VLRINI, VLRJUROS, '
+      '  VLRMULTA, VLRDESC, VLRBRUTO, VLRPAGO, DOCUMENTO, HISTORICO, '
+      '  TIPOCONTA, STATUSCONTA, ORIGEM, OBS'
       'FROM CONTA'
       'WHERE IDCONTA = :IDCONTA')
     Left = 56
@@ -229,17 +219,9 @@ object dmFin: TdmFin
       'A.*,'
       'B.RAZAO,'
       'B.CNPJ,'
-      'B.CPF,'
-      'C.descricao CCUSTO,'
-      'D.DESCRICAO FPAGTO'
+      'B.CPF'
       'FROM CONTA A'
-      'left join CLIENTE B on A.IDCLIE=B.IDCLIE'
-      
-        'left join GENERICA C on A.IDCCUSTO = C.IDGENERICA and C.TABELA= ' +
-        #39'CCUSTO'#39
-      
-        'left join GENERICA D on A.idCpagto = D.idgenerica and D.TABELA= ' +
-        #39'FPAGTO'#39)
+      'left join CLIENTE B on A.IDCLIE=B.IDCLIE')
     Left = 56
     Top = 1
     object qryContaIDCONTA: TIntegerField
@@ -251,14 +233,6 @@ object dmFin: TdmFin
     object qryContaIDCLIE: TIntegerField
       FieldName = 'IDCLIE'
       Origin = 'IDCLIE'
-    end
-    object qryContaIDCCUSTO: TIntegerField
-      FieldName = 'IDCCUSTO'
-      Origin = 'IDCCUSTO'
-    end
-    object qryContaIDCPAGTO: TIntegerField
-      FieldName = 'IDCPAGTO'
-      Origin = 'IDCPAGTO'
     end
     object qryContaIDLOTE: TIntegerField
       FieldName = 'IDLOTE'
@@ -326,10 +300,6 @@ object dmFin: TdmFin
       Origin = 'VLRPAGO'
       DisplayFormat = '###,###,##0.00'
     end
-    object qryContaPARCELA: TIntegerField
-      FieldName = 'PARCELA'
-      Origin = 'PARCELA'
-    end
     object qryContaDOCUMENTO: TStringField
       FieldName = 'DOCUMENTO'
       Origin = 'DOCUMENTO'
@@ -381,22 +351,6 @@ object dmFin: TdmFin
       Origin = 'CPF'
       ProviderFlags = []
       ReadOnly = True
-    end
-    object qryContaCCUSTO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CCUSTO'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 100
-    end
-    object qryContaFPAGTO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'FPAGTO'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 100
     end
   end
   object uHis_Conta: TUCHist_DataSet
@@ -479,7 +433,7 @@ object dmFin: TdmFin
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 274
+    Left = 370
     Top = 117
     object cdsSelecIDCONTA: TIntegerField
       FieldName = 'IDCONTA'
@@ -538,7 +492,7 @@ object dmFin: TdmFin
   end
   object dsSelec: TDataSource
     DataSet = cdsSelec
-    Left = 274
+    Left = 370
     Top = 161
   end
   object UpdtContaRateio: TFDUpdateSQL
@@ -651,5 +605,217 @@ object dmFin: TdmFin
     ControlHistorico = FPrinc.uHistorico
     Left = 91
     Top = 137
+  end
+  object UpdtCaixa: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO CAIXA'
+      '(IDCAIXA, IDBANCO, AGENCIA, TITULAR, CONTA, '
+      '  DTABERTURA, DTFECHADO, SALDOCAIXA, SALDOCONCILIADO, '
+      '  TIPOCAIXA, BOL_ESPECIEDOC, BOL_ACEITE, BOL_NOSSONUMERO, '
+      '  BOL_LOCALPAGTO, BOL_PERCJUROS, BOL_PERCMULTA, '
+      '  BOL_DIASPROTESTO, BOL_INST1, BOL_INST2, BOL_INST3, '
+      '  BOL_INST4, AGENCIA_DIG, CONTA_DIG, BOL_TAMNOSSONUMERO, '
+      '  BOL_CARTEIRA, BOL_CODCEDENTE, BOL_ESPECIEMOD, '
+      '  BOL_DIASCARENCIA)'
+      
+        'VALUES (:NEW_IDCAIXA, :NEW_IDBANCO, :NEW_AGENCIA, :NEW_TITULAR, ' +
+        ':NEW_CONTA, '
+      
+        '  :NEW_DTABERTURA, :NEW_DTFECHADO, :NEW_SALDOCAIXA, :NEW_SALDOCO' +
+        'NCILIADO, '
+      
+        '  :NEW_TIPOCAIXA, :NEW_BOL_ESPECIEDOC, :NEW_BOL_ACEITE, :NEW_BOL' +
+        '_NOSSONUMERO, '
+      '  :NEW_BOL_LOCALPAGTO, :NEW_BOL_PERCJUROS, :NEW_BOL_PERCMULTA, '
+      
+        '  :NEW_BOL_DIASPROTESTO, :NEW_BOL_INST1, :NEW_BOL_INST2, :NEW_BO' +
+        'L_INST3, '
+      
+        '  :NEW_BOL_INST4, :NEW_AGENCIA_DIG, :NEW_CONTA_DIG, :NEW_BOL_TAM' +
+        'NOSSONUMERO, '
+      '  :NEW_BOL_CARTEIRA, :NEW_BOL_CODCEDENTE, :NEW_BOL_ESPECIEMOD, '
+      '  :NEW_BOL_DIASCARENCIA)'
+      
+        'RETURNING IDCAIXA, IDBANCO, AGENCIA, TITULAR, CONTA, DTABERTURA,' +
+        ' DTFECHADO, SALDOCAIXA, SALDOCONCILIADO, TIPOCAIXA, BOL_ESPECIED' +
+        'OC, BOL_ACEITE, BOL_NOSSONUMERO, BOL_LOCALPAGTO, BOL_PERCJUROS, ' +
+        'BOL_PERCMULTA, BOL_DIASPROTESTO, BOL_INST1, BOL_INST2, BOL_INST3' +
+        ', BOL_INST4, AGENCIA_DIG, CONTA_DIG, BOL_TAMNOSSONUMERO, BOL_CAR' +
+        'TEIRA, BOL_CODCEDENTE, BOL_ESPECIEMOD, BOL_DIASCARENCIA')
+    ModifySQL.Strings = (
+      'UPDATE CAIXA'
+      
+        'SET IDCAIXA = :NEW_IDCAIXA, IDBANCO = :NEW_IDBANCO, AGENCIA = :N' +
+        'EW_AGENCIA, '
+      
+        '  TITULAR = :NEW_TITULAR, CONTA = :NEW_CONTA, DTABERTURA = :NEW_' +
+        'DTABERTURA, '
+      '  DTFECHADO = :NEW_DTFECHADO, SALDOCAIXA = :NEW_SALDOCAIXA, '
+      
+        '  SALDOCONCILIADO = :NEW_SALDOCONCILIADO, TIPOCAIXA = :NEW_TIPOC' +
+        'AIXA, '
+      
+        '  BOL_ESPECIEDOC = :NEW_BOL_ESPECIEDOC, BOL_ACEITE = :NEW_BOL_AC' +
+        'EITE, '
+      
+        '  BOL_NOSSONUMERO = :NEW_BOL_NOSSONUMERO, BOL_LOCALPAGTO = :NEW_' +
+        'BOL_LOCALPAGTO, '
+      
+        '  BOL_PERCJUROS = :NEW_BOL_PERCJUROS, BOL_PERCMULTA = :NEW_BOL_P' +
+        'ERCMULTA, '
+      
+        '  BOL_DIASPROTESTO = :NEW_BOL_DIASPROTESTO, BOL_INST1 = :NEW_BOL' +
+        '_INST1, '
+      '  BOL_INST2 = :NEW_BOL_INST2, BOL_INST3 = :NEW_BOL_INST3, '
+      '  BOL_INST4 = :NEW_BOL_INST4, AGENCIA_DIG = :NEW_AGENCIA_DIG, '
+      
+        '  CONTA_DIG = :NEW_CONTA_DIG, BOL_TAMNOSSONUMERO = :NEW_BOL_TAMN' +
+        'OSSONUMERO, '
+      
+        '  BOL_CARTEIRA = :NEW_BOL_CARTEIRA, BOL_CODCEDENTE = :NEW_BOL_CO' +
+        'DCEDENTE, '
+      
+        '  BOL_ESPECIEMOD = :NEW_BOL_ESPECIEMOD, BOL_DIASCARENCIA = :NEW_' +
+        'BOL_DIASCARENCIA'
+      'WHERE IDCAIXA = :OLD_IDCAIXA'
+      
+        'RETURNING IDCAIXA, IDBANCO, AGENCIA, TITULAR, CONTA, DTABERTURA,' +
+        ' DTFECHADO, SALDOCAIXA, SALDOCONCILIADO, TIPOCAIXA, BOL_ESPECIED' +
+        'OC, BOL_ACEITE, BOL_NOSSONUMERO, BOL_LOCALPAGTO, BOL_PERCJUROS, ' +
+        'BOL_PERCMULTA, BOL_DIASPROTESTO, BOL_INST1, BOL_INST2, BOL_INST3' +
+        ', BOL_INST4, AGENCIA_DIG, CONTA_DIG, BOL_TAMNOSSONUMERO, BOL_CAR' +
+        'TEIRA, BOL_CODCEDENTE, BOL_ESPECIEMOD, BOL_DIASCARENCIA')
+    DeleteSQL.Strings = (
+      'DELETE FROM CAIXA'
+      'WHERE IDCAIXA = :OLD_IDCAIXA')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDCAIXA, IDBANCO, AGENCIA, TITULAR, CONTA, DTABERTURA, DT' +
+        'FECHADO, '
+      '  SALDOCAIXA, SALDOCONCILIADO, TIPOCAIXA, BOL_ESPECIEDOC, '
+      '  BOL_ACEITE, BOL_NOSSONUMERO, BOL_LOCALPAGTO, BOL_PERCJUROS, '
+      
+        '  BOL_PERCMULTA, BOL_DIASPROTESTO, BOL_INST1, BOL_INST2, BOL_INS' +
+        'T3, '
+      
+        '  BOL_INST4, AGENCIA_DIG, CONTA_DIG, BOL_TAMNOSSONUMERO, BOL_CAR' +
+        'TEIRA, '
+      '  BOL_CODCEDENTE, BOL_ESPECIEMOD, BOL_DIASCARENCIA'
+      'FROM CAIXA'
+      'WHERE IDCAIXA = :IDCAIXA')
+    Left = 124
+    Top = 46
+  end
+  object dsCaixa: TDataSource
+    DataSet = qryCaixa
+    Left = 124
+    Top = 89
+  end
+  object qryCaixa: TFDQuery
+    AfterInsert = qryCaixaAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
+    UpdateObject = UpdtCaixa
+    SQL.Strings = (
+      'select * from CAIXA')
+    Left = 124
+    Top = 2
+  end
+  object uHist_Caixa: TUCHist_DataSet
+    DataSet = qryCaixa
+    ControlHistorico = FPrinc.uHistorico
+    Left = 124
+    Top = 133
+  end
+  object UpdtCaixaItem: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO CAIXAITEM'
+      '(IDCAIXAITEM, IDCAIXA, DOCUMENTO, CREDITO, '
+      '  DEBITO, SALDOITEM, DATAITEM, HISTORICO, '
+      '  DATACONCILIADO, IDPLANO, IDLOTE, USUARIO, '
+      '  IDFPAGTO)'
+      
+        'VALUES (:NEW_IDCAIXAITEM, :NEW_IDCAIXA, :NEW_DOCUMENTO, :NEW_CRE' +
+        'DITO, '
+      '  :NEW_DEBITO, :NEW_SALDOITEM, :NEW_DATAITEM, :NEW_HISTORICO, '
+      '  :NEW_DATACONCILIADO, :NEW_IDPLANO, :NEW_IDLOTE, :NEW_USUARIO, '
+      '  :NEW_IDFPAGTO)'
+      
+        'RETURNING IDCAIXAITEM, IDCAIXA, DOCUMENTO, CREDITO, DEBITO, SALD' +
+        'OITEM, DATAITEM, HISTORICO, DATACONCILIADO, IDPLANO, IDLOTE, USU' +
+        'ARIO, IDFPAGTO')
+    ModifySQL.Strings = (
+      'UPDATE CAIXAITEM'
+      
+        'SET IDCAIXAITEM = :NEW_IDCAIXAITEM, IDCAIXA = :NEW_IDCAIXA, DOCU' +
+        'MENTO = :NEW_DOCUMENTO, '
+      
+        '  CREDITO = :NEW_CREDITO, DEBITO = :NEW_DEBITO, SALDOITEM = :NEW' +
+        '_SALDOITEM, '
+      
+        '  DATAITEM = :NEW_DATAITEM, HISTORICO = :NEW_HISTORICO, DATACONC' +
+        'ILIADO = :NEW_DATACONCILIADO, '
+      
+        '  IDPLANO = :NEW_IDPLANO, IDLOTE = :NEW_IDLOTE, USUARIO = :NEW_U' +
+        'SUARIO, '
+      '  IDFPAGTO = :NEW_IDFPAGTO'
+      'WHERE IDCAIXAITEM = :OLD_IDCAIXAITEM'
+      
+        'RETURNING IDCAIXAITEM, IDCAIXA, DOCUMENTO, CREDITO, DEBITO, SALD' +
+        'OITEM, DATAITEM, HISTORICO, DATACONCILIADO, IDPLANO, IDLOTE, USU' +
+        'ARIO, IDFPAGTO')
+    DeleteSQL.Strings = (
+      'DELETE FROM CAIXAITEM'
+      'WHERE IDCAIXAITEM = :OLD_IDCAIXAITEM')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDCAIXAITEM, IDCAIXA, DOCUMENTO, CREDITO, DEBITO, SALDOIT' +
+        'EM, '
+      
+        '  DATAITEM, HISTORICO, DATACONCILIADO, IDPLANO, IDLOTE, USUARIO,' +
+        ' '
+      '  IDFPAGTO'
+      'FROM CAIXAITEM'
+      'WHERE IDCAIXAITEM = :IDCAIXAITEM')
+    Left = 157
+    Top = 46
+  end
+  object dsCaixaItem: TDataSource
+    DataSet = qryCaixaItem
+    Left = 157
+    Top = 89
+  end
+  object qryCaixaItem: TFDQuery
+    AfterInsert = qryCaixaItemAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
+    UpdateObject = UpdtCaixaItem
+    SQL.Strings = (
+      'select A.*,'
+      'B.NOMEPLANO,'
+      'C.DESCRICAO NOMEFPAGTO'
+      'from CAIXAITEM A'
+      'LEFT JOIN PLANOCONTA B on A.IDPLANO = B.IDPLANO'
+      
+        'LEFT JOIN GENERICA C on A.IDFPAGTO = C.IDGENERICA and C.TABELA='#39 +
+        'FPAGTO'#39)
+    Left = 157
+    Top = 2
+  end
+  object uHis_CaixaItem: TUCHist_DataSet
+    DataSet = qryCaixaItem
+    ControlHistorico = FPrinc.uHistorico
+    Left = 157
+    Top = 133
   end
 end

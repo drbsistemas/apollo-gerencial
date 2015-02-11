@@ -6,13 +6,13 @@ inherited Fcad_PlanoConta: TFcad_PlanoConta
   ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnImg: TcxImage [0]
+  inherited pnImg: TcxImage
     Left = 644
     ExplicitLeft = 644
     ExplicitHeight = 539
     Height = 539
   end
-  inherited pnCon: TPanel [1]
+  inherited pnCon: TPanel
     Width = 644
     Height = 539
     ExplicitWidth = 644
@@ -76,7 +76,7 @@ inherited Fcad_PlanoConta: TFcad_PlanoConta
       end
     end
   end
-  inherited pnCad: TPanel [2]
+  inherited pnCad: TPanel
     Width = 644
     Height = 539
     ExplicitWidth = 644
@@ -218,7 +218,6 @@ inherited Fcad_PlanoConta: TFcad_PlanoConta
       StyleFocused.Color = 13366014
       TabOrder = 3
       Text = '1 - RECEITAS'
-      OnClick = cxConsultaPropertiesChange
       Width = 228
     end
     object cxLabel4: TcxLabel
@@ -246,7 +245,6 @@ inherited Fcad_PlanoConta: TFcad_PlanoConta
       StyleFocused.Color = 13366014
       TabOrder = 4
       Text = 'SIM'
-      OnClick = cxConsultaPropertiesChange
       Width = 97
     end
     object cxSalvaFoto: TcxButton

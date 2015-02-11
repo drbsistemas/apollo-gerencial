@@ -364,16 +364,18 @@ object Fcad_PaiFinanceiro: TFcad_PaiFinanceiro
         Properties.DropDownListStyle = lsFixedList
         Properties.Items.Strings = (
           '')
+        Properties.OnChange = cxConsultaPropertiesChange
         StyleFocused.Color = 13366014
-        TabOrder = 1
+        TabOrder = 0
         Width = 121
       end
       object eConsulta: TcxTextEdit
         Left = 177
         Top = 1
         Properties.CharCase = ecUpperCase
+        Properties.OnChange = cxConsultaPropertiesChange
         StyleFocused.Color = 13366014
-        TabOrder = 2
+        TabOrder = 1
         Width = 235
       end
       object cxLabel2: TcxLabel
@@ -402,6 +404,7 @@ object Fcad_PaiFinanceiro: TFcad_PaiFinanceiro
         StyleFocused.Color = 13366014
         TabOrder = 3
         Text = 'TODOS'
+        OnClick = cxConsultaPropertiesChange
         Width = 80
       end
       object cxCon: TcxButton
@@ -438,7 +441,8 @@ object Fcad_PaiFinanceiro: TFcad_PaiFinanceiro
           C1C1C2DFDFE0F5F4F5F9F9F9EEEEEED4D4D5CFD0D1FFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F6D7D8D9D0D0D1D2D2D3CFCFD0E7
           E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        TabOrder = 0
+        TabOrder = 2
+        OnClick = cxConsultaPropertiesChange
       end
       object cxQtdeReg: TcxLabel
         Left = 558

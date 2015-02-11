@@ -6,13 +6,13 @@ inherited Fcad_Produto: TFcad_Produto
   ExplicitHeight = 571
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnImg: TcxImage [0]
+  inherited pnImg: TcxImage
     Left = 852
     ExplicitLeft = 852
     ExplicitHeight = 540
     Height = 540
   end
-  inherited pnCon: TPanel [1]
+  inherited pnCon: TPanel
     Width = 852
     Height = 540
     TabOrder = 1
@@ -815,7 +815,7 @@ inherited Fcad_Produto: TFcad_Produto
       end
     end
   end
-  inherited pnCad: TPanel [2]
+  inherited pnCad: TPanel
     Width = 852
     Height = 540
     TabOrder = 0
@@ -1833,7 +1833,7 @@ inherited Fcad_Produto: TFcad_Produto
       end
       object cxLabel9: TcxLabel
         Left = 44
-        Top = 121
+        Top = 120
         AutoSize = False
         Caption = 'Grupo:'
         ParentFont = False
@@ -1857,7 +1857,7 @@ inherited Fcad_Produto: TFcad_Produto
       end
       object eCodGrupo: TcxButtonEdit
         Left = 134
-        Top = 118
+        Top = 117
         Hint = '(F3) Busca Grupos'
         AutoSize = False
         ParentFont = False
@@ -1913,7 +1913,7 @@ inherited Fcad_Produto: TFcad_Produto
       end
       object eGrupo: TcxTextEdit
         Left = 194
-        Top = 118
+        Top = 117
         TabStop = False
         ParentFont = False
         Properties.CharCase = ecUpperCase
@@ -1965,7 +1965,7 @@ inherited Fcad_Produto: TFcad_Produto
       end
       object eCodSub: TcxButtonEdit
         Left = 134
-        Top = 140
+        Top = 139
         Hint = '(F3) Busca SubGrupos'
         AutoSize = False
         ParentFont = False

@@ -145,6 +145,7 @@ type
     procedure cxLogOffClick(Sender: TObject);
     procedure cxHistoricoClick(Sender: TObject);
     procedure cxPlanoContaClick(Sender: TObject);
+    procedure cxConfClick(Sender: TObject);
    private
       { Private declarations }
    public
@@ -161,7 +162,7 @@ implementation
 uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, uCad_Clientes,
   uCad_Animais, uCon_Generica, uDmRel, uCad_Empresa, uCad_Produto, uCad_Balanco,
   uCad_Pedido, udmMov, uCad_Pagto, uRotinaDeCalculosMovimentacao, udmFin,
-  uCon_Relatorio, LoginWindow_U, uCad_Conta, uCad_PlanoConta;
+  uCon_Relatorio, LoginWindow_U, uCad_Conta, uCad_PlanoConta, uCad_Parametro;
 
 procedure TFPrinc.cxCadastroUsuarioClick(Sender: TObject);
 begin
@@ -222,6 +223,11 @@ procedure TFPrinc.cxComprasClick(Sender: TObject);
 begin
    TipoMov := ENTRADA;
 
+end;
+
+procedure TFPrinc.cxConfClick(Sender: TObject);
+begin
+   ExecutaForm(TFcad_Parametro, Tobject(Fcad_Parametro));
 end;
 
 procedure TFPrinc.cxVendasClick(Sender: TObject);

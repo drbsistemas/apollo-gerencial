@@ -32,8 +32,6 @@ type
     uHis_Conta: TUCHist_DataSet;
     qryContaIDCONTA: TIntegerField;
     qryContaIDCLIE: TIntegerField;
-    qryContaIDCCUSTO: TIntegerField;
-    qryContaIDCPAGTO: TIntegerField;
     qryContaIDLOTE: TIntegerField;
     qryContaIDPAI: TIntegerField;
     qryContaIDORIGEM: TIntegerField;
@@ -49,7 +47,6 @@ type
     qryContaVLRDESC: TFloatField;
     qryContaVLRBRUTO: TFloatField;
     qryContaVLRPAGO: TFloatField;
-    qryContaPARCELA: TIntegerField;
     qryContaDOCUMENTO: TStringField;
     qryContaHISTORICO: TStringField;
     qryContaTIPOCONTA: TStringField;
@@ -59,8 +56,6 @@ type
     qryContaRAZAO: TStringField;
     qryContaCNPJ: TStringField;
     qryContaCPF: TStringField;
-    qryContaCCUSTO: TStringField;
-    qryContaFPAGTO: TStringField;
     cdsSelec: TClientDataSet;
     dsSelec: TDataSource;
     cdsSelecIDCONTA: TIntegerField;
@@ -91,9 +86,19 @@ type
     qryContaRateioIDCCUSTO: TIntegerField;
     qryContaRateioDESCRICAO: TStringField;
     qryContaRateioNOMEPLANO: TStringField;
+    UpdtCaixa: TFDUpdateSQL;
+    dsCaixa: TDataSource;
+    qryCaixa: TFDQuery;
+    uHist_Caixa: TUCHist_DataSet;
+    UpdtCaixaItem: TFDUpdateSQL;
+    dsCaixaItem: TDataSource;
+    qryCaixaItem: TFDQuery;
+    uHis_CaixaItem: TUCHist_DataSet;
     procedure qryCreditoAfterInsert(DataSet: TDataSet);
     procedure qryContaAfterInsert(DataSet: TDataSet);
     procedure qryContaRateioAfterInsert(DataSet: TDataSet);
+    procedure qryCaixaAfterInsert(DataSet: TDataSet);
+    procedure qryCaixaItemAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -111,19 +116,29 @@ uses uDmCon, uRotinas, uPrinc;
 
 {$R *.dfm}
 
+procedure TdmFin.qryCaixaAfterInsert(DataSet: TDataSet);
+begin
+   dmFin.qryCaixa.FieldByName('IDCAIXA').AsInteger                := ExecutaGen('CAIXA');
+end;
+
+procedure TdmFin.qryCaixaItemAfterInsert(DataSet: TDataSet);
+begin
+   dmFin.qryCaixaItem.FieldByName('IDCAIXAITEM').AsInteger        := ExecutaGen('CAIXAITEM');
+end;
+
 procedure TdmFin.qryContaAfterInsert(DataSet: TDataSet);
 begin
-   dmFin.qryConta.FieldByName('IDCONTA').AsInteger      := ExecutaGen('CONTA');
+   dmFin.qryConta.FieldByName('IDCONTA').AsInteger                := ExecutaGen('CONTA');
 end;
 
 procedure TdmFin.qryContaRateioAfterInsert(DataSet: TDataSet);
 begin
-   dmFin.qryContaRateio.FieldByName('IDCONTARATEIO').AsInteger      := ExecutaGen('CONTARATEIO');
+   dmFin.qryContaRateio.FieldByName('IDCONTARATEIO').AsInteger    := ExecutaGen('CONTARATEIO');
 end;
 
 procedure TdmFin.qryCreditoAfterInsert(DataSet: TDataSet);
 begin
-   dmFin.qryCredito.FieldByName('IDCREDITO').AsInteger  := ExecutaGen('CLIENTECREDITO');
+   dmFin.qryCredito.FieldByName('IDCREDITO').AsInteger            := ExecutaGen('CLIENTECREDITO');
 end;
 
 end.

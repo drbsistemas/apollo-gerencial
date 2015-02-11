@@ -225,15 +225,9 @@ inherited Fcad_Generica: TFcad_Generica
         Top = 3
         Properties.CharCase = ecUpperCase
         Properties.DropDownListStyle = lsFixedList
-        Properties.Items.Strings = (
-          'Cadastro de Grupos'
-          'Cadastro de SubGrupos'
-          'Cadastro de Centro de Custos'
-          'Cadastro de Formas de Pagamentos')
         Properties.OnChange = cxConsultaPropertiesChange
         StyleFocused.Color = 13366014
         TabOrder = 0
-        Text = 'CADASTRO DE GRUPOS'
         OnClick = cxTabelaClick
         Width = 498
       end

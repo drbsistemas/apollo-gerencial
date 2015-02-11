@@ -113,7 +113,10 @@ type
     qryPlanoContaItemIDPLANO: TIntegerField;
     qryPlanoContaItemPERCENTUAL: TFloatField;
     qryPlanoContaItemDESCRICAO: TStringField;
-    procedure qryGenericoAfterInsert(DataSet: TDataSet);
+    qryParametro: TFDQuery;
+    UpdtParametro: TFDUpdateSQL;
+    dsParametro: TDataSource;
+    uHis_Parametro: TUCHist_DataSet;
     procedure qryProdAfterInsert(DataSet: TDataSet);
     procedure qryEstoqueAfterInsert(DataSet: TDataSet);
     procedure qryAnimaisAfterInsert(DataSet: TDataSet);
@@ -142,52 +145,47 @@ uses uDmCon, uRotinas, uPrinc;
 
 procedure TdmCad.qryAnimaisAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryAnimais.FieldByName('IDANIMAL').AsInteger       := ExecutaGen('ANIMAIS');
+   dmCad.qryAnimais.FieldByName('IDANIMAL').AsInteger           := ExecutaGen('ANIMAIS');
 end;
 
 procedure TdmCad.qryBalancoAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryBalanco.FieldByName('IDBALANCO').AsInteger       := ExecutaGen('BALANCO');
+   dmCad.qryBalanco.FieldByName('IDBALANCO').AsInteger          := ExecutaGen('BALANCO');
 end;
 
 procedure TdmCad.qryCPagtoAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryCPagto.FieldByName('IDCPAGTO').AsInteger       := ExecutaGen('CPAGTO');
+   dmCad.qryCPagto.FieldByName('IDCPAGTO').AsInteger            := ExecutaGen('CPAGTO');
 end;
 
 procedure TdmCad.qryCPagtoItemAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryCPagtoItem.FieldByName('IDCPAGTOITEM').AsInteger       := ExecutaGen('CPAGTOITEM');
+   dmCad.qryCPagtoItem.FieldByName('IDCPAGTOITEM').AsInteger    := ExecutaGen('CPAGTOITEM');
 end;
 
 procedure TdmCad.qryEnderecoAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryEndereco.FieldByName('IDEND').AsInteger := ExecutaGen('ENDERECO');
+   dmCad.qryEndereco.FieldByName('IDEND').AsInteger             := ExecutaGen('ENDERECO');
 end;
 
 procedure TdmCad.qryEstoqueAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryEstoque.FieldByName('IDESTOQUE').AsInteger      := ExecutaGen('ESTOQUE');
-end;
-
-procedure TdmCad.qryGenericoAfterInsert(DataSet: TDataSet);
-begin
-   dmCad.qryGenerico.FieldByName('IDGENERICA').AsInteger := ExecutaGen('GENERICA');
+   dmCad.qryEstoque.FieldByName('IDESTOQUE').AsInteger          := ExecutaGen('ESTOQUE');
 end;
 
 procedure TdmCad.qryPlanoContaAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryPlanoConta.FieldByName('IDPLANO').AsInteger       := ExecutaGen('PLANOCONTA');
+   dmCad.qryPlanoConta.FieldByName('IDPLANO').AsInteger         := ExecutaGen('PLANOCONTA');
 end;
 
 procedure TdmCad.qryPlanoContaItemAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryPlanoContaItem.FieldByName('IDPLANOITEM').AsInteger       := ExecutaGen('PLANOCONTAITEM');
+   dmCad.qryPlanoContaItem.FieldByName('IDPLANOITEM').AsInteger := ExecutaGen('PLANOCONTAITEM');
 end;
 
 procedure TdmCad.qryProdAfterInsert(DataSet: TDataSet);
 begin
-   dmCad.qryProd.FieldByName('IDPROD').AsInteger         := ExecutaGen('PRODUTO');
+   dmCad.qryProd.FieldByName('IDPROD').AsInteger                := ExecutaGen('PRODUTO');
 end;
 
 end.

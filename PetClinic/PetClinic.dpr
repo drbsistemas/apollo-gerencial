@@ -41,7 +41,10 @@ uses
   udmFin in '..\Financeiro\udmFin.pas' {dmFin: TDataModule},
   uRotinaLancamentoFinanceiro in '..\Rotinas\uRotinaLancamentoFinanceiro.pas',
   uCad_Conta in '..\Financeiro\uCad_Conta.pas' {Fcad_Contas},
-  uCad_PlanoConta in '..\Cadastros\uCad_PlanoConta.pas' {Fcad_PlanoConta};
+  uCad_PlanoConta in '..\Cadastros\uCad_PlanoConta.pas' {Fcad_PlanoConta},
+  uCad_Baixa in '..\Financeiro\uCad_Baixa.pas' {Fcad_Baixa},
+  uCad_Parametro in '..\Cadastros\uCad_Parametro.pas' {FCad_Parametro},
+  uCad_Caixa in '..\Financeiro\uCad_Caixa.pas' {Fcad_Caixa};
 
 {$R *.res}
 

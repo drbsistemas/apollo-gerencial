@@ -59,6 +59,7 @@ type
     procedure grConsultaDBTableView1CustomDrawCell(
       Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
       AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+    procedure cxConsultaPropertiesChange(Sender: TObject);
   private
 
     { Private declarations }
@@ -96,6 +97,11 @@ end;
 procedure TFcad_PaiFinanceiro.cxCancelaClick(Sender: TObject);
 begin
    MOstraPainelCadastro(Con);
+end;
+
+procedure TFcad_PaiFinanceiro.cxConsultaPropertiesChange(Sender: TObject);
+begin
+//
 end;
 
 procedure TFcad_PaiFinanceiro.cxSalvarClick(Sender: TObject);

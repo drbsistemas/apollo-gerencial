@@ -317,7 +317,7 @@ end;
 procedure TFcad_Produto.eCodGrupoExit(Sender: TObject);
 begin
   inherited;
-   eGrupo.Text :=  ConsultaCampoNomeAtivo(eCodGrupo.Text, 'GRUPOS');
+   eGrupo.Text :=  ConsultaCampoNomeAtivo(eCodGrupo.Text, 'GRUPO');
    if eGrupo.Text ='NENHUM' then
       eCodGrupo.Text := '0';
 end;
@@ -326,7 +326,7 @@ procedure TFcad_Produto.eCodGrupoPropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
 begin
   inherited;
-   AbreTelaComShowModal(TFcad_Generica, TObject(Fcad_Generica), Fcad_Produto, 'GRUPOS');
+   AbreTelaComShowModal(TFcad_Generica, TObject(Fcad_Generica), Fcad_Produto, 'GRUPO');
 
    if ID > 0 then
    begin

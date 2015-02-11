@@ -92,12 +92,12 @@ uses uDmCon, uRotinas, uPrinc;
 
 procedure TdmMov.qryItemPedAfterInsert(DataSet: TDataSet);
 begin
-   dmMov.qryItemPed.FieldByName('IDPEDIDOITEM').AsInteger      := ExecutaGen('PEDIDOITEM');
+   dmMov.qryItemPed.FieldByName('IDPEDIDOITEM').AsInteger         := ExecutaGen('PEDIDOITEM');
 end;
 
 procedure TdmMov.qryPedidoAfterInsert(DataSet: TDataSet);
 begin
-   dmMov.qryPedido.FieldByName('IDPEDIDO').AsInteger      := ExecutaGen('PEDIDO');
+   dmMov.qryPedido.FieldByName('IDPEDIDO').AsInteger              := ExecutaGen('PEDIDO');
 end;
 
 procedure TdmMov.qryPedidoFinAfterInsert(DataSet: TDataSet);
