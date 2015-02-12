@@ -96,7 +96,7 @@ begin
 
    StrSql := StrSql +' order by '+indice;
    ConsultaSql(StrSql, dmFin.qryCaixa);
-
+   //
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmFin.qryCaixa.RecordCount);
 end;
 
