@@ -146,6 +146,7 @@ type
     procedure cxHistoricoClick(Sender: TObject);
     procedure cxPlanoContaClick(Sender: TObject);
     procedure cxConfClick(Sender: TObject);
+    procedure cxCaixaClick(Sender: TObject);
    private
       { Private declarations }
    public
@@ -162,11 +163,17 @@ implementation
 uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, uCad_Clientes,
   uCad_Animais, uCon_Generica, uDmRel, uCad_Empresa, uCad_Produto, uCad_Balanco,
   uCad_Pedido, udmMov, uCad_Pagto, uRotinaDeCalculosMovimentacao, udmFin,
-  uCon_Relatorio, LoginWindow_U, uCad_Conta, uCad_PlanoConta, uCad_Parametro;
+  uCon_Relatorio, LoginWindow_U, uCad_Conta, uCad_PlanoConta, uCad_Parametro,
+  uCad_Caixa;
 
 procedure TFPrinc.cxCadastroUsuarioClick(Sender: TObject);
 begin
    actCadastro.Execute;
+end;
+
+procedure TFPrinc.cxCaixaClick(Sender: TObject);
+begin
+   ExecutaForm(TFcad_Caixa, Tobject(Fcad_Caixa));
 end;
 
 procedure TFPrinc.cxClienteClick(Sender: TObject);

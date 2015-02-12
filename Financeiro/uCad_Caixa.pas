@@ -116,7 +116,7 @@ procedure TFcad_Caixa.cxNovoClick(Sender: TObject);
 begin
    inherited;
    Limpa;
-   cbPessoa.SetFocus;
+  // cbPessoa.SetFocus;
 end;
 
 procedure TFcad_Caixa.cxVerClick(Sender: TObject);

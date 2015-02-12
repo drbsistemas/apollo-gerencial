@@ -7,20 +7,28 @@ inherited Fcad_Caixa: TFcad_Caixa
   TextHeight = 13
   inherited pnCad: TPanel [0]
     Width = 842
+    ExplicitWidth = 842
     inherited pnMenu: TPanel
       Width = 840
+      ExplicitWidth = 840
     end
   end
   inherited pnImg: TcxImage [1]
     Left = 842
+    ExplicitLeft = 842
   end
   inherited pnCon: TPanel [2]
     Width = 842
-    ExplicitLeft = -48
-    ExplicitTop = 72
     ExplicitWidth = 842
     inherited pnBusca: TPanel
       Width = 840
+      ExplicitWidth = 840
+      inherited cxConsulta: TcxComboBox
+        Properties.Items.Strings = (
+          'C'#243'digo'
+          'Banco')
+        Text = 'C'#211'DIGO'
+      end
       inherited cxLabel2: TcxLabel
         Visible = False
       end
@@ -31,6 +39,7 @@ inherited Fcad_Caixa: TFcad_Caixa
     end
     inherited pnBotaoCad: TPanel
       Width = 840
+      ExplicitWidth = 840
       inherited cxApagar: TcxButton
         OnClick = cxApagarClick
       end
@@ -40,8 +49,7 @@ inherited Fcad_Caixa: TFcad_Caixa
     end
     inherited pnBotaoCon: TPanel
       Width = 840
-      ExplicitLeft = 33
-      ExplicitTop = 532
+      ExplicitTop = 488
       ExplicitWidth = 840
       inherited cxCadastro: TcxButton
         Left = 360
@@ -56,7 +64,7 @@ inherited Fcad_Caixa: TFcad_Caixa
       Width = 840
       Height = 132
       ExplicitWidth = 840
-      ExplicitHeight = 169
+      ExplicitHeight = 101
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmFin.dsCaixa
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
@@ -96,6 +104,7 @@ inherited Fcad_Caixa: TFcad_Caixa
       Align = alBottom
       Caption = 'Panel1'
       TabOrder = 4
+      ExplicitTop = 177
       object cxGroupBox2: TcxGroupBox
         Left = 1
         Top = 1
@@ -136,10 +145,6 @@ inherited Fcad_Caixa: TFcad_Caixa
           LookAndFeel.NativeStyle = False
           LookAndFeel.SkinName = 'Office2010Black'
           RootLevelOptions.TabsForEmptyDetails = False
-          ExplicitLeft = 2
-          ExplicitTop = 5
-          ExplicitWidth = 477
-          ExplicitHeight = 266
           object cxGridDBTableView3: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.Summary.DefaultGroupSummaryItems = <>
@@ -228,7 +233,6 @@ inherited Fcad_Caixa: TFcad_Caixa
           LookAndFeel.NativeStyle = False
           LookAndFeel.SkinName = 'Office2010Black'
           RootLevelOptions.TabsForEmptyDetails = False
-          ExplicitLeft = 2
           object cxGridDBTableView2: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = dsResumo
