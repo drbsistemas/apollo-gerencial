@@ -932,34 +932,6 @@ object dmCad: TdmCad
       'select * from NCM')
     Left = 138
     Top = 195
-    object IntegerField1: TIntegerField
-      FieldName = 'IDCPAGTOITEM'
-      Origin = 'IDCPAGTOITEM'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object IntegerField2: TIntegerField
-      FieldName = 'IDCPAGTO'
-      Origin = 'IDCPAGTO'
-    end
-    object IntegerField3: TIntegerField
-      FieldName = 'DIAS'
-      Origin = 'DIAS'
-    end
-    object FloatField1: TFloatField
-      FieldName = 'JUROS'
-      Origin = 'JUROS'
-      DisplayFormat = '###,###,0.00'
-    end
-    object FloatField2: TFloatField
-      FieldName = 'PERCENTUAL'
-      Origin = 'PERCENTUAL'
-      DisplayFormat = '###,###,0.00'
-    end
-    object IntegerField4: TIntegerField
-      FieldName = 'PARCELA'
-      Origin = 'PARCELA'
-    end
   end
   object UpdtNcm: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -1302,5 +1274,43 @@ object dmCad: TdmCad
     ControlHistorico = FPrinc.uHistorico
     Left = 276
     Top = 136
+  end
+  object qryBanco: TFDQuery
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateObject = UPdtBanco
+    SQL.Strings = (
+      'select * from BANCO')
+    Left = 170
+    Top = 195
+  end
+  object UPdtBanco: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO BANCO'
+      '(IDBANCO, BANCO)'
+      'VALUES (:NEW_IDBANCO, :NEW_BANCO)'
+      'RETURNING IDBANCO, BANCO')
+    ModifySQL.Strings = (
+      'UPDATE BANCO'
+      'SET IDBANCO = :NEW_IDBANCO, BANCO = :NEW_BANCO'
+      'WHERE IDBANCO = :OLD_IDBANCO'
+      'RETURNING IDBANCO, BANCO')
+    DeleteSQL.Strings = (
+      'DELETE FROM BANCO'
+      'WHERE IDBANCO = :OLD_IDBANCO')
+    FetchRowSQL.Strings = (
+      'SELECT IDBANCO, BANCO'
+      'FROM BANCO'
+      'WHERE IDBANCO = :IDBANCO')
+    Left = 170
+    Top = 239
+  end
+  object dsBanco: TDataSource
+    DataSet = qryBanco
+    Left = 170
+    Top = 283
   end
 end

@@ -509,7 +509,7 @@ begin
          Fieldbyname('PRECOVENDA').AsFloat          := ePrecoVenda.Value;
          Fieldbyname('PERCCOMISSAO').AsFloat        := eComissao.Value;
 
-         Fieldbyname('DTATUALIZADO').AsDateTime     := eDtAtualizado.Date+Time;
+         Fieldbyname('DTATUALIZADO').AsDateTime     := Date+Time;
 //         Fieldbyname('CODBAR').AsString             := eObs.Text;
          Fieldbyname('OBS').AsString                := eObs.Lines.Text;
 
@@ -531,42 +531,7 @@ end;
 
 procedure TFcad_Produto.Limpa;
 begin
-    eCOdigo.TExt        := '0';
-    eNomeProd.Clear;
-    eRefProd.Clear;
-    eMarca.Clear;
-    eCodGrupo.Text      := '0';
-    eGrupo.TExt         := 'NENHUM';
-    eCodFornec.Text     := '0';
-    eFornec.Text        := 'NENHUM';
-    eCodSub.Text        := '0';
-    eSubGrupo.Text      := 'NENHUM';
-
-    eEstoqueDisp.Value  := 0;
-    eEstoqueTotal.Value := 0;
-    eQtdeMin.Value      := 0;
-    eQtdeMax.Value      := 0;
-
-    eDtCad.Date         := Date;;
-    eDtValidade.Clear;
-    eDtAtualizado.Date  := Date;
-
-    ePesoB.Value        := 0;
-    ePesoL.Value        := 0;
-    eAtivo.Checked      := True;
-    eUn.Text            := 'UN';
-    eFoto.Clear;
-    eNcm.Clear;
-
-    ePrecoCpr.Value     := 0;
-    eCustoCpr.Value     := 0;
-    eCustoProd.Value    := 0;
-    eMl.Value           := 0;
-    ePrecoVenda.Value   := 0;
-    eComissao.Value     := 0;
-
-    cxPage.Properties.ActivePage := cxVenda;
-    eObs.Lines.Clear;
+   LimpaCampos(Fcad_Produto);
 end;
 
 procedure TFcad_Produto.Edita;

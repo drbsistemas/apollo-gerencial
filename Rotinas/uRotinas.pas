@@ -6,6 +6,7 @@ uses
    MMSystem, Graphics, System.SysUtils, Forms, System.Classes, TypInfo,
    cxButtons, CxGroupBox, cxLabel, cxCheckBox, cxTextEdit, cxMaskEdit, cxCurrencyEdit, Controls,
    FireDAC.Comp.Client, Windows, StdCtrls, Vcl.DIalogs, ComObj, ComCtrls, cxImage,
+   cxCalendar, cxButtonEdit, cxDropDownEdit, cxMemo, cxPC,
    NFe_Util_2G_TLB ; // acrescentar essa linha no use da unit para NF-E DLL;
 
    // Mensagens
@@ -18,10 +19,11 @@ uses
    FUNCTION CalculoCorreto(N1, N2: Extended; Operador: string; Decimal: Integer): Extended;
 
    // Validaçoes
+   PROCEDURE   ValidaCampoTag(Form: TForm);
+   PROCEDURE   LimpaCampos(Form: TForm);
    FUNCTION    VALIDAUF(Dado : string) : boolean;
    FUNCTION    VALIDACNPJ(Dado : string) : boolean;
    FUNCTION    VALIDACPF(Dado : string) : boolean;
-   PROCEDURE   ValidaCampoTag(Form: TForm);
    FUNCTION    DATAVALIDA(Dado: string): String;
    FUNCTION    Temletra(texto:string) : boolean;
    FUNCTION    DigitoCodigodeBar(EREFERENCIA:string):integer;
@@ -450,6 +452,43 @@ begin
    end;
 end;
 
+procedure LimpaCampos(Form: TForm);
+var j: integer;
+begin
+   with Form do
+   begin
+      for j := 0 to ComponentCount - 1 do
+      begin
+         if (Components[j] is TcxPageControl) then
+            (Components[j] as TcxPageControl).ActivePageIndex := 0;
+
+         if (Components[j] is TcxTextEdit) then
+         begin
+            if (Components[j] as TcxTextEdit).Name <> 'eConsulta' then
+               (Components[j] as TcxTextEdit).text    := '';
+         end;
+         if (Components[j] is TcxDateEdit) then
+         (Components[j] as TcxDateEdit).Date          := Date;
+         if (Components[j] is TcxButtonEdit) then
+         (Components[j] as TcxButtonEdit).TExt        := '0';
+         if (Components[j] is TcxCurrencyEdit) then
+         (Components[j] as TcxCurrencyEdit).Value     := 0;
+         if (Components[j] is TcxMaskEdit) then
+         (Components[j] as TcxMaskEdit).TExt          := '';
+         if (Components[j] is TcxMemo) then
+         (Components[j] as TcxMemo).Lines.Text        := '';
+         if (Components[j] is TcxCheckBox) then
+         begin
+            if (Components[j] as TcxCheckBox).Name = 'eAtivo' then
+               (Components[j] as TcxCheckBox).Checked := True else
+               (Components[j] as TcxCheckBox).Checked := False;
+         end;
+         if (Components[j] is TcxComboBox) then
+         (Components[j] as TcxComboBox).ItemIndex     :=0;
+      end;
+   end;
+end;
+
 Procedure ValidaCampoTag(Form: TForm);
 var
    i, intPassou: integer;
@@ -639,6 +678,7 @@ begin
    If TABELA = 'CPAGTO'          then StrSql := 'SELECT DESCRICAO   Nome FROM CPAGTO     WHERE IDCPAGTO='+IntToStr(CODIGO)+'  ' else
    if TABELA = 'PLANOCONTAREC'   then StrSql := 'SELECT NOMEPLANO   Nome FROM PLANOCONTA WHERE TIPOPLANO LIKE '+QuotedStr('%RECEITAS%')+' and IDPLANO='+IntToStr(CODIGO)+' AND ATIVO = '+QUotedStr('S') else
    if TABELA = 'PLANOCONTAPAG'   then StrSql := 'SELECT NOMEPLANO   Nome FROM PLANOCONTA WHERE TIPOPLANO LIKE '+QuotedStr('%DESPESAS%')+' and IDPLANO='+IntToStr(CODIGO)+' AND ATIVO = '+QUotedStr('S') else
+   If TABELA = 'BANCO'           then StrSql := 'SELECT BANCO       Nome FROM BANCO    WHERE IDBANCO='+IntToStr(CODIGO) else
 
    if TABELA <> ''          then StrSql := 'SELECT DESCRICAO Nome FROM GENERICA WHERE TABELA='+QuotedStr(TABELA)+' AND IDGENERICA='+IntToStr(CODIGO);
 

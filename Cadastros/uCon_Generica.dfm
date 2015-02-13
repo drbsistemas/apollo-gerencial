@@ -2,6 +2,7 @@ inherited Fcad_Generica: TFcad_Generica
   Caption = 'Outros Cadastros'
   ClientHeight = 541
   ClientWidth = 704
+  ExplicitTop = 8
   ExplicitWidth = 712
   ExplicitHeight = 572
   PixelsPerInch = 96
@@ -182,20 +183,20 @@ inherited Fcad_Generica: TFcad_Generica
       end
     end
     inherited pnBotaoCon: TPanel [1]
-      Top = 490
+      Top = 489
       Width = 644
       TabOrder = 4
-      ExplicitTop = 490
+      ExplicitTop = 489
       ExplicitWidth = 644
     end
     inherited grConsulta: TcxGrid [2]
       Top = 103
       Width = 644
-      Height = 387
+      Height = 386
       TabOrder = 3
       ExplicitTop = 103
       ExplicitWidth = 644
-      ExplicitHeight = 387
+      ExplicitHeight = 386
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmCad.dsGenerico
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
@@ -225,7 +226,6 @@ inherited Fcad_Generica: TFcad_Generica
         Top = 3
         Properties.CharCase = ecUpperCase
         Properties.DropDownListStyle = lsFixedList
-        Properties.OnChange = cxConsultaPropertiesChange
         StyleFocused.Color = 13366014
         TabOrder = 0
         OnClick = cxTabelaClick

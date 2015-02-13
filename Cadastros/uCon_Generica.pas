@@ -56,10 +56,18 @@ type
     procedure Limpa;
     procedure CaptionForm;
     function BuscaID: Integer;
+    procedure BloqueiaCampos;
   public
     { Public declarations }
      TABELA: string;
   end;
+
+const
+   oTabelaCentroDeCusto    = 'CENTRO DE CUSTO';
+   oTabelaFormaDePagamento = 'FORMA DE PAGAMENTO';
+   oTabelaDeGrupos         = 'GRUPOS';
+   oTabelaDeSubGrupos      = 'SUBGRUPOS';
+   oTabelaDeLocalizacao    = 'LOCALIZAÇÃO';
 
 var
   Fcad_Generica: TFcad_Generica;
@@ -195,8 +203,8 @@ procedure TFcad_Generica.FormShow(Sender: TObject);
 begin
    inherited;
    if TABELA = '' then
-      CarregaTabelas;
-   cxConsultaPropertiesChange(self);
+      CarregaTabelas else
+      cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Generica.Limpa;
@@ -224,16 +232,19 @@ begin
       3: TABELA := 'SUBGRUPO';
       4: TABELA := 'LOCALIZACAO';
    end;
+   BloqueiaCampos;
    cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Generica.CarregaTabelas();
 begin
-   cxTabela.Properties.Items.Add('CENTRO DE CUSTO');
-   cxTabela.Properties.Items.Add('FORMA DE PAGAMENTO');
-   cxTabela.Properties.Items.Add('GRUPOS');
-   cxTabela.Properties.Items.Add('SUBGRUPOS');
-   cxTabela.Properties.Items.Add('LOCALIZAÇÃO');
+   cxTAbela.Properties.Items.Clear;
+   cxTabela.Properties.Items.Add(oTabelaCentroDeCusto);
+   cxTabela.Properties.Items.Add(oTabelaFormaDePagamento);
+   cxTabela.Properties.Items.Add(oTabelaDeGrupos);
+   cxTabela.Properties.Items.Add(oTabelaDeSubGrupos);
+   cxTabela.Properties.Items.Add(oTabelaDeLocalizacao);
+
 {   cxTabela.Properties.Items.Add('RAÇA');
    cxTabela.Properties.Items.Add('ESPÉCIE');
    cxTabela.Properties.Items.Add('TIPO DE TRABALHO');
@@ -241,7 +252,6 @@ begin
 
    pnTabela.Visible := true;
    cxTabela.ItemIndex := 0;
-   cxTabelaClick(self);
 end;
 
 Procedure TFcad_Generica.CaptionForm;
@@ -260,6 +270,30 @@ Function TFcad_GEnerica.BuscaID(): Integer;
 begin
    ConsultaSql('select MAx(IDGENERICA) ID from GENERICA where TABELA='+QuotedStr(TABELA), dmCad.qryAux);
    Result := dmCad.qryAux.Fieldbyname('ID').asInteger+1;
+end;
+
+Procedure TFcad_Generica.BloqueiaCampos;
+begin
+   if cxTabela.Text = oTabelaFormaDePagamento then
+   begin
+      cxCadastro.Enabled := False;
+      cxNovo.Enabled     := False;
+      cxEdita.Enabled    := False;
+      cxVEr.Enabled      := False;
+      cxApagar.Enabled   := False;
+      cxOpcoes.Enabled   := False;
+      cxPrint.Enabled    := False;
+   end else
+   begin
+      cxCadastro.Enabled := True;
+      cxNovo.Enabled     := True;
+      cxEdita.Enabled    := True;
+      cxVEr.Enabled      := True;
+      cxApagar.Enabled   := True;
+      cxOpcoes.Enabled   := True;
+      cxPrint.Enabled    := True;
+   end;
+
 end;
 
 end.

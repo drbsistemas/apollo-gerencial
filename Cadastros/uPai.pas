@@ -146,7 +146,7 @@ end;
 
 procedure TFcad_Pai.cxConsultaPropertiesChange(Sender: TObject);
 begin
-   //
+   eCOnsulta.SetFocus;
 end;
 
 procedure TFcad_Pai.cxEditaClick(Sender: TObject);

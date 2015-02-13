@@ -79,12 +79,6 @@ type
     qryCPagtoItemPERCENTUAL: TFloatField;
     qryCPagtoItemPARCELA: TIntegerField;
     qryNcm: TFDQuery;
-    IntegerField1: TIntegerField;
-    IntegerField2: TIntegerField;
-    IntegerField3: TIntegerField;
-    FloatField1: TFloatField;
-    FloatField2: TFloatField;
-    IntegerField4: TIntegerField;
     UpdtNcm: TFDUpdateSQL;
     dsNcm: TDataSource;
     qryEndereco: TFDQuery;
@@ -117,6 +111,9 @@ type
     UpdtParametro: TFDUpdateSQL;
     dsParametro: TDataSource;
     uHis_Parametro: TUCHist_DataSet;
+    qryBanco: TFDQuery;
+    UPdtBanco: TFDUpdateSQL;
+    dsBanco: TDataSource;
     procedure qryProdAfterInsert(DataSet: TDataSet);
     procedure qryEstoqueAfterInsert(DataSet: TDataSet);
     procedure qryAnimaisAfterInsert(DataSet: TDataSet);

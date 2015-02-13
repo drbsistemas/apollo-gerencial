@@ -747,65 +747,8 @@ end;
 
 Procedure TFcad_Clientes.Limpa;
 begin
-   eCOdigo.TExt           := '0';
-   eRazao.Text            := EmptyStr;
-   eFantasia.Text         := EmptyStr;
-   eEndereco.Text         := EmptyStr;
-   eNum.Text              := EmptyStr;
-   eComplemento.Text      := EmptyStr;
-   eCidade.Text           := EmptyStr;
-   eUf.Text               := EmptyStr;
-   eBairro.Text           := EmptyStr;
-   eCep.Text              := EmptyStr;
-   eCnpj.Text             := EmptyStr;
-   eRg.Text               := EmptyStr;
-   eIe.Text               := EmptyStr;
-   eCpf.Text              := EmptyStr;
-   eFone.Text             := EmptyStr;
-   eCelular.Text          := EmptyStr;
-   eDtCad.Date            := Date;
-   cbDtNascimento.Date    := Date;
-   eAtivo.Checked         := True;
-   cbPessoa.Itemindex     := 0;
+   LimpaCampos(Fcad_Clientes);
    cbPessoaPropertiesChange(Self);
-   cbtpclie.ItemIndex     := 0;
-
-   eCodVend.Text          := '0';
-   eVendedor.Text         := 'NEHUM';
-   eCodCPagto.Text        := '0';
-   eCPagto.Text           :='NENHUM';
-   eCodTransp.Text        := '0';
-   eTransportadora.Text   := 'NENHUM';
-   eCredito.Value         := 0;
-   eLimite.Value          := 0;
-   cxBloqueado.Checked    := False;
-
-   cxAlerta.Checked       := False;
-
-   cxREsidencia.ItemIndex := 0;
-   eAluguel.Value         := 0;
-   eTempoMoradia.CLear;
-   eEmpresa.Clear;
-   eFoneEmpresa.Clear;
-   eEnderecoEmpresa.Clear;
-   eCidadeEmpresa.Clear;
-   eProfissao.Clear;
-   eSalario.Value         := 0;
-   eOutrasREndas.Value    := 0;
-   eDescricaoRenda.Clear;
-
-   eNomeConjuge.Clear;
-   eCpfConjuge.Clear;
-   eRgConjuge.Clear;
-   eDataNasceConjuge.Date := Date;
-   eSalarioConjuge.Value  := 0;
-   eEmpresaConjuge.Clear;
-   eFoneEmpresaConjuge.Clear;
-   eEmailConjuge.Clear;
-   eFoneConjuge.Clear;
-   cxEndereco.Enabled     := False;
-
-   cxPage.ActivePageIndex := 0;
 end;
 
 

@@ -7,7 +7,7 @@ inherited Fcad_Balanco: TFcad_Balanco
   ExplicitHeight = 568
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnImg: TcxImage [0]
+  inherited pnImg: TcxImage
     Left = 851
     ExplicitLeft = 851
     ExplicitHeight = 537
@@ -440,7 +440,7 @@ inherited Fcad_Balanco: TFcad_Balanco
       end
     end
   end
-  inherited pnCon: TPanel
+  inherited pnCon: TPanel [2]
     Width = 851
     Height = 537
     TabOrder = 1

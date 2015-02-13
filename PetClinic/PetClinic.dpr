@@ -9,7 +9,6 @@ uses
   uConexao in '..\Acesso\uConexao.pas',
   uMsg in '..\Acesso\uMsg.pas' {Fmsg},
   LoginWindow_U in 'C:\Program Files (x86)\Embarcadero\Studio\14.0\LibAdicional\UserControlXE6\Source\LoginWindow_U.pas' {frmLoginWindow},
-  uDmCad in '..\Acesso\uDmCad.pas' {dmCad: TDataModule},
   uPai in '..\Cadastros\uPai.pas' {Fcad_Pai},
   uSerial in '..\Acesso\uSerial.pas' {FCad_Serial},
   uCad_Captcha in '..\Acesso\uCad_Captcha.pas' {Fcon_Captcha},
@@ -44,7 +43,9 @@ uses
   uCad_PlanoConta in '..\Cadastros\uCad_PlanoConta.pas' {Fcad_PlanoConta},
   uCad_Baixa in '..\Financeiro\uCad_Baixa.pas' {Fcad_Baixa},
   uCad_Parametro in '..\Cadastros\uCad_Parametro.pas' {FCad_Parametro},
-  uCad_Caixa in '..\Financeiro\uCad_Caixa.pas' {Fcad_Caixa};
+  uCad_Caixa in '..\Financeiro\uCad_Caixa.pas' {Fcad_Caixa},
+  uCad_Banco in '..\Cadastros\uCad_Banco.pas' {Fcad_Banco},
+  uDmCad in '..\Acesso\uDmCad.pas' {dmCad: TDataModule};
 
 {$R *.res}
 

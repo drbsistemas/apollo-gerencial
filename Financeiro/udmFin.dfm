@@ -722,7 +722,8 @@ object dmFin: TdmFin
     UpdateOptions.RefreshMode = rmAll
     UpdateObject = UpdtCaixa
     SQL.Strings = (
-      'select * from CAIXA')
+      'select A.*, B.BANCO from CAIXA A'
+      'left join BANCO B on A.IDBANCO = B.IDBANCO')
     Left = 124
     Top = 2
   end

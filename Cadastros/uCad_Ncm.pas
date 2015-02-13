@@ -64,7 +64,6 @@ end;
 
 procedure TFcad_NCM.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  inherited;
    ID               := dmCad.qryNCM.Fieldbyname('NCM').AsInteger;
    DESCRICAO        := dmCad.qryNCM.FieldByName('DESCRICAO').AsString;
 
