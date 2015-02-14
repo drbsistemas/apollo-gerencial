@@ -94,11 +94,16 @@ type
     dsCaixaItem: TDataSource;
     qryCaixaItem: TFDQuery;
     uHis_CaixaItem: TUCHist_DataSet;
+    UpdtCaixaFechamento: TFDUpdateSQL;
+    dsCaixaFechamento: TDataSource;
+    qryCaixaFechamento: TFDQuery;
+    uHis_CaixaFechamento: TUCHist_DataSet;
     procedure qryCreditoAfterInsert(DataSet: TDataSet);
     procedure qryContaAfterInsert(DataSet: TDataSet);
     procedure qryContaRateioAfterInsert(DataSet: TDataSet);
     procedure qryCaixaAfterInsert(DataSet: TDataSet);
     procedure qryCaixaItemAfterInsert(DataSet: TDataSet);
+    procedure qryCaixaFechamentoAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -118,27 +123,32 @@ uses uDmCon, uRotinas, uPrinc;
 
 procedure TdmFin.qryCaixaAfterInsert(DataSet: TDataSet);
 begin
-   dmFin.qryCaixa.FieldByName('IDCAIXA').AsInteger                := ExecutaGen('CAIXA');
+   dmFin.qryCaixa.FieldByName('IDCAIXA').AsInteger                      := ExecutaGen('CAIXA');
+end;
+
+procedure TdmFin.qryCaixaFechamentoAfterInsert(DataSet: TDataSet);
+begin
+   dmFin.qryCaixaFechamento.FieldByName('IDFECHAMENTO').AsInteger        := ExecutaGen('CAIXAFECHAMENTO');
 end;
 
 procedure TdmFin.qryCaixaItemAfterInsert(DataSet: TDataSet);
 begin
-   dmFin.qryCaixaItem.FieldByName('IDCAIXAITEM').AsInteger        := ExecutaGen('CAIXAITEM');
+   dmFin.qryCaixaItem.FieldByName('IDCAIXAITEM').AsInteger              := ExecutaGen('CAIXAITEM');
 end;
 
 procedure TdmFin.qryContaAfterInsert(DataSet: TDataSet);
 begin
-   dmFin.qryConta.FieldByName('IDCONTA').AsInteger                := ExecutaGen('CONTA');
+   dmFin.qryConta.FieldByName('IDCONTA').AsInteger                      := ExecutaGen('CONTA');
 end;
 
 procedure TdmFin.qryContaRateioAfterInsert(DataSet: TDataSet);
 begin
-   dmFin.qryContaRateio.FieldByName('IDCONTARATEIO').AsInteger    := ExecutaGen('CONTARATEIO');
+   dmFin.qryContaRateio.FieldByName('IDCONTARATEIO').AsInteger          := ExecutaGen('CONTARATEIO');
 end;
 
 procedure TdmFin.qryCreditoAfterInsert(DataSet: TDataSet);
 begin
-   dmFin.qryCredito.FieldByName('IDCREDITO').AsInteger            := ExecutaGen('CLIENTECREDITO');
+   dmFin.qryCredito.FieldByName('IDCREDITO').AsInteger                  := ExecutaGen('CLIENTECREDITO');
 end;
 
 end.

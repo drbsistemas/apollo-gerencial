@@ -821,663 +821,7 @@ inherited Fcad_Produto: TFcad_Produto
     TabOrder = 0
     ExplicitWidth = 852
     ExplicitHeight = 540
-    inherited pnMenu: TPanel
-      Width = 850
-      ExplicitWidth = 850
-      inherited cxSalvar: TcxButton
-        Left = 50
-        Top = -1
-        ExplicitLeft = 50
-        ExplicitTop = -1
-      end
-      inherited cxCancela: TcxButton
-        Left = 109
-        Top = -1
-        ExplicitLeft = 109
-        ExplicitTop = -1
-      end
-    end
-    object cxPage: TcxPageControl
-      Left = 1
-      Top = 306
-      Width = 850
-      Height = 233
-      Align = alClient
-      TabOrder = 2
-      Properties.ActivePage = cxVenda
-      Properties.CustomButtons.Buttons = <>
-      Properties.Style = 11
-      Properties.TabWidth = 100
-      LookAndFeel.Kind = lfUltraFlat
-      LookAndFeel.NativeStyle = False
-      LookAndFeel.SkinName = 'Office2010Silver'
-      ClientRectBottom = 227
-      ClientRectLeft = 2
-      ClientRectRight = 844
-      ClientRectTop = 27
-      object cxVenda: TcxTabSheet
-        Caption = 'Dados Venda'
-        ImageIndex = 0
-        object ePrecoCpr: TcxCurrencyEdit
-          Left = 132
-          Top = 3
-          Hint = 'Pre'#231'o de compra no fornecedor'
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 3
-          Properties.DisplayFormat = '###,###,##0.000'
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 0
-          OnExit = eCustoProdExit
-          Width = 75
-        end
-        object cxLabel4: TcxLabel
-          Left = 42
-          Top = 5
-          AutoSize = False
-          Caption = 'Pre'#231'o Compra:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clBlack
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 90
-          AnchorX = 132
-        end
-        object cxLabel15: TcxLabel
-          Left = 210
-          Top = 5
-          AutoSize = False
-          Caption = 'Custo Compra:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 90
-          AnchorX = 300
-        end
-        object eCustoCpr: TcxCurrencyEdit
-          Left = 300
-          Top = 3
-          Hint = 'Custo para compra do produto'
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 3
-          Properties.DisplayFormat = '###,###,##0.000'
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 1
-          OnExit = eCustoProdExit
-          Width = 75
-        end
-        object cxLabel16: TcxLabel
-          Left = 378
-          Top = 5
-          AutoSize = False
-          Caption = 'Custo Produto:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 90
-          AnchorX = 468
-        end
-        object eCustoProd: TcxCurrencyEdit
-          Left = 468
-          Top = 3
-          Hint = 'Custo Efetivo do Produto'
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 3
-          Properties.DisplayFormat = '###,###,##0.000'
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 2
-          OnExit = eCustoProdExit
-          Width = 75
-        end
-        object eMl: TcxCurrencyEdit
-          Left = 132
-          Top = 25
-          Hint = 'Margem de Lucro com Base no Custo Produto'
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 3
-          Properties.DisplayFormat = '0.00%'
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 6
-          OnExit = eMlExit
-          Width = 75
-        end
-        object cxLabel17: TcxLabel
-          Left = 43
-          Top = 27
-          AutoSize = False
-          Caption = 'M. Lucro:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 90
-          AnchorX = 133
-        end
-        object cxLabel18: TcxLabel
-          Left = 221
-          Top = 27
-          AutoSize = False
-          Caption = 'Pre'#231'o Venda:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 78
-          AnchorX = 299
-        end
-        object ePrecoVenda: TcxCurrencyEdit
-          Left = 300
-          Top = 25
-          Hint = 'Pre'#231'o de Venda do Produto'
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 2
-          Properties.DisplayFormat = '###,###,##0.00'
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 7
-          OnExit = ePrecoVendaExit
-          Width = 75
-        end
-        object cxLabel21: TcxLabel
-          Left = 210
-          Top = 49
-          AutoSize = False
-          Caption = 'Custo M'#233'dio:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 90
-          AnchorX = 300
-        end
-        object eCustoMedio: TcxCurrencyEdit
-          Left = 300
-          Top = 47
-          Hint = 'Custo M'#233'dio Efetivo do Produto'
-          TabStop = False
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 2
-          Properties.DisplayFormat = '###,###,##0.00'
-          Properties.ReadOnly = True
-          Style.Color = clBtnFace
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 12
-          Width = 75
-        end
-        object cxLabel22: TcxLabel
-          Left = 378
-          Top = 27
-          AutoSize = False
-          Caption = 'Comiss'#227'o:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 90
-          AnchorX = 468
-        end
-        object eComissao: TcxCurrencyEdit
-          Left = 468
-          Top = 25
-          Hint = 'Percentual de Comiss'#227'o para Vendedores'
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 3
-          Properties.DisplayFormat = '0.00%'
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 8
-          Width = 75
-        end
-      end
-      object cxEstoque: TcxTabSheet
-        Caption = 'Dados Estoque'
-        ImageIndex = 1
-        object eEstoqueDisp: TcxCurrencyEdit
-          Left = 131
-          Top = 3
-          Hint = 'Estoque Dispon'#237'vel para Vendas'
-          TabStop = False
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 2
-          Properties.DisplayFormat = '###,###,##0.00'
-          Properties.ReadOnly = True
-          Style.Color = clBtnFace
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 0
-          Width = 75
-        end
-        object cxLabel23: TcxLabel
-          Left = 18
-          Top = 5
-          AutoSize = False
-          Caption = 'Est. Dispon'#237'vel:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 113
-          AnchorX = 131
-        end
-        object eEstoqueTotal: TcxCurrencyEdit
-          Left = 131
-          Top = 25
-          Hint = 'Estoque F'#237'sico do Produto'
-          TabStop = False
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 2
-          Properties.DisplayFormat = '###,###,##0.00'
-          Properties.ReadOnly = True
-          Style.Color = clBtnFace
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 6
-          Width = 75
-        end
-        object cxLabel24: TcxLabel
-          Left = 18
-          Top = 27
-          AutoSize = False
-          Caption = 'Est. F'#237'sico:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 113
-          AnchorX = 131
-        end
-        object eQtdeMin: TcxCurrencyEdit
-          Left = 299
-          Top = 3
-          Hint = 'Quantidade M'#237'nima para Ter em Estoque'
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 2
-          Properties.DisplayFormat = '###,###,##0.00'
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 1
-          Width = 75
-        end
-        object cxLabel25: TcxLabel
-          Left = 219
-          Top = 5
-          AutoSize = False
-          Caption = 'Qtde M'#237'nima:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 80
-          AnchorX = 299
-        end
-        object cxLabel26: TcxLabel
-          Left = 219
-          Top = 27
-          AutoSize = False
-          Caption = 'Qtde M'#225'xima:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 80
-          AnchorX = 299
-        end
-        object eQtdeMax: TcxCurrencyEdit
-          Left = 299
-          Top = 25
-          Hint = 'Quantidade M'#225'xima para Ter em Estoque'
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 2
-          Properties.DisplayFormat = '###,###,##0.00'
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 7
-          Width = 75
-        end
-        object cxLabel27: TcxLabel
-          Left = 377
-          Top = 5
-          AutoSize = False
-          Caption = 'Peso L'#237'quido:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 90
-          AnchorX = 467
-        end
-        object ePesoL: TcxCurrencyEdit
-          Left = 467
-          Top = 3
-          Hint = 'Peso Liquido do Produto'
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 2
-          Properties.DisplayFormat = '###,###,##0.00'
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 2
-          Width = 75
-        end
-        object ePesoB: TcxCurrencyEdit
-          Left = 467
-          Top = 25
-          Hint = 'Peso Bruto do Produto'
-          EditValue = 0.000000000000000000
-          ParentFont = False
-          Properties.Alignment.Horz = taRightJustify
-          Properties.DecimalPlaces = 2
-          Properties.DisplayFormat = '###,###,##0.00'
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 8
-          Width = 75
-        end
-        object cxLabel28: TcxLabel
-          Left = 377
-          Top = 27
-          AutoSize = False
-          Caption = 'Peso Bruto:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 90
-          AnchorX = 467
-        end
-        object eObs: TcxMemo
-          Left = 132
-          Top = 50
-          Hint = 'Observa'#231#245'es Adicionais'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.IsFontAssigned = True
-          StyleFocused.Color = 13366014
-          TabOrder = 13
-          Height = 75
-          Width = 411
-        end
-        object cxLabel29: TcxLabel
-          Left = 18
-          Top = 50
-          AutoSize = False
-          Caption = 'Observa'#231#245'es:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clMaroon
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clBlack
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 113
-          AnchorX = 131
-        end
-      end
-    end
-    object pnDados: TPanel
+    object pnDados: TPanel [0]
       Left = 1
       Top = 51
       Width = 850
@@ -1504,8 +848,8 @@ inherited Fcad_Produto: TFcad_Produto
         Width = 97
       end
       object cxLabel3: TcxLabel
-        Left = 59
-        Top = 31
+        Left = 53
+        Top = 30
         AutoSize = False
         Caption = 'C'#243'digo:'
         ParentFont = False
@@ -1524,7 +868,7 @@ inherited Fcad_Produto: TFcad_Produto
         Transparent = True
         Height = 17
         Width = 75
-        AnchorX = 134
+        AnchorX = 128
       end
       object eAtivo: TcxCheckBox
         Left = 237
@@ -2878,6 +2222,662 @@ inherited Fcad_Produto: TFcad_Produto
         Height = 17
         Width = 90
         AnchorX = 134
+      end
+    end
+    inherited pnMenu: TPanel
+      Width = 850
+      ExplicitWidth = 850
+      inherited cxSalvar: TcxButton
+        Left = 50
+        Top = -1
+        ExplicitLeft = 50
+        ExplicitTop = -1
+      end
+      inherited cxCancela: TcxButton
+        Left = 109
+        Top = -1
+        ExplicitLeft = 109
+        ExplicitTop = -1
+      end
+    end
+    object cxPage: TcxPageControl
+      Left = 1
+      Top = 306
+      Width = 850
+      Height = 233
+      Align = alClient
+      TabOrder = 2
+      Properties.ActivePage = cxVenda
+      Properties.CustomButtons.Buttons = <>
+      Properties.Style = 11
+      Properties.TabWidth = 100
+      LookAndFeel.Kind = lfUltraFlat
+      LookAndFeel.NativeStyle = False
+      LookAndFeel.SkinName = 'Office2010Silver'
+      ClientRectBottom = 227
+      ClientRectLeft = 2
+      ClientRectRight = 844
+      ClientRectTop = 27
+      object cxVenda: TcxTabSheet
+        Caption = 'Dados Venda'
+        ImageIndex = 0
+        object ePrecoCpr: TcxCurrencyEdit
+          Left = 132
+          Top = 3
+          Hint = 'Pre'#231'o de compra no fornecedor'
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 3
+          Properties.DisplayFormat = '###,###,##0.000'
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 0
+          OnExit = eCustoProdExit
+          Width = 75
+        end
+        object cxLabel4: TcxLabel
+          Left = 42
+          Top = 5
+          AutoSize = False
+          Caption = 'Pre'#231'o Compra:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clBlack
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 90
+          AnchorX = 132
+        end
+        object cxLabel15: TcxLabel
+          Left = 210
+          Top = 5
+          AutoSize = False
+          Caption = 'Custo Compra:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 90
+          AnchorX = 300
+        end
+        object eCustoCpr: TcxCurrencyEdit
+          Left = 300
+          Top = 3
+          Hint = 'Custo para compra do produto'
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 3
+          Properties.DisplayFormat = '###,###,##0.000'
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 1
+          OnExit = eCustoProdExit
+          Width = 75
+        end
+        object cxLabel16: TcxLabel
+          Left = 378
+          Top = 5
+          AutoSize = False
+          Caption = 'Custo Produto:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 90
+          AnchorX = 468
+        end
+        object eCustoProd: TcxCurrencyEdit
+          Left = 468
+          Top = 3
+          Hint = 'Custo Efetivo do Produto'
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 3
+          Properties.DisplayFormat = '###,###,##0.000'
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 2
+          OnExit = eCustoProdExit
+          Width = 75
+        end
+        object eMl: TcxCurrencyEdit
+          Left = 132
+          Top = 25
+          Hint = 'Margem de Lucro com Base no Custo Produto'
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 3
+          Properties.DisplayFormat = '0.00%'
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 6
+          OnExit = eMlExit
+          Width = 75
+        end
+        object cxLabel17: TcxLabel
+          Left = 43
+          Top = 27
+          AutoSize = False
+          Caption = 'M. Lucro:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 90
+          AnchorX = 133
+        end
+        object cxLabel18: TcxLabel
+          Left = 221
+          Top = 27
+          AutoSize = False
+          Caption = 'Pre'#231'o Venda:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 78
+          AnchorX = 299
+        end
+        object ePrecoVenda: TcxCurrencyEdit
+          Left = 300
+          Top = 25
+          Hint = 'Pre'#231'o de Venda do Produto'
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 2
+          Properties.DisplayFormat = '###,###,##0.00'
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 7
+          OnExit = ePrecoVendaExit
+          Width = 75
+        end
+        object cxLabel21: TcxLabel
+          Left = 210
+          Top = 49
+          AutoSize = False
+          Caption = 'Custo M'#233'dio:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 90
+          AnchorX = 300
+        end
+        object eCustoMedio: TcxCurrencyEdit
+          Left = 300
+          Top = 47
+          Hint = 'Custo M'#233'dio Efetivo do Produto'
+          TabStop = False
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 2
+          Properties.DisplayFormat = '###,###,##0.00'
+          Properties.ReadOnly = True
+          Style.Color = clBtnFace
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 12
+          Width = 75
+        end
+        object cxLabel22: TcxLabel
+          Left = 378
+          Top = 27
+          AutoSize = False
+          Caption = 'Comiss'#227'o:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 90
+          AnchorX = 468
+        end
+        object eComissao: TcxCurrencyEdit
+          Left = 468
+          Top = 25
+          Hint = 'Percentual de Comiss'#227'o para Vendedores'
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 3
+          Properties.DisplayFormat = '0.00%'
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 8
+          Width = 75
+        end
+      end
+      object cxEstoque: TcxTabSheet
+        Caption = 'Dados Estoque'
+        ImageIndex = 1
+        object eEstoqueDisp: TcxCurrencyEdit
+          Left = 131
+          Top = 3
+          Hint = 'Estoque Dispon'#237'vel para Vendas'
+          TabStop = False
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 2
+          Properties.DisplayFormat = '###,###,##0.00'
+          Properties.ReadOnly = True
+          Style.Color = clBtnFace
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 0
+          Width = 75
+        end
+        object cxLabel23: TcxLabel
+          Left = 18
+          Top = 5
+          AutoSize = False
+          Caption = 'Est. Dispon'#237'vel:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 113
+          AnchorX = 131
+        end
+        object eEstoqueTotal: TcxCurrencyEdit
+          Left = 131
+          Top = 25
+          Hint = 'Estoque F'#237'sico do Produto'
+          TabStop = False
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 2
+          Properties.DisplayFormat = '###,###,##0.00'
+          Properties.ReadOnly = True
+          Style.Color = clBtnFace
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 6
+          Width = 75
+        end
+        object cxLabel24: TcxLabel
+          Left = 18
+          Top = 27
+          AutoSize = False
+          Caption = 'Est. F'#237'sico:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 113
+          AnchorX = 131
+        end
+        object eQtdeMin: TcxCurrencyEdit
+          Left = 299
+          Top = 3
+          Hint = 'Quantidade M'#237'nima para Ter em Estoque'
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 2
+          Properties.DisplayFormat = '###,###,##0.00'
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 1
+          Width = 75
+        end
+        object cxLabel25: TcxLabel
+          Left = 219
+          Top = 5
+          AutoSize = False
+          Caption = 'Qtde M'#237'nima:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 80
+          AnchorX = 299
+        end
+        object cxLabel26: TcxLabel
+          Left = 219
+          Top = 27
+          AutoSize = False
+          Caption = 'Qtde M'#225'xima:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 80
+          AnchorX = 299
+        end
+        object eQtdeMax: TcxCurrencyEdit
+          Left = 299
+          Top = 25
+          Hint = 'Quantidade M'#225'xima para Ter em Estoque'
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 2
+          Properties.DisplayFormat = '###,###,##0.00'
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 7
+          Width = 75
+        end
+        object cxLabel27: TcxLabel
+          Left = 377
+          Top = 5
+          AutoSize = False
+          Caption = 'Peso L'#237'quido:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 90
+          AnchorX = 467
+        end
+        object ePesoL: TcxCurrencyEdit
+          Left = 467
+          Top = 3
+          Hint = 'Peso Liquido do Produto'
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 2
+          Properties.DisplayFormat = '###,###,##0.00'
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 2
+          Width = 75
+        end
+        object ePesoB: TcxCurrencyEdit
+          Left = 467
+          Top = 25
+          Hint = 'Peso Bruto do Produto'
+          EditValue = 0.000000000000000000
+          ParentFont = False
+          Properties.Alignment.Horz = taRightJustify
+          Properties.DecimalPlaces = 2
+          Properties.DisplayFormat = '###,###,##0.00'
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 8
+          Width = 75
+        end
+        object cxLabel28: TcxLabel
+          Left = 377
+          Top = 27
+          AutoSize = False
+          Caption = 'Peso Bruto:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 90
+          AnchorX = 467
+        end
+        object eObs: TcxMemo
+          Left = 132
+          Top = 50
+          Hint = 'Observa'#231#245'es Adicionais'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          StyleFocused.Color = 13366014
+          TabOrder = 13
+          Height = 75
+          Width = 411
+        end
+        object cxLabel29: TcxLabel
+          Left = 18
+          Top = 50
+          AutoSize = False
+          Caption = 'Observa'#231#245'es:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clMaroon
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clBlack
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 113
+          AnchorX = 131
+        end
       end
     end
   end

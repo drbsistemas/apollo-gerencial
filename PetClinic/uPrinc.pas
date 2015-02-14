@@ -22,7 +22,7 @@ uses
   Vcl.StdCtrls, dxGDIPlusClasses, cxImage, cxButtons, Vcl.ExtCtrls, Vcl.Grids,
   Vcl.DBGrids, Data.DB, dxSkinsdxBarPainter, dxRibbonSkins,
   dxSkinsdxRibbonPainter, dxBar, dxBarExtItems, dxRibbonRadialMenu, cxClasses,
-  dxRibbon, RxMenus, UCHist_Base;
+  dxRibbon, RxMenus, UCHist_Base, System.Win.TaskbarCore, RxShell;
 
    procedure VerificaAcessos;
 
@@ -112,13 +112,16 @@ type
     cadConf: TAction;
     cadEmpresa: TAction;
     cxPlanoConta: TdxBarLargeButton;
+    tIcon: TTrayIcon;
+    popTray: TPopupMenu;
+    ForarFechamentodoSistema1: TMenuItem;
    //
-   procedure PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
-   procedure MostraNomeForm(Str: String);
+    procedure PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
+    procedure MostraNomeForm(Str: String);
    //
-   procedure ShowHint(Sender: TObject);
-   procedure FormShow(Sender: TObject);
-   procedure FormCreate(Sender: TObject);
+    procedure ShowHint(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormResize(Sender: TObject);
     procedure cxClienteClick(Sender: TObject);
@@ -147,7 +150,11 @@ type
     procedure cxPlanoContaClick(Sender: TObject);
     procedure cxConfClick(Sender: TObject);
     procedure cxCaixaClick(Sender: TObject);
+    procedure tIconClick(Sender: TObject);
+    procedure ForarFechamentodoSistema1Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
    private
+    procedure MostraResumoDoSistema;
       { Private declarations }
    public
       { Public declarations }
@@ -307,6 +314,16 @@ begin
    ExecutaForm(TFcad_Balanco, TObject(Fcad_Balanco));
 end;
 
+procedure TFPrinc.ForarFechamentodoSistema1Click(Sender: TObject);
+begin
+   Application.Terminate;
+end;
+
+procedure TFPrinc.FormActivate(Sender: TObject);
+begin
+   MostraResumoDoSistema;
+end;
+
 procedure TFPrinc.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    if (FormAtivo <> NIL) Then
@@ -336,9 +353,8 @@ begin
    AbreIni;
 
    AbreAcesso;
-   UserControl1.StartLogin;
-   uHistorico.Active := true;
-//   CarregaEmpresa('LOJA '+FormatFloat('###0',1), 'Padrão');
+{   UserControl1.StartLogin;
+   uHistorico.Active := true;}
 
    if not dmcad.qryConf.Active = true then
       dmCad.qryConf.Open;
@@ -354,8 +370,8 @@ end;
 
 procedure TFPrinc.FormShow(Sender: TObject);
 begin
-   FCorSelec := $0097E6FD;
-   FCorLista := clBtnFace;//$0000002D; //$00F1EDE9;
+   FCorSelec               := $0097E6FD;
+   FCorLista               := clBtnFace;//$0000002D; //$00F1EDE9;
 
    if Liberacao = false then
       StBar.Panels[2].Text := 'Licença Expirada!' else
@@ -398,6 +414,13 @@ begin
       FPrinc.cxHint.caption := '';
 end;
 
+procedure TFPrinc.tIconClick(Sender: TObject);
+begin
+   Show();
+   WindowState := wsMaximized;
+   Application.BringToFront();
+end;
+
 Procedure VerificaAcessos;
 begin
    with FPrinc do
@@ -429,6 +452,29 @@ begin
       cxConf.Enabled            := ValidaAcessoUsuario('FPrinc','cadConf');
       cxEmpresa.Enabled         := ValidaAcessoUsuario('FPrinc','cadEmpresa');
    end;
+
+end;
+
+Procedure TFPrinc.MostraResumoDoSistema;
+Var
+   StrMsg: String;
+begin
+   ConsultaSql('SELECT COUNT(*) QTDE, COALESCE(SUM(VLRBRUTO),0) TOTAL '+#13+
+               ' FROM CONTA where dtvencto='+QuotedStr(DataSql(Date))+' AND STATUSCONTA='+QuotedStr('ABERTO')+' AND TIPOCONTA='+QuotedStr('R'), dmCAd.qryAux);
+   StrMsg := 'RECEBER HOJE:'+#13+
+              dmCad.qryAux.FieldByName('QTDE').AsString+' - Contas no Valor de R$ '+FormatFloat('###,###,##0.00',(dmCad.qryAux.FieldByName('TOTAL').ASFloat))+#13;
+
+   ConsultaSql('SELECT COUNT(*) QTDE, COALESCE(SUM(VLRBRUTO),0) TOTAL '+#13+
+               ' FROM CONTA where dtvencto='+QuotedStr(DataSql(Date))+' AND STATUSCONTA='+QuotedStr('ABERTO')+' AND TIPOCONTA='+QuotedStr('P'), dmCAd.qryAux);
+   StrMsg := StrMsg+#13+'PAGAR HOJE:'+#13+
+              dmCad.qryAux.FieldByName('QTDE').AsString+' - Contas no Valor de R$ '+FormatFloat('###,###,##0.00',(dmCad.qryAux.FieldByName('TOTAL').ASFloat))+#13;
+
+   ConsultaSql('SELECT SALDOCAIXA, DTFECHADO FROM CAIXA WHERE TIPOCAIXA='+QuotedStr('S'),dmCad.qryAux);
+   StrMsg := StrMsg+#13+'CAIXA:'+#13+
+              ' Saldo Atual R$ '+FormatFloat('###,###,##0.00',(dmCad.qryAux.FieldByName('SALDOCAIXA').ASFloat))+#13;
+
+   StrMsg := StrMsg+#13+'Status: '+(ifs(dmCad.qryAux.Fieldbyname('DTFECHADO').AsDateTIme>=Date,'CAIXA FECHADO','CAIXA ABERTO'));
+   MensagemIcone(StrMsg, bfInfo);
 
 end;
 

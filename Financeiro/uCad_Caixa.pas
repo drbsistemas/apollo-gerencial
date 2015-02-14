@@ -100,6 +100,14 @@ type
     cxLabel30: TcxLabel;
     cxLabel31: TcxLabel;
     eModDoc: TcxTextEdit;
+    LanarDinheiro1: TMenuItem;
+    Lanar1: TMenuItem;
+    Realocar1: TMenuItem;
+    ConsultarLanamento1: TMenuItem;
+    N1: TMenuItem;
+    grConsultaDBTableView1Column5: TcxGridDBColumn;
+    N2: TMenuItem;
+    AbrirFecharCC1: TMenuItem;
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -116,6 +124,7 @@ type
       AButtonIndex: Integer);
     procedure eCodBancoExit(Sender: TObject);
     procedure eCodBancoKeyPress(Sender: TObject; var Key: Char);
+    procedure AbrirFecharCC1Click(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -134,7 +143,7 @@ implementation
 
 {$R *.dfm}
 
-uses udmFin, uRotinas, uCad_Banco;
+uses udmFin, uRotinas, uCad_Banco, uCad_CaixaFechamento;
 
 procedure TFcad_Caixa.cxApagarClick(Sender: TObject);
 begin
@@ -194,6 +203,15 @@ end;
 procedure TFcad_Caixa.cxSalvarClick(Sender: TObject);
 begin
    ValidaCampoTag(Fcad_Caixa);
+   ConsultaSql('select IDCAIXA from CAIXA where TIPOCAIXA='+QuotedStr('S'), dmFin.qryAUx);
+   if (cbTipo.Itemindex = 0) and
+      (dmFin.qryAUx.Fieldbyname('IDCAIXA').asInteger <> StrToIntDef(ecodigo.text,0)) then
+   begin
+      Msg('Verificamos que já existe uma C/C do Tipo Caixa, verifique!','I',':)');
+      cbTipo.SetFocus;
+      Abort;
+   end;
+
 
    with dmFin.qryCaixa do
    begin
@@ -234,6 +252,7 @@ begin
          POst;
          ApplyUpdates(0);
          inherited;
+         cxConsultaPropertiesChange(self);
       Except
          CancelUpdates;
       end;
@@ -285,6 +304,7 @@ procedure TFcad_Caixa.Edita;
 begin
    with dmFin.qryCaixa do
    begin
+      eCodigo.Text           := FieldByName('IDCAIXA').AsString;
       ecodBanco.Text         := FieldByName('IDBANCO').AsString;
       ecodBancoExit(self);
       eAgencia.TExt          := FieldByName('AGENCIA').AsString;
@@ -366,6 +386,12 @@ end;
 procedure TFcad_Caixa.Limpa;
 begin
    LimpaCampos(Fcad_Caixa);
+end;
+
+procedure TFcad_Caixa.AbrirFecharCC1Click(Sender: TObject);
+begin
+   inherited;
+   AbreTelaComShowModal(TFcad_CaixaFechamento, TObject(Fcad_CaixaFechamento), Fcad_Caixa, '');
 end;
 
 procedure TFcad_Caixa.ConsultaMov;

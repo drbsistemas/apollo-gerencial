@@ -1151,7 +1151,8 @@ inherited Fcad_Contas: TFcad_Contas
           'TODOS'
           'ABERTO'
           'QUITADO'
-          'CANCELADO')
+          'CANCELADO'
+          'PREVIS'#195'O')
         Style.Font.Charset = ANSI_CHARSET
         Style.Font.Color = clWindowText
         Style.Font.Height = -11
@@ -1339,6 +1340,7 @@ inherited Fcad_Contas: TFcad_Contas
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
+        OnClick = cxEstornarClick
       end
       object cxBaixar: TcxButton
         Left = 352
@@ -1496,17 +1498,16 @@ inherited Fcad_Contas: TFcad_Contas
       end
     end
     inherited pnBotaoCon: TPanel
-      Top = 488
+      Top = 487
       Width = 730
-      ExplicitLeft = 28
-      ExplicitTop = 488
+      ExplicitTop = 487
       ExplicitWidth = 730
     end
     inherited grConsulta: TcxGrid
       Width = 730
-      Height = 178
+      Height = 177
       ExplicitWidth = 730
-      ExplicitHeight = 178
+      ExplicitHeight = 177
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmFin.dsConta
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
@@ -1588,7 +1589,7 @@ inherited Fcad_Contas: TFcad_Contas
     end
     object pnSelec: TPanel
       Left = 1
-      Top = 254
+      Top = 253
       Width = 730
       Height = 234
       Align = alBottom
@@ -1756,6 +1757,7 @@ inherited Fcad_Contas: TFcad_Contas
     end
   end
   inherited cxPopMenu: TRxPopupMenu
+    Alignment = paCenter
     Left = 632
   end
   object cdsRateio: TClientDataSet

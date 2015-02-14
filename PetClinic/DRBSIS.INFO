@@ -1,9 +1,9 @@
 [ACESSO]
-BANCO=D:\Gerencial\Dados\Acesso.FDB
+BANCO=D:\DRB\Dados\Acesso.FDB
 
 [LOJAS]
 TOTAL=1
 
 [LOJA 1]
 NOME=APOLLO
-BANCO=D:\Gerencial\Dados\BANCO.FDB
+BANCO=D:\DRB\Dados\BANCO.FDB

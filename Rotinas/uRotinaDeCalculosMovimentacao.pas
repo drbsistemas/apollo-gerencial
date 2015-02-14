@@ -3,12 +3,13 @@ unit uRotinaDeCalculosMovimentacao;
 interface
 
 Uses
-   FireDAC.Comp.Client, uRotinas, Datasnap.DbClient, System.SysUtils;
+   FireDAC.Comp.Client, uRotinas, Datasnap.DbClient, System.SysUtils, Vcl.ExtCtrls;
 
    Procedure CalculaitensPedido(qrDados : TFdQUery);
    Procedure GerarCobranca(DData: TDateTime; FValorTotal: Double; StrCodigoMov, StrGerar, StrCPagtoId: String; RxParcela: TClientDataSet);
+
    ///// Rotinas de Veriricação
-   Procedure VerificaCaixa;
+   procedure      VerificaAberturaDoCaixa;
 
 var
    FQtde,
@@ -129,31 +130,45 @@ begin
    dmMov.qryAux.Close;
 end;
 
-Procedure VerificaCaixa;
+Procedure VerificaAberturaDoCaixa;
 Var
    StrParametro: String;
 begin
-   if TipoMov = ENTRADA then
-      StrParametro := 'CCRECEB' else
-      StrParametro := 'CCPAGAR';
-
-   ConsultaSql('SELECT IDCAIXA FROM CAIXA WHERE IDCAIXA='+BUSCACONF(StrParametro),dmMov.qryAux);
-
-   if dmMov.qryAux.Fieldbyname('IDCAIXA').asInteger <= 0 then
+   with dmMov do
    begin
-      Msg('C/C não encontrado, verifique o parâmetro de conta corrente!','I',':)');
-      abort;
-   end;
+      if TipoMov = ENTRADA then
+         StrParametro := 'CCRECEB' else
+         StrParametro := 'CCPAGAR';
 
-   if TipoMov = ENTRADA then
-      StrParametro := 'PLANORECEBER' else
-      StrParametro := 'PLANOPAGAR';
+      ConsultaSql('SELECT IDCAIXA, DTFECHADO FROM CAIXA WHERE IDCAIXA='+BUSCACONF(StrParametro),qryAux);
 
-   ConsultaSql('SELECT IDPLANO FROM PLANOCONTA WHERE IDPLANO='+BUSCACONF(StrParametro), dmMov.qryAux);
-   if dmMov.qryAux.Fieldbyname('IDPLANO').asInteger <= 0 then
-   begin
-      Msg('Plano de Contas não encontrado, verifique o parâmetro de plano de contas!','I',':)');
-      abort;
+      if (qryAux.Fieldbyname('IDCAIXA').asInteger <= 0) then
+      begin
+         Msg('C/C não encontrado, verifique o parâmetro de conta corrente!','I',':)');
+         abort;
+      end;
+      if (qryAux.FieldByName('DTFECHADO').AsDateTime >= Date) then
+      begin
+         MensagemIcone('CAIXA FECHADO',bfWarning);
+         Abort;
+      end;
+
+      if TipoMov = ENTRADA then
+         StrParametro := 'PLANORECEBER' else
+         StrParametro := 'PLANOPAGAR';
+
+      ConsultaSql('SELECT IDPLANO FROM PLANOCONTA WHERE IDPLANO='+BUSCACONF(StrParametro), dmMov.qryAux);
+      if dmMov.qryAux.Fieldbyname('IDPLANO').asInteger <= 0 then
+      begin
+         Msg('Plano de Contas não encontrado, verifique o parâmetro de plano de contas!','I',':)');
+         abort;
+      end;
+
+      if (qryAux.FieldByName('DTFECHADO').AsDateTime < Date) then
+      begin
+         MensagemIcone('CAIXA FECHADO',bfWarning);
+         Abort;
+      end;
    end;
 end;
 

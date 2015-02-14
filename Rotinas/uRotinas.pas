@@ -6,11 +6,12 @@ uses
    MMSystem, Graphics, System.SysUtils, Forms, System.Classes, TypInfo,
    cxButtons, CxGroupBox, cxLabel, cxCheckBox, cxTextEdit, cxMaskEdit, cxCurrencyEdit, Controls,
    FireDAC.Comp.Client, Windows, StdCtrls, Vcl.DIalogs, ComObj, ComCtrls, cxImage,
-   cxCalendar, cxButtonEdit, cxDropDownEdit, cxMemo, cxPC,
+   cxCalendar, cxButtonEdit, cxDropDownEdit, cxMemo, cxPC, Vcl.ExtCtrls,
    NFe_Util_2G_TLB ; // acrescentar essa linha no use da unit para NF-E DLL;
 
    // Mensagens
    FUNCTION Msg(Mensagem, TipoMsg, Rosto: String): Boolean;
+   PROCEDURE MensagemIcone(StrMsg: string; Flag: TBalloonFlags);
    // Licenca
    FUNCTION Crypt(Action, Src: String): String;
 
@@ -265,6 +266,24 @@ begin
       Result             := False;
    FMsg.Free;
    FMsg := nil;
+end;
+
+Procedure MensagemIcone(StrMsg: string; Flag: TBalloonFlags);
+begin
+   with FPrinc do
+   begin
+      tIcon.BalloonFlags          := Flag;
+      tIcon.BalloonHint           := StrMsg;
+
+      if Flag = bfInfo then
+         tIcon.BalloonTitle       := 'Informação!' else
+      if Flag = bfWarning then
+         tIcon.BalloonTitle       := 'Atenção!' else
+      if Flag = bfError then
+         tIcon.BalloonTitle       := 'Verifique!';
+
+      tIcon.ShowBalloonHint;
+   end;
 end;
 
 Function Crypt(Action, Src: String): String;

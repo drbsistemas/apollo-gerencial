@@ -169,7 +169,6 @@ end;
 procedure TFcad_Pai.cxSalvarClick(Sender: TObject);
 begin
    MostraPainelCadastro(Con);
-   cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Pai.cxVerClick(Sender: TObject);
@@ -203,6 +202,13 @@ end;
 procedure TFcad_Pai.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+   if (pncad.Visible = True) then
+   begin
+      if Key = VK_F4 then
+         cxSalvarClick(Self);
+      if Key = VK_F7 then
+         cxCancelaClick(self);
+   end;
    if (Key = VK_F3) and (pnBUsca.Visible = true) then
       cxConsultaPropertiesChange(self);
 

@@ -6,7 +6,7 @@ inherited Fcad_Pedido: TFcad_Pedido
   ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnImg: TcxImage [0]
+  inherited pnImg: TcxImage
     Left = 852
     ExplicitLeft = 852
     ExplicitHeight = 539
@@ -380,7 +380,7 @@ inherited Fcad_Pedido: TFcad_Pedido
       end
     end
   end
-  inherited pnCon: TPanel [2]
+  inherited pnCon: TPanel
     Width = 852
     Height = 539
     ExplicitWidth = 852
@@ -438,7 +438,6 @@ inherited Fcad_Pedido: TFcad_Pedido
       end
       inherited cxCon: TcxButton
         Top = 26
-        TabOrder = 2
         ExplicitTop = 26
       end
       inherited cxQtdeReg: TcxLabel
@@ -641,18 +640,18 @@ inherited Fcad_Pedido: TFcad_Pedido
       end
     end
     inherited pnBotaoCon: TPanel
-      Top = 488
+      Top = 487
       Width = 850
-      ExplicitTop = 488
+      ExplicitTop = 487
       ExplicitWidth = 850
     end
     inherited grConsulta: TcxGrid
       Top = 103
       Width = 850
-      Height = 385
+      Height = 384
       ExplicitTop = 103
       ExplicitWidth = 850
-      ExplicitHeight = 385
+      ExplicitHeight = 384
       inherited grConsultaDBTableView1: TcxGridDBTableView
         PopupMenu = cxPopMenu
         DataController.DataSource = dmMov.dsPedido
@@ -722,7 +721,7 @@ inherited Fcad_Pedido: TFcad_Pedido
       end
     end
   end
-  inherited pnCad: TPanel [3]
+  inherited pnCad: TPanel
     Width = 852
     Height = 539
     ExplicitWidth = 852
@@ -1330,7 +1329,6 @@ inherited Fcad_Pedido: TFcad_Pedido
         Properties.Items.Strings = (
           'OR'#199'AMENTO'
           'PEDIDO')
-        Properties.OnChange = cxConsultaPropertiesChange
         StyleFocused.Color = 13366014
         TabOrder = 3
         Text = 'OR'#199'AMENTO'
@@ -2663,8 +2661,6 @@ inherited Fcad_Pedido: TFcad_Pedido
       object cxPageDados: TcxTabSheet
         Caption = 'Dados Adicionais'
         ImageIndex = 1
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object cxLabel21: TcxLabel
           Left = 3
           Top = 4

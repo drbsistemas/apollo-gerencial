@@ -136,6 +136,7 @@ type
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
       var ADone: Boolean);
     procedure cxBaixarClick(Sender: TObject);
+    procedure cxEstornarClick(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -147,6 +148,7 @@ type
     procedure TotalContas(FValor: Double);
     procedure ConsultaRateio(FTotalConta: Double; StrCodPlano, StrCodConta, StrDados: String);
     procedure SAlvaRAteio;
+    procedure ValidaDadosParaBaixar;
   public
     { Public declarations }
   end;
@@ -178,7 +180,8 @@ end;
 
 procedure TFcad_Contas.cxBaixarClick(Sender: TObject);
 begin
-   VerificaCaixa;
+   ValidaDadosParaBaixar;
+   VerificaAberturaDoCaixa;
 
    if (dmFin.qryConta.RecordCount <=0) or (FTotalContas <=0) or (pnSelec.Visible = false) then
    begin
@@ -239,6 +242,12 @@ begin
    inherited;
    Limpa;
    Edita;
+end;
+
+procedure TFcad_Contas.cxEstornarClick(Sender: TObject);
+begin
+   inherited;
+   VerificaAberturaDoCaixa;
 end;
 
 procedure TFcad_Contas.cxGridDBTableView1CustomDrawCell(
@@ -321,6 +330,7 @@ begin
             SalvaRateio;
          end;
          inherited;
+         cxConsultaPropertiesChange(Self);
       Except
          CancelUpdates;
       end;
@@ -419,10 +429,11 @@ end;
 
 procedure TFcad_Contas.FormShow(Sender: TObject);
 begin
-  inherited;
-  if TipoMov= ENTRADA then
-   Caption := 'CADASTRO DE CONTAS Á RECEBER' else
-   Caption := 'CADASTRO DE CONTAS Á PAGAR';
+   inherited;
+
+   if TipoMov= ENTRADA then
+      Caption := 'CADASTRO DE CONTAS Á RECEBER' else
+      Caption := 'CADASTRO DE CONTAS Á PAGAR';
 
    dmFin.cdsSelec.Close;
    dmFin.cdsSelec.CreateDataSet;
@@ -685,6 +696,17 @@ begin
       end;
       qryContaRateio.ApplyUpdates(0);
    end;
+end;
+
+Procedure TFcad_Contas.ValidaDadosParaBaixar;
+begin
+   if dmFin.cdsSelec.RecordCount<=0 then
+   begin
+      MensagemIcone('Não encontramos contas selecionadas para baixa!',bfError);
+      Abort;
+   end;
+
+
 end;
 
 end.

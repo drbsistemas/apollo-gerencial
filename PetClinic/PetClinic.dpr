@@ -45,7 +45,8 @@ uses
   uCad_Parametro in '..\Cadastros\uCad_Parametro.pas' {FCad_Parametro},
   uCad_Caixa in '..\Financeiro\uCad_Caixa.pas' {Fcad_Caixa},
   uCad_Banco in '..\Cadastros\uCad_Banco.pas' {Fcad_Banco},
-  uDmCad in '..\Acesso\uDmCad.pas' {dmCad: TDataModule};
+  uDmCad in '..\Acesso\uDmCad.pas' {dmCad: TDataModule},
+  uCad_CaixaFechamento in '..\Financeiro\uCad_CaixaFechamento.pas' {Fcad_CaixaFechamento};
 
 {$R *.res}
 

@@ -78,7 +78,6 @@
         <Icon_MainIcon>Imagem\Sistema\PetClinic.ico</Icon_MainIcon>
         <VerInfo_Build>2</VerInfo_Build>
         <VerInfo_PreRelease>true</VerInfo_PreRelease>
-        <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Debug>true</VerInfo_Debug>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -218,6 +217,10 @@
             <Form>dmCad</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Financeiro\uCad_CaixaFechamento.pas">
+            <Form>Fcad_CaixaFechamento</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
