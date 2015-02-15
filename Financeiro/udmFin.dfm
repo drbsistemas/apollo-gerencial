@@ -856,12 +856,12 @@ object dmFin: TdmFin
       '  USUARIO, CANCELADO, TIPOMOV'
       'FROM CAIXAFECHAMENTO'
       'WHERE IDFECHAMENTO = :IDFECHAMENTO')
-    Left = 189
+    Left = 197
     Top = 46
   end
   object dsCaixaFechamento: TDataSource
     DataSet = qryCaixaFechamento
-    Left = 189
+    Left = 197
     Top = 89
   end
   object qryCaixaFechamento: TFDQuery
@@ -874,14 +874,14 @@ object dmFin: TdmFin
     UpdateOptions.RefreshMode = rmAll
     UpdateObject = UpdtCaixaFechamento
     SQL.Strings = (
-      'select * from CAIXAFECHAMENTO')
-    Left = 189
+      'select * from caixafechamento')
+    Left = 197
     Top = 2
   end
   object uHis_CaixaFechamento: TUCHist_DataSet
     DataSet = qryCaixaFechamento
     ControlHistorico = FPrinc.uHistorico
-    Left = 189
+    Left = 197
     Top = 133
   end
 end
