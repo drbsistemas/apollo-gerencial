@@ -472,7 +472,6 @@ object FPrinc: TFPrinc
   OldCreateOrder = False
   Position = poMainFormCenter
   WindowState = wsMaximized
-  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   OnResize = FormResize

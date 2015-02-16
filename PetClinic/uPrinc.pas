@@ -152,7 +152,6 @@ type
     procedure cxCaixaClick(Sender: TObject);
     procedure tIconClick(Sender: TObject);
     procedure ForarFechamentodoSistema1Click(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
    private
     procedure MostraResumoDoSistema;
       { Private declarations }
@@ -317,11 +316,6 @@ end;
 procedure TFPrinc.ForarFechamentodoSistema1Click(Sender: TObject);
 begin
    Application.Terminate;
-end;
-
-procedure TFPrinc.FormActivate(Sender: TObject);
-begin
-   MostraResumoDoSistema;
 end;
 
 procedure TFPrinc.FormClose(Sender: TObject; var Action: TCloseAction);

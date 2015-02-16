@@ -125,6 +125,9 @@ type
     procedure eCodBancoExit(Sender: TObject);
     procedure eCodBancoKeyPress(Sender: TObject; var Key: Char);
     procedure AbrirFecharCC1Click(Sender: TObject);
+    procedure grConsultaDBTableView1CellClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
   private
     { Private declarations }
     indice : String;
@@ -372,6 +375,14 @@ procedure TFcad_Caixa.FormShow(Sender: TObject);
 begin
    inherited;
    cxConsultaPropertiesChange(self);
+   ConsultaMov;
+end;
+
+procedure TFcad_Caixa.grConsultaDBTableView1CellClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+begin
+   inherited;
    ConsultaMov;
 end;
 

@@ -11,32 +11,30 @@ uses
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, Vcl.StdCtrls,
   cxButtons, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLabel, Vcl.ExtCtrls,
   dxGDIPlusClasses, cxImage, Vcl.ComCtrls, dxCore, cxDateUtils, cxCurrencyEdit,
-  cxCalendar, cxCheckBox;
+  cxCalendar;
 
 type
   TFcad_CaixaFechamento = class(TFcad_Pai)
+    cxLabel3: TcxLabel;
+    eCodigo: TcxTextEdit;
+    cxLabel4: TcxLabel;
+    eDtFechamento: TcxDateEdit;
+    cxLabel5: TcxLabel;
+    eSaldo: TcxCurrencyEdit;
+    eTipo: TcxTextEdit;
+    cxLabel6: TcxLabel;
+    grConsultaDBTableView1Column1: TcxGridDBColumn;
     grConsultaDBTableView1Column2: TcxGridDBColumn;
     grConsultaDBTableView1Column3: TcxGridDBColumn;
     grConsultaDBTableView1Column4: TcxGridDBColumn;
     grConsultaDBTableView1Column5: TcxGridDBColumn;
-    cxLabel3: TcxLabel;
-    eCodigo: TcxTextEdit;
-    cxLabel5: TcxLabel;
-    eDtFechamento: TcxDateEdit;
-    cxLabel4: TcxLabel;
-    eSaldo: TcxCurrencyEdit;
-    grConsultaDBTableView1Column1: TcxGridDBColumn;
-    cxLabel6: TcxLabel;
-    eTipo: TcxTextEdit;
-    procedure FormShow(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure grConsultaDBTableView1DblClick(Sender: TObject);
     procedure cxConsultaPropertiesChange(Sender: TObject);
-    procedure cxCancelaClick(Sender: TObject);
-    procedure cxSalvarClick(Sender: TObject);
-    procedure eDtFechamentoExit(Sender: TObject);
     procedure cxNovoClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure cxSalvarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure eDtFechamentoExit(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -51,13 +49,7 @@ implementation
 
 {$R *.dfm}
 
-uses udmFin, uRotinas;
-
-procedure TFcad_CaixaFechamento.cxCancelaClick(Sender: TObject);
-begin
-   inherited;
-   cxConsultaPropertiesChange(self);
-end;
+uses uRotinas, udmFin, uRotinaLancamentoFinanceiro;
 
 procedure TFcad_CaixaFechamento.cxConsultaPropertiesChange(Sender: TObject);
 begin
@@ -97,7 +89,7 @@ begin
          Edit;
       try
          FieldByName('IDCAIXA').AsInteger               := dmfin.qryCaixa.FieldByName('IDCAIXA').AsInteger;
-         FieldByName('USUARIO').AsString                := Usuario;
+         FieldByName('USUARIO').AsString                := Trim(Usuario);
          FieldByName('CANCELADO').AsString              := 'NÃO';
 
          FieldByName('DTMOVIMENTO').AsDateTime          := eDtFechamento.Date+Time;
@@ -105,6 +97,17 @@ begin
          FieldByName('SALDOATUAL').AsFloat              := eSaldo.Value;
          FieldByName('SALDOANTERIOR').AsFloat           := dmFin.qryCaixa.FieldByName('SALDOCAIXA').asFloat;
          Post;
+
+         LancamentoCaixa(Date+Time,
+                         eTipo.Text,
+                         eTipo.Text+' DE CAIXA DIÁRIO',
+                         ifs(eTipo.Text='ABERTURA', eSaldo.Value, 0),
+                         ifs(eTipo.Text='ABERTURA', 0, eSaldo.Value),
+                         0,
+                         0,
+                         dmfin.qryCaixa.FieldByName('IDCAIXA').AsInteger,
+                         0);
+
          ApplyUpdates(0);
          inherited;
       Except
@@ -124,10 +127,10 @@ begin
    end;
 end;
 
-procedure TFcad_CaixaFechamento.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TFcad_CaixaFechamento.FormClose(Sender: TObject;
+  var Action: TCloseAction);
 begin
    inherited;
-
    if pnBotaoCon.Visible = False then
    begin
       FormAtivo         := Nil;
@@ -142,7 +145,6 @@ procedure TFcad_CaixaFechamento.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
    inherited;
-
    if (key = VK_DOWN) and (not grConsulta.Focused = true) then
       dmFIn.qryCaixaFechamento.Next;
    if (key = VK_UP) and (not grConsulta.Focused = true) then
@@ -155,14 +157,6 @@ procedure TFcad_CaixaFechamento.FormShow(Sender: TObject);
 begin
    inherited;
    cxConsultaPropertiesChange(self);
-end;
-
-procedure TFcad_CaixaFechamento.grConsultaDBTableView1DblClick(Sender: TObject);
-begin
-   inherited;
-   if pnBotaoCon.Visible = false then
-      cxEditaClick(Self) else
-      Close;
 end;
 
 end.

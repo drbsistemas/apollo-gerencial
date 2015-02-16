@@ -44,6 +44,8 @@ uses
    FUNCTION    BUSCACONF(CAMPO:String):String;
    FUNCTION    ConsultaCampoNomeAtivo(StrCodigo, StrTabela: String):String;
    FUNCTION    ConsultaProduto(StrProd: String): String;
+   FUNCTION    TrocaString(const S, OldPattern, NewPattern: string;
+               Flags: TReplaceFlags): string;
 
 
    // Chama/Configura Forms
@@ -944,6 +946,42 @@ begin
          Dec (Dia);
       End;
    MenorDataValida := DataAux;
+end;
+
+function TrocaString(const S, OldPattern, NewPattern: string;
+   Flags: TReplaceFlags): string;
+var
+   SearchStr, Patt, NewStr: string;
+   Offset: Integer;
+begin
+   if rfIgnoreCase in Flags then
+      begin
+         SearchStr := UpperCase(S);
+         Patt := UpperCase(OldPattern);
+      end else
+      begin
+         SearchStr := S;
+         Patt := OldPattern;
+      end;
+   NewStr := S;
+   Result := '';
+   while SearchStr <> '' do
+      begin
+         Offset := Pos(Patt, SearchStr);
+         if Offset = 0 then
+            begin
+               Result := Result + NewStr;
+               Break;
+            end;
+         Result := Result + Copy(NewStr, 1, Offset - 1) + NewPattern;
+         NewStr := Copy(NewStr, Offset + Length(OldPattern), MaxInt);
+         if not (rfReplaceAll in Flags) then
+            begin
+               Result := Result + NewStr;
+               Break;
+            end;
+         SearchStr := Copy(SearchStr, Offset + Length(Patt), MaxInt);
+      end;
 end;
 
 end.

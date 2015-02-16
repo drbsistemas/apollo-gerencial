@@ -1,24 +1,14 @@
 inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
-  Caption = 'Cadastro de Abertura/Fechamentos (Caixa)'
-  ClientHeight = 539
-  ClientWidth = 702
-  ExplicitWidth = 710
-  ExplicitHeight = 570
+  Caption = 'Abertura/Fechamento (Caixa)'
+  ExplicitWidth = 718
+  ExplicitHeight = 601
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnCad: TPanel [0]
-    Width = 644
-    Height = 539
     ExplicitLeft = -6
-    ExplicitWidth = 644
-    ExplicitHeight = 539
-    inherited pnMenu: TPanel
-      Width = 642
-      TabOrder = 3
-    end
     object cxLabel3: TcxLabel
-      Left = 63
-      Top = 123
+      Left = 62
+      Top = 108
       AutoSize = False
       Caption = 'C'#243'digo:'
       ParentFont = False
@@ -37,11 +27,11 @@ inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 138
+      AnchorX = 137
     end
     object eCodigo: TcxTextEdit
       Left = 138
-      Top = 121
+      Top = 106
       Hint = 'C'#243'digo Interno do Sistema'
       TabStop = False
       ParentFont = False
@@ -54,12 +44,12 @@ inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = []
       Style.IsFontAssigned = True
-      TabOrder = 0
-      Width = 130
+      TabOrder = 2
+      Width = 97
     end
-    object cxLabel5: TcxLabel
-      Left = 48
-      Top = 146
+    object cxLabel4: TcxLabel
+      Left = 47
+      Top = 129
       AutoSize = False
       Caption = 'Dt. Mov:'
       ParentFont = False
@@ -78,12 +68,12 @@ inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
       Transparent = True
       Height = 17
       Width = 90
-      AnchorX = 138
+      AnchorX = 137
     end
     object eDtFechamento: TcxDateEdit
       Left = 138
-      Top = 145
-      Hint = 'Campo para Data'
+      Top = 128
+      Hint = 'Data Fechamento'
       ParentFont = False
       Properties.DateButtons = [btnClear, btnToday]
       Properties.ReadOnly = False
@@ -96,15 +86,15 @@ inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
       Style.HotTrack = True
       Style.Shadow = False
       Style.IsFontAssigned = True
-      TabOrder = 1
+      TabOrder = 4
       OnExit = eDtFechamentoExit
       Width = 130
     end
-    object cxLabel4: TcxLabel
-      Left = 48
-      Top = 170
+    object cxLabel5: TcxLabel
+      Left = 40
+      Top = 152
       AutoSize = False
-      Caption = 'Saldo:'
+      Caption = 'Vlr. Mov:'
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clMaroon
@@ -121,20 +111,18 @@ inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
       Properties.LabelEffect = cxleCool
       Transparent = True
       Height = 17
-      Width = 90
-      AnchorX = 138
+      Width = 97
+      AnchorX = 137
     end
     object eSaldo: TcxCurrencyEdit
       Left = 138
-      Top = 168
-      Hint = 'Valor do Registro'
+      Top = 150
+      Hint = 'Pre'#231'o de Venda do Produto'
       EditValue = 0.000000000000000000
       ParentFont = False
       Properties.Alignment.Horz = taRightJustify
       Properties.DecimalPlaces = 2
       Properties.DisplayFormat = '###,###,##0.00'
-      Properties.ReadOnly = False
-      Style.Color = clWhite
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clWindowText
       Style.Font.Height = -11
@@ -142,12 +130,30 @@ inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 2
-      Width = 130
+      TabOrder = 6
+      Width = 75
+    end
+    object eTipo: TcxTextEdit
+      Left = 294
+      Top = 106
+      Hint = 'Tipo de Movimenta'#231#227'o'
+      TabStop = False
+      ParentFont = False
+      Properties.CharCase = ecUpperCase
+      Properties.ReadOnly = True
+      Style.Color = clBtnFace
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -11
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.IsFontAssigned = True
+      TabOrder = 7
+      Width = 107
     end
     object cxLabel6: TcxLabel
-      Left = 272
-      Top = 123
+      Left = 218
+      Top = 108
       AutoSize = False
       Caption = 'Tipo Mov:'
       ParentFont = False
@@ -166,61 +172,30 @@ inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
       Transparent = True
       Height = 17
       Width = 75
-      AnchorX = 347
-    end
-    object eTipo: TcxTextEdit
-      Left = 347
-      Top = 121
-      Hint = 'Tipo de Movimenta'#231#227'o'
-      TabStop = False
-      ParentFont = False
-      Properties.CharCase = ecUpperCase
-      Properties.ReadOnly = True
-      Style.Color = clBtnFace
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clWindowText
-      Style.Font.Height = -11
-      Style.Font.Name = 'Tahoma'
-      Style.Font.Style = []
-      Style.IsFontAssigned = True
-      TabOrder = 8
-      Width = 130
+      AnchorX = 293
     end
   end
   inherited pnImg: TcxImage [1]
-    Left = 644
-    Height = 539
   end
   inherited pnCon: TPanel [2]
-    Width = 644
-    Height = 539
     inherited pnBusca: TPanel
-      Width = 642
       inherited cxConsulta: TcxComboBox
         Properties.Items.Strings = (
           'C'#243'digo'
-          'Tipo Mov.'
-          'Dt. Movimento')
+          'Tipo'
+          'Dt. Mov.')
         Text = 'C'#211'DIGO'
-      end
-      inherited cxLabel2: TcxLabel
-        Visible = False
       end
       inherited cbAtivo: TcxComboBox
         Style.IsFontAssigned = True
-        Visible = False
       end
     end
     inherited pnBotaoCad: TPanel
-      Width = 642
       inherited cxEdita: TcxButton
         Enabled = False
       end
       inherited cxVer: TcxButton
         Enabled = False
-      end
-      inherited cxApagar: TcxButton
-        Caption = '&Cancelar'
       end
       inherited cxPrint: TcxButton
         Enabled = False
@@ -229,55 +204,45 @@ inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
         Enabled = False
       end
     end
-    inherited pnBotaoCon: TPanel
-      Top = 487
-      Width = 642
-    end
     inherited grConsulta: TcxGrid
-      Width = 642
-      Height = 411
-      ExplicitLeft = -4
-      ExplicitTop = 79
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmFin.dsCaixaFechamento
-        object grConsultaDBTableView1Column3: TcxGridDBColumn [0]
-          Caption = 'C'#243'digo'
+        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
           DataBinding.FieldName = 'IDFECHAMENTO'
-          Width = 58
         end
         object grConsultaDBTableView1Column1: TcxGridDBColumn [1]
-          Caption = 'Tipo Mov.'
-          DataBinding.FieldName = 'TIPOMOV'
-          Width = 104
-        end
-        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
-          Caption = 'Dt. Movimento'
-          DataBinding.FieldName = 'DTMOVIMENTO'
-          Width = 133
-        end
-        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
           Caption = 'Saldo Ant.'
           DataBinding.FieldName = 'SALDOANTERIOR'
           PropertiesClassName = 'TcxCurrencyEditProperties'
           Properties.DisplayFormat = '###,###,##0.00'
-          Width = 80
+          Width = 75
+        end
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
+          Caption = 'Dt. Mov.'
+          DataBinding.FieldName = 'DTMOVIMENTO'
+          Width = 100
         end
         object grConsultaDBTableView1Column2: TcxGridDBColumn
           Caption = 'Saldo Atual'
           DataBinding.FieldName = 'SALDOATUAL'
           PropertiesClassName = 'TcxCurrencyEditProperties'
           Properties.DisplayFormat = '###,###,##0.00'
-          Width = 80
+          Width = 75
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn
+          Caption = 'Tipo Mov.'
+          DataBinding.FieldName = 'TIPOMOV'
+          Width = 102
         end
         object grConsultaDBTableView1Column4: TcxGridDBColumn
-          Caption = 'Usu'#225'rio'
-          DataBinding.FieldName = 'USUARIO'
-          Width = 120
-        end
-        object grConsultaDBTableView1Column5: TcxGridDBColumn
           Caption = 'Cancelado'
           DataBinding.FieldName = 'CANCELADO'
-          Width = 77
+          Width = 66
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn
+          Caption = 'Usu'#225'rio'
+          DataBinding.FieldName = 'USUARIO'
+          Width = 98
         end
       end
     end
