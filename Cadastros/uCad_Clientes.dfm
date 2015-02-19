@@ -6,7 +6,7 @@ inherited Fcad_Clientes: TFcad_Clientes
   ExplicitHeight = 571
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnImg: TcxImage
+  inherited pnImg: TcxImage [0]
     Left = 852
     Properties.GraphicClassName = 'TdxPNGImage'
     Style.BorderStyle = ebsFlat
@@ -14,7 +14,7 @@ inherited Fcad_Clientes: TFcad_Clientes
     ExplicitHeight = 540
     Height = 540
   end
-  inherited pnCon: TPanel
+  inherited pnCon: TPanel [1]
     Width = 852
     Height = 540
     TabOrder = 1
@@ -127,9 +127,9 @@ inherited Fcad_Clientes: TFcad_Clientes
       end
     end
     inherited pnBotaoCon: TPanel
-      Top = 489
+      Top = 488
       Width = 850
-      ExplicitTop = 489
+      ExplicitTop = 488
       ExplicitWidth = 850
       inherited cxCadastro: TcxButton
         Left = 364
@@ -144,9 +144,9 @@ inherited Fcad_Clientes: TFcad_Clientes
     end
     inherited grConsulta: TcxGrid
       Width = 850
-      Height = 413
+      Height = 412
       ExplicitWidth = 850
-      ExplicitHeight = 413
+      ExplicitHeight = 412
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dsClie
         inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
@@ -200,7 +200,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       end
     end
   end
-  inherited pnCad: TPanel
+  inherited pnCad: TPanel [2]
     Width = 852
     Height = 540
     BevelOuter = bvNone

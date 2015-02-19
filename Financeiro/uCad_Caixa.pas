@@ -180,7 +180,7 @@ begin
 
    StrSql := StrSql +' order by '+indice;
    ConsultaSql(StrSql, dmFin.qryCaixa);
-
+   ConsultaMov;
    cxQtdeReg.Caption := 'Registros: '+ intToStr(dmFin.qryCaixa.RecordCount);
 end;
 
@@ -228,7 +228,7 @@ begin
          FieldByName('CONTA').AsString              := eConta.TExt;
          FieldByName('CONTA_DIG').AsString          := eContaDig.TExt;
          FieldByName('TITULAR').AsString            := eTitular.TExt;
-         FieldByName('DTABERTURA').AsDateTime       := eDtCad.Date+Time;
+         FieldByName('DTABERTURA').AsDateTime       := eDtCad.Date;
          FieldByName('DTFECHADO').AsDateTIme        := edtFechado.Date;
          FieldByName('SALDOCAIXA').ASFloat          := eSaldo.Value;
          FieldByName('SALDOCONCILIADO').ASFLoat     := eSaldoConciliado.Value;
@@ -375,7 +375,6 @@ procedure TFcad_Caixa.FormShow(Sender: TObject);
 begin
    inherited;
    cxConsultaPropertiesChange(self);
-   ConsultaMov;
 end;
 
 procedure TFcad_Caixa.grConsultaDBTableView1CellClick(
@@ -403,6 +402,7 @@ procedure TFcad_Caixa.AbrirFecharCC1Click(Sender: TObject);
 begin
    inherited;
    AbreTelaComShowModal(TFcad_CaixaFechamento, TObject(Fcad_CaixaFechamento), Fcad_Caixa, '');
+   cxConsultaPropertiesChange(self);
 end;
 
 procedure TFcad_Caixa.ConsultaMov;

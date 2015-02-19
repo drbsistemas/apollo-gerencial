@@ -90,9 +90,9 @@
     <Transaction>2015/02/14 00:19:04.000.356,=D:\DRB\PetClinic\Unit1.pas</Transaction>
     <Transaction>2015/02/14 00:26:40.000.366,D:\DRB\PetClinic\Unit1.dfm=D:\DRB\Financeiro\uCad_CaixaFechamento.dfm</Transaction>
     <Transaction>2015/02/14 00:26:40.000.365,D:\DRB\PetClinic\Unit1.pas=D:\DRB\Financeiro\uCad_CaixaFechamento.pas</Transaction>
-    <Transaction>2015/02/15 08:00:57.356,=D:\DRB\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2015/02/15 08:01:09.374,=D:\DRB\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2015/02/15 08:03:56.197,D:\DRB\Financeiro\uCad_CaixaFechamento.pas=D:\DRB\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2015/02/15 08:03:56.197,D:\DRB\Financeiro\uCad_CaixaFechamento.dfm=D:\DRB\PetClinic\Unit1.dfm</Transaction>
+    <Transaction>2015/02/15 08:00:57.000.356,=D:\DRB\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2015/02/15 08:01:09.000.374,=D:\DRB\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2015/02/15 08:03:56.000.197,D:\DRB\Financeiro\uCad_CaixaFechamento.pas=D:\DRB\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2015/02/15 08:03:56.000.197,D:\DRB\Financeiro\uCad_CaixaFechamento.dfm=D:\DRB\PetClinic\Unit1.dfm</Transaction>
   </Transactions>
 </BorlandProject>

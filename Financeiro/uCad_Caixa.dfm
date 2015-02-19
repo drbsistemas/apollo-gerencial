@@ -6,7 +6,7 @@ inherited Fcad_Caixa: TFcad_Caixa
   ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel [0]
+  inherited pnCad: TPanel
     Width = 842
     Height = 539
     ExplicitWidth = 842
@@ -1433,13 +1433,13 @@ inherited Fcad_Caixa: TFcad_Caixa
       Width = 55
     end
   end
-  inherited pnImg: TcxImage [1]
+  inherited pnImg: TcxImage
     Left = 842
     ExplicitLeft = 842
     ExplicitHeight = 539
     Height = 539
   end
-  inherited pnCon: TPanel [2]
+  inherited pnCon: TPanel
     Width = 842
     Height = 539
     ExplicitWidth = 842
@@ -1512,12 +1512,12 @@ inherited Fcad_Caixa: TFcad_Caixa
         object grConsultaDBTableView1Column2: TcxGridDBColumn
           Caption = 'Dt. Abertura'
           DataBinding.FieldName = 'DTABERTURA'
-          Width = 100
+          Width = 85
         end
         object grConsultaDBTableView1Column3: TcxGridDBColumn
           Caption = 'Dt. Fechado'
           DataBinding.FieldName = 'DTFECHADO'
-          Width = 100
+          Width = 85
         end
         object grConsultaDBTableView1Column4: TcxGridDBColumn
           Caption = 'Saldo Conc.'
@@ -1598,12 +1598,12 @@ inherited Fcad_Caixa: TFcad_Caixa
             object cxGridDBColumn8: TcxGridDBColumn
               Caption = 'Data'
               DataBinding.FieldName = 'DATAITEM'
-              Width = 115
+              Width = 142
             end
             object cxGridDBColumn9: TcxGridDBColumn
               Caption = 'Hist'#243'rico'
               DataBinding.FieldName = 'HISTORICO'
-              Width = 150
+              Width = 303
             end
             object cxGridDBTableView3Column1: TcxGridDBColumn
               Caption = 'Cr'#233'dito'

@@ -12,7 +12,8 @@ uses
   cxMaskEdit, cxDropDownEdit, cxLabel, dxGDIPlusClasses, cxImage, Vcl.StdCtrls,
   cxButtons, Vcl.ExtCtrls, Vcl.ComCtrls, dxCore, cxDateUtils, cxCalendar,
   cxButtonEdit, cxCurrencyEdit, Datasnap.DBClient, FireDAC.Comp.Client,
-  dxSkinsCore, dxSkinOffice2010Silver, dxSkinscxPCPainter, System.DateUtils;
+  dxSkinsCore, dxSkinOffice2010Silver, dxSkinscxPCPainter, System.DateUtils,
+  uRotinaLancamentoFinanceiro;
 
 type
   TFcad_Contas = class(TFcad_Pai)
@@ -136,7 +137,6 @@ type
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
       var ADone: Boolean);
     procedure cxBaixarClick(Sender: TObject);
-    procedure cxEstornarClick(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -144,7 +144,6 @@ type
     Procedure Limpa;
     procedure Edita;
     procedure SomaValorConta;
-    procedure Marca(intTipo: Integer);
     procedure TotalContas(FValor: Double);
     procedure ConsultaRateio(FTotalConta: Double; StrCodPlano, StrCodConta, StrDados: String);
     procedure SAlvaRAteio;
@@ -160,7 +159,7 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas, udmFin, uRotinaDeCalculosMovimentacao, uCad_Clientes,
+uses uRotinas, udmFin, uCad_Clientes, uRotinaDeCalculosMovimentacao,
   uCon_Generica, uCad_PlanoConta, uCad_Baixa;
 
 procedure TFcad_Contas.cxApagarClick(Sender: TObject);
@@ -181,13 +180,10 @@ end;
 procedure TFcad_Contas.cxBaixarClick(Sender: TObject);
 begin
    ValidaDadosParaBaixar;
-   VerificaAberturaDoCaixa;
 
-   if (dmFin.qryConta.RecordCount <=0) or (FTotalContas <=0) or (pnSelec.Visible = false) then
-   begin
-      Msg('Não identificamos um registro válido para baixa, verifique!','I',':(');
-      Abort;
-   end;
+   if TipoMov = ENTRADA then
+      VerificaAberturaDoCaixa(StrToInt(BUSCACONF('CCRECEB'))) else
+      VerificaAberturaDoCaixa(StrToInt(BUSCACONF('CCPAGAR')));
 
    Fcad_Baixa := TFcad_Baixa.Create(Self);
    Fcad_Baixa.ShowModal;
@@ -242,12 +238,6 @@ begin
    inherited;
    Limpa;
    Edita;
-end;
-
-procedure TFcad_Contas.cxEstornarClick(Sender: TObject);
-begin
-   inherited;
-   VerificaAberturaDoCaixa;
 end;
 
 procedure TFcad_Contas.cxGridDBTableView1CustomDrawCell(
@@ -435,10 +425,6 @@ begin
       Caption := 'CADASTRO DE CONTAS Á RECEBER' else
       Caption := 'CADASTRO DE CONTAS Á PAGAR';
 
-   dmFin.cdsSelec.Close;
-   dmFin.cdsSelec.CreateDataSet;
-   dmFin.cdsSelec.Open;
-
    cxConsultaPropertiesChange(Self);
 end;
 
@@ -488,9 +474,16 @@ begin
       Msg('Contas quitadas não podem ser selecionadas!','I',':)');
       abort;
    end;
-   if dmFin.CdsSelec.locate('IDCONTA', dmFin.qryConta.FieldByName('IDCONTA').AsInteger, []) then
-      Marca(1) else  // Desmarca
-      Marca(0);      // Marca
+   AtualizaEMarcaConta(dmFin.qryConta.FieldByName('IDCONTA').ASinteger, False);      // Marca
+
+   if dmFin.cdsSelec.RecordCount<=0 then
+   begin
+      pnSelec.Visible  := false;
+      TotalContas(0);
+   end
+   else
+      pnSelec.Visible   := true;
+   TotalContas((dmFin.qryConta.FieldByName('VLRBRUTO').AsFLoat));
 end;
 
 procedure TFcad_Contas.Limpa;
@@ -580,55 +573,19 @@ begin
    ConsultaRateio(eValorTotal.Value, eCodPlano.Text, eCodigo.Text, 'CONSULTA');
 end;
 
-procedure TFcad_Contas.Marca(intTipo: Integer);
+procedure TFcad_Contas.TotalContas(FValor: Double);
 begin
    with dmFin do
    begin
-      if IntTipo=0 then // Marca
+      FTotalContas := 0;
+      CdsSelec.DisableControls;
+      while not cdsSelec.Eof do
       begin
-         cdsSelec.Append;
-         cdsSelecIDCONTA.AsInteger     := qryConta.FieldByName('IDCONTA').ASinteger;
-         cdsSelecIDCLIE.ASInteger      := qryConta.FieldByName('IDCLIE').ASInteger;
-         cdsSelecIDPLANO.AsInteger     := qryConta.FieldByName('IDPLANOCTA').ASInteger;
-         cdsSelecDOCUMENTO.AsString    := qryConta.FieldByName('DOCUMENTO').AsString;
-         cdsSelecNOMECLIE.AsString     := qryConta.FieldByName('RAZAO').AsString;
-         cdsSelecDTVENCTO.AsDateTIme   := qryConta.FieldByName('DTVENCTO').AsDateTIme;
-         cdsSelecDTEMISSAO.AsDateTime  := qryConta.FieldByName('DTEMISSAO').AsDateTIme;
-         cdsSelecVLRINI.AsFloat        := qryConta.FieldByName('VLRINI').ASFloat;
-         cdsSelecVLRJUROS.AsFloat      := qryConta.FieldByName('VLRJUROS').ASFLoat;
-         cdsSelecVLRMULTA.ASFLoat      := qryConta.FieldByName('VLRMULTA').ASFLoat;
-         cdsSelecVLRDESC.ASFLoat       := qryConta.FieldByName('VLRDESC').ASFLoat;
-         cdsSelecVLRBRUTO.ASFLoat      := qryConta.FieldByName('VLRBRUTO').ASFLoat;
-         cdsSelecDIASATRASO.AsInteger  := DaysBetween(Date, qryConta.FieldByName('DTVENCTO').AsDateTime);
-         cdsSelecHISTORICO.ASString    := qryConta.FieldByName('HISTORICO').asString;
-         cdsSelecSTATUS.AsString       := qryConta.FieldByName('STATUSCONTA').ASString;
-         cdsSelecVLRPAGO.ASFloat       := qryConta.FieldByName('VLRPAGO').AsFloat;
-         cdsSelec.Post;
-         TotalContas(qryConta.FieldByName('VLRBRUTO').AsFLoat);
-      end else
-      if IntTipo=1 then // Desmarca
-      begin
-         cdsSelec.Locate('IDCONTA', qryConta.FieldByName('IDCONTA').AsInteger, []);
-         TotalContas((qryConta.FieldByName('VLRBRUTO').AsFLoat*-1));
-         cdsSelec.DELETE;
+         FTotalContas:= FTotalContas + cdsSelec.FieldByName('VLRBRUTO').AsFloat;
+         cdsSelec.NExt;
       end;
-
-   ///// Controla Paineis
-      if cdsSelec.RecordCount<=0 then
-      begin
-         pnSelec.Visible  := false;
-         TotalContas(0);
-      end
-      else
-         pnSelec.Visible   := true;
+      CdsSelec.EnableControls;
    end;
-end;
-
-procedure TFcad_Contas.TotalContas(FValor: Double);
-begin
-   if Fvalor = 0 then
-      FTotalContas := 0 else
-      FTotalContas:= FTotalContas + FValor;
 
    cxTotal.Caption := 'Total de Contas R$: '+FormatFloat('###,###,##0.00',FTotalContas);
 end;
@@ -700,13 +657,17 @@ end;
 
 Procedure TFcad_Contas.ValidaDadosParaBaixar;
 begin
+   if (dmFin.qryConta.RecordCount <=0) or (FTotalContas <=0) or (pnSelec.Visible = false) then
+   begin
+      Msg('Não identificamos um registro válido para baixa, verifique!','I',':(');
+      Abort;
+   end;
+
    if dmFin.cdsSelec.RecordCount<=0 then
    begin
       MensagemIcone('Não encontramos contas selecionadas para baixa!',bfError);
       Abort;
    end;
-
-
 end;
 
 end.

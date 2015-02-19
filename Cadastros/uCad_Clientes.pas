@@ -394,6 +394,12 @@ procedure TFcad_Clientes.cxNovoClick(Sender: TObject);
 begin
   inherited;
    Limpa;
+   if (BUSCACONF('NOVOCLIE') = 'SIM') then
+   begin
+      eCidade.Text := dmCad.qryParametro.FieldByName('CIDADEEMP').AsString;
+      eUf.Text     := dmCad.qryParametro.FieldByName('UFEMP').AsString;
+   end;
+
    cbPessoa.SetFocus;
 end;
 

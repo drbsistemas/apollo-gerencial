@@ -93,6 +93,9 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cxSalvarClick(Sender: TObject);
+    procedure cxGridDBTableView1CustomDrawCell(Sender: TcxCustomGridTableView;
+      ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
+      var ADone: Boolean);
   private
     procedure CalculaBaixa;
     procedure PreencheFPagto;
@@ -148,6 +151,25 @@ end;
 procedure TFcad_Baixa.cxCancelaClick(Sender: TObject);
 begin
    Close;
+end;
+
+procedure TFcad_Baixa.cxGridDBTableView1CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+   if AViewInfo.GridRecord.Selected then
+   begin
+      ACanvas.Brush.Color       := FCorSelec;
+      ACanvas.Canvas.Font.Color := clBlack;
+      //ACanvas.Canvas.Font.Style :=[fsBold];
+   end
+   else
+   begin
+      if AViewInfo.GridRecord.RecordIndex mod 2 = 0 then
+         ACanvas.Brush.Color := clWindow
+      else
+         ACanvas.Brush.Color := FCorLista;
+   end;
 end;
 
 procedure TFcad_Baixa.cxGridDBTableView2DblClick(Sender: TObject);

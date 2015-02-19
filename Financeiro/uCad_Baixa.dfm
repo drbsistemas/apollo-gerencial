@@ -27,7 +27,6 @@ object Fcad_Baixa: TFcad_Baixa
     Height = 25
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 802
     object cxContas: TcxLabel
       Left = 29
       Top = 2
@@ -117,6 +116,7 @@ object Fcad_Baixa: TFcad_Baixa
     RootLevelOptions.TabsForEmptyDetails = False
     object cxGridDBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
+      OnCustomDrawCell = cxGridDBTableView1CustomDrawCell
       DataController.DataSource = dmFin.dsSelec
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
@@ -206,9 +206,6 @@ object Fcad_Baixa: TFcad_Baixa
     Height = 292
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 208
-    ExplicitWidth = 802
-    ExplicitHeight = 294
     object pnCond: TcxGroupBox
       Left = 261
       Top = 2
@@ -765,9 +762,6 @@ object Fcad_Baixa: TFcad_Baixa
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 3
-    ExplicitLeft = 1
-    ExplicitTop = 1
-    ExplicitWidth = 650
     object cxSalvar: TcxButton
       Left = 340
       Top = 0

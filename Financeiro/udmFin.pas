@@ -9,7 +9,7 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, UCHistDataset, Datasnap.DBClient;
 
 type
-  TdmFin = class(TDataModule)
+   TdmFin = class(TDataModule)
     UpdtCredito: TFDUpdateSQL;
     dsCredito: TDataSource;
     qryCredito: TFDQuery;
@@ -62,7 +62,6 @@ type
     cdsSelecIDCLIE: TIntegerField;
     cdsSelecIDPLANO: TIntegerField;
     cdsSelecDOCUMENTO: TStringField;
-    cdsSelecNOMECLIE: TStringField;
     cdsSelecDTVENCTO: TDateTimeField;
     cdsSelecDTEMISSAO: TDateTimeField;
     cdsSelecVLRINI: TFloatField;
@@ -98,6 +97,10 @@ type
     dsCaixaFechamento: TDataSource;
     qryCaixaFechamento: TFDQuery;
     uHis_CaixaFechamento: TUCHist_DataSet;
+    cdsSelecNOMECLIE: TStringField;
+    cdsSelecVLRJUROSINI: TFloatField;
+    cdsSelecVLRMULTAINI: TFloatField;
+    cdsSelecVLRDESCINI: TFloatField;
     procedure qryCreditoAfterInsert(DataSet: TDataSet);
     procedure qryContaAfterInsert(DataSet: TDataSet);
     procedure qryContaRateioAfterInsert(DataSet: TDataSet);

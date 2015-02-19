@@ -31,6 +31,7 @@ uses
    FUNCTION    DataSql(Data: TDateTime): string;
    FUNCTION    ValidarCEP(const CEP: string): string;
    FUNCTION    ValidaAcessoUsuario(formulario, componente: string): Boolean;
+   FUNCTION    DiaSemana(Data:TDateTime): String;
 
    // Envio de E-mails
    PROCEDURE EnviaEmailDLL(Assunto, Destino, Anexo: String);
@@ -68,6 +69,7 @@ var
    FormAtivo                          : TForm;
    FCorSelec, FCorLista               : TColor;
    Lista                              : TStringList;
+   DiaDaSemana,
    CaminhoExe,
    CaminhoIni,
    StrSql,
@@ -982,6 +984,24 @@ begin
             end;
          SearchStr := Copy(SearchStr, Offset + Length(Patt), MaxInt);
       end;
+end;
+
+Function DiaSemana(Data:TDateTime): String;
+{Retorna dia da semana}
+var
+  NoDia : Integer;
+  DiaDaSemana : array [1..7] of String[13];
+begin
+{ Dias da Semana }
+  DiaDasemana [1]:= 'Domingo';
+  DiaDasemana [2]:= 'Segunda';
+  DiaDasemana [3]:= 'Terça';
+  DiaDasemana [4]:= 'Quarta';
+  DiaDasemana [5]:= 'Quinta';
+  DiaDasemana [6]:= 'Sexta';
+  DiaDasemana [7]:= 'Sábado';
+  NoDia:=DayOfWeek(Data);
+  DiaSemana:=DiaDasemana[NoDia];
 end;
 
 end.

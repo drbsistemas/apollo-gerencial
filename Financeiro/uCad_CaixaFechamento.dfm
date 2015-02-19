@@ -4,8 +4,79 @@ inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
   ExplicitHeight = 601
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel [0]
-    ExplicitLeft = -6
+  inherited pnImg: TcxImage [0]
+  end
+  inherited pnCon: TPanel [1]
+    inherited pnBusca: TPanel
+      inherited cxConsulta: TcxComboBox
+        Properties.Items.Strings = (
+          'C'#243'digo'
+          'Tipo'
+          'Dt. Mov.')
+        Text = 'C'#211'DIGO'
+      end
+      inherited cbAtivo: TcxComboBox
+        Style.IsFontAssigned = True
+      end
+    end
+    inherited pnBotaoCad: TPanel
+      inherited cxEdita: TcxButton
+        Enabled = False
+      end
+      inherited cxVer: TcxButton
+        Enabled = False
+      end
+      inherited cxPrint: TcxButton
+        Enabled = False
+      end
+      inherited cxOpcoes: TcxButton
+        Enabled = False
+      end
+    end
+    inherited grConsulta: TcxGrid
+      inherited grConsultaDBTableView1: TcxGridDBTableView
+        DataController.DataSource = dmFin.dsCaixaFechamento
+        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
+          DataBinding.FieldName = 'IDFECHAMENTO'
+        end
+        object grConsultaDBTableView1Column1: TcxGridDBColumn [1]
+          Caption = 'Saldo Ant.'
+          DataBinding.FieldName = 'SALDOANTERIOR'
+          PropertiesClassName = 'TcxCurrencyEditProperties'
+          Properties.DisplayFormat = '###,###,##0.00'
+          Width = 75
+        end
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
+          Caption = 'Dt. Mov.'
+          DataBinding.FieldName = 'DTMOVIMENTO'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column2: TcxGridDBColumn
+          Caption = 'Saldo Atual'
+          DataBinding.FieldName = 'SALDOATUAL'
+          PropertiesClassName = 'TcxCurrencyEditProperties'
+          Properties.DisplayFormat = '###,###,##0.00'
+          Width = 75
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn
+          Caption = 'Tipo Mov.'
+          DataBinding.FieldName = 'TIPOMOV'
+          Width = 102
+        end
+        object grConsultaDBTableView1Column4: TcxGridDBColumn
+          Caption = 'Cancelado'
+          DataBinding.FieldName = 'CANCELADO'
+          Width = 66
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn
+          Caption = 'Usu'#225'rio'
+          DataBinding.FieldName = 'USUARIO'
+          Width = 98
+        end
+      end
+    end
+  end
+  inherited pnCad: TPanel [2]
     object cxLabel3: TcxLabel
       Left = 62
       Top = 108
@@ -173,78 +244,6 @@ inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
       Height = 17
       Width = 75
       AnchorX = 293
-    end
-  end
-  inherited pnImg: TcxImage [1]
-  end
-  inherited pnCon: TPanel [2]
-    inherited pnBusca: TPanel
-      inherited cxConsulta: TcxComboBox
-        Properties.Items.Strings = (
-          'C'#243'digo'
-          'Tipo'
-          'Dt. Mov.')
-        Text = 'C'#211'DIGO'
-      end
-      inherited cbAtivo: TcxComboBox
-        Style.IsFontAssigned = True
-      end
-    end
-    inherited pnBotaoCad: TPanel
-      inherited cxEdita: TcxButton
-        Enabled = False
-      end
-      inherited cxVer: TcxButton
-        Enabled = False
-      end
-      inherited cxPrint: TcxButton
-        Enabled = False
-      end
-      inherited cxOpcoes: TcxButton
-        Enabled = False
-      end
-    end
-    inherited grConsulta: TcxGrid
-      inherited grConsultaDBTableView1: TcxGridDBTableView
-        DataController.DataSource = dmFin.dsCaixaFechamento
-        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
-          DataBinding.FieldName = 'IDFECHAMENTO'
-        end
-        object grConsultaDBTableView1Column1: TcxGridDBColumn [1]
-          Caption = 'Saldo Ant.'
-          DataBinding.FieldName = 'SALDOANTERIOR'
-          PropertiesClassName = 'TcxCurrencyEditProperties'
-          Properties.DisplayFormat = '###,###,##0.00'
-          Width = 75
-        end
-        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
-          Caption = 'Dt. Mov.'
-          DataBinding.FieldName = 'DTMOVIMENTO'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column2: TcxGridDBColumn
-          Caption = 'Saldo Atual'
-          DataBinding.FieldName = 'SALDOATUAL'
-          PropertiesClassName = 'TcxCurrencyEditProperties'
-          Properties.DisplayFormat = '###,###,##0.00'
-          Width = 75
-        end
-        object grConsultaDBTableView1Column3: TcxGridDBColumn
-          Caption = 'Tipo Mov.'
-          DataBinding.FieldName = 'TIPOMOV'
-          Width = 102
-        end
-        object grConsultaDBTableView1Column4: TcxGridDBColumn
-          Caption = 'Cancelado'
-          DataBinding.FieldName = 'CANCELADO'
-          Width = 66
-        end
-        object grConsultaDBTableView1Column5: TcxGridDBColumn
-          Caption = 'Usu'#225'rio'
-          DataBinding.FieldName = 'USUARIO'
-          Width = 98
-        end
-      end
     end
   end
 end

@@ -3,12 +3,22 @@ unit uRotinaLancamentoFinanceiro;
 interface
 
 Uses
-   System.SysUtils;
+   System.SysUtils, System.DateUtils, uRotinaDeCalculosMovimentacao;
 
+type
+   TTipoValor = (PJUROS, PMULTA);
+
+   // Calculos Financeiros
+   FUNCTION CalculaValorAtualizado(tipoValor: TTipoValor; DData: TDateTime; FValorCalcula, FValorinicial: Double; intDiaAtraso: Integer): Double;
+   FUNCTION CalculaDiasAtraso(DData: TDateTime; intDiaAtraso: Integer): Integer;
+   PROCEDURE AtualizaEMarcaConta(intConta: Integer; bAtualiza:Boolean);
+
+   // Lançamentos Financeiros
    PROCEDURE LancaAdiantamento(DData: TDateTime; StrDoc, StrDescricao: String; FSAldoAntes, FCredito, FDebito: Double;
       IntCodCLie: Integer );
    FUNCTION LancamentoCaixa(DataBaixa: TDateTime; StrDocumento, StrHistorico: string;
       Fcredito, FDebito: Double; intFpagto, intPlanoConta, intConta, intLote: Integer): Boolean;
+
 
 implementation
 
@@ -49,12 +59,6 @@ begin
       ///// Pega o saldo do caixa
       FSaldo := qryAux.Fieldbyname('SALDOCAIXA').AsFloat;
 
-      if qryAux.FieldByName('DTFECHADO').AsDateTime >= DATE then
-      begin
-         Msg('Identificamos que o caixa esta fechado, verifique!','I',':(');
-         Abort;
-      end;
-
       if qryCaixaItem.Active = False then
          qryCaixaItem.Open;
 
@@ -83,6 +87,95 @@ begin
          qryCaixaItem.CancelUpdates;
       end;
       qryAux.Close;
+   end;
+end;
+
+Function CalculaValorAtualizado(tipoValor: TTipoValor; DData: TDateTime; FValorCalcula, FValorinicial: Double; intDiaAtraso: Integer): Double;
+var
+   fPJuros, fPMulta  : Double;
+Begin
+   Result            := FValorCalcula;
+   if TipoMov=ENTRADA then
+   begin
+      fPJuros           := StrToFloat(BuscaConf('PJUROS'));
+      fPMulta           := StrToFloat(BuscaConf('PMULTA'));
+      if intDiaAtraso > 0 then
+      begin
+         if (tipoValor = PJuros) then
+            Result := FValorCalcula + ((((fPJuros/100) * FValorinicial)/30)*intDiaAtraso);
+         if (tipoValor = PMULTA) then
+            Result := FValorCalcula + ((fPMulta/100) * FValorinicial);
+      end;
+   end;
+End;
+
+Function CalculaDiasAtraso(DData: TDateTime; intDiaAtraso: Integer): Integer;
+var
+   intDiaCarencia: Integer;
+begin
+   intDiaCarencia := StrToInt(BUSCACONF('DIASCARENCIA'));
+   intDiaAtraso   := intDiaAtraso - intDiaCarencia;
+   DiaDaSemana    := DiaSemana(DData);
+   if intDiaAtraso>0 then
+   begin
+      Result      := ifs(DiaDaSemana='Sábado',intDiaAtraso-2, intDiaAtraso);
+      Result      := ifs(DiaDaSemana='Domingo', intDiaAtraso-1, intDiaAtraso);
+   end else
+   Result         := 0;
+end;
+
+procedure AtualizaEMarcaConta(intConta: Integer; bAtualiza:Boolean);
+begin
+   with dmFin do
+   begin
+      if not cdsSelec.Active then
+      begin
+         cdsSelec.Close;
+         cdsSelec.CreateDataSet;
+         cdsSelec.Open;
+      end;
+
+      if (not CdsSelec.locate('IDCONTA', intConta, [])) or (bAtualiza=True) then
+      begin
+         if bAtualiza=True then
+            cdsSelec.Edit else
+            cdsSelec.Append;
+         cdsSelecIDCONTA.AsInteger     := qryConta.FieldByName('IDCONTA').ASinteger;
+         cdsSelecIDCLIE.ASInteger      := qryConta.FieldByName('IDCLIE').ASInteger;
+         cdsSelecIDPLANO.AsInteger     := qryConta.FieldByName('IDPLANOCTA').ASInteger;
+         cdsSelecDOCUMENTO.AsString    := qryConta.FieldByName('DOCUMENTO').AsString;
+         cdsSelecNOMECLIE.AsString     := qryConta.FieldByName('RAZAO').AsString;
+         cdsSelecDTVENCTO.AsDateTIme   := qryConta.FieldByName('DTVENCTO').AsDateTIme;
+         cdsSelecDTEMISSAO.AsDateTime  := qryConta.FieldByName('DTEMISSAO').AsDateTIme;
+
+         cdsSelecDIASATRASO.AsInteger  := CalculaDiasAtraso(Date, DaysBetween(Date, qryConta.FieldByName('DTVENCTO').AsDateTime));
+         cdsSelecVLRINI.AsFloat        := qryConta.FieldByName('VLRINI').ASFloat;
+
+         cdsSelecVLRJUROSINI.AsFloat   := qryConta.FieldByName('VLRJUROS').ASFLoat;
+         cdsSelecVLRMULTAINI.ASFLoat   := qryConta.FieldByName('VLRMULTA').ASFLoat;
+         cdsSelecVLRDESCINI.ASFLoat    := qryConta.FieldByName('VLRDESC').ASFLoat;
+
+         cdsSelecVLRJUROS.AsFloat      := CalculaValorAtualizado(PJuros, Date,
+                                                                  cdsSelecVLRJUROSINI.AsFloat,
+                                                                  cdsSelecVLRINI.AsFloat,
+                                                                  cdsSelecDIASATRASO.AsInteger);
+         cdsSelecVLRMULTA.ASFLoat      := CalculaValorAtualizado(PMulta, Date,
+                                                                  cdsSelecVLRMULTAINI.ASFLoat,
+                                                                  cdsSelecVLRINI.AsFloat,
+                                                                  cdsSelecDIASATRASO.AsInteger);
+         cdsSelecVLRDESC.ASFLoat       := qryConta.FieldByName('VLRDESC').ASFLoat;
+
+         cdsSelecVLRBRUTO.ASFLoat      := (cdsSelecVLRINI.AsFloat +
+                                          cdsSelecVLRJUROS.AsFloat +
+                                          cdsSelecVLRMULTA.ASFLoat) -
+                                          cdsSelecVLRDESC.ASFLoat;
+
+         cdsSelecHISTORICO.ASString    := qryConta.FieldByName('HISTORICO').asString;
+         cdsSelecSTATUS.AsString       := qryConta.FieldByName('STATUSCONTA').ASString;
+         cdsSelecVLRPAGO.ASFloat       := qryConta.FieldByName('VLRPAGO').AsFloat;
+         cdsSelec.Post;
+      end else
+         cdsSelec.DELETE;
    end;
 end;
 

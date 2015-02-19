@@ -9,7 +9,7 @@ Uses
    Procedure GerarCobranca(DData: TDateTime; FValorTotal: Double; StrCodigoMov, StrGerar, StrCPagtoId: String; RxParcela: TClientDataSet);
 
    ///// Rotinas de Veriricação
-   procedure      VerificaAberturaDoCaixa;
+   procedure      VerificaAberturaDoCaixa(intCaixa: Integer);
 
 var
    FQtde,
@@ -130,26 +130,25 @@ begin
    dmMov.qryAux.Close;
 end;
 
-Procedure VerificaAberturaDoCaixa;
+Procedure VerificaAberturaDoCaixa(intCaixa: Integer);
 Var
    StrParametro: String;
 begin
    with dmMov do
    begin
-      if TipoMov = ENTRADA then
-         StrParametro := 'CCRECEB' else
-         StrParametro := 'CCPAGAR';
+      ConsultaSql(' SELECT  A.TipoMov  '+#13+
+                  ' FROM caixafechamento A '+#13+
+                  ' WHERE a.idfechamento=(SELECT Max(idfechamento) idfechamento FROM caixafechamento) and A.IDCAIXA='+IntToStr(intCaixa),qryAux);
 
-      ConsultaSql('SELECT IDCAIXA, DTFECHADO FROM CAIXA WHERE IDCAIXA='+BUSCACONF(StrParametro),qryAux);
-
-      if (qryAux.Fieldbyname('IDCAIXA').asInteger <= 0) then
+      if (qryAux.RecordCount<=0) then
       begin
          Msg('C/C não encontrado, verifique o parâmetro de conta corrente!','I',':)');
          abort;
       end;
-      if (qryAux.FieldByName('DTFECHADO').AsDateTime >= Date) then
+
+      if (qryAux.FieldByName('TIPOMOV').AsString = 'FECHAMENTO') then
       begin
-         MensagemIcone('CAIXA FECHADO',bfWarning);
+         Msg('Atenção! Caixa Fechado, Verifique','I',':|');
          Abort;
       end;
 
@@ -162,12 +161,6 @@ begin
       begin
          Msg('Plano de Contas não encontrado, verifique o parâmetro de plano de contas!','I',':)');
          abort;
-      end;
-
-      if (qryAux.FieldByName('DTFECHADO').AsDateTime < Date) then
-      begin
-         MensagemIcone('CAIXA FECHADO',bfWarning);
-         Abort;
       end;
    end;
 end;

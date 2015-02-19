@@ -6,7 +6,7 @@ inherited Fcad_Contas: TFcad_Contas
   ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel [0]
+  inherited pnCad: TPanel
     Width = 732
     Height = 539
     ExplicitWidth = 732
@@ -1089,13 +1089,13 @@ inherited Fcad_Contas: TFcad_Contas
       end
     end
   end
-  inherited pnImg: TcxImage [1]
+  inherited pnImg: TcxImage
     Left = 732
     ExplicitLeft = 732
     ExplicitHeight = 539
     Height = 539
   end
-  inherited pnCon: TPanel [2]
+  inherited pnCon: TPanel
     Width = 732
     Height = 539
     ExplicitWidth = 732
@@ -1340,7 +1340,6 @@ inherited Fcad_Contas: TFcad_Contas
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        OnClick = cxEstornarClick
       end
       object cxBaixar: TcxButton
         Left = 352

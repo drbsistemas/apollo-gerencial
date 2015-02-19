@@ -396,7 +396,15 @@ object dmFin: TdmFin
         DataType = ftFloat
       end
       item
+        Name = 'VLRJUROSINI'
+        DataType = ftFloat
+      end
+      item
         Name = 'VLRJUROS'
+        DataType = ftFloat
+      end
+      item
+        Name = 'VLRMULTAINI'
         DataType = ftFloat
       end
       item
@@ -405,6 +413,10 @@ object dmFin: TdmFin
       end
       item
         Name = 'VLRDESC'
+        DataType = ftFloat
+      end
+      item
+        Name = 'VLRDESCINI'
         DataType = ftFloat
       end
       item
@@ -446,9 +458,6 @@ object dmFin: TdmFin
     object cdsSelecDOCUMENTO: TStringField
       FieldName = 'DOCUMENTO'
     end
-    object cdsSelecNOMECLIE: TStringField
-      FieldName = 'NOMECLIE'
-    end
     object cdsSelecDTVENCTO: TDateTimeField
       FieldName = 'DTVENCTO'
     end
@@ -459,13 +468,22 @@ object dmFin: TdmFin
       FieldName = 'VLRINI'
       DisplayFormat = '###,###,##0.00'
     end
+    object cdsSelecVLRJUROSINI: TFloatField
+      FieldName = 'VLRJUROSINI'
+    end
     object cdsSelecVLRJUROS: TFloatField
       FieldName = 'VLRJUROS'
       DisplayFormat = '###,###,##0.00'
     end
+    object cdsSelecVLRMULTAINI: TFloatField
+      FieldName = 'VLRMULTAINI'
+    end
     object cdsSelecVLRMULTA: TFloatField
       FieldName = 'VLRMULTA'
       DisplayFormat = '###,###,##0.00'
+    end
+    object cdsSelecVLRDESCINI: TFloatField
+      FieldName = 'VLRDESCINI'
     end
     object cdsSelecVLRDESC: TFloatField
       FieldName = 'VLRDESC'
@@ -487,6 +505,10 @@ object dmFin: TdmFin
     object cdsSelecVLRPAGO: TFloatField
       FieldName = 'VLRPAGO'
       DisplayFormat = '###,###,##0.00'
+    end
+    object cdsSelecNOMECLIE: TStringField
+      FieldName = 'NOMECLIE'
+      Size = 200
     end
   end
   object dsSelec: TDataSource

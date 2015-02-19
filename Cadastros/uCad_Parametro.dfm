@@ -10,7 +10,6 @@ inherited FCad_Parametro: TFCad_Parametro
           'C'#243'digo'
           'Par'#226'metro'
           'M'#243'dulo')
-        Properties.OnChange = cxConsultaPropertiesChange
         Text = 'C'#211'DIGO'
       end
       inherited eConsulta: TcxTextEdit

@@ -71,12 +71,14 @@ end;
 procedure TFcad_CaixaFechamento.cxNovoClick(Sender: TObject);
 begin
    inherited;
-   ConsultaSql('select * from CAIXAFECHAMENTO where IDCAIXA='+dmfin.qryCaixa.FieldByName('IDCAIXA').asString+' and CANCELADO='+QuotedStr('NÃO')+' order by IDFECHAMENTO', dmFin.qryAux);
-   if (dmFin.qryAux.FieldByName('TIPOMOV').AsString = 'ABERTURA') then
+   dmFin.qryCaixaFechamento.Last;
+
+   if (dmFin.qryCaixaFechamento.FieldByName('TIPOMOV').AsString = 'ABERTURA') then
       eTIpo.TExt := 'FECHAMENTO' else
       eTipo.TExt := 'ABERTURA';
 
    eDtFechamento.Date := Date;
+   eSaldo.Value       := 0;
    eDtFechamento.SetFOcus;
 end;
 
@@ -92,10 +94,10 @@ begin
          FieldByName('USUARIO').AsString                := Trim(Usuario);
          FieldByName('CANCELADO').AsString              := 'NÃO';
 
-         FieldByName('DTMOVIMENTO').AsDateTime          := eDtFechamento.Date+Time;
+         FieldByName('DTMOVIMENTO').AsDateTime          := eDtFechamento.Date;
          FieldByName('TIPOMOV').AsString                := eTipo.TExt;
-         FieldByName('SALDOATUAL').AsFloat              := eSaldo.Value;
          FieldByName('SALDOANTERIOR').AsFloat           := dmFin.qryCaixa.FieldByName('SALDOCAIXA').asFloat;
+         FieldByName('SALDOATUAL').AsFloat              := ifs(eTipo.Text='ABERTURA', dmFin.qryCaixa.FieldByName('SALDOCAIXA').asFloat+eSaldo.Value, dmFin.qryCaixa.FieldByName('SALDOCAIXA').asFloat-eSaldo.Value);
          Post;
 
          LancamentoCaixa(Date+Time,
@@ -108,8 +110,10 @@ begin
                          dmfin.qryCaixa.FieldByName('IDCAIXA').AsInteger,
                          0);
 
+         ExecutaSQl('UPDATE CAIXA SET DTFECHADO='+QuotedStr(DataSql(eDtFechamento.Date))+' where idcaixa='+dmfin.qryCaixa.FieldByName('IDCAIXA').AsString, dmFin.qryAux);
          ApplyUpdates(0);
          inherited;
+         cxConsultaPropertiesChange(self);
       Except
          CancelUpdates;
       end;
