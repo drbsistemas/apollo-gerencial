@@ -40,7 +40,6 @@ type
     eVlrBaixa: TcxCurrencyEdit;
     cxLabel5: TcxLabel;
     cxCurrencyEdit1: TcxCurrencyEdit;
-    cxNovo: TcxButton;
     eData: TcxDateEdit;
     cxLabel14: TcxLabel;
     cxLabel6: TcxLabel;

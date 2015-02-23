@@ -1,7 +1,5 @@
 inherited Fcad_CaixaFechamento: TFcad_CaixaFechamento
   Caption = 'Abertura/Fechamento (Caixa)'
-  ExplicitWidth = 718
-  ExplicitHeight = 601
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnImg: TcxImage [0]

@@ -30,8 +30,6 @@ type
   TFcad_PaiFinanceiro = class(TForm)
     pnCad: TPanel;
     pnMenu: TPanel;
-    cxSalvar: TcxButton;
-    cxCancela: TcxButton;
     pnCon: TPanel;
     pnBusca: TPanel;
     cxLabel1: TcxLabel;
@@ -49,6 +47,33 @@ type
     grConsultaDBTableView1Campo2: TcxGridDBColumn;
     grConsultaLevel1: TcxGridLevel;
     pnBotaoCon: TPanel;
+    pnSelec: TPanel;
+    grConsulta2: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGridDBColumn1: TcxGridDBColumn;
+    cxGridDBColumn2: TcxGridDBColumn;
+    cxGridDBColumn3: TcxGridDBColumn;
+    cxGridDBColumn4: TcxGridDBColumn;
+    cxGridDBColumn5: TcxGridDBColumn;
+    cxGridDBColumn6: TcxGridDBColumn;
+    cxGridDBColumn7: TcxGridDBColumn;
+    cxGridDBColumn8: TcxGridDBColumn;
+    cxGridDBColumn9: TcxGridDBColumn;
+    cxGridDBColumn10: TcxGridDBColumn;
+    cxGridDBColumn11: TcxGridDBColumn;
+    cxGridDBTableView1Column1: TcxGridDBColumn;
+    cxGridLevel1: TcxGridLevel;
+    pnTop: TPanel;
+    cxContas: TcxLabel;
+    cxTotal: TcxLabel;
+    cxNovo: TcxButton;
+    cxEdita: TcxButton;
+    cxVer: TcxButton;
+    cxApagar: TcxButton;
+    cxPrint: TcxButton;
+    cxOpcoes: TcxButton;
+    cxCancela: TcxButton;
+    cxSalvar: TcxButton;
     procedure MOstraPainelCadastro(AbrePainel: TAbrePainel);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -96,6 +121,9 @@ end;
 
 procedure TFcad_PaiFinanceiro.cxCancelaClick(Sender: TObject);
 begin
+   if Msg('Verificamos que pode perder dados executando esta ação, deseja realmente cancelar ?','P',';O') = False then
+      Abort;
+
    MOstraPainelCadastro(Con);
 end;
 

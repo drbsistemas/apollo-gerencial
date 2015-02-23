@@ -40,7 +40,6 @@ type
     dsResumo: TDataSource;
     cdsResumo: TClientDataSet;
     cdsResumoDESCRICAO: TStringField;
-    cdsResumoVALOR: TFloatField;
     cxLabel3: TcxLabel;
     eCodigo: TcxTextEdit;
     cxLabel4: TcxLabel;
@@ -108,12 +107,20 @@ type
     grConsultaDBTableView1Column5: TcxGridDBColumn;
     N2: TMenuItem;
     AbrirFecharCC1: TMenuItem;
+    cdsResumoCREDITO: TFloatField;
+    cdsResumoDEBITO: TFloatField;
+    cxGridDBTableView2Column1: TcxGridDBColumn;
+    cxGridDBTableView3Column5: TcxGridDBColumn;
+    Panel2: TPanel;
+    edtIni: TcxDateEdit;
+    cxLabel32: TcxLabel;
+    edtFim: TcxDateEdit;
+    cxLabel33: TcxLabel;
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure grConsultaDBTableView1DblClick(Sender: TObject);
-    procedure cxVoltarClick(Sender: TObject);
     procedure cxVerClick(Sender: TObject);
     procedure cxNovoClick(Sender: TObject);
     procedure cxEditaClick(Sender: TObject);
@@ -128,6 +135,10 @@ type
     procedure grConsultaDBTableView1CellClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
+    procedure cxGridDBTableView3CustomDrawCell(Sender: TcxCustomGridTableView;
+      ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
+      var ADone: Boolean);
+    procedure edtIniPropertiesChange(Sender: TObject);
   private
     { Private declarations }
     indice : String;
@@ -194,6 +205,26 @@ begin
    inherited;
    Limpa;
    Edita;
+end;
+
+procedure TFcad_Caixa.cxGridDBTableView3CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+  inherited;
+   if AViewInfo.GridRecord.Selected then
+   begin
+      ACanvas.Brush.Color       := FCorSelec;
+      ACanvas.Canvas.Font.Color := clBlack;
+      //ACanvas.Canvas.Font.Style :=[fsBold];
+   end
+   else
+   begin
+      if AViewInfo.GridRecord.RecordIndex mod 2 = 0 then
+         ACanvas.Brush.Color := clWindow
+      else
+         ACanvas.Brush.Color := FCorLista;
+   end;
 end;
 
 procedure TFcad_Caixa.cxNovoClick(Sender: TObject);
@@ -269,13 +300,6 @@ begin
    cxSalvar.Enabled := false;
 end;
 
-procedure TFcad_Caixa.cxVoltarClick(Sender: TObject);
-begin
-   inherited;
-   ID               := dmFin.qryCaixa.Fieldbyname('IDCAIXA').AsInteger;
-   DESCRICAO        := dmFin.qryCaixa.FieldByName('BANCO').AsString;
-end;
-
 procedure TFcad_Caixa.eCodBancoExit(Sender: TObject);
 begin
    inherited;
@@ -341,11 +365,18 @@ begin
    end;
 end;
 
+procedure TFcad_Caixa.edtIniPropertiesChange(Sender: TObject);
+begin
+   inherited;
+   if (dmFin.qryCaixa.Active=True) and (dmFin.qryCaixa.RecordCount>0) then
+      ConsultaMov;
+end;
+
 procedure TFcad_Caixa.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    ID               := dmFin.qryCaixa.Fieldbyname('IDCAIXA').AsInteger;
    DESCRICAO        := dmFin.qryCaixa.FieldByName('BANCO').AsString;
-
+   dmFin.qryCaixa.Close;
    inherited;
 
    if pnBotaoCon.Visible = False then
@@ -374,6 +405,8 @@ end;
 procedure TFcad_Caixa.FormShow(Sender: TObject);
 begin
    inherited;
+   edtIni.date := Date;
+   edtFim.Date := Date;
    cxConsultaPropertiesChange(self);
 end;
 
@@ -411,20 +444,33 @@ begin
    begin
       with dmFin do
       begin
-         ConsultaSQl('SELECT * FROM CAIXAITEM WHERE IDCAIXA='+qryCaixa.FieldByName('IDCAIXA').AsString, qryCaixaItem);
+         ConsultaSQl('select A.*, '+#13+
+            ' B.NOMEPLANO, '+#13+
+            ' C.DESCRICAO NOMEFPAGTO '+#13+
+            ' from CAIXAITEM A '+#13+
+            ' LEFT JOIN PLANOCONTA B on A.IDPLANO = B.IDPLANO '+#13+
+            ' LEFT JOIN GENERICA C on A.IDFPAGTO = C.IDGENERICA and C.TABELA='+QuotedStr('FPAGTO')+#13+
+            ' WHERE IDCAIXA='+qryCaixa.FieldByName('IDCAIXA').AsString +#13+
+            ' and DATAITEM between '+QuotedStr(DataSql(edtIni.DAte)+' 00:00:00')+' and '+QuotedStr(DataSql(edtfim.DAte)+' 23:59:59')+#13+
+            ' order by DATAITEM', qryCaixaItem);
          qryCaixaItem.Last;
       end;
       SomaFPagto;
    end;
+   Application.ProcessMessages;
 end;
 
 procedure TFcad_Caixa.SomaFpagto;
 begin
-   StrSql := 'SELECT SUM(A.CREDITO-A.DEBITO) VALOR, A.IDFPAGTO, B.DESCRICAO FROM CAIXAITEM A  '+#13+
-      ' left join GENERICA B on A.IDFPAGTO=B.IDGENERICA and B.TABELA='+QuotedStr('FPAGTO') +#13+
-      ' where A.IDCAIXA='+dmFin.qryCaixa.FieldbyName('IDCAIXA').AsString +
-      ' group by IDFPAGTO, DESCRICAO ';
-
+   StrSQl := 'SELECT '+#13+
+             ' SUM(A.CREDITO) CREDITO,  '+#13+
+             ' SUM(A.DEBITO) DEBITO,  '+#13+
+             ' B.DESCRICAO  '+#13+
+             ' FROM CAIXAITEM A '+#13+
+             ' LEFT JOIN GENERICA B on A.IDFPAGTO=B.IDGENERICA and B.TABELA='+QuotedStr('FPAGTO') +#13+
+             ' WHERE A.IDCAIXA='+dmFin.qryCaixa.FieldbyName('IDCAIXA').AsString +#13+
+             ' and A.DATAITEM between '+QuotedStr(DataSql(edtIni.DAte)+' 00:00:00')+' and '+QuotedStr(DataSql(edtfim.DAte)+' 23:59:59')+#13+
+             ' group by DESCRICAO, IDFPAGTO order by idfpagto';
    ConsultaSql(StrSql, dmFin.qryAux);
 
    cdsResumo.Close;
@@ -435,10 +481,12 @@ begin
    begin
       cdsResumo.Append;
       cdsResumoDESCRICAO.AsString := dmFin.qryAux.Fieldbyname('DESCRICAO').asString;
-      cdsResumoVALOR.AsFloat      := dmFin.qryAux.Fieldbyname('VALOR').AsFloat;
+      cdsResumoCREDITO.AsFloat    := dmFin.qryAux.Fieldbyname('CREDITO').AsFloat;
+      cdsResumoDEBITO.AsFloat     := dmFin.qryAux.Fieldbyname('DEBITO').AsFloat;
       cdsResumo.Post;
       dmFIn.qryAux.Next;
    end;
 end;
 
 end.
+

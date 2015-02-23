@@ -50,16 +50,16 @@ object Fcad_Baixa: TFcad_Baixa
       Transparent = True
     end
     object cxLabel14: TcxLabel
-      Left = 604
+      Left = 577
       Top = 4
       AutoSize = False
-      Caption = 'Dt. Pedido:'
+      Caption = 'Data de Baixa:'
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clBlack
       Style.Font.Height = -11
       Style.Font.Name = 'Tahoma'
-      Style.Font.Style = []
+      Style.Font.Style = [fsBold]
       Style.LookAndFeel.NativeStyle = True
       Style.IsFontAssigned = True
       StyleDisabled.LookAndFeel.NativeStyle = True
@@ -69,7 +69,7 @@ object Fcad_Baixa: TFcad_Baixa
       Properties.LabelEffect = cxleCool
       Transparent = True
       Height = 17
-      Width = 77
+      Width = 104
       AnchorX = 681
     end
     object eData: TcxDateEdit
@@ -89,6 +89,7 @@ object Fcad_Baixa: TFcad_Baixa
       Style.Shadow = False
       Style.IsFontAssigned = True
       TabOrder = 2
+      OnExit = eDataExit
       Width = 110
     end
   end
@@ -762,12 +763,12 @@ object Fcad_Baixa: TFcad_Baixa
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 3
-    object cxSalvar: TcxButton
+    object cxBaixar: TcxButton
       Left = 340
       Top = 0
       Width = 60
       Height = 51
-      Hint = 'Salva os dados do registro.'
+      Hint = 'Quita os t'#237'tulos selecionados'
       Caption = '&Baixar'
       LookAndFeel.Kind = lfOffice11
       OptionsImage.Glyph.Data = {
@@ -907,7 +908,7 @@ object Fcad_Baixa: TFcad_Baixa
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      OnClick = cxSalvarClick
+      OnClick = cxBaixarClick
     end
     object cxCancela: TcxButton
       Left = 399

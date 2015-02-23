@@ -2,6 +2,7 @@ inherited Fcad_Caixa: TFcad_Caixa
   Caption = 'Conta Corrente (Caixa)'
   ClientHeight = 539
   ClientWidth = 900
+  Position = poDesigned
   ExplicitWidth = 908
   ExplicitHeight = 570
   PixelsPerInch = 96
@@ -1444,7 +1445,54 @@ inherited Fcad_Caixa: TFcad_Caixa
     Height = 539
     ExplicitWidth = 842
     ExplicitHeight = 539
-    inherited pnBusca: TPanel
+    inherited grConsulta: TcxGrid [0]
+      Width = 840
+      Height = 119
+      Align = alTop
+      ExplicitWidth = 840
+      ExplicitHeight = 119
+      inherited grConsultaDBTableView1: TcxGridDBTableView
+        OnCellClick = grConsultaDBTableView1CellClick
+        DataController.DataSource = dmFin.dsCaixa
+        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
+          DataBinding.FieldName = 'IDCAIXA'
+        end
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
+          DataBinding.FieldName = 'BANCO'
+          Width = 393
+        end
+        object grConsultaDBTableView1Column2: TcxGridDBColumn
+          Caption = 'Dt. Abertura'
+          DataBinding.FieldName = 'DTABERTURA'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn
+          Caption = 'Dt. Fechado'
+          DataBinding.FieldName = 'DTFECHADO'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column4: TcxGridDBColumn
+          Caption = 'Saldo Conc.'
+          DataBinding.FieldName = 'SALDOCONCILIADO'
+          PropertiesClassName = 'TcxCurrencyEditProperties'
+          Properties.DisplayFormat = '###,###,##0.00'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn
+          Caption = 'Tipo Caixa'
+          DataBinding.FieldName = 'TIPOCAIXA'
+          Width = 70
+        end
+        object grConsultaDBTableView1Column1: TcxGridDBColumn
+          Caption = 'Saldo'
+          DataBinding.FieldName = 'SALDOCAIXA'
+          PropertiesClassName = 'TcxCurrencyEditProperties'
+          Properties.DisplayFormat = '###,###,##0.00'
+          Width = 100
+        end
+      end
+    end
+    inherited pnBusca: TPanel [1]
       Width = 840
       ExplicitWidth = 840
       inherited cxConsulta: TcxComboBox
@@ -1461,7 +1509,7 @@ inherited Fcad_Caixa: TFcad_Caixa
         Visible = False
       end
     end
-    inherited pnBotaoCad: TPanel
+    inherited pnBotaoCad: TPanel [2]
       Width = 840
       ExplicitWidth = 840
       inherited cxApagar: TcxButton
@@ -1472,7 +1520,7 @@ inherited Fcad_Caixa: TFcad_Caixa
         Kind = cxbkDropDown
       end
     end
-    inherited pnBotaoCon: TPanel
+    inherited pnBotaoCon: TPanel [3]
       Top = 487
       Width = 840
       ExplicitTop = 487
@@ -1486,58 +1534,11 @@ inherited Fcad_Caixa: TFcad_Caixa
         ExplicitLeft = 419
       end
     end
-    inherited grConsulta: TcxGrid
-      Width = 840
-      Height = 196
-      Align = alTop
-      ExplicitWidth = 840
-      ExplicitHeight = 196
-      inherited grConsultaDBTableView1: TcxGridDBTableView
-        OnCellClick = grConsultaDBTableView1CellClick
-        DataController.DataSource = dmFin.dsCaixa
-        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
-          DataBinding.FieldName = 'IDCAIXA'
-        end
-        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
-          DataBinding.FieldName = 'BANCO'
-          Width = 350
-        end
-        object grConsultaDBTableView1Column1: TcxGridDBColumn
-          Caption = 'Saldo'
-          DataBinding.FieldName = 'SALDOCAIXA'
-          PropertiesClassName = 'TcxCurrencyEditProperties'
-          Properties.DisplayFormat = '###,###,##0.00'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column2: TcxGridDBColumn
-          Caption = 'Dt. Abertura'
-          DataBinding.FieldName = 'DTABERTURA'
-          Width = 85
-        end
-        object grConsultaDBTableView1Column3: TcxGridDBColumn
-          Caption = 'Dt. Fechado'
-          DataBinding.FieldName = 'DTFECHADO'
-          Width = 85
-        end
-        object grConsultaDBTableView1Column4: TcxGridDBColumn
-          Caption = 'Saldo Conc.'
-          DataBinding.FieldName = 'SALDOCONCILIADO'
-          PropertiesClassName = 'TcxCurrencyEditProperties'
-          Properties.DisplayFormat = '###,###,##0.00'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column5: TcxGridDBColumn
-          Caption = 'Tipo Caixa'
-          DataBinding.FieldName = 'TIPOCAIXA'
-          Width = 66
-        end
-      end
-    end
     object Panel1: TPanel
       Left = 1
-      Top = 272
+      Top = 195
       Width = 840
-      Height = 215
+      Height = 292
       Align = alClient
       Caption = 'Panel1'
       TabOrder = 4
@@ -1559,13 +1560,13 @@ inherited Fcad_Caixa: TFcad_Caixa
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
         TabOrder = 0
-        Height = 213
-        Width = 533
+        Height = 290
+        Width = 503
         object cxGrid2: TcxGrid
           Left = 3
-          Top = 15
-          Width = 527
-          Height = 188
+          Top = 39
+          Width = 497
+          Height = 241
           Hint = 'Grid de Dados'
           Align = alClient
           BevelOuter = bvNone
@@ -1583,9 +1584,17 @@ inherited Fcad_Caixa: TFcad_Caixa
           RootLevelOptions.TabsForEmptyDetails = False
           object cxGridDBTableView3: TcxGridDBTableView
             Navigator.Buttons.CustomButtons = <>
+            OnCustomDrawCell = cxGridDBTableView3CustomDrawCell
             DataController.DataSource = dmFin.dsCaixaItem
             DataController.Summary.DefaultGroupSummaryItems = <>
-            DataController.Summary.FooterSummaryItems = <>
+            DataController.Summary.FooterSummaryItems = <
+              item
+                Kind = skSum
+                FieldName = 'CREDITO-DEBITO'
+                Column = cxGridDBTableView3Column3
+                DisplayText = 'Saldo:'
+                Sorted = True
+              end>
             DataController.Summary.SummaryGroups = <>
             OptionsData.CancelOnExit = False
             OptionsData.Deleting = False
@@ -1594,6 +1603,9 @@ inherited Fcad_Caixa: TFcad_Caixa
             OptionsData.Inserting = False
             OptionsSelection.CellSelect = False
             OptionsView.NoDataToDisplayInfoText = '<N'#227'o h'#225' registros>'
+            OptionsView.Footer = True
+            OptionsView.FooterAutoHeight = True
+            OptionsView.FooterMultiSummaries = True
             OptionsView.GroupByBox = False
             object cxGridDBColumn8: TcxGridDBColumn
               Caption = 'Data'
@@ -1605,40 +1617,139 @@ inherited Fcad_Caixa: TFcad_Caixa
               DataBinding.FieldName = 'HISTORICO'
               Width = 303
             end
+            object cxGridDBTableView3Column4: TcxGridDBColumn
+              Caption = 'Usu'#225'rio'
+              DataBinding.FieldName = 'USUARIO'
+              Width = 110
+            end
             object cxGridDBTableView3Column1: TcxGridDBColumn
               Caption = 'Cr'#233'dito'
               DataBinding.FieldName = 'CREDITO'
               PropertiesClassName = 'TcxCurrencyEditProperties'
               Properties.DisplayFormat = '###,###,##0.00'
-              Width = 75
+              Width = 90
             end
             object cxGridDBTableView3Column2: TcxGridDBColumn
               Caption = 'D'#233'bito'
               DataBinding.FieldName = 'DEBITO'
               PropertiesClassName = 'TcxCurrencyEditProperties'
               Properties.DisplayFormat = '###,###,##0.00'
-              Width = 75
+              Width = 90
             end
             object cxGridDBTableView3Column3: TcxGridDBColumn
               Caption = 'Saldo'
               DataBinding.FieldName = 'SALDOITEM'
               PropertiesClassName = 'TcxCurrencyEditProperties'
               Properties.DisplayFormat = '###,###,##0.00'
-              Width = 75
+              Width = 90
             end
-            object cxGridDBTableView3Column4: TcxGridDBColumn
-              Caption = 'Usu'#225'rio'
-              DataBinding.FieldName = 'USUARIO'
-              Width = 110
+            object cxGridDBTableView3Column5: TcxGridDBColumn
+              Caption = 'F. Pagamento'
+              DataBinding.FieldName = 'NOMEFPAGTO'
+              Width = 100
             end
           end
           object cxGridLevel3: TcxGridLevel
             GridView = cxGridDBTableView3
           end
         end
+        object Panel2: TPanel
+          Left = 3
+          Top = 15
+          Width = 497
+          Height = 24
+          Align = alTop
+          TabOrder = 1
+          object edtIni: TcxDateEdit
+            Left = 86
+            Top = 1
+            Hint = 'Data de Validade do Produto'
+            ParentFont = False
+            Properties.DateButtons = [btnClear, btnToday]
+            Properties.ReadOnly = False
+            Properties.OnChange = edtIniPropertiesChange
+            Style.Edges = [bLeft, bTop, bRight, bBottom]
+            Style.Font.Charset = ANSI_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -11
+            Style.Font.Name = 'Tahoma'
+            Style.Font.Style = []
+            Style.HotTrack = True
+            Style.Shadow = False
+            Style.IsFontAssigned = True
+            TabOrder = 0
+            Width = 130
+          end
+          object cxLabel32: TcxLabel
+            Left = 4
+            Top = 2
+            AutoSize = False
+            Caption = 'Data:'
+            ParentFont = False
+            Style.Font.Charset = ANSI_CHARSET
+            Style.Font.Color = clBlack
+            Style.Font.Height = -11
+            Style.Font.Name = 'Tahoma'
+            Style.Font.Style = []
+            Style.LookAndFeel.NativeStyle = True
+            Style.IsFontAssigned = True
+            StyleDisabled.LookAndFeel.NativeStyle = True
+            StyleFocused.LookAndFeel.NativeStyle = True
+            StyleHot.LookAndFeel.NativeStyle = True
+            Properties.Alignment.Horz = taRightJustify
+            Properties.LabelEffect = cxleCool
+            Transparent = True
+            Height = 17
+            Width = 82
+            AnchorX = 86
+          end
+          object edtFim: TcxDateEdit
+            Left = 247
+            Top = 1
+            Hint = 'Data de Validade do Produto'
+            ParentFont = False
+            Properties.DateButtons = [btnClear, btnToday]
+            Properties.ReadOnly = False
+            Properties.OnChange = edtIniPropertiesChange
+            Style.Edges = [bLeft, bTop, bRight, bBottom]
+            Style.Font.Charset = ANSI_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -11
+            Style.Font.Name = 'Tahoma'
+            Style.Font.Style = []
+            Style.HotTrack = True
+            Style.Shadow = False
+            Style.IsFontAssigned = True
+            TabOrder = 2
+            Width = 130
+          end
+          object cxLabel33: TcxLabel
+            Left = 217
+            Top = 2
+            AutoSize = False
+            Caption = #225
+            ParentFont = False
+            Style.Font.Charset = ANSI_CHARSET
+            Style.Font.Color = clBlack
+            Style.Font.Height = -11
+            Style.Font.Name = 'Tahoma'
+            Style.Font.Style = []
+            Style.LookAndFeel.NativeStyle = True
+            Style.IsFontAssigned = True
+            StyleDisabled.LookAndFeel.NativeStyle = True
+            StyleFocused.LookAndFeel.NativeStyle = True
+            StyleHot.LookAndFeel.NativeStyle = True
+            Properties.Alignment.Horz = taRightJustify
+            Properties.LabelEffect = cxleCool
+            Transparent = True
+            Height = 17
+            Width = 20
+            AnchorX = 237
+          end
+        end
       end
       object cxGroupBox1: TcxGroupBox
-        Left = 534
+        Left = 504
         Top = 1
         Align = alRight
         Alignment = alTopCenter
@@ -1655,13 +1766,13 @@ inherited Fcad_Caixa: TFcad_Caixa
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
         TabOrder = 1
-        Height = 213
-        Width = 305
+        Height = 290
+        Width = 335
         object cxGrid1: TcxGrid
           Left = 3
           Top = 15
-          Width = 299
-          Height = 188
+          Width = 329
+          Height = 265
           Hint = 'Grid de Dados'
           Align = alClient
           BevelOuter = bvNone
@@ -1684,10 +1795,15 @@ inherited Fcad_Caixa: TFcad_Caixa
             DataController.Summary.FooterSummaryItems = <
               item
                 Kind = skSum
-                FieldName = 'VALOR'
+                FieldName = 'CREDITO'
                 Column = cxGridDBColumn7
-                DisplayText = 'Vlr. Total:'
-                Sorted = True
+                DisplayText = 'Saldo:'
+              end
+              item
+                Kind = skSum
+                FieldName = 'DEBITO'
+                Column = cxGridDBTableView2Column1
+                DisplayText = 'Saldo:'
               end>
             DataController.Summary.SummaryGroups = <>
             OptionsData.CancelOnExit = False
@@ -1698,18 +1814,26 @@ inherited Fcad_Caixa: TFcad_Caixa
             OptionsSelection.CellSelect = False
             OptionsView.NoDataToDisplayInfoText = '<N'#227'o h'#225' registros>'
             OptionsView.Footer = True
+            OptionsView.FooterAutoHeight = True
             OptionsView.GroupByBox = False
             object cxGridDBColumn6: TcxGridDBColumn
               Caption = 'F. Pagamento'
               DataBinding.FieldName = 'DESCRICAO'
-              Width = 175
+              Width = 130
             end
             object cxGridDBColumn7: TcxGridDBColumn
-              Caption = 'Valor'
-              DataBinding.FieldName = 'VALOR'
+              Caption = 'Cr'#233'dito'
+              DataBinding.FieldName = 'CREDITO'
               PropertiesClassName = 'TcxCurrencyEditProperties'
               Properties.DisplayFormat = '###,###,##0.00'
-              Width = 100
+              Width = 90
+            end
+            object cxGridDBTableView2Column1: TcxGridDBColumn
+              Caption = 'D'#233'bito'
+              DataBinding.FieldName = 'DEBITO'
+              PropertiesClassName = 'TcxCurrencyEditProperties'
+              Properties.DisplayFormat = '###,###,##0.00'
+              Width = 90
             end
           end
           object cxGridLevel2: TcxGridLevel
@@ -1727,7 +1851,7 @@ inherited Fcad_Caixa: TFcad_Caixa
       Caption = '&Lan'#231'ar Pagamento Individual'
     end
     object Realocar1: TMenuItem
-      Caption = 'Lan'#231'ar Transfer'#234'ncia/Realoca'#231#227'o'
+      Caption = '&Efetuar Transfer'#234'ncia/Realoca'#231#227'o'
     end
     object N1: TMenuItem
       Caption = '-'
@@ -1757,7 +1881,11 @@ inherited Fcad_Caixa: TFcad_Caixa
         Size = 100
       end
       item
-        Name = 'VALOR'
+        Name = 'CREDITO'
+        DataType = ftFloat
+      end
+      item
+        Name = 'DEBITO'
         DataType = ftFloat
       end>
     IndexDefs = <>
@@ -1768,8 +1896,11 @@ inherited Fcad_Caixa: TFcad_Caixa
     object cdsResumoDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
     end
-    object cdsResumoVALOR: TFloatField
-      FieldName = 'VALOR'
+    object cdsResumoCREDITO: TFloatField
+      FieldName = 'CREDITO'
+    end
+    object cdsResumoDEBITO: TFloatField
+      FieldName = 'DEBITO'
     end
   end
 end

@@ -181,9 +181,7 @@ procedure TFcad_Contas.cxBaixarClick(Sender: TObject);
 begin
    ValidaDadosParaBaixar;
 
-   if TipoMov = ENTRADA then
-      VerificaAberturaDoCaixa(StrToInt(BUSCACONF('CCRECEB'))) else
-      VerificaAberturaDoCaixa(StrToInt(BUSCACONF('CCPAGAR')));
+   VerificaAberturaDoCaixa(StrToInt(BUSCACONF('CCAIXA')));
 
    Fcad_Baixa := TFcad_Baixa.Create(Self);
    Fcad_Baixa.ShowModal;
@@ -474,7 +472,7 @@ begin
       Msg('Contas quitadas não podem ser selecionadas!','I',':)');
       abort;
    end;
-   AtualizaEMarcaConta(dmFin.qryConta.FieldByName('IDCONTA').ASinteger, False);      // Marca
+   AtualizaEMarcaConta(Date, dmFin.qryConta.FieldByName('IDCONTA').ASinteger, False);      // Marca
 
    if dmFin.cdsSelec.RecordCount<=0 then
    begin

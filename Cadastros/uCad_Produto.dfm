@@ -2234,9 +2234,9 @@ inherited Fcad_Produto: TFcad_Produto
         ExplicitTop = -1
       end
       inherited cxCancela: TcxButton
-        Left = 109
+        Left = 129
         Top = -1
-        ExplicitLeft = 109
+        ExplicitLeft = 129
         ExplicitTop = -1
       end
     end

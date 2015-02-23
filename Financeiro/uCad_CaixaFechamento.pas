@@ -11,7 +11,7 @@ uses
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, Vcl.StdCtrls,
   cxButtons, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLabel, Vcl.ExtCtrls,
   dxGDIPlusClasses, cxImage, Vcl.ComCtrls, dxCore, cxDateUtils, cxCurrencyEdit,
-  cxCalendar;
+  cxCalendar, uRotinaDeCalculosMovimentacao;
 
 type
   TFcad_CaixaFechamento = class(TFcad_Pai)
@@ -105,8 +105,8 @@ begin
                          eTipo.Text+' DE CAIXA DIÁRIO',
                          ifs(eTipo.Text='ABERTURA', eSaldo.Value, 0),
                          ifs(eTipo.Text='ABERTURA', 0, eSaldo.Value),
-                         0,
-                         0,
+                         StrToInt(BUSCACONF('FPAGTO')),
+                         StrToInt(BUSCACONF('PLANOCONTACAIXA')),
                          dmfin.qryCaixa.FieldByName('IDCAIXA').AsInteger,
                          0);
 

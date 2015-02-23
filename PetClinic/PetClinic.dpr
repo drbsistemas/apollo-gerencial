@@ -46,7 +46,8 @@ uses
   uCad_Caixa in '..\Financeiro\uCad_Caixa.pas' {Fcad_Caixa},
   uCad_Banco in '..\Cadastros\uCad_Banco.pas' {Fcad_Banco},
   uDmCad in '..\Acesso\uDmCad.pas' {dmCad: TDataModule},
-  uCad_CaixaFechamento in '..\Financeiro\uCad_CaixaFechamento.pas' {Fcad_CaixaFechamento};
+  uCad_CaixaFechamento in '..\Financeiro\uCad_CaixaFechamento.pas' {Fcad_CaixaFechamento},
+  uCad_Cheque in '..\Financeiro\uCad_Cheque.pas' {Fcad_Cheque};
 
 {$R *.res}
 
@@ -57,3 +58,6 @@ begin
   Application.CreateForm(TFPrinc, FPrinc);
   Application.Run;
 end.
+
+// http://www.xvideos.com/profiles/mindy-main#_tabVideos
+// http://www.xvideos.com/video5307551/slender_blowjob_and_sex_babe

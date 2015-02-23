@@ -157,7 +157,8 @@ type
     procedure cxVerClick(Sender: TObject);
   private
     { Private declarations }
-    indice : String;
+    indice,
+    StrCaminhoFoto : String;
     procedure Edita;
     procedure Limpa;
     procedure VerFoto;
@@ -462,7 +463,8 @@ begin
          end
          else
             CopyFile(PChar(eFile2.FileName), PChar(Dir+'\'+eCodigo.Text+'.jpg'), true);
-         eFoto.Text := Dir+'\'+eCodigo.Text+'.jpg';
+//         eFoto.Text := Dir+'\'+eCodigo.Text+'.jpg';
+         eFoto.Text := eCodigo.Text+'.jpg';
          cxImage.Picture.LoadFromFile(eFoto.Text);
       end;
    except
@@ -561,7 +563,7 @@ begin
       ePesoL.Value                        := FieldByName('PESOLIQ').AsFloat;
       eAtivo.Checked                      := ifs(FieldByName('ATIVOPROD').AsString='S', True, False);
       eUn.Text                            := Fieldbyname('UNPROD').AsString;
-      eFOto.Text                          := Fieldbyname('FOTOPROD').AsString;
+      eFOto.Text                          := StrCaminhoFoto;
       eNcm.Text                           := Fieldbyname('NCMPROD').AsString;
 
       ePrecoCpr.Value                     :=Fieldbyname('PRECOCOMRPA').AsFloat;
@@ -589,10 +591,12 @@ end;
 
 Procedure TFcad_Produto.VerFoto;
 begin
-   if (dmcad.QryProd.Fieldbyname('FOTOPROD').AsString <> '') and (FileExists(dmcad.QryProd.Fieldbyname('FOTOPROD').AsString)) then
+   StrCaminhoFoto := dmCad.qryConf.FieldByName('PASTASERVIDOR').AsString+'\Imagem\FotosProd\'+dmcad.QryProd.Fieldbyname('FOTOPROD').AsString;
+
+   if (StrCaminhoFoto <> '') and (FileExists(StrCaminhoFoto)) then
    begin
       try
-         cxImage1.Picture.LoadFromFile(dmcad.QryProd.Fieldbyname('FOTOPROD').AsString);
+         cxImage1.Picture.LoadFromFile(StrCaminhoFoto);
       except
          cxImage1.Picture := nil;
       end;
@@ -605,7 +609,7 @@ Procedure TFCad_Produto.VisualizaImagem;
 var
    fImagemZoom: TcxImage;
 begin
-   if dmcad.qryProd.FieldByName('FOTOPROD').AsString <> '' then
+   if (StrCaminhoFoto <> '') and FileExists(StrCaminhoFoto) then
    begin
       fVisualizaImagem          := TForm.Create(fVisualizaImagem);
       with fVisualizaImagem do begin
@@ -622,7 +626,7 @@ begin
             Align               := alClient;
             AutoSize            := False;
             Properties.Center   := True;
-            Picture.LoadFromFile(dmcad.qryProd.FieldByName('FOTOPROD').AsString);
+            Picture.LoadFromFile(StrCaminhoFoto);
             Properties.Stretch  := False;
             fImagemZoom.OnClick := FechaVisualizacaoImagem;
          end;

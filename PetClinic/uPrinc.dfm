@@ -25054,7 +25054,7 @@ object FPrinc: TFPrinc
     Options.SaveDelete = True
     Options.SavePostInsert = True
     Options.SavePostEdit = True
-    Options.TypeSavePostEdit = tpSaveAllFields
+    Options.TypeSavePostEdit = tpSaveModifiedFields
     TableHistory.TableName = 'UCTABHistory'
     TableHistory.FieldApplicationID = 'ApplicationID'
     TableHistory.FieldUserID = 'UserID'

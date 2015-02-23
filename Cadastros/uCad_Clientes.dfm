@@ -6,7 +6,7 @@ inherited Fcad_Clientes: TFcad_Clientes
   ExplicitHeight = 571
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnImg: TcxImage [0]
+  inherited pnImg: TcxImage
     Left = 852
     Properties.GraphicClassName = 'TdxPNGImage'
     Style.BorderStyle = ebsFlat
@@ -14,7 +14,7 @@ inherited Fcad_Clientes: TFcad_Clientes
     ExplicitHeight = 540
     Height = 540
   end
-  inherited pnCon: TPanel [1]
+  inherited pnCon: TPanel
     Width = 852
     Height = 540
     TabOrder = 1
@@ -64,22 +64,22 @@ inherited Fcad_Clientes: TFcad_Clientes
         Text = 'C'#211'DIGO'
       end
       inherited cxLabel2: TcxLabel
-        Left = 626
-        ExplicitLeft = 626
+        Left = 652
+        ExplicitLeft = 652
       end
       inherited cbAtivo: TcxComboBox
-        Left = 659
+        Left = 685
         Properties.OnChange = cxConsultaPropertiesChange
         Style.IsFontAssigned = True
         TabOrder = 4
-        ExplicitLeft = 659
+        ExplicitLeft = 685
       end
       inherited cxQtdeReg: TcxLabel
-        Left = 740
-        ExplicitLeft = 740
+        Left = 766
+        ExplicitLeft = 766
       end
       object cxTipoClie: TcxComboBox
-        Left = 473
+        Left = 499
         Top = 1
         Hint = 'Tipo de Cadastro'
         ParentFont = False
@@ -103,7 +103,7 @@ inherited Fcad_Clientes: TFcad_Clientes
         Width = 150
       end
       object cxLabel23: TcxLabel
-        Left = 445
+        Left = 471
         Top = 3
         AutoSize = False
         Caption = 'Tipo:'
@@ -123,7 +123,7 @@ inherited Fcad_Clientes: TFcad_Clientes
         Transparent = True
         Height = 17
         Width = 29
-        AnchorX = 474
+        AnchorX = 500
       end
     end
     inherited pnBotaoCon: TPanel
@@ -200,7 +200,7 @@ inherited Fcad_Clientes: TFcad_Clientes
       end
     end
   end
-  inherited pnCad: TPanel [2]
+  inherited pnCad: TPanel
     Width = 852
     Height = 540
     BevelOuter = bvNone
@@ -224,8 +224,10 @@ inherited Fcad_Clientes: TFcad_Clientes
         ExplicitTop = 1
       end
       inherited cxCancela: TcxButton
+        Left = 136
         Top = 1
         LookAndFeel.SkinName = ''
+        ExplicitLeft = 136
         ExplicitTop = 1
       end
     end

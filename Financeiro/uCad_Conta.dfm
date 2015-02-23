@@ -1100,6 +1100,174 @@ inherited Fcad_Contas: TFcad_Contas
     Height = 539
     ExplicitWidth = 732
     ExplicitHeight = 539
+    object pnSelec: TPanel [0]
+      Left = 1
+      Top = 253
+      Width = 730
+      Height = 234
+      Align = alBottom
+      TabOrder = 4
+      Visible = False
+      object grConsulta2: TcxGrid
+        Left = 1
+        Top = 25
+        Width = 728
+        Height = 208
+        Hint = 'Grid de Dados'
+        Align = alClient
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        BorderStyle = cxcbsNone
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        LookAndFeel.Kind = lfStandard
+        LookAndFeel.NativeStyle = False
+        LookAndFeel.SkinName = 'Office2010Black'
+        RootLevelOptions.TabsForEmptyDetails = False
+        object cxGridDBTableView1: TcxGridDBTableView
+          OnDblClick = cxGridDBTableView1DblClick
+          Navigator.Buttons.CustomButtons = <>
+          OnCustomDrawCell = cxGridDBTableView1CustomDrawCell
+          DataController.DataSource = dmFin.dsSelec
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsData.CancelOnExit = False
+          OptionsData.Deleting = False
+          OptionsData.DeletingConfirmation = False
+          OptionsData.Editing = False
+          OptionsData.Inserting = False
+          OptionsView.NoDataToDisplayInfoText = '<N'#227'o h'#225' registros>'
+          OptionsView.GroupByBox = False
+          object cxGridDBColumn1: TcxGridDBColumn
+            Caption = 'St'
+            DataBinding.FieldName = 'STATUSCONTA'
+            Width = 30
+          end
+          object cxGridDBColumn2: TcxGridDBColumn
+            Caption = 'C'#243'digo'
+            DataBinding.FieldName = 'IDCONTA'
+            Width = 60
+          end
+          object cxGridDBColumn3: TcxGridDBColumn
+            Caption = 'Cliente'
+            DataBinding.FieldName = 'NOMECLIE'
+            Width = 300
+          end
+          object cxGridDBColumn4: TcxGridDBColumn
+            Caption = 'Dt. Emiss'#227'o'
+            DataBinding.FieldName = 'DTEMISSAO'
+            Width = 100
+          end
+          object cxGridDBColumn5: TcxGridDBColumn
+            Caption = 'Documento'
+            DataBinding.FieldName = 'DOCUMENTO'
+            Width = 100
+          end
+          object cxGridDBColumn6: TcxGridDBColumn
+            Caption = 'Dt. Vencto'
+            DataBinding.FieldName = 'DTVENCTO'
+            Width = 100
+          end
+          object cxGridDBColumn7: TcxGridDBColumn
+            Caption = 'Vlr. Inicial'
+            DataBinding.FieldName = 'VLRINI'
+            Width = 75
+          end
+          object cxGridDBColumn8: TcxGridDBColumn
+            Caption = 'Vlr. Juros'
+            DataBinding.FieldName = 'VLRJUROS'
+            Width = 75
+          end
+          object cxGridDBColumn9: TcxGridDBColumn
+            Caption = 'Vlr. Multa'
+            DataBinding.FieldName = 'VLRMULTA'
+            Width = 75
+          end
+          object cxGridDBColumn10: TcxGridDBColumn
+            Caption = 'Vlr. Desc'
+            DataBinding.FieldName = 'VLRDESC'
+            Width = 75
+          end
+          object cxGridDBColumn11: TcxGridDBColumn
+            Caption = 'Vlr. Total'
+            DataBinding.FieldName = 'VLRBRUTO'
+            Width = 75
+          end
+          object cxGridDBTableView1Column1: TcxGridDBColumn
+            Caption = 'Dias Atraso'
+            DataBinding.FieldName = 'DIASATRASO'
+          end
+        end
+        object cxGridLevel1: TcxGridLevel
+          GridView = cxGridDBTableView1
+        end
+      end
+      object pnTop: TPanel
+        Left = 1
+        Top = 1
+        Width = 728
+        Height = 24
+        Align = alTop
+        TabOrder = 1
+        object cxContas: TcxLabel
+          Left = 29
+          Top = 0
+          Caption = 'Contas Selecionadas'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clGray
+          Style.Font.Height = -13
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = [fsBold]
+          Style.HotTrack = False
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clWindowFrame
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.LineOptions.InnerColor = clWindowFrame
+          Properties.LineOptions.OuterColor = clWindowFrame
+          Properties.ShadowedColor = clWindowFrame
+          Transparent = True
+        end
+        object cxTotal: TcxLabel
+          Left = 520
+          Top = 1
+          Align = alRight
+          AutoSize = False
+          Caption = 'Contas Selecionadas'
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clMaroon
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clGray
+          Style.Font.Height = -13
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = [fsBold]
+          Style.HotTrack = False
+          Style.LookAndFeel.NativeStyle = True
+          Style.TextColor = clMaroon
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taLeftJustify
+          Properties.LineOptions.InnerColor = clWindowFrame
+          Properties.LineOptions.OuterColor = clWindowFrame
+          Properties.ShadowedColor = clWindowFrame
+          Transparent = True
+          Height = 22
+          Width = 207
+        end
+      end
+    end
     inherited pnBusca: TPanel
       Width = 730
       ExplicitWidth = 730
@@ -1115,34 +1283,38 @@ inherited Fcad_Contas: TFcad_Contas
           'Data Vencimento')
         Text = 'C'#211'DIGO'
       end
+      inherited eConsulta: TcxTextEdit
+        ExplicitWidth = 235
+        Width = 235
+      end
       inherited cxLabel2: TcxLabel
-        Left = 563
-        Top = -2
+        Left = 562
         Visible = False
-        ExplicitLeft = 563
-        ExplicitTop = -2
+        ExplicitLeft = 562
       end
       inherited cbAtivo: TcxComboBox
-        Left = 595
-        Top = -4
+        Left = 594
         Style.IsFontAssigned = True
         Visible = False
-        ExplicitLeft = 595
-        ExplicitTop = -4
+        ExplicitLeft = 594
+      end
+      inherited cxCon: TcxButton
+        Left = 413
+        ExplicitLeft = 413
       end
       inherited cxQtdeReg: TcxLabel
-        Left = 592
-        ExplicitLeft = 592
+        Top = 3
+        ExplicitTop = 3
       end
       object cxLabel25: TcxLabel
-        Left = 446
+        Left = 445
         Top = 3
         Caption = 'Status:'
         Style.TextColor = clBlack
         Transparent = True
       end
       object cxStatus: TcxComboBox
-        Left = 484
+        Left = 483
         Top = 1
         ParentFont = False
         Properties.CharCase = ecUpperCase
@@ -1583,174 +1755,6 @@ inherited Fcad_Contas: TFcad_Contas
           Caption = 'C'#243'd. Origem'
           DataBinding.FieldName = 'IDORIGEM'
           Width = 75
-        end
-      end
-    end
-    object pnSelec: TPanel
-      Left = 1
-      Top = 253
-      Width = 730
-      Height = 234
-      Align = alBottom
-      TabOrder = 4
-      Visible = False
-      object grConsulta2: TcxGrid
-        Left = 1
-        Top = 25
-        Width = 728
-        Height = 208
-        Hint = 'Grid de Dados'
-        Align = alClient
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        BorderStyle = cxcbsNone
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        LookAndFeel.Kind = lfStandard
-        LookAndFeel.NativeStyle = False
-        LookAndFeel.SkinName = 'Office2010Black'
-        RootLevelOptions.TabsForEmptyDetails = False
-        object cxGridDBTableView1: TcxGridDBTableView
-          OnDblClick = cxGridDBTableView1DblClick
-          Navigator.Buttons.CustomButtons = <>
-          OnCustomDrawCell = cxGridDBTableView1CustomDrawCell
-          DataController.DataSource = dmFin.dsSelec
-          DataController.Summary.DefaultGroupSummaryItems = <>
-          DataController.Summary.FooterSummaryItems = <>
-          DataController.Summary.SummaryGroups = <>
-          OptionsData.CancelOnExit = False
-          OptionsData.Deleting = False
-          OptionsData.DeletingConfirmation = False
-          OptionsData.Editing = False
-          OptionsData.Inserting = False
-          OptionsView.NoDataToDisplayInfoText = '<N'#227'o h'#225' registros>'
-          OptionsView.GroupByBox = False
-          object cxGridDBColumn1: TcxGridDBColumn
-            Caption = 'St'
-            DataBinding.FieldName = 'STATUSCONTA'
-            Width = 30
-          end
-          object cxGridDBColumn2: TcxGridDBColumn
-            Caption = 'C'#243'digo'
-            DataBinding.FieldName = 'IDCONTA'
-            Width = 60
-          end
-          object cxGridDBColumn3: TcxGridDBColumn
-            Caption = 'Cliente'
-            DataBinding.FieldName = 'NOMECLIE'
-            Width = 300
-          end
-          object cxGridDBColumn4: TcxGridDBColumn
-            Caption = 'Dt. Emiss'#227'o'
-            DataBinding.FieldName = 'DTEMISSAO'
-            Width = 100
-          end
-          object cxGridDBColumn5: TcxGridDBColumn
-            Caption = 'Documento'
-            DataBinding.FieldName = 'DOCUMENTO'
-            Width = 100
-          end
-          object cxGridDBColumn6: TcxGridDBColumn
-            Caption = 'Dt. Vencto'
-            DataBinding.FieldName = 'DTVENCTO'
-            Width = 100
-          end
-          object cxGridDBColumn7: TcxGridDBColumn
-            Caption = 'Vlr. Inicial'
-            DataBinding.FieldName = 'VLRINI'
-            Width = 75
-          end
-          object cxGridDBColumn8: TcxGridDBColumn
-            Caption = 'Vlr. Juros'
-            DataBinding.FieldName = 'VLRJUROS'
-            Width = 75
-          end
-          object cxGridDBColumn9: TcxGridDBColumn
-            Caption = 'Vlr. Multa'
-            DataBinding.FieldName = 'VLRMULTA'
-            Width = 75
-          end
-          object cxGridDBColumn10: TcxGridDBColumn
-            Caption = 'Vlr. Desc'
-            DataBinding.FieldName = 'VLRDESC'
-            Width = 75
-          end
-          object cxGridDBColumn11: TcxGridDBColumn
-            Caption = 'Vlr. Total'
-            DataBinding.FieldName = 'VLRBRUTO'
-            Width = 75
-          end
-          object cxGridDBTableView1Column1: TcxGridDBColumn
-            Caption = 'Dias Atraso'
-            DataBinding.FieldName = 'DIASATRASO'
-          end
-        end
-        object cxGridLevel1: TcxGridLevel
-          GridView = cxGridDBTableView1
-        end
-      end
-      object pnTop: TPanel
-        Left = 1
-        Top = 1
-        Width = 728
-        Height = 24
-        Align = alTop
-        TabOrder = 1
-        object cxContas: TcxLabel
-          Left = 29
-          Top = 0
-          Caption = 'Contas Selecionadas'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clGray
-          Style.Font.Height = -13
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = [fsBold]
-          Style.HotTrack = False
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clWindowFrame
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.LineOptions.InnerColor = clWindowFrame
-          Properties.LineOptions.OuterColor = clWindowFrame
-          Properties.ShadowedColor = clWindowFrame
-          Transparent = True
-        end
-        object cxTotal: TcxLabel
-          Left = 520
-          Top = 1
-          Align = alRight
-          AutoSize = False
-          Caption = 'Contas Selecionadas'
-          ParentColor = False
-          ParentFont = False
-          Style.Color = clMaroon
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clGray
-          Style.Font.Height = -13
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = [fsBold]
-          Style.HotTrack = False
-          Style.LookAndFeel.NativeStyle = True
-          Style.TextColor = clMaroon
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taLeftJustify
-          Properties.LineOptions.InnerColor = clWindowFrame
-          Properties.LineOptions.OuterColor = clWindowFrame
-          Properties.ShadowedColor = clWindowFrame
-          Transparent = True
-          Height = 22
-          Width = 207
         end
       end
     end

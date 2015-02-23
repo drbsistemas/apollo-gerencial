@@ -101,6 +101,10 @@ type
     cdsSelecVLRJUROSINI: TFloatField;
     cdsSelecVLRMULTAINI: TFloatField;
     cdsSelecVLRDESCINI: TFloatField;
+    UpdtCheque: TFDUpdateSQL;
+    dsCheque: TDataSource;
+    qryCheque: TFDQuery;
+    uHis_Cheque: TUCHist_DataSet;
     procedure qryCreditoAfterInsert(DataSet: TDataSet);
     procedure qryContaAfterInsert(DataSet: TDataSet);
     procedure qryContaRateioAfterInsert(DataSet: TDataSet);

@@ -625,7 +625,7 @@ object dmFin: TdmFin
     DataSet = qryContaRateio
     ControlHistorico = FPrinc.uHistorico
     Left = 91
-    Top = 137
+    Top = 136
   end
   object UpdtCaixa: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -752,7 +752,7 @@ object dmFin: TdmFin
     DataSet = qryCaixa
     ControlHistorico = FPrinc.uHistorico
     Left = 124
-    Top = 133
+    Top = 136
   end
   object UpdtCaixaItem: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -838,7 +838,7 @@ object dmFin: TdmFin
     DataSet = qryCaixaItem
     ControlHistorico = FPrinc.uHistorico
     Left = 157
-    Top = 133
+    Top = 136
   end
   object UpdtCaixaFechamento: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -904,6 +904,77 @@ object dmFin: TdmFin
     DataSet = qryCaixaFechamento
     ControlHistorico = FPrinc.uHistorico
     Left = 197
-    Top = 133
+    Top = 136
+  end
+  object UpdtCheque: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO CAIXAFECHAMENTO'
+      '(IDFECHAMENTO, IDCAIXA, DTMOVIMENTO, SALDOANTERIOR, '
+      '  SALDOATUAL, USUARIO, CANCELADO, TIPOMOV)'
+      
+        'VALUES (:NEW_IDFECHAMENTO, :NEW_IDCAIXA, :NEW_DTMOVIMENTO, :NEW_' +
+        'SALDOANTERIOR, '
+      '  :NEW_SALDOATUAL, :NEW_USUARIO, :NEW_CANCELADO, :NEW_TIPOMOV)'
+      
+        'RETURNING IDFECHAMENTO, IDCAIXA, DTMOVIMENTO, SALDOANTERIOR, SAL' +
+        'DOATUAL, USUARIO, CANCELADO, TIPOMOV')
+    ModifySQL.Strings = (
+      'UPDATE CAIXAFECHAMENTO'
+      
+        'SET IDFECHAMENTO = :NEW_IDFECHAMENTO, IDCAIXA = :NEW_IDCAIXA, DT' +
+        'MOVIMENTO = :NEW_DTMOVIMENTO, '
+      
+        '  SALDOANTERIOR = :NEW_SALDOANTERIOR, SALDOATUAL = :NEW_SALDOATU' +
+        'AL, '
+      
+        '  USUARIO = :NEW_USUARIO, CANCELADO = :NEW_CANCELADO, TIPOMOV = ' +
+        ':NEW_TIPOMOV'
+      'WHERE IDFECHAMENTO = :OLD_IDFECHAMENTO'
+      
+        'RETURNING IDFECHAMENTO, IDCAIXA, DTMOVIMENTO, SALDOANTERIOR, SAL' +
+        'DOATUAL, USUARIO, CANCELADO, TIPOMOV')
+    DeleteSQL.Strings = (
+      'DELETE FROM CAIXAFECHAMENTO'
+      'WHERE IDFECHAMENTO = :OLD_IDFECHAMENTO')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDFECHAMENTO, IDCAIXA, DTMOVIMENTO, SALDOANTERIOR, SALDOA' +
+        'TUAL, '
+      '  USUARIO, CANCELADO, TIPOMOV'
+      'FROM CAIXAFECHAMENTO'
+      'WHERE IDFECHAMENTO = :IDFECHAMENTO')
+    Left = 233
+    Top = 46
+  end
+  object dsCheque: TDataSource
+    DataSet = qryCheque
+    Left = 233
+    Top = 89
+  end
+  object qryCheque: TFDQuery
+    AfterInsert = qryCaixaFechamentoAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
+    UpdateObject = UpdtCheque
+    SQL.Strings = (
+      'select A.*, C.BANCO, D.NOMEPLANO, E.FANTASIA '
+      'from cheque A'
+      'left join caixa B on A.IDCAIXA = B.IDCAIXA'
+      'left join banco C on B.IDBANCO = C.IDBANCO'
+      'left join PLANOCONTA D on A.IDPLANO = D.IDPLANO'
+      'left join CLIENTE E on A.IDCLIE = E.IDCLIE')
+    Left = 233
+    Top = 2
+  end
+  object uHis_Cheque: TUCHist_DataSet
+    DataSet = qryCheque
+    ControlHistorico = FPrinc.uHistorico
+    Left = 233
+    Top = 136
   end
 end

@@ -8,16 +8,25 @@ Uses
 type
    TTipoValor = (PJUROS, PMULTA);
 
+Const
+   intDinheiro       = 1;
+   intCartao         = 2;
+   intChequeProrio   = 3;
+   intCheuqeTerceiro = 4;
+
    // Calculos Financeiros
    FUNCTION CalculaValorAtualizado(tipoValor: TTipoValor; DData: TDateTime; FValorCalcula, FValorinicial: Double; intDiaAtraso: Integer): Double;
    FUNCTION CalculaDiasAtraso(DData: TDateTime; intDiaAtraso: Integer): Integer;
-   PROCEDURE AtualizaEMarcaConta(intConta: Integer; bAtualiza:Boolean);
+   PROCEDURE AtualizaEMarcaConta(DData:TDateTime; intConta: Integer; bAtualiza:Boolean);
 
    // Lançamentos Financeiros
    PROCEDURE LancaAdiantamento(DData: TDateTime; StrDoc, StrDescricao: String; FSAldoAntes, FCredito, FDebito: Double;
       IntCodCLie: Integer );
    FUNCTION LancamentoCaixa(DataBaixa: TDateTime; StrDocumento, StrHistorico: string;
       Fcredito, FDebito: Double; intFpagto, intPlanoConta, intConta, intLote: Integer): Boolean;
+
+   // Pega Dados Financeiros
+   FUNCTION PegaNumeroParaLoteDeBaixa(): Integer;
 
 
 implementation
@@ -124,7 +133,7 @@ begin
    Result         := 0;
 end;
 
-procedure AtualizaEMarcaConta(intConta: Integer; bAtualiza:Boolean);
+procedure AtualizaEMarcaConta(DData: TDateTime; intConta: Integer; bAtualiza:Boolean);
 begin
    with dmFin do
    begin
@@ -148,7 +157,7 @@ begin
          cdsSelecDTVENCTO.AsDateTIme   := qryConta.FieldByName('DTVENCTO').AsDateTIme;
          cdsSelecDTEMISSAO.AsDateTime  := qryConta.FieldByName('DTEMISSAO').AsDateTIme;
 
-         cdsSelecDIASATRASO.AsInteger  := CalculaDiasAtraso(Date, DaysBetween(Date, qryConta.FieldByName('DTVENCTO').AsDateTime));
+         cdsSelecDIASATRASO.AsInteger  := CalculaDiasAtraso(DData, DaysBetween(DData, qryConta.FieldByName('DTVENCTO').AsDateTime));
          cdsSelecVLRINI.AsFloat        := qryConta.FieldByName('VLRINI').ASFloat;
 
          cdsSelecVLRJUROSINI.AsFloat   := qryConta.FieldByName('VLRJUROS').ASFLoat;
@@ -176,6 +185,26 @@ begin
          cdsSelec.Post;
       end else
          cdsSelec.DELETE;
+   end;
+end;
+
+Function PegaNumeroParaLoteDeBaixa(): Integer;
+begin
+   ConsultaSql('SELECT GEN_ID(GEN_IDLOTE,1) CODIGO FROM DUAL',dmFin.qryAux);
+   Result := dmFin.qryAux.FieldByName('CODIGO').asInteger;
+end;
+
+
+Procedure LancaBaixaNoCaixa(intLote: Integer);
+begin
+   with dmFin do
+   begin
+      cdsSelec.First;
+      while not cdsSelec.Eof do
+      begin
+
+         cdsSelec.Next
+      end;
    end;
 end;
 

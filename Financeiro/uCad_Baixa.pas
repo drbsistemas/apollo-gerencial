@@ -12,7 +12,8 @@ uses
   cxRadioGroup, cxCurrencyEdit, cxTextEdit, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid,
   cxMaskEdit, cxDropDownEdit, cxCalendar, cxLabel, Vcl.ExtCtrls, Vcl.Menus,
-  Vcl.StdCtrls, cxButtons, Datasnap.DBClient;
+  Vcl.StdCtrls, cxButtons, Datasnap.DBClient,
+  uRotinaLancamentoFinanceiro;
 
 type
   TFcad_Baixa = class(TForm)
@@ -63,7 +64,7 @@ type
     cxOpcao: TcxRadioGroup;
     DBGrid1: TDBGrid;
     pnMenu: TPanel;
-    cxSalvar: TcxButton;
+    cxBaixar: TcxButton;
     cxCancela: TcxButton;
     cdsFPagto: TClientDataSet;
     dsFPagto: TDataSource;
@@ -92,10 +93,11 @@ type
       Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure cxSalvarClick(Sender: TObject);
+    procedure cxBaixarClick(Sender: TObject);
     procedure cxGridDBTableView1CustomDrawCell(Sender: TcxCustomGridTableView;
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
       var ADone: Boolean);
+    procedure eDataExit(Sender: TObject);
   private
     procedure CalculaBaixa;
     procedure PreencheFPagto;
@@ -104,6 +106,7 @@ type
     procedure GeraTroco;
     procedure ApagaBaixa;
     procedure AbreCds;
+    procedure ValidaFinalizacao;
     { Private declarations }
   public
     { Public declarations }
@@ -121,7 +124,6 @@ uses udmFin, uRotinas, uRotinaDeCalculosMovimentacao;
 
 Procedure TFcad_Baixa.CalculaBaixa;
 begin
-   eData.DAte := DAte;
    with dmFin do
    begin
       cdsSelec.DisableControls;
@@ -136,6 +138,7 @@ begin
    /////
       while not cdsSelec.eof do
       begin
+         AtualizaEMarcaConta(eData.Date, cdsSelecIDCONTA.AsInteger, True);
          eVlrIni.Value     := eVlrIni.Value + cdsSelecVLRINI.Value;
          eJuros.Value      := ejuros.VAlue + (cdsSelecVLRJUROS.Value + cdsSelecVLRMULTA.Value);
          eDesc.Value       := eDesc.Value + cdsSelecVLRDESC.Value;
@@ -187,9 +190,29 @@ begin
    end;
 end;
 
-procedure TFcad_Baixa.cxSalvarClick(Sender: TObject);
+procedure TFcad_Baixa.cxBaixarClick(Sender: TObject);
+var
+   intLote: Integer;
 begin
-   //
+///// Valida Baixa
+   ValidaFinalizacao;
+
+///// Determina o Numero do Lote
+   intLote := PegaNumeroParaLoteDeBaixa;
+{   if intLote > 0 then
+   begin
+      ///// Lanca no banco
+      LancaCaixa(intLote);
+      ///// Lança Cheques
+      LancaCheques(intLote);
+      ///// Baixa duplicatas
+      QuitaContas(intLote);
+      ///// Imprime Recibo se tiver marcado
+   if cxOpcao.ItemIndex =1 then
+      ImprimeRecibo;
+      ///// Fecha o FOrm
+      close;
+   end; }
 end;
 
 procedure TFcad_Baixa.eCodFpagtoExit(Sender: TObject);
@@ -204,7 +227,7 @@ begin
 
       if (qryAux.fieldbyname('IDGENERICA').AsInteger<=0) or ((TipoMov = ENTRADA) and (qryAux.fieldbyname('IDGENERICA').AsInteger=4)) then
       begin
-         Msg('A forma de pagamento escolhida é inválida, verifique na tabela ao lado!','I',':P');
+         Msg('A forma de pagamento escolhida é inválida, verifique o código na tabela ao lado!','I',':P');
          eCodFpagto.Text := '0';
          eFpagto.Clear;
          ecodFpagto.SetFocus;
@@ -222,6 +245,11 @@ end;
 procedure TFcad_Baixa.eCodFpagtoKeyPress(Sender: TObject; var Key: Char);
 begin
    if not (key in ['0'..'9', #8, ',']) then key := #0;
+end;
+
+procedure TFcad_Baixa.eDataExit(Sender: TObject);
+begin
+   CalculaBaixa;
 end;
 
 procedure TFcad_Baixa.eVlrPagoExit(Sender: TObject);
@@ -245,6 +273,7 @@ end;
 
 procedure TFcad_Baixa.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+   Fcad_Baixa := NIl;
    Action := CaFree;
 end;
 
@@ -266,7 +295,7 @@ begin
    end;
 //// Baixar (F4)
    if Key = Vk_F4 then
-      cxSalvarClick(self);
+      cxBaixarClick(self);
 
 ///// Cancelar (F10)
    if key = VK_F10 then
@@ -284,6 +313,7 @@ end;
 
 procedure TFcad_Baixa.FormShow(Sender: TObject);
 begin
+   eData.DAte := DAte;
    CalculaBaixa;
    AbreCds;
    PreencheFPagto;
@@ -383,6 +413,22 @@ begin
    cdsBaixa.CreateDataSet;
    cdsBaixa.Open;
    cdsBaixa.EmptyDataSet;
+end;
+
+procedure TFcad_Baixa.ValidaFinalizacao;
+begin
+   if eRestante.Value <> 0 then
+   begin
+      Msg('Verificamos que existe valor restante para quitação, verifique!', 'I', ':|');
+      ecodFpagto.SetFocus;
+      abort;
+   end;
+   if (DATAVALIDA(edata.Text)='') or (edata.Date > Date) then
+   begin
+      Msg('Verificamos que a data para baixa é inválida, verifique!', 'I', ':|');
+      eData.SetFocus;
+      abort;
+   end;
 end;
 
 end.
