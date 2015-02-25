@@ -178,10 +178,6 @@
             <Form>FCad_Credito</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Financeiro\uPaiFinanceiro.pas">
-            <Form>Fcad_PaiFinanceiro</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="..\Rotinas\uConsultaDadosCliente.pas"/>
         <DCCReference Include="..\Financeiro\udmFin.pas">
             <Form>dmFin</Form>
@@ -224,6 +220,10 @@
         </DCCReference>
         <DCCReference Include="..\Financeiro\uCad_Cheque.pas">
             <Form>Fcad_Cheque</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Financeiro\uCad_PaiFinanceiro.pas">
+            <Form>Fcad_PaiFinanceiro</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Debug">

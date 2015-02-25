@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPaiFinanceiro, cxGraphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCad_PaiFinanceiro, cxGraphics,
   cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, dxSkinsCore, dxSkinBlack,
   dxSkinBlue, dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom,
   dxSkinDarkSide, dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
@@ -21,7 +21,8 @@ uses
   cxNavigator, Data.DB, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid,
   cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLabel, Vcl.StdCtrls, cxButtons,
-  Vcl.ExtCtrls, cxCurrencyEdit, Vcl.ComCtrls, dxCore, cxDateUtils, cxCalendar;
+  Vcl.ExtCtrls, cxCurrencyEdit, Vcl.ComCtrls, dxCore, cxDateUtils, cxCalendar,
+  RxMenus, dxGDIPlusClasses, cxImage;
 
 type
   TFCad_Credito = class(TFcad_PaiFinanceiro)
@@ -35,11 +36,6 @@ type
     grConsultaDBTableView1Column4: TcxGridDBColumn;
     eTotalCredito: TcxCurrencyEdit;
     cxLabel11: TcxLabel;
-    cxBaixaValor: TcxButton;
-    cxLabel4: TcxLabel;
-    eVlrBaixa: TcxCurrencyEdit;
-    cxLabel5: TcxLabel;
-    cxCurrencyEdit1: TcxCurrencyEdit;
     eData: TcxDateEdit;
     cxLabel14: TcxLabel;
     cxLabel6: TcxLabel;
@@ -48,10 +44,17 @@ type
     eDescricao: TcxTextEdit;
     eDocumento: TcxTextEdit;
     cxLabel7: TcxLabel;
+    Panel2: TPanel;
+    cxBaixaValor: TcxButton;
+    eVlrBaixa: TcxCurrencyEdit;
+    cxLabel4: TcxLabel;
+    cxCurrencyEdit1: TcxCurrencyEdit;
+    cxLabel5: TcxLabel;
     procedure cxVoltarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure cxNovoClick(Sender: TObject);
     procedure cxSalvarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     procedure Consulta;
     procedure LimpaItemDinheiro;
@@ -72,7 +75,6 @@ uses udmFin, uRotinas, uDmCad, uPrinc, uRotinaLancamentoFinanceiro;
 procedure TFCad_Credito.cxNovoClick(Sender: TObject);
 begin
    inherited;
-   MOstraPainelCadastro(Cad);
    LimpaItemDinheiro;
 end;
 
@@ -103,9 +105,15 @@ begin
    Close;
 end;
 
+procedure TFCad_Credito.FormCreate(Sender: TObject);
+begin
+//  inherited;
+
+end;
+
 procedure TFCad_Credito.FormShow(Sender: TObject);
 begin
-   inherited;
+//   inherited;
    Consulta;
 end;
 

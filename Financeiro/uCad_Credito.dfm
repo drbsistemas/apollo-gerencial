@@ -1,26 +1,25 @@
 inherited FCad_Credito: TFCad_Credito
   BorderIcons = []
   Caption = 'Cr'#233'dito de Cliente'
-  ClientWidth = 702
+  ClientWidth = 906
   FormStyle = fsNormal
   Visible = False
   WindowState = wsNormal
-  ExplicitWidth = 710
-  ExplicitHeight = 571
+  ExplicitTop = -15
+  ExplicitWidth = 914
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnCad: TPanel
     Top = 23
-    Width = 702
-    Height = 517
-    ExplicitLeft = 0
+    Width = 848
+    Height = 547
     ExplicitTop = 23
-    ExplicitWidth = 702
-    ExplicitHeight = 517
+    ExplicitWidth = 644
+    ExplicitHeight = 547
     inherited pnMenu: TPanel
-      Width = 700
+      Width = 846
       TabOrder = 4
-      ExplicitWidth = 700
+      ExplicitWidth = 642
     end
     object eData: TcxDateEdit
       Left = 137
@@ -193,19 +192,29 @@ inherited FCad_Credito: TFCad_Credito
       AnchorX = 135
     end
   end
+  inherited pnImg: TcxImage
+    Left = 848
+    Top = 23
+    TabOrder = 3
+    ExplicitLeft = 644
+    ExplicitTop = 23
+    ExplicitHeight = 547
+    Height = 547
+  end
   inherited pnCon: TPanel
     Top = 23
-    Width = 702
-    Height = 517
+    Width = 848
+    Height = 547
+    ExplicitLeft = 0
     ExplicitTop = 23
-    ExplicitWidth = 702
-    ExplicitHeight = 517
+    ExplicitWidth = 644
+    ExplicitHeight = 547
     inherited pnBusca: TPanel
       Top = 52
-      Width = 700
+      Width = 846
       Visible = False
       ExplicitTop = 52
-      ExplicitWidth = 700
+      ExplicitWidth = 642
       inherited cxLabel1: TcxLabel
         Left = 9
         ExplicitLeft = 9
@@ -237,27 +246,17 @@ inherited FCad_Credito: TFCad_Credito
       end
     end
     inherited pnBotaoCad: TPanel
-      Width = 700
+      Width = 846
       Height = 51
-      ExplicitWidth = 700
+      ExplicitWidth = 642
       ExplicitHeight = 51
-      inherited cxVoltar: TcxButton
-        Left = 124
-        OnClick = cxVoltarClick
-        ExplicitLeft = 124
-      end
       inherited cxNovo: TcxButton
-        Top = 0
         Caption = '&Dinheiro'
-        OnClick = cxNovoClick
-        ExplicitTop = 0
       end
       inherited cxEdita: TcxButton
         Left = 398
-        Top = 0
         Visible = False
         ExplicitLeft = 398
-        ExplicitTop = 0
       end
       inherited cxVer: TcxButton
         Left = 457
@@ -268,6 +267,10 @@ inherited FCad_Credito: TFCad_Credito
         Left = 516
         Visible = False
         ExplicitLeft = 516
+      end
+      inherited cxVoltar: TcxButton
+        Left = 116
+        ExplicitLeft = 116
       end
       inherited cxPrint: TcxButton
         Left = 634
@@ -280,14 +283,29 @@ inherited FCad_Credito: TFCad_Credito
         ExplicitLeft = 575
       end
     end
+    inherited pnBotaoCon: TPanel
+      Top = 499
+      Width = 846
+      Height = 47
+      Visible = False
+      ExplicitTop = 500
+      ExplicitWidth = 642
+      ExplicitHeight = 47
+      inherited cxCadastro: TcxButton
+        TabOrder = 1
+      end
+      inherited cxFechar: TcxButton
+        TabOrder = 0
+      end
+    end
     inherited grConsulta: TcxGrid
       Top = 75
-      Width = 700
-      Height = 401
+      Width = 846
+      Height = 149
       ExplicitLeft = 1
       ExplicitTop = 75
-      ExplicitWidth = 700
-      ExplicitHeight = 167
+      ExplicitWidth = 642
+      ExplicitHeight = 431
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmFin.dsCredito
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
@@ -319,17 +337,43 @@ inherited FCad_Credito: TFCad_Credito
         end
       end
     end
-    inherited pnBotaoCon: TPanel
-      Top = 476
-      Width = 700
-      Height = 40
-      Visible = False
-      ExplicitTop = 476
+    inherited pnSelec: TPanel
+      Top = 224
+      Width = 846
+      ExplicitLeft = 650
+      ExplicitTop = 150
       ExplicitWidth = 700
-      ExplicitHeight = 40
+      inherited grConsulta2: TcxGrid
+        Width = 844
+        ExplicitWidth = 698
+      end
+      inherited pnTop: TPanel
+        Width = 844
+        ExplicitWidth = 698
+        inherited cxContas: TcxLabel
+          Style.IsFontAssigned = True
+        end
+        inherited cxTotal: TcxLabel
+          Left = 636
+          Style.IsFontAssigned = True
+          ExplicitLeft = 490
+        end
+      end
+    end
+    object Panel2: TPanel
+      Left = 1
+      Top = 458
+      Width = 846
+      Height = 41
+      Align = alBottom
+      Caption = 'Panel2'
+      TabOrder = 5
+      Visible = False
+      ExplicitLeft = -15
+      ExplicitTop = 449
       object cxBaixaValor: TcxButton
-        Left = 645
-        Top = 1
+        Left = 649
+        Top = 2
         Width = 55
         Height = 39
         Hint = 'Confirma Valor para Baixa'
@@ -472,27 +516,6 @@ inherited FCad_Credito: TFCad_Credito
         ShowHint = True
         TabOrder = 0
       end
-      object cxLabel4: TcxLabel
-        Left = 456
-        Top = 12
-        Caption = 'Valor para Baixa:'
-        ParentFont = False
-        Style.Font.Charset = ANSI_CHARSET
-        Style.Font.Color = clMaroon
-        Style.Font.Height = -11
-        Style.Font.Name = 'Segoe UI'
-        Style.Font.Style = [fsBold]
-        Style.LookAndFeel.NativeStyle = True
-        Style.TextColor = clBlack
-        Style.IsFontAssigned = True
-        StyleDisabled.LookAndFeel.NativeStyle = True
-        StyleFocused.LookAndFeel.NativeStyle = True
-        StyleHot.LookAndFeel.NativeStyle = True
-        StyleHot.TextColor = clBlack
-        Properties.Alignment.Horz = taLeftJustify
-        Properties.LabelEffect = cxleCool
-        Transparent = True
-      end
       object eVlrBaixa: TcxCurrencyEdit
         Left = 547
         Top = 10
@@ -513,13 +536,13 @@ inherited FCad_Credito: TFCad_Credito
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 2
+        TabOrder = 1
         Width = 96
       end
-      object cxLabel5: TcxLabel
-        Left = 268
+      object cxLabel4: TcxLabel
+        Left = 456
         Top = 12
-        Caption = 'Valor '#225' Receber:'
+        Caption = 'Valor para Baixa:'
         ParentFont = False
         Style.Font.Charset = ANSI_CHARSET
         Style.Font.Color = clMaroon
@@ -557,44 +580,40 @@ inherited FCad_Credito: TFCad_Credito
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 4
+        TabOrder = 3
         Width = 96
       end
-    end
-    inherited pnSelec: TPanel
-      Left = 650
-      Top = 150
-      Width = 700
-      Align = alNone
-      Visible = True
-      ExplicitLeft = 650
-      ExplicitTop = 150
-      ExplicitWidth = 700
-      inherited grConsulta2: TcxGrid
-        Width = 698
-        ExplicitWidth = 698
-      end
-      inherited pnTop: TPanel
-        Width = 698
-        ExplicitWidth = 698
-        inherited cxContas: TcxLabel
-          Style.IsFontAssigned = True
-        end
-        inherited cxTotal: TcxLabel
-          Left = 490
-          Style.IsFontAssigned = True
-          ExplicitLeft = 490
-        end
+      object cxLabel5: TcxLabel
+        Left = 268
+        Top = 12
+        Caption = 'Valor '#225' Receber:'
+        ParentFont = False
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clMaroon
+        Style.Font.Height = -11
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.NativeStyle = True
+        Style.TextColor = clBlack
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        StyleHot.TextColor = clBlack
+        Properties.Alignment.Horz = taLeftJustify
+        Properties.LabelEffect = cxleCool
+        Transparent = True
       end
     end
   end
-  object Panel1: TPanel
+  object Panel1: TPanel [3]
     Left = 0
     Top = 0
-    Width = 702
+    Width = 906
     Height = 23
     Align = alTop
     TabOrder = 2
+    ExplicitWidth = 702
     object cxLabel3: TcxLabel
       Left = -11
       Top = 3

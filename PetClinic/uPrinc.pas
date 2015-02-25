@@ -115,6 +115,11 @@ type
     tIcon: TTrayIcon;
     popTray: TPopupMenu;
     ForarFechamentodoSistema1: TMenuItem;
+    dxBarSubItem2: TdxBarSubItem;
+    cxChequeProprio: TdxBarLargeButton;
+    cxChequeTerceiro: TdxBarLargeButton;
+    ActChequeProprio: TAction;
+    ActChequeTerceiros: TAction;
    //
     procedure PegaNomeForm(var Msg: TMsg; var Handled: Boolean);
     procedure MostraNomeForm(Str: String);
@@ -152,6 +157,8 @@ type
     procedure cxCaixaClick(Sender: TObject);
     procedure tIconClick(Sender: TObject);
     procedure ForarFechamentodoSistema1Click(Sender: TObject);
+    procedure ActChequeTerceirosExecute(Sender: TObject);
+    procedure ActChequeProprioExecute(Sender: TObject);
    private
     procedure MostraResumoDoSistema;
       { Private declarations }
@@ -170,7 +177,7 @@ uses uRotinas, uConexao, uMsg, uDmCon, uDmCad, uCad_Clientes,
   uCad_Animais, uCon_Generica, uDmRel, uCad_Empresa, uCad_Produto, uCad_Balanco,
   uCad_Pedido, udmMov, uCad_Pagto, uRotinaDeCalculosMovimentacao, udmFin,
   uCon_Relatorio, LoginWindow_U, uCad_Conta, uCad_PlanoConta, uCad_Parametro,
-  uCad_Caixa;
+  uCad_Caixa, uCad_Cheque;
 
 procedure TFPrinc.cxCadastroUsuarioClick(Sender: TObject);
 begin
@@ -279,6 +286,18 @@ procedure TFPrinc.ActAnimaisExecute(Sender: TObject);
 begin
    if Fcad_Animais = nil then
       AbreTelaComShowModal(TFcad_Animais, TObject(Fcad_Animais), NIL, '');
+end;
+
+procedure TFPrinc.ActChequeProprioExecute(Sender: TObject);
+begin
+   TipoMov := ENTRADA;
+   ExecutaForm(TFcad_Cheque, TObject(Fcad_Cheque));
+end;
+
+procedure TFPrinc.ActChequeTerceirosExecute(Sender: TObject);
+begin
+   TipoMov := SAIDA;
+   ExecutaForm(TFcad_Cheque, TObject(Fcad_Cheque));
 end;
 
 procedure TFPrinc.ActClienteExecute(Sender: TObject);

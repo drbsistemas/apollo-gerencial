@@ -4,55 +4,61 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPai, cxGraphics, cxLookAndFeels,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCad_PaiFinanceiro, cxGraphics, cxLookAndFeels,
   cxLookAndFeelPainters, Vcl.Menus, cxControls, cxContainer, cxEdit, cxStyles,
   cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator, Data.DB, cxDBData,
   RxMenus, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxLabel, dxGDIPlusClasses, cxImage, Vcl.StdCtrls,
   cxButtons, Vcl.ExtCtrls, Vcl.ComCtrls, dxCore, cxDateUtils, cxButtonEdit,
-  cxCalendar, cxCurrencyEdit;
+  cxCalendar, cxCurrencyEdit, uRotinaDeCalculosMovimentacao;
 
 type
-  TFcad_Cheque = class(TFcad_Pai)
+  TFcad_Cheque = class(TFcad_PaiFinanceiro)
     cxLabel3: TcxLabel;
     eCodigo: TcxTextEdit;
     cxLabel4: TcxLabel;
-    eDtLancamento: TcxDateEdit;
+    eDtEmissao: TcxDateEdit;
     cxLabel5: TcxLabel;
     eCodPlano: TcxButtonEdit;
     ePlanoCta: TcxTextEdit;
-    cxLabel6: TcxLabel;
-    eDocumento: TcxTextEdit;
     cxLabel7: TcxLabel;
     eDtVencimento: TcxDateEdit;
     cxLabel8: TcxLabel;
-    cxDateEdit1: TcxDateEdit;
+    eDtCompensacao: TcxDateEdit;
     pnTerceiro: TPanel;
-    cxTextEdit1: TcxTextEdit;
+    eNBanco: TcxTextEdit;
     cxLabel9: TcxLabel;
-    cxTextEdit2: TcxTextEdit;
+    eNAgencia: TcxTextEdit;
     cxLabel10: TcxLabel;
-    eValorInicial: TcxCurrencyEdit;
+    eVlrCheque: TcxCurrencyEdit;
     cxLabel11: TcxLabel;
     eObs: TcxTextEdit;
     cxLabel12: TcxLabel;
-    cxTextEdit3: TcxTextEdit;
+    ePortador: TcxTextEdit;
     cxLabel13: TcxLabel;
     cxLabel14: TcxLabel;
     eStatus: TcxTextEdit;
     cxLabel15: TcxLabel;
-    cxTextEdit4: TcxTextEdit;
+    cbStatus: TcxTextEdit;
     cxLabel16: TcxLabel;
-    cxTextEdit5: TcxTextEdit;
-    cxTextEdit6: TcxTextEdit;
+    eNConta: TcxTextEdit;
+    eNCheque: TcxTextEdit;
     cxLabel17: TcxLabel;
     cxLabel18: TcxLabel;
-    cxButtonEdit1: TcxButtonEdit;
-    cxTextEdit7: TcxTextEdit;
+    eCodCaixa: TcxButtonEdit;
+    eCaixa: TcxTextEdit;
+    cxLabel6: TcxLabel;
+    cxStatus: TcxComboBox;
+    pnProprio: TPanel;
     cxLabel19: TcxLabel;
     eCodClie: TcxButtonEdit;
     eCliente: TcxTextEdit;
+    grConsultaDBTableView1Column1: TcxGridDBColumn;
+    grConsultaDBTableView1Column2: TcxGridDBColumn;
+    grConsultaDBTableView1Column3: TcxGridDBColumn;
+    grConsultaDBTableView1Column4: TcxGridDBColumn;
+    grConsultaDBTableView1Column5: TcxGridDBColumn;
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -62,6 +68,20 @@ type
     procedure cxVerClick(Sender: TObject);
     procedure cxApagarClick(Sender: TObject);
     procedure cxCancelaClick(Sender: TObject);
+    procedure cxSalvarClick(Sender: TObject);
+    procedure eCodPlanoExit(Sender: TObject);
+    procedure eCodPlanoKeyPress(Sender: TObject; var Key: Char);
+    procedure eCodPlanoPropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure eCodClieExit(Sender: TObject);
+    procedure eCodCliePropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure eCodCaixaExit(Sender: TObject);
+    procedure eCodCaixaPropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure grConsultaDBTableView1CustomDrawCell(
+      Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+      AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
   private
     { Private declarations }
      indice :string;
@@ -78,7 +98,7 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas, udmFin;
+uses uRotinas, udmFin, uCad_PlanoConta, uCad_Clientes, uCad_Caixa;
 
 procedure TFcad_Cheque.cxApagarClick(Sender: TObject);
 begin
@@ -118,6 +138,8 @@ begin
              ' left join PLANOCONTA D on A.IDPLANO = D.IDPLANO '+#13+
              ' left join CLIENTE E on A.IDCLIE = E.IDCLIE      '+#13+
              ' Where '+indice+' LIKE '+QuotedStr('%'+eConsulta.Text+'%')+#13+
+             ' and TIPOCHEQUE='+QuotedStr(ifs(TipoMov=ENTRADA,'P','T'))+#13+
+             ' and STATUS LIKE '+QuotedStr('%'+ifs(cxStatus.ItemIndex>0,cxStatus.Text,'')+'%')+#13+
              '  order by '+indice;
 
    ConsultaSql(StrSql, dmFin.qryCheque);
@@ -131,9 +153,7 @@ begin
       Msg('Olá, Verificamos que não há nenhum registro para editar, verifique a consulta dos dados','I',':)');
       Abort;
    end;
-
    inherited;
-
    Limpa;
    Edita;
    eNCheque.SetFocus;
@@ -146,6 +166,47 @@ begin
    eNCheque.SetFocus;
 end;
 
+procedure TFcad_Cheque.cxSalvarClick(Sender: TObject);
+begin
+   ValidaCampoTag(Fcad_Cheque);
+
+   with dmFin.qryCheque do
+   begin
+      if cxSalvar.Tag = 1 then // Salvar
+         Insert else
+         Edit;
+      try
+//         FieldByName('IDCLIE').AsString            := eCodigo.Text;
+         FieldByName('IDCAIXA').AsString          := eCodCaixa.Text;
+         FieldByName('IDPLANO').AsString          := eCodPlano.Text;
+         FieldByName('IDCLIE').AsString           := eCodClie.TExt;
+
+         FieldByName('DTEMISSAO').AsDateTime      := eDtEmissao.Date;
+         FieldByName('DTVENCIMENTO').AsDAteTime   := eDtVencimento.Date;
+         FieldByName('DTDEPOSITO').AsDateTime     := eDtCompensacao.Date;
+
+         FieldByName('NBANCO').AsString           := eNBanco.Text;
+         FieldByName('NAGENCIA').AsString         := eNAgencia.Text;
+         FieldByName('NCONTA').AsString           := eNConta.Text;
+         FieldByName('NCHEQUE').AsString          := eNCheque.Text;
+
+         FieldByName('TIPOCHEQUE').AsString       := ifs(TipoMov=ENTRADA,'P','T');
+         FieldByName('STATUS').AsString           := cbStatus.Text;
+         FieldByName('NOMEPORTADOR').AsString     := ePortador.Text;
+
+         FieldByName('OBSERVACAO').AsString       := eObs.Text;
+         FieldByName('VLRTOTAL').AsFloat          := eVlrCheque.Value;
+
+         Post;
+         ApplyUpdates(0);
+         inherited;
+         cxConsultaPropertiesChange(Self);
+      Except
+         CancelUpdates;
+      end;
+   end;
+end;
+
 procedure TFcad_Cheque.cxVerClick(Sender: TObject);
 begin
   inherited;
@@ -153,9 +214,109 @@ begin
    cxSalvar.Enabled := false;
 end;
 
+procedure TFcad_Cheque.eCodCaixaExit(Sender: TObject);
+begin
+  inherited;
+   eCaixa.Text :=  ConsultaCampoNomeAtivo(eCodCaixa.Text, 'CAIXA');
+   if eCaixa.Text ='NENHUM' then
+      eCodCaixa.Text := '0';
+end;
+
+procedure TFcad_Cheque.eCodCaixaPropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+   AbreTelaComShowModal(TFcad_Caixa, TObject(Fcad_Caixa), Fcad_Cheque, 'CAIXA');
+
+   if ID > 0 then
+   begin
+      eCaixa.Text    := DESCRICAO;
+      eCodCaixa.Text := intToStr(ID);
+   end;
+end;
+
+procedure TFcad_Cheque.eCodClieExit(Sender: TObject);
+begin
+  inherited;
+   eCliente.Text :=  ConsultaCampoNomeAtivo(eCodClie.Text, 'CLI');
+   if eCliente.Text ='NENHUM' then
+      eCodClie.Text := '0';
+end;
+
+procedure TFcad_Cheque.eCodCliePropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+   AbreTelaComShowModal(TFcad_Clientes, TObject(Fcad_Clientes), Fcad_Cheque, 'CLI');
+
+   if ID > 0 then
+   begin
+      eCliente.Text := DESCRICAO;
+      eCOdCLie.Text   := intToStr(ID);
+   end;
+end;
+
+procedure TFcad_Cheque.eCodPlanoExit(Sender: TObject);
+begin
+  inherited;
+  if TipoMov = ENTRADA then
+      ePlanoCta.Text       :=  ConsultaCampoNomeAtivo(eCodPlano.Text, 'PLANOCONTAREC') else
+      ePlanoCta.Text       :=  ConsultaCampoNomeAtivo(eCodPlano.Text, 'PLANOCONTAPAG');
+
+   if ePlanoCta.Text ='NENHUM' then
+      eCodPlano.Text := '0';
+end;
+
+procedure TFcad_Cheque.eCodPlanoKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+   If not (key in ['0'..'9',#8]) then key := #0;
+end;
+
+procedure TFcad_Cheque.eCodPlanoPropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  inherited;
+   if TipoMov = ENTRADA then
+      TipoPlano := RECEITA else
+      TipoPlano := DESPESA;
+   AbreTelaComShowModal(TFcad_PlanoConta, TObject(Fcad_PlanoConta), Fcad_Cheque, '');
+
+
+   if ID > 0 then
+   begin
+      eCodPlano.Text := intToStr(ID);
+      ePlanoCta.Text    := DESCRICAO;
+   end;
+end;
+
 procedure TFcad_Cheque.Edita;
 begin
-   //
+   with dmFin.qryCheque do
+   begin
+      eCodigo.Text        := FieldByName('IDCLIE').AsString;
+      eCodCaixa.Text      := FieldByName('IDCAIXA').AsString;
+      eCodCaixaExit(Self);
+      eCodPlano.Text      := FieldByName('IDPLANO').AsString;
+      eCodPlanoExit(Self);
+      eCodClie.TExt       := FieldByName('IDCLIE').AsString;
+      eCodClieExit(Self);
+
+      eDtEmissao.Date     := FieldByName('DTEMISSAO').AsDateTime;
+      eDtVencimento.Date  := FieldByName('DTVENCIMENTO').AsDAteTime;
+      eDtCompensacao.Date := FieldByName('DTDEPOSITO').AsDateTime;
+
+      eNBanco.Text        := FieldByName('NBANCO').AsString;
+      eNAgencia.Text      := FieldByName('NAGENCIA').AsString;
+      eNConta.Text        := FieldByName('NCONTA').AsString;
+      eNCheque.Text       := FieldByName('NCHEQUE').AsString;
+
+      cbStatus.Text       := FieldByName('STATUS').AsString;
+      ePortador.Text      := FieldByName('NOMEPORTADOR').AsString;
+
+      eObs.Text           := FieldByName('OBSERVACAO').AsString;
+      eVlrCheque.Value    := FieldByName('VLRTOTAL').AsFloat;
+   end;
 end;
 
 procedure TFcad_Cheque.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -195,9 +356,47 @@ begin
    cxConsultaPropertiesChange(Self);
 end;
 
+procedure TFcad_Cheque.grConsultaDBTableView1CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+  inherited;
+   if (AViewInfo.Item.Index = grConsultaDBTableView1Campo1.Index) then
+   begin
+      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'ABERTO') then
+      begin
+         ACanvas.Canvas.Brush.Color := clGreen;
+         ACanvas.Canvas.Font.Color  := clGreen;
+      end else
+      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'DEPOSITADO') then
+      begin
+         ACanvas.Canvas.Brush.Color := clYellow;
+         ACanvas.Canvas.Font.Color  := clYellow;
+      end else
+      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'COMPENSADO') then
+      begin
+         ACanvas.Canvas.Brush.Color := clBlue;
+         ACanvas.Canvas.Font.Color  := clBlue;
+      end else
+      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'DEVOLVIDO') then
+      begin
+         ACanvas.Canvas.Brush.Color := clPurple;
+         ACanvas.Canvas.Font.Color  := clPurple;
+      end else
+      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'CANCELADO') then
+      begin
+         ACanvas.Canvas.Brush.Color := clRed;
+         ACanvas.Canvas.Font.Color  := clRed;
+      end;
+   end;
+end;
+
 procedure TFcad_Cheque.Limpa;
 begin
-   //
+   LimpaCampos(Fcad_Cheque);
+   if TipoMov=ENTRADA then
+      pnProprio.Visible  := True else
+      pnTerceiro.Visible := True;
 end;
 
 end.

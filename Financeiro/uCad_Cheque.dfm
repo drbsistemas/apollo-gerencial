@@ -1,31 +1,22 @@
 inherited Fcad_Cheque: TFcad_Cheque
   Caption = 'Cadastro de Cheques'
+  ClientHeight = 539
+  ClientWidth = 702
+  ExplicitWidth = 710
+  ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCon: TPanel
-    inherited pnBusca: TPanel
-      inherited cxConsulta: TcxComboBox
-        Properties.Items.Strings = (
-          'C'#243'digo'
-          'N'#186' Cheque'
-          'Plano Cta.'
-          'Data Emiss'#227'o'
-          'Data Vencimento')
-      end
-      inherited cbAtivo: TcxComboBox
-        Style.IsFontAssigned = True
-      end
-    end
-    inherited pnBotaoCad: TPanel
-      inherited cxApagar: TcxButton
-        OnClick = cxApagarClick
-      end
-    end
-  end
   inherited pnCad: TPanel
-    ExplicitLeft = -24
-    ExplicitTop = -8
+    Width = 644
+    Height = 539
+    ExplicitLeft = -6
+    ExplicitTop = -7
+    ExplicitWidth = 644
+    ExplicitHeight = 539
     inherited pnMenu: TPanel
+      Width = 642
+      TabOrder = 15
+      ExplicitWidth = 642
       object cxLabel14: TcxLabel
         Left = 330
         Top = 65
@@ -106,7 +97,7 @@ inherited Fcad_Cheque: TFcad_Cheque
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = []
       Style.IsFontAssigned = True
-      TabOrder = 2
+      TabOrder = 0
       Width = 97
     end
     object cxLabel4: TcxLabel
@@ -132,7 +123,7 @@ inherited Fcad_Cheque: TFcad_Cheque
       Width = 82
       AnchorX = 405
     end
-    object eDtLancamento: TcxDateEdit
+    object eDtEmissao: TcxDateEdit
       Left = 404
       Top = 73
       Hint = 'Data do Cadastro no Sistema'
@@ -149,12 +140,12 @@ inherited Fcad_Cheque: TFcad_Cheque
       Style.HotTrack = True
       Style.Shadow = False
       Style.IsFontAssigned = True
-      TabOrder = 4
+      TabOrder = 1
       Width = 130
     end
     object cxLabel5: TcxLabel
       Left = 28
-      Top = 141
+      Top = 144
       AutoSize = False
       Caption = 'Plano Cta:'
       ParentFont = False
@@ -179,7 +170,7 @@ inherited Fcad_Cheque: TFcad_Cheque
     object eCodPlano: TcxButtonEdit
       Tag = 1
       Left = 117
-      Top = 139
+      Top = 142
       Hint = '(F3) Busca Registro do Cadastro'
       AutoSize = False
       ParentFont = False
@@ -218,6 +209,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         end>
       Properties.CharCase = ecUpperCase
       Properties.ClickKey = 114
+      Properties.OnButtonClick = eCodPlanoPropertiesButtonClick
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clWindowText
       Style.Font.Height = -11
@@ -227,12 +219,14 @@ inherited Fcad_Cheque: TFcad_Cheque
       StyleFocused.Color = 13366014
       TabOrder = 6
       Text = '0'
+      OnExit = eCodPlanoExit
+      OnKeyPress = eCodPlanoKeyPress
       Height = 21
       Width = 60
     end
     object ePlanoCta: TcxTextEdit
       Left = 179
-      Top = 139
+      Top = 142
       Hint = 'Descri'#231#227'o do Cadastro'
       TabStop = False
       ParentFont = False
@@ -259,53 +253,9 @@ inherited Fcad_Cheque: TFcad_Cheque
       Text = 'NENHUM'
       Width = 355
     end
-    object cxLabel6: TcxLabel
-      Left = 43
-      Top = 119
-      AutoSize = False
-      Caption = 'Documento:'
-      ParentFont = False
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clBlack
-      Style.Font.Height = -11
-      Style.Font.Name = 'Tahoma'
-      Style.Font.Style = []
-      Style.LookAndFeel.NativeStyle = True
-      Style.IsFontAssigned = True
-      StyleDisabled.LookAndFeel.NativeStyle = True
-      StyleFocused.LookAndFeel.NativeStyle = True
-      StyleHot.LookAndFeel.NativeStyle = True
-      Properties.Alignment.Horz = taRightJustify
-      Properties.LabelEffect = cxleCool
-      Transparent = True
-      Height = 17
-      Width = 75
-      AnchorX = 118
-    end
-    object eDocumento: TcxTextEdit
-      Tag = 1
-      Left = 117
-      Top = 117
-      Hint = 'N'#250'mero do Documento que Originou a Movimenta'#231#227'o'
-      ParentFont = False
-      ParentShowHint = False
-      Properties.CharCase = ecUpperCase
-      Properties.MaxLength = 200
-      ShowHint = True
-      Style.Color = clWhite
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clWindowText
-      Style.Font.Height = -11
-      Style.Font.Name = 'Tahoma'
-      Style.Font.Style = []
-      Style.IsFontAssigned = True
-      StyleFocused.Color = 13366014
-      TabOrder = 9
-      Width = 228
-    end
     object cxLabel7: TcxLabel
-      Left = 323
-      Top = 361
+      Left = 322
+      Top = 236
       AutoSize = False
       Caption = 'Dt. Vencimento:'
       ParentFont = False
@@ -324,11 +274,12 @@ inherited Fcad_Cheque: TFcad_Cheque
       Transparent = True
       Height = 17
       Width = 82
-      AnchorX = 405
+      AnchorX = 404
     end
     object eDtVencimento: TcxDateEdit
-      Left = 405
-      Top = 359
+      Tag = 1
+      Left = 404
+      Top = 234
       Hint = 'Data de Vencimento'
       ParentFont = False
       Properties.DateButtons = [btnClear, btnToday]
@@ -342,14 +293,14 @@ inherited Fcad_Cheque: TFcad_Cheque
       Style.HotTrack = True
       Style.Shadow = False
       Style.IsFontAssigned = True
-      TabOrder = 11
+      TabOrder = 13
       Width = 130
     end
     object cxLabel8: TcxLabel
-      Left = 323
-      Top = 212
+      Left = 300
+      Top = 260
       AutoSize = False
-      Caption = 'Dt. Dep'#243'sito:'
+      Caption = 'Dt. Compensa'#231#227'o:'
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clBlack
@@ -365,12 +316,12 @@ inherited Fcad_Cheque: TFcad_Cheque
       Properties.LabelEffect = cxleCool
       Transparent = True
       Height = 17
-      Width = 82
-      AnchorX = 405
+      Width = 104
+      AnchorX = 404
     end
-    object cxDateEdit1: TcxDateEdit
+    object eDtCompensacao: TcxDateEdit
       Left = 404
-      Top = 210
+      Top = 257
       Hint = 'Data do Cadastro no Sistema'
       Enabled = False
       ParentFont = False
@@ -385,19 +336,20 @@ inherited Fcad_Cheque: TFcad_Cheque
       Style.HotTrack = True
       Style.Shadow = False
       Style.IsFontAssigned = True
-      TabOrder = 13
+      TabOrder = 14
       Width = 130
     end
     object pnTerceiro: TPanel
-      Left = 33
-      Top = 288
-      Width = 613
-      Height = 41
-      TabOrder = 14
-      object cxTextEdit1: TcxTextEdit
-        Tag = 1
+      Left = 34
+      Top = 118
+      Width = 538
+      Height = 23
+      BevelOuter = bvNone
+      TabOrder = 4
+      Visible = False
+      object eNBanco: TcxTextEdit
         Left = 82
-        Top = 8
+        Top = 1
         Hint = 'N'#250'mero do Documento que Originou a Movimenta'#231#227'o'
         ParentFont = False
         ParentShowHint = False
@@ -417,7 +369,7 @@ inherited Fcad_Cheque: TFcad_Cheque
       end
       object cxLabel9: TcxLabel
         Left = 8
-        Top = 8
+        Top = 3
         AutoSize = False
         Caption = 'Banco:'
         ParentFont = False
@@ -438,10 +390,9 @@ inherited Fcad_Cheque: TFcad_Cheque
         Width = 75
         AnchorX = 83
       end
-      object cxTextEdit2: TcxTextEdit
-        Tag = 1
-        Left = 210
-        Top = 8
+      object eNAgencia: TcxTextEdit
+        Left = 266
+        Top = 1
         Hint = 'N'#250'mero do Documento que Originou a Movimenta'#231#227'o'
         ParentFont = False
         ParentShowHint = False
@@ -456,12 +407,12 @@ inherited Fcad_Cheque: TFcad_Cheque
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 2
+        TabOrder = 1
         Width = 70
       end
       object cxLabel10: TcxLabel
-        Left = 136
-        Top = 8
+        Left = 192
+        Top = 3
         AutoSize = False
         Caption = 'Ag'#234'ncia:'
         ParentFont = False
@@ -480,11 +431,11 @@ inherited Fcad_Cheque: TFcad_Cheque
         Transparent = True
         Height = 17
         Width = 75
-        AnchorX = 211
+        AnchorX = 267
       end
       object cxLabel16: TcxLabel
-        Left = 272
-        Top = 8
+        Left = 358
+        Top = 3
         AutoSize = False
         Caption = 'Conta:'
         ParentFont = False
@@ -503,12 +454,11 @@ inherited Fcad_Cheque: TFcad_Cheque
         Transparent = True
         Height = 17
         Width = 75
-        AnchorX = 347
+        AnchorX = 433
       end
-      object cxTextEdit5: TcxTextEdit
-        Tag = 1
-        Left = 346
-        Top = 8
+      object eNConta: TcxTextEdit
+        Left = 432
+        Top = 1
         Hint = 'N'#250'mero do Documento que Originou a Movimenta'#231#227'o'
         ParentFont = False
         ParentShowHint = False
@@ -523,14 +473,14 @@ inherited Fcad_Cheque: TFcad_Cheque
         Style.Font.Style = []
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 5
+        TabOrder = 2
         Width = 70
       end
     end
-    object eValorInicial: TcxCurrencyEdit
+    object eVlrCheque: TcxCurrencyEdit
       Tag = 1
-      Left = 115
-      Top = 337
+      Left = 117
+      Top = 234
       Hint = 'Valor Inicial da Movimenta'#231#227'o'
       EditValue = 0.000000000000000000
       ParentFont = False
@@ -544,12 +494,12 @@ inherited Fcad_Cheque: TFcad_Cheque
       Style.Font.Style = [fsBold]
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 15
+      TabOrder = 12
       Width = 75
     end
     object cxLabel11: TcxLabel
-      Left = 26
-      Top = 339
+      Left = 28
+      Top = 236
       AutoSize = False
       Caption = 'Vlr Cheque:'
       ParentFont = False
@@ -569,11 +519,11 @@ inherited Fcad_Cheque: TFcad_Cheque
       Transparent = True
       Height = 17
       Width = 90
-      AnchorX = 116
+      AnchorX = 118
     end
     object eObs: TcxTextEdit
       Left = 117
-      Top = 232
+      Top = 211
       Hint = 'Observa'#231#227'o de Movimenta'#231#227'o'
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -599,12 +549,12 @@ inherited Fcad_Cheque: TFcad_Cheque
       StyleHot.LookAndFeel.Kind = lfStandard
       StyleHot.LookAndFeel.NativeStyle = False
       StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-      TabOrder = 17
+      TabOrder = 11
       Width = 417
     end
     object cxLabel12: TcxLabel
       Left = 36
-      Top = 234
+      Top = 213
       AutoSize = False
       Caption = 'Observa'#231#227'o:'
       ParentFont = False
@@ -625,9 +575,10 @@ inherited Fcad_Cheque: TFcad_Cheque
       Width = 82
       AnchorX = 118
     end
-    object cxTextEdit3: TcxTextEdit
-      Left = 116
-      Top = 255
+    object ePortador: TcxTextEdit
+      Tag = 1
+      Left = 117
+      Top = 188
       Hint = 'Observa'#231#227'o de Movimenta'#231#227'o'
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -653,12 +604,12 @@ inherited Fcad_Cheque: TFcad_Cheque
       StyleHot.LookAndFeel.Kind = lfStandard
       StyleHot.LookAndFeel.NativeStyle = False
       StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-      TabOrder = 19
+      TabOrder = 10
       Width = 417
     end
     object cxLabel13: TcxLabel
       Left = 35
-      Top = 257
+      Top = 190
       AutoSize = False
       Caption = 'Portador:'
       ParentFont = False
@@ -681,7 +632,7 @@ inherited Fcad_Cheque: TFcad_Cheque
     end
     object cxLabel15: TcxLabel
       Left = 330
-      Top = 97
+      Top = 98
       AutoSize = False
       Caption = 'Status:'
       ParentFont = False
@@ -702,10 +653,10 @@ inherited Fcad_Cheque: TFcad_Cheque
       Width = 75
       AnchorX = 405
     end
-    object cxTextEdit4: TcxTextEdit
+    object cbStatus: TcxTextEdit
       Left = 404
-      Top = 95
-      Hint = 'Status da Movimenta'#231#227'o'
+      Top = 96
+      Hint = 'Status do Cheque'
       TabStop = False
       ParentFont = False
       Properties.CharCase = ecUpperCase
@@ -717,12 +668,12 @@ inherited Fcad_Cheque: TFcad_Cheque
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = []
       Style.IsFontAssigned = True
-      TabOrder = 22
+      TabOrder = 3
       Width = 130
     end
-    object cxTextEdit6: TcxTextEdit
+    object eNCheque: TcxTextEdit
       Tag = 1
-      Left = 116
+      Left = 117
       Top = 96
       Hint = 'N'#250'mero do Documento que Originou a Movimenta'#231#227'o'
       ParentFont = False
@@ -738,7 +689,7 @@ inherited Fcad_Cheque: TFcad_Cheque
       Style.Font.Style = []
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 23
+      TabOrder = 2
       Width = 228
     end
     object cxLabel17: TcxLabel
@@ -766,7 +717,7 @@ inherited Fcad_Cheque: TFcad_Cheque
     end
     object cxLabel18: TcxLabel
       Left = 29
-      Top = 162
+      Top = 167
       AutoSize = False
       Caption = 'C/C:'
       ParentFont = False
@@ -788,10 +739,10 @@ inherited Fcad_Cheque: TFcad_Cheque
       Width = 90
       AnchorX = 119
     end
-    object cxButtonEdit1: TcxButtonEdit
+    object eCodCaixa: TcxButtonEdit
       Tag = 1
-      Left = 118
-      Top = 160
+      Left = 117
+      Top = 165
       Hint = '(F3) Busca Registro do Cadastro'
       AutoSize = False
       ParentFont = False
@@ -830,6 +781,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         end>
       Properties.CharCase = ecUpperCase
       Properties.ClickKey = 114
+      Properties.OnButtonClick = eCodCaixaPropertiesButtonClick
       Style.Font.Charset = ANSI_CHARSET
       Style.Font.Color = clWindowText
       Style.Font.Height = -11
@@ -837,121 +789,16 @@ inherited Fcad_Cheque: TFcad_Cheque
       Style.Font.Style = [fsBold]
       Style.IsFontAssigned = True
       StyleFocused.Color = 13366014
-      TabOrder = 26
+      TabOrder = 8
       Text = '0'
+      OnExit = eCodCaixaExit
+      OnKeyPress = eCodPlanoKeyPress
       Height = 21
       Width = 60
     end
-    object cxTextEdit7: TcxTextEdit
-      Left = 180
-      Top = 160
-      Hint = 'Descri'#231#227'o do Cadastro'
-      TabStop = False
-      ParentFont = False
-      Properties.CharCase = ecUpperCase
-      Properties.MaxLength = 30
-      Properties.ReadOnly = True
-      Style.Color = clBtnFace
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clWindowText
-      Style.Font.Height = -11
-      Style.Font.Name = 'Tahoma'
-      Style.Font.Style = [fsBold]
-      Style.LookAndFeel.NativeStyle = False
-      Style.LookAndFeel.SkinName = 'Office2010Silver'
-      Style.IsFontAssigned = True
-      StyleDisabled.LookAndFeel.NativeStyle = False
-      StyleDisabled.LookAndFeel.SkinName = 'Office2010Silver'
-      StyleFocused.Color = 13366014
-      StyleFocused.LookAndFeel.NativeStyle = False
-      StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
-      StyleHot.LookAndFeel.NativeStyle = False
-      StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-      TabOrder = 27
-      Text = 'NENHUM'
-      Width = 355
-    end
-    object cxLabel19: TcxLabel
-      Left = 28
-      Top = 184
-      AutoSize = False
-      Caption = 'Cliente:'
-      ParentFont = False
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clMaroon
-      Style.Font.Height = -11
-      Style.Font.Name = 'Tahoma'
-      Style.Font.Style = []
-      Style.LookAndFeel.NativeStyle = True
-      Style.TextColor = clBlack
-      Style.IsFontAssigned = True
-      StyleDisabled.LookAndFeel.NativeStyle = True
-      StyleFocused.LookAndFeel.NativeStyle = True
-      StyleHot.LookAndFeel.NativeStyle = True
-      Properties.Alignment.Horz = taRightJustify
-      Properties.LabelEffect = cxleCool
-      Transparent = True
-      Height = 17
-      Width = 90
-      AnchorX = 118
-    end
-    object eCodClie: TcxButtonEdit
-      Tag = 1
-      Left = 117
-      Top = 182
-      Hint = '(F3) Busca Dados do Cadastro'
-      AutoSize = False
-      ParentFont = False
-      Properties.Alignment.Horz = taRightJustify
-      Properties.Buttons = <
-        item
-          Default = True
-          Glyph.Data = {
-            36030000424D3603000000000000360000002800000010000000100000000100
-            18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFD6D6D7ABACACFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E4E5959596BDBEBFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E7
-            E7979798C0C0C0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFEAEAEA9B9B9CC2C2C3FFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAEAEA9E9E9FC2C2
-            C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8ECECEDEDEDEDF2F2F2FF
-            FFFFFFFFFFF3F3F39F9FA0C4C4C5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            DCDCDDD7D7D8E6E6E6E9E9E8E1E2E2DCDCDEDADBDB9E9E9FDBDBDCFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFD7D7D8E4E4E4FEFEFEFFFFFFFDFDFDFEFEFDFE
-            FEFEC0C1C2DEDEDEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEEEEFD7D8D8
-            FEFEFEFCFCFCF9F9F9F9F9F9F6F6F6F2F2F2F4F4F4E5E5E5FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFD3D3D4E5E6E6F8F8F8F9F9F9FEFEFEFCFCFCF6F6F6ED
-            EDECEAEAEAD5D6D6F6F6F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D2D3E5E5E5
-            F2F2F2F9F9F9FCFCFCFBFBFBF7F7F7ECECEDE1E1E1D8D9D9ECECEDFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFD0D0D1DEDDDEF3F3F3FAFAFAFAFAFAFAFAFAF8F8F8F1
-            F1F2E1E1E2D3D3D3EAEAEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD7D7D8D0D1D1
-            FFFFFFFBFBFBFAFAFAF9F9FAF8F8F8FEFEFEE4E4E5C4C5C6FCFCFCFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFF9F9FABCBDBEF2F2F2FFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFCECECFE3E3E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F0F0
-            C1C1C2DFDFE0F5F4F5F9F9F9EEEEEED4D4D5CFD0D1FFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F6D7D8D9D0D0D1D2D2D3CFCFD0E7
-            E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-          Kind = bkGlyph
-        end>
-      Properties.CharCase = ecUpperCase
-      Properties.ClickKey = 114
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clWindowText
-      Style.Font.Height = -11
-      Style.Font.Name = 'Tahoma'
-      Style.Font.Style = [fsBold]
-      Style.IsFontAssigned = True
-      StyleFocused.Color = 13366014
-      TabOrder = 29
-      Text = '0'
-      Height = 21
-      Width = 60
-    end
-    object eCliente: TcxTextEdit
+    object eCaixa: TcxTextEdit
       Left = 179
-      Top = 182
+      Top = 165
       Hint = 'Descri'#231#227'o do Cadastro'
       TabStop = False
       ParentFont = False
@@ -964,23 +811,301 @@ inherited Fcad_Cheque: TFcad_Cheque
       Style.Font.Height = -11
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = [fsBold]
-      Style.LookAndFeel.Kind = lfStandard
       Style.LookAndFeel.NativeStyle = False
       Style.LookAndFeel.SkinName = 'Office2010Silver'
       Style.IsFontAssigned = True
-      StyleDisabled.LookAndFeel.Kind = lfStandard
       StyleDisabled.LookAndFeel.NativeStyle = False
       StyleDisabled.LookAndFeel.SkinName = 'Office2010Silver'
       StyleFocused.Color = 13366014
-      StyleFocused.LookAndFeel.Kind = lfStandard
       StyleFocused.LookAndFeel.NativeStyle = False
       StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
-      StyleHot.LookAndFeel.Kind = lfStandard
       StyleHot.LookAndFeel.NativeStyle = False
       StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-      TabOrder = 30
+      TabOrder = 9
       Text = 'NENHUM'
       Width = 355
+    end
+    object pnProprio: TPanel
+      Left = 34
+      Top = 117
+      Width = 538
+      Height = 23
+      BevelOuter = bvNone
+      TabOrder = 5
+      Visible = False
+      object cxLabel19: TcxLabel
+        Left = -6
+        Top = 4
+        AutoSize = False
+        Caption = 'Cliente:'
+        ParentFont = False
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clMaroon
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.LookAndFeel.NativeStyle = True
+        Style.TextColor = clBlack
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.NativeStyle = True
+        StyleFocused.LookAndFeel.NativeStyle = True
+        StyleHot.LookAndFeel.NativeStyle = True
+        Properties.Alignment.Horz = taRightJustify
+        Properties.LabelEffect = cxleCool
+        Transparent = True
+        Height = 17
+        Width = 90
+        AnchorX = 84
+      end
+      object eCodClie: TcxButtonEdit
+        Left = 83
+        Top = 2
+        Hint = '(F3) Busca Dados do Cadastro'
+        AutoSize = False
+        ParentFont = False
+        Properties.Alignment.Horz = taRightJustify
+        Properties.Buttons = <
+          item
+            Default = True
+            Glyph.Data = {
+              36030000424D3603000000000000360000002800000010000000100000000100
+              18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFD6D6D7ABACACFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E4E5959596BDBEBFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E7
+              E7979798C0C0C0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFEAEAEA9B9B9CC2C2C3FFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAEAEA9E9E9FC2C2
+              C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8ECECEDEDEDEDF2F2F2FF
+              FFFFFFFFFFF3F3F39F9FA0C4C4C5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              DCDCDDD7D7D8E6E6E6E9E9E8E1E2E2DCDCDEDADBDB9E9E9FDBDBDCFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFD7D7D8E4E4E4FEFEFEFFFFFFFDFDFDFEFEFDFE
+              FEFEC0C1C2DEDEDEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEEEEFD7D8D8
+              FEFEFEFCFCFCF9F9F9F9F9F9F6F6F6F2F2F2F4F4F4E5E5E5FFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFD3D3D4E5E6E6F8F8F8F9F9F9FEFEFEFCFCFCF6F6F6ED
+              EDECEAEAEAD5D6D6F6F6F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D2D3E5E5E5
+              F2F2F2F9F9F9FCFCFCFBFBFBF7F7F7ECECEDE1E1E1D8D9D9ECECEDFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFD0D0D1DEDDDEF3F3F3FAFAFAFAFAFAFAFAFAF8F8F8F1
+              F1F2E1E1E2D3D3D3EAEAEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD7D7D8D0D1D1
+              FFFFFFFBFBFBFAFAFAF9F9FAF8F8F8FEFEFEE4E4E5C4C5C6FCFCFCFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFF9F9FABCBDBEF2F2F2FFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFCECECFE3E3E4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F0F0
+              C1C1C2DFDFE0F5F4F5F9F9F9EEEEEED4D4D5CFD0D1FFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F6D7D8D9D0D0D1D2D2D3CFCFD0E7
+              E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+            Kind = bkGlyph
+          end>
+        Properties.CharCase = ecUpperCase
+        Properties.ClickKey = 114
+        Properties.OnButtonClick = eCodCliePropertiesButtonClick
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 13366014
+        TabOrder = 1
+        Text = '0'
+        OnExit = eCodClieExit
+        OnKeyPress = eCodPlanoKeyPress
+        Height = 21
+        Width = 60
+      end
+      object eCliente: TcxTextEdit
+        Left = 145
+        Top = 2
+        Hint = 'Descri'#231#227'o do Cadastro'
+        TabStop = False
+        ParentFont = False
+        Properties.CharCase = ecUpperCase
+        Properties.MaxLength = 30
+        Properties.ReadOnly = True
+        Style.Color = clBtnFace
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfStandard
+        Style.LookAndFeel.NativeStyle = False
+        Style.LookAndFeel.SkinName = 'Office2010Silver'
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfStandard
+        StyleDisabled.LookAndFeel.NativeStyle = False
+        StyleDisabled.LookAndFeel.SkinName = 'Office2010Silver'
+        StyleFocused.Color = 13366014
+        StyleFocused.LookAndFeel.Kind = lfStandard
+        StyleFocused.LookAndFeel.NativeStyle = False
+        StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
+        StyleHot.LookAndFeel.Kind = lfStandard
+        StyleHot.LookAndFeel.NativeStyle = False
+        StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
+        TabOrder = 2
+        Text = 'NENHUM'
+        Width = 355
+      end
+    end
+  end
+  inherited pnImg: TcxImage
+    Left = 644
+    ExplicitLeft = 644
+    ExplicitHeight = 539
+    Height = 539
+  end
+  inherited pnCon: TPanel
+    Width = 644
+    Height = 539
+    ExplicitLeft = 0
+    ExplicitWidth = 644
+    ExplicitHeight = 539
+    inherited pnBusca: TPanel
+      Width = 642
+      ExplicitWidth = 642
+      inherited cxConsulta: TcxComboBox
+        Properties.Items.Strings = (
+          'C'#243'digo'
+          'N'#186' Cheque'
+          'Plano Cta.'
+          'Data Emiss'#227'o'
+          'Data Vencimento')
+        Text = 'C'#211'DIGO'
+      end
+      inherited cxLabel2: TcxLabel
+        Left = 591
+        Top = 0
+        Visible = False
+        ExplicitLeft = 591
+        ExplicitTop = 0
+      end
+      inherited cbAtivo: TcxComboBox
+        Left = 623
+        Top = -2
+        Style.IsFontAssigned = True
+        Visible = False
+        ExplicitLeft = 623
+        ExplicitTop = -2
+      end
+      inherited cxQtdeReg: TcxLabel
+        Left = 618
+        ExplicitLeft = 618
+      end
+      object cxLabel6: TcxLabel
+        Left = 470
+        Top = 3
+        Caption = 'Status:'
+        Style.TextColor = clBlack
+        Transparent = True
+      end
+      object cxStatus: TcxComboBox
+        Left = 508
+        Top = 1
+        ParentFont = False
+        Properties.CharCase = ecUpperCase
+        Properties.DropDownListStyle = lsFixedList
+        Properties.Items.Strings = (
+          'TODOS'
+          'ABERTO'
+          'DEPOSITADO'
+          'COMPENSADO'
+          'DEVOLVIDO'
+          'CANCELADO')
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 13366014
+        TabOrder = 8
+        Text = 'TODOS'
+        OnClick = cxConsultaPropertiesChange
+        Width = 107
+      end
+    end
+    inherited pnBotaoCad: TPanel
+      Width = 642
+      ExplicitWidth = 642
+      inherited cxApagar: TcxButton
+        OnClick = cxApagarClick
+      end
+    end
+    inherited pnBotaoCon: TPanel
+      Top = 487
+      Width = 642
+      ExplicitTop = 487
+      ExplicitWidth = 642
+    end
+    inherited grConsulta: TcxGrid
+      Width = 642
+      Height = 177
+      ExplicitLeft = -4
+      ExplicitTop = 77
+      ExplicitWidth = 642
+      ExplicitHeight = 177
+      inherited grConsultaDBTableView1: TcxGridDBTableView
+        OnDblClick = nil
+        DataController.DataSource = dmFin.dsCheque
+        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
+          Caption = 'St'
+          DataBinding.FieldName = 'STATUS'
+          Width = 30
+        end
+        object grConsultaDBTableView1Column1: TcxGridDBColumn [1]
+          Caption = 'N'#186' Cheque'
+          DataBinding.FieldName = 'NCHEQUE'
+          Width = 75
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn [2]
+          Caption = 'Dt. Emiss'#227'o'
+          DataBinding.FieldName = 'DTEMISSAO'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column2: TcxGridDBColumn [3]
+          Caption = 'P. Conta'
+          DataBinding.FieldName = 'NOMEPLANO'
+          Width = 129
+        end
+        object grConsultaDBTableView1Column4: TcxGridDBColumn [4]
+          Caption = 'Vlr. Total'
+          DataBinding.FieldName = 'VLRTOTAL'
+          PropertiesClassName = 'TcxCurrencyEditProperties'
+          Properties.DisplayFormat = '###,###,##0.00'
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn [5]
+          Caption = 'Portador'
+          DataBinding.FieldName = 'NOMEPORTADOR'
+          Width = 250
+        end
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
+          Caption = 'C/C Destino'
+          DataBinding.FieldName = 'BANCO'
+          Width = 265
+        end
+      end
+    end
+    inherited pnSelec: TPanel
+      Top = 253
+      Width = 642
+      ExplicitTop = 253
+      ExplicitWidth = 642
+      inherited grConsulta2: TcxGrid
+        Width = 640
+        ExplicitWidth = 640
+      end
+      inherited pnTop: TPanel
+        Width = 640
+        ExplicitWidth = 640
+        inherited cxContas: TcxLabel
+          Style.IsFontAssigned = True
+        end
+        inherited cxTotal: TcxLabel
+          Left = 432
+          Style.IsFontAssigned = True
+          ExplicitLeft = 432
+        end
+      end
     end
   end
 end

@@ -1,10 +1,36 @@
 inherited FCad_Parametro: TFCad_Parametro
   Caption = 'Configura'#231#227'o do Sistema'
-  OnKeyDown = FormKeyDown
+  ClientHeight = 539
+  ClientWidth = 702
+  ExplicitWidth = 710
+  ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
+  inherited pnCad: TPanel
+    Width = 644
+    Height = 539
+    ExplicitWidth = 644
+    ExplicitHeight = 539
+    inherited pnMenu: TPanel
+      Width = 642
+      ExplicitWidth = 642
+    end
+  end
+  inherited pnImg: TcxImage
+    Left = 644
+    ExplicitLeft = 644
+    ExplicitHeight = 539
+    Height = 539
+  end
   inherited pnCon: TPanel
+    Width = 644
+    Height = 539
+    ExplicitLeft = 0
+    ExplicitWidth = 644
+    ExplicitHeight = 539
     inherited pnBusca: TPanel
+      Width = 642
+      ExplicitWidth = 642
       inherited cxConsulta: TcxComboBox
         Properties.Items.Strings = (
           'C'#243'digo'
@@ -24,15 +50,45 @@ inherited FCad_Parametro: TFCad_Parametro
       end
     end
     inherited pnBotaoCad: TPanel
+      Width = 642
+      ExplicitWidth = 642
+      inherited cxNovo: TcxButton
+        Visible = False
+      end
+      inherited cxEdita: TcxButton
+        Visible = False
+      end
+      inherited cxVer: TcxButton
+        Visible = False
+      end
+      inherited cxApagar: TcxButton
+        Visible = False
+      end
       inherited cxVoltar: TcxButton
         Left = 424
-        OnClick = cxVoltarClick
         ExplicitLeft = 424
       end
+      inherited cxPrint: TcxButton
+        Visible = False
+      end
+      inherited cxOpcoes: TcxButton
+        Visible = False
+      end
+    end
+    inherited pnBotaoCon: TPanel
+      Top = 487
+      Width = 642
+      ExplicitTop = 487
+      ExplicitWidth = 642
     end
     inherited grConsulta: TcxGrid
+      Width = 642
+      Height = 177
+      ExplicitLeft = 1
+      ExplicitTop = 76
+      ExplicitWidth = 642
+      ExplicitHeight = 177
       inherited grConsultaDBTableView1: TcxGridDBTableView
-        OnDblClick = grConsultaDBTableView1DblClick
         DataController.DataSource = dmCad.dsParametro
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
           DataBinding.FieldName = 'IDPARAMETRO'
@@ -51,6 +107,29 @@ inherited FCad_Parametro: TFCad_Parametro
           Caption = 'Valor'
           DataBinding.FieldName = 'VALORCONF'
           Width = 100
+        end
+      end
+    end
+    inherited pnSelec: TPanel
+      Top = 253
+      Width = 642
+      TabOrder = 5
+      ExplicitTop = 253
+      ExplicitWidth = 642
+      inherited grConsulta2: TcxGrid
+        Width = 640
+        ExplicitWidth = 640
+      end
+      inherited pnTop: TPanel
+        Width = 640
+        ExplicitWidth = 640
+        inherited cxContas: TcxLabel
+          Style.IsFontAssigned = True
+        end
+        inherited cxTotal: TcxLabel
+          Left = 432
+          Style.IsFontAssigned = True
+          ExplicitLeft = 432
         end
       end
     end
@@ -134,7 +213,7 @@ inherited FCad_Parametro: TFCad_Parametro
         Width = 41
         AnchorX = 44
       end
-      object cxComboBox1: TcxComboBox
+      object eAtivo: TcxComboBox
         Left = 50
         Top = 22
         Properties.CharCase = ecUpperCase

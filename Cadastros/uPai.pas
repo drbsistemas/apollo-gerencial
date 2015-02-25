@@ -195,7 +195,8 @@ end;
 
 procedure TFcad_Pai.FormCreate(Sender: TObject);
 begin
-   grConsulta.Tag := 0;
+   grConsulta.Tag       := 0;
+   cxConsulta.Itemindex := 0;
    MostraPainelBusca(Cad);
 end;
 

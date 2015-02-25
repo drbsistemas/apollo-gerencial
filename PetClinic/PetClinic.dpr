@@ -35,7 +35,6 @@ uses
   uRotinaDeCalculosMovimentacao in '..\Rotinas\uRotinaDeCalculosMovimentacao.pas',
   uCad_Endereco in '..\Cadastros\uCad_Endereco.pas' {Fcad_Endereco},
   uCad_Credito in '..\Financeiro\uCad_Credito.pas' {FCad_Credito},
-  uPaiFinanceiro in '..\Financeiro\uPaiFinanceiro.pas' {Fcad_PaiFinanceiro},
   uConsultaDadosCliente in '..\Rotinas\uConsultaDadosCliente.pas',
   udmFin in '..\Financeiro\udmFin.pas' {dmFin: TDataModule},
   uRotinaLancamentoFinanceiro in '..\Rotinas\uRotinaLancamentoFinanceiro.pas',
@@ -47,7 +46,8 @@ uses
   uCad_Banco in '..\Cadastros\uCad_Banco.pas' {Fcad_Banco},
   uDmCad in '..\Acesso\uDmCad.pas' {dmCad: TDataModule},
   uCad_CaixaFechamento in '..\Financeiro\uCad_CaixaFechamento.pas' {Fcad_CaixaFechamento},
-  uCad_Cheque in '..\Financeiro\uCad_Cheque.pas' {Fcad_Cheque};
+  uCad_Cheque in '..\Financeiro\uCad_Cheque.pas' {Fcad_Cheque},
+  uCad_PaiFinanceiro in '..\Financeiro\uCad_PaiFinanceiro.pas' {Fcad_PaiFinanceiro};
 
 {$R *.res}
 

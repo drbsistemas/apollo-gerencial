@@ -111,6 +111,7 @@ type
     procedure qryCaixaAfterInsert(DataSet: TDataSet);
     procedure qryCaixaItemAfterInsert(DataSet: TDataSet);
     procedure qryCaixaFechamentoAfterInsert(DataSet: TDataSet);
+    procedure qryChequeAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -135,12 +136,17 @@ end;
 
 procedure TdmFin.qryCaixaFechamentoAfterInsert(DataSet: TDataSet);
 begin
-   dmFin.qryCaixaFechamento.FieldByName('IDFECHAMENTO').AsInteger        := ExecutaGen('CAIXAFECHAMENTO');
+   dmFin.qryCaixaFechamento.FieldByName('IDFECHAMENTO').AsInteger       := ExecutaGen('CAIXAFECHAMENTO');
 end;
 
 procedure TdmFin.qryCaixaItemAfterInsert(DataSet: TDataSet);
 begin
    dmFin.qryCaixaItem.FieldByName('IDCAIXAITEM').AsInteger              := ExecutaGen('CAIXAITEM');
+end;
+
+procedure TdmFin.qryChequeAfterInsert(DataSet: TDataSet);
+begin
+   dmFin.qryCheque.FieldByName('IDCHEQUE').AsInteger                    := ExecutaGen('CHEQUE');
 end;
 
 procedure TdmFin.qryContaAfterInsert(DataSet: TDataSet);

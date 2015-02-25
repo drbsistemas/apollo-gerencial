@@ -4,14 +4,14 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPaiFinanceiro, cxGraphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCad_PaiFinanceiro, cxGraphics,
   cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, dxSkinsCore,
   dxSkinOffice2010Silver, cxControls, cxContainer, cxEdit, cxStyles,
   dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage,
   cxNavigator, Data.DB, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid,
   cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLabel, Vcl.StdCtrls, cxButtons,
-  Vcl.ExtCtrls, cxCurrencyEdit;
+  Vcl.ExtCtrls, cxCurrencyEdit, RxMenus, dxGDIPlusClasses, cxImage;
 
 type
   TFCad_Parametro = class(TFcad_PaiFinanceiro)
@@ -21,7 +21,7 @@ type
     eInt: TcxCurrencyEdit;
     eMsg: TcxLabel;
     cxLabel3: TcxLabel;
-    cxComboBox1: TcxComboBox;
+    eAtivo: TcxComboBox;
     cxGrava: TcxButton;
     cxCancelar: TcxButton;
     grConsultaDBTableView1Column1: TcxGridDBColumn;
@@ -78,8 +78,8 @@ procedure TFCad_Parametro.cxGravaClick(Sender: TObject);
 begin
    inherited;
    dmCad.qryparametro.Edit;
-   if cbAtivo.Visible=true then
-      dmCad.qryParametro.FieldByName('VALORCONF').AsString := cbAtivo.Text else
+   if eAtivo.Visible=true then
+      dmCad.qryParametro.FieldByName('VALORCONF').AsString := eAtivo.Text else
    if eint.visible=true then
       dmCad.qryParametro.FieldByName('VALORCONF').AsString := eInt.Text else
    if eStr.Visible=true then
@@ -135,15 +135,14 @@ end;
 
 procedure TFCad_Parametro.grConsultaDBTableView1DblClick(Sender: TObject);
 begin
-   inherited;
    pnEdita.BringToFront;
    pnEdita.VIsible       := true;
-      pnBusca.Enabled    := False;
-      pnBotaoCad.Enabled := False;
+   pnBusca.Enabled       := False;
+   pnBotaoCad.Enabled    := False;
    grConsulta.Enabled    := false;
 
    ///// Deixa todos invisiveis
-   cbAtivo.visible       := false;
+   eAtivo.visible       := false;
    eStr.visible          := false;
    eInt.Visible          := False;
    eVLr.VIsible          := False;
@@ -153,11 +152,11 @@ begin
    ///// Ve o tipo do parametro e mostra o campo correspondente.
    if dmCad.qryParametro.FieldByName('TIPOINFO').AsString='B' then
    begin
-      cbAtivo.VIsible:=true;
+      eAtivo.VIsible:=true;
       if dmCad.qryParametro.FieldByName('VALORCONF').AsString = 'SIM' then
-         cbAtivo.itemindex:=0 else
-         cbAtivo.itemindex:=1;
-      cbAtivo.SetFOcus;
+         eAtivo.itemindex:=0 else
+         eAtivo.itemindex:=1;
+      eAtivo.SetFOcus;
    end else
    if dmCad.qryParametro.FieldByName('TIPOINFO').AsString='F' then
    begin

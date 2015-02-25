@@ -380,7 +380,6 @@ begin
       TipoPlano := DESPESA;
    AbreTelaComShowModal(TFcad_PlanoConta, TObject(Fcad_PlanoConta), Fcad_Contas, '');
 
-
    if ID > 0 then
    begin
       eCodPlano.Text := intToStr(ID);
@@ -443,20 +442,16 @@ begin
          ACanvas.Canvas.Brush.Color := clYellow;
          ACanvas.Canvas.Font.Color  := clYellow;
       end else
+      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'PREVISÃO') then
+      begin
+         ACanvas.Canvas.Brush.Color := clPurple;
+         ACanvas.Canvas.Font.Color  := clPurple;
+      end else
       if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'CANCELADO') then
       begin
-         ACanvas.Canvas.Brush.Color := clBlue;
-         ACanvas.Canvas.Font.Color  := clBlue;
+         ACanvas.Canvas.Brush.Color := clRed;
+         ACanvas.Canvas.Font.Color  := clRed;
       end;
-//      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'ABERTO') then
-//      begin
-//         ACanvas.Canvas.Brush.Color := clGreen;
-//         ACanvas.Canvas.Font.Color  := clGreen;
-//      end else
-//      begin
-//         ACanvas.Canvas.Brush.Color := clGreen;
-//         ACanvas.Canvas.Font.Color  := clGreen;
-//      end;
    end;
 end;
 
