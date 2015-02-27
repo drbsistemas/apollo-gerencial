@@ -18,6 +18,7 @@ Const
    FUNCTION CalculaValorAtualizado(tipoValor: TTipoValor; DData: TDateTime; FValorCalcula, FValorinicial: Double; intDiaAtraso: Integer): Double;
    FUNCTION CalculaDiasAtraso(DData: TDateTime; intDiaAtraso: Integer): Integer;
    PROCEDURE AtualizaEMarcaConta(DData:TDateTime; intConta: Integer; bAtualiza:Boolean);
+   PROCEDURE MarcaDesmarcaCheque(intCheque: Integer);
 
    // Lançamentos Financeiros
    PROCEDURE LancaAdiantamento(DData: TDateTime; StrDoc, StrDescricao: String; FSAldoAntes, FCredito, FDebito: Double;
@@ -185,6 +186,36 @@ begin
          cdsSelec.Post;
       end else
          cdsSelec.DELETE;
+   end;
+end;
+
+procedure MarcaDesmarcaCheque(intCheque: Integer);
+begin
+   with dmFin do
+   begin
+      if not cdsChequeSelec.Active then
+      begin
+         cdsChequeSelec.Close;
+         cdsChequeSelec.CreateDataSet;
+         cdsChequeSelec.Open;
+      end;
+
+      if (not cdsChequeSelec.locate('IDCHEQUE', intCheque, [])) then
+      begin
+         cdsChequeSelec.Append;
+         cdsChequeSelecIDCHEQUE.AsInteger     := qryCheque.FieldByName('IDCHEQUE').ASinteger;
+         cdsChequeSelecIDCLIE.ASInteger       := qryCheque.FieldByName('IDCLIE').ASInteger;
+         cdsChequeSelecIDCAIXA.AsInteger      := qryCheque.FieldByName('IDCAIXA').ASInteger;
+         cdsChequeSelecCLIENTE.AsString       := qryCheque.FieldByName('RAZAO').AsString;
+         cdsChequeSelecNCHEQUE.AsString       := qryCheque.FieldByName('NCHEQUE').AsString;
+         cdsChequeSelecDTEMISSAO.AsDateTIme   := qryCheque.FieldByName('DTEMISSAO').AsDateTIme;
+         cdsChequeSelecTIPOCHEQUE.AsString    := qryCheque.FieldByName('TIPOCHEQUE').AsString;
+         cdsChequeSelecSTATUS.AsString        := qryCheque.FieldByName('STATUS').AsString;
+
+         cdsChequeSelecVLRTOTAL.AsFloat       := qryCheque.FieldbyName('VLRTOTAL').AsFloat ;
+         cdsChequeSelec.Post;
+      end else
+         cdsChequeSelec.DELETE;
    end;
 end;
 

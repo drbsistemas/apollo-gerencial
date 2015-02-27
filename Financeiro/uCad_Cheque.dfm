@@ -1,22 +1,10 @@
 inherited Fcad_Cheque: TFcad_Cheque
   Caption = 'Cadastro de Cheques'
-  ClientHeight = 539
-  ClientWidth = 702
-  ExplicitWidth = 710
-  ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnCad: TPanel
-    Width = 644
-    Height = 539
-    ExplicitLeft = -6
-    ExplicitTop = -7
-    ExplicitWidth = 644
-    ExplicitHeight = 539
     inherited pnMenu: TPanel
-      Width = 642
       TabOrder = 15
-      ExplicitWidth = 642
       object cxLabel14: TcxLabel
         Left = 330
         Top = 65
@@ -948,21 +936,8 @@ inherited Fcad_Cheque: TFcad_Cheque
       end
     end
   end
-  inherited pnImg: TcxImage
-    Left = 644
-    ExplicitLeft = 644
-    ExplicitHeight = 539
-    Height = 539
-  end
   inherited pnCon: TPanel
-    Width = 644
-    Height = 539
-    ExplicitLeft = 0
-    ExplicitWidth = 644
-    ExplicitHeight = 539
     inherited pnBusca: TPanel
-      Width = 642
-      ExplicitWidth = 642
       inherited cxConsulta: TcxComboBox
         Properties.Items.Strings = (
           'C'#243'digo'
@@ -1025,27 +1000,12 @@ inherited Fcad_Cheque: TFcad_Cheque
       end
     end
     inherited pnBotaoCad: TPanel
-      Width = 642
-      ExplicitWidth = 642
       inherited cxApagar: TcxButton
         OnClick = cxApagarClick
       end
     end
-    inherited pnBotaoCon: TPanel
-      Top = 487
-      Width = 642
-      ExplicitTop = 487
-      ExplicitWidth = 642
-    end
     inherited grConsulta: TcxGrid
-      Width = 642
-      Height = 177
-      ExplicitLeft = -4
-      ExplicitTop = 77
-      ExplicitWidth = 642
-      ExplicitHeight = 177
       inherited grConsultaDBTableView1: TcxGridDBTableView
-        OnDblClick = nil
         DataController.DataSource = dmFin.dsCheque
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
           Caption = 'St'
@@ -1062,18 +1022,24 @@ inherited Fcad_Cheque: TFcad_Cheque
           DataBinding.FieldName = 'DTEMISSAO'
           Width = 100
         end
-        object grConsultaDBTableView1Column2: TcxGridDBColumn [3]
-          Caption = 'P. Conta'
-          DataBinding.FieldName = 'NOMEPLANO'
-          Width = 129
+        object grConsultaDBTableView1Column6: TcxGridDBColumn [3]
+          Caption = 'Cliente'
+          DataBinding.FieldName = 'RAZAO'
+          Width = 324
         end
         object grConsultaDBTableView1Column4: TcxGridDBColumn [4]
           Caption = 'Vlr. Total'
           DataBinding.FieldName = 'VLRTOTAL'
           PropertiesClassName = 'TcxCurrencyEditProperties'
           Properties.DisplayFormat = '###,###,##0.00'
+          Width = 75
         end
-        object grConsultaDBTableView1Column3: TcxGridDBColumn [5]
+        object grConsultaDBTableView1Column2: TcxGridDBColumn [5]
+          Caption = 'P. Conta'
+          DataBinding.FieldName = 'NOMEPLANO'
+          Width = 129
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn [6]
           Caption = 'Portador'
           DataBinding.FieldName = 'NOMEPORTADOR'
           Width = 250
@@ -1086,24 +1052,42 @@ inherited Fcad_Cheque: TFcad_Cheque
       end
     end
     inherited pnSelec: TPanel
-      Top = 253
-      Width = 642
-      ExplicitTop = 253
-      ExplicitWidth = 642
       inherited grConsulta2: TcxGrid
-        Width = 640
-        ExplicitWidth = 640
+        inherited cxGridDBTableView1: TcxGridDBTableView
+          OnDblClick = cxGridDBTableView1DblClick
+          DataController.DataSource = dmFin.dsChequeSelec
+          inherited cxGridDBColumn1: TcxGridDBColumn
+            Caption = 'ST'
+            DataBinding.FieldName = 'STATUS'
+          end
+          inherited cxGridDBColumn2: TcxGridDBColumn
+            Caption = 'N'#186' Cheque'
+            DataBinding.FieldName = 'NCHEQUE'
+            Width = 75
+          end
+          object cxGridDBTableView1Column2: TcxGridDBColumn
+            Caption = 'Dt. Emiss'#227'o'
+            DataBinding.FieldName = 'DTEMISSAO'
+            Width = 100
+          end
+          object cxGridDBTableView1Column3: TcxGridDBColumn
+            Caption = 'Cliente'
+            DataBinding.FieldName = 'RAZAO'
+            Width = 324
+          end
+          object cxGridDBTableView1Column1: TcxGridDBColumn
+            Caption = 'Vlr. Total'
+            DataBinding.FieldName = 'VLRTOTAL'
+            Width = 75
+          end
+        end
       end
       inherited pnTop: TPanel
-        Width = 640
-        ExplicitWidth = 640
         inherited cxContas: TcxLabel
           Style.IsFontAssigned = True
         end
         inherited cxTotal: TcxLabel
-          Left = 432
           Style.IsFontAssigned = True
-          ExplicitLeft = 432
         end
       end
     end

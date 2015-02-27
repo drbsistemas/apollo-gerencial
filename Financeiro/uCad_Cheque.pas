@@ -11,7 +11,7 @@ uses
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxLabel, dxGDIPlusClasses, cxImage, Vcl.StdCtrls,
   cxButtons, Vcl.ExtCtrls, Vcl.ComCtrls, dxCore, cxDateUtils, cxButtonEdit,
-  cxCalendar, cxCurrencyEdit, uRotinaDeCalculosMovimentacao;
+  cxCalendar, cxCurrencyEdit, uRotinaDeCalculosMovimentacao, uRotinaLancamentoFinanceiro;
 
 type
   TFcad_Cheque = class(TFcad_PaiFinanceiro)
@@ -59,6 +59,10 @@ type
     grConsultaDBTableView1Column3: TcxGridDBColumn;
     grConsultaDBTableView1Column4: TcxGridDBColumn;
     grConsultaDBTableView1Column5: TcxGridDBColumn;
+    cxGridDBTableView1Column2: TcxGridDBColumn;
+    cxGridDBTableView1Column1: TcxGridDBColumn;
+    cxGridDBTableView1Column3: TcxGridDBColumn;
+    grConsultaDBTableView1Column6: TcxGridDBColumn;
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -82,6 +86,8 @@ type
     procedure grConsultaDBTableView1CustomDrawCell(
       Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
       AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+    procedure grConsultaDBTableView1DblClick(Sender: TObject);
+    procedure cxGridDBTableView1DblClick(Sender: TObject);
   private
     { Private declarations }
      indice :string;
@@ -131,7 +137,7 @@ begin
       4: indice := 'DTVENCIMENTO';
    end;
 
-   StrSql := 'select A.*, C.BANCO, D.NOMEPLANO, E.FANTASIA     '+#13+
+   StrSql := 'select A.*, C.BANCO, D.NOMEPLANO, E.RAZAO        '+#13+
              ' from cheque A                                   '+#13+
              ' left join caixa B on A.IDCAIXA = B.IDCAIXA      '+#13+
              ' left join banco C on B.IDBANCO = C.IDBANCO      '+#13+
@@ -157,6 +163,15 @@ begin
    Limpa;
    Edita;
    eNCheque.SetFocus;
+end;
+
+procedure TFcad_Cheque.cxGridDBTableView1DblClick(Sender: TObject);
+begin
+  inherited;
+//   TotalContas((dmFin.cdsSelecVLRBRUTO.AsFLoat*-1));
+   dmFin.cdsChequeSelec.Delete;
+   if dmFIn.cdsChequeSelec.RecordCount<=0 then
+      pnSelec.Visible := false;
 end;
 
 procedure TFcad_Cheque.cxNovoClick(Sender: TObject);
@@ -353,6 +368,9 @@ end;
 procedure TFcad_Cheque.FormShow(Sender: TObject);
 begin
    inherited;
+   if TipoMov= ENTRADA then
+      Caption := 'CADASTRO DE CHEQUES TERCEIROS' else
+      Caption := 'CADASTRO DE CHEQUES PRÓPRIOS';
    cxConsultaPropertiesChange(Self);
 end;
 
@@ -389,6 +407,30 @@ begin
          ACanvas.Canvas.Font.Color  := clRed;
       end;
    end;
+end;
+
+procedure TFcad_Cheque.grConsultaDBTableView1DblClick(Sender: TObject);
+begin
+   if (dmFIn.qryCheque.Active = true) and (dmFIn.qryCheque.RecordCount < 1) then
+   begin
+      Msg('Olá, Verificamos que não há nenhum registro para editar, verifique a consulta dos dados!','I',':)');
+      Abort;
+   end;
+   if dmFIn.qryCheque.FieldByName('STATUS').AsString = 'QUITADO' then
+   begin
+      Msg('Cheques Depositados/Compensados não podem ser selecionadas!','I',':)');
+      abort;
+   end;
+   MarcaDesmarcaCheque(dmFIn.qryCheque.FieldByName('IDCHEQUE').ASinteger);      // Marca
+
+   if dmFin.cdsChequeSelec.RecordCount<=0 then
+   begin
+      pnSelec.Visible  := false;
+//      TotalContas(0);
+   end
+   else
+      pnSelec.Visible   := true;
+//   TotalContas((dmFin.qryConta.FieldByName('VLRBRUTO').AsFLoat));
 end;
 
 procedure TFcad_Cheque.Limpa;

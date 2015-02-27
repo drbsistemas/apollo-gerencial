@@ -978,7 +978,7 @@ object dmFin: TdmFin
     UpdateOptions.RefreshMode = rmAll
     UpdateObject = UpdtCheque
     SQL.Strings = (
-      'select A.*, C.BANCO, D.NOMEPLANO, E.FANTASIA '
+      'select A.*, C.BANCO, D.NOMEPLANO, E.RAZAO'
       'from cheque A'
       'left join caixa B on A.IDCAIXA = B.IDCAIXA'
       'left join banco C on B.IDBANCO = C.IDBANCO'
@@ -992,5 +992,86 @@ object dmFin: TdmFin
     ControlHistorico = FPrinc.uHistorico
     Left = 233
     Top = 136
+  end
+  object cdsChequeSelec: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'IDCHEQUE'
+        DataType = ftInteger
+      end
+      item
+        Name = 'IDCAIXA'
+        DataType = ftInteger
+      end
+      item
+        Name = 'IDCLIE'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CLIENTE'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'NCHEQUE'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'DTEMISSAO'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'TIPOCHEQUE'
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'VLRTOTAL'
+        DataType = ftFloat
+      end
+      item
+        Name = 'STATUS'
+        DataType = ftString
+        Size = 20
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 328
+    Top = 117
+    object cdsChequeSelecIDCHEQUE: TIntegerField
+      FieldName = 'IDCHEQUE'
+    end
+    object cdsChequeSelecIDCAIXA: TIntegerField
+      FieldName = 'IDCAIXA'
+    end
+    object cdsChequeSelecIDCLIE: TIntegerField
+      FieldName = 'IDCLIE'
+    end
+    object cdsChequeSelecCLIENTE: TStringField
+      FieldName = 'CLIENTE'
+    end
+    object cdsChequeSelecNCHEQUE: TStringField
+      FieldName = 'NCHEQUE'
+    end
+    object cdsChequeSelecDTEMISSAO: TDateTimeField
+      FieldName = 'DTEMISSAO'
+    end
+    object cdsChequeSelecTIPOCHEQUE: TStringField
+      FieldName = 'TIPOCHEQUE'
+    end
+    object cdsChequeSelecVLRTOTAL: TFloatField
+      FieldName = 'VLRTOTAL'
+    end
+    object cdsChequeSelecSTATUS: TStringField
+      FieldName = 'STATUS'
+    end
+  end
+  object dsChequeSelec: TDataSource
+    DataSet = cdsChequeSelec
+    Left = 328
+    Top = 161
   end
 end

@@ -19,16 +19,6 @@ type
     cxGridDBTableView1: TcxGridDBTableView;
     cxGridDBColumn1: TcxGridDBColumn;
     cxGridDBColumn2: TcxGridDBColumn;
-    cxGridDBColumn3: TcxGridDBColumn;
-    cxGridDBColumn4: TcxGridDBColumn;
-    cxGridDBColumn5: TcxGridDBColumn;
-    cxGridDBColumn6: TcxGridDBColumn;
-    cxGridDBColumn7: TcxGridDBColumn;
-    cxGridDBColumn8: TcxGridDBColumn;
-    cxGridDBColumn9: TcxGridDBColumn;
-    cxGridDBColumn10: TcxGridDBColumn;
-    cxGridDBColumn11: TcxGridDBColumn;
-    cxGridDBTableView1Column1: TcxGridDBColumn;
     cxGridLevel1: TcxGridLevel;
     pnTop: TPanel;
     cxContas: TcxLabel;

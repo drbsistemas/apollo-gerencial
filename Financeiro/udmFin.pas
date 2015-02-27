@@ -105,6 +105,17 @@ type
     dsCheque: TDataSource;
     qryCheque: TFDQuery;
     uHis_Cheque: TUCHist_DataSet;
+    cdsChequeSelec: TClientDataSet;
+    dsChequeSelec: TDataSource;
+    cdsChequeSelecIDCHEQUE: TIntegerField;
+    cdsChequeSelecIDCAIXA: TIntegerField;
+    cdsChequeSelecIDCLIE: TIntegerField;
+    cdsChequeSelecCLIENTE: TStringField;
+    cdsChequeSelecNCHEQUE: TStringField;
+    cdsChequeSelecDTEMISSAO: TDateTimeField;
+    cdsChequeSelecTIPOCHEQUE: TStringField;
+    cdsChequeSelecVLRTOTAL: TFloatField;
+    cdsChequeSelecSTATUS: TStringField;
     procedure qryCreditoAfterInsert(DataSet: TDataSet);
     procedure qryContaAfterInsert(DataSet: TDataSet);
     procedure qryContaRateioAfterInsert(DataSet: TDataSet);

@@ -533,7 +533,6 @@ object FPrinc: TFPrinc
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    ExplicitWidth = 1024
   end
   object cxHint: TPanel
     Left = 0
@@ -550,7 +549,6 @@ object FPrinc: TFPrinc
     ParentBackground = False
     ParentFont = False
     TabOrder = 2
-    ExplicitWidth = 1024
   end
   object pnTop: TcxGroupBox
     Left = 0
@@ -576,7 +574,6 @@ object FPrinc: TFPrinc
     StyleFocused.LookAndFeel.SkinName = ''
     StyleHot.LookAndFeel.SkinName = ''
     TabOrder = 0
-    ExplicitWidth = 1024
     Height = 65
     Width = 1070
     object cxImage1: TcxImage
@@ -19730,7 +19727,6 @@ object FPrinc: TFPrinc
     Contexts = <>
     TabOrder = 1
     TabStop = False
-    ExplicitWidth = 1024
     object dxModuloPrinc: TdxRibbonTab
       Active = True
       Caption = 'M'#243'dulo Principal'

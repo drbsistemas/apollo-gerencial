@@ -290,13 +290,13 @@ end;
 
 procedure TFPrinc.ActChequeProprioExecute(Sender: TObject);
 begin
-   TipoMov := ENTRADA;
+   TipoMov := SAIDA;
    ExecutaForm(TFcad_Cheque, TObject(Fcad_Cheque));
 end;
 
 procedure TFPrinc.ActChequeTerceirosExecute(Sender: TObject);
 begin
-   TipoMov := SAIDA;
+   TipoMov := ENTRADA;
    ExecutaForm(TFcad_Cheque, TObject(Fcad_Cheque));
 end;
 
