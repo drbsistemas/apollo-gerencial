@@ -6,7 +6,7 @@ uses
    MMSystem, Graphics, System.SysUtils, Forms, System.Classes, TypInfo,
    cxButtons, CxGroupBox, cxLabel, cxCheckBox, cxTextEdit, cxMaskEdit, cxCurrencyEdit, Controls,
    FireDAC.Comp.Client, Windows, StdCtrls, Vcl.DIalogs, ComObj, ComCtrls, cxImage,
-   cxCalendar, cxButtonEdit, cxDropDownEdit, cxMemo, cxPC, Vcl.ExtCtrls,
+   cxCalendar, cxButtonEdit, cxDropDownEdit, cxMemo, cxPC, Vcl.ExtCtrls, Datasnap.DBClient,
    NFe_Util_2G_TLB ; // acrescentar essa linha no use da unit para NF-E DLL;
 
    // Mensagens
@@ -53,6 +53,7 @@ uses
    PROCEDURE   ExecutaForm(FormClasse: TFormClass; var NewForm: TObject);
    PROCEDURE   AbreTelaComShowModal(FormClasse: TFormClass; var NewForm: TObject; FNomeFormRetorno: TForm; StrTabela: String);
    procedure   AbreEnderecoDeCliente(StrCodCliente, StrNome: String; FNomeFormRetorno: TForm);
+   Procedure   CriaLimpaDataSet(cds: TClientDataSet);
 
    PROCEDURE   PFundo(mostra: integer);
 
@@ -1003,6 +1004,16 @@ begin
   DiaDasemana [7]:= 'Sábado';
   NoDia:=DayOfWeek(Data);
   DiaSemana:=DiaDasemana[NoDia];
+end;
+
+Procedure CriaLimpaDataSet(cds: TClientDataSet);
+begin
+   if not cds.Active then
+      cds.CreateDataSet;
+   cds.Open;
+   cds.EmptyDataSet;
+   cds.Close;
+   cds.Open;
 end;
 
 end.

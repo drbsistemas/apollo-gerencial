@@ -11,10 +11,36 @@ uses
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxLabel, dxGDIPlusClasses, cxImage, Vcl.StdCtrls,
   cxButtons, Vcl.ExtCtrls, Vcl.ComCtrls, dxCore, cxDateUtils, cxButtonEdit,
-  cxCalendar, cxCurrencyEdit, uRotinaDeCalculosMovimentacao, uRotinaLancamentoFinanceiro;
+  cxCalendar, cxCurrencyEdit, uRotinaDeCalculosMovimentacao, uRotinaLancamentoFinanceiro,
+  UCBase;
 
 type
   TFcad_Cheque = class(TFcad_PaiFinanceiro)
+    cxLabel14: TcxLabel;
+    eStatus: TcxTextEdit;
+    cxLabel6: TcxLabel;
+    cxStatus: TcxComboBox;
+    grConsultaDBTableView1Column1: TcxGridDBColumn;
+    grConsultaDBTableView1Column2: TcxGridDBColumn;
+    grConsultaDBTableView1Column3: TcxGridDBColumn;
+    grConsultaDBTableView1Column4: TcxGridDBColumn;
+    grConsultaDBTableView1Column5: TcxGridDBColumn;
+    cxGridDBTableView1Column2: TcxGridDBColumn;
+    cxGridDBTableView1Column1: TcxGridDBColumn;
+    cxGridDBTableView1Column3: TcxGridDBColumn;
+    grConsultaDBTableView1Column6: TcxGridDBColumn;
+    cxSelecionaPop: TMenuItem;
+    cxLimpaPop: TMenuItem;
+    N1: TMenuItem;
+    Depositar1: TMenuItem;
+    Compensar1: TMenuItem;
+    grHistorico: TcxGrid;
+    cxGridDBTableView2: TcxGridDBTableView;
+    cxGridDBColumn3: TcxGridDBColumn;
+    cxGridDBColumn4: TcxGridDBColumn;
+    cxGridDBColumn5: TcxGridDBColumn;
+    cxGridLevel2: TcxGridLevel;
+    Panel1: TPanel;
     cxLabel3: TcxLabel;
     eCodigo: TcxTextEdit;
     cxLabel4: TcxLabel;
@@ -31,38 +57,27 @@ type
     cxLabel9: TcxLabel;
     eNAgencia: TcxTextEdit;
     cxLabel10: TcxLabel;
+    cxLabel16: TcxLabel;
+    eNConta: TcxTextEdit;
     eVlrCheque: TcxCurrencyEdit;
     cxLabel11: TcxLabel;
     eObs: TcxTextEdit;
     cxLabel12: TcxLabel;
     ePortador: TcxTextEdit;
     cxLabel13: TcxLabel;
-    cxLabel14: TcxLabel;
-    eStatus: TcxTextEdit;
     cxLabel15: TcxLabel;
     cbStatus: TcxTextEdit;
-    cxLabel16: TcxLabel;
-    eNConta: TcxTextEdit;
     eNCheque: TcxTextEdit;
     cxLabel17: TcxLabel;
     cxLabel18: TcxLabel;
     eCodCaixa: TcxButtonEdit;
     eCaixa: TcxTextEdit;
-    cxLabel6: TcxLabel;
-    cxStatus: TcxComboBox;
     pnProprio: TPanel;
     cxLabel19: TcxLabel;
     eCodClie: TcxButtonEdit;
     eCliente: TcxTextEdit;
-    grConsultaDBTableView1Column1: TcxGridDBColumn;
-    grConsultaDBTableView1Column2: TcxGridDBColumn;
-    grConsultaDBTableView1Column3: TcxGridDBColumn;
-    grConsultaDBTableView1Column4: TcxGridDBColumn;
-    grConsultaDBTableView1Column5: TcxGridDBColumn;
-    cxGridDBTableView1Column2: TcxGridDBColumn;
-    cxGridDBTableView1Column1: TcxGridDBColumn;
-    cxGridDBTableView1Column3: TcxGridDBColumn;
-    grConsultaDBTableView1Column6: TcxGridDBColumn;
+    cxGridDBTableView2Column1: TcxGridDBColumn;
+    UCControls1: TUCControls;
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -88,11 +103,18 @@ type
       AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
     procedure grConsultaDBTableView1DblClick(Sender: TObject);
     procedure cxGridDBTableView1DblClick(Sender: TObject);
+    procedure cxGridDBTableView1CustomDrawCell(Sender: TcxCustomGridTableView;
+      ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
+      var ADone: Boolean);
+    procedure cxSelecionaPopClick(Sender: TObject);
+    procedure cxLimpaPopClick(Sender: TObject);
   private
     { Private declarations }
      indice :string;
+     FtotalContas: Double;
      procedure Edita;
      procedure Limpa;
+    procedure TotalContas;
   public
     { Public declarations }
   end;
@@ -104,15 +126,22 @@ implementation
 
 {$R *.dfm}
 
-uses uRotinas, udmFin, uCad_PlanoConta, uCad_Clientes, uCad_Caixa;
+uses uRotinas, udmFin, uCad_PlanoConta, uCad_Clientes, uCad_Caixa, uPrinc;
 
 procedure TFcad_Cheque.cxApagarClick(Sender: TObject);
 begin
    inherited;
-   if Msg('Entendemos sua vontade, mas deseja realmente apagar o registro?','P', ':X') then
+   if dmFin.qryCheque.RecordCount <= 0 then
+   begin
+      Msg('Olá, Verificamos que não há nenhum registro para editar, verifique a consulta dos dados','I',':)');
+      Abort;
+   end;
+   if Msg('Entendemos sua vontade, mas deseja realmente cancelar o registro?','P', ':X') then
    begin
       try
-         dmFin.qryCheque.Delete;
+         dmFin.qryCheque.Edit;
+         dmfin.qryCheque.FieldByName('STATUS').AsString := 'CANCELADO';
+         dmFin.qryCheque.Post;
          dmFin.qryCheque.ApplyUpdates(0);
       Except
          dmFin.qryCheque.CancelUpdates;
@@ -165,10 +194,48 @@ begin
    eNCheque.SetFocus;
 end;
 
-procedure TFcad_Cheque.cxGridDBTableView1DblClick(Sender: TObject);
+procedure TFcad_Cheque.cxGridDBTableView1CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
 begin
   inherited;
-//   TotalContas((dmFin.cdsSelecVLRBRUTO.AsFLoat*-1));
+   if pnSelec.Visible = true then
+   begin
+      if (AViewInfo.Item.Index = cxGridDBColumn1.Index) then
+      begin
+         if (AViewInfo.GridRecord.Values[cxGridDBColumn1.Index] = 'ABERTO') then
+         begin
+            ACanvas.Canvas.Brush.Color := clGreen;
+            ACanvas.Canvas.Font.Color  := clGreen;
+         end else
+         if (AViewInfo.GridRecord.Values[cxGridDBColumn1.Index] = 'DEPOSITADO') then
+         begin
+            ACanvas.Canvas.Brush.Color := clYellow;
+            ACanvas.Canvas.Font.Color  := clYellow;
+         end else
+         if (AViewInfo.GridRecord.Values[cxGridDBColumn1.Index] = 'COMPENSADO') then
+         begin
+            ACanvas.Canvas.Brush.Color := clBlue;
+            ACanvas.Canvas.Font.Color  := clBlue;
+         end else
+         if (AViewInfo.GridRecord.Values[cxGridDBColumn1.Index] = 'DEVOLVIDO') then
+         begin
+            ACanvas.Canvas.Brush.Color := clPurple;
+            ACanvas.Canvas.Font.Color  := clPurple;
+         end else
+         if (AViewInfo.GridRecord.Values[cxGridDBColumn1.Index] = 'CANCELADO') then
+         begin
+            ACanvas.Canvas.Brush.Color := clRed;
+            ACanvas.Canvas.Font.Color  := clRed;
+         end;
+      end;
+   end;
+end;
+
+procedure TFcad_Cheque.cxGridDBTableView1DblClick(Sender: TObject);
+begin
+   inherited;
+   TotalContas;
    dmFin.cdsChequeSelec.Delete;
    if dmFIn.cdsChequeSelec.RecordCount<=0 then
       pnSelec.Visible := false;
@@ -178,10 +245,11 @@ procedure TFcad_Cheque.cxNovoClick(Sender: TObject);
 begin
   inherited;
    Limpa;
+   eStatus.Text := 'ABERTO';
    eNCheque.SetFocus;
 end;
 
-procedure TFcad_Cheque.cxSalvarClick(Sender: TObject);
+Procedure TFcad_Cheque.cxSalvarClick(Sender: TObject);
 begin
    ValidaCampoTag(Fcad_Cheque);
 
@@ -331,6 +399,8 @@ begin
 
       eObs.Text           := FieldByName('OBSERVACAO').AsString;
       eVlrCheque.Value    := FieldByName('VLRTOTAL').AsFloat;
+      grHistorico.Visible := False;
+      ConsultaSql('select * from CHEQUEHISTORICO where IDCHEQUE='+eCodigo.Text, dmfin.qryChequeHis);
    end;
 end;
 
@@ -378,33 +448,36 @@ procedure TFcad_Cheque.grConsultaDBTableView1CustomDrawCell(
   Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
   AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
 begin
-  inherited;
-   if (AViewInfo.Item.Index = grConsultaDBTableView1Campo1.Index) then
+   inherited;
+   if dmfin.qryCheque.RecordCount>0 then
    begin
-      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'ABERTO') then
+      if (AViewInfo.Item.Index = grConsultaDBTableView1Campo1.Index) then
       begin
-         ACanvas.Canvas.Brush.Color := clGreen;
-         ACanvas.Canvas.Font.Color  := clGreen;
-      end else
-      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'DEPOSITADO') then
-      begin
-         ACanvas.Canvas.Brush.Color := clYellow;
-         ACanvas.Canvas.Font.Color  := clYellow;
-      end else
-      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'COMPENSADO') then
-      begin
-         ACanvas.Canvas.Brush.Color := clBlue;
-         ACanvas.Canvas.Font.Color  := clBlue;
-      end else
-      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'DEVOLVIDO') then
-      begin
-         ACanvas.Canvas.Brush.Color := clPurple;
-         ACanvas.Canvas.Font.Color  := clPurple;
-      end else
-      if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'CANCELADO') then
-      begin
-         ACanvas.Canvas.Brush.Color := clRed;
-         ACanvas.Canvas.Font.Color  := clRed;
+         if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'ABERTO') then
+         begin
+            ACanvas.Canvas.Brush.Color := clGreen;
+            ACanvas.Canvas.Font.Color  := clGreen;
+         end else
+         if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'DEPOSITADO') then
+         begin
+            ACanvas.Canvas.Brush.Color := clYellow;
+            ACanvas.Canvas.Font.Color  := clYellow;
+         end else
+         if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'COMPENSADO') then
+         begin
+            ACanvas.Canvas.Brush.Color := clBlue;
+            ACanvas.Canvas.Font.Color  := clBlue;
+         end else
+         if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'DEVOLVIDO') then
+         begin
+            ACanvas.Canvas.Brush.Color := clPurple;
+            ACanvas.Canvas.Font.Color  := clPurple;
+         end else
+         if (AViewInfo.GridRecord.Values[grConsultaDBTableView1Campo1.Index] = 'CANCELADO') then
+         begin
+            ACanvas.Canvas.Brush.Color := clRed;
+            ACanvas.Canvas.Font.Color  := clRed;
+         end;
       end;
    end;
 end;
@@ -426,19 +499,63 @@ begin
    if dmFin.cdsChequeSelec.RecordCount<=0 then
    begin
       pnSelec.Visible  := false;
-//      TotalContas(0);
+      TotalContas;
    end
    else
       pnSelec.Visible   := true;
-//   TotalContas((dmFin.qryConta.FieldByName('VLRBRUTO').AsFLoat));
+   TotalContas;
 end;
 
 procedure TFcad_Cheque.Limpa;
 begin
    LimpaCampos(Fcad_Cheque);
+   grHistorico.Visible := False;
    if TipoMov=ENTRADA then
       pnProprio.Visible  := True else
       pnTerceiro.Visible := True;
+end;
+
+procedure TFcad_Cheque.cxLimpaPopClick(Sender: TObject);
+begin
+   inherited;
+   TotalContas;
+   CriaLimpaDataSet(dmFin.cdsChequeSelec);
+
+   pnSelec.Visible := false;
+end;
+
+procedure TFcad_Cheque.cxSelecionaPopClick(Sender: TObject);
+begin
+   inherited;
+   with dmFin do
+   begin
+      qryCheque.first;
+      while not qryCheque.eof do
+      begin
+         MarcaDesmarcaCheque(qryCheque.FieldByName('IDCHEQUE').ASinteger);      // Marca
+         TotalContas;
+         qryCheque.NExt;
+      end;
+      pnSelec.Visible   := true;
+   end;
+end;
+
+procedure TFcad_Cheque.TotalContas;
+begin
+   with dmFin do
+   begin
+      FTotalContas := 0;
+      cdsChequeSelec.DisableControls;
+      cdsChequeSelec.First;
+      while not cdsChequeSelec.Eof do
+      begin
+         FTotalContas:= FTotalContas + qryCheque.FieldByName('VLRTOTAL').AsFloat;
+         cdsChequeSelec.NExt;
+      end;
+      CdsSelec.EnableControls;
+   end;
+
+   cxTotal.Caption := 'Total de Cheques R$: '+FormatFloat('###,###,##0.00',FTotalContas);
 end;
 
 end.

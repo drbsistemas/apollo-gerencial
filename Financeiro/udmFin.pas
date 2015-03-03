@@ -116,6 +116,10 @@ type
     cdsChequeSelecTIPOCHEQUE: TStringField;
     cdsChequeSelecVLRTOTAL: TFloatField;
     cdsChequeSelecSTATUS: TStringField;
+    UpdtChequeHis: TFDUpdateSQL;
+    dsChequeHis: TDataSource;
+    qryChequeHis: TFDQuery;
+    ucHis_ChequeHis: TUCHist_DataSet;
     procedure qryCreditoAfterInsert(DataSet: TDataSet);
     procedure qryContaAfterInsert(DataSet: TDataSet);
     procedure qryContaRateioAfterInsert(DataSet: TDataSet);

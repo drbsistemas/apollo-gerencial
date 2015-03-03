@@ -1946,6 +1946,8 @@ inherited Fcad_Pedido: TFcad_Pedido
       object cxPageDados: TcxTabSheet
         Caption = 'Dados Adicionais'
         ImageIndex = 1
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object cxLabel21: TcxLabel
           Left = 3
           Top = 4
@@ -2760,12 +2762,6 @@ inherited Fcad_Pedido: TFcad_Pedido
       inherited cxEdita: TcxButton [0]
       end
       inherited cxNovo: TcxButton [1]
-      end
-      inherited cxApagar: TcxButton
-        OnClick = cxApagarClick
-      end
-      inherited cxPrint: TcxButton
-        OnClick = cxPrintClick
       end
       inherited cxOpcoes: TcxButton
         Enabled = False

@@ -144,7 +144,7 @@ type
     Procedure Limpa;
     procedure Edita;
     procedure SomaValorConta;
-    procedure TotalContas(FValor: Double);
+    procedure TotalContas;
     procedure ConsultaRateio(FTotalConta: Double; StrCodPlano, StrCodConta, StrDados: String);
     procedure SAlvaRAteio;
     procedure ValidaDadosParaBaixar;
@@ -265,7 +265,7 @@ end;
 
 procedure TFcad_Contas.cxGridDBTableView1DblClick(Sender: TObject);
 begin
-   TotalContas((dmFin.cdsSelecVLRBRUTO.AsFLoat*-1));
+   TotalContas;
    dmFin.cdsSelec.Delete;
    if dmFIn.cdsSelec.RecordCount<=0 then
       pnSelec.Visible := false;
@@ -472,11 +472,11 @@ begin
    if dmFin.cdsSelec.RecordCount<=0 then
    begin
       pnSelec.Visible  := false;
-      TotalContas(0);
+      TotalContas;
    end
    else
       pnSelec.Visible   := true;
-   TotalContas((dmFin.qryConta.FieldByName('VLRBRUTO').AsFLoat));
+   TotalContas;
 end;
 
 procedure TFcad_Contas.Limpa;
@@ -566,15 +566,16 @@ begin
    ConsultaRateio(eValorTotal.Value, eCodPlano.Text, eCodigo.Text, 'CONSULTA');
 end;
 
-procedure TFcad_Contas.TotalContas(FValor: Double);
+procedure TFcad_Contas.TotalContas;
 begin
    with dmFin do
    begin
       FTotalContas := 0;
       CdsSelec.DisableControls;
+      CdsSelec.First;
       while not cdsSelec.Eof do
       begin
-         FTotalContas:= FTotalContas + cdsSelec.FieldByName('VLRBRUTO').AsFloat;
+         FTotalContas:= FTotalContas + CdsSelec.FieldByName('VLRBRUTO').AsFLoat;
          cdsSelec.NExt;
       end;
       CdsSelec.EnableControls;

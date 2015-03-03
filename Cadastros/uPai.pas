@@ -79,6 +79,9 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure cxVerClick(Sender: TObject);
+    procedure cxPrintClick(Sender: TObject);
+    procedure cxApagarClick(Sender: TObject);
+    procedure cxPopMenuPopup(Sender: TObject);
   private
 
     { Private declarations }
@@ -130,6 +133,15 @@ begin
    end;
 end;
 
+procedure TFcad_Pai.cxApagarClick(Sender: TObject);
+begin
+   if grConsultaDBTableView1.DataController.RecordCount <= 0 then
+   begin
+       Msg('Olá, Verificamos que não há nenhum registro para editar, verifique a consulta dos dados','I',':)');
+       Abort;
+   end;
+end;
+
 procedure TFcad_Pai.cxCadastroClick(Sender: TObject);
 begin
    pnBotaoCon.Tag :=1;
@@ -151,6 +163,11 @@ end;
 
 procedure TFcad_Pai.cxEditaClick(Sender: TObject);
 begin
+   if grConsultaDBTableView1.DataController.RecordCount <= 0 then
+   begin
+       Msg('Olá, Verificamos que não há nenhum registro para editar, verifique a consulta dos dados','I',':)');
+       Abort;
+   end;
    MostraPainelCadastro(Cad);
    cxSalvar.Tag := 0;
 end;
@@ -164,6 +181,24 @@ procedure TFcad_Pai.cxNovoClick(Sender: TObject);
 begin
    MostraPainelCadastro(Cad);
    cxSalvar.Tag := 1;
+end;
+
+procedure TFcad_Pai.cxPopMenuPopup(Sender: TObject);
+begin
+  if grConsultaDBTableView1.DataController.RecordCount <= 0 then
+  begin
+      Msg('Olá, Verificamos que não há nenhum registro para editar, verifique a consulta dos dados','I',':)');
+      Abort;
+  end;
+end;
+
+procedure TFcad_Pai.cxPrintClick(Sender: TObject);
+begin
+  if grConsultaDBTableView1.DataController.RecordCount <= 0 then
+  begin
+      Msg('Olá, Verificamos que não há nenhum registro para editar, verifique a consulta dos dados','I',':)');
+      Abort;
+  end;
 end;
 
 procedure TFcad_Pai.cxSalvarClick(Sender: TObject);

@@ -20255,6 +20255,42 @@ object FPrinc: TFPrinc
         CompName = 'ForarFechamentodoSistema1'
         Caption = 'For'#231'ar Fechamento do Sistema'
         GroupName = 'Tela Principal'
+      end
+      item
+        FormName = 'Fcad_Cheque'
+        CompName = 'cxNovo'
+        Caption = 'Novo'
+        GroupName = 'Cadastro de Cheques'
+      end
+      item
+        FormName = 'Fcad_Cheque'
+        CompName = 'cxEdita'
+        Caption = 'Editar'
+        GroupName = 'Cadastro de Cheques'
+      end
+      item
+        FormName = 'Fcad_Cheque'
+        CompName = 'cxVer'
+        Caption = 'Visualizar'
+        GroupName = 'Cadastro de Cheques'
+      end
+      item
+        FormName = 'Fcad_Cheque'
+        CompName = 'cxApagar'
+        Caption = 'Cancelar'
+        GroupName = 'Cadastro de Cheques'
+      end
+      item
+        FormName = 'Fcad_Cheque'
+        CompName = 'cxOpcoes'
+        Caption = 'Op'#231#245'es'
+        GroupName = 'Cadastro de Cheques'
+      end
+      item
+        FormName = 'Fcad_Cheque'
+        CompName = 'cxCadastro'
+        Caption = 'Cadastro'
+        GroupName = 'Cadastro de Cheques'
       end>
     TableUsers.FieldUserID = 'UCIdUser'
     TableUsers.FieldUserName = 'UCUserName'

@@ -4910,6 +4910,7 @@ object Fcad_Pai: TFcad_Pai
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
+        OnClick = cxApagarClick
       end
       object cxVoltar: TcxButton
         Left = 411
@@ -5215,6 +5216,7 @@ object Fcad_Pai: TFcad_Pai
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
+        OnClick = cxPrintClick
       end
       object cxOpcoes: TcxButton
         Left = 293
@@ -5223,6 +5225,8 @@ object Fcad_Pai: TFcad_Pai
         Height = 51
         Hint = 'Op'#231#245'es adicionais aos registros'
         Caption = '&Op'#231#245'es'
+        DropDownMenu = cxPopMenu
+        Kind = cxbkDropDown
         LookAndFeel.Kind = lfOffice11
         OptionsImage.Glyph.Data = {
           36100000424D3610000000000000360000002800000020000000200000000100
@@ -5378,8 +5382,6 @@ object Fcad_Pai: TFcad_Pai
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 3
-      ExplicitLeft = -4
-      ExplicitTop = 524
       object cxCadastro: TcxButton
         Left = 265
         Top = 0
@@ -5737,6 +5739,7 @@ object Fcad_Pai: TFcad_Pai
     end
   end
   object cxPopMenu: TRxPopupMenu
+    OnPopup = cxPopMenuPopup
     Left = 584
     Top = 8
   end

@@ -1,6 +1,6 @@
 object dmFin: TdmFin
   OldCreateOrder = False
-  Height = 222
+  Height = 357
   Width = 408
   object UpdtCredito: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -444,8 +444,8 @@ object dmFin: TdmFin
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 370
-    Top = 117
+    Left = 194
+    Top = 189
     object cdsSelecIDCONTA: TIntegerField
       FieldName = 'IDCONTA'
     end
@@ -513,8 +513,8 @@ object dmFin: TdmFin
   end
   object dsSelec: TDataSource
     DataSet = cdsSelec
-    Left = 370
-    Top = 161
+    Left = 194
+    Top = 233
   end
   object UpdtContaRateio: TFDUpdateSQL
     Connection = dmCon.FdCon
@@ -1039,8 +1039,8 @@ object dmFin: TdmFin
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 328
-    Top = 117
+    Left = 152
+    Top = 189
     object cdsChequeSelecIDCHEQUE: TIntegerField
       FieldName = 'IDCHEQUE'
     end
@@ -1071,7 +1071,63 @@ object dmFin: TdmFin
   end
   object dsChequeSelec: TDataSource
     DataSet = cdsChequeSelec
-    Left = 328
-    Top = 161
+    Left = 152
+    Top = 233
+  end
+  object UpdtChequeHis: TFDUpdateSQL
+    Connection = dmCon.FdCon
+    InsertSQL.Strings = (
+      'INSERT INTO CHEQUEHISTORICO'
+      '(IDHISTORICO, IDCHEQUE, "DATA", HISTORICO, '
+      '  USUARIO)'
+      
+        'VALUES (:NEW_IDHISTORICO, :NEW_IDCHEQUE, :NEW_DATA, :NEW_HISTORI' +
+        'CO, '
+      '  :NEW_USUARIO)'
+      'RETURNING IDHISTORICO, IDCHEQUE, "DATA", HISTORICO, USUARIO')
+    ModifySQL.Strings = (
+      'UPDATE CHEQUEHISTORICO'
+      
+        'SET IDHISTORICO = :NEW_IDHISTORICO, IDCHEQUE = :NEW_IDCHEQUE, "D' +
+        'ATA" = :NEW_DATA, '
+      '  HISTORICO = :NEW_HISTORICO, USUARIO = :NEW_USUARIO'
+      'WHERE IDHISTORICO = :OLD_IDHISTORICO'
+      'RETURNING IDHISTORICO, IDCHEQUE, "DATA", HISTORICO, USUARIO')
+    DeleteSQL.Strings = (
+      'DELETE FROM CHEQUEHISTORICO'
+      'WHERE IDHISTORICO = :OLD_IDHISTORICO')
+    FetchRowSQL.Strings = (
+      
+        'SELECT IDHISTORICO, IDCHEQUE, "DATA" AS "DATA", HISTORICO, USUAR' +
+        'IO'
+      'FROM CHEQUEHISTORICO'
+      'WHERE IDHISTORICO = :IDHISTORICO')
+    Left = 273
+    Top = 46
+  end
+  object dsChequeHis: TDataSource
+    DataSet = qryChequeHis
+    Left = 273
+    Top = 89
+  end
+  object qryChequeHis: TFDQuery
+    AfterInsert = qryChequeAfterInsert
+    CachedUpdates = True
+    Connection = dmCon.FdCon
+    Transaction = dmCon.FdSalva
+    UpdateTransaction = dmCon.FdSalva
+    UpdateOptions.AssignedValues = [uvRefreshMode]
+    UpdateOptions.RefreshMode = rmAll
+    UpdateObject = UpdtChequeHis
+    SQL.Strings = (
+      'select * from CHEQUEHISTORICO')
+    Left = 273
+    Top = 2
+  end
+  object ucHis_ChequeHis: TUCHist_DataSet
+    DataSet = qryChequeHis
+    ControlHistorico = FPrinc.uHistorico
+    Left = 273
+    Top = 136
   end
 end

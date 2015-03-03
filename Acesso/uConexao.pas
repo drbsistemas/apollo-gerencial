@@ -9,7 +9,7 @@ Uses
    Procedure AbreAcesso;
    Procedure AbreBanco(EnderecoBanco:String);
    // Licença
-   Function VerificaLicenca(): Boolean;
+   Function VerificaLicenca: Boolean;
    Function ValidaLicenca(StrSerial: String): Boolean;
    Function LeLicenca(StrSerial: String): Boolean;
    Procedure AtualizaLicenca(StrValidade, StrTerminais, StrKeygen: String);
@@ -26,8 +26,8 @@ uses uRotinas, uDmCon, uPrinc, uDmCad, uSerial;
 procedure AbreAcesso;
 begin
    try
-      if dmCon = nil then
-         Application.CreateForm(TdmCon, dmCon);
+      dmCon.FdConAcesso.Params.Clear;
+      dmCon.FdCon.Params.Clear;
 
       with dmCon.FdConAcesso do
       begin
@@ -39,6 +39,7 @@ begin
          Params.Add('DriverID=FB');
          dmCon.FDPhysFBDriverLink1.VendorLib := 'gds32.dll'; // Pasta do Aplicativo EXE
          Open();
+         FPrinc.UserControl1.StartLogin;
       end;
 
    except
@@ -126,7 +127,7 @@ begin
    end;
 end;
 
-Function VerificaLicenca(): Boolean;
+Function VerificaLicenca: Boolean;
 begin
    Liberacao := True;
    if (dmCad.qryConf.FieldbyName('KEYGEN').AsString='') or (not ValidaLicenca(dmCad.qryConf.FieldbyName('KEYGEN').AsString)) then

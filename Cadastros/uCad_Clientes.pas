@@ -372,14 +372,7 @@ end;
 
 procedure TFcad_Clientes.cxEditaClick(Sender: TObject);
 begin
-   if qryClie.RecordCount <= 0 then
-   begin
-      Msg('Olá, Verificamos que não há nenhum registro para editar, verifique a consulta dos dados','I',':)');
-      Abort;
-   end;
-
    inherited;
-
    Limpa;
    Edita;
 end;

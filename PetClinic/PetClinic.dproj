@@ -75,6 +75,8 @@
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <DCC_ExeOutput>C:\DRB\</DCC_ExeOutput>
+        <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>Imagem\Sistema\PetClinic.ico</Icon_MainIcon>
         <VerInfo_Build>3</VerInfo_Build>
         <VerInfo_PreRelease>true</VerInfo_PreRelease>
@@ -247,6 +249,7 @@
                     <Source Name="MainSource">PetClinic.dpr</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Windows\system32\14.0\Bpl\dcldxADOServerModeRS20.bpl">ADO Data Source for ExpressDataController Server Mode by Developer Express Inc.</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k200.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp200.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>

@@ -900,29 +900,6 @@ inherited Fcad_Contas: TFcad_Contas
       Width = 82
       AnchorX = 283
     end
-    object cxLabel23: TcxLabel
-      Left = 117
-      Top = 300
-      AutoSize = False
-      Caption = 'Dados do Pagamento'
-      ParentFont = False
-      Style.Font.Charset = ANSI_CHARSET
-      Style.Font.Color = clBlack
-      Style.Font.Height = -11
-      Style.Font.Name = 'Tahoma'
-      Style.Font.Style = [fsBold]
-      Style.LookAndFeel.NativeStyle = True
-      Style.TextColor = clBlack
-      Style.IsFontAssigned = True
-      StyleDisabled.LookAndFeel.NativeStyle = True
-      StyleFocused.LookAndFeel.NativeStyle = True
-      StyleHot.LookAndFeel.NativeStyle = True
-      Properties.Alignment.Horz = taLeftJustify
-      Properties.LabelEffect = cxleCool
-      Transparent = True
-      Height = 17
-      Width = 166
-    end
     object cxLabel8: TcxLabel
       Left = 28
       Top = 141
@@ -1087,6 +1064,29 @@ inherited Fcad_Contas: TFcad_Contas
       object cxGridLevel2: TcxGridLevel
         GridView = cxGridDBTableView2
       end
+    end
+    object cxLabel23: TcxLabel
+      Left = 117
+      Top = 300
+      AutoSize = False
+      Caption = 'Dados do Pagamento'
+      ParentFont = False
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clBlack
+      Style.Font.Height = -11
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = [fsBold]
+      Style.LookAndFeel.NativeStyle = True
+      Style.TextColor = clBlack
+      Style.IsFontAssigned = True
+      StyleDisabled.LookAndFeel.NativeStyle = True
+      StyleFocused.LookAndFeel.NativeStyle = True
+      StyleHot.LookAndFeel.NativeStyle = True
+      Properties.Alignment.Horz = taLeftJustify
+      Properties.LabelEffect = cxleCool
+      Transparent = True
+      Height = 17
+      Width = 166
     end
   end
   inherited pnImg: TcxImage
@@ -1341,9 +1341,6 @@ inherited Fcad_Contas: TFcad_Contas
     inherited pnBotaoCad: TPanel
       Width = 730
       ExplicitWidth = 730
-      inherited cxApagar: TcxButton
-        OnClick = cxApagarClick
-      end
       inherited cxVoltar: TcxButton
         Left = 529
         ExplicitLeft = 529
@@ -1354,8 +1351,6 @@ inherited Fcad_Contas: TFcad_Contas
       end
       inherited cxOpcoes: TcxButton
         Left = 411
-        DropDownMenu = cxPopMenu
-        Kind = cxbkDropDown
         ExplicitLeft = 411
       end
       object cxEstornar: TcxButton
@@ -1671,7 +1666,6 @@ inherited Fcad_Contas: TFcad_Contas
     inherited pnBotaoCon: TPanel
       Top = 487
       Width = 730
-      ExplicitLeft = 1
       ExplicitTop = 487
       ExplicitWidth = 730
     end

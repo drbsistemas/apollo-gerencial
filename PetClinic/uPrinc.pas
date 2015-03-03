@@ -351,28 +351,30 @@ end;
 
 procedure TFPrinc.FormCreate(Sender: TObject);
 begin
+   AbreIni;
+   if dmCon = nil then
+      Application.CreateForm(TdmCon, dmCon);
    if dmCad = nil then
       Application.CreateForm(TdmCad, dmCad);
+
+   AbreAcesso;
+
+   dmCad.qryConf.Open;
+
+   VerificaLicenca;
+
    if dmMov = nil then
       Application.CreateForm(TdmMov, dmMov);
    if dmFin = nil then
       Application.CreateForm(TdmFin, dmFin);
+
+//   uHistorico.Active       := true; //Não mudar de posição, ele precisa de todos os DMS criados.
+
+
    Application.UpdateFormatSettings := False;
-   FormatSettings.ShortDateFormat := 'dd/mm/yyyy';
-
-
-   Application.OnMessage := PegaNomeForm;
-   Application.OnHint := ShowHint;
-   AbreIni;
-
-   AbreAcesso;
-{   UserControl1.StartLogin;
-   uHistorico.Active := true;}
-
-   if not dmcad.qryConf.Active = true then
-      dmCad.qryConf.Open;
-
-   VerificaLicenca();
+   FormatSettings.ShortDateFormat   := 'dd/mm/yyyy';
+   Application.OnMessage            := PegaNomeForm;
+   Application.OnHint               := ShowHint;
 end;
 
 procedure TFPrinc.FormResize(Sender: TObject);
@@ -457,7 +459,7 @@ begin
       cxPedido.Enabled          := ValidaAcessoUsuario('FPrinc','cadPedido');
       cxCompras.Enabled         := ValidaAcessoUsuario('FPrinc','cadCompra');
       cxPedidoVEnda.Enabled     := ValidaAcessoUsuario('FPrinc','cadPedidoVenda');
-      cxVendas.Enabled          := ValidaAcessoUsuario('FPrinc','cadVenda');
+      cxVendas.Enabled          := ValidaAcessoUsuario('FPrinc','cadVendas');
       cxReceber.Enabled         := ValidaAcessoUsuario('FPrinc','cadReceber');
       cxPagar.Enabled           := ValidaAcessoUsuario('FPrinc','cadPagar');
       cxCaixa.Enabled           := ValidaAcessoUsuario('FPrinc','cadCaixa');

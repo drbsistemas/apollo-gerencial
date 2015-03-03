@@ -140,9 +140,7 @@ begin
    begin
       if not cdsSelec.Active then
       begin
-         cdsSelec.Close;
-         cdsSelec.CreateDataSet;
-         cdsSelec.Open;
+         CriaLimpaDataSet(cdsSelec);
       end;
 
       if (not CdsSelec.locate('IDCONTA', intConta, [])) or (bAtualiza=True) then
@@ -194,11 +192,7 @@ begin
    with dmFin do
    begin
       if not cdsChequeSelec.Active then
-      begin
-         cdsChequeSelec.Close;
-         cdsChequeSelec.CreateDataSet;
-         cdsChequeSelec.Open;
-      end;
+         CriaLimpaDataSet(cdsChequeSelec);
 
       if (not cdsChequeSelec.locate('IDCHEQUE', intCheque, [])) then
       begin
@@ -212,7 +206,7 @@ begin
          cdsChequeSelecTIPOCHEQUE.AsString    := qryCheque.FieldByName('TIPOCHEQUE').AsString;
          cdsChequeSelecSTATUS.AsString        := qryCheque.FieldByName('STATUS').AsString;
 
-         cdsChequeSelecVLRTOTAL.AsFloat       := qryCheque.FieldbyName('VLRTOTAL').AsFloat ;
+         cdsChequeSelecVLRTOTAL.AsFloat       := qryCheque.FieldbyName('VLRTOTAL').AsFloat;
          cdsChequeSelec.Post;
       end else
          cdsChequeSelec.DELETE;
