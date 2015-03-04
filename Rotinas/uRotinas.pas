@@ -53,7 +53,7 @@ uses
    PROCEDURE   ExecutaForm(FormClasse: TFormClass; var NewForm: TObject);
    PROCEDURE   AbreTelaComShowModal(FormClasse: TFormClass; var NewForm: TObject; FNomeFormRetorno: TForm; StrTabela: String);
    procedure   AbreEnderecoDeCliente(StrCodCliente, StrNome: String; FNomeFormRetorno: TForm);
-   Procedure   CriaLimpaDataSet(cds: TClientDataSet);
+   Procedure   CriaLimpaDataSet(const cds: TClientDataSet);
 
    PROCEDURE   PFundo(mostra: integer);
 
@@ -1006,7 +1006,7 @@ begin
   DiaSemana:=DiaDasemana[NoDia];
 end;
 
-Procedure CriaLimpaDataSet(cds: TClientDataSet);
+Procedure CriaLimpaDataSet(const cds: TClientDataSet);
 begin
    if not cds.Active then
       cds.CreateDataSet;

@@ -357,7 +357,7 @@ begin
    if dmCad = nil then
       Application.CreateForm(TdmCad, dmCad);
 
-   AbreAcesso;
+//   AbreAcesso;
 
    dmCad.qryConf.Open;
 

@@ -255,10 +255,15 @@ begin
          ACanvas.Canvas.Brush.Color := clYellow;
          ACanvas.Canvas.Font.Color  := clYellow;
       end else
+      if (AViewInfo.GridRecord.Values[cxGridDBColumn1.Index] = 'PREVISÃO') then
+      begin
+         ACanvas.Canvas.Brush.Color := clPurple;
+         ACanvas.Canvas.Font.Color  := clPurple;
+      end else
       if (AViewInfo.GridRecord.Values[cxGridDBColumn1.Index] = 'CANCELADO') then
       begin
-         ACanvas.Canvas.Brush.Color := clBlue;
-         ACanvas.Canvas.Font.Color  := clBlue;
+         ACanvas.Canvas.Brush.Color := clRed;
+         ACanvas.Canvas.Font.Color  := clRed;
       end;
    end;
 end;

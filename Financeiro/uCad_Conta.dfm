@@ -1146,7 +1146,7 @@ inherited Fcad_Contas: TFcad_Contas
           OptionsView.GroupByBox = False
           object cxGridDBColumn1: TcxGridDBColumn
             Caption = 'St'
-            DataBinding.FieldName = 'STATUSCONTA'
+            DataBinding.FieldName = 'STATUS'
             Width = 30
           end
           object cxGridDBColumn2: TcxGridDBColumn

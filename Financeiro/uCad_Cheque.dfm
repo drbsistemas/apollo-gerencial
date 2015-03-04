@@ -273,7 +273,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 11
+        TabOrder = 9
         Text = '0'
         OnExit = eCodPlanoExit
         OnKeyPress = eCodPlanoKeyPress
@@ -305,7 +305,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 12
+        TabOrder = 11
         Text = 'NENHUM'
         Width = 355
       end
@@ -349,7 +349,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         Style.HotTrack = True
         Style.Shadow = False
         Style.IsFontAssigned = True
-        TabOrder = 23
+        TabOrder = 21
         Width = 130
       end
       object cxLabel8: TcxLabel
@@ -401,7 +401,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         Width = 538
         Height = 23
         BevelOuter = bvNone
-        TabOrder = 9
+        TabOrder = 8
         Visible = False
         object eNBanco: TcxTextEdit
           Left = 82
@@ -550,7 +550,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 21
+        TabOrder = 17
         Width = 75
       end
       object cxLabel11: TcxLabel
@@ -605,7 +605,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 19
+        TabOrder = 15
         Width = 417
       end
       object cxLabel12: TcxLabel
@@ -660,7 +660,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         StyleHot.LookAndFeel.Kind = lfStandard
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 17
+        TabOrder = 14
         Width = 417
       end
       object cxLabel13: TcxLabel
@@ -724,7 +724,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = []
         Style.IsFontAssigned = True
-        TabOrder = 7
+        TabOrder = 6
         Width = 130
       end
       object eNCheque: TcxTextEdit
@@ -845,7 +845,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 14
+        TabOrder = 12
         Text = '0'
         OnExit = eCodCaixaExit
         OnKeyPress = eCodPlanoKeyPress
@@ -877,7 +877,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         StyleFocused.LookAndFeel.SkinName = 'Office2010Silver'
         StyleHot.LookAndFeel.NativeStyle = False
         StyleHot.LookAndFeel.SkinName = 'Office2010Silver'
-        TabOrder = 15
+        TabOrder = 13
         Text = 'NENHUM'
         Width = 355
       end
@@ -887,7 +887,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         Width = 538
         Height = 23
         BevelOuter = bvNone
-        TabOrder = 8
+        TabOrder = 7
         Visible = False
         object cxLabel19: TcxLabel
           Left = -6
@@ -1072,7 +1072,6 @@ inherited Fcad_Cheque: TFcad_Cheque
       inherited cxApagar: TcxButton
         Hint = 'Cancelar o registro em sele'#231#227'o.'
         Caption = '&Cancelar'
-        OnClick = cxApagarClick
       end
     end
     inherited grConsulta: TcxGrid
@@ -1158,7 +1157,9 @@ inherited Fcad_Cheque: TFcad_Cheque
       end
       inherited pnTop: TPanel
         inherited cxContas: TcxLabel
+          Caption = 'Cheques Selecionados'
           Style.IsFontAssigned = True
+          ExplicitWidth = 147
         end
         inherited cxTotal: TcxLabel
           Style.IsFontAssigned = True
@@ -1167,7 +1168,6 @@ inherited Fcad_Cheque: TFcad_Cheque
     end
   end
   inherited cxPopMenu: TRxPopupMenu
-    OnPopup = cxPopMenuPopup
     object cxSelecionaPop: TMenuItem
       Caption = '&Selecionar Todos'
       OnClick = cxSelecionaPopClick
@@ -1190,7 +1190,7 @@ inherited Fcad_Cheque: TFcad_Cheque
     GroupName = 'Cadastro de Cheques'
     UserControl = FPrinc.UserControl1
     Components = ''
-    Left = 40
-    Top = 128
+    Left = 72
+    Top = 136
   end
 end

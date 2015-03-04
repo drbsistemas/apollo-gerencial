@@ -5739,7 +5739,9 @@ object Fcad_Pai: TFcad_Pai
     end
   end
   object cxPopMenu: TRxPopupMenu
+    MenuAnimation = [maLeftToRight]
     OnPopup = cxPopMenuPopup
+    Style = msOwnerDraw
     Left = 584
     Top = 8
   end

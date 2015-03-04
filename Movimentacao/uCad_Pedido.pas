@@ -728,6 +728,12 @@ end;
 procedure TFcad_Pedido.FixarComoPedido1Click(Sender: TObject);
 begin
   inherited;
+   if (dmMov.qryPedidoTIPOPEDIDO.AsString='PEDIDO') then
+   begin
+      Msg('Apenas Orçamentos podem ser modificados, verifique!','I',':)');
+      Abort;
+   end
+   ;
    if Msg('Deseja realmente modificar este orçamento para pedido e reservar estoque ? Esta é uma opção irreversível!','P','=P') then
    begin
       try

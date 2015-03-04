@@ -549,12 +549,11 @@ begin
       cdsChequeSelec.First;
       while not cdsChequeSelec.Eof do
       begin
-         FTotalContas:= FTotalContas + qryCheque.FieldByName('VLRTOTAL').AsFloat;
+         FTotalContas:= FTotalContas + cdsChequeSelec.FieldByName('VLRTOTAL').AsFloat;
          cdsChequeSelec.NExt;
       end;
-      CdsSelec.EnableControls;
+      cdsChequeSelec.EnableControls;
    end;
-
    cxTotal.Caption := 'Total de Cheques R$: '+FormatFloat('###,###,##0.00',FTotalContas);
 end;
 
