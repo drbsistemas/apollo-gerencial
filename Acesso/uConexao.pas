@@ -236,4 +236,5 @@ begin
    Result := dmcad.qryAux.FieldbyName('COUNT').asInteger;
 end;
 
+
 end.
