@@ -4,7 +4,7 @@ object dmCon: TdmCon
   Width = 265
   object FdConAcesso: TFDConnection
     Params.Strings = (
-      'Database=D:\DRB\Dados\Acesso.FDB'
+      'Database=D:\Gerencial\Dados\Acesso.FDB'
       'User_Name=SYSDBA'
       'Password=masterkey'
       'PageSize=16384'
@@ -36,7 +36,7 @@ object dmCon: TdmCon
   end
   object FdCon: TFDConnection
     Params.Strings = (
-      'Database=D:\DRB\Dados\BANCO.FDB'
+      'Database=D:\Gerencial\Dados\BANCO.FDB'
       'User_Name=SYSDBA'
       'Password=masterkey'
       'PageSize=16384'

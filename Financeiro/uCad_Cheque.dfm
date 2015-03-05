@@ -2,7 +2,9 @@ inherited Fcad_Cheque: TFcad_Cheque
   Caption = 'Cadastro de Cheques'
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel
+  inherited pnImg: TcxImage [0]
+  end
+  inherited pnCad: TPanel [1]
     inherited pnMenu: TPanel
       object cxLabel14: TcxLabel
         Left = 330
@@ -349,7 +351,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         Style.HotTrack = True
         Style.Shadow = False
         Style.IsFontAssigned = True
-        TabOrder = 21
+        TabOrder = 20
         Width = 130
       end
       object cxLabel8: TcxLabel
@@ -550,7 +552,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         StyleFocused.Color = 13366014
-        TabOrder = 17
+        TabOrder = 16
         Width = 75
       end
       object cxLabel11: TcxLabel
@@ -1076,10 +1078,12 @@ inherited Fcad_Cheque: TFcad_Cheque
     end
     inherited grConsulta: TcxGrid
       inherited grConsultaDBTableView1: TcxGridDBTableView
+        PopupMenu = cxPopChequeSelec
         DataController.DataSource = dmFin.dsCheque
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
           Caption = 'St'
           DataBinding.FieldName = 'STATUS'
+          OnGetCellHint = grConsultaDBTableView1Campo1GetCellHint
           Width = 30
         end
         object grConsultaDBTableView1Column1: TcxGridDBColumn [1]
@@ -1130,6 +1134,7 @@ inherited Fcad_Cheque: TFcad_Cheque
           inherited cxGridDBColumn1: TcxGridDBColumn
             Caption = 'ST'
             DataBinding.FieldName = 'STATUS'
+            OnGetCellHint = cxGridDBColumn1GetCellHint
           end
           inherited cxGridDBColumn2: TcxGridDBColumn
             Caption = 'N'#186' Cheque'
@@ -1181,6 +1186,7 @@ inherited Fcad_Cheque: TFcad_Cheque
     end
     object Depositar1: TMenuItem
       Caption = 'Depositar'
+      OnClick = Depositar1Click
     end
     object Compensar1: TMenuItem
       Caption = 'Compensar'
@@ -1190,7 +1196,18 @@ inherited Fcad_Cheque: TFcad_Cheque
     GroupName = 'Cadastro de Cheques'
     UserControl = FPrinc.UserControl1
     Components = ''
-    Left = 72
-    Top = 136
+    Left = 24
+    Top = 240
+  end
+  object cxPopChequeSelec: TRxPopupMenu
+    MenuAnimation = [maLeftToRight]
+    OnPopup = cxPopMenuPopup
+    Style = msOwnerDraw
+    Left = 552
+    Top = 328
+    object MenuItem1: TMenuItem
+      Caption = '&Modificar C/C Destino'
+      OnClick = MenuItem1Click
+    end
   end
 end

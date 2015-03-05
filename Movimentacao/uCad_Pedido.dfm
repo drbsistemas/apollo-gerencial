@@ -6,7 +6,7 @@ inherited Fcad_Pedido: TFcad_Pedido
   ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel
+  inherited pnCad: TPanel [0]
     Width = 852
     Height = 539
     ExplicitWidth = 852
@@ -1885,6 +1885,7 @@ inherited Fcad_Pedido: TFcad_Pedido
             object grConsultaItemColumn5: TcxGridDBColumn
               Caption = 'ST'
               DataBinding.FieldName = 'STATUSITEM'
+              OnGetCellHint = grConsultaItemColumn5GetCellHint
               Width = 25
             end
             object cxGridDBColumn1: TcxGridDBColumn
@@ -2138,7 +2139,13 @@ inherited Fcad_Pedido: TFcad_Pedido
       end
     end
   end
-  object pnPagar: TPanel [1]
+  inherited pnImg: TcxImage [1]
+    Left = 852
+    ExplicitLeft = 852
+    ExplicitHeight = 539
+    Height = 539
+  end
+  object pnPagar: TPanel [2]
     Left = 254
     Top = 153
     Width = 400
@@ -2506,13 +2513,7 @@ inherited Fcad_Pedido: TFcad_Pedido
       end
     end
   end
-  inherited pnImg: TcxImage
-    Left = 852
-    ExplicitLeft = 852
-    ExplicitHeight = 539
-    Height = 539
-  end
-  inherited pnCon: TPanel
+  inherited pnCon: TPanel [3]
     Width = 852
     Height = 539
     ExplicitWidth = 852
@@ -2784,6 +2785,7 @@ inherited Fcad_Pedido: TFcad_Pedido
         inherited grConsultaDBTableView1Campo2: TcxGridDBColumn [0]
           Caption = 'ST'
           DataBinding.FieldName = 'STATUS'
+          OnGetCellHint = grConsultaDBTableView1Campo2GetCellHint
           Width = 25
         end
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn [1]

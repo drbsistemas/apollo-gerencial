@@ -78,6 +78,8 @@ type
     eCliente: TcxTextEdit;
     cxGridDBTableView2Column1: TcxGridDBColumn;
     UCControls1: TUCControls;
+    cxPopChequeSelec: TRxPopupMenu;
+    MenuItem1: TMenuItem;
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -108,6 +110,17 @@ type
       var ADone: Boolean);
     procedure cxSelecionaPopClick(Sender: TObject);
     procedure cxLimpaPopClick(Sender: TObject);
+    procedure Depositar1Click(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
+    procedure grConsultaDBTableView1Campo1GetCellHint(
+      Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
+      var AHintText: TCaption; var AIsHintMultiLine: Boolean;
+      var AHintTextRect: TRect);
+    procedure cxGridDBColumn1GetCellHint(Sender: TcxCustomGridTableItem;
+      ARecord: TcxCustomGridRecord; ACellViewInfo: TcxGridTableDataCellViewInfo;
+      const AMousePos: TPoint; var AHintText: TCaption;
+      var AIsHintMultiLine: Boolean; var AHintTextRect: TRect);
   private
     { Private declarations }
      indice :string;
@@ -192,6 +205,17 @@ begin
    Limpa;
    Edita;
    eNCheque.SetFocus;
+end;
+
+procedure TFcad_Cheque.cxGridDBColumn1GetCellHint(
+  Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
+  var AHintText: TCaption; var AIsHintMultiLine: Boolean;
+  var AHintTextRect: TRect);
+begin
+   inherited;
+   AHintText := VarToStr(ARecord.Values[Sender.Index]);
+   AIsHintMultiLine := True;
 end;
 
 procedure TFcad_Cheque.cxGridDBTableView1CustomDrawCell(
@@ -297,6 +321,31 @@ begin
    cxSalvar.Enabled := false;
 end;
 
+procedure TFcad_Cheque.Depositar1Click(Sender: TObject);
+begin
+   inherited;
+   if cxgridDBTableView1.DataController.RecordCount <= 0 then
+   begin
+      Msg('Olá, Verificamos que não há nenhum registro selecionado, verifique a consulta dos dados','I',':)');
+      Abort;
+   end;
+
+   with dmFin do
+   begin
+      cdsChequeSelec.DisableControls;
+      cdsChequeSelec.First;
+      while not cdsChequeSelec.Eof do
+      begin
+         ExecutaSql('UPDATE cheque SET status='+QuotedStr('DEPOSITADO')+' where idcheque='+cdsChequeSelecIDCHEQUE.AsString, qryAux);
+         LancaHistoricoDeCheque(cdsChequeSelecIDCHEQUE.AsInteger, 'DEPOSITADO NA C/C: '+cdsChequeSelecIDCAIXA.AsString+' - '+cdsChequeSelecBANCO.AsString, Date);
+         cdsChequeSelec.next;
+      end;
+      cdsChequeSelec.EnableControls;
+   end;
+   cxConsultaPropertiesChange(self);
+   cxLimpaPopClick(self);
+end;
+
 procedure TFcad_Cheque.eCodCaixaExit(Sender: TObject);
 begin
   inherited;
@@ -399,7 +448,7 @@ begin
 
       eObs.Text           := FieldByName('OBSERVACAO').AsString;
       eVlrCheque.Value    := FieldByName('VLRTOTAL').AsFloat;
-      grHistorico.Visible := False;
+      grHistorico.Visible := True;
       ConsultaSql('select * from CHEQUEHISTORICO where IDCHEQUE='+eCodigo.Text, dmfin.qryChequeHis);
    end;
 end;
@@ -442,6 +491,17 @@ begin
       Caption := 'CADASTRO DE CHEQUES TERCEIROS' else
       Caption := 'CADASTRO DE CHEQUES PRÓPRIOS';
    cxConsultaPropertiesChange(Self);
+end;
+
+procedure TFcad_Cheque.grConsultaDBTableView1Campo1GetCellHint(
+  Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
+  var AHintText: TCaption; var AIsHintMultiLine: Boolean;
+  var AHintTextRect: TRect);
+begin
+   inherited;
+   AHintText := VarToStr(ARecord.Values[Sender.Index]);
+   AIsHintMultiLine := True;
 end;
 
 procedure TFcad_Cheque.grConsultaDBTableView1CustomDrawCell(
@@ -515,12 +575,34 @@ begin
       pnTerceiro.Visible := True;
 end;
 
+procedure TFcad_Cheque.MenuItem1Click(Sender: TObject);
+begin
+  inherited;
+  if cxGridDBTableView1.DataController.RecordCount>0 then
+  begin
+     Msg('Nenhum cheque deve estar em seleção para editar um C/C Destino, verifique!','I',':E');
+     Abort;
+  end;
+
+   with dmFin do
+   begin
+      AbreTelaComShowModal(TFcad_Caixa, TObject(Fcad_Caixa), Fcad_Cheque, 'CAIXA');
+      if ID > 0 then
+      begin
+         qryCheque.Edit;
+         qryCheque.FieldByName('IDCAIXA').AsString := intToStr(ID);
+         qryChequeBANCO.AsString                   := DESCRICAO;
+         qryCheque.Post;
+         qryCheque.ApplyUpdates(0);
+      end;
+   end;
+end;
+
 procedure TFcad_Cheque.cxLimpaPopClick(Sender: TObject);
 begin
    inherited;
    TotalContas;
-   CriaLimpaDataSet(dmFin.cdsChequeSelec);
-
+   dmFin.cdsChequeSelec.Close;
    pnSelec.Visible := false;
 end;
 

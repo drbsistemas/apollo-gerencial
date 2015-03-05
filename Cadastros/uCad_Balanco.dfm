@@ -485,7 +485,6 @@ inherited Fcad_Balanco: TFcad_Balanco
       inherited cxApagar: TcxButton
         Left = 116
         TabOrder = 1
-        OnClick = cxApagarClick
         ExplicitLeft = 116
       end
       inherited cxVoltar: TcxButton
@@ -778,22 +777,23 @@ inherited Fcad_Balanco: TFcad_Balanco
       end
     end
     inherited pnBotaoCon: TPanel
-      Top = 486
+      Top = 485
       Width = 849
-      ExplicitTop = 486
+      ExplicitTop = 485
       ExplicitWidth = 849
     end
     inherited grConsulta: TcxGrid
       Width = 849
-      Height = 410
+      Height = 409
       ExplicitWidth = 849
-      ExplicitHeight = 410
+      ExplicitHeight = 409
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmCad.dsBalanco
         OptionsSelection.CellSelect = False
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
           Caption = 'ST'
           DataBinding.FieldName = 'STATUS'
+          OnGetCellHint = grConsultaDBTableView1Campo1GetCellHint
           Width = 30
         end
         inherited grConsultaDBTableView1Campo2: TcxGridDBColumn

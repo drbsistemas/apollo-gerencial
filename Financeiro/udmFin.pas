@@ -120,6 +120,26 @@ type
     dsChequeHis: TDataSource;
     qryChequeHis: TFDQuery;
     ucHis_ChequeHis: TUCHist_DataSet;
+    qryChequeBANCO: TStringField;
+    qryChequeIDCHEQUE: TIntegerField;
+    qryChequeIDCAIXA: TIntegerField;
+    qryChequeIDPLANO: TIntegerField;
+    qryChequeDTEMISSAO: TSQLTimeStampField;
+    qryChequeDTVENCIMENTO: TSQLTimeStampField;
+    qryChequeDTDEPOSITO: TSQLTimeStampField;
+    qryChequeNBANCO: TStringField;
+    qryChequeNAGENCIA: TStringField;
+    qryChequeNCONTA: TStringField;
+    qryChequeNCHEQUE: TStringField;
+    qryChequeTIPOCHEQUE: TStringField;
+    qryChequeSTATUS: TStringField;
+    qryChequeNOMEPORTADOR: TStringField;
+    qryChequeIDCLIE: TIntegerField;
+    qryChequeOBSERVACAO: TStringField;
+    qryChequeVLRTOTAL: TIntegerField;
+    qryChequeNOMEPLANO: TStringField;
+    qryChequeRAZAO: TStringField;
+    cdsChequeSelecBANCO: TStringField;
     procedure qryCreditoAfterInsert(DataSet: TDataSet);
     procedure qryContaAfterInsert(DataSet: TDataSet);
     procedure qryContaRateioAfterInsert(DataSet: TDataSet);
@@ -127,6 +147,7 @@ type
     procedure qryCaixaItemAfterInsert(DataSet: TDataSet);
     procedure qryCaixaFechamentoAfterInsert(DataSet: TDataSet);
     procedure qryChequeAfterInsert(DataSet: TDataSet);
+    procedure qryChequeHisAfterInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -162,6 +183,11 @@ end;
 procedure TdmFin.qryChequeAfterInsert(DataSet: TDataSet);
 begin
    dmFin.qryCheque.FieldByName('IDCHEQUE').AsInteger                    := ExecutaGen('CHEQUE');
+end;
+
+procedure TdmFin.qryChequeHisAfterInsert(DataSet: TDataSet);
+begin
+   dmFin.qryChequeHis.FieldByName('IDHISTORICO').AsInteger              := ExecutaGen('CHEQUEHISTORICO');
 end;
 
 procedure TdmFin.qryContaAfterInsert(DataSet: TDataSet);

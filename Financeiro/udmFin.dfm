@@ -986,6 +986,100 @@ object dmFin: TdmFin
       'left join CLIENTE E on A.IDCLIE = E.IDCLIE')
     Left = 233
     Top = 2
+    object qryChequeBANCO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'BANCO'
+      Origin = 'BANCO'
+      ProviderFlags = []
+      Size = 200
+    end
+    object qryChequeIDCHEQUE: TIntegerField
+      FieldName = 'IDCHEQUE'
+      Origin = 'IDCHEQUE'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qryChequeIDCAIXA: TIntegerField
+      FieldName = 'IDCAIXA'
+      Origin = 'IDCAIXA'
+    end
+    object qryChequeIDPLANO: TIntegerField
+      FieldName = 'IDPLANO'
+      Origin = 'IDPLANO'
+    end
+    object qryChequeDTEMISSAO: TSQLTimeStampField
+      FieldName = 'DTEMISSAO'
+      Origin = 'DTEMISSAO'
+    end
+    object qryChequeDTVENCIMENTO: TSQLTimeStampField
+      FieldName = 'DTVENCIMENTO'
+      Origin = 'DTVENCIMENTO'
+    end
+    object qryChequeDTDEPOSITO: TSQLTimeStampField
+      FieldName = 'DTDEPOSITO'
+      Origin = 'DTDEPOSITO'
+    end
+    object qryChequeNBANCO: TStringField
+      FieldName = 'NBANCO'
+      Origin = 'NBANCO'
+      Size = 10
+    end
+    object qryChequeNAGENCIA: TStringField
+      FieldName = 'NAGENCIA'
+      Origin = 'NAGENCIA'
+      Size = 10
+    end
+    object qryChequeNCONTA: TStringField
+      FieldName = 'NCONTA'
+      Origin = 'NCONTA'
+    end
+    object qryChequeNCHEQUE: TStringField
+      FieldName = 'NCHEQUE'
+      Origin = 'NCHEQUE'
+    end
+    object qryChequeTIPOCHEQUE: TStringField
+      FieldName = 'TIPOCHEQUE'
+      Origin = 'TIPOCHEQUE'
+      Size = 1
+    end
+    object qryChequeSTATUS: TStringField
+      FieldName = 'STATUS'
+      Origin = 'STATUS'
+    end
+    object qryChequeNOMEPORTADOR: TStringField
+      FieldName = 'NOMEPORTADOR'
+      Origin = 'NOMEPORTADOR'
+      Size = 200
+    end
+    object qryChequeIDCLIE: TIntegerField
+      FieldName = 'IDCLIE'
+      Origin = 'IDCLIE'
+    end
+    object qryChequeOBSERVACAO: TStringField
+      FieldName = 'OBSERVACAO'
+      Origin = 'OBSERVACAO'
+      Size = 200
+    end
+    object qryChequeVLRTOTAL: TIntegerField
+      FieldName = 'VLRTOTAL'
+      Origin = 'VLRTOTAL'
+    end
+    object qryChequeNOMEPLANO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOMEPLANO'
+      Origin = 'NOMEPLANO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object qryChequeRAZAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'RAZAO'
+      Origin = 'RAZAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 200
+    end
   end
   object uHis_Cheque: TUCHist_DataSet
     DataSet = qryCheque
@@ -1035,6 +1129,11 @@ object dmFin: TdmFin
         Name = 'STATUS'
         DataType = ftString
         Size = 20
+      end
+      item
+        Name = 'BANCO'
+        DataType = ftString
+        Size = 100
       end>
     IndexDefs = <>
     Params = <>
@@ -1067,6 +1166,10 @@ object dmFin: TdmFin
     end
     object cdsChequeSelecSTATUS: TStringField
       FieldName = 'STATUS'
+    end
+    object cdsChequeSelecBANCO: TStringField
+      FieldName = 'BANCO'
+      Size = 100
     end
   end
   object dsChequeSelec: TDataSource
@@ -1111,7 +1214,7 @@ object dmFin: TdmFin
     Top = 89
   end
   object qryChequeHis: TFDQuery
-    AfterInsert = qryChequeAfterInsert
+    AfterInsert = qryChequeHisAfterInsert
     CachedUpdates = True
     Connection = dmCon.FdCon
     Transaction = dmCon.FdSalva

@@ -90,6 +90,11 @@ type
       Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
       AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
     procedure Diferen1Click(Sender: TObject);
+    procedure grConsultaDBTableView1Campo1GetCellHint(
+      Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
+      var AHintText: TCaption; var AIsHintMultiLine: Boolean;
+      var AHintTextRect: TRect);
   private
     indice : String;
     procedure Limpa;
@@ -461,6 +466,19 @@ procedure TFcad_Balanco.FormShow(Sender: TObject);
 begin
   inherited;
    cxConsultaPropertiesChange(self);
+end;
+
+procedure TFcad_Balanco.grConsultaDBTableView1Campo1GetCellHint(
+  Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
+  var AHintText: TCaption; var AIsHintMultiLine: Boolean;
+  var AHintTextRect: TRect);
+begin
+   inherited;
+   if VarToStr(ARecord.Values[Sender.Index]) = 'F' then
+      AHintText := 'SINCRONIZADO' else
+      AHintText := 'ABERTO';
+   AIsHintMultiLine := True;
 end;
 
 procedure TFcad_Balanco.grConsultaDBTableView1CustomDrawCell(

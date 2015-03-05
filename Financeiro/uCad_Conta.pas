@@ -137,6 +137,15 @@ type
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
       var ADone: Boolean);
     procedure cxBaixarClick(Sender: TObject);
+    procedure grConsultaDBTableView1Campo1GetCellHint(
+      Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
+      var AHintText: TCaption; var AIsHintMultiLine: Boolean;
+      var AHintTextRect: TRect);
+    procedure cxGridDBColumn1GetCellHint(Sender: TcxCustomGridTableItem;
+      ARecord: TcxCustomGridRecord; ACellViewInfo: TcxGridTableDataCellViewInfo;
+      const AMousePos: TPoint; var AHintText: TCaption;
+      var AIsHintMultiLine: Boolean; var AHintTextRect: TRect);
   private
     { Private declarations }
     indice : String;
@@ -236,6 +245,17 @@ begin
    inherited;
    Limpa;
    Edita;
+end;
+
+procedure TFcad_Contas.cxGridDBColumn1GetCellHint(
+  Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
+  var AHintText: TCaption; var AIsHintMultiLine: Boolean;
+  var AHintTextRect: TRect);
+begin
+   inherited;
+   AHintText := VarToStr(ARecord.Values[Sender.Index]);
+   AIsHintMultiLine := True;
 end;
 
 procedure TFcad_Contas.cxGridDBTableView1CustomDrawCell(
@@ -428,6 +448,17 @@ begin
       Caption := 'CADASTRO DE CONTAS Á PAGAR';
 
    cxConsultaPropertiesChange(Self);
+end;
+
+procedure TFcad_Contas.grConsultaDBTableView1Campo1GetCellHint(
+  Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
+  var AHintText: TCaption; var AIsHintMultiLine: Boolean;
+  var AHintTextRect: TRect);
+begin
+   inherited;
+   AHintText := VarToStr(ARecord.Values[Sender.Index]);
+   AIsHintMultiLine := True;
 end;
 
 procedure TFcad_Contas.grConsultaDBTableView1CustomDrawCell(

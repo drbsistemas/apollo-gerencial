@@ -6,7 +6,7 @@ inherited Fcad_Contas: TFcad_Contas
   ExplicitHeight = 570
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel
+  inherited pnCad: TPanel [0]
     Width = 732
     Height = 539
     ExplicitWidth = 732
@@ -1089,13 +1089,13 @@ inherited Fcad_Contas: TFcad_Contas
       Width = 166
     end
   end
-  inherited pnImg: TcxImage
+  inherited pnImg: TcxImage [1]
     Left = 732
     ExplicitLeft = 732
     ExplicitHeight = 539
     Height = 539
   end
-  inherited pnCon: TPanel
+  inherited pnCon: TPanel [2]
     Width = 732
     Height = 539
     ExplicitWidth = 732
@@ -1147,6 +1147,7 @@ inherited Fcad_Contas: TFcad_Contas
           object cxGridDBColumn1: TcxGridDBColumn
             Caption = 'St'
             DataBinding.FieldName = 'STATUS'
+            OnGetCellHint = cxGridDBColumn1GetCellHint
             Width = 30
           end
           object cxGridDBColumn2: TcxGridDBColumn
@@ -1679,6 +1680,7 @@ inherited Fcad_Contas: TFcad_Contas
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
           Caption = 'St'
           DataBinding.FieldName = 'STATUSCONTA'
+          OnGetCellHint = grConsultaDBTableView1Campo1GetCellHint
           Width = 30
         end
         inherited grConsultaDBTableView1Campo2: TcxGridDBColumn

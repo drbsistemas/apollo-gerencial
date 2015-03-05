@@ -183,6 +183,15 @@ type
     procedure FixarComoPedido1Click(Sender: TObject);
     procedure cxCancelarClick(Sender: TObject);
     procedure cxPrintClick(Sender: TObject);
+    procedure grConsultaItemColumn5GetCellHint(Sender: TcxCustomGridTableItem;
+      ARecord: TcxCustomGridRecord; ACellViewInfo: TcxGridTableDataCellViewInfo;
+      const AMousePos: TPoint; var AHintText: TCaption;
+      var AIsHintMultiLine: Boolean; var AHintTextRect: TRect);
+    procedure grConsultaDBTableView1Campo2GetCellHint(
+      Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
+      var AHintText: TCaption; var AIsHintMultiLine: Boolean;
+      var AHintTextRect: TRect);
   private
     { Private declarations }
     indice : String;
@@ -803,6 +812,17 @@ begin
       Caption := 'Tela de Orçamentos/Pedidos de Venda';
 end;
 
+procedure TFcad_Pedido.grConsultaDBTableView1Campo2GetCellHint(
+  Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
+  var AHintText: TCaption; var AIsHintMultiLine: Boolean;
+  var AHintTextRect: TRect);
+begin
+   inherited;
+   AHintText := VarToStr(ARecord.Values[Sender.Index]);
+   AIsHintMultiLine := True;
+end;
+
 procedure TFcad_Pedido.grConsultaDBTableView1CustomDrawCell(
   Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
   AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
@@ -835,6 +855,17 @@ begin
          ACanvas.Canvas.Font.Color  := clGreen;
       end;
    end;
+end;
+
+procedure TFcad_Pedido.grConsultaItemColumn5GetCellHint(
+  Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; const AMousePos: TPoint;
+  var AHintText: TCaption; var AIsHintMultiLine: Boolean;
+  var AHintTextRect: TRect);
+begin
+   inherited;
+   AHintText := VarToStr(ARecord.Values[Sender.Index]);
+   AIsHintMultiLine := True;
 end;
 
 procedure TFcad_Pedido.Limpa;

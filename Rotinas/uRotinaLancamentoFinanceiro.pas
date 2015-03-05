@@ -15,16 +15,21 @@ Const
    intCheuqeTerceiro = 4;
 
    // Calculos Financeiros
-   FUNCTION CalculaValorAtualizado(tipoValor: TTipoValor; DData: TDateTime; FValorCalcula, FValorinicial: Double; intDiaAtraso: Integer): Double;
-   FUNCTION CalculaDiasAtraso(DData: TDateTime; intDiaAtraso: Integer): Integer;
-   PROCEDURE AtualizaEMarcaConta(DData:TDateTime; intConta: Integer; bAtualiza:Boolean);
-   PROCEDURE MarcaDesmarcaCheque(intCheque: Integer);
+   FUNCTION    CalculaValorAtualizado(tipoValor: TTipoValor; DData: TDateTime; FValorCalcula, FValorinicial: Double; intDiaAtraso: Integer): Double;
+   FUNCTION    CalculaDiasAtraso(DData: TDateTime; intDiaAtraso: Integer): Integer;
+   PROCEDURE   AtualizaEMarcaConta(DData:TDateTime; intConta: Integer; bAtualiza:Boolean);
+   PROCEDURE   MarcaDesmarcaCheque(intCheque: Integer);
 
    // Lançamentos Financeiros
-   PROCEDURE LancaAdiantamento(DData: TDateTime; StrDoc, StrDescricao: String; FSAldoAntes, FCredito, FDebito: Double;
+   PROCEDURE   LancaAdiantamento(DData: TDateTime; StrDoc, StrDescricao: String; FSAldoAntes, FCredito, FDebito: Double;
       IntCodCLie: Integer );
-   FUNCTION LancamentoCaixa(DataBaixa: TDateTime; StrDocumento, StrHistorico: string;
+   FUNCTION    LancamentoCaixa(DataBaixa: TDateTime; StrDocumento, StrHistorico: string;
       Fcredito, FDebito: Double; intFpagto, intPlanoConta, intConta, intLote: Integer): Boolean;
+   FUNCTION    LancamentoDeCheque(intCaixa, intPlano, inClie:Integer;
+                                  DtEmissao, DtVencto: TDateTime;
+                                  nBanco, nAgencia, nConta, nCheque, nPortador, nObs: string;
+                                  FVlrTotal:Double): Boolean;
+   FUNCTION    LancaHistoricoDeCheque(intIdCheque: Integer; StrHistorico: String; Ddate: TDateTime): Boolean;
 
    // Pega Dados Financeiros
    FUNCTION PegaNumeroParaLoteDeBaixa(): Integer;
@@ -205,6 +210,7 @@ begin
          cdsChequeSelecDTEMISSAO.AsDateTIme   := qryCheque.FieldByName('DTEMISSAO').AsDateTIme;
          cdsChequeSelecTIPOCHEQUE.AsString    := qryCheque.FieldByName('TIPOCHEQUE').AsString;
          cdsChequeSelecSTATUS.AsString        := qryCheque.FieldByName('STATUS').AsString;
+         cdsChequeSelecBANCO.AsString         := qryCheque.FieldByName('BANCO').AsString;
 
          cdsChequeSelecVLRTOTAL.AsFloat       := qryCheque.FieldbyName('VLRTOTAL').AsFloat;
          cdsChequeSelec.Post;
@@ -230,6 +236,63 @@ begin
 
          cdsSelec.Next
       end;
+   end;
+end;
+
+Function LancamentoDeCheque(intCaixa, intPlano, inClie:Integer;
+                           DtEmissao, DtVencto: TDateTime;
+                           nBanco, nAgencia, nConta, nCheque, nPortador, nObs: string;
+                           FVlrTotal:Double): Boolean;
+begin
+   with dmFin do
+   begin
+
+      qryCheque.Append;
+      qryCheque.FieldByName('IDCAIXA').AsInteger       := intCaixa;
+      qryCheque.FieldByName('IDPLANO').AsInteger       := intPlano;
+      qryCheque.FieldByName('IDCLIE').AsInteger        := inClie;
+      qryCheque.FieldByName('DTEMISSAO').AsDateTime    := DtEmissao;
+      qryCheque.FieldByName('DTVENCIMENTO').AsDateTime := DtVencto;
+      qryCheque.FieldByName('DTDEPOSITO').IsNull;
+      qryCheque.FieldByName('NBANCO').AsString         := nBanco;
+      qryCheque.FieldByName('NAGENCIA').AsString       := nAgencia;
+      qryCheque.FieldByName('NCONTA').AsString         := nConta;
+      qryCheque.FieldByName('NCHEQUE').AsString        := nCheque;
+      qryCheque.FieldByName('TIPOCHEQUE').AsString     := ifs(TipoMov=ENTRADA,'T','P');
+      qryCheque.FieldByName('STATUS').AsString         := 'ABERTO';
+      qryCheque.FieldByName('NOMEPORTADOR').AsString   := nPortador;
+      qryCheque.FieldByName('OBSERVACAO').AsString     := nObs;
+      qryCheque.FieldByName('VLRTOTAL').AsFloat        := FVlrTotal;
+
+      qryCheque.Post;
+      try
+         qryCheque.ApplyUpdates(0);
+      except
+         qryCheque.CancelUpdates;
+      end;
+      qryCheque.Close;
+   end;
+end;
+
+function LancaHistoricoDeCheque(intIdCheque: Integer; StrHistorico: String; Ddate: TDateTime): Boolean;
+begin
+   with dmFin do
+   begin
+      if qryChequeHis.Active = False then
+         ConsultaSql('select * from CHEQUEHISTORICO', qryChequeHis);
+
+      qryChequeHis.Append;
+      qryChequeHis.FieldByName('IDCHEQUE').AsInteger  := intIdCheque;
+      qryChequeHis.FieldByName('USUARIO').AsString    := FPrinc.UserControl1.CurrentUser.UserName;
+      qryChequeHis.FieldByName('HISTORICO').AsString  := StrHistorico;
+      qryChequeHis.FieldByName('DATA').AsDateTime     := DDate;
+      qryChequeHis.Post;
+      try
+         qryChequeHis.ApplyUpdates(0);
+      except
+         qryChequeHis.CancelUpdates;
+      end;
+      qryChequeHis.Close;
    end;
 end;
 

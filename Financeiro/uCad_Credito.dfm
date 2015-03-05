@@ -5,21 +5,20 @@ inherited FCad_Credito: TFCad_Credito
   FormStyle = fsNormal
   Visible = False
   WindowState = wsNormal
-  ExplicitTop = -15
   ExplicitWidth = 914
   PixelsPerInch = 96
   TextHeight = 13
-  inherited pnCad: TPanel
+  inherited pnCad: TPanel [0]
     Top = 23
     Width = 848
-    Height = 547
+    Height = 516
     ExplicitTop = 23
-    ExplicitWidth = 644
-    ExplicitHeight = 547
+    ExplicitWidth = 848
+    ExplicitHeight = 516
     inherited pnMenu: TPanel
       Width = 846
       TabOrder = 4
-      ExplicitWidth = 642
+      ExplicitWidth = 846
     end
     object eData: TcxDateEdit
       Left = 137
@@ -192,29 +191,28 @@ inherited FCad_Credito: TFCad_Credito
       AnchorX = 135
     end
   end
-  inherited pnImg: TcxImage
+  inherited pnImg: TcxImage [1]
     Left = 848
     Top = 23
     TabOrder = 3
-    ExplicitLeft = 644
+    ExplicitLeft = 848
     ExplicitTop = 23
-    ExplicitHeight = 547
-    Height = 547
+    ExplicitHeight = 516
+    Height = 516
   end
-  inherited pnCon: TPanel
+  inherited pnCon: TPanel [2]
     Top = 23
     Width = 848
-    Height = 547
-    ExplicitLeft = 0
+    Height = 516
     ExplicitTop = 23
-    ExplicitWidth = 644
-    ExplicitHeight = 547
+    ExplicitWidth = 848
+    ExplicitHeight = 516
     inherited pnBusca: TPanel
       Top = 52
       Width = 846
       Visible = False
       ExplicitTop = 52
-      ExplicitWidth = 642
+      ExplicitWidth = 846
       inherited cxLabel1: TcxLabel
         Left = 9
         ExplicitLeft = 9
@@ -248,7 +246,7 @@ inherited FCad_Credito: TFCad_Credito
     inherited pnBotaoCad: TPanel
       Width = 846
       Height = 51
-      ExplicitWidth = 642
+      ExplicitWidth = 846
       ExplicitHeight = 51
       inherited cxNovo: TcxButton
         Caption = '&Dinheiro'
@@ -284,12 +282,12 @@ inherited FCad_Credito: TFCad_Credito
       end
     end
     inherited pnBotaoCon: TPanel
-      Top = 499
+      Top = 468
       Width = 846
       Height = 47
       Visible = False
-      ExplicitTop = 500
-      ExplicitWidth = 642
+      ExplicitTop = 468
+      ExplicitWidth = 846
       ExplicitHeight = 47
       inherited cxCadastro: TcxButton
         TabOrder = 1
@@ -301,11 +299,10 @@ inherited FCad_Credito: TFCad_Credito
     inherited grConsulta: TcxGrid
       Top = 75
       Width = 846
-      Height = 149
-      ExplicitLeft = 1
+      Height = 118
       ExplicitTop = 75
-      ExplicitWidth = 642
-      ExplicitHeight = 431
+      ExplicitWidth = 846
+      ExplicitHeight = 118
       inherited grConsultaDBTableView1: TcxGridDBTableView
         DataController.DataSource = dmFin.dsCredito
         inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
@@ -338,39 +335,36 @@ inherited FCad_Credito: TFCad_Credito
       end
     end
     inherited pnSelec: TPanel
-      Top = 224
+      Top = 193
       Width = 846
-      ExplicitLeft = 650
-      ExplicitTop = 150
-      ExplicitWidth = 700
+      ExplicitTop = 193
+      ExplicitWidth = 846
       inherited grConsulta2: TcxGrid
         Width = 844
-        ExplicitWidth = 698
+        ExplicitWidth = 844
       end
       inherited pnTop: TPanel
         Width = 844
-        ExplicitWidth = 698
+        ExplicitWidth = 844
         inherited cxContas: TcxLabel
           Style.IsFontAssigned = True
         end
         inherited cxTotal: TcxLabel
           Left = 636
           Style.IsFontAssigned = True
-          ExplicitLeft = 490
+          ExplicitLeft = 636
         end
       end
     end
     object Panel2: TPanel
       Left = 1
-      Top = 458
+      Top = 427
       Width = 846
       Height = 41
       Align = alBottom
       Caption = 'Panel2'
       TabOrder = 5
       Visible = False
-      ExplicitLeft = -15
-      ExplicitTop = 449
       object cxBaixaValor: TcxButton
         Left = 649
         Top = 2
@@ -613,7 +607,6 @@ inherited FCad_Credito: TFCad_Credito
     Height = 23
     Align = alTop
     TabOrder = 2
-    ExplicitWidth = 702
     object cxLabel3: TcxLabel
       Left = -11
       Top = 3
