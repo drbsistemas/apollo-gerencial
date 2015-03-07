@@ -24,15 +24,18 @@ Procedure CalculaitensPedido(qrDados : TFdQUery);
 begin
    FQtde       := 0;
    FTotalItem  := 0;
-   qrDados.DisableControls;
-   qrDados.First;
-   while not qrDados.Eof do
-   begin
-      FTotalItem := FTotalItem + qrDados.FieldByName('VLRTOTALITEM').AsFloat;
-      FQtde      := FQtde + qrDados.FieldByName('QTDE').AsFloat;
-      qrDados.Next;
+   try
+      qrDados.DisableControls;
+      qrDados.First;
+      while not qrDados.Eof do
+      begin
+         FTotalItem := FTotalItem + qrDados.FieldByName('VLRTOTALITEM').AsFloat;
+         FQtde      := FQtde + qrDados.FieldByName('QTDE').AsFloat;
+         qrDados.Next;
+      end;
+   finally
+      qrDAdos.EnableControls;
    end;
-   qrDAdos.EnableControls;
 end;
 
 procedure GerarCobranca(DData: TDateTime; FValorTotal: Double; StrCodigoMov, StrGerar, StrCPagtoId: String; RxParcela: TClientDataSet);
@@ -136,7 +139,7 @@ Var
 begin
    with dmMov do
    begin
-      ConsultaSql(' SELECT  A.TipoMov  '+#13+
+      ConsultaSql(' SELECT  A.TipoMov, A.TipoCaixa  '+#13+
                   ' FROM caixafechamento A '+#13+
                   ' WHERE a.idfechamento=(SELECT Max(idfechamento) idfechamento FROM caixafechamento) and A.IDCAIXA='+IntToStr(intCaixa),qryAux);
 
@@ -146,7 +149,7 @@ begin
          abort;
       end;
 
-      if (qryAux.FieldByName('TIPOMOV').AsString = 'FECHAMENTO') then
+      if (qryAux.FieldByName('TIPOMOV').AsString = 'FECHAMENTO') and (qryAux.FieldByName('TIPOCAIXA').AsString = 'S') then
       begin
          Msg('Atenção! Caixa Fechado, Verifique','I',':|');
          Abort;

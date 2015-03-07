@@ -913,7 +913,8 @@ object dmFin: TdmFin
       '(IDCHEQUE, IDCAIXA, IDPLANO, DTEMISSAO, DTVENCIMENTO, '
       '  DTDEPOSITO, NBANCO, NAGENCIA, NCONTA, '
       '  NCHEQUE, TIPOCHEQUE, STATUS, NOMEPORTADOR, '
-      '  IDCLIE, OBSERVACAO, VLRTOTAL)'
+      '  IDCLIE, OBSERVACAO, VLRTOTAL, IDFPAGTO, '
+      '  IDLOTE)'
       
         'VALUES (:NEW_IDCHEQUE, :NEW_IDCAIXA, :NEW_IDPLANO, :NEW_DTEMISSA' +
         'O, :NEW_DTVENCIMENTO, '
@@ -921,11 +922,12 @@ object dmFin: TdmFin
       
         '  :NEW_NCHEQUE, :NEW_TIPOCHEQUE, :NEW_STATUS, :NEW_NOMEPORTADOR,' +
         ' '
-      '  :NEW_IDCLIE, :NEW_OBSERVACAO, :NEW_VLRTOTAL)'
+      '  :NEW_IDCLIE, :NEW_OBSERVACAO, :NEW_VLRTOTAL, :NEW_IDFPAGTO, '
+      '  :NEW_IDLOTE)'
       
         'RETURNING IDCHEQUE, IDCAIXA, IDPLANO, DTEMISSAO, DTVENCIMENTO, D' +
         'TDEPOSITO, NBANCO, NAGENCIA, NCONTA, NCHEQUE, TIPOCHEQUE, STATUS' +
-        ', NOMEPORTADOR, IDCLIE, OBSERVACAO, VLRTOTAL')
+        ', NOMEPORTADOR, IDCLIE, OBSERVACAO, VLRTOTAL, IDFPAGTO')
     ModifySQL.Strings = (
       'UPDATE CHEQUE'
       
@@ -941,12 +943,13 @@ object dmFin: TdmFin
       '  STATUS = :NEW_STATUS, NOMEPORTADOR = :NEW_NOMEPORTADOR, '
       
         '  IDCLIE = :NEW_IDCLIE, OBSERVACAO = :NEW_OBSERVACAO, VLRTOTAL =' +
-        ' :NEW_VLRTOTAL'
+        ' :NEW_VLRTOTAL, '
+      '  IDFPAGTO = :NEW_IDFPAGTO, IDLOTE = :NEW_IDLOTE'
       'WHERE IDCHEQUE = :OLD_IDCHEQUE'
       
         'RETURNING IDCHEQUE, IDCAIXA, IDPLANO, DTEMISSAO, DTVENCIMENTO, D' +
         'TDEPOSITO, NBANCO, NAGENCIA, NCONTA, NCHEQUE, TIPOCHEQUE, STATUS' +
-        ', NOMEPORTADOR, IDCLIE, OBSERVACAO, VLRTOTAL')
+        ', NOMEPORTADOR, IDCLIE, OBSERVACAO, VLRTOTAL, IDFPAGTO')
     DeleteSQL.Strings = (
       'DELETE FROM CHEQUE'
       'WHERE IDCHEQUE = :OLD_IDCHEQUE')
@@ -957,7 +960,7 @@ object dmFin: TdmFin
       
         '  NBANCO, NAGENCIA, NCONTA, NCHEQUE, TIPOCHEQUE, STATUS, NOMEPOR' +
         'TADOR, '
-      '  IDCLIE, OBSERVACAO, VLRTOTAL'
+      '  IDCLIE, OBSERVACAO, VLRTOTAL, IDFPAGTO, IDLOTE'
       'FROM CHEQUE'
       'WHERE IDCHEQUE = :IDCHEQUE')
     Left = 233
@@ -1134,6 +1137,18 @@ object dmFin: TdmFin
         Name = 'BANCO'
         DataType = ftString
         Size = 100
+      end
+      item
+        Name = 'IDFPAGTO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'IDLOTE'
+        DataType = ftInteger
+      end
+      item
+        Name = 'IDPLANO'
+        DataType = ftInteger
       end>
     IndexDefs = <>
     Params = <>
@@ -1170,6 +1185,15 @@ object dmFin: TdmFin
     object cdsChequeSelecBANCO: TStringField
       FieldName = 'BANCO'
       Size = 100
+    end
+    object cdsChequeSelecIDFPAGTO: TIntegerField
+      FieldName = 'IDFPAGTO'
+    end
+    object cdsChequeSelecIDLOTE: TIntegerField
+      FieldName = 'IDLOTE'
+    end
+    object cdsChequeSelecIDPLANO: TIntegerField
+      FieldName = 'IDPLANO'
     end
   end
   object dsChequeSelec: TDataSource

@@ -20,7 +20,7 @@ type
     grConsultaDBTableView1Column2: TcxGridDBColumn;
     grConsultaDBTableView1Column3: TcxGridDBColumn;
     grConsultaDBTableView1Column4: TcxGridDBColumn;
-    Panel1: TPanel;
+    pnItem: TPanel;
     cxGroupBox2: TcxGroupBox;
     cxGrid2: TcxGrid;
     cxGridDBTableView3: TcxGridDBTableView;
@@ -405,8 +405,11 @@ end;
 procedure TFcad_Caixa.FormShow(Sender: TObject);
 begin
    inherited;
-   edtIni.date := Date;
-   edtFim.Date := Date;
+   edtIni.date       := Date;
+   edtFim.Date       := Date;
+   if pnBotaoCon.Visible = true then
+      pnItem.Visible := False;
+
    cxConsultaPropertiesChange(self);
 end;
 

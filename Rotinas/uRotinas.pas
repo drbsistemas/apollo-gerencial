@@ -38,8 +38,8 @@ uses
 
    // Executa Processos
    FUNCTION    ExecutaGen(StrTabela : String) : Integer;
-   FUNCTION    ExecutaSql(StrConsulta: String; qrDados: TFDQuery): Boolean;
-   FUNCTION    ConsultaSql(StrConsulta: String; qrDados: TFDQuery): Boolean;
+   FUNCTION    ExecutaSql(StrConsulta: String; const qrDados: TFDQuery): Boolean;
+   FUNCTION    ConsultaSql(StrConsulta: String; const qrDados: TFDQuery): Boolean;
    FUNCTION    ifs(Expressao: Boolean; CasoVerdadeiro, CasoFalso: Variant): Variant;
    FUNCTION    BuscaNomeAtivo(TABELA:String;CODIGO:Integer):String;
    FUNCTION    BUSCACONF(CAMPO:String):String;
@@ -60,6 +60,8 @@ uses
 
 const
    SqlBuscaProduto = 'SELECT IDPROD, NOMEPROD, UNPROD, ESTOQUETOTAL, REFPROD, CODBAR, NCMPROD, MARCAPROD, PRECOVENDA, DTVALIDADE, FOTOPROD FROM PRODUTO';
+   pIntChequeProprio = 3;
+   pintChequeTerceiro = 4;
 
 type
    TTipoMov = (ENTRADA, SAIDA);
@@ -391,7 +393,7 @@ begin
    end;
 end;
 
-Function ConsultaSql(StrConsulta: String; qrDados: TFDQuery): Boolean;
+Function ConsultaSql(StrConsulta: String; const qrDados: TFDQuery): Boolean;
 begin
    try
       qrDados.Close;
@@ -741,7 +743,7 @@ begin
    ReSult := oNome;
 end;
 
-Function ExecutaSql(StrConsulta: String; qrDados: TFDQuery): Boolean;
+Function ExecutaSql(StrConsulta: String; const qrDados: TFDQuery): Boolean;
 begin
    try
       qrDados.Close;

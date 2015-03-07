@@ -47,7 +47,8 @@ uses
   uDmCad in '..\Acesso\uDmCad.pas' {dmCad: TDataModule},
   uCad_CaixaFechamento in '..\Financeiro\uCad_CaixaFechamento.pas' {Fcad_CaixaFechamento},
   uCad_Cheque in '..\Financeiro\uCad_Cheque.pas' {Fcad_Cheque},
-  uCad_PaiFinanceiro in '..\Financeiro\uCad_PaiFinanceiro.pas' {Fcad_PaiFinanceiro};
+  uCad_PaiFinanceiro in '..\Financeiro\uCad_PaiFinanceiro.pas' {Fcad_PaiFinanceiro},
+  uRotinaLancamentoDeCheques in '..\Rotinas\uRotinaLancamentoDeCheques.pas';
 
 {$R *.res}
 

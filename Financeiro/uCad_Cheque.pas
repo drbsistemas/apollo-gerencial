@@ -11,7 +11,7 @@ uses
   cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxLabel, dxGDIPlusClasses, cxImage, Vcl.StdCtrls,
   cxButtons, Vcl.ExtCtrls, Vcl.ComCtrls, dxCore, cxDateUtils, cxButtonEdit,
-  cxCalendar, cxCurrencyEdit, uRotinaDeCalculosMovimentacao, uRotinaLancamentoFinanceiro,
+  cxCalendar, cxCurrencyEdit, uRotinaDeCalculosMovimentacao, uRotinaLancamentoDeCheques,
   UCBase;
 
 type
@@ -80,6 +80,9 @@ type
     UCControls1: TUCControls;
     cxPopChequeSelec: TRxPopupMenu;
     MenuItem1: TMenuItem;
+    Devolver1: TMenuItem;
+    cxLabel20: TcxLabel;
+    edtMov: TcxDateEdit;
     procedure cxConsultaPropertiesChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -121,6 +124,9 @@ type
       ARecord: TcxCustomGridRecord; ACellViewInfo: TcxGridTableDataCellViewInfo;
       const AMousePos: TPoint; var AHintText: TCaption;
       var AIsHintMultiLine: Boolean; var AHintTextRect: TRect);
+    procedure Compensar1Click(Sender: TObject);
+    procedure edtMovExit(Sender: TObject);
+    procedure Devolver1Click(Sender: TObject);
   private
     { Private declarations }
      indice :string;
@@ -140,6 +146,19 @@ implementation
 {$R *.dfm}
 
 uses uRotinas, udmFin, uCad_PlanoConta, uCad_Clientes, uCad_Caixa, uPrinc;
+
+procedure TFcad_Cheque.Compensar1Click(Sender: TObject);
+begin
+  inherited;
+   if cxgridDBTableView1.DataController.RecordCount <= 0 then
+   begin
+      Msg('Olá, Verificamos que não há nenhum registro selecionado, verifique a consulta dos dados','I',':)');
+      Abort;
+   end;
+   LancaMovimentacaoCheque(edtMov.Date+Time, 'COMPENSADO');
+   cxConsultaPropertiesChange(self);
+   cxLimpaPopClick(self);
+end;
 
 procedure TFcad_Cheque.cxApagarClick(Sender: TObject);
 begin
@@ -287,6 +306,7 @@ begin
          FieldByName('IDCAIXA').AsString          := eCodCaixa.Text;
          FieldByName('IDPLANO').AsString          := eCodPlano.Text;
          FieldByName('IDCLIE').AsString           := eCodClie.TExt;
+         FieldByName('IDFPAGTO').AsString           := ifs(TipoMov=ENTRADA, pIntChequeProprio, pintChequeTerceiro);
 
          FieldByName('DTEMISSAO').AsDateTime      := eDtEmissao.Date;
          FieldByName('DTVENCIMENTO').AsDAteTime   := eDtVencimento.Date;
@@ -329,19 +349,20 @@ begin
       Msg('Olá, Verificamos que não há nenhum registro selecionado, verifique a consulta dos dados','I',':)');
       Abort;
    end;
+   LancaMovimentacaoCheque(edtMov.Date+Time, 'DEPOSITADO');
+   cxConsultaPropertiesChange(self);
+   cxLimpaPopClick(self);
+end;
 
-   with dmFin do
+procedure TFcad_Cheque.Devolver1Click(Sender: TObject);
+begin
+  inherited;
+   if cxgridDBTableView1.DataController.RecordCount <= 0 then
    begin
-      cdsChequeSelec.DisableControls;
-      cdsChequeSelec.First;
-      while not cdsChequeSelec.Eof do
-      begin
-         ExecutaSql('UPDATE cheque SET status='+QuotedStr('DEPOSITADO')+' where idcheque='+cdsChequeSelecIDCHEQUE.AsString, qryAux);
-         LancaHistoricoDeCheque(cdsChequeSelecIDCHEQUE.AsInteger, 'DEPOSITADO NA C/C: '+cdsChequeSelecIDCAIXA.AsString+' - '+cdsChequeSelecBANCO.AsString, Date);
-         cdsChequeSelec.next;
-      end;
-      cdsChequeSelec.EnableControls;
+      Msg('Olá, Verificamos que não há nenhum registro selecionado, verifique a consulta dos dados','I',':)');
+      Abort;
    end;
+   LancaDevolucaoDeCheque(edtMov.Date);
    cxConsultaPropertiesChange(self);
    cxLimpaPopClick(self);
 end;
@@ -453,6 +474,17 @@ begin
    end;
 end;
 
+procedure TFcad_Cheque.edtMovExit(Sender: TObject);
+begin
+   inherited;
+   if DATAVALIDA(edtMov.Text)='' then
+   begin
+      Msg('Verificamos que a Data Para Movimentação do cheque é inválida, verifique!','I',':O');
+      edtMov.Date := Date;
+   end;
+
+end;
+
 procedure TFcad_Cheque.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    inherited;
@@ -490,6 +522,7 @@ begin
    if TipoMov= ENTRADA then
       Caption := 'CADASTRO DE CHEQUES TERCEIROS' else
       Caption := 'CADASTRO DE CHEQUES PRÓPRIOS';
+   edtMov.Date := Date;
    cxConsultaPropertiesChange(Self);
 end;
 
@@ -589,6 +622,7 @@ begin
       AbreTelaComShowModal(TFcad_Caixa, TObject(Fcad_Caixa), Fcad_Cheque, 'CAIXA');
       if ID > 0 then
       begin
+         VerificaAberturaDoCaixa(ID);
          qryCheque.Edit;
          qryCheque.FieldByName('IDCAIXA').AsString := intToStr(ID);
          qryChequeBANCO.AsString                   := DESCRICAO;
@@ -609,11 +643,13 @@ end;
 procedure TFcad_Cheque.cxSelecionaPopClick(Sender: TObject);
 begin
    inherited;
+   cxLimpaPopClick(self);
    with dmFin do
    begin
       qryCheque.first;
       while not qryCheque.eof do
       begin
+         VerificaAberturaDoCaixa(qryCheque.FieldByName('IDCAIXA').ASinteger);
          MarcaDesmarcaCheque(qryCheque.FieldByName('IDCHEQUE').ASinteger);      // Marca
          TotalContas;
          qryCheque.NExt;

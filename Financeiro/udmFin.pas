@@ -140,6 +140,9 @@ type
     qryChequeNOMEPLANO: TStringField;
     qryChequeRAZAO: TStringField;
     cdsChequeSelecBANCO: TStringField;
+    cdsChequeSelecIDFPAGTO: TIntegerField;
+    cdsChequeSelecIDLOTE: TIntegerField;
+    cdsChequeSelecIDPLANO: TIntegerField;
     procedure qryCreditoAfterInsert(DataSet: TDataSet);
     procedure qryContaAfterInsert(DataSet: TDataSet);
     procedure qryContaRateioAfterInsert(DataSet: TDataSet);

@@ -1512,13 +1512,6 @@ inherited Fcad_Caixa: TFcad_Caixa
     inherited pnBotaoCad: TPanel [2]
       Width = 840
       ExplicitWidth = 840
-      inherited cxApagar: TcxButton
-        OnClick = cxApagarClick
-      end
-      inherited cxOpcoes: TcxButton
-        DropDownMenu = cxPopMenu
-        Kind = cxbkDropDown
-      end
     end
     inherited pnBotaoCon: TPanel [3]
       Top = 487
@@ -1534,13 +1527,12 @@ inherited Fcad_Caixa: TFcad_Caixa
         ExplicitLeft = 419
       end
     end
-    object Panel1: TPanel
+    object pnItem: TPanel
       Left = 1
       Top = 195
       Width = 840
       Height = 292
       Align = alClient
-      Caption = 'Panel1'
       TabOrder = 4
       object cxGroupBox2: TcxGroupBox
         Left = 1
