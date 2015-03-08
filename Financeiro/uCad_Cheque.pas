@@ -149,7 +149,9 @@ uses uRotinas, udmFin, uCad_PlanoConta, uCad_Clientes, uCad_Caixa, uPrinc;
 
 procedure TFcad_Cheque.Compensar1Click(Sender: TObject);
 begin
-  inherited;
+   inherited;
+   if dmfin.qryCheque.FieldByName('STATUS').AsString <> 'DEPOSITADO' then
+   begin
    if cxgridDBTableView1.DataController.RecordCount <= 0 then
    begin
       Msg('Olá, Verificamos que não há nenhum registro selecionado, verifique a consulta dos dados','I',':)');
@@ -158,27 +160,35 @@ begin
    LancaMovimentacaoCheque(edtMov.Date+Time, 'COMPENSADO');
    cxConsultaPropertiesChange(self);
    cxLimpaPopClick(self);
+   end else
+      Msg('Apenas cheques depositados podem ser compensados!','I',':)');
+
 end;
 
 procedure TFcad_Cheque.cxApagarClick(Sender: TObject);
 begin
    inherited;
-   if dmFin.qryCheque.RecordCount <= 0 then
+   if (dmFin.qryCheque.FieldByName('STATUS').AsString ='ABERTO') then
    begin
-      Msg('Olá, Verificamos que não há nenhum registro para editar, verifique a consulta dos dados','I',':)');
-      Abort;
-   end;
-   if Msg('Entendemos sua vontade, mas deseja realmente cancelar o registro?','P', ':X') then
-   begin
-      try
-         dmFin.qryCheque.Edit;
-         dmfin.qryCheque.FieldByName('STATUS').AsString := 'CANCELADO';
-         dmFin.qryCheque.Post;
-         dmFin.qryCheque.ApplyUpdates(0);
-      Except
-         dmFin.qryCheque.CancelUpdates;
+      if (dmFin.qryCheque.RecordCount <= 0) then
+      begin
+         Msg('Olá, Verificamos que não há nenhum registro para movimentar, verifique a consulta dos dados','I',':)');
+         Abort;
       end;
-   end;
+      if Msg('Entendemos sua vontade, mas deseja realmente cancelar o registro?','P', ':X') then
+      begin
+         try
+            dmFin.qryCheque.Edit;
+            dmfin.qryCheque.FieldByName('STATUS').AsString := 'CANCELADO';
+            dmFin.qryCheque.Post;
+            LancaHistoricoDeCheque(dmfin.qryCheque.FieldbyName('IDCHEQUE').AsInteger, 'CHEQUE CANCELADO POR USUÁRIO EM: '+DateToStr(Date), Date);
+            dmFin.qryCheque.ApplyUpdates(0);
+         Except
+            dmFin.qryCheque.CancelUpdates;
+         end;
+      end;
+   end else
+      Msg('Apenas cheques que não estejam em movimentação podem ser cancelados!','I',':)');
 end;
 
 procedure TFcad_Cheque.cxCancelaClick(Sender: TObject);
@@ -223,6 +233,9 @@ begin
    inherited;
    Limpa;
    Edita;
+   if dmFin.qryCheque.FieldByName('STATUS').AsString <> 'ABERTO' then
+      cxSalvar.Enabled := false;
+
    eNCheque.SetFocus;
 end;
 
@@ -344,27 +357,35 @@ end;
 procedure TFcad_Cheque.Depositar1Click(Sender: TObject);
 begin
    inherited;
-   if cxgridDBTableView1.DataController.RecordCount <= 0 then
+   if dmfin.qryCheque.FieldByName('STATUS').AsString = 'ABERTO' then
    begin
-      Msg('Olá, Verificamos que não há nenhum registro selecionado, verifique a consulta dos dados','I',':)');
-      Abort;
-   end;
-   LancaMovimentacaoCheque(edtMov.Date+Time, 'DEPOSITADO');
-   cxConsultaPropertiesChange(self);
-   cxLimpaPopClick(self);
+      if cxgridDBTableView1.DataController.RecordCount <= 0 then
+      begin
+         Msg('Olá, Verificamos que não há nenhum registro selecionado, verifique a consulta dos dados','I',':)');
+         Abort;
+      end;
+      LancaMovimentacaoCheque(edtMov.Date+Time, 'DEPOSITADO');
+      cxConsultaPropertiesChange(self);
+      cxLimpaPopClick(self);
+   end else
+      Msg('Apenas cheques em aberto podem ser depositados!','I',':)');
 end;
 
 procedure TFcad_Cheque.Devolver1Click(Sender: TObject);
 begin
-  inherited;
-   if cxgridDBTableView1.DataController.RecordCount <= 0 then
+   inherited;
+   if dmfin.qryCheque.FieldByName('STATUS').AsString <> 'ABERTO' then
    begin
-      Msg('Olá, Verificamos que não há nenhum registro selecionado, verifique a consulta dos dados','I',':)');
-      Abort;
-   end;
-   LancaDevolucaoDeCheque(edtMov.Date);
-   cxConsultaPropertiesChange(self);
-   cxLimpaPopClick(self);
+      if cxgridDBTableView1.DataController.RecordCount <= 0 then
+      begin
+         Msg('Olá, Verificamos que não há nenhum registro selecionado, verifique a consulta dos dados','I',':)');
+         Abort;
+      end;
+      LancaDevolucaoDeCheque(edtMov.Date);
+      cxConsultaPropertiesChange(self);
+      cxLimpaPopClick(self);
+   end else
+      Msg('Apenas cheques com movimentação podem ser devolvidos!','I',':)');
 end;
 
 procedure TFcad_Cheque.eCodCaixaExit(Sender: TObject);
@@ -423,7 +444,8 @@ end;
 procedure TFcad_Cheque.eCodPlanoKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-   If not (key in ['0'..'9',#8]) then key := #0;
+   if not CharInSet(Key, ['0'..'9',#8]) then
+      Key := #0;
 end;
 
 procedure TFcad_Cheque.eCodPlanoPropertiesButtonClick(Sender: TObject;
@@ -447,7 +469,7 @@ procedure TFcad_Cheque.Edita;
 begin
    with dmFin.qryCheque do
    begin
-      eCodigo.Text        := FieldByName('IDCLIE').AsString;
+      eCodigo.Text        := FieldByName('IDCHEQUE').AsString;
       eCodCaixa.Text      := FieldByName('IDCAIXA').AsString;
       eCodCaixaExit(Self);
       eCodPlano.Text      := FieldByName('IDPLANO').AsString;
@@ -635,7 +657,7 @@ end;
 procedure TFcad_Cheque.cxLimpaPopClick(Sender: TObject);
 begin
    inherited;
-   TotalContas;
+   cxTotal.Caption := 'Total de Cheques R$: '+FormatFloat('###,###,##0.00',0);
    dmFin.cdsChequeSelec.Close;
    pnSelec.Visible := false;
 end;

@@ -70,11 +70,11 @@
     <Transaction>2015/01/28 23:35:45.000.240,C:\Program Files (x86)\Embarcadero\Studio\14.0\LibAdicional\UserControlXE6\UCHistorico\UCHist_Form.pas=</Transaction>
     <Transaction>2015/01/29 19:32:18.000.303,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
     <Transaction>2015/02/03 16:18:08.000.484,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2015/02/03 16:46:59.000.195,D:\Gerencial\Financeiro\uCad_Conta.pas=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
     <Transaction>2015/02/03 16:46:59.000.195,D:\Gerencial\Financeiro\uCad_Conta.dfm=D:\Gerencial\PetClinic\Unit1.dfm</Transaction>
+    <Transaction>2015/02/03 16:46:59.000.195,D:\Gerencial\Financeiro\uCad_Conta.pas=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
     <Transaction>2015/02/03 19:09:38.000.528,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2015/02/03 19:15:42.000.833,D:\Gerencial\Cadastros\uCad_PlanoConta.dfm=D:\Gerencial\PetClinic\Unit1.dfm</Transaction>
     <Transaction>2015/02/03 19:15:42.000.833,D:\Gerencial\Cadastros\uCad_PlanoConta.pas=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2015/02/03 19:15:42.000.833,D:\Gerencial\Cadastros\uCad_PlanoConta.dfm=D:\Gerencial\PetClinic\Unit1.dfm</Transaction>
     <Transaction>2015/02/08 17:51:38.000.469,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
     <Transaction>2015/02/08 18:04:44.000.459,D:\Gerencial\PetClinic\Unit1.pas=D:\Gerencial\Financeiro\uCad_Baixa.pas</Transaction>
     <Transaction>2015/02/08 18:04:44.000.459,D:\Gerencial\PetClinic\Unit1.dfm=D:\Gerencial\Financeiro\uCad_Baixa.dfm</Transaction>
@@ -100,7 +100,7 @@
     <Transaction>2015/02/24 21:21:45.000.009,=D:\DRB\PetClinic\Unit1.pas</Transaction>
     <Transaction>2015/02/24 21:22:31.000.552,D:\DRB\PetClinic\Unit1.dfm=D:\DRB\Financeiro\uCad_PaiFinanceiro.dfm</Transaction>
     <Transaction>2015/02/24 21:22:31.000.552,D:\DRB\PetClinic\Unit1.pas=D:\DRB\Financeiro\uCad_PaiFinanceiro.pas</Transaction>
-    <Transaction>2015/03/07 17:59:04.697,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
-    <Transaction>2015/03/07 18:01:06.852,D:\Gerencial\Rotinas\uRotinaLancamentoDeCheques.pas=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2015/03/07 17:59:04.000.697,=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
+    <Transaction>2015/03/07 18:01:06.000.852,D:\Gerencial\Rotinas\uRotinaLancamentoDeCheques.pas=D:\Gerencial\PetClinic\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

@@ -4,219 +4,7 @@ inherited Fcad_Cheque: TFcad_Cheque
   TextHeight = 13
   inherited pnImg: TcxImage [0]
   end
-  inherited pnCon: TPanel [1]
-    inherited pnBusca: TPanel
-      inherited cxConsulta: TcxComboBox
-        Properties.Items.Strings = (
-          'C'#243'digo'
-          'N'#186' Cheque'
-          'Plano Cta.'
-          'Data Emiss'#227'o'
-          'Data Vencimento')
-        Text = 'C'#211'DIGO'
-      end
-      inherited cxLabel2: TcxLabel
-        Left = 591
-        Top = 0
-        Visible = False
-        ExplicitLeft = 591
-        ExplicitTop = 0
-      end
-      inherited cbAtivo: TcxComboBox
-        Left = 623
-        Top = -2
-        Style.IsFontAssigned = True
-        Visible = False
-        ExplicitLeft = 623
-        ExplicitTop = -2
-      end
-      inherited cxQtdeReg: TcxLabel
-        Left = 618
-        ExplicitLeft = 618
-      end
-      object cxLabel6: TcxLabel
-        Left = 470
-        Top = 3
-        Caption = 'Status:'
-        Style.TextColor = clBlack
-        Transparent = True
-      end
-      object cxStatus: TcxComboBox
-        Left = 508
-        Top = 1
-        ParentFont = False
-        Properties.CharCase = ecUpperCase
-        Properties.DropDownListStyle = lsFixedList
-        Properties.Items.Strings = (
-          'TODOS'
-          'ABERTO'
-          'DEPOSITADO'
-          'COMPENSADO'
-          'DEVOLVIDO'
-          'CANCELADO')
-        Style.Font.Charset = ANSI_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Segoe UI'
-        Style.Font.Style = []
-        Style.IsFontAssigned = True
-        StyleFocused.Color = 13366014
-        TabOrder = 8
-        Text = 'TODOS'
-        OnClick = cxConsultaPropertiesChange
-        Width = 107
-      end
-    end
-    inherited pnBotaoCad: TPanel
-      inherited cxApagar: TcxButton
-        Hint = 'Cancelar o registro em sele'#231#227'o.'
-        Caption = '&Cancelar'
-      end
-    end
-    inherited grConsulta: TcxGrid
-      inherited grConsultaDBTableView1: TcxGridDBTableView
-        PopupMenu = cxPopChequeSelec
-        DataController.DataSource = dmFin.dsCheque
-        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
-          Caption = 'St'
-          DataBinding.FieldName = 'STATUS'
-          OnGetCellHint = grConsultaDBTableView1Campo1GetCellHint
-          Width = 30
-        end
-        object grConsultaDBTableView1Column1: TcxGridDBColumn [1]
-          Caption = 'N'#186' Cheque'
-          DataBinding.FieldName = 'NCHEQUE'
-          Width = 75
-        end
-        object grConsultaDBTableView1Column5: TcxGridDBColumn [2]
-          Caption = 'Dt. Emiss'#227'o'
-          DataBinding.FieldName = 'DTEMISSAO'
-          Width = 100
-        end
-        object grConsultaDBTableView1Column6: TcxGridDBColumn [3]
-          Caption = 'Cliente'
-          DataBinding.FieldName = 'RAZAO'
-          Width = 324
-        end
-        object grConsultaDBTableView1Column4: TcxGridDBColumn [4]
-          Caption = 'Vlr. Total'
-          DataBinding.FieldName = 'VLRTOTAL'
-          PropertiesClassName = 'TcxCurrencyEditProperties'
-          Properties.DisplayFormat = '###,###,##0.00'
-          Width = 75
-        end
-        object grConsultaDBTableView1Column2: TcxGridDBColumn [5]
-          Caption = 'P. Conta'
-          DataBinding.FieldName = 'NOMEPLANO'
-          Width = 129
-        end
-        object grConsultaDBTableView1Column3: TcxGridDBColumn [6]
-          Caption = 'Portador'
-          DataBinding.FieldName = 'NOMEPORTADOR'
-          Width = 250
-        end
-        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
-          Caption = 'C/C Destino'
-          DataBinding.FieldName = 'BANCO'
-          Width = 265
-        end
-      end
-    end
-    inherited pnSelec: TPanel
-      inherited grConsulta2: TcxGrid
-        inherited cxGridDBTableView1: TcxGridDBTableView
-          OnDblClick = cxGridDBTableView1DblClick
-          OnCustomDrawCell = cxGridDBTableView1CustomDrawCell
-          DataController.DataSource = dmFin.dsChequeSelec
-          inherited cxGridDBColumn1: TcxGridDBColumn
-            Caption = 'ST'
-            DataBinding.FieldName = 'STATUS'
-            OnGetCellHint = cxGridDBColumn1GetCellHint
-          end
-          inherited cxGridDBColumn2: TcxGridDBColumn
-            Caption = 'N'#186' Cheque'
-            DataBinding.FieldName = 'NCHEQUE'
-            Width = 75
-          end
-          object cxGridDBTableView1Column2: TcxGridDBColumn
-            Caption = 'Dt. Emiss'#227'o'
-            DataBinding.FieldName = 'DTEMISSAO'
-            Width = 100
-          end
-          object cxGridDBTableView1Column3: TcxGridDBColumn
-            Caption = 'Cliente'
-            DataBinding.FieldName = 'CLIENTE'
-            Width = 324
-          end
-          object cxGridDBTableView1Column1: TcxGridDBColumn
-            Caption = 'Vlr. Total'
-            DataBinding.FieldName = 'VLRTOTAL'
-            PropertiesClassName = 'TcxCurrencyEditProperties'
-            Properties.DisplayFormat = '###,###,##0.00'
-            Width = 75
-          end
-        end
-      end
-      inherited pnTop: TPanel
-        inherited cxContas: TcxLabel
-          Left = 1
-          Top = 1
-          Align = alLeft
-          Caption = 'Cheques Selecionados'
-          Style.IsFontAssigned = True
-          ExplicitTop = 2
-          ExplicitWidth = 147
-        end
-        inherited cxTotal: TcxLabel
-          Style.IsFontAssigned = True
-        end
-        object cxLabel20: TcxLabel
-          Left = 158
-          Top = 3
-          AutoSize = False
-          Caption = 'Dt. Mov:'
-          ParentFont = False
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clBlack
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.LookAndFeel.NativeStyle = True
-          Style.IsFontAssigned = True
-          StyleDisabled.LookAndFeel.NativeStyle = True
-          StyleFocused.LookAndFeel.NativeStyle = True
-          StyleHot.LookAndFeel.NativeStyle = True
-          Properties.Alignment.Horz = taRightJustify
-          Properties.LabelEffect = cxleCool
-          Transparent = True
-          Height = 17
-          Width = 82
-          AnchorX = 240
-        end
-        object edtMov: TcxDateEdit
-          Left = 240
-          Top = 2
-          Hint = 'Data de Validade do Produto'
-          ParentFont = False
-          Properties.DateButtons = [btnClear, btnToday]
-          Properties.ReadOnly = False
-          Style.Edges = [bLeft, bTop, bRight, bBottom]
-          Style.Font.Charset = ANSI_CHARSET
-          Style.Font.Color = clWindowText
-          Style.Font.Height = -11
-          Style.Font.Name = 'Tahoma'
-          Style.Font.Style = []
-          Style.HotTrack = True
-          Style.Shadow = False
-          Style.IsFontAssigned = True
-          TabOrder = 3
-          OnExit = edtMovExit
-          Width = 130
-        end
-      end
-    end
-  end
-  inherited pnCad: TPanel [2]
+  inherited pnCad: TPanel [1]
     inherited pnMenu: TPanel
       object cxLabel14: TcxLabel
         Left = 330
@@ -563,7 +351,7 @@ inherited Fcad_Cheque: TFcad_Cheque
         Style.HotTrack = True
         Style.Shadow = False
         Style.IsFontAssigned = True
-        TabOrder = 19
+        TabOrder = 18
         Width = 130
       end
       object cxLabel8: TcxLabel
@@ -1215,6 +1003,220 @@ inherited Fcad_Cheque: TFcad_Cheque
           TabOrder = 1
           Text = 'NENHUM'
           Width = 355
+        end
+      end
+    end
+  end
+  inherited pnCon: TPanel
+    inherited pnBusca: TPanel
+      inherited cxConsulta: TcxComboBox
+        Properties.Items.Strings = (
+          'C'#243'digo'
+          'N'#186' Cheque'
+          'Plano Cta.'
+          'Data Emiss'#227'o'
+          'Data Vencimento')
+        Text = 'C'#211'DIGO'
+      end
+      inherited cxLabel2: TcxLabel
+        Left = 591
+        Top = 0
+        Visible = False
+        ExplicitLeft = 591
+        ExplicitTop = 0
+      end
+      inherited cbAtivo: TcxComboBox
+        Left = 623
+        Top = -2
+        Style.IsFontAssigned = True
+        Visible = False
+        ExplicitLeft = 623
+        ExplicitTop = -2
+      end
+      inherited cxQtdeReg: TcxLabel
+        Left = 618
+        ExplicitLeft = 618
+      end
+      object cxLabel6: TcxLabel
+        Left = 470
+        Top = 3
+        Caption = 'Status:'
+        Style.TextColor = clBlack
+        Transparent = True
+      end
+      object cxStatus: TcxComboBox
+        Left = 508
+        Top = 1
+        ParentFont = False
+        Properties.CharCase = ecUpperCase
+        Properties.DropDownListStyle = lsFixedList
+        Properties.Items.Strings = (
+          'TODOS'
+          'ABERTO'
+          'DEPOSITADO'
+          'COMPENSADO'
+          'DEVOLVIDO'
+          'CANCELADO')
+        Style.Font.Charset = ANSI_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Segoe UI'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        StyleFocused.Color = 13366014
+        TabOrder = 8
+        Text = 'TODOS'
+        OnClick = cxConsultaPropertiesChange
+        Width = 107
+      end
+    end
+    inherited pnBotaoCad: TPanel
+      inherited cxApagar: TcxButton
+        Hint = 'Cancelar o registro em sele'#231#227'o.'
+        Caption = '&Cancelar'
+      end
+    end
+    inherited grConsulta: TcxGrid
+      inherited grConsultaDBTableView1: TcxGridDBTableView
+        PopupMenu = cxPopChequeSelec
+        DataController.DataSource = dmFin.dsCheque
+        inherited grConsultaDBTableView1Campo1: TcxGridDBColumn
+          Caption = 'St'
+          DataBinding.FieldName = 'STATUS'
+          OnGetCellHint = grConsultaDBTableView1Campo1GetCellHint
+          Width = 30
+        end
+        object grConsultaDBTableView1Column1: TcxGridDBColumn [1]
+          Caption = 'N'#186' Cheque'
+          DataBinding.FieldName = 'NCHEQUE'
+          Width = 75
+        end
+        object grConsultaDBTableView1Column5: TcxGridDBColumn [2]
+          Caption = 'Dt. Emiss'#227'o'
+          DataBinding.FieldName = 'DTEMISSAO'
+          Width = 100
+        end
+        object grConsultaDBTableView1Column6: TcxGridDBColumn [3]
+          Caption = 'Cliente'
+          DataBinding.FieldName = 'RAZAO'
+          Width = 324
+        end
+        object grConsultaDBTableView1Column4: TcxGridDBColumn [4]
+          Caption = 'Vlr. Total'
+          DataBinding.FieldName = 'VLRTOTAL'
+          PropertiesClassName = 'TcxCurrencyEditProperties'
+          Properties.DisplayFormat = '###,###,##0.00'
+          Width = 75
+        end
+        object grConsultaDBTableView1Column2: TcxGridDBColumn [5]
+          Caption = 'P. Conta'
+          DataBinding.FieldName = 'NOMEPLANO'
+          Width = 129
+        end
+        object grConsultaDBTableView1Column3: TcxGridDBColumn [6]
+          Caption = 'Portador'
+          DataBinding.FieldName = 'NOMEPORTADOR'
+          Width = 250
+        end
+        inherited grConsultaDBTableView1Campo2: TcxGridDBColumn
+          Caption = 'C/C Destino'
+          DataBinding.FieldName = 'BANCO'
+          Width = 265
+        end
+      end
+    end
+    inherited pnSelec: TPanel
+      inherited grConsulta2: TcxGrid
+        inherited cxGridDBTableView1: TcxGridDBTableView
+          OnDblClick = cxGridDBTableView1DblClick
+          OnCustomDrawCell = cxGridDBTableView1CustomDrawCell
+          DataController.DataSource = dmFin.dsChequeSelec
+          inherited cxGridDBColumn1: TcxGridDBColumn
+            Caption = 'ST'
+            DataBinding.FieldName = 'STATUS'
+            OnGetCellHint = cxGridDBColumn1GetCellHint
+          end
+          inherited cxGridDBColumn2: TcxGridDBColumn
+            Caption = 'N'#186' Cheque'
+            DataBinding.FieldName = 'NCHEQUE'
+            Width = 75
+          end
+          object cxGridDBTableView1Column2: TcxGridDBColumn
+            Caption = 'Dt. Emiss'#227'o'
+            DataBinding.FieldName = 'DTEMISSAO'
+            Width = 100
+          end
+          object cxGridDBTableView1Column3: TcxGridDBColumn
+            Caption = 'Cliente'
+            DataBinding.FieldName = 'CLIENTE'
+            Width = 324
+          end
+          object cxGridDBTableView1Column1: TcxGridDBColumn
+            Caption = 'Vlr. Total'
+            DataBinding.FieldName = 'VLRTOTAL'
+            PropertiesClassName = 'TcxCurrencyEditProperties'
+            Properties.DisplayFormat = '###,###,##0.00'
+            Width = 75
+          end
+        end
+      end
+      inherited pnTop: TPanel
+        inherited cxContas: TcxLabel
+          Left = 1
+          Top = 1
+          Align = alLeft
+          Caption = 'Cheques Selecionados'
+          Style.IsFontAssigned = True
+          ExplicitLeft = 1
+          ExplicitTop = 1
+          ExplicitWidth = 147
+          ExplicitHeight = 22
+        end
+        inherited cxTotal: TcxLabel
+          Style.IsFontAssigned = True
+        end
+        object cxLabel20: TcxLabel
+          Left = 158
+          Top = 3
+          AutoSize = False
+          Caption = 'Dt. Mov:'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clBlack
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.LookAndFeel.NativeStyle = True
+          Style.IsFontAssigned = True
+          StyleDisabled.LookAndFeel.NativeStyle = True
+          StyleFocused.LookAndFeel.NativeStyle = True
+          StyleHot.LookAndFeel.NativeStyle = True
+          Properties.Alignment.Horz = taRightJustify
+          Properties.LabelEffect = cxleCool
+          Transparent = True
+          Height = 17
+          Width = 82
+          AnchorX = 240
+        end
+        object edtMov: TcxDateEdit
+          Left = 240
+          Top = 2
+          Hint = 'Data de Validade do Produto'
+          ParentFont = False
+          Properties.DateButtons = [btnClear, btnToday]
+          Properties.ReadOnly = False
+          Style.Edges = [bLeft, bTop, bRight, bBottom]
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Tahoma'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.Shadow = False
+          Style.IsFontAssigned = True
+          TabOrder = 3
+          OnExit = edtMovExit
+          Width = 130
         end
       end
     end

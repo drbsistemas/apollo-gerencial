@@ -139,9 +139,10 @@ Var
 begin
    with dmMov do
    begin
-      ConsultaSql(' SELECT  A.TipoMov, A.TipoCaixa  '+#13+
-                  ' FROM caixafechamento A '+#13+
-                  ' WHERE a.idfechamento=(SELECT Max(idfechamento) idfechamento FROM caixafechamento) and A.IDCAIXA='+IntToStr(intCaixa),qryAux);
+      ConsultaSql(' SELECT  A.TIPOCAIXA, B.TIPOMOV  '+sLineBreak+
+                  ' FROM CAIXA A '+sLineBreak+
+                  ' LEFT JOIN CAIXAFECHAMENTO B on A.IDCAIXA = B.IDCAIXA '+sLineBreak+
+                  ' WHERE B.idfechamento=(SELECT Max(idfechamento) idfechamento FROM caixafechamento) and A.IDCAIXA='+IntToStr(intCaixa),qryAux);
 
       if (qryAux.RecordCount<=0) then
       begin

@@ -78,12 +78,12 @@
         <DCC_ExeOutput>C:\DRB\</DCC_ExeOutput>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>Imagem\Sistema\PetClinic.ico</Icon_MainIcon>
-        <VerInfo_Build>3</VerInfo_Build>
+        <VerInfo_Build>4</VerInfo_Build>
         <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <VerInfo_Debug>true</VerInfo_Debug>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=DRB Sistemas Comerciais;FileDescription=;FileVersion=1.0.0.3;InternalName=Sitemas Apollo;LegalCopyright=2014;LegalTrademarks=;OriginalFilename=Apollo Gestão;ProductName=Apollo Gestão;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=DRB Sistemas Comerciais;FileDescription=;FileVersion=1.0.0.4;InternalName=Sitemas Apollo;LegalCopyright=2014;LegalTrademarks=;OriginalFilename=Apollo Gestão;ProductName=Apollo Gestão;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
