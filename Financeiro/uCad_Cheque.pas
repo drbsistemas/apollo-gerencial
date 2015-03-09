@@ -150,14 +150,14 @@ uses uRotinas, udmFin, uCad_PlanoConta, uCad_Clientes, uCad_Caixa, uPrinc;
 procedure TFcad_Cheque.Compensar1Click(Sender: TObject);
 begin
    inherited;
-   if dmfin.qryCheque.FieldByName('STATUS').AsString <> 'DEPOSITADO' then
+   if dmfin.qryCheque.FieldByName('STATUS').AsString = 'DEPOSITADO' then
    begin
    if cxgridDBTableView1.DataController.RecordCount <= 0 then
    begin
       Msg('Olá, Verificamos que não há nenhum registro selecionado, verifique a consulta dos dados','I',':)');
       Abort;
    end;
-   LancaMovimentacaoCheque(edtMov.Date+Time, 'COMPENSADO');
+   LancaMovimentacaoCheque(edtMov.Date, 'COMPENSADO');
    cxConsultaPropertiesChange(self);
    cxLimpaPopClick(self);
    end else
@@ -301,7 +301,7 @@ procedure TFcad_Cheque.cxNovoClick(Sender: TObject);
 begin
   inherited;
    Limpa;
-   eStatus.Text := 'ABERTO';
+   cbStatus.Text := 'ABERTO';
    eNCheque.SetFocus;
 end;
 
@@ -319,7 +319,7 @@ begin
          FieldByName('IDCAIXA').AsString          := eCodCaixa.Text;
          FieldByName('IDPLANO').AsString          := eCodPlano.Text;
          FieldByName('IDCLIE').AsString           := eCodClie.TExt;
-         FieldByName('IDFPAGTO').AsString           := ifs(TipoMov=ENTRADA, pIntChequeProprio, pintChequeTerceiro);
+         FieldByName('IDFPAGTO').AsInteger        := ifs(TipoMov=ENTRADA, pintChequeTerceiro, pIntChequeProprio);
 
          FieldByName('DTEMISSAO').AsDateTime      := eDtEmissao.Date;
          FieldByName('DTVENCIMENTO').AsDAteTime   := eDtVencimento.Date;
@@ -330,7 +330,7 @@ begin
          FieldByName('NCONTA').AsString           := eNConta.Text;
          FieldByName('NCHEQUE').AsString          := eNCheque.Text;
 
-         FieldByName('TIPOCHEQUE').AsString       := ifs(TipoMov=ENTRADA,'P','T');
+         FieldByName('TIPOCHEQUE').AsString       := ifs(TipoMov=ENTRADA,'T','P');
          FieldByName('STATUS').AsString           := cbStatus.Text;
          FieldByName('NOMEPORTADOR').AsString     := ePortador.Text;
 
@@ -625,8 +625,7 @@ procedure TFcad_Cheque.Limpa;
 begin
    LimpaCampos(Fcad_Cheque);
    grHistorico.Visible := False;
-   if TipoMov=ENTRADA then
-      pnProprio.Visible  := True else
+   if TipoMov=SAIDA then
       pnTerceiro.Visible := True;
 end;
 

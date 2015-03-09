@@ -75,6 +75,7 @@
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <DCC_DcuOutput>D:\DRB\trunk\DCU</DCC_DcuOutput>
         <DCC_ExeOutput>C:\DRB\</DCC_ExeOutput>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>Imagem\Sistema\PetClinic.ico</Icon_MainIcon>

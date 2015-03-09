@@ -1083,6 +1083,14 @@ object dmFin: TdmFin
       ReadOnly = True
       Size = 200
     end
+    object qryChequeIDFPAGTO: TIntegerField
+      FieldName = 'IDFPAGTO'
+      Origin = 'IDFPAGTO'
+    end
+    object qryChequeIDLOTE: TIntegerField
+      FieldName = 'IDLOTE'
+      Origin = 'IDLOTE'
+    end
   end
   object uHis_Cheque: TUCHist_DataSet
     DataSet = qryCheque

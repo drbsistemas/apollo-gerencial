@@ -143,6 +143,8 @@ type
     cdsChequeSelecIDFPAGTO: TIntegerField;
     cdsChequeSelecIDLOTE: TIntegerField;
     cdsChequeSelecIDPLANO: TIntegerField;
+    qryChequeIDFPAGTO: TIntegerField;
+    qryChequeIDLOTE: TIntegerField;
     procedure qryCreditoAfterInsert(DataSet: TDataSet);
     procedure qryContaAfterInsert(DataSet: TDataSet);
     procedure qryContaRateioAfterInsert(DataSet: TDataSet);

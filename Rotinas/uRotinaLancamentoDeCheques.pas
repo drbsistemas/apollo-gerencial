@@ -119,10 +119,10 @@ begin
             begin
                ExecutaSql('UPDATE cheque SET status='+QuotedStr(StrStatus)+' where idcheque='+cdsChequeSelecIDCHEQUE.AsString, qryAux);
                LancaHistoricoDeCheque(cdsChequeSelecIDCHEQUE.AsInteger, StrStatus+' NA C/C: '+cdsChequeSelecIDCAIXA.AsString+' - '+cdsChequeSelecBANCO.AsString+' EM: '+DateToStr(DData), Date);
-               if cdsChequeSelecSTATUS.AsString = 'COMPENSADO' then
+               if StrStatus = 'COMPENSADO' then
                   LancamentoCaixa(DData,
                                   cdsChequeSelecNCHEQUE.AsString,
-                                  'CHEQUE '+StrStatus,
+                                  'CHEQUE '+ifs(TipoMov=ENTRADA, 'TERCEIROS ','PRÓPRIO ')+StrStatus,
                                   ifs(TipoMov=ENTRADA, cdsChequeSelecVLRTOTAL.AsFloat, 0),
                                   ifs(TipoMov=ENTRADA, 0, cdsChequeSelecVLRTOTAL.AsFloat),
                                   cdsChequeSelecIDFPAGTO.AsInteger,
@@ -155,9 +155,9 @@ begin
             while not cdsChequeSelec.Eof do
             begin
                if cdsChequeSelecSTATUS.AsString = 'COMPENSADO' then // É por que estava
-                  LancamentoCaixa(DDate+Time,
+                  LancamentoCaixa(DDate,
                                   cdsChequeSelecNCHEQUE.AsString,
-                                  'CHEQUE FOI DEVOLVIDO',
+                                  'CHEQUE '+ifs(TipoMov=ENTRADA, 'TERCEIROS','PRÓPRIO')+' FOI DEVOLVIDO',
                                   ifs(TipoMov=ENTRADA, 0, cdsChequeSelecVLRTOTAL.AsFloat),
                                   ifs(TipoMov=ENTRADA, cdsChequeSelecVLRTOTAL.AsFloat, 0),
                                   cdsChequeSelecIDFPAGTO.AsInteger,
@@ -170,7 +170,7 @@ begin
                   1: StrStatus := 'DEPOSITADO';
                end;
                ExecutaSql('UPDATE cheque SET status='+QuotedStr(StrStatus)+' where idcheque='+cdsChequeSelecIDCHEQUE.AsString, qryAux);
-               LancaHistoricoDeCheque(cdsChequeSelecIDCHEQUE.AsInteger, 'CHEQUE DEVOLVIDO PARA STATUS: '+StrStatus+' EM: '+DateToStr(DDate), Date);
+               LancaHistoricoDeCheque(cdsChequeSelecIDCHEQUE.AsInteger,'CHEQUE DEVOLVIDO PARA STATUS: '+StrStatus+' EM: '+DateToStr(DDate), Date);
                cdsChequeSelec.next;
             end;
             Result := True;
