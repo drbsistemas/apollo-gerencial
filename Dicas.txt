@@ -1,0 +1,6 @@
+TRUNK: A pasta trunk contém os projetos que estão em desenvolvimento. Todas as atualizações efetuadas no dia-a-dia são amarzenadas nesta pasta.
+
+BRANCHES: A pasta branches é aquela que contem "linhas de desenvolvimento" de um projeto, que entre elas podem haver poucas diferenças, porém uma independe daoutra,
+Quando a equipe decide que o projeto pode ser liebrado como uma versão, a pasta TRUNK é copiada(ou alguns arquivos dentro dela, não necessariamente a pastainteira) para a passta Branch.
+
+TAGS: QUando os testes efetuados em cima de um branch estão completos, a versão que se encontra no Branch é copiada para a pasta TAG formando assim uma Release. É esta TAG que será compactada e disponibilizada para o Cliente. A Tag nada mais é que um ponteiro para a pasta Branch.
